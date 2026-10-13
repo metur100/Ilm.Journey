@@ -1,0 +1,1126 @@
+{
+  "source": {
+    "text": "Tanzil Quran Text (Uthmani), tanzil.net — distributed verbatim via api.alquran.cloud",
+    "translations": {
+      "en": "Saheeh International",
+      "de": "Frank Bubenheim & Nadeem Elyas",
+      "bs": "Besim Korkut"
+    },
+    "transliteration": "alquran.cloud English transliteration",
+    "api": "https://api.alquran.cloud/v1 (editions quran-uthmani,en.sahih,de.bubenheim,bs.korkut,en.transliteration)",
+    "surahNamesBs": "api.quran.com v4 chapters (language=bs); German surah-name meanings fall back to English",
+    "generated": "2026-10-13",
+    "generator": "scripts/generate-quran.mjs",
+    "note": "Each dua is presented as the full ayah(s); the Quran text is never cut by hand. Titles and context sentences are editorial, not Quran."
+  },
+  "duas": [
+    {
+      "id": "ibrahim-ismail-acceptance",
+      "ref": "2:127-128",
+      "theme": "acceptance",
+      "title": {
+        "en": "Acceptance of good deeds",
+        "de": "Annahme der guten Taten",
+        "bs": "Da nam se prime dobra djela"
+      },
+      "context": {
+        "en": "The supplication of Ibrahim and Ismail while raising the foundations of the House (the Kaaba) (Al-Baqara 2:127-128).",
+        "de": "Das Bittgebet von Ibrahim und Ismail, als sie die Grundmauern des Hauses (der Kaaba) errichteten (Al-Baqara 2:127-128).",
+        "bs": "Dova Ibrahima i Ismaila dok su podizali temelje Kuće (Kabe) (Al-Baqara 2:127-128)."
+      },
+      "surah": {
+        "number": 2,
+        "nameArabic": "سُورَةُ البَقَرَةِ",
+        "nameTransliterated": "Al-Baqara",
+        "nameMeaning": "The Cow",
+        "ayahCount": 286
+      },
+      "ayahs": [
+        {
+          "surah": 2,
+          "numberInSurah": 127,
+          "globalNumber": 134,
+          "arabic": "وَإِذْ يَرْفَعُ إِبْرَٰهِۦمُ ٱلْقَوَاعِدَ مِنَ ٱلْبَيْتِ وَإِسْمَٰعِيلُ رَبَّنَا تَقَبَّلْ مِنَّآ ۖ إِنَّكَ أَنتَ ٱلسَّمِيعُ ٱلْعَلِيمُ",
+          "transliteration": "Wa iz yarfa'u Ibraaheemul qawaa'ida minal Baitiwa Ismaa'eelu Rabbanaa taqabbal minnaa innaka Antas Samee'ul Aleem",
+          "translation": {
+            "en": "And [mention] when Abraham was raising the foundations of the House and [with him] Ishmael, [saying], \"Our Lord, accept [this] from us. Indeed You are the Hearing, the Knowing.",
+            "de": "Und (gedenkt,) als Ibrahim die Grundmauern des Hauses errichtete, zusammen mit Isma'il, (da beteten sie): \"Unser Herr, nimm (es) von uns an. Du bist ja der Allhörende und Allwissende.",
+            "bs": "I dok su Ibrahim i Ismail temelje Hrama podizali, oni su molili: \"Gospodaru naš, primi od nas, jer Ti, uistinu, sve čuješ i sve znaš!"
+          }
+        },
+        {
+          "surah": 2,
+          "numberInSurah": 128,
+          "globalNumber": 135,
+          "arabic": "رَبَّنَا وَٱجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةًۭ مُّسْلِمَةًۭ لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبْ عَلَيْنَآ ۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ",
+          "transliteration": "Rabbanaa waj'alnaa muslimaini laka wa min zurriyyatinaaa ummatam muslimatal laka wa arinaa manaasikanaa wa tub 'alainaa innaka antat Tawwaabur Raheem",
+          "translation": {
+            "en": "Our Lord, and make us Muslims [in submission] to You and from our descendants a Muslim nation [in submission] to You. And show us our rites and accept our repentance. Indeed, You are the Accepting of repentance, the Merciful.",
+            "de": "Unser Herr, mache uns Dir ergeben und von unserer Nachkommenschaft eine Dir ergebene Gemeinschaft. Und zeige uns unsere Riten, und nimm unsere Reue an. Du bist ja der Reue-Annehmende und Barmherzige.",
+            "bs": "Gospodaru naš, učini nas dvojicu Tebi odanim, i porod naš neka bude odan Tebi, i pokaži nam obrede naše i oprosti nam, jer Ti primaš pokajanje i samilostan si!"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "2:127-128"
+    },
+    {
+      "id": "good-in-both-worlds",
+      "ref": "2:201",
+      "theme": "goodness",
+      "title": {
+        "en": "Good in this world and the Hereafter",
+        "de": "Gutes im Diesseits und im Jenseits",
+        "bs": "Dobro na ovom i na budućem svijetu"
+      },
+      "context": {
+        "en": "Mentioned after the rites of Hajj as the supplication of those who ask for good in this world and the Hereafter (Al-Baqara 2:201).",
+        "de": "Nach den Riten der Pilgerfahrt erwähnt als Bittgebet derer, die um Gutes im Diesseits und im Jenseits bitten (Al-Baqara 2:201).",
+        "bs": "Spomenuta nakon obreda hadža kao dova onih koji traže dobro i na ovom i na budućem svijetu (Al-Baqara 2:201)."
+      },
+      "surah": {
+        "number": 2,
+        "nameArabic": "سُورَةُ البَقَرَةِ",
+        "nameTransliterated": "Al-Baqara",
+        "nameMeaning": "The Cow",
+        "ayahCount": 286
+      },
+      "ayahs": [
+        {
+          "surah": 2,
+          "numberInSurah": 201,
+          "globalNumber": 208,
+          "arabic": "وَمِنْهُم مَّن يَقُولُ رَبَّنَآ ءَاتِنَا فِى ٱلدُّنْيَا حَسَنَةًۭ وَفِى ٱلْءَاخِرَةِ حَسَنَةًۭ وَقِنَا عَذَابَ ٱلنَّارِ",
+          "transliteration": "Wa minhum mai yaqoolu rabbanaaa aatina fid dunyaa hasanatawn wa fil aakhirati hasanatanw wa qinaa azaaban Naar",
+          "translation": {
+            "en": "But among them is he who says, \"Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.\"",
+            "de": "Unter ihnen gibt es aber auch solche, die sagen: \"Unser Herr, gib uns im Diesseits Gutes und im Jenseits Gutes, und bewahre uns vor der Strafe des (Höllen)feuers!",
+            "bs": "A ima i onih koji govore: \"Gospodaru naš, podaj nam dobro i na ovome i na onome svijetu, i sačuvaj nas patnje u ognju!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "2:201"
+    },
+    {
+      "id": "talut-patience",
+      "ref": "2:250",
+      "theme": "steadfastness",
+      "title": {
+        "en": "Patience and firm footing",
+        "de": "Geduld und feste Schritte",
+        "bs": "Strpljenje i čvrsti koraci"
+      },
+      "context": {
+        "en": "The supplication of the believers with Talut (Saul) as they went out to face Jalut (Goliath) and his soldiers (Al-Baqara 2:250).",
+        "de": "Das Bittgebet der Gläubigen mit Talut (Saul), als sie gegen Galut (Goliath) und seine Truppen auszogen (Al-Baqara 2:250).",
+        "bs": "Dova vjernika s Talutom kada su izašli pred Džaluta i njegovu vojsku (Al-Baqara 2:250)."
+      },
+      "surah": {
+        "number": 2,
+        "nameArabic": "سُورَةُ البَقَرَةِ",
+        "nameTransliterated": "Al-Baqara",
+        "nameMeaning": "The Cow",
+        "ayahCount": 286
+      },
+      "ayahs": [
+        {
+          "surah": 2,
+          "numberInSurah": 250,
+          "globalNumber": 257,
+          "arabic": "وَلَمَّا بَرَزُوا۟ لِجَالُوتَ وَجُنُودِهِۦ قَالُوا۟ رَبَّنَآ أَفْرِغْ عَلَيْنَا صَبْرًۭا وَثَبِّتْ أَقْدَامَنَا وَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَٰفِرِينَ",
+          "transliteration": "Wa lammaa barazoo liJaaloota wa junoodihee qaaloo Rabbanaaa afrigh 'alainaa sabranw wa sabbit aqdaamanaa wansurnaa 'alal qawmil kaafireen",
+          "translation": {
+            "en": "And when they went forth to [face] Goliath and his soldiers, they said, \"Our Lord, pour upon us patience and plant firmly our feet and give us victory over the disbelieving people.\"",
+            "de": "Und als sie gegen Galut und seine Heerscharen auf dem Plan erschienen, sagten sie: \"Unser Herr, überschütte uns mit Standhaftigkeit, festige unsere Füße und verhilf uns zum Sieg über das ungläubige Volk!\"",
+            "bs": "I kad nastupiše prema Džalutu i vojsci njegovoj, oni zamoliše: \"Gospodaru naš, nadahni nas izdržljivošću i učvrsti korake naše i pomozi nas protiv naroda koji ne vjeruje!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "2:250"
+    },
+    {
+      "id": "ease-pardon-mercy",
+      "ref": "2:286",
+      "theme": "forgiveness",
+      "title": {
+        "en": "Ease, pardon and mercy",
+        "de": "Erleichterung, Verzeihung und Erbarmen",
+        "bs": "Olakšanje, oprost i milost"
+      },
+      "context": {
+        "en": "The final ayah of Surah Al-Baqarah, which ends with a supplication for pardon, forgiveness and mercy (Al-Baqara 2:286).",
+        "de": "Der letzte Vers der Sure al-Baqara, der mit einem Bittgebet um Verzeihung, Vergebung und Erbarmen endet (Al-Baqara 2:286).",
+        "bs": "Posljednji ajet sure El-Bekare, koji završava dovom za oprost, praštanje i milost (Al-Baqara 2:286)."
+      },
+      "surah": {
+        "number": 2,
+        "nameArabic": "سُورَةُ البَقَرَةِ",
+        "nameTransliterated": "Al-Baqara",
+        "nameMeaning": "The Cow",
+        "ayahCount": 286
+      },
+      "ayahs": [
+        {
+          "surah": 2,
+          "numberInSurah": 286,
+          "globalNumber": 293,
+          "arabic": "لَا يُكَلِّفُ ٱللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا ٱكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِن نَّسِينَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًۭا كَمَا حَمَلْتَهُۥ عَلَى ٱلَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِۦ ۖ وَٱعْفُ عَنَّا وَٱغْفِرْ لَنَا وَٱرْحَمْنَآ ۚ أَنتَ مَوْلَىٰنَا فَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَٰفِرِينَ",
+          "transliteration": "Laa yukalliful-laahu nafsan illaa wus'ahaa; lahaa maa kasabat wa 'alaihaa maktasabat; Rabbanaa la tu'aakhiznaa in naseenaaa aw akhtaanaa; Rabbanaa wa laa tahmil-'alainaaa isran kamaa hamaltahoo 'alal-lazeena min qablinaa; Rabbanaa wa laa tuhammilnaa maa laa taaqata lanaa bih wa'fu 'annaa waghfir lanaa warhamnaa; Anta mawlaanaa fansurnaa 'alal qawmil kaafireen",
+          "translation": {
+            "en": "Allah does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\"",
+            "de": "Allah erlegt keiner Seele mehr auf, als sie zu leisten vermag. Ihr kommt (nur) zu, was sie verdient hat, und angelastet wird ihr (nur), was sie verdient hat. \"Unser Herr, belange uns nicht, wenn wir (etwas) vergessen oder einen Fehler begehen. Unser Herr, lege uns keine Bürde auf, wie Du sie denjenigen vor uns auferlegt hast. Unser Herr, bürde uns nichts auf, wozu wir keine Kraft haben. Verzeihe uns, vergib uns und erbarme Dich unser! Du bist unser Schutzherr. So verhilf uns zum Sieg über das ungläubige Volk!",
+            "bs": "Allah nikoga ne opterećuje preko mogućnosti njegovih: u njegovu korist je dobro koje učini, a na njegovu štetu zlo koje uradi. Gospodaru naš, ne kazni nas ako zaboravimo ili što nehotice učinimo! Gospodaru naš, ne tovari na nas breme kao što si ga tovario na one prije nas! Gospodaru naš, ne stavljaj nam u dužnost ono što ne možemo podnijeti, pobriši grijehe naše i oprosti nam, i smiluj se na nas. Ti si Gospodar naš pa nam pomozi protiv naroda koji ne vjeruje!"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "2:286"
+    },
+    {
+      "id": "steadfast-hearts",
+      "ref": "3:8",
+      "theme": "guidance",
+      "title": {
+        "en": "For guidance and steadfast hearts",
+        "de": "Für Rechtleitung und standhafte Herzen",
+        "bs": "Za uputu i postojana srca"
+      },
+      "context": {
+        "en": "A supplication that follows the mention of those firmly grounded in knowledge (Aal-i-Imraan 3:8).",
+        "de": "Ein Bittgebet, das auf die Erwähnung derer folgt, die im Wissen fest gegründet sind (Aal-i-Imraan 3:8).",
+        "bs": "Dova koja slijedi nakon spomena onih koji su temeljito upućeni u znanje (Aal-i-Imraan 3:8)."
+      },
+      "surah": {
+        "number": 3,
+        "nameArabic": "سُورَةُ آلِ عِمۡرَانَ",
+        "nameTransliterated": "Aal-i-Imraan",
+        "nameMeaning": "The Family of Imraan",
+        "ayahCount": 200
+      },
+      "ayahs": [
+        {
+          "surah": 3,
+          "numberInSurah": 8,
+          "globalNumber": 301,
+          "arabic": "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ ٱلْوَهَّابُ",
+          "transliteration": "Rabbanaa laa tuzigh quloobanaa ba'da iz hadaitanaa wa hab lanaa mil ladunka rahmah; innaka antal Wahhaab",
+          "translation": {
+            "en": "[Who say], \"Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy. Indeed, You are the Bestower.",
+            "de": "Unser Herr, lasse unsere Herzen nicht abschweifen, nachdem Du uns rechtgeleitet hast, und schenke uns Erbarmen von Dir aus. Du bist ja der unablässig Schenkende.",
+            "bs": "\"Gospodaru naš, ne dopusti srcima našim da skrenu, kada si nam već na Pravi put ukazao, i daruj nam Svoju milost; Ti si, uistinu, Onaj koji mnogo daruje!"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "3:8"
+    },
+    {
+      "id": "forgiveness-and-firm-feet",
+      "ref": "3:147",
+      "theme": "steadfastness",
+      "title": {
+        "en": "Forgiveness and steadfastness",
+        "de": "Vergebung und Standhaftigkeit",
+        "bs": "Oprost i postojanost"
+      },
+      "context": {
+        "en": "The words of the many devoted followers who fought alongside prophets and did not weaken (Aal-i-Imraan 3:147).",
+        "de": "Die Worte der vielen Gottergebenen, die an der Seite von Propheten kämpften und nicht schwach wurden (Aal-i-Imraan 3:147).",
+        "bs": "Riječi mnogih pobožnih koji su se borili uz vjerovjesnike i nisu klonuli (Aal-i-Imraan 3:147)."
+      },
+      "surah": {
+        "number": 3,
+        "nameArabic": "سُورَةُ آلِ عِمۡرَانَ",
+        "nameTransliterated": "Aal-i-Imraan",
+        "nameMeaning": "The Family of Imraan",
+        "ayahCount": 200
+      },
+      "ayahs": [
+        {
+          "surah": 3,
+          "numberInSurah": 147,
+          "globalNumber": 440,
+          "arabic": "وَمَا كَانَ قَوْلَهُمْ إِلَّآ أَن قَالُوا۟ رَبَّنَا ٱغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِىٓ أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَٱنصُرْنَا عَلَى ٱلْقَوْمِ ٱلْكَٰفِرِينَ",
+          "transliteration": "Wa maa kaana qawlahum illaa an qaaloo Rabbanagh fir lanaa zunoobanaa wa israafanaa feee amirnaa wa sabbit aqdaamanaa wansurnaa 'alal qawmil kaafireen",
+          "translation": {
+            "en": "And their words were not but that they said, \"Our Lord, forgive us our sins and the excess [committed] in our affairs and plant firmly our feet and give us victory over the disbelieving people.\"",
+            "de": "Ihre Worte waren nichts anderes, als daß sie sagten: \"Unser Herr, vergib uns unsere Sünden und die Maßlosigkeit in unserer Angelegenheit, festige unsere Füße und hilf uns gegen das ungläubige Volk!\"",
+            "bs": "i samo su govorili: \"Gospodaru naš, oprosti nam krivice naše i neumjerenost našu u postupcima našim, i učvrsti korake naše i pomozi nam protiv naroda koji ne vjeruje!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "3:147"
+    },
+    {
+      "id": "people-of-understanding",
+      "ref": "3:191-194",
+      "theme": "reflection",
+      "title": {
+        "en": "Reflecting on creation",
+        "de": "Nachsinnen über die Schöpfung",
+        "bs": "Razmišljanje o stvaranju"
+      },
+      "context": {
+        "en": "The supplication of people of understanding who remember Allah and reflect on the creation of the heavens and the earth (Aal-i-Imraan 3:191-194).",
+        "de": "Das Bittgebet der Verständigen, die Allahs gedenken und über die Erschaffung der Himmel und der Erde nachsinnen (Aal-i-Imraan 3:191-194).",
+        "bs": "Dova razumom obdarenih koji Allaha spominju i razmišljaju o stvaranju nebesa i Zemlje (Aal-i-Imraan 3:191-194)."
+      },
+      "surah": {
+        "number": 3,
+        "nameArabic": "سُورَةُ آلِ عِمۡرَانَ",
+        "nameTransliterated": "Aal-i-Imraan",
+        "nameMeaning": "The Family of Imraan",
+        "ayahCount": 200
+      },
+      "ayahs": [
+        {
+          "surah": 3,
+          "numberInSurah": 191,
+          "globalNumber": 484,
+          "arabic": "ٱلَّذِينَ يَذْكُرُونَ ٱللَّهَ قِيَٰمًۭا وَقُعُودًۭا وَعَلَىٰ جُنُوبِهِمْ وَيَتَفَكَّرُونَ فِى خَلْقِ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ رَبَّنَا مَا خَلَقْتَ هَٰذَا بَٰطِلًۭا سُبْحَٰنَكَ فَقِنَا عَذَابَ ٱلنَّارِ",
+          "transliteration": "Allazeena yazkuroonal laaha qiyaamaiw-wa qu'oodanw-wa 'alaa juno obihim wa yatafakkaroona fee khalqis samaawaati wal ardi Rabbanaa maa khalaqta haaza baatilan Subhaanak faqinaa 'azaaban Naar",
+          "translation": {
+            "en": "Who remember Allah while standing or sitting or [lying] on their sides and give thought to the creation of the heavens and the earth, [saying], \"Our Lord, You did not create this aimlessly; exalted are You [above such a thing]; then protect us from the punishment of the Fire.",
+            "de": "die Allahs stehend, sitzend und auf der Seite (liegend) gedenken und über die Schöpfung der Himmel und der Erde nachdenken: \"Unser Herr, Du hast (all) dies nicht umsonst erschaffen. Preis sei Dir! Bewahre uns vor der Strafe des (Höllen)feuers.",
+            "bs": "za one koji i stojeći i sjedeći i ležeći Allaha spominju i o stvaranju nebesa i Zemlje razmišljaju. \"Gospodaru naš, Ti nisi ovo uzalud stvorio; hvaljen Ti budi i sačuvaj nas patnje u vatri!"
+          }
+        },
+        {
+          "surah": 3,
+          "numberInSurah": 192,
+          "globalNumber": 485,
+          "arabic": "رَبَّنَآ إِنَّكَ مَن تُدْخِلِ ٱلنَّارَ فَقَدْ أَخْزَيْتَهُۥ ۖ وَمَا لِلظَّٰلِمِينَ مِنْ أَنصَارٍۢ",
+          "transliteration": "Rabbanaaa innaka man tudkhilin Naara faqad akhzai tahoo wa maa lizzaalimeena min ansaar",
+          "translation": {
+            "en": "Our Lord, indeed whoever You admit to the Fire - You have disgraced him, and for the wrongdoers there are no helpers.",
+            "de": "Unser Herr, gewiß, wen Du ins (Höllen)feuer eingehen läßt, den hast Du (damit) in Schande gestürzt. Und die Ungerechten werden keine Helfer haben.",
+            "bs": "Gospodaru naš, onoga koga Ti budeš u vatru ubacio Ti si već osramotio, a nevjernicima neće niko u pomoć priteći."
+          }
+        },
+        {
+          "surah": 3,
+          "numberInSurah": 193,
+          "globalNumber": 486,
+          "arabic": "رَّبَّنَآ إِنَّنَا سَمِعْنَا مُنَادِيًۭا يُنَادِى لِلْإِيمَٰنِ أَنْ ءَامِنُوا۟ بِرَبِّكُمْ فَـَٔامَنَّا ۚ رَبَّنَا فَٱغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلْأَبْرَارِ",
+          "transliteration": "Rabbanaaa innanaa sami'naa munaadiyai yunaadee lil eemaani an aaminoo bi Rabbikum fa aamannaa; Rabbanaa faghfir lanaa zunoobanaa wa kaffir 'annaa saiyi aatina wa tawaffanaa ma'al abraar",
+          "translation": {
+            "en": "Our Lord, indeed we have heard a caller calling to faith, [saying], 'Believe in your Lord,' and we have believed. Our Lord, so forgive us our sins and remove from us our misdeeds and cause us to die with the righteous.",
+            "de": "Unser Herr, gewiß, wir hörten einen Rufer, der zum Glauben aufrief: .Glaubt an euren Herrn. Da glaubten wir. Unser Herr, vergib uns unsere Sünden, tilge unsere bösen Taten und berufe uns ab unter den Gütigen.",
+            "bs": "Gospodaru naš, mi smo čuli glasnika koji poziva u vjeru: 'Vjerujte u Gospodara vašeg!' – i mi smo mu se odazvali. Gospodaru naš, oprosti nam grijehe naše i pređi preko hrđavih postupaka naših, i učini da poslije smrti budemo s onima dobrima."
+          }
+        },
+        {
+          "surah": 3,
+          "numberInSurah": 194,
+          "globalNumber": 487,
+          "arabic": "رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ ٱلْقِيَٰمَةِ ۗ إِنَّكَ لَا تُخْلِفُ ٱلْمِيعَادَ",
+          "transliteration": "Rabbanaa wa aatinaa maa wa'attanaa 'alaa Rusulika wa laa tukhzinaa Yawmal Qiyaamah; innaka laa tukhliful mee'aad",
+          "translation": {
+            "en": "Our Lord, and grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in [Your] promise.\"",
+            "de": "Unser Herr, und gib uns, was Du uns durch Deine Gesandten versprochen hast, und stürze uns nicht in Schande am Tag der Auferstehung. Gewiß, Du brichst nicht, was Du versprochen hast.\"",
+            "bs": "Gospodaru naš, podaj nam ono što si nam obećao po poslanicima Svojim i na Sudnjem danu nas ne osramoti! Ti ćeš, doista, Svoje obećanje ispuniti!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "3:191-194"
+    },
+    {
+      "id": "adam-repentance",
+      "ref": "7:23",
+      "theme": "forgiveness",
+      "title": {
+        "en": "Admitting a mistake and seeking forgiveness",
+        "de": "Fehler eingestehen und um Vergebung bitten",
+        "bs": "Priznati grešku i tražiti oprost"
+      },
+      "context": {
+        "en": "The words of Adam and his wife after they had eaten from the tree (Al-A'raaf 7:23).",
+        "de": "Die Worte Adams und seiner Frau, nachdem sie von dem Baum gegessen hatten (Al-A'raaf 7:23).",
+        "bs": "Riječi Adema i njegove žene nakon što su jeli s drveta (Al-A'raaf 7:23)."
+      },
+      "surah": {
+        "number": 7,
+        "nameArabic": "سُورَةُ الأَعۡرَافِ",
+        "nameTransliterated": "Al-A'raaf",
+        "nameMeaning": "The Heights",
+        "ayahCount": 206
+      },
+      "ayahs": [
+        {
+          "surah": 7,
+          "numberInSurah": 23,
+          "globalNumber": 977,
+          "arabic": "قَالَا رَبَّنَا ظَلَمْنَآ أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ ٱلْخَٰسِرِينَ",
+          "transliteration": "Qaalaa Rabbanaa zalamnaaa anfusanaa wa illam taghfir lanaa wa tarhamnaa lanakoonanna minal khaasireen",
+          "translation": {
+            "en": "They said, \"Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers.\"",
+            "de": "Sie sagten: \"Unser Herr, wir haben uns selbst Unrecht zugefügt. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir ganz gewiß zu den Verlorenen gehören.\"",
+            "bs": "\"Gospodaru naš\" – rekoše oni – \"sami smo sebi krivi, i ako nam Ti ne oprostiš i ne smiluješ nam se, sigurno ćemo biti izgubljeni.\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "7:23"
+    },
+    {
+      "id": "magicians-patience",
+      "ref": "7:126",
+      "theme": "steadfastness",
+      "title": {
+        "en": "Patience under pressure",
+        "de": "Geduld unter Druck",
+        "bs": "Strpljenje pod pritiskom"
+      },
+      "context": {
+        "en": "The supplication of Pharaoh's magicians after they had believed and Pharaoh threatened them (Al-A'raaf 7:126).",
+        "de": "Das Bittgebet der Zauberer Pharaos, nachdem sie gläubig geworden waren und Pharao ihnen drohte (Al-A'raaf 7:126).",
+        "bs": "Dova faraonovih čarobnjaka nakon što su povjerovali, a faraon im je prijetio (Al-A'raaf 7:126)."
+      },
+      "surah": {
+        "number": 7,
+        "nameArabic": "سُورَةُ الأَعۡرَافِ",
+        "nameTransliterated": "Al-A'raaf",
+        "nameMeaning": "The Heights",
+        "ayahCount": 206
+      },
+      "ayahs": [
+        {
+          "surah": 7,
+          "numberInSurah": 126,
+          "globalNumber": 1080,
+          "arabic": "وَمَا تَنقِمُ مِنَّآ إِلَّآ أَنْ ءَامَنَّا بِـَٔايَٰتِ رَبِّنَا لَمَّا جَآءَتْنَا ۚ رَبَّنَآ أَفْرِغْ عَلَيْنَا صَبْرًۭا وَتَوَفَّنَا مُسْلِمِينَ",
+          "transliteration": "Wa maa tanqimu minnaaa illaaa an aamannaa bi Aayaati Rabbinaa lammaa jaaa'atnaa; Rabbanaaa afrigh 'alainaa sabranw wa tawaffanaa muslimeen",
+          "translation": {
+            "en": "And you do not resent us except because we believed in the signs of our Lord when they came to us. Our Lord, pour upon us patience and let us die as Muslims [in submission to You].\"",
+            "de": "Du grollst uns ja nur (darum), daß wir an die Zeichen unseres Herrn glaubten, als sie zu uns kamen. Unser Herr, überschütte uns mit Standhaftigkeit und berufe uns ab als (Dir) Ergebene!\"",
+            "bs": "Ti nam zamjeraš samo to što smo u dokaze Gospodara našeg povjerovali kada su nam oni došli. Gospodaru naš, daj nam snage da izdržimo i učini da kao vjernici umremo!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "7:126"
+    },
+    {
+      "id": "trust-and-protection",
+      "ref": "10:85-86",
+      "theme": "protection",
+      "title": {
+        "en": "Trust in Allah and protection from oppression",
+        "de": "Vertrauen auf Allah und Schutz vor Unterdrückung",
+        "bs": "Oslonac na Allaha i zaštita od nasilja"
+      },
+      "context": {
+        "en": "The answer of the believers among Musa's people when he told them to rely on Allah, at a time they feared Pharaoh (Yunus 10:85-86).",
+        "de": "Die Antwort der Gläubigen aus dem Volk Musas, als er sie aufforderte, sich auf Allah zu verlassen – in einer Zeit, in der sie Pharao fürchteten (Yunus 10:85-86).",
+        "bs": "Odgovor vjernika iz Musaovog naroda kada ih je pozvao da se oslone na Allaha, u vrijeme kada su se bojali faraona (Yunus 10:85-86)."
+      },
+      "surah": {
+        "number": 10,
+        "nameArabic": "سُورَةُ يُونُسَ",
+        "nameTransliterated": "Yunus",
+        "nameMeaning": "Jonas",
+        "ayahCount": 109
+      },
+      "ayahs": [
+        {
+          "surah": 10,
+          "numberInSurah": 85,
+          "globalNumber": 1449,
+          "arabic": "فَقَالُوا۟ عَلَى ٱللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةًۭ لِّلْقَوْمِ ٱلظَّٰلِمِينَ",
+          "transliteration": "Faqaaloo 'alal laahi tawakkalnaa Rabbanaa laa taj'alnaa fitnatal lilqawmiz zaalimeen",
+          "translation": {
+            "en": "So they said, \"Upon Allah do we rely. Our Lord, make us not [objects of] trial for the wrongdoing people",
+            "de": "Sie sagten: \"Auf Allah verlassen wir uns. Unser Herr, mache uns nicht zu einer Versuchung für das ungerechte Volk,",
+            "bs": "\"U Allaha se uzdamo!\" – rekoše oni. \"Gospodaru naš, ne učini da zbog nas dođu u iskušenje ljudi koji nasilje čine,"
+          }
+        },
+        {
+          "surah": 10,
+          "numberInSurah": 86,
+          "globalNumber": 1450,
+          "arabic": "وَنَجِّنَا بِرَحْمَتِكَ مِنَ ٱلْقَوْمِ ٱلْكَٰفِرِينَ",
+          "transliteration": "Wa najjinaa birahmatika minal qawmil kaafireen",
+          "translation": {
+            "en": "And save us by Your mercy from the disbelieving people.\"",
+            "de": "und errette uns durch Deine Barmherzigkeit von dem ungläubigen Volk!\"",
+            "bs": "i spasi nas, milošću Svojom, od naroda koji ne vjeruje!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "10:85-86"
+    },
+    {
+      "id": "ibrahim-prayer-offspring-parents",
+      "ref": "14:40-41",
+      "theme": "family",
+      "title": {
+        "en": "For prayer, offspring and parents",
+        "de": "Für das Gebet, die Nachkommen und die Eltern",
+        "bs": "Za namaz, potomstvo i roditelje"
+      },
+      "context": {
+        "en": "Part of the supplication of Ibrahim (Ibrahim 14:40-41).",
+        "de": "Teil des Bittgebets Ibrahims (Ibrahim 14:40-41).",
+        "bs": "Dio Ibrahimove dove (Ibrahim 14:40-41)."
+      },
+      "surah": {
+        "number": 14,
+        "nameArabic": "سُورَةُ إِبۡرَاهِيمَ",
+        "nameTransliterated": "Ibrahim",
+        "nameMeaning": "Abraham",
+        "ayahCount": 52
+      },
+      "ayahs": [
+        {
+          "surah": 14,
+          "numberInSurah": 40,
+          "globalNumber": 1790,
+          "arabic": "رَبِّ ٱجْعَلْنِى مُقِيمَ ٱلصَّلَوٰةِ وَمِن ذُرِّيَّتِى ۚ رَبَّنَا وَتَقَبَّلْ دُعَآءِ",
+          "transliteration": "Rabbij 'alnee muqeemas Salaati wa min zurriyyatee Rabbanaa wa taqabbal du'aaa'",
+          "translation": {
+            "en": "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication.",
+            "de": "Mein Herr, mach, daß ich das Gebet verrichte, (ich) und (auch einige) aus meiner Nachkommenschaft. Unser Herr, und nimm mein Gebet an.",
+            "bs": "Gospodaru moj, daj da ja i neki potomci moji obavljamo molitvu; Gospodaru naš, Ti usliši molbu moju!"
+          }
+        },
+        {
+          "surah": 14,
+          "numberInSurah": 41,
+          "globalNumber": 1791,
+          "arabic": "رَبَّنَا ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ ٱلْحِسَابُ",
+          "transliteration": "Rabbanagh fir lee wa liwaalidaiya wa lilmu'mineena Yawma yaqoomul hisaab",
+          "translation": {
+            "en": "Our Lord, forgive me and my parents and the believers the Day the account is established.\"",
+            "de": "Unser Herr, vergib mir und meinen Eltern und den Gläubigen an dem Tag, da die Abrechnung stattfinden wird.\"",
+            "bs": "Gospodaru naš, oprosti meni, i roditeljima mojim, i svim vjernicima – na Dan kad se bude polagao račun!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "14:40-41"
+    },
+    {
+      "id": "mercy-for-parents",
+      "ref": "17:24",
+      "theme": "parents",
+      "title": {
+        "en": "Mercy for one's parents",
+        "de": "Erbarmen für die Eltern",
+        "bs": "Milost za roditelje"
+      },
+      "context": {
+        "en": "Part of the command to be good to one's parents; the ayah teaches what to say for them (Al-Israa 17:24).",
+        "de": "Teil des Gebots, die Eltern gut zu behandeln; der Vers lehrt, was man für sie sagen soll (Al-Israa 17:24).",
+        "bs": "Dio naredbe o dobročinstvu prema roditeljima; ajet uči šta za njih reći (Al-Israa 17:24)."
+      },
+      "surah": {
+        "number": 17,
+        "nameArabic": "سُورَةُ الإِسۡرَاءِ",
+        "nameTransliterated": "Al-Israa",
+        "nameMeaning": "The Night Journey",
+        "ayahCount": 111
+      },
+      "ayahs": [
+        {
+          "surah": 17,
+          "numberInSurah": 24,
+          "globalNumber": 2053,
+          "arabic": "وَٱخْفِضْ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحْمَةِ وَقُل رَّبِّ ٱرْحَمْهُمَا كَمَا رَبَّيَانِى صَغِيرًۭا",
+          "transliteration": "Wakhfid lahumaa janaahaz zulli minar rahmati wa qur Rabbir hamhumaa kamaa rabbayaanee sagheera",
+          "translation": {
+            "en": "And lower to them the wing of humility out of mercy and say, \"My Lord, have mercy upon them as they brought me up [when I was] small.\"",
+            "de": "Und senke für sie aus Barmherzigkeit den Flügel der Demut und sag: \"Mein Herr, erbarme Dich ihrer, wie sie mich aufgezogen haben, als ich klein war.\"",
+            "bs": "Budi prema njima pažljiv i ponizan i reci: \"Gospodaru moj, smiluj im se, oni su mene, kad sam bio dijete, njegovali!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "17:24"
+    },
+    {
+      "id": "good-entrance-good-exit",
+      "ref": "17:80",
+      "theme": "guidance",
+      "title": {
+        "en": "A good beginning and a good ending",
+        "de": "Ein guter Anfang und ein gutes Ende",
+        "bs": "Dobar ulazak i dobar izlazak"
+      },
+      "context": {
+        "en": "A supplication the Quran instructs to be said (Al-Israa 17:80).",
+        "de": "Ein Bittgebet, das zu sprechen der Koran anweist (Al-Israa 17:80).",
+        "bs": "Dova koju Kur'an upućuje da se izgovara (Al-Israa 17:80)."
+      },
+      "surah": {
+        "number": 17,
+        "nameArabic": "سُورَةُ الإِسۡرَاءِ",
+        "nameTransliterated": "Al-Israa",
+        "nameMeaning": "The Night Journey",
+        "ayahCount": 111
+      },
+      "ayahs": [
+        {
+          "surah": 17,
+          "numberInSurah": 80,
+          "globalNumber": 2109,
+          "arabic": "وَقُل رَّبِّ أَدْخِلْنِى مُدْخَلَ صِدْقٍۢ وَأَخْرِجْنِى مُخْرَجَ صِدْقٍۢ وَٱجْعَل لِّى مِن لَّدُنكَ سُلْطَٰنًۭا نَّصِيرًۭا",
+          "transliteration": "Wa qur Rabbi adkhilnee mudkhala sidqinw wa akhrijnee mukhraja sidqinw waj'al lee milladunka sultaanan naseeraa",
+          "translation": {
+            "en": "And say, \"My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.\"",
+            "de": "Und sag: Mein Herr, gewähre mir einen wahrhaftigen Eingang, und gewähre mir einen wahrhaftigen Ausgang, und schaffe mir von Dir aus eine hilfreiche Macht.",
+            "bs": "I reci: \"Gospodaru moj, učini da umrem, a da si Ti zadovoljan mnome i učini da iz mrtvih ustanem, a da si Ti zadovoljan mnome, i daruj mi od Sebe snagu koja će mi pomoći!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "17:80"
+    },
+    {
+      "id": "youths-of-the-cave",
+      "ref": "18:10",
+      "theme": "guidance",
+      "title": {
+        "en": "Mercy and right direction",
+        "de": "Erbarmen und der richtige Weg",
+        "bs": "Milost i pravi put"
+      },
+      "context": {
+        "en": "The supplication of the young men who took refuge in the cave (Al-Kahf 18:10).",
+        "de": "Das Bittgebet der jungen Männer, die in der Höhle Zuflucht suchten (Al-Kahf 18:10).",
+        "bs": "Dova mladića koji su se sklonili u pećinu (Al-Kahf 18:10)."
+      },
+      "surah": {
+        "number": 18,
+        "nameArabic": "سُورَةُ الكَهۡفِ",
+        "nameTransliterated": "Al-Kahf",
+        "nameMeaning": "The Cave",
+        "ayahCount": 110
+      },
+      "ayahs": [
+        {
+          "surah": 18,
+          "numberInSurah": 10,
+          "globalNumber": 2150,
+          "arabic": "إِذْ أَوَى ٱلْفِتْيَةُ إِلَى ٱلْكَهْفِ فَقَالُوا۟ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحْمَةًۭ وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًۭا",
+          "transliteration": "Iz awal fityatu ilal Kahfi faqaaloo Rabbanaaa aatinaa mil ladunka rahmatanw wa haiyi' lanaa min amrinaa rashadaa",
+          "translation": {
+            "en": "[Mention] when the youths retreated to the cave and said, \"Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.\"",
+            "de": "Als die Jünglinge in der Höhle Zuflucht suchten und sagten: \"Unser Herr, gib uns Barmherzigkeit von Dir aus, und bereite uns in unserer Angelegenheit einen rechten (Aus)weg.\"",
+            "bs": "Kad se nekoliko momaka u pećini sklonilo pa reklo: \"Gospodaru naš, daj nam Svoju milost i pruži nam u ovom našem postupku prisebnost\","
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "18:10"
+    },
+    {
+      "id": "musa-ease-and-speech",
+      "ref": "20:25-28",
+      "theme": "ease",
+      "title": {
+        "en": "Confidence and clear speech",
+        "de": "Zuversicht und klare Rede",
+        "bs": "Smirenost i jasan govor"
+      },
+      "context": {
+        "en": "The supplication of Musa when he was sent to Pharaoh (Taa-Haa 20:25-28).",
+        "de": "Das Bittgebet Musas, als er zu Pharao gesandt wurde (Taa-Haa 20:25-28).",
+        "bs": "Musaova dova kada je poslan faraonu (Taa-Haa 20:25-28)."
+      },
+      "surah": {
+        "number": 20,
+        "nameArabic": "سُورَةُ طه",
+        "nameTransliterated": "Taa-Haa",
+        "nameMeaning": "Taa-Haa",
+        "ayahCount": 135
+      },
+      "ayahs": [
+        {
+          "surah": 20,
+          "numberInSurah": 25,
+          "globalNumber": 2373,
+          "arabic": "قَالَ رَبِّ ٱشْرَحْ لِى صَدْرِى",
+          "transliteration": "Qaala Rabbish rah lee sadree",
+          "translation": {
+            "en": "[Moses] said, \"My Lord, expand for me my breast [with assurance]",
+            "de": "Er sagte: \"Mein Herr, weite mir meine Brust,",
+            "bs": "\"Gospodaru moj\" – reče Musa – \"učini prostranim prsa moja"
+          }
+        },
+        {
+          "surah": 20,
+          "numberInSurah": 26,
+          "globalNumber": 2374,
+          "arabic": "وَيَسِّرْ لِىٓ أَمْرِى",
+          "transliteration": "Wa yassir leee amree",
+          "translation": {
+            "en": "And ease for me my task",
+            "de": "und mache mir meine Angelegenheit leicht.",
+            "bs": "i olakšaj zadatak moj;"
+          }
+        },
+        {
+          "surah": 20,
+          "numberInSurah": 27,
+          "globalNumber": 2375,
+          "arabic": "وَٱحْلُلْ عُقْدَةًۭ مِّن لِّسَانِى",
+          "transliteration": "Wahlul 'uqdatam milli saanee",
+          "translation": {
+            "en": "And untie the knot from my tongue",
+            "de": "Und löse den Knoten in meiner Zunge,",
+            "bs": "odriješi uzao sa jezika moga"
+          }
+        },
+        {
+          "surah": 20,
+          "numberInSurah": 28,
+          "globalNumber": 2376,
+          "arabic": "يَفْقَهُوا۟ قَوْلِى",
+          "transliteration": "Yafqahoo qawlee",
+          "translation": {
+            "en": "That they may understand my speech.",
+            "de": "so daß sie meine Worte verstehen.",
+            "bs": "da bi razumjeli govor moj"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "20:25-28"
+    },
+    {
+      "id": "increase-in-knowledge",
+      "ref": "20:114",
+      "theme": "knowledge",
+      "title": {
+        "en": "Increase in knowledge",
+        "de": "Mehr Wissen",
+        "bs": "Povećanje znanja"
+      },
+      "context": {
+        "en": "Said to the Prophet in connection with the revelation of the Quran (Taa-Haa 20:114).",
+        "de": "An den Propheten gerichtet im Zusammenhang mit der Offenbarung des Korans (Taa-Haa 20:114).",
+        "bs": "Upućeno Vjerovjesniku u vezi s objavom Kur'ana (Taa-Haa 20:114)."
+      },
+      "surah": {
+        "number": 20,
+        "nameArabic": "سُورَةُ طه",
+        "nameTransliterated": "Taa-Haa",
+        "nameMeaning": "Taa-Haa",
+        "ayahCount": 135
+      },
+      "ayahs": [
+        {
+          "surah": 20,
+          "numberInSurah": 114,
+          "globalNumber": 2462,
+          "arabic": "فَتَعَٰلَى ٱللَّهُ ٱلْمَلِكُ ٱلْحَقُّ ۗ وَلَا تَعْجَلْ بِٱلْقُرْءَانِ مِن قَبْلِ أَن يُقْضَىٰٓ إِلَيْكَ وَحْيُهُۥ ۖ وَقُل رَّبِّ زِدْنِى عِلْمًۭا",
+          "transliteration": "Fata'aalal laahul Malikul Haqq; wa laa ta'jal bil Quraani min qabli ai yuqdaaa ilaika wahyuhoo wa qur Rabbi zidnee 'ilmaa",
+          "translation": {
+            "en": "So high [above all] is Allah, the Sovereign, the Truth. And, [O Muhammad], do not hasten with [recitation of] the Qur'an before its revelation is completed to you, and say, \"My Lord, increase me in knowledge.\"",
+            "de": "Erhaben ist Allah, der König, der Wahre! Und übereile dich nicht mit dem Qur'an, bevor dir seine Offenbarung vollständig eingegeben worden ist. Und sag: Mein Herr, lasse mich an Wissen zunehmen.",
+            "bs": "Neka je uzvišen Allah, Vladar Istiniti! I ne žuri s čitanjem Kur'ana prije nego što ti se objavljivanje njegovo ne završi, i reci: \"Gospodaru moj, Ti znanje moje proširi!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "20:114"
+    },
+    {
+      "id": "ayyub-hardship",
+      "ref": "21:83",
+      "theme": "relief",
+      "title": {
+        "en": "When hardship touches you",
+        "de": "Wenn Unheil einen trifft",
+        "bs": "Kada te pogodi nevolja"
+      },
+      "context": {
+        "en": "The call of Ayyub to his Lord when adversity had touched him (Al-Anbiyaa 21:83).",
+        "de": "Der Ruf Ayyubs (Hiob) zu seinem Herrn, als ihn Unheil getroffen hatte (Al-Anbiyaa 21:83).",
+        "bs": "Ejjubov zov Gospodaru kada ga je pogodila nevolja (Al-Anbiyaa 21:83)."
+      },
+      "surah": {
+        "number": 21,
+        "nameArabic": "سُورَةُ الأَنبِيَاءِ",
+        "nameTransliterated": "Al-Anbiyaa",
+        "nameMeaning": "The Prophets",
+        "ayahCount": 112
+      },
+      "ayahs": [
+        {
+          "surah": 21,
+          "numberInSurah": 83,
+          "globalNumber": 2566,
+          "arabic": "۞ وَأَيُّوبَ إِذْ نَادَىٰ رَبَّهُۥٓ أَنِّى مَسَّنِىَ ٱلضُّرُّ وَأَنتَ أَرْحَمُ ٱلرَّٰحِمِينَ",
+          "transliteration": "Wa Ayyooba iz naadaa Rabbahooo annee massaniyad durru wa Anta arhamur raahimeen",
+          "translation": {
+            "en": "And [mention] Job, when he called to his Lord, \"Indeed, adversity has touched me, and you are the Most Merciful of the merciful.\"",
+            "de": "Und (auch) Ayyub, als er zu seinem Herrn rief: \"Mir ist gewiß Unheil widerfahren, doch Du bist der Barmherzigste der Barmherzigen.\"",
+            "bs": "I Ejjubu se, kada je Gospodaru svome zavapio: \"Mene je nevolja snašla, a Ti si od milostivih najmilostiviji!\" –"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "21:83"
+    },
+    {
+      "id": "yunus-in-the-darkness",
+      "ref": "21:87",
+      "theme": "relief",
+      "title": {
+        "en": "From the darkness to relief",
+        "de": "Aus der Dunkelheit zur Rettung",
+        "bs": "Iz tmine ka spasu"
+      },
+      "context": {
+        "en": "The call of Yunus, the man of the fish, from within the darknesses (Al-Anbiyaa 21:87).",
+        "de": "Der Ruf Yunus’, des Mannes mit dem Fisch, aus den Finsternissen (Al-Anbiyaa 21:87).",
+        "bs": "Junusov zov, onoga koji je bio u ribi, iz tmina (Al-Anbiyaa 21:87)."
+      },
+      "surah": {
+        "number": 21,
+        "nameArabic": "سُورَةُ الأَنبِيَاءِ",
+        "nameTransliterated": "Al-Anbiyaa",
+        "nameMeaning": "The Prophets",
+        "ayahCount": 112
+      },
+      "ayahs": [
+        {
+          "surah": 21,
+          "numberInSurah": 87,
+          "globalNumber": 2570,
+          "arabic": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبًۭا فَظَنَّ أَن لَّن نَّقْدِرَ عَلَيْهِ فَنَادَىٰ فِى ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبْحَٰنَكَ إِنِّى كُنتُ مِنَ ٱلظَّٰلِمِينَ",
+          "transliteration": "Wa Zan Nooni iz zahaba mughaadiban fazaanna al lan naqdira 'alaihi fanaanna al lan naqdira 'alaihi fanaadaa fiz zulumaati al laaa ilaaha illaaa Anta Subhaanaka innee kuntu minaz zaalimeen",
+          "translation": {
+            "en": "And [mention] the man of the fish, when he went off in anger and thought that We would not decree [anything] upon him. And he called out within the darknesses, \"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.\"",
+            "de": "Und (auch) dem Mann mit dem Fisch', als er erzürnt wegging. Da meinte er, Wir würden ihm nicht (den Lebensunterhalt) bemessen. Dann rief er in den Finsternissen: \"Es gibt keinen Gott außer Dir! Preis sei Dir! Gewiß, ich gehöre zu den Ungerechten.\"",
+            "bs": "I Zunnunu se, kada srdit ode i pomisli da ga nećemo kazniti – pa poslije u tminama zavapi: \"Nema boga osim Tebe, hvaljen neka si, a ja sam se zaista ogriješio prema sebi!\" –"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "21:87"
+    },
+    {
+      "id": "zakariyya-heir",
+      "ref": "21:89",
+      "theme": "family",
+      "title": {
+        "en": "For offspring",
+        "de": "Um Nachkommen",
+        "bs": "Za potomstvo"
+      },
+      "context": {
+        "en": "The call of Zakariyya to his Lord; the next ayah tells that Allah answered him and gave him Yahya (Al-Anbiyaa 21:89).",
+        "de": "Der Ruf Zakariyyas zu seinem Herrn; der nächste Vers berichtet, dass Allah ihn erhörte und ihm Yahya schenkte (Al-Anbiyaa 21:89).",
+        "bs": "Zekerijjin zov Gospodaru; sljedeći ajet kazuje da mu se Allah odazvao i darovao mu Jahju (Al-Anbiyaa 21:89)."
+      },
+      "surah": {
+        "number": 21,
+        "nameArabic": "سُورَةُ الأَنبِيَاءِ",
+        "nameTransliterated": "Al-Anbiyaa",
+        "nameMeaning": "The Prophets",
+        "ayahCount": 112
+      },
+      "ayahs": [
+        {
+          "surah": 21,
+          "numberInSurah": 89,
+          "globalNumber": 2572,
+          "arabic": "وَزَكَرِيَّآ إِذْ نَادَىٰ رَبَّهُۥ رَبِّ لَا تَذَرْنِى فَرْدًۭا وَأَنتَ خَيْرُ ٱلْوَٰرِثِينَ",
+          "transliteration": "Wa Zakariyyaaa iz naadaa Rabbahoo Rabbi laa tazarnee fardanw wa Anta khairul waariseen",
+          "translation": {
+            "en": "And [mention] Zechariah, when he called to his Lord, \"My Lord, do not leave me alone [with no heir], while you are the best of inheritors.\"",
+            "de": "Und (auch) Zakariyya, als er zu seinem Herrn rief: \"Mein Herr, lasse mich nicht kinderlos bleiben, und Du bist der beste Erbe.\"",
+            "bs": "I Zekerijjau se – kada zamoli Gospodara svoga: \"Gospodaru moj, ne ostavljaj me sama, a Ti si jedini vječan!\" –"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "21:89"
+    },
+    {
+      "id": "refuge-from-devils",
+      "ref": "23:97-98",
+      "theme": "protection",
+      "title": {
+        "en": "Refuge from the whispers of the devils",
+        "de": "Zuflucht vor den Einflüsterungen der Satane",
+        "bs": "Zaštita od šejtanskih došaptavanja"
+      },
+      "context": {
+        "en": "A supplication the Quran instructs to be said (Al-Muminoon 23:97-98).",
+        "de": "Ein Bittgebet, das zu sprechen der Koran anweist (Al-Muminoon 23:97-98).",
+        "bs": "Dova koju Kur'an upućuje da se izgovara (Al-Muminoon 23:97-98)."
+      },
+      "surah": {
+        "number": 23,
+        "nameArabic": "سُورَةُ المُؤۡمِنُونَ",
+        "nameTransliterated": "Al-Muminoon",
+        "nameMeaning": "The Believers",
+        "ayahCount": 118
+      },
+      "ayahs": [
+        {
+          "surah": 23,
+          "numberInSurah": 97,
+          "globalNumber": 2770,
+          "arabic": "وَقُل رَّبِّ أَعُوذُ بِكَ مِنْ هَمَزَٰتِ ٱلشَّيَٰطِينِ",
+          "transliteration": "Wa qur Rabbi a'oozu bika min hamazaatish Shayaateen",
+          "translation": {
+            "en": "And say, \"My Lord, I seek refuge in You from the incitements of the devils,",
+            "de": "Und sag: Mein Herr, ich nehme Zuflucht bei Dir vor den Aufstachelungen der Satane.",
+            "bs": "i reci: \"Tebi se ja, Gospodaru moj, obraćam za zaštitu od priviđenja šejtanskih,"
+          }
+        },
+        {
+          "surah": 23,
+          "numberInSurah": 98,
+          "globalNumber": 2771,
+          "arabic": "وَأَعُوذُ بِكَ رَبِّ أَن يَحْضُرُونِ",
+          "transliteration": "Wa a'oozu bika Rabbi ai-yahduroon",
+          "translation": {
+            "en": "And I seek refuge in You, my Lord, lest they be present with me.\"",
+            "de": "Und ich nehme Zuflucht bei Dir davor, mein Herr, daß sie mich aufsuchen.",
+            "bs": "i Tebi se, Gospodaru moj, obraćam da me od njihova prisustva zaštitiš!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "23:97-98"
+    },
+    {
+      "id": "comfort-of-the-eyes",
+      "ref": "25:74",
+      "theme": "family",
+      "title": {
+        "en": "Spouses and children as a joy",
+        "de": "Ehepartner und Kinder als Freude",
+        "bs": "Supružnici i djeca kao radost"
+      },
+      "context": {
+        "en": "Among the qualities described of the servants of the Most Merciful (Al-Furqaan 25:74).",
+        "de": "Unter den beschriebenen Eigenschaften der Diener des Allerbarmers (Al-Furqaan 25:74).",
+        "bs": "Među opisanim osobinama robova Milostivog (Al-Furqaan 25:74)."
+      },
+      "surah": {
+        "number": 25,
+        "nameArabic": "سُورَةُ الفُرۡقَانِ",
+        "nameTransliterated": "Al-Furqaan",
+        "nameMeaning": "The Criterion",
+        "ayahCount": 77
+      },
+      "ayahs": [
+        {
+          "surah": 25,
+          "numberInSurah": 74,
+          "globalNumber": 2929,
+          "arabic": "وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبْ لَنَا مِنْ أَزْوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعْيُنٍۢ وَٱجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+          "transliteration": "Wallazeena yaqooloona Rabbanaa hab lanaa min azwaajinaa wa zurriyaatinaa qurrata a'yuninw waj 'alnaa lilmuttaqeena Imaamaa",
+          "translation": {
+            "en": "And those who say, \"Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.\"",
+            "de": "Und diejenigen, die sagen: \"Unser Herr, schenke uns an unseren Gattinnen und unseren Nachkommenschaften Grund zur Freude, und mache uns für die Rechtschaffenen zu einem Vorbild.\"",
+            "bs": "i oni koji govore: \"Gospodaru naš, podari nam u ženama našim i djeci našoj radost i učini da se čestiti na nas ugledaju!\" –"
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "25:74"
+    },
+    {
+      "id": "sulayman-gratitude",
+      "ref": "27:19",
+      "theme": "gratitude",
+      "title": {
+        "en": "Gratitude and righteous deeds",
+        "de": "Dankbarkeit und gute Taten",
+        "bs": "Zahvalnost i dobra djela"
+      },
+      "context": {
+        "en": "The supplication of Sulayman after he heard the words of an ant (An-Naml 27:19).",
+        "de": "Das Bittgebet Sulaimans, nachdem er die Worte einer Ameise gehört hatte (An-Naml 27:19).",
+        "bs": "Sulejmanova dova nakon što je čuo riječi jednog mrava (An-Naml 27:19)."
+      },
+      "surah": {
+        "number": 27,
+        "nameArabic": "سُورَةُ النَّمۡلِ",
+        "nameTransliterated": "An-Naml",
+        "nameMeaning": "The Ant",
+        "ayahCount": 93
+      },
+      "ayahs": [
+        {
+          "surah": 27,
+          "numberInSurah": 19,
+          "globalNumber": 3178,
+          "arabic": "فَتَبَسَّمَ ضَاحِكًۭا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَٰلِحًۭا تَرْضَىٰهُ وَأَدْخِلْنِى بِرَحْمَتِكَ فِى عِبَادِكَ ٱلصَّٰلِحِينَ",
+          "transliteration": "Fatabassama daahikam min qawlihaa wa qaala Rabbi awzi'nee an ashkura ni'mata kal lateee an'amta 'alaiya wa 'alaa waalidaiya wa an a'mala saalihan tardaahu wa adkhilnee birahmatika fee 'ibaadikas saaliheen",
+          "translation": {
+            "en": "So [Solomon] smiled, amused at her speech, and said, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to do righteousness of which You approve. And admit me by Your mercy into [the ranks of] Your righteous servants.\"",
+            "de": "Da lächelte er erheitert über ihre Worte und sagte: \"Mein Herr, veranlasse mich, für Deine Gunst zu danken, die Du mir und meinen Eltern erwiesen hast, und rechtschaffen zu handeln, womit Du zufrieden bist. Und lasse mich durch Deine Barmherzigkeit eingehen in die Reihen Deiner rechtschaffenen Diener.\"",
+            "bs": "I on se nasmija glasno riječima njegovim i reče: \"Gospodaru moj, omogući mi da budem zahvalan na blagodati Tvojoj, koju si ukazao meni i roditeljima mojim, i da činim dobra djela na zadovoljstvo Tvoje, i uvedi me, milošću Svojom, među dobre robove Svoje!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "27:19"
+    },
+    {
+      "id": "musa-in-need",
+      "ref": "28:24",
+      "theme": "provision",
+      "title": {
+        "en": "In need of every good",
+        "de": "Bedürftig nach allem Guten",
+        "bs": "Potreban svakog dobra"
+      },
+      "context": {
+        "en": "The words of Musa in Madyan, after he had watered the flock for two women (Al-Qasas 28:24).",
+        "de": "Die Worte Musas in Madyan, nachdem er für zwei Frauen die Herde getränkt hatte (Al-Qasas 28:24).",
+        "bs": "Musaove riječi u Medjenu, nakon što je napojio stoku dvjema ženama (Al-Qasas 28:24)."
+      },
+      "surah": {
+        "number": 28,
+        "nameArabic": "سُورَةُ القَصَصِ",
+        "nameTransliterated": "Al-Qasas",
+        "nameMeaning": "The Stories",
+        "ayahCount": 88
+      },
+      "ayahs": [
+        {
+          "surah": 28,
+          "numberInSurah": 24,
+          "globalNumber": 3276,
+          "arabic": "فَسَقَىٰ لَهُمَا ثُمَّ تَوَلَّىٰٓ إِلَى ٱلظِّلِّ فَقَالَ رَبِّ إِنِّى لِمَآ أَنزَلْتَ إِلَىَّ مِنْ خَيْرٍۢ فَقِيرٌۭ",
+          "transliteration": "Fasaqaa lahumaa summa tawallaaa ilaz zilli faqaala Rabbi innee limaaa anzalta ilaiya min khairin faqeer",
+          "translation": {
+            "en": "So he watered [their flocks] for them; then he went back to the shade and said, \"My Lord, indeed I am, for whatever good You would send down to me, in need.\"",
+            "de": "Da tränkte er ihnen (ihre Tiere). Hierauf zog er sich zurück in den Schatten und sagte: \"Mein Herr, ich bin dessen bedürftig, was Du auch immer an Gutem zu mir herabsendest.\"",
+            "bs": "I on im je napoji, a onda ode u hladovinu i reče: \"Gospodaru moj, ma kakvu mi hranu dao, zaista mi je potrebna!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "28:24"
+    },
+    {
+      "id": "gratitude-for-parents",
+      "ref": "46:15",
+      "theme": "parents",
+      "title": {
+        "en": "Gratitude for oneself and one's parents",
+        "de": "Dankbarkeit für sich und die Eltern",
+        "bs": "Zahvalnost za sebe i roditelje"
+      },
+      "context": {
+        "en": "Part of the command of kindness to parents: the supplication of one who reaches full strength and forty years (Al-Ahqaf 46:15).",
+        "de": "Teil des Gebots der Güte gegenüber den Eltern: das Bittgebet dessen, der seine Vollkraft erreicht und vierzig Jahre alt wird (Al-Ahqaf 46:15).",
+        "bs": "Dio naredbe o dobročinstvu prema roditeljima: dova onoga ko dostigne zrelost i navrši četrdeset godina (Al-Ahqaf 46:15)."
+      },
+      "surah": {
+        "number": 46,
+        "nameArabic": "سُورَةُ الأَحۡقَافِ",
+        "nameTransliterated": "Al-Ahqaf",
+        "nameMeaning": "The Dunes",
+        "ayahCount": 35
+      },
+      "ayahs": [
+        {
+          "surah": 46,
+          "numberInSurah": 15,
+          "globalNumber": 4525,
+          "arabic": "وَوَصَّيْنَا ٱلْإِنسَٰنَ بِوَٰلِدَيْهِ إِحْسَٰنًا ۖ حَمَلَتْهُ أُمُّهُۥ كُرْهًۭا وَوَضَعَتْهُ كُرْهًۭا ۖ وَحَمْلُهُۥ وَفِصَٰلُهُۥ ثَلَٰثُونَ شَهْرًا ۚ حَتَّىٰٓ إِذَا بَلَغَ أَشُدَّهُۥ وَبَلَغَ أَرْبَعِينَ سَنَةًۭ قَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَٰلِحًۭا تَرْضَىٰهُ وَأَصْلِحْ لِى فِى ذُرِّيَّتِىٓ ۖ إِنِّى تُبْتُ إِلَيْكَ وَإِنِّى مِنَ ٱلْمُسْلِمِينَ",
+          "transliteration": "Wa wassainal insaana biwaalidaihi ihsaanan hamalathu ummuhoo kurhanw-wa wada'athu kurhanw wa hamluhoo wa fisaaluhoo salaasoona shahraa; hattaaa izaa balagha ashuddahoo wa balagho arba'eena sanatan qaala Rabbi aqzi'neee an ashkura ni'matakal lateee an'amta 'alaiya wa 'alaa waalidaiya wa an a'mala saalihan tardaahu wa aslih lee fee zurriyyatee innee tubtu ilaika wa innee minal muslimeen",
+          "translation": {
+            "en": "And We have enjoined upon man, to his parents, good treatment. His mother carried him with hardship and gave birth to him with hardship, and his gestation and weaning [period] is thirty months. [He grows] until, when he reaches maturity and reaches [the age of] forty years, he says, \"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents and to work righteousness of which You will approve and make righteous for me my offspring. Indeed, I have repented to You, and indeed, I am of the Muslims.\"",
+            "de": "Und Wir haben dem Menschen anempfohlen, zu seinen Eltern gütig zu sein. Seine Mutter hat ihn unter Widerwillen getragen und unter Widerwillen zur Welt gebracht. Die (Zeit der) Schwangerschaft mit ihm bis zu seiner Entwöhnung (beträgt) dreißig Monate. Wenn er dann seine Vollreife erlangt hat und das Alter von vierzig Jahren erreicht hat, sagt er: \"Mein Herr, veranlasse mich, für Deine Gunst zu danken, die Du mir und meinen Eltern erwiesen hast, und rechtschaffen zu handeln, womit Du zufrieden bist. Und gib mir Rechtschaffenheit in meiner Nachkommenschaft. Ich wende mich Dir ja in Reue zu, und ich gehöre ja zu den (Dir) Ergebenen.\"",
+            "bs": "Čovjeka smo zadužili da roditeljima svojim čini dobro; majka njegova s mukom ga nosi i u mukama ga rađa, nosi ga i doji trideset mjeseci. A kad dospije u muževno doba i kad dostigne četrdeset godina, on rekne: \"Gospodaru moj, dozvoli Mi da Ti budem zahvalan na blagodati koju si darovao meni i roditeljima mojim, i pomozi mi da činim dobra djela kojima ćeš zadovoljan biti, i učini dobrim potomke moje; ja se, zaista, kajem i odan sam Tebi.\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "46:15"
+    },
+    {
+      "id": "brothers-and-sisters-in-faith",
+      "ref": "59:10",
+      "theme": "community",
+      "title": {
+        "en": "For our brothers and sisters in faith",
+        "de": "Für unsere Geschwister im Glauben",
+        "bs": "Za našu braću i sestre u vjeri"
+      },
+      "context": {
+        "en": "The supplication of those who came after the Emigrants and the Helpers (Al-Hashr 59:10).",
+        "de": "Das Bittgebet derer, die nach den Auswanderern und den Helfern kamen (Al-Hashr 59:10).",
+        "bs": "Dova onih koji su došli poslije muhadžira i ensarija (Al-Hashr 59:10)."
+      },
+      "surah": {
+        "number": 59,
+        "nameArabic": "سُورَةُ الحَشۡرِ",
+        "nameTransliterated": "Al-Hashr",
+        "nameMeaning": "The Exile",
+        "ayahCount": 24
+      },
+      "ayahs": [
+        {
+          "surah": 59,
+          "numberInSurah": 10,
+          "globalNumber": 5136,
+          "arabic": "وَٱلَّذِينَ جَآءُو مِنۢ بَعْدِهِمْ يَقُولُونَ رَبَّنَا ٱغْفِرْ لَنَا وَلِإِخْوَٰنِنَا ٱلَّذِينَ سَبَقُونَا بِٱلْإِيمَٰنِ وَلَا تَجْعَلْ فِى قُلُوبِنَا غِلًّۭا لِّلَّذِينَ ءَامَنُوا۟ رَبَّنَآ إِنَّكَ رَءُوفٌۭ رَّحِيمٌ",
+          "transliteration": "Wallazeena jaaa'oo min ba'dihim yaqooloona Rabbanagh fir lanaa wa li ikhwaani nal lazeena sabqoonaa bil eemaani wa laa taj'al fee quloobinaa ghillalil lazeena aamanoo rabbannaaa innaka Ra'oofur Raheem",
+          "translation": {
+            "en": "And [there is a share for] those who came after them, saying, \"Our Lord, forgive us and our brothers who preceded us in faith and put not in our hearts [any] resentment toward those who have believed. Our Lord, indeed You are Kind and Merciful.\"",
+            "de": "Und diejenigen, die nach ihnen gekommen sind, sagen: \"Unser Herr, vergib uns und unseren Brüdern, die uns im Glauben vorausgegangen sind, und lasse in unseren Herzen keinen Groll sein gegen diejenigen, die glauben. Unser Herr, Du bist ja Gnädig und Barmherzig.\"",
+            "bs": "Oni koji poslije njih dolaze – govore: \"Gospodaru naš, oprosti nama i braći našoj koja su nas u vjeri pretekla i ne dopusti da u srcima našim bude imalo zlobe prema vjernicima; Gospodaru naš, ti si, zaista, dobar i milostiv!\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "59:10"
+    },
+    {
+      "id": "perfect-our-light",
+      "ref": "66:8",
+      "theme": "forgiveness",
+      "title": {
+        "en": "Sincere repentance and complete light",
+        "de": "Aufrichtige Reue und vollkommenes Licht",
+        "bs": "Iskreno pokajanje i potpuno svjetlo"
+      },
+      "context": {
+        "en": "The words of the believers on the Day their light runs before them, within a call to sincere repentance (At-Tahrim 66:8).",
+        "de": "Die Worte der Gläubigen an dem Tag, an dem ihr Licht vor ihnen hereilt – im Rahmen eines Aufrufs zu aufrichtiger Reue (At-Tahrim 66:8).",
+        "bs": "Riječi vjernika na Dan kada će njihovo svjetlo ići ispred njih, uz poziv na iskreno pokajanje (At-Tahrim 66:8)."
+      },
+      "surah": {
+        "number": 66,
+        "nameArabic": "سُورَةُ التَّحۡرِيمِ",
+        "nameTransliterated": "At-Tahrim",
+        "nameMeaning": "The Prohibition",
+        "ayahCount": 12
+      },
+      "ayahs": [
+        {
+          "surah": 66,
+          "numberInSurah": 8,
+          "globalNumber": 5237,
+          "arabic": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ تُوبُوٓا۟ إِلَى ٱللَّهِ تَوْبَةًۭ نَّصُوحًا عَسَىٰ رَبُّكُمْ أَن يُكَفِّرَ عَنكُمْ سَيِّـَٔاتِكُمْ وَيُدْخِلَكُمْ جَنَّٰتٍۢ تَجْرِى مِن تَحْتِهَا ٱلْأَنْهَٰرُ يَوْمَ لَا يُخْزِى ٱللَّهُ ٱلنَّبِىَّ وَٱلَّذِينَ ءَامَنُوا۟ مَعَهُۥ ۖ نُورُهُمْ يَسْعَىٰ بَيْنَ أَيْدِيهِمْ وَبِأَيْمَٰنِهِمْ يَقُولُونَ رَبَّنَآ أَتْمِمْ لَنَا نُورَنَا وَٱغْفِرْ لَنَآ ۖ إِنَّكَ عَلَىٰ كُلِّ شَىْءٍۢ قَدِيرٌۭ",
+          "transliteration": "Yaaa ayyuhal lazeena aammano toobooo ilal laahi tawbatan nasoohan 'asaa rabbukum any-yukaffira 'ankum sayyi aatikum wa yudkhilakum jannaatin tajree min tahtihal anhaaru yawma laa yukhzil laahun nabiyya wallazeena aamanoo ma'ahoo nooruhum yas'aa baina aydeehim wa bi aymaanihim yaqooloona rabbanaaa atmim lanaa nooranaa waghfir lana innaka 'alaa kulli shai'in qadeer",
+          "translation": {
+            "en": "O you who have believed, repent to Allah with sincere repentance. Perhaps your Lord will remove from you your misdeeds and admit you into gardens beneath which rivers flow [on] the Day when Allah will not disgrace the Prophet and those who believed with him. Their light will proceed before them and on their right; they will say, \"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.\"",
+            "de": "O die ihr glaubt, kehrt zu Allah um in aufrichtiger Reue; vielleicht wird euer Herr euch eure bösen Taten tilgen und euch in Gärten eingehen lassen, durcheilt von Bächen, am Tag, da Allah den Propheten und diejenigen, die mit ihm geglaubt haben, nicht in Schande stürzen wird. Ihr Licht eilt ihnen voraus und (ebenso) zu ihrer Rechten. Sie werden sagen: \"Unser Herr, vollende für uns unser Licht und vergib uns. Gewiß, Du hast zu allem die Macht.\"",
+            "bs": "O vi koji vjerujete, učinite pokajanje Allahu iskreno, da bi Gospodar vaš preko ružnih postupaka vaših prešao i da bi vas u džennetske bašče, kroz koje će rijeke teći, uveo, na Dan u kojem Allah neće osramotiti Vjerovjesnika i one koji su zajedno sa njim vjerovali; svjetlo njihovo će ići ispred njih i s njihove desne strane. \"Gospodaru naš\" – govoriće oni – \"učini potpunim svjetlo naše i oprosti nam jer Ti, doista, sve možeš.\""
+          }
+        }
+      ],
+      "sourceName": "Qur'an",
+      "sourceReference": "66:8"
+    }
+  ]
+}
