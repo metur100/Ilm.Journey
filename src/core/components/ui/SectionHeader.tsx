@@ -32,6 +32,7 @@ export function SectionHeader({ title, actionLabel, onAction, dark }: SectionHea
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: spacing.sm },
-  title: { flexShrink: 1 },
+  // flexGrow: Android sometimes measures a title a fraction too narrow and wraps its last word out of view ("Tvoj put").
+  title: { flexShrink: 1, flexGrow: 1 },
   action: { minHeight: 48, justifyContent: 'center', paddingHorizontal: spacing.xs },
 });
