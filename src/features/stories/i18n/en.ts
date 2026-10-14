@@ -36,6 +36,7 @@ const en = {
   'story.start': 'Start story',
   'story.resume': 'Continue story',
   'story.replay': 'Read again',
+  'story.playGame': 'Play the game',
   'story.notFound': 'This story could not be found.',
   'story.place': 'Place',
   'story.symbolNote': 'Prophets are never shown. The pictures show only places and objects.',

@@ -37,6 +37,7 @@ const de: Record<StoriesKey, string> = {
   'story.start': 'Geschichte starten',
   'story.resume': 'Geschichte fortsetzen',
   'story.replay': 'Nochmal lesen',
+  'story.playGame': 'Das Spiel spielen',
   'story.notFound': 'Diese Geschichte wurde nicht gefunden.',
   'story.place': 'Ort',
   'story.symbolNote': 'Propheten werden nie gezeigt. Die Bilder zeigen nur Orte und Gegenstände.',

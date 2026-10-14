@@ -37,6 +37,7 @@ const bs: Record<StoriesKey, string> = {
   'story.start': 'Počni kazivanje',
   'story.resume': 'Nastavi kazivanje',
   'story.replay': 'Pročitaj ponovo',
+  'story.playGame': 'Igraj igru',
   'story.notFound': 'Ovo kazivanje nije pronađeno.',
   'story.place': 'Mjesto',
   'story.symbolNote': 'Poslanici se nikada ne prikazuju. Slike pokazuju samo mjesta i predmete.',
