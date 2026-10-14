@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useState } from 'react';
 import { StyleSheet, View, type ViewStyle } from 'react-native';
 import Svg, { Circle, Defs, Ellipse, G, LinearGradient, Path, Rect, Stop } from 'react-native-svg';
 
@@ -69,14 +69,20 @@ export function SceneView({ scene, height = 200, style, rounded = true }: SceneV
   const [top, bottom] = SKIES[scene.sky];
   const dark = isDark(scene.sky);
   const elements = [...scene.elements].sort((a, b) => LAYER[a] - LAYER[b]);
+  // Wide, short views cannot show the whole 400×220 scene. A centred crop cut off the ground (garden, river,
+  // the foot of buildings), so crop mostly from the sky and keep the ground in view.
+  const [width, setWidth] = useState(0);
+  const visibleHeight = width > 0 ? Math.min(220, (400 * height) / width) : 220;
+  const cropTop = (220 - visibleHeight) * 0.8;
 
   return (
     <View
+      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
       style={[styles.root, { height, borderRadius: rounded ? 22 : 0 }, style]}
       importantForAccessibility="no-hide-descendants"
       accessibilityElementsHidden
     >
-      <Svg width="100%" height="100%" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+      <Svg width="100%" height="100%" viewBox={`0 ${cropTop} 400 ${visibleHeight}`} preserveAspectRatio="xMidYMid slice">
         <Defs>
           <LinearGradient id={`sky${id}`} x1="0" y1="0" x2="0" y2="1">
             <Stop offset="0" stopColor={top} />
