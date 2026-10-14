@@ -1,4 +1,4 @@
-import type { LocalizedText, SourceRef } from './common';
+import type { FactKind, LocalizedText, SourceRef } from './common';
 
 /**
  * Collection album (see docs/GAMES.md "Engagement systems"). Cards are registered by features (built from their
@@ -38,8 +38,10 @@ export interface CollectionCard {
   arabic?: string;
   /** Fact on the back of the card – copied from existing content, never a new claim. */
   fact: LocalizedText;
-  /** Where the fact comes from (required, at least one). */
+  /** Where the fact comes from (required, at least one; rule: `factSourceProblem(kind, sources)`). */
   sources: SourceRef[];
+  /** `language` for letter / vocabulary cards (neutral language source, never a Quran verse); default religious. */
+  kind?: FactKind;
   /** Achievement key that unlocks the card (see `AchievementKey`). */
   unlock: AchievementKey;
   /** Name of the thing to complete, used in the "How to unlock" hint (e.g. the story or episode title). */

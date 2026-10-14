@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 
 import type { CoreKey, Namespace, Params } from '../i18n';
-import type { CollectionCard, Language, LocalizedText, SourceRef, TopicId } from '../models';
+import type { CollectionCard, FactKind, Language, LocalizedText, SourceRef, TopicId } from '../models';
 import type { SoundName } from '../services/sound';
 
 /** Game levels: easy → harder. */
@@ -23,8 +23,10 @@ export interface GameFact {
   /** Unique inside the game (kebab-case); the review key is `game:<gameId>:<factId>`. */
   id: string;
   text: LocalizedText;
-  /** At least one source (Quran surah:ayah, hadith collection, Ibn Hisham …). */
+  /** At least one source (Quran surah:ayah, hadith collection, Ibn Hisham …; language facts: `LANGUAGE_SOURCES`). */
   sources: SourceRef[];
+  /** `language` for Arabic letter / form / harakat / vocabulary facts (neutral source); default religious. */
+  kind?: FactKind;
   /** Optional illustration for the fact card. */
   art?: string;
   /** Optional review question built by `factQuestion`. */

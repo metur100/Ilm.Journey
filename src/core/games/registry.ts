@@ -1,5 +1,5 @@
 import { localizedFrom, translateNs } from '../i18n';
-import type { DayKey, LocalizedText, Question } from '../models';
+import { type DayKey, factSourceProblem, type LocalizedText, type Question } from '../models';
 import { registerCollectionCards } from '../registry';
 import { dayNumber } from '../utils/date';
 import type { GameDef, GameFact, GameTextKey } from './types';
@@ -34,7 +34,8 @@ export function validateGame(def: GameDef<unknown>): void {
     if (!ID_PATTERN.test(fact.id)) fail(`fact id "${fact.id}" must be kebab-case`);
     if (factIds.has(fact.id)) fail(`duplicate fact id "${fact.id}"`);
     factIds.add(fact.id);
-    if (fact.sources.length === 0 || fact.sources.some((s) => !s.sourceName.trim())) fail(`fact "${fact.id}" needs sources`);
+    const sourceProblem = factSourceProblem(fact.kind, fact.sources);
+    if (sourceProblem) fail(`fact "${fact.id}" ${sourceProblem}`);
     if (fact.check?.type === 'choice' && (fact.check.correctIndex < 0 || fact.check.correctIndex >= fact.check.options.length)) {
       fail(`fact "${fact.id}" has an invalid choice check`);
     }

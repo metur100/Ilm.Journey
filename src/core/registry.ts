@@ -425,6 +425,24 @@ export function getCollectionCards(): CollectionCard[] {
 }
 
 // ---------------------------------------------------------------------------------------------
+// Quran memorisation (read-only signal for games, e.g. Ayah Builder prefers surahs the learner is memorising)
+// ---------------------------------------------------------------------------------------------
+
+/** Learned ayah numbers per surah number, reported by the feature that owns the memorisation tool. */
+export type MemorizationReader = () => Readonly<Record<number, readonly number[]>>;
+
+let memorizationReader: MemorizationReader | null = null;
+
+export function registerMemorizationReader(reader: MemorizationReader): void {
+  memorizationReader = reader;
+}
+
+/** Learned ayahs per surah (empty when no feature reports memorisation). */
+export function getMemorizedAyahs(): Readonly<Record<number, readonly number[]>> {
+  return memorizationReader ? safe(memorizationReader, {}) : {};
+}
+
+// ---------------------------------------------------------------------------------------------
 
 /** Removes every registration (tests only). */
 export function clearRegistryForTests(): void {
@@ -442,5 +460,6 @@ export function clearRegistryForTests(): void {
   profileLinks.clear();
   achievementProviders.clear();
   collectionCards.clear();
+  memorizationReader = null;
   bumpProgressVersion();
 }

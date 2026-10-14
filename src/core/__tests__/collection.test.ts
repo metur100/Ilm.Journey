@@ -16,7 +16,7 @@ import {
   useCollectionStore,
 } from '@/core/collection';
 import { translate } from '@/core/i18n';
-import { COLLECTION_CATEGORIES, LANGUAGES, type CollectionCard, TOPIC_IDS } from '@/core/models';
+import { COLLECTION_CATEGORIES, factSourceProblem, LANGUAGES, type CollectionCard, TOPIC_IDS } from '@/core/models';
 import { collectAchievements, getCollectionCards, hydrateFeatures, resetFeatures } from '@/core/registry';
 import { savePersisted } from '@/core/storage';
 import { registerFeatures } from '@/features';
@@ -57,6 +57,8 @@ describe('collection seed', () => {
         if (card.subtitle) expect({ id: card.id, lang, subtitle: nonEmpty(card.subtitle[lang]) }).toEqual({ id: card.id, lang, subtitle: true });
       }
       expect({ id: card.id, sources: card.sources.length > 0 && card.sources.every((s) => nonEmpty(s.sourceName)) }).toEqual({ id: card.id, sources: true });
+      // Religious cards cite religious sources; language cards (letters) a neutral language reference, never a verse.
+      expect({ id: card.id, problem: factSourceProblem(card.kind, card.sources) }).toEqual({ id: card.id, problem: null });
     }
   });
 

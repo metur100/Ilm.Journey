@@ -124,6 +124,11 @@ const FACTS = {
 ```
 
 - 1–3 facts per level; each is shown after the level with its sources (`SourceList`).
+- Language facts (Arabic letters, letter forms, harakat, basic vocabulary) are not religious claims: mark them
+  `kind: 'language'` and cite `LANGUAGE_SOURCES.alphabet` / `.vocabulary` (`@/core/models`) – never a Quran verse.
+  `validateGame` enforces `factSourceProblem(kind, sources)`; religious facts (default) still need a religious source.
+  Collection cards follow the same rule (`CollectionCard.kind`).
+- Quran games can read the learner's memorised ayahs with `getMemorizedAyahs()` (`@/core/registry`).
 - Copy the text and sources from the existing content (learn units/quests, stories, seerah, quran data). Keep
   "scholars differ" wording where the content has it. Quran text only from `@/features/quran` – never typed.
 - **Review keys:** every id in `factsMissed` becomes a review item `game:<gameId>:<factId>` (unless the fact has a

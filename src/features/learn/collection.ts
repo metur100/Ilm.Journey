@@ -1,5 +1,5 @@
 import { localizedFrom, translate } from '@/core/i18n';
-import { type AchievementKey, type CollectionCard, type LocalizedText, TOPIC_IDS } from '@/core/models';
+import { type AchievementKey, type CollectionCard, LANGUAGE_SOURCES, type LocalizedText, TOPIC_IDS } from '@/core/models';
 import { registerAchievements, registerCollectionCards } from '@/core/registry';
 import { getDua, getSurah, QURAN_SOURCE } from '@/features/quran';
 
@@ -23,8 +23,9 @@ const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 const LETTERS = ['ا', 'ب', 'ت', 'ج', 'د', 'س', 'ق', 'م'];
 
 function letterCards(): CollectionCard[] {
-  // The letter lessons carry no own references; the Learn unit "The Arabic Letters" is the cited source of the topic.
-  const sources = getUnit('arabic-letters')?.sources ?? [];
+  // Letter names and pronunciation are language facts (from the letter lessons), not religious claims: they cite the
+  // neutral alphabet reference instead of a Quran verse (the unit's 12:2 says the Quran is Arabic, not how ب sounds).
+  const sources = [LANGUAGE_SOURCES.alphabet];
   return LETTERS.flatMap((char) => {
     const letter = ALPHABET.find((l) => l.letter === char);
     if (!letter) return [];
@@ -38,6 +39,7 @@ function letterCards(): CollectionCard[] {
         arabic: letter.letter,
         fact: letter.description,
         sources,
+        kind: 'language' as const,
         unlock: `letter:${letter.letter}:traced`,
         unlockTitle: name,
         order: letter.position,

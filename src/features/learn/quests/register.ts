@@ -10,6 +10,7 @@ import {
   type CompletedItem,
   registerDailyPool,
   registerLifecycle,
+  registerMemorizationReader,
   registerProgress,
   registerQuestionRenderer,
   registerQuestions,
@@ -160,6 +161,10 @@ export function registerLearnQuests(): void {
     reset: () => useQuestStore.getState().reset(),
     autoSave: startQuestAutoSave,
   });
+  // Read-only memorisation signal for games (e.g. Ayah Builder prefers surahs the learner is memorising).
+  registerMemorizationReader(() =>
+    Object.fromEntries(Object.entries(useQuestStore.getState().memorization).map(([surah, memo]) => [Number(surah), memo.learned])),
+  );
 
   // 7. Topic tools.
   registerTopicTool({
