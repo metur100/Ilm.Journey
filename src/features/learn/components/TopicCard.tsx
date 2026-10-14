@@ -49,7 +49,7 @@ export function TopicCard({ topic, completed, total, knowledge, mastered, onPres
             <AppText variant="heading">{name}</AppText>
             {mastered ? <Icon name="trophy" size={18} color={c.goldText} /> : null}
           </View>
-          <AppText variant="small" color={c.textMuted} numberOfLines={2}>
+          <AppText variant="small" color={c.textMuted}>
             {l(getArea(topic)?.description)}
           </AppText>
           <AppText variant="tiny" color={c.goldText}>

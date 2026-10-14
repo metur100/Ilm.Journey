@@ -16,7 +16,7 @@ interface ToggleRowProps {
 
 export function ToggleRow({ icon, label, description, value, onChange }: ToggleRowProps) {
   const feedback = useFeedback();
-  const { c } = useTheme();
+  const { c, dark } = useTheme();
   return (
     <Pressable
       style={styles.row}
@@ -42,7 +42,8 @@ export function ToggleRow({ icon, label, description, value, onChange }: ToggleR
         value={value}
         onValueChange={onChange}
         trackColor={{ true: c.primary, false: c.switchOff }}
-        thumbColor={c.surface}
+        // In dark mode the surface colour would make the thumb invisible on the card.
+        thumbColor={dark ? c.text : c.surface}
         importantForAccessibility="no"
         accessibilityElementsHidden
       />

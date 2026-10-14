@@ -27,7 +27,8 @@ const useStyles = makeStyles((c) => ({
   radarCard: { gap: spacing.md },
   statGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   stat: { width: '48.5%', backgroundColor: c.surface, borderRadius: radius.md, padding: spacing.md, borderWidth: 1, borderColor: c.border },
-  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, justifyContent: 'space-between' },
+  // Left-aligned: with space-between a half-filled last row was pushed apart to both edges.
+  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   links: { gap: 0 },
 }));
 
