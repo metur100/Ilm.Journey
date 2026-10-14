@@ -11,9 +11,9 @@ import { Icon, type IconName } from './Icon';
 const TABS: Record<string, { icon: IconName; label: CoreKey }> = {
   index: { icon: 'home', label: 'tabs.home' },
   learn: { icon: 'book', label: 'tabs.learn' },
+  play: { icon: 'star', label: 'tabs.play' },
   stories: { icon: 'scroll', label: 'tabs.stories' },
-  seerah: { icon: 'kaaba', label: 'tabs.seerah' },
-  profile: { icon: 'user', label: 'tabs.profile' },
+  profile: { icon: 'user', label: 'tabs.me' },
 };
 
 interface BottomNavigationProps {

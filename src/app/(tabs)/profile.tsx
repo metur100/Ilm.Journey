@@ -1,7 +1,10 @@
 import { router } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 
+import { Art } from '@/core/art';
+import { useCollection } from '@/core/collection';
 import { CharacterCard } from '@/core/components/character/CharacterCard';
+import { useGarden } from '@/core/components/garden/useGarden';
 import { KnowledgeList, KnowledgeRadar } from '@/core/components/game/KnowledgeRadar';
 import { AppText } from '@/core/components/ui/AppText';
 import { Badge } from '@/core/components/ui/Badge';
@@ -30,9 +33,14 @@ const useStyles = makeStyles((c) => ({
   // Left-aligned: with space-between a half-filled last row was pushed apart to both edges.
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   links: { gap: 0 },
+  tiles: { flexDirection: 'row', gap: spacing.sm },
+  tile: { flex: 1, alignItems: 'center', gap: spacing.xs },
 }));
 
-/** Profile: hero, level, streak, knowledge radar, badges, statistics, review centre, feature links, settings. */
+/**
+ * Me (v2 profile): hero with the level wardrobe, level, streak, Ilm Garden and collection album, knowledge radar,
+ * badges, statistics, review centre, feature links (bookmarks, reflections), settings.
+ */
 export default function Profile() {
   const { t, language } = useI18n();
   const { c } = useTheme();
@@ -44,6 +52,8 @@ export default function Profile() {
   const badges = useAppStore((s) => s.badges);
   const dailyCompleted = useAppStore((s) => s.dailyCompleted);
   const summary = useSummary();
+  const collection = useCollection();
+  const garden = useGarden();
   const accuracy = stats.questionsAnswered ? Math.round((stats.correctAnswers / stats.questionsAnswered) * 100) : 0;
   const earned = BADGES.filter((b) => badges[b.id]);
   const preview = [...earned, ...BADGES.filter((b) => !badges[b.id])].slice(0, 6);
@@ -78,6 +88,27 @@ export default function Profile() {
             {t('streak.note')}
           </AppText>
         </Card>
+
+        <View style={styles.tiles}>
+          <Card style={styles.tile} onPress={() => router.push('/garden')} accessibilityLabel={`${t('garden.title')}: ${t('me.gardenCount', { count: garden.garden.placed.length })}, ${garden.stateLabel}`}>
+            <Art name="garden.palm" size={64} />
+            <AppText variant="bodyBold" align="center">
+              {t('garden.title')}
+            </AppText>
+            <AppText variant="tiny" color={c.textMuted} align="center">
+              {t('me.gardenCount', { count: garden.garden.placed.length })}
+            </AppText>
+          </Card>
+          <Card style={styles.tile} onPress={() => router.push('/collection')} accessibilityLabel={`${t('collection.title')}: ${t('collection.progress', { count: collection.progress.unlocked, total: collection.progress.total })}`}>
+            <Art name="pattern.star" size={64} />
+            <AppText variant="bodyBold" align="center">
+              {t('collection.title')}
+            </AppText>
+            <AppText variant="tiny" color={collection.newCount > 0 ? c.goldText : c.textMuted} align="center">
+              {collection.newCount > 0 ? t('me.newCards', { count: collection.newCount }) : t('collection.progress', { count: collection.progress.unlocked, total: collection.progress.total })}
+            </AppText>
+          </Card>
+        </View>
 
         <SectionHeader title={t('profile.knowledgeMap')} />
         <Card style={styles.radarCard}>
