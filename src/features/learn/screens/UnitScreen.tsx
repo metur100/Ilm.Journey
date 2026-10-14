@@ -165,7 +165,7 @@ function UnitFlow({ unit }: { unit: Unit }) {
           <Button
             label={t('unit.backToTopic')}
             variant={next ? 'ghost' : 'primary'}
-            onPress={() => router.replace({ pathname: '/topic/[id]', params: { id: unit.areaId } })}
+            onPress={() => router.dismissTo({ pathname: '/topic/[id]', params: { id: unit.areaId } })}
           />
         </ScrollView>
       </SafeAreaView>

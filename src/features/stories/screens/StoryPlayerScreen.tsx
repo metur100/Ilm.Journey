@@ -205,7 +205,7 @@ function StoryPlayer({ story }: { story: Story }) {
             <Button label={t('reward.review')} icon="refresh" variant="secondary" fullWidth onPress={() => router.replace('/review')} />
           ) : null}
           <Button label={t('reward.map')} icon="map" variant="ghost" fullWidth onPress={() => router.replace('/story/map')} />
-          <Button label={t('reward.stories')} icon="scroll" variant="ghost" fullWidth onPress={() => router.replace('/(tabs)/stories')} />
+          <Button label={t('reward.stories')} icon="scroll" variant="ghost" fullWidth onPress={() => router.dismissTo('/(tabs)/stories')} />
         </ScrollView>
       </SafeAreaView>
     );

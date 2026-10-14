@@ -174,7 +174,7 @@ function MasterRun({ topic, onRetry }: { topic: TopicId; onRetry: () => void }) 
           <Button
             label={t('unit.backToTopic')}
             variant={outcome.passed ? 'primary' : 'ghost'}
-            onPress={() => router.replace({ pathname: '/topic/[id]', params: { id: topic } })}
+            onPress={() => router.dismissTo({ pathname: '/topic/[id]', params: { id: topic } })}
           />
         </ScrollView>
       </SafeAreaView>

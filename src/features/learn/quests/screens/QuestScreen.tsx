@@ -272,7 +272,7 @@ function QuestFlow({ quest }: { quest: BeginnerQuest }) {
               label={t('reward.backToTopic')}
               icon="map"
               variant={next ? 'ghost' : 'primary'}
-              onPress={() => router.replace({ pathname: '/topic/[id]', params: { id: quest.worldId } })}
+              onPress={() => router.dismissTo({ pathname: '/topic/[id]', params: { id: quest.worldId } })}
             />
           </View>
           {lessons.length > 0 ? (
