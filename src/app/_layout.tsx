@@ -1,24 +1,46 @@
-import { AmiriQuran_400Regular } from '@expo-google-fonts/amiri-quran';
-import { Lora_400Regular, Lora_600SemiBold, Lora_700Bold } from '@expo-google-fonts/lora';
-import { NotoNaskhArabic_400Regular, NotoNaskhArabic_700Bold } from '@expo-google-fonts/noto-naskh-arabic';
-import { Nunito_400Regular, Nunito_600SemiBold, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-google-fonts/nunito';
-import { useFonts } from 'expo-font';
-import { getLocales } from 'expo-localization';
-import { DarkTheme, DefaultTheme, type ErrorBoundaryProps, Stack, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import * as SystemUI from 'expo-system-ui';
-import { useEffect, useMemo } from 'react';
-import { AppState, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AmiriQuran_400Regular } from "@expo-google-fonts/amiri-quran";
+import {
+  Lora_400Regular,
+  Lora_600SemiBold,
+  Lora_700Bold,
+} from "@expo-google-fonts/lora";
+import {
+  NotoNaskhArabic_400Regular,
+  NotoNaskhArabic_700Bold,
+} from "@expo-google-fonts/noto-naskh-arabic";
+import {
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+} from "@expo-google-fonts/nunito";
+import { useFonts } from "expo-font";
+import { getLocales } from "expo-localization";
+import {
+  DarkTheme,
+  DefaultTheme,
+  type ErrorBoundaryProps,
+  Stack,
+  ThemeProvider,
+} from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import * as SystemUI from "expo-system-ui";
+import { useEffect, useMemo } from "react";
+import { AppState, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { CelebrationOverlay } from '@/core/components/game/CelebrationOverlay';
-import { ErrorState } from '@/core/components/ui/States';
-import { languageFromLocale, translate } from '@/core/i18n';
-import { startFeatureAutoSaves } from '@/core/registry';
-import { configureNotificationHandler, syncReminder } from '@/core/services/notifications';
-import { startAppAutoSave, useAppStore } from '@/core/store/appStore';
-import { useTheme } from '@/core/theme';
-import { registerFeatures } from '@/features';
+import { CelebrationOverlay } from "@/core/components/game/CelebrationOverlay";
+import { ErrorState } from "@/core/components/ui/States";
+import { languageFromLocale, translate } from "@/core/i18n";
+import { startFeatureAutoSaves } from "@/core/registry";
+import {
+  configureNotificationHandler,
+  syncReminder,
+} from "@/core/services/notifications";
+import { startAppAutoSave, useAppStore } from "@/core/store/appStore";
+import { useTheme } from "@/core/theme";
+import { registerFeatures } from "@/features";
 
 // Features register their content, progress, i18n and lifecycle before anything hydrates.
 registerFeatures();
@@ -49,7 +71,9 @@ export default function RootLayout() {
   useEffect(() => {
     const stopApp = startAppAutoSave();
     const stopFeatures = startFeatureAutoSaves();
-    hydrate(languageFromLocale(getLocales()[0]?.languageCode)).catch(() => undefined);
+    hydrate(languageFromLocale(getLocales()[0]?.languageCode)).catch(
+      () => undefined,
+    );
     return () => {
       stopApp();
       stopFeatures();
@@ -59,8 +83,8 @@ export default function RootLayout() {
   // A new day brings a new quest log, also when the app was left open overnight.
   useEffect(() => {
     if (!hydrated) return;
-    const sub = AppState.addEventListener('change', (state) => {
-      if (state === 'active') refreshQuests();
+    const sub = AppState.addEventListener("change", (state) => {
+      if (state === "active") refreshQuests();
     });
     return () => sub.remove();
   }, [hydrated, refreshQuests]);
@@ -79,7 +103,15 @@ export default function RootLayout() {
     const base = dark ? DarkTheme : DefaultTheme;
     return {
       ...base,
-      colors: { ...base.colors, background: c.background, card: c.surface, text: c.text, border: c.border, primary: c.primary, notification: c.gold },
+      colors: {
+        ...base.colors,
+        background: c.background,
+        card: c.surface,
+        text: c.text,
+        border: c.border,
+        primary: c.primary,
+        notification: c.gold,
+      },
     };
   }, [c, dark]);
 
@@ -92,21 +124,47 @@ export default function RootLayout() {
   if (!ready) return <View style={{ flex: 1, backgroundColor: c.night }} />;
 
   return (
-    <ThemeProvider value={navigationTheme}>
-      <SafeAreaProvider>
-        {/* No root <StatusBar>: its props would override the per-screen style set by useStatusBar (dark onboarding/hero headers). */}
-        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.background }, animation: 'slide_from_right' }}>
-          <Stack.Screen name="index" options={{ animation: 'none' }} />
-          <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
-          <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
-          <Stack.Screen name="unit/[id]" options={{ gestureEnabled: false, animation: 'slide_from_bottom' }} />
-          <Stack.Screen name="master/[id]" options={{ gestureEnabled: false, animation: 'slide_from_bottom' }} />
-          <Stack.Screen name="daily" options={{ animation: 'slide_from_bottom' }} />
-          <Stack.Screen name="review" options={{ animation: 'slide_from_bottom' }} />
-        </Stack>
-        <CelebrationOverlay />
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={navigationTheme}>
+        <SafeAreaProvider>
+          {/* No root <StatusBar>: its props would override the per-screen style set by useStatusBar (dark onboarding/hero headers). */}
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: c.background },
+              animation: "slide_from_right",
+            }}
+          >
+            <Stack.Screen name="index" options={{ animation: "none" }} />
+            <Stack.Screen name="onboarding" options={{ animation: "fade" }} />
+            <Stack.Screen name="(tabs)" options={{ animation: "fade" }} />
+            <Stack.Screen
+              name="unit/[id]"
+              options={{
+                gestureEnabled: false,
+                animation: "slide_from_bottom",
+              }}
+            />
+            <Stack.Screen
+              name="master/[id]"
+              options={{
+                gestureEnabled: false,
+                animation: "slide_from_bottom",
+              }}
+            />
+            <Stack.Screen
+              name="daily"
+              options={{ animation: "slide_from_bottom" }}
+            />
+            <Stack.Screen
+              name="review"
+              options={{ animation: "slide_from_bottom" }}
+            />
+          </Stack>
+          <CelebrationOverlay />
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 
@@ -117,9 +175,9 @@ export function ErrorBoundary({ retry }: ErrorBoundaryProps) {
   return (
     <View style={{ flex: 1, backgroundColor: c.background }}>
       <ErrorState
-        title={translate(language, 'error.title')}
-        body={translate(language, 'error.body')}
-        actionLabel={translate(language, 'common.retry')}
+        title={translate(language, "error.title")}
+        body={translate(language, "error.body")}
+        actionLabel={translate(language, "common.retry")}
         onAction={retry}
       />
     </View>
