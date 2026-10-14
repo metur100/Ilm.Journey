@@ -1,4 +1,5 @@
-import { act, create, type ReactTestInstance, type ReactTestRenderer } from 'react-test-renderer';
+
+import type React from 'react';
 
 import { EMPTY_GAMES, useGamesStore } from '@/core/games';
 import { DEMO_GAME_ID } from '@/core/games/demo/register';
@@ -9,6 +10,7 @@ import { XP } from '@/core/services/xp';
 import { useAppStore } from '@/core/store/appStore';
 import { registerFeatures } from '@/features';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 jest.mock('react-native-safe-area-context', () => require('react-native-safe-area-context/jest/mock').default);
 jest.mock('expo-router', () => ({
   router: { push: jest.fn(), back: jest.fn(), replace: jest.fn(), canGoBack: () => true },
@@ -17,6 +19,21 @@ jest.mock('expo-router', () => ({
 jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 
 registerFeatures();
+
+/** Minimal local typing of react-test-renderer (the package ships no types here). */
+interface ReactTestInstance {
+  props: Record<string, any>;
+  findAll: (predicate: (node: ReactTestInstance) => boolean) => ReactTestInstance[];
+}
+interface ReactTestRenderer {
+  root: ReactTestInstance;
+  unmount: () => void;
+}
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { act, create } = require('react-test-renderer') as {
+  act: (callback: () => Promise<unknown>) => Promise<void>;
+  create: (element: React.ReactElement) => ReactTestRenderer;
+};
 
 const byLabel = (root: ReactTestInstance, label: string | RegExp) =>
   root.findAll((n) => typeof n.props.onPress === 'function' && (typeof label === 'string' ? n.props.accessibilityLabel === label : label.test(String(n.props.accessibilityLabel ?? ''))))[0];
