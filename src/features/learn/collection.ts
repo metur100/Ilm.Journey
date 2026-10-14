@@ -33,7 +33,7 @@ function letterCards(): CollectionCard[] {
       {
         id: `letter-${letter.position}`,
         category: 'letters' as const,
-        art: 'pattern.letter',
+        art: 'pattern.star-tile',
         title: name,
         arabic: letter.letter,
         fact: letter.description,
@@ -50,14 +50,14 @@ function letterCards(): CollectionCard[] {
 
 const SURAHS: readonly { number: number; art: string }[] = [
   { number: 1, art: 'object.quran-stand' },
-  { number: 103, art: 'pattern.star' },
+  { number: 103, art: 'pattern.star-tile' },
   { number: 105, art: 'animal.elephant' },
   { number: 107, art: 'object.coins' },
-  { number: 108, art: 'pattern.star' },
+  { number: 108, art: 'pattern.star-tile' },
   { number: 109, art: 'object.book' },
-  { number: 110, art: 'pattern.star' },
+  { number: 110, art: 'pattern.star-tile' },
   { number: 112, art: 'object.quran-stand' },
-  { number: 113, art: 'ui.star' },
+  { number: 113, art: 'ui.star-filled' },
   { number: 114, art: 'object.book' },
 ];
 
@@ -130,13 +130,13 @@ function duaCards(): CollectionCard[] {
 // ---------- Good deeds (akhlaq unit lessons) ----------
 
 const DEEDS: readonly { id: string; unitId: string; section: number; art: string }[] = [
-  { id: 'deed-sabr', unitId: 'akhlaq-sabr-shukr', section: 0, art: 'object.tree' },
+  { id: 'deed-sabr', unitId: 'akhlaq-sabr-shukr', section: 0, art: 'garden.sapling' },
   { id: 'deed-shukr', unitId: 'akhlaq-sabr-shukr', section: 1, art: 'food.dates' },
   { id: 'deed-sidq', unitId: 'akhlaq-honesty-trust', section: 0, art: 'object.scroll' },
   { id: 'deed-amanah', unitId: 'akhlaq-honesty-trust', section: 1, art: 'object.coins' },
   { id: 'deed-rahmah', unitId: 'akhlaq-mercy-family', section: 0, art: 'animal.dove' },
   { id: 'deed-parents', unitId: 'akhlaq-mercy-family', section: 1, art: 'ui.heart' },
-  { id: 'deed-forgiveness', unitId: 'akhlaq-mercy-family', section: 2, art: 'pattern.star' },
+  { id: 'deed-forgiveness', unitId: 'akhlaq-mercy-family', section: 2, art: 'pattern.star-tile' },
 ];
 
 function deedCards(): CollectionCard[] {

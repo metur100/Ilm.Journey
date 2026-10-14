@@ -23,12 +23,12 @@ interface ObjectSeed {
 }
 
 const SEEDS: readonly ObjectSeed[] = [
-  { id: 'object-tree', storyId: 'adam', sceneId: 'adam-s2', art: 'object.tree', title: { en: 'The tree', de: 'Der Baum', bs: 'Drvo' } },
+  { id: 'object-tree', storyId: 'adam', sceneId: 'adam-s2', art: 'garden.sapling', title: { en: 'The tree', de: 'Der Baum', bs: 'Drvo' } },
   { id: 'object-ark', storyId: 'nuh', sceneId: 'nuh-s2', art: 'object.ark', title: { en: 'The ark', de: 'Die Arche', bs: 'Lađa' } },
   { id: 'object-fire', storyId: 'ibrahim', sceneId: 'ibrahim-s2', art: 'object.fire', title: { en: 'The fire', de: 'Das Feuer', bs: 'Vatra' } },
   { id: 'object-basket', storyId: 'musa', sceneId: 'musa-s1', art: 'object.basket', title: { en: 'The basket', de: 'Der Korb', bs: 'Korpa' } },
   { id: 'object-staff', storyId: 'musa', sceneId: 'musa-s3', art: 'object.staff', title: { en: 'The staff', de: 'Der Stab', bs: 'Štap' } },
-  { id: 'object-well', storyId: 'yusuf', sceneId: 'yusuf-s2', art: 'place.well', title: { en: 'The well', de: 'Der Brunnen', bs: 'Bunar' } },
+  { id: 'object-well', storyId: 'yusuf', sceneId: 'yusuf-s2', art: 'object.well', title: { en: 'The well', de: 'Der Brunnen', bs: 'Bunar' } },
   { id: 'object-grain', storyId: 'yusuf', sceneId: 'yusuf-s3', art: 'object.grain-sack', title: { en: 'The grain', de: 'Das Getreide', bs: 'Žito' } },
   { id: 'object-fish', storyId: 'yunus', sceneId: 'yunus-s1', art: 'animal.whale', title: { en: 'The big fish', de: 'Der große Fisch', bs: 'Velika riba' } },
   { id: 'object-dates', storyId: 'isa', sceneId: 'isa-s1', art: 'food.dates', title: { en: 'The palm and its dates', de: 'Die Palme und ihre Datteln', bs: 'Palma i njene hurme' } },
@@ -36,7 +36,7 @@ const SEEDS: readonly ObjectSeed[] = [
     id: 'place-judi',
     storyId: 'nuh',
     sceneId: 'nuh-s3',
-    art: 'place.judi',
+    art: 'place.mount-judi',
     category: 'places',
     title: localizedFrom((lang) => translateNs(storiesI18n, lang, 'place.judi')),
   },

@@ -71,12 +71,12 @@ export const MAX_CARD_CHARS = 240;
 
 /** Topic illustration used when a section has no entry in the art map. */
 export const TOPIC_FALLBACK_ART: Record<TopicId, string> = {
-  salah: 'place.masjid',
+  salah: 'object.prayer-mat',
   quran: 'object.quran-stand',
   prophets: 'scene.mountains',
   seerah: 'place.kaaba',
   akhlaq: 'ui.heart',
-  ramadan: 'object.moon-lantern',
+  ramadan: 'object.lantern-ramadan',
   history: 'object.scroll',
   arabic: 'object.pen',
 };

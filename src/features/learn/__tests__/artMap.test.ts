@@ -6,14 +6,14 @@ import { LESSONS } from '@/features/learn/content/quests';
 
 /** Art names the lesson sections may use (docs/GAMES.md art library naming scheme `category.name`). */
 const ALLOWED = new Set([
-  'scene.dawn', 'scene.day', 'scene.sunset', 'scene.night', 'scene.desert', 'scene.sea', 'scene.river', 'scene.mountains',
-  'scene.garden', 'scene.city', 'place.kaaba', 'place.masjid', 'place.masjid-nabawi', 'place.cave', 'place.cave-hira',
-  'place.mountains', 'place.well', 'place.city', 'place.minaret', 'object.ark', 'object.staff', 'object.basket',
+  'sky.dawn', 'sky.noon', 'sky.sunset', 'sky.night', 'scene.desert', 'place.sea', 'place.river', 'scene.mountains',
+  'scene.garden-backdrop', 'scene.city', 'place.kaaba', 'garden.masjid-small', 'place.masjid-nabawi', 'place.cave-hira', 'place.cave-thawr',
+  'scene.mountains', 'object.well', 'place.city-generic', 'garden.minaret', 'object.ark', 'object.staff', 'object.basket',
   'object.grain-sack', 'object.lantern', 'object.quran-stand', 'object.prayer-mat', 'object.compass', 'object.dates',
-  'object.water-jug', 'object.book', 'object.scroll', 'object.pen', 'object.coins', 'object.moon-lantern', 'object.clock',
-  'animal.camel', 'animal.sheep', 'animal.dove', 'animal.whale', 'animal.bird', 'animal.spider-web', 'animal.hoopoe',
+  'object.water-jug', 'object.book', 'object.scroll', 'object.pen', 'object.coins', 'object.lantern-ramadan', 'object.clock',
+  'animal.camel', 'animal.sheep', 'animal.dove', 'animal.whale', 'animal.birds', 'object.spider-web', 'animal.hoopoe',
   'animal.ant', 'body.hands', 'body.mouth', 'body.nose', 'body.face', 'body.arms', 'body.head', 'body.ears', 'body.feet',
-  'food.dates', 'food.water', 'food.bread', 'ui.star', 'ui.heart', 'pattern.star',
+  'food.dates', 'food.water', 'food.bread', 'ui.star-filled', 'ui.heart', 'pattern.star-tile',
 ]);
 
 const SECTION_IDS = [

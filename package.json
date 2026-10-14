@@ -65,6 +65,7 @@
       "^@/(.*)$": "<rootDir>/src/$1"
     },
     "testPathIgnorePatterns": [
+      "\\.d\\.ts$",
       "/node_modules/",
       "/android/",
       "/ios/"

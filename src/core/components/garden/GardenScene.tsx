@@ -158,7 +158,7 @@ function SkyPieces({ sky, width, height }: { sky: ReturnType<typeof skyForDate>;
 /** The garden backdrop from the art library, or gentle hills while the piece is not available. */
 function Backdrop({ width, height }: { width: number; height: number }) {
   if (hasArt(GARDEN_SKY_ART.backdrop)) {
-    return <Art name={GARDEN_SKY_ART.backdrop} size={width} height={height * 0.62} style={{ position: 'absolute', left: 0, bottom: 0 }} />;
+    return <Art name={GARDEN_SKY_ART.backdrop} size={width} height={height * 0.62} fit="cover" style={{ position: 'absolute', left: 0, bottom: 0 }} />;
   }
   const top = height * 0.42;
   return (
@@ -242,7 +242,7 @@ function PlacedView({
   }
 
   const box: ViewStyle = { position: 'absolute', left: spot.x * width - w / 2, bottom: height - spot.y * height + hover, width: w, alignItems: 'center' };
-  const art = <Art name={gardenArt(element.id)} size={w} />;
+  const art = <Art name={gardenArt(element.id)} size={w} thirsty={growing && thirst > 0} />;
   const content = <Animated.View style={{ transform: transforms as never, opacity }}>{art}</Animated.View>;
 
   if (onPress) {

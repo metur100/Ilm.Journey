@@ -15,10 +15,10 @@ const base = { id: 'q', topic: 't', prompt: text('?'), explanation: text('.') };
 const LIBRARY_NAMES = new Set([
   'object.ark', 'object.staff', 'object.basket', 'object.grain-sack', 'object.lantern', 'object.quran-stand',
   'object.prayer-mat', 'object.compass', 'object.dates', 'object.water-jug', 'object.well', 'object.fire', 'object.book',
-  'place.kaaba', 'place.masjid', 'place.cave', 'place.mountains', 'place.city', 'place.well',
-  'animal.camel', 'animal.sheep', 'animal.dove', 'animal.whale', 'animal.bird', 'animal.spider-web', 'animal.hoopoe',
+  'place.kaaba', 'garden.masjid-small', 'place.cave-hira', 'scene.mountains', 'place.city-generic', 'object.well',
+  'animal.camel', 'animal.sheep', 'animal.dove', 'animal.whale', 'animal.birds', 'object.spider-web', 'animal.hoopoe',
   'animal.ant', 'body.hands', 'body.mouth', 'body.nose', 'body.face', 'body.arms', 'body.head', 'body.ears', 'body.feet',
-  'food.dates', 'scene.sea', 'scene.river', 'scene.palms', 'scene.garden', 'scene.stars', 'scene.moon', 'scene.sun',
+  'food.dates', 'place.sea', 'place.river', 'place.oasis', 'scene.garden-backdrop', 'garden.stars', 'object.crescent', 'garden.sun',
 ]);
 
 describe('optionArt', () => {
@@ -49,7 +49,7 @@ describe('optionArt', () => {
       correctIds: ['w'],
     };
     expect(artForOption(find, 'w')).toBe('animal.whale');
-    expect(artForOption(find, 'm')).toBe('place.masjid');
+    expect(artForOption(find, 'm')).toBe('garden.masjid-small');
     expect(artForOption(find, 'p')).toBeUndefined();
   });
 
@@ -69,7 +69,7 @@ describe('optionArt', () => {
     expect(artForText('Face')).toBe('body.face');
     expect(artForText('Wash the face')).toBe('body.face');
     expect(artForText('Both feet')).toBe('body.feet');
-    expect(artForText('Cave of Hira')).toBe('place.cave');
+    expect(artForText('Cave of Hira')).toBe('place.cave-hira');
 
     // Not clear-cut → no picture.
     expect(artForText('Face the qibla')).toBeUndefined();

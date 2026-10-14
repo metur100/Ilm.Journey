@@ -98,7 +98,7 @@ describe('lesson content as cards', () => {
     it(`[${language}] preserves every section text exactly and keeps cards short`, () => {
       const problems: string[] = [];
       for (const lesson of ALL_LESSONS) {
-        const cards = buildLessonCards(lesson.sources, { fallbackArt: 'ui.star', language });
+        const cards = buildLessonCards(lesson.sources, { fallbackArt: 'ui.star-filled', language });
         for (const source of lesson.sources) {
           const own = cards.filter((c) => c.sourceId === source.id);
           const original = source.body[language];
@@ -128,7 +128,7 @@ describe('interactions', () => {
   ];
 
   it('chooses flip, reveal, match and none by the documented rules', () => {
-    const cards = buildLessonCards(sections, { fallbackArt: 'place.masjid', language: 'en' });
+    const cards = buildLessonCards(sections, { fallbackArt: 'garden.masjid-small', language: 'en' });
     expect(cards.map((c) => [c.sourceId, c.interaction.kind])).toEqual([
       ['s#0', 'flip'],
       ['s#1', 'reveal'],
@@ -143,12 +143,12 @@ describe('interactions', () => {
     expect(cards[0].arabic).toBe('صَلَاة');
     expect(cards[0].transliteration).toBe('salah');
     expect(cards[4].art).toBe('object.clock');
-    expect(cards[1].art).toBe('place.masjid');
+    expect(cards[1].art).toBe('garden.masjid-small');
   });
 
   it('gives continuation cards no interaction and no Arabic', () => {
     const long = Array.from({ length: 6 }, (_, i) => `This is sentence ${i + 1} of a rather long section body.`).join(' ');
-    const cards = buildLessonCards([{ id: 'x#0', heading: lt('Title'), body: lt(long), arabic: 'سَلَام' }], { fallbackArt: 'ui.star', language: 'en' });
+    const cards = buildLessonCards([{ id: 'x#0', heading: lt('Title'), body: lt(long), arabic: 'سَلَام' }], { fallbackArt: 'ui.star-filled', language: 'en' });
     expect(cards.length).toBeGreaterThan(1);
     expect(cards[0].interaction.kind).toBe('flip');
     expect(cards.slice(1).every((c) => c.interaction.kind === 'none' && !c.arabic && c.heading === 'Title')).toBe(true);
@@ -160,7 +160,7 @@ describe('interactions', () => {
         { id: 'a#0', heading: lt('Example'), body: lt('One.') },
         { id: 'a#1', heading: lt('Example'), body: lt('Two.') },
       ],
-      { fallbackArt: 'ui.star', language: 'en' },
+      { fallbackArt: 'ui.star-filled', language: 'en' },
     );
     expect(cards.map((c) => c.interaction.kind)).toEqual(['reveal', 'reveal']);
   });
@@ -168,8 +168,8 @@ describe('interactions', () => {
   it('is deterministic and has at most one match card per lesson', () => {
     for (const language of LANGUAGES) {
       for (const lesson of ALL_LESSONS) {
-        const a = buildLessonCards(lesson.sources, { fallbackArt: 'ui.star', language });
-        const b = buildLessonCards(lesson.sources, { fallbackArt: 'ui.star', language });
+        const a = buildLessonCards(lesson.sources, { fallbackArt: 'ui.star-filled', language });
+        const b = buildLessonCards(lesson.sources, { fallbackArt: 'ui.star-filled', language });
         expect(a).toEqual(b);
         const matches = a.filter((c) => c.interaction.kind === 'match');
         expect(matches.length).toBeLessThanOrEqual(1);

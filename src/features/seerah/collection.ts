@@ -14,25 +14,25 @@ import { pickSeerah, useSeerahStore } from './store/seerahStore';
 
 /** Places with their art; Jeddah is left out (shown on the map for orientation only, no sources). */
 const PLACES: readonly { id: string; art: string }[] = [
-  { id: 'makkah', art: 'place.makkah' },
+  { id: 'makkah', art: 'place.makkah-city' },
   { id: 'hira', art: 'place.cave-hira' },
-  { id: 'abyssinia', art: 'place.abyssinia' },
+  { id: 'abyssinia', art: 'place.city-generic' },
   { id: 'taif', art: 'place.taif' },
   { id: 'thawr', art: 'place.cave-thawr' },
-  { id: 'quba', art: 'place.masjid-quba' },
-  { id: 'madinah', art: 'place.madinah' },
-  { id: 'badr', art: 'place.badr' },
-  { id: 'uhud', art: 'place.uhud' },
-  { id: 'hudaybiyyah', art: 'place.hudaybiyyah' },
-  { id: 'arafat', art: 'place.arafat' },
+  { id: 'quba', art: 'place.masjid-nabawi-early' },
+  { id: 'madinah', art: 'place.madinah-city' },
+  { id: 'badr', art: 'place.badr-wells' },
+  { id: 'uhud', art: 'place.mount-uhud' },
+  { id: 'hudaybiyyah', art: 'place.desert-road' },
+  { id: 'arafat', art: 'place.valley' },
 ];
 
 /** Events with an episode and a fact block (battles with casualties and the Prophet's ﷺ death are not used as cards). */
 const EVENTS: readonly { id: string; art: string }[] = [
   { id: 'elephant', art: 'animal.elephant' },
   { id: 'first-revelation', art: 'object.scroll' },
-  { id: 'public-call', art: 'place.mountains' },
-  { id: 'abyssinia', art: 'place.abyssinia' },
+  { id: 'public-call', art: 'scene.mountains' },
+  { id: 'abyssinia', art: 'place.city-generic' },
   { id: 'hijrah', art: 'animal.camel' },
   { id: 'mosque', art: 'place.masjid-nabawi' },
   { id: 'brotherhood', art: 'ui.heart' },
