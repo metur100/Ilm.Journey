@@ -1,0 +1,44 @@
+{
+  "_source": "Extracted verbatim by script from islam-quest/src/data/content/prophets.json (facts only). The 8 prophet-story quests, their lessons and questions are not ported: the Stories tab covers them.",
+  "facts": [
+    {
+      "id": "prophets-fact-25",
+      "worldId": "prophets",
+      "text": {
+        "en": "The Quran mentions 25 prophets by name – from Adam to Muhammad ﷺ.",
+        "de": "Der Koran nennt 25 Propheten mit Namen – von Adam bis Muhammad ﷺ.",
+        "bs": "Kur'an spominje 25 poslanika po imenu – od Adema do Muhammeda ﷺ."
+      }
+    },
+    {
+      "id": "prophets-fact-yusuf",
+      "worldId": "prophets",
+      "text": {
+        "en": "The story of Yusuf is told in one surah from beginning to end – Surah Yusuf, the 12th surah.",
+        "de": "Die Geschichte Yusufs wird in einer einzigen Sure von Anfang bis Ende erzählt – Sure Yusuf, die 12. Sure.",
+        "bs": "Kazivanje o Jusufu ispričano je u jednoj suri od početka do kraja – sura Jusuf, 12. sura."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "12"
+        }
+      ]
+    },
+    {
+      "id": "prophets-fact-maryam",
+      "worldId": "prophets",
+      "text": {
+        "en": "Maryam is the only woman mentioned by name in the Quran, and a whole surah carries her name.",
+        "de": "Maryam ist die einzige Frau, die im Koran mit Namen genannt wird, und eine ganze Sure trägt ihren Namen.",
+        "bs": "Merjema je jedina žena spomenuta imenom u Kur'anu, i cijela jedna sura nosi njeno ime."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "19"
+        }
+      ]
+    }
+  ]
+}

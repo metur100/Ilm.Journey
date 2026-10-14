@@ -6,7 +6,7 @@ import { XP } from '@/core/services/xp';
 import { savePersisted } from '@/core/storage';
 import { useAppStore } from '@/core/store/appStore';
 import { learnKey, testQuestionsOfArea, unitsOfArea } from '@/features/learn/content';
-import { clearLearnExtensionsForTests } from '@/features/learn/extensions';
+import { clearLearnExtensionsForTests, registerPathSource } from '@/features/learn/extensions';
 import { registerLearnFeature } from '@/features/learn/register';
 import { EMPTY_LEARN } from '@/features/learn/services/progression';
 import { LEARN_PERSIST, sanitizeLearnData, unitTarget, useLearnStore } from '@/features/learn/store/learnStore';
@@ -16,6 +16,9 @@ beforeEach(async () => {
   clearRegistryForTests();
   clearLearnExtensionsForTests();
   registerLearnFeature();
+  // These tests cover the knowledge-rpg units; the islam-quest beginner quests that open every path are
+  // covered in quests.test.ts, so their path source is emptied here.
+  registerPathSource({ id: 'quests', order: 10, items: () => [] });
   useLearnStore.setState({ ...EMPTY_LEARN, hydrated: true });
   useAppStore.setState({ ...createInitialData('en'), hydrated: true, celebrations: [], celebrationsPaused: false });
 });
