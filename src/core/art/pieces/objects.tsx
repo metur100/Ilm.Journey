@@ -62,6 +62,24 @@ function Pot({ c, x, y, w, h, color, neck = 0.5 }: { c: Ctx; x: number; y: numbe
   );
 }
 
+function CompassFace() {
+  return (
+    <>
+      <Circle cx={50} cy={50} r={44} fill={C.goldDeep} />
+      <Circle cx={50} cy={50} r={40} fill={C.gold} />
+      <Circle cx={50} cy={50} r={34} fill={C.cream} />
+      {Array.from({ length: 16 }, (_, i) => (
+        <Path key={i} d={`M50 18V${i % 4 === 0 ? 24 : 21}`} stroke={C.sandDark} strokeWidth={i % 4 === 0 ? 2.4 : 1.2} transform={`rotate(${i * 22.5} 50 50)`} strokeLinecap="round" />
+      ))}
+      <Path d={star8Path(50, 50, 16)} fill={C.sandLight} />
+      <Path d="M50 20 57 50H43Z" fill={C.berry} />
+      <Path d="M50 80 57 50H43Z" fill={C.nightLine} />
+      <Circle cx={50} cy={50} r={4} fill={C.gold} />
+      <Circle cx={50} cy={6} r={4} fill={C.goldDeep} />
+    </>
+  );
+}
+
 export const object = {
   ark: art(140, 100, () => (
     <>
@@ -303,19 +321,11 @@ export const object = {
   compass: art(100, 100, (c) => (
     <>
       <Shadow c={c} cx={50} cy={94} rx={34} />
-      <Circle cx={50} cy={50} r={44} fill={C.goldDeep} />
-      <Circle cx={50} cy={50} r={40} fill={C.gold} />
-      <Circle cx={50} cy={50} r={34} fill={C.cream} />
-      {Array.from({ length: 16 }, (_, i) => (
-        <Path key={i} d={`M50 18V${i % 4 === 0 ? 24 : 21}`} stroke={C.sandDark} strokeWidth={i % 4 === 0 ? 2.4 : 1.2} transform={`rotate(${i * 22.5} 50 50)`} strokeLinecap="round" />
-      ))}
-      <Path d={star8Path(50, 50, 16)} fill={C.sandLight} />
-      <Path d="M50 20 57 50H43Z" fill={C.berry} />
-      <Path d="M50 80 57 50H43Z" fill={C.nightLine} />
-      <Circle cx={50} cy={50} r={4} fill={C.gold} />
-      <Circle cx={50} cy={6} r={4} fill={C.goldDeep} />
+      <CompassFace />
     </>
   )),
+  /** The compass without its ground shadow – for a compass that turns (Find the Qibla). */
+  'compass-face': art(100, 100, () => <CompassFace />),
 
   'qibla-arrow': art(100, 100, (c) => (
     <>

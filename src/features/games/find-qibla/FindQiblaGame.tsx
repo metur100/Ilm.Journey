@@ -62,6 +62,7 @@ export function FindQiblaGame(api: GameApi<QiblaConfig>) {
   const { style: shakeStyle, shake } = useShake(reducedMotion);
   const watch = useStopwatch(api.challengeMode);
   const finished = useRef(false);
+  const scrollRef = useRef<ScrollView>(null);
 
   const city = cities[round];
   const cityName = t(`city.${city}`);
@@ -83,6 +84,8 @@ export function FindQiblaGame(api: GameApi<QiblaConfig>) {
     const error = Math.round(angleDiff(reading, bearing));
     const points = roundPoints(error);
     setChecked({ error, bearing });
+    // The answer card and the next button appear below the compass – bring them into view on phones.
+    setTimeout(() => scrollRef.current?.scrollToEnd({ animated: !reducedMotion }), 80);
     setErrors((e) => [...e, error]);
     if (points >= 2) {
       haptic('success');
@@ -105,12 +108,13 @@ export function FindQiblaGame(api: GameApi<QiblaConfig>) {
     }
     setRound((r) => r + 1);
     setChecked(null);
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
   };
 
   const points = checked ? roundPoints(checked.error) : 0;
 
   return (
-    <ScrollView contentContainerStyle={styles.scroll} scrollEnabled={!!checked} onLayout={(e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width)}>
+    <ScrollView ref={scrollRef} contentContainerStyle={styles.scroll} scrollEnabled={!!checked} onLayout={(e: LayoutChangeEvent) => setWidth(e.nativeEvent.layout.width)}>
       {api.challengeMode ? <ChallengeClock ms={watch.ms} label={t('play.time')} /> : null}
       <ProgressDots total={cities.length} done={round + (checked ? 1 : 0)} label={t('play.progress', { done: round + (checked ? 1 : 0), total: cities.length })} />
       <View style={styles.instruction}>

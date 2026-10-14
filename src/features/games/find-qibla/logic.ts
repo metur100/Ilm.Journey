@@ -157,4 +157,4 @@ export function qiblaResult(errors: readonly number[], bonus?: { points: number;
 
 export const PAR_MS: Record<QiblaMode, number> = { europe: 40_000, world: 60_000, free: 60_000 };
 
-export const QIBLA_ART: readonly string[] = ['scene.map-world-simple', 'object.compass', 'object.kaaba-icon', 'object.qibla-arrow', 'place.kaaba', 'ui.sparkle'];
+export const QIBLA_ART: readonly string[] = ['scene.map-world-simple', 'object.compass', 'object.compass-face', 'object.kaaba-icon', 'object.qibla-arrow', 'place.kaaba', 'ui.sparkle'];

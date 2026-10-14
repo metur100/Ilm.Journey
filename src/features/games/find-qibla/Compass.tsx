@@ -167,7 +167,7 @@ export function Compass({ size, angle, onChange, onTick, hintBearing, answerBear
           </View>
         ) : null}
         <Animated.View pointerEvents="none" style={[styles.needle, { width: size, height: size }, needle]}>
-          <Art name="object.compass" size={art} />
+          <Art name="object.compass-face" size={art} />
         </Animated.View>
         {answerBearing != null ? (
           <View pointerEvents="none" style={[StyleSheet.absoluteFill, { transform: [{ rotate: `${normalizeDeg(answerBearing)}deg` }] }]}>
