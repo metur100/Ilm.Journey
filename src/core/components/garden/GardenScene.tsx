@@ -7,6 +7,7 @@ import { Art, hasArt } from '@/core/art';
 import { Icon } from '@/core/components/ui/Icon';
 import {
   depthScale,
+  GARDEN_BACKDROP_LAYERS,
   GARDEN_SKY_ART,
   GARDEN_SPOTS,
   gardenArt,
@@ -43,6 +44,8 @@ interface GardenSceneProps {
   accessibilityLabel?: string;
   style?: ViewStyle;
   rounded?: boolean;
+  /** Height covered by overlay controls at the top (e.g. the Home header) – sun and moon stay below it. */
+  topInset?: number;
   children?: React.ReactNode;
 }
 
@@ -70,6 +73,7 @@ export function GardenScene({
   accessibilityLabel,
   style,
   rounded = true,
+  topInset = 0,
   children,
 }: GardenSceneProps) {
   const reduced = useReducedMotion();
@@ -97,7 +101,7 @@ export function GardenScene({
       <LinearGradient colors={SKY_GRADIENTS[sky]} style={StyleSheet.absoluteFill} />
       {width > 0 ? (
         <>
-          <SkyPieces sky={sky} width={width} height={height} />
+          <SkyPieces sky={sky} width={width} height={height} topInset={topInset} />
           <Backdrop width={width} height={height} />
           {thirst > 0 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: thirst === 2 ? 'rgba(150,110,50,0.22)' : 'rgba(150,110,50,0.12)' }]} /> : null}
           {sorted.map((p) => (
@@ -138,13 +142,17 @@ export function GardenScene({
   );
 }
 
-function SkyPieces({ sky, width, height }: { sky: ReturnType<typeof skyForDate>; width: number; height: number }) {
-  const body = Math.round(Math.min(width, height) * 0.22);
+function SkyPieces({ sky, width, height, topInset }: { sky: ReturnType<typeof skyForDate>; width: number; height: number; topInset: number }) {
+  // The open sky lies between the overlay controls and the far hills (≈ 64 % of the scene height).
+  const skyTop = Math.min(topInset, height * 0.4);
+  const skyH = height * 0.64 - skyTop;
+  const body = Math.round(Math.min(width * 0.22, height * 0.22, skyH * 0.7));
+  const at = (f: number) => skyTop + Math.max(0, skyH - body) * f;
   const place: Record<typeof sky, { name: string; left: number; top: number }> = {
-    dawn: { name: GARDEN_SKY_ART.sun, left: width * 0.12, top: height * 0.24 },
-    day: { name: GARDEN_SKY_ART.sun, left: width * 0.72, top: height * 0.05 },
-    sunset: { name: GARDEN_SKY_ART.sun, left: width * 0.7, top: height * 0.22 },
-    night: { name: GARDEN_SKY_ART.moon, left: width * 0.14, top: height * 0.06 },
+    dawn: { name: GARDEN_SKY_ART.sun, left: width * 0.12, top: at(0.85) },
+    day: { name: GARDEN_SKY_ART.sun, left: width * 0.72, top: at(0.15) },
+    sunset: { name: GARDEN_SKY_ART.sun, left: width * 0.7, top: at(0.8) },
+    night: { name: GARDEN_SKY_ART.moon, left: width * 0.14, top: at(0.15) },
   };
   const p = place[sky];
   return (
@@ -155,10 +163,19 @@ function SkyPieces({ sky, width, height }: { sky: ReturnType<typeof skyForDate>;
   );
 }
 
-/** The garden backdrop from the art library, or gentle hills while the piece is not available. */
+/**
+ * The garden landscape (far hills with the little masjid, trees, lawn) from the art library – only the land layers,
+ * so the time-of-day sky above stays visible – or gentle hills while the pieces are not available.
+ */
 function Backdrop({ width, height }: { width: number; height: number }) {
-  if (hasArt(GARDEN_SKY_ART.backdrop)) {
-    return <Art name={GARDEN_SKY_ART.backdrop} size={width} height={height * 0.62} fit="cover" style={{ position: 'absolute', left: 0, bottom: 0 }} />;
+  if (GARDEN_BACKDROP_LAYERS.every(hasArt)) {
+    return (
+      <>
+        {GARDEN_BACKDROP_LAYERS.map((name) => (
+          <Art key={name} name={name} size={width} height={height * 0.62} fit="cover" style={{ position: 'absolute', left: 0, bottom: 0 }} />
+        ))}
+      </>
+    );
   }
   const top = height * 0.42;
   return (

@@ -69,8 +69,11 @@ export const gardenArt = (elementId: string) => `garden.${elementId}`;
 /** Sky pieces of the scene (art library names). */
 export const GARDEN_SKY_ART = { backdrop: 'scene.garden-backdrop', sun: 'garden.sun', moon: 'garden.moon', stars: 'garden.stars' } as const;
 
+/** Land layers of the backdrop (no sky – the scene draws the sky for the real time of day). */
+export const GARDEN_BACKDROP_LAYERS = ['scene.garden-far', 'scene.garden-mid', 'scene.garden-lawn'] as const;
+
 /** Every art name the garden references (checked against the art library by a test). */
-export const GARDEN_ART_NAMES: readonly string[] = [...Object.values(GARDEN_SKY_ART), ...GARDEN_ELEMENTS.map((e) => gardenArt(e.id))];
+export const GARDEN_ART_NAMES: readonly string[] = [...Object.values(GARDEN_SKY_ART), ...GARDEN_BACKDROP_LAYERS, ...GARDEN_ELEMENTS.map((e) => gardenArt(e.id))];
 
 /** Elements whose level is reached, in table order. */
 export function elementsForLevel(level: number): GardenElement[] {

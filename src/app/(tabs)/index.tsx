@@ -202,14 +202,14 @@ export default function Home() {
   return (
     <ScrollView style={styles.root} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
       <View style={styles.hero}>
-        <GardenScene placed={garden.garden.placed} thirst={garden.thirst} height={heroHeight} rounded={false} accessibilityLabel={garden.a11y}>
+        <GardenScene placed={garden.garden.placed} thirst={garden.thirst} height={heroHeight} rounded={false} topInset={insets.top + 92} accessibilityLabel={garden.a11y}>
           <View style={[styles.overlayTop, { top: insets.top + spacing.sm }]}>
             <View style={styles.panel}>
               <View style={styles.avatar}>
                 <Avatar character={profile.character} size={46} />
               </View>
               <View style={styles.flex}>
-                <AppText variant="bodyBold" color={c.onNight} numberOfLines={1}>
+                <AppText variant="bodyBold" color={c.onNight} numberOfLines={2}>
                   {t(profile.learnerGroup === 'child' ? 'home.greeting.child' : 'home.greeting', { name: profile.name })}
                 </AppText>
                 <AppText variant="tiny" color={c.gold}>
