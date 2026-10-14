@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { AppText } from '@/core/components/ui/AppText';
 import { Icon } from '@/core/components/ui/Icon';
@@ -10,6 +10,7 @@ import { evaluateAnswer } from '@/core/services/quiz';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
+import { LiftPressable, Reactive } from './motion';
 import type { QuestionComponentProps } from './types';
 
 interface MemoryCard {
@@ -23,8 +24,9 @@ const useStyles = makeStyles((c) => ({
   header: { flexDirection: 'row', justifyContent: 'space-between', gap: spacing.md },
   hint: { flex: 1 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, justifyContent: 'center' },
+  cell: { width: '31%' },
   card: {
-    width: '31%',
+    width: '100%',
     aspectRatio: 0.95,
     borderRadius: radius.md,
     backgroundColor: c.night,
@@ -37,9 +39,19 @@ const useStyles = makeStyles((c) => ({
   cardOpen: { backgroundColor: c.surface, borderColor: c.primary },
   cardFound: { backgroundColor: c.successSoft, borderColor: c.success },
   cardText: { fontSize: 13, lineHeight: 17 },
+  back: {
+    width: '70%',
+    aspectRatio: 1,
+    borderRadius: radius.sm,
+    borderWidth: 1.5,
+    borderColor: c.nightLine,
+    backgroundColor: c.nightSoft,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
 
-/** Classic memory: flip two cards; a word and its meaning form a pair. */
+/** Classic memory: flip two cards; a word and its meaning form a pair. Cards turn over (rotateY) unless motion is reduced. */
 export function MemoryQuestion({ question, onAnswered, locked }: QuestionComponentProps<Memory>) {
   const { t, l } = useI18n();
   const { c } = useTheme();
@@ -108,23 +120,35 @@ export function MemoryQuestion({ question, onAnswered, locked }: QuestionCompone
         {cards.map((card, index) => {
           const isFound = found.includes(card.pairId);
           const isOpen = isFound || open.includes(card.key);
+          // Two open cards that are not found yet are a mismatch (a match is moved to `found` at once).
+          const mismatch = open.length === 2 && open.includes(card.key);
           return (
-            <Pressable
+            <Reactive
               key={card.key}
-              onPress={() => flip(card)}
-              disabled={isFound || locked}
-              accessibilityRole="button"
-              accessibilityLabel={isOpen ? `${t('a11y.card', { index: index + 1 })}: ${card.text}` : t('a11y.hiddenCard', { index: index + 1 })}
-              style={[styles.card, isOpen && styles.cardOpen, isFound && styles.cardFound]}
+              reaction={isFound ? 'correct' : mismatch ? 'incorrect' : 'idle'}
+              face={isOpen}
+              flipAxis="y"
+              radius={radius.md}
+              style={styles.cell}
             >
-              {isOpen ? (
-                <AppText variant="small" align="center" style={styles.cardText}>
-                  {card.text}
-                </AppText>
-              ) : (
-                <Icon name="sparkle" size={24} color={c.gold} />
-              )}
-            </Pressable>
+              <LiftPressable
+                onPress={() => flip(card)}
+                disabled={isFound || locked}
+                accessibilityRole="button"
+                accessibilityLabel={isOpen ? `${t('a11y.card', { index: index + 1 })}: ${card.text}` : t('a11y.hiddenCard', { index: index + 1 })}
+                style={[styles.card, isOpen && styles.cardOpen, isFound && styles.cardFound]}
+              >
+                {isOpen ? (
+                  <AppText variant="small" align="center" style={styles.cardText}>
+                    {card.text}
+                  </AppText>
+                ) : (
+                  <View style={styles.back}>
+                    <Icon name="sparkle" size={24} color={c.gold} />
+                  </View>
+                )}
+              </LiftPressable>
+            </Reactive>
           );
         })}
       </View>

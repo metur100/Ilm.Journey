@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { SceneView } from '@/core/components/scene/SceneView';
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
 import { Icon } from '@/core/components/ui/Icon';
@@ -9,14 +8,17 @@ import { useFeedback } from '@/core/hooks/useFeedback';
 import { useI18n } from '@/core/i18n';
 import type { FindQuestion as Find } from '@/core/models';
 import { evaluateAnswer } from '@/core/services/quiz';
-import { spacing, useTheme } from '@/core/theme';
+import { radius, spacing, useTheme } from '@/core/theme';
 import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
-import { useTileStyles } from './ImageChoiceQuestion';
-import { skyFor } from './sky';
+import { TileIllustration, useTileStyles } from './ImageChoiceQuestion';
+import { LiftPressable, type Reaction, Reactive } from './motion';
+import { artForOption } from './optionArt';
 import type { QuestionComponentProps } from './types';
 
 type TileState = 'idle' | 'selected' | 'right' | 'wrong' | 'missed';
+
+const REACTION: Record<TileState, Reaction> = { idle: 'idle', selected: 'idle', right: 'correct', wrong: 'incorrect', missed: 'idle' };
 
 /** Find game (story-of-the-prophets): select every illustrated object that belongs to the story. */
 export function FindQuestion({ question, onAnswered, locked }: QuestionComponentProps<Find>) {
@@ -71,24 +73,33 @@ export function FindQuestion({ question, onAnswered, locked }: QuestionComponent
               ? 'selected'
               : 'idle';
           return (
-            <Pressable
+            <Reactive
               key={item.id}
-              onPress={() => toggle(item.id)}
-              accessibilityRole="checkbox"
-              accessibilityState={{ checked: isSelected, disabled: submitted }}
-              accessibilityLabel={l(item.label)}
-              style={[tiles.tile, state !== 'idle' && tiles[state]]}
+              reaction={REACTION[state]}
+              // Missed objects turn over to show they belonged to the story.
+              face={state === 'missed'}
+              radius={radius.md}
+              style={tiles.cell}
             >
-              <SceneView scene={{ sky: skyFor(item.element), elements: [item.element] }} height={86} rounded={false} />
-              <View style={tiles.label}>
-                <AppText variant="small" style={tiles.flex} numberOfLines={1}>
-                  {l(item.label)}
-                </AppText>
-                {state === 'selected' || state === 'right' ? <Icon name="check" size={18} color={c.success} strokeWidth={3} /> : null}
-                {state === 'wrong' ? <Icon name="close" size={18} color={c.error} strokeWidth={3} /> : null}
-                {state === 'missed' ? <Icon name="info" size={18} color={c.goldText} /> : null}
-              </View>
-            </Pressable>
+              <LiftPressable
+                lifted={state === 'selected'}
+                onPress={() => toggle(item.id)}
+                accessibilityRole="checkbox"
+                accessibilityState={{ checked: isSelected, disabled: submitted }}
+                accessibilityLabel={l(item.label)}
+                style={[tiles.tile, state !== 'idle' && tiles[state]]}
+              >
+                <TileIllustration art={artForOption(question, item.id)} element={item.element} height={86} />
+                <View style={tiles.label}>
+                  <AppText variant="small" style={tiles.flex} numberOfLines={1}>
+                    {l(item.label)}
+                  </AppText>
+                  {state === 'selected' || state === 'right' ? <Icon name="check" size={18} color={c.success} strokeWidth={3} /> : null}
+                  {state === 'wrong' ? <Icon name="close" size={18} color={c.error} strokeWidth={3} /> : null}
+                  {state === 'missed' ? <Icon name="info" size={18} color={c.goldText} /> : null}
+                </View>
+              </LiftPressable>
+            </Reactive>
           );
         })}
       </View>

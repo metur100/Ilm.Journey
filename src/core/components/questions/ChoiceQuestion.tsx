@@ -7,6 +7,7 @@ import type { LessonChoiceQuestion, MultipleChoiceQuestion, ScenarioQuestion } f
 import { evaluateAnswer } from '@/core/services/quiz';
 import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
+import { artForOption } from './optionArt';
 import type { QuestionComponentProps } from './types';
 
 const MARKERS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -48,6 +49,7 @@ export function ChoiceQuestion({
           key={option.id}
           marker={MARKERS[index]}
           label={l(option.text)}
+          art={artForOption(question, option.id)}
           state={stateFor(option.id)}
           disabled={!!picked || locked}
           onPress={() => choose(option.id)}

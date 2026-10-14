@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { AppText } from '@/core/components/ui/AppText';
 import { useFeedback } from '@/core/hooks/useFeedback';
@@ -9,6 +9,7 @@ import { evaluateAnswer } from '@/core/services/quiz';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
+import { LiftPressable, Reactive } from './motion';
 import type { QuestionComponentProps } from './types';
 
 const useStyles = makeStyles((c) => ({
@@ -28,14 +29,17 @@ const useStyles = makeStyles((c) => ({
     padding: spacing.sm,
   },
   rightTile: { backgroundColor: c.goldSoft, borderColor: c.goldBorder },
+  /** Right-hand tiles while a left item is picked: they are the drop targets. */
+  target: { borderColor: c.primary, borderStyle: 'dashed' },
   selected: { borderColor: c.primary, backgroundColor: c.primarySoft },
   matched: { borderColor: c.success, backgroundColor: c.successSoft, opacity: 0.75 },
-  wrong: { borderColor: c.error, backgroundColor: c.errorSoft },
+  wrong: { borderColor: c.error, backgroundColor: c.errorSoft, borderStyle: 'solid' },
 }));
 
 /**
  * Tap a left item, then its partner on the right. Pairs with identical right-hand text
- * (e.g. several prayers with 4 rak'ahs) are interchangeable.
+ * (e.g. several prayers with 4 rak'ahs) are interchangeable. The picked item lifts, possible partners highlight,
+ * a match pops and a miss shakes softly.
  */
 export function MatchingQuestion({ question, onAnswered, locked }: QuestionComponentProps<Matching>) {
   const { t, l } = useI18n();
@@ -93,23 +97,25 @@ export function MatchingQuestion({ question, onAnswered, locked }: QuestionCompo
             const matched = matchedLeft.includes(pair.id);
             const selected = selectedLeft === pair.id;
             return (
-              <Pressable
-                key={pair.id}
-                disabled={matched || locked}
-                onPress={() => {
-                  feedback.tap();
-                  setSelectedLeft(pair.id);
-                  setWrongRight(null);
-                }}
-                accessibilityRole="button"
-                accessibilityState={{ selected, disabled: matched }}
-                accessibilityLabel={`${l(pair.left)}${matched ? `, ${t('a11y.correct')}` : selected ? `, ${t('a11y.selected')}` : ''}`}
-                style={[styles.tile, selected && styles.selected, matched && styles.matched]}
-              >
-                <AppText variant="bodyBold" align="center">
-                  {l(pair.left)}
-                </AppText>
-              </Pressable>
+              <Reactive key={pair.id} reaction={matched ? 'correct' : 'idle'} radius={radius.md}>
+                <LiftPressable
+                  lifted={selected}
+                  disabled={matched || locked}
+                  onPress={() => {
+                    feedback.tap();
+                    setSelectedLeft(pair.id);
+                    setWrongRight(null);
+                  }}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected, disabled: matched }}
+                  accessibilityLabel={`${l(pair.left)}${matched ? `, ${t('a11y.correct')}` : selected ? `, ${t('a11y.selected')}` : ''}`}
+                  style={[styles.tile, selected && styles.selected, matched && styles.matched]}
+                >
+                  <AppText variant="bodyBold" align="center">
+                    {l(pair.left)}
+                  </AppText>
+                </LiftPressable>
+              </Reactive>
             );
           })}
         </View>
@@ -117,20 +123,27 @@ export function MatchingQuestion({ question, onAnswered, locked }: QuestionCompo
           {right.map((pair) => {
             const matched = matchedRight.includes(pair.id);
             const wrong = wrongRight === pair.id;
+            const target = !!selectedLeft && !matched && !locked;
             return (
-              <Pressable
+              <Reactive
                 key={pair.id}
-                disabled={matched || locked || !selectedLeft}
-                onPress={() => tapRight(pair.id)}
-                accessibilityRole="button"
-                accessibilityState={{ disabled: matched || !selectedLeft }}
-                accessibilityLabel={`${l(pair.right)}${matched ? `, ${t('a11y.correct')}` : wrong ? `, ${t('a11y.incorrect')}` : ''}`}
-                style={[styles.tile, styles.rightTile, matched && styles.matched, wrong && styles.wrong]}
+                reaction={matched ? 'correct' : wrong ? 'incorrect' : 'idle'}
+                nonce={wrong ? mistakes : 0}
+                radius={radius.md}
               >
-                <AppText variant="bodyBold" align="center">
-                  {l(pair.right)}
-                </AppText>
-              </Pressable>
+                <LiftPressable
+                  disabled={matched || locked || !selectedLeft}
+                  onPress={() => tapRight(pair.id)}
+                  accessibilityRole="button"
+                  accessibilityState={{ disabled: matched || !selectedLeft }}
+                  accessibilityLabel={`${l(pair.right)}${matched ? `, ${t('a11y.correct')}` : wrong ? `, ${t('a11y.incorrect')}` : ''}`}
+                  style={[styles.tile, styles.rightTile, target && styles.target, matched && styles.matched, wrong && styles.wrong]}
+                >
+                  <AppText variant="bodyBold" align="center">
+                    {l(pair.right)}
+                  </AppText>
+                </LiftPressable>
+              </Reactive>
             );
           })}
         </View>

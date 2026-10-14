@@ -4,13 +4,17 @@ import { useI18n } from '@/core/i18n';
 import type { OrderingQuestion as Ordering } from '@/core/models';
 import { evaluateAnswer } from '@/core/services/quiz';
 
+import { artForOption } from './optionArt';
 import { SequenceBuilder } from './SequenceBuilder';
 import type { QuestionComponentProps } from './types';
 
 /** Ordering and timeline game: tap the items in the right order. */
 export function OrderingQuestion({ question, onAnswered, locked }: QuestionComponentProps<Ordering>) {
   const { t, l } = useI18n();
-  const items = useMemo(() => question.items.map((i) => ({ id: i.id, label: l(i.text) })), [question.items, l]);
+  const items = useMemo(
+    () => question.items.map((i) => ({ id: i.id, label: l(i.text), art: artForOption(question, i.id) })),
+    [question, l],
+  );
   return (
     <SequenceBuilder
       items={items}

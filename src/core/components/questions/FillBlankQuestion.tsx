@@ -9,6 +9,7 @@ import { evaluateAnswer } from '@/core/services/quiz';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
+import { artForOption } from './optionArt';
 import type { QuestionComponentProps } from './types';
 
 const BLANK = '___';
@@ -60,7 +61,14 @@ export function FillBlankQuestion({ question, onAnswered, locked }: QuestionComp
       </View>
       <View style={styles.options}>
         {options.map((option) => (
-          <AnswerOption key={option.id} label={l(option.text)} state={stateFor(option.id)} onPress={() => choose(option.id)} disabled={!!picked || locked} />
+          <AnswerOption
+            key={option.id}
+            label={l(option.text)}
+            art={artForOption(question, option.id)}
+            state={stateFor(option.id)}
+            onPress={() => choose(option.id)}
+            disabled={!!picked || locked}
+          />
         ))}
       </View>
     </View>
