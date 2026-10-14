@@ -6,7 +6,6 @@ import { useFonts } from 'expo-font';
 import { getLocales } from 'expo-localization';
 import { DarkTheme, DefaultTheme, type ErrorBoundaryProps, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect, useMemo } from 'react';
 import { AppState, View } from 'react-native';
@@ -95,7 +94,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={navigationTheme}>
       <SafeAreaProvider>
-        <StatusBar style={dark ? 'light' : 'dark'} />
+        {/* No root <StatusBar>: its props would override the per-screen style set by useStatusBar (dark onboarding/hero headers). */}
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.background }, animation: 'slide_from_right' }}>
           <Stack.Screen name="index" options={{ animation: 'none' }} />
           <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
