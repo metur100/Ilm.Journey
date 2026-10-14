@@ -165,15 +165,15 @@ function SurahView({ surah }: { surah: Surah }) {
                 </AppText>
               </Pressable>
             </View>
+            {recitation.failed === ayah.globalNumber ? (
+              <AppText variant="small" color={c.error} accessibilityLiveRegion="polite">
+                {t('recite.audioUnavailable')}
+              </AppText>
+            ) : null}
           </View>
         );
       })}
 
-      {recitation.error ? (
-        <AppText variant="small" color={c.error} accessibilityLiveRegion="polite">
-          {t('recite.audioUnavailable')}
-        </AppText>
-      ) : null}
       <AppText variant="tiny" color={c.textMuted}>
         {t('recite.source', { translation: QURAN_SOURCE.translations[language] })} {t('recite.audioSource')}
       </AppText>

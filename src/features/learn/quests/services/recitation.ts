@@ -85,7 +85,8 @@ export function currentRecitation(): number | null {
 /** React state for the recitation player; stops playback when the screen unmounts. */
 export function useRecitation() {
   const [playing, setPlaying] = useState<number | null>(currentAyah);
-  const [error, setError] = useState(false);
+  /** The ayah whose recitation could not be loaded (e.g. offline), so screens can show the hint right there. */
+  const [failed, setFailed] = useState<number | null>(null);
 
   useEffect(() => {
     const listener = () => setPlaying(currentAyah);
@@ -101,12 +102,12 @@ export function useRecitation() {
       stopRecitation();
       return;
     }
-    setError(false);
-    const ok = playRecitation(globalAyah, (failed) => {
-      if (failed) setError(true);
+    setFailed(null);
+    const ok = playRecitation(globalAyah, (didFail) => {
+      if (didFail) setFailed(globalAyah);
     });
-    if (!ok) setError(true);
+    if (!ok) setFailed(globalAyah);
   }, []);
 
-  return { playing, error, toggle, stop: stopRecitation };
+  return { playing, error: failed !== null, failed, toggle, stop: stopRecitation };
 }
