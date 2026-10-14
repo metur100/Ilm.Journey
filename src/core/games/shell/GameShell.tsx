@@ -2,7 +2,7 @@ import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { AccessibilityInfo, Pressable, ScrollView, View } from 'react-native';
+import { AccessibilityInfo, BackHandler, Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Art } from '../../art';
@@ -91,6 +91,17 @@ export function GameShell({ gameId }: { gameId: string }) {
     setPaused(phase === 'play');
   }, [phase, setPaused]);
   useEffect(() => () => setPaused(false), [setPaused]);
+
+  // Android back steps back inside the game (play / result → levels, how to play → intro) instead of leaving it.
+  useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (phase === 'play' || phase === 'result') setPhase('levels');
+      else if (phase === 'howto') setPhase('intro');
+      else return false;
+      return true;
+    });
+    return () => sub.remove();
+  }, [phase]);
 
   const gt = useCallback(
     (key: string, params?: Params) => (def ? translateNs(def.i18n, language, key, params) : key),
