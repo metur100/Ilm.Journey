@@ -13,6 +13,7 @@ import {
 } from '@/core/registry';
 import type { QuestCandidate } from '@/core/services/quests';
 
+import { registerStoriesCollection } from './collection';
 import { StoryMapQuestion } from './components/StoryMapQuestion';
 import { getQuestion, getStory, QUESTIONS, STORIES, STORIES_PREFIX, storiesKey, storyOfQuestion } from './content';
 import { storiesI18n } from './i18n';
@@ -118,4 +119,5 @@ export function registerStoriesFeature(): void {
     reset: () => useStoriesStore.getState().reset(),
     autoSave: startStoriesAutoSave,
   });
+  registerStoriesCollection();
 }

@@ -1,7 +1,7 @@
 import type { Href } from 'expo-router';
 import type { ComponentType } from 'react';
 
-import type { BadgeMetrics, DayKey, Language, LocalizedText, Question, QuestionType, SourceRef, TopicId } from './models';
+import type { AchievementKey, BadgeMetrics, CollectionCard, DayKey, Language, LocalizedText, Question, QuestionType, SourceRef, TopicId } from './models';
 import { parseQuestionKey } from './models';
 import { mergeMetrics } from './services/badges';
 import type { DailyCandidate } from './services/daily';
@@ -384,6 +384,47 @@ export function getProfileLinks(): ProfileLink[] {
 }
 
 // ---------------------------------------------------------------------------------------------
+// Achievements & collection cards (v2 engagement: collection album, unlock rules)
+// ---------------------------------------------------------------------------------------------
+
+/**
+ * Reports the achievement keys a feature's learner has earned (see `AchievementKey` in core/models/collection),
+ * e.g. `story:adam:complete`, `episode:e01`, `letter:ب:traced`. Must be cheap and pure (read the feature store).
+ */
+export type AchievementProvider = () => Iterable<AchievementKey>;
+
+const achievementProviders = new Map<string, AchievementProvider>();
+
+export function registerAchievements(feature: string, provider: AchievementProvider): void {
+  achievementProviders.set(feature, provider);
+}
+
+/** Every achievement key earned so far, across all features. */
+export function collectAchievements(): Set<AchievementKey> {
+  const all = new Set<AchievementKey>();
+  for (const provider of achievementProviders.values()) {
+    for (const key of safe(() => [...provider()], [] as AchievementKey[])) all.add(key);
+  }
+  return all;
+}
+
+const collectionCards = new Map<string, CollectionCard[]>();
+
+/**
+ * Registers the collection cards a feature contributes (built from its existing content – facts and sources
+ * are copied, never invented). Registering again under the same feature replaces its cards.
+ */
+export function registerCollectionCards(feature: string, cards: CollectionCard[]): void {
+  collectionCards.set(feature, cards);
+  bumpProgressVersion();
+}
+
+/** All registered cards in registration order (features in registration order, cards as given). */
+export function getCollectionCards(): CollectionCard[] {
+  return [...collectionCards.values()].flat();
+}
+
+// ---------------------------------------------------------------------------------------------
 
 /** Removes every registration (tests only). */
 export function clearRegistryForTests(): void {
@@ -399,5 +440,7 @@ export function clearRegistryForTests(): void {
   lifecycles.clear();
   homeSections.clear();
   profileLinks.clear();
+  achievementProviders.clear();
+  collectionCards.clear();
   bumpProgressVersion();
 }

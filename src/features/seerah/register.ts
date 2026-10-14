@@ -19,6 +19,7 @@ import {
 } from '@/core/registry';
 import type { QuestCandidate } from '@/core/services/quests';
 
+import { registerSeerahCollection } from './collection';
 import {
   EPISODES,
   episodeOfQuestion,
@@ -166,4 +167,5 @@ export function registerSeerahFeature(): void {
     reset: () => useSeerahStore.getState().reset(),
     autoSave: startSeerahAutoSave,
   });
+  registerSeerahCollection();
 }
