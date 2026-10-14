@@ -24,7 +24,7 @@ import {
   useZoneHover,
   type DropZones,
 } from '../wudu-flow/kit';
-import { PRAYER_ARABIC, PRAYER_BODY, PRAYER_HEADING, PRAYER_NAME, TIMES_DIFFERENCE_NOTE } from './content';
+import { PRAYER_ARABIC, PRAYER_BODY, PRAYER_NAME, TIMES_DIFFERENCE_NOTE } from './content';
 import {
   dayResult,
   isDayOrder,
@@ -221,7 +221,8 @@ function SunPlay(api: GameApi<SkyConfig>) {
     playSound('failure');
     shake();
     setWrong((w) => ({ ...w, [prayer]: (w[prayer] ?? 0) + 1 }));
-    setMessage({ text: t('play.lookAgain', { heading: l(PRAYER_HEADING[prayer]) }), tone: 'warn' });
+    // The lesson sentence says exactly when the prayer begins (the short heading alone was misleading at sunset).
+    setMessage({ text: t('play.lookAgain', { heading: `${l(PRAYER_BODY[prayer]).split('. ')[0]}.` }), tone: 'warn' });
   };
 
   const next = () => {
@@ -458,7 +459,8 @@ function DayPlay(api: GameApi<SkyConfig>) {
       playSound('success');
       setSparkle((x) => x + 1);
       setPhase('match');
-      setMessage({ text: t('play.ordered'), tone: 'ok' });
+      // Keep the praise, but also say how the matching works (the hint would otherwise stay hidden).
+      setMessage({ text: `${t('play.ordered')} ${t('play.matchHint')}`, tone: 'ok' });
       return;
     }
     haptic('warning');
@@ -482,7 +484,7 @@ function DayPlay(api: GameApi<SkyConfig>) {
       if (next.length === total) {
         playSound('success');
         setPhase('end');
-        setMessage({ text: t('play.allMatched'), tone: 'ok' });
+        setMessage(null);
       } else {
         setMessage(null);
       }
@@ -540,7 +542,7 @@ function DayPlay(api: GameApi<SkyConfig>) {
         <>
           <Instruction
             title={phase === 'end' ? t('play.allMatched') : t('play.matchTitle')}
-            message={message?.text ?? (selected ? t('play.matchSelected', { prayer: l(PRAYER_NAME[selected]) }) : t('play.matchHint'))}
+            message={message?.text ?? (phase === 'end' ? undefined : selected ? t('play.matchSelected', { prayer: l(PRAYER_NAME[selected]) }) : t('play.matchHint'))}
             tone={message?.tone}
           />
           {phase === 'match' ? (

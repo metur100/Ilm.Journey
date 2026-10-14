@@ -14,7 +14,7 @@ export const prayerSkyGame: GameDef<SkyConfig> = {
   id: 'prayer-sky',
   topicId: 'salah',
   i18n: prayerSkyI18n,
-  coverArt: 'sky.sunset',
+  coverArt: 'object.sundial',
   hintArt: 'sky.morning',
   component: PrayerSkyGame,
   levels: [

@@ -54,7 +54,8 @@ const SkyLayer = memo(function SkyLayer({ time, part, width, height }: { time: S
             </G>
           ) : null}
           {time === 'night' ? <Path d={crescentPath(296, 72, 26, 13, -10, 22)} fill="#F7D774" /> : null}
-          {time === 'dawn' ? <Path d={crescentPath(320, 60, 14, 7, -5, 12)} fill="#FFE9A8" opacity={0.9} /> : null}
+          {/* Same moon as at night (only paler), so cross-fading never shows two moons. */}
+          {time === 'dawn' ? <Path d={crescentPath(296, 72, 26, 13, -10, 22)} fill="#FFE9A8" opacity={0.75} /> : null}
           {time === 'morning' || time === 'noon' || time === 'afternoon' ? (
             <>
               <Cloud x={time === 'noon' ? 90 : 230} y={78} r={20} opacity={0.9} />

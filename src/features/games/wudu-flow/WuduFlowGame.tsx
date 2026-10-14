@@ -225,7 +225,8 @@ function SequencePlay(api: GameApi<WuduConfig>) {
         setDone(next);
         if (next === total) {
           playSound('success');
-          setMessage({ text: t('play.allDone'), tone: 'ok' });
+          // The end screen's title already says it – only the sorting phase repeats it as a message.
+          setMessage(config.mode === 'full' ? { text: t('play.allDone'), tone: 'ok' } : null);
           setPhase(config.mode === 'full' ? 'sort' : 'end');
         } else {
           setMessage({ text: t('play.nice', { step: l(STEP_TEXT[id]) }), tone: 'ok' });
@@ -291,7 +292,7 @@ function SequencePlay(api: GameApi<WuduConfig>) {
   const gap = spacing.md;
   const tileSize = Math.max(
     72,
-    Math.floor(Math.min(boardSize.w > 0 ? (boardSize.w - gap * (cols - 1)) / cols : 110, boardSize.h > 0 ? (boardSize.h - gap * (rows - 1)) / rows : 110, 150)),
+    Math.floor(Math.min(boardSize.w > 0 ? (boardSize.w - gap * (cols - 1)) / cols : 110, boardSize.h > 0 ? (boardSize.h - gap * (rows - 1)) / rows : 110, 180)),
   );
 
   const title =
