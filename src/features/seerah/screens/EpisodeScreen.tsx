@@ -12,6 +12,7 @@ import { Card } from '@/core/components/ui/Card';
 import { Icon } from '@/core/components/ui/Icon';
 import { ProgressBar } from '@/core/components/ui/ProgressBar';
 import { EmptyState } from '@/core/components/ui/States';
+import { gameTitle, getGame } from '@/core/games';
 import { useStatusBar } from '@/core/hooks/useStatusBar';
 import { useAppStore } from '@/core/store/appStore';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
@@ -361,12 +362,16 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
   );
 }
 
+/** v2 mini-games that continue an episode – offered as "Play the game" when the episode is finished. */
+const EPISODE_GAMES: Readonly<Record<string, string>> = { 'episode-05': 'hijrah-path', 'episode-06': 'build-the-masjid' };
+
 function EpisodeDone({ episode, outcome, answerXp }: { episode: Episode; outcome: EpisodeOutcome; answerXp: number }) {
   const { c } = useTheme();
   const { t, l } = useSeerahI18n();
   const styles = useStyles();
   const next = EPISODES.find((e) => e.order === episode.order + 1);
   const xp = outcome.xp + answerXp;
+  const game = EPISODE_GAMES[episode.id] ? getGame(EPISODE_GAMES[episode.id]) : undefined;
   return (
     <SafeAreaView style={styles.fill}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -388,6 +393,14 @@ function EpisodeDone({ episode, outcome, answerXp }: { episode: Episode; outcome
             {t('reward.noXp')}
           </AppText>
         )}
+        {game ? (
+          <Button
+            label={t('episode.playGame', { title: l(gameTitle(game)) })}
+            icon="play"
+            variant="gold"
+            onPress={() => router.push({ pathname: '/game/[id]', params: { id: game.id } })}
+          />
+        ) : null}
         {next ? (
           <Button
             label={`${t('episode.nextEpisode')}: ${l(next.title)}`}

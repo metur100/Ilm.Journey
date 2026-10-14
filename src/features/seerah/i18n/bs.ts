@@ -117,6 +117,7 @@ const bs: Record<SeerahKey, string> = {
   'episode.doneBody': "Završio si „{title}“.",
   'episode.nextEpisode': "Sljedeća epizoda",
   'episode.backHome': "Nazad na siru",
+  'episode.playGame': "Igraj igru: {title}",
   'episode.mainEvent': "Glavni događaj",
   'narration.play': "Slušaj naraciju",
   'narration.pause': "Pauziraj naraciju",

@@ -118,7 +118,8 @@ describe('topic path', () => {
   it('registers the topic tools for quran, arabic and ramadan', () => {
     expect(getTopicTools('quran').map((t) => t.href)).toEqual(['/tools/quran', '/tools/duas']);
     expect(getTopicTools('arabic').map((t) => t.href)).toEqual(['/tools/arabic']);
-    expect(getTopicTools('ramadan').map((t) => t.href)).toEqual(['/tools/ramadan']);
+    // The Ramadan page also links the game "A Day of Good Deeds" (its level 3 is a Ramadan day).
+    expect(getTopicTools('ramadan').map((t) => t.href)).toEqual(['/tools/ramadan', { pathname: '/game/[id]', params: { id: 'good-deeds-day' } }]);
     for (const tool of [...getTopicTools('quran'), ...getTopicTools('arabic'), ...getTopicTools('ramadan')]) {
       for (const lang of ['en', 'de', 'bs'] as const) expect(tool.label(lang).length).toBeGreaterThan(0);
     }

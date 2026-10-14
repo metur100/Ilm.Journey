@@ -115,6 +115,7 @@ const en = {
   'episode.doneBody': "You completed \"{title}\".",
   'episode.nextEpisode': "Next episode",
   'episode.backHome': "Back to the Seerah",
+  'episode.playGame': "Play the game: {title}",
   'episode.mainEvent': "Main event",
   'narration.play': "Listen to narration",
   'narration.pause': "Pause narration",

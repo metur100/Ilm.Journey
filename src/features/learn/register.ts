@@ -1,5 +1,5 @@
 import { localize, localizedFrom, topicName, translate, translateNs } from '@/core/i18n';
-import { TOPIC_IDS, type LocalizedText, type TopicId } from '@/core/models';
+import { type Language, TOPIC_IDS, type LocalizedText, type TopicId } from '@/core/models';
 import {
   type CompletedItem,
   type ContinueItem,
@@ -11,6 +11,7 @@ import {
   registerSearch,
   type SearchResult,
 } from '@/core/registry';
+import { getGame } from '@/core/games';
 import type { QuestCandidate } from '@/core/services/quests';
 import { topicThemes } from '@/core/theme';
 
@@ -177,6 +178,24 @@ export function registerLearnFeature(): void {
     description: (lang) => translateNs(learnI18n, lang, 'tool.seerahDesc'),
     href: { pathname: '/(tabs)/stories', params: { segment: 'seerah' } },
   });
+
+  // v2 game linked from topic pages ("A Day of Good Deeds" – its level 3 is a Ramadan day). Texts come from the game.
+  const gameText = (id: string, lang: Language, key: 'title' | 'description') => {
+    const game = getGame(id);
+    // Until the game registers (games register after the features), the label falls back to the core "Play".
+    return game ? translateNs(game.i18n, lang, key) : key === 'title' ? translate(lang, 'play.title') : '';
+  };
+  for (const topic of ['akhlaq', 'ramadan'] as const) {
+    registerTopicTool({
+      id: `game-good-deeds-day-${topic}`,
+      topic,
+      order: 40,
+      icon: 'play',
+      label: (lang) => gameText('good-deeds-day', lang, 'title'),
+      description: (lang) => gameText('good-deeds-day', lang, 'description'),
+      href: { pathname: '/game/[id]', params: { id: 'good-deeds-day' } },
+    });
+  }
 
   // islam-quest beginner quests and topic tools (owned by the islam-quest port).
   registerLearnQuests();

@@ -117,6 +117,7 @@ const de: Record<SeerahKey, string> = {
   'episode.doneBody': "Du hast „{title}“ abgeschlossen.",
   'episode.nextEpisode': "Nächste Episode",
   'episode.backHome': "Zurück zur Sira",
+  'episode.playGame': "Zum Spiel: {title}",
   'episode.mainEvent': "Hauptereignis",
   'narration.play': "Erzählung anhören",
   'narration.pause': "Erzählung pausieren",
