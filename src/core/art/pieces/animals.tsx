@@ -303,13 +303,14 @@ export const animal = {
 
   hoopoe: art(100, 90, (c) => {
     const body = '#E09A5C';
+    const ink = darkish(c, C.ink, '#565A80');
     return (
       <>
         <Shadow c={c} cx={46} cy={86} rx={28} />
-        <Path d="M24 50 4 62 8 68 28 58Z" fill={C.ink} />
+        <Path d="M24 50 4 62 8 68 28 58Z" fill={ink} />
         <Path d="M8 63 14 60M14 66 20 62" stroke={C.white} strokeWidth={2} />
         <Ellipse cx={42} cy={54} rx={24} ry={16} fill={body} />
-        <Path d="M22 50C30 44 46 46 54 56 46 66 30 66 22 58Z" fill={C.ink} />
+        <Path d="M22 50C30 44 46 46 54 56 46 66 30 66 22 58Z" fill={ink} />
         <Path d="M28 50 32 62M36 48 40 62M44 50 47 62" stroke={C.white} strokeWidth={3} strokeLinecap="round" />
         <Circle cx={60} cy={34} r={11} fill={body} />
         {[-60, -35, -10, 15, 40].map((a, i) => {
@@ -319,14 +320,14 @@ export const animal = {
           return (
             <G key={i}>
               <Path d={`M58 28L${x2} ${y2}`} stroke={C.orange} strokeWidth={6} strokeLinecap="round" />
-              <Circle cx={x2} cy={y2} r={3} fill={C.ink} />
+              <Circle cx={x2} cy={y2} r={3} fill={ink} />
               <Circle cx={58 + Math.sin(r) * 17} cy={26 - Math.cos(r) * 17} r={2.2} fill={C.white} />
             </G>
           );
         })}
-        <Path d="M70 34C80 36 88 42 96 52 86 46 78 42 70 38Z" fill={C.ink} />
+        <Path d="M70 34C80 36 88 42 96 52 86 46 78 42 70 38Z" fill={ink} />
         <Eye x={63} y={32} r={1.8} />
-        <Path d="M40 70V82M48 70V82" stroke={C.ink} strokeWidth={2} strokeLinecap="round" />
+        <Path d="M40 70V82M48 70V82" stroke={ink} strokeWidth={2} strokeLinecap="round" />
       </>
     );
   }),

@@ -132,15 +132,18 @@ export const body = {
 
   'water-on-hands': art(100, 110, (c) => (
     <>
-      <Path d="M2 10C8 6 20 8 30 14L36 22 28 24C20 18 10 16 4 18Z" fill={C.goldDeep} />
-      <Path d="M30 22C34 40 40 46 44 56" stroke={C.waterLight} strokeWidth={6} strokeLinecap="round" fill="none" />
-      <Path d="M32 24C35 38 40 46 44 54" stroke={C.white} strokeWidth={1.6} strokeLinecap="round" fill="none" opacity={0.7} />
-      <Path d="M14 66C14 60 20 58 26 62L50 76 74 62C80 58 86 60 86 66 86 82 70 96 50 96S14 82 14 66Z" fill={c.tint} />
-      <Path d="M50 76 74 62C80 58 86 60 86 66 86 82 70 96 50 96Z" fill={shade(c.tint, 0.12)} />
-      <Ellipse cx={50} cy={68} rx={22} ry={7} fill={WATER} />
-      <Path d="M36 66Q44 63 52 64" stroke={C.white} strokeWidth={1.6} strokeLinecap="round" fill="none" opacity={0.7} />
-      <Path d="M34 92 24 106M66 92 76 106" stroke={c.tint} strokeWidth={14} strokeLinecap="round" />
-      <Drops pts={[[16, 40, 8], [84, 36, 9]]} />
+      <Glow c={c} k="g" cx={50} cy={60} r={48} color={C.waterPale} opacity={c.dark ? 0.25 : 0.5} />
+      <Path d="M26 6C32 2 42 4 50 12L54 20 46 22C40 14 32 12 28 14Z" fill={C.goldDeep} />
+      <Path d="M50 20C50 34 50 42 50 52" stroke={C.waterLight} strokeWidth={6} strokeLinecap="round" />
+      <Path d="M48.5 22V50" stroke={C.white} strokeWidth={1.4} strokeLinecap="round" opacity={0.7} />
+      <G transform="translate(36 84) rotate(-24) scale(0.8)">
+        <Palm c={c} x={0} y={0} flip color={shade(c.tint, 0.1)} />
+      </G>
+      <G transform="translate(64 84) rotate(24) scale(0.8)">
+        <Palm c={c} x={0} y={0} />
+      </G>
+      <Ellipse cx={50} cy={60} rx={12} ry={4} fill={WATER} opacity={0.9} />
+      <Drops pts={[[30, 44, 8], [70, 42, 9], [22, 60, 6], [80, 58, 7]]} />
     </>
   )),
 } satisfies Record<string, ArtDef>;

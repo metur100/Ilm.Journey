@@ -119,4 +119,13 @@ export const pattern = {
       </G>
     );
   }),
+
+  star: art(100, 100, (c) => (
+    <>
+      <Path d={star8Path(50, 50, 46)} fill={c.dark ? C.goldLight : C.gold} />
+      <Path d={star8Path(50, 50, 34, 22.5)} fill={c.dark ? C.nightSoft : C.teal} />
+      <Path d={star8Path(50, 50, 22)} fill={C.gold} />
+      <Circle cx={50} cy={50} r={7} fill={c.dark ? C.nightSoft : C.cream} />
+    </>
+  )),
 } satisfies Record<string, ArtDef>;

@@ -1,6 +1,6 @@
 import { Circle, ClipPath, Defs, Ellipse, G, Path, Rect } from 'react-native-svg';
 
-import { art, Cloud, crescentPath, domePath, Dunes, Glow, LeafyTree, Lin, Mountain, Palm, smoothClosed, smoothOpen, sparklePath, star8Path, type ArtDef, type Ctx } from '../kit';
+import { art, Cloud, crescentPath, domePath, Dunes, Glow, House, LeafyTree, Lin, Mountain, Palm, smoothClosed, smoothOpen, sparklePath, star8Path, type ArtDef, type Ctx } from '../kit';
 import { C, mix } from '../palette';
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -403,6 +403,37 @@ export const scene = {
           <Rect x={mk.x - 3} y={mk.y - 3} width={6} height={6} fill={C.black} />
           <Rect x={mk.x - 3} y={mk.y - 1.6} width={6} height={1.2} fill={C.gold} />
         </G>
+      </>
+    );
+  }),
+
+  city: art(400, 240, (c) => {
+    const win = c.dark ? C.goldLight : C.woodLight;
+    const h = (x: number, w: number, ht: number, col: string, dome?: string) => (
+      <House key={x} x={x} y={200} w={w} h={ht} color={dim(c, col)} shadeColor={dim(c, C.sandDeep)} window={win} dome={dome && dim(c, dome)} />
+    );
+    return (
+      <>
+        <SceneSky c={c} w={400} h={240} light={['#8FCDEB', '#FCE6C0']} />
+        <Path d="M0 170C60 150 120 156 200 162S330 148 400 158V240H0Z" fill={dim(c, '#D9B07A')} />
+        <G fill={dim(c, '#C9A27A', 0.5)} opacity={0.7}>
+          <Rect x={150} y={128} width={40} height={40} />
+          <Path d={domePath(170, 129, 16, 1.4)} />
+          <Rect x={196} y={104} width={7} height={64} />
+          <Path d="M195 104 199.5 92 204 104Z" />
+        </G>
+        {h(10, 44, 50, C.sandLight)}
+        {h(56, 36, 70, C.cream, C.tealMid)}
+        {h(94, 50, 40, C.sand)}
+        {h(146, 40, 56, C.sandLight)}
+        {h(188, 56, 44, C.cream, C.gold)}
+        {h(246, 38, 64, C.sand)}
+        {h(286, 50, 46, C.sandLight)}
+        {h(338, 52, 58, C.cream, C.tealMid)}
+        <Rect x={0} y={200} width={400} height={40} fill={dim(c, C.sandDeep)} />
+        <Path d="M0 200H400" stroke={dim(c, C.sandDark)} strokeWidth={3} />
+        <Palm c={c} x={30} y={226} h={60} lean={-5} dark={c.dark} />
+        <Palm c={c} x={376} y={228} h={54} lean={5} dark={c.dark} />
       </>
     );
   }),

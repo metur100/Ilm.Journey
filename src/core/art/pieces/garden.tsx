@@ -548,7 +548,7 @@ export const garden = {
     </>
   )),
 
-  cloud: art(120, 70, (c) => <Cloud x={60} y={38} r={36} color={c.dark ? '#E6EBF5' : C.white} shadeColor={c.dark ? '#C3CCE0' : '#DCE8F2'} />),
+  cloud: art(120, 70, (c) => <Cloud x={60} y={38} r={36} color={c.dark ? '#E6EBF5' : '#EEF4FA'} shadeColor={c.dark ? '#C3CCE0' : '#C6D9E8'} />),
 
   'watering-can': art(110, 80, (c) => (
     <>
