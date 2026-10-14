@@ -33,8 +33,8 @@ const useStyles = makeStyles((c) => ({
   day: {
     width: '15%',
     flexGrow: 1,
-    aspectRatio: 1,
-    minHeight: TOUCH_TARGET,
+    // No aspectRatio: combined with flexGrow, Yoga sizes the wrapped rows taller than the cells (empty gap below the grid).
+    minHeight: TOUCH_TARGET + 4,
     borderRadius: radius.md,
     borderWidth: 1.5,
     borderColor: c.border,
