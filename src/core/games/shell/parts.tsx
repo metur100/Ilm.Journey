@@ -104,7 +104,7 @@ export function HowToHint({ art, reduced }: { art: string; reduced: boolean }) {
       <Art name={art} size={150} />
       <Animated.View style={[styles.ripple, { transform: [{ translateX }, { translateY }, { scale: rippleScale }], opacity: reduced ? 0 : rippleOpacity }]} />
       <Animated.View style={[styles.finger, { transform: [{ translateX: reduced ? 0 : translateX }, { translateY: reduced ? 30 : translateY }] }]}>
-        <Icon name="play" size={20} color={c.onGold} />
+        <Icon name="pointer" size={22} color={c.onGold} />
       </Animated.View>
     </View>
   );

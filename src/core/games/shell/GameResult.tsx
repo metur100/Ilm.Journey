@@ -81,7 +81,7 @@ export function GameResult({ title, level, summary, facts, onReplay, onNext, onB
           ) : null}
         </View>
 
-        <View style={styles.rewards} accessible accessibilityLabel={[summary.xp > 0 ? t('reward.xp', { xp: summary.xp }) : '', summary.seeds > 0 ? t('games.seeds', { count: summary.seeds }) : '', summary.water > 0 ? t('games.water', { count: summary.water }) : ''].filter(Boolean).join(', ')}>
+        <View style={styles.rewards} accessible accessibilityLabel={[summary.xp > 0 ? t('reward.xp', { xp: summary.xp }) : '', summary.seeds > 0 ? t(summary.seeds === 1 ? 'games.seed' : 'games.seeds', { count: summary.seeds }) : '', summary.water > 0 ? t('games.water', { count: summary.water }) : ''].filter(Boolean).join(', ')}>
           {summary.xp > 0 ? (
             <View style={[styles.chip, styles.xpChip]}>
               <Icon name="star" size={18} color={c.goldText} />
@@ -93,7 +93,7 @@ export function GameResult({ title, level, summary, facts, onReplay, onNext, onB
           {summary.seeds > 0 ? (
             <View style={styles.chip}>
               <Art name="garden.seed" size={26} />
-              <AppText variant="bodyBold">{t('games.seeds', { count: summary.seeds })}</AppText>
+              <AppText variant="bodyBold">{t(summary.seeds === 1 ? 'games.seed' : 'games.seeds', { count: summary.seeds })}</AppText>
             </View>
           ) : null}
           {summary.water > 0 ? (
