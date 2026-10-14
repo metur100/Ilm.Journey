@@ -4,15 +4,18 @@ import { AppText } from '@/core/components/ui/AppText';
 import { Icon } from '@/core/components/ui/Icon';
 import { useFeedback } from '@/core/hooks/useFeedback';
 import { type CoreKey, useI18n } from '@/core/i18n';
-import type { Accessory, Character, HairStyle, Headwear, Outfit, SkinTone } from '@/core/models';
+import type { Accessory, Character, HairStyle, Headwear, HeroPattern, LanternStyle, Outfit, SkinTone } from '@/core/models';
+import { useAppStore } from '@/core/store/appStore';
+import { type HeroItem, requiredLevel } from '@/core/unlockables';
 import { makeStyles, radius, spacing, TOUCH_TARGET, useTheme } from '@/core/theme';
 
-import { Avatar, HAIR_COLORS, OUTFIT_COLORS, SKIN_TONES } from './Avatar';
+import { Avatar, HAIR_COLORS, HEADWEAR_COLORS, HERO_PATTERNS, OUTFIT_COLORS, SKIN_TONES } from './Avatar';
 
 const HAIR_STYLES: HairStyle[] = ['short', 'curly', 'long', 'buzz', 'bun'];
 const HEADWEAR: Headwear[] = ['none', 'kufi', 'hijab', 'cap'];
 const OUTFITS: Outfit[] = ['hoodie', 'thobe', 'jacket', 'abaya'];
 const ACCESSORIES: Accessory[] = ['none', 'glasses', 'backpack', 'scarf', 'lantern'];
+const LANTERNS: LanternStyle[] = ['classic', 'star', 'crescent'];
 
 interface CharacterEditorProps {
   character: Character;
@@ -55,13 +58,24 @@ const useStyles = makeStyles((c) => ({
     borderColor: 'transparent',
   },
   swatchActive: { borderColor: c.text },
+  swatchCell: { alignItems: 'center', gap: 2 },
+  locked: { opacity: 0.45 },
+  chipLocked: { flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: c.surfaceAlt },
 }));
 
-/** The hero editor (onboarding and profile). Never used for prophets or other real persons. */
+/**
+ * The hero editor (onboarding and profile) with the v2 wardrobe: items that unlock with levels are shown locked with
+ * "Level N" (core/unlockables.ts). Never used for prophets or other real persons.
+ */
 export function CharacterEditor({ character, onChange }: CharacterEditorProps) {
   const { t } = useI18n();
   const styles = useStyles();
+  const level = useAppStore((s) => s.level);
   const set = <K extends keyof Character>(key: K, value: Character[K]) => onChange({ ...character, [key]: value });
+  const lockOf = (item: HeroItem) => {
+    const needed = requiredLevel(item);
+    return needed > level ? needed : 0;
+  };
 
   return (
     <View style={styles.root}>
@@ -95,7 +109,23 @@ export function CharacterEditor({ character, onChange }: CharacterEditorProps) {
         selected={character.outfit}
         onSelect={(o) => set('outfit', o)}
       />
-      <SwatchGroup title={t('character.outfitColor')} colorsList={OUTFIT_COLORS} selected={character.outfitColor} onSelect={(i) => set('outfitColor', i)} />
+      <SwatchGroup
+        title={t('character.outfitColor')}
+        colorsList={OUTFIT_COLORS}
+        selected={character.outfitColor}
+        onSelect={(i) => set('outfitColor', i)}
+        lockedLevel={(i) => lockOf({ kind: 'outfitColor', index: i })}
+      />
+      {character.headwear !== 'none' ? (
+        <SwatchGroup
+          title={t('character.headwearColor')}
+          colorsList={HEADWEAR_COLORS}
+          selected={character.headwearColor ?? 0}
+          onSelect={(i) => set('headwearColor', i)}
+          lockedLevel={(i) => lockOf({ kind: 'headwearColor', index: i })}
+          firstLabel={t('character.headwearColor.match')}
+        />
+      ) : null}
       <ChipGroup
         title={t('character.accessory')}
         options={ACCESSORIES}
@@ -103,6 +133,26 @@ export function CharacterEditor({ character, onChange }: CharacterEditorProps) {
         selected={character.accessory}
         onSelect={(o) => set('accessory', o)}
       />
+      {character.accessory === 'scarf' || character.accessory === 'backpack' ? (
+        <ChipGroup<HeroPattern>
+          title={t(character.accessory === 'scarf' ? 'character.scarfPattern' : 'character.backpackPattern')}
+          options={[...HERO_PATTERNS]}
+          labelKey={(o) => `character.pattern.${o}` as CoreKey}
+          selected={(character.accessory === 'scarf' ? character.scarfPattern : character.backpackPattern) ?? 'plain'}
+          onSelect={(o) => set(character.accessory === 'scarf' ? 'scarfPattern' : 'backpackPattern', o)}
+          lockedLevel={(o) => lockOf({ kind: character.accessory === 'scarf' ? 'scarfPattern' : 'backpackPattern', id: o })}
+        />
+      ) : null}
+      {character.accessory === 'lantern' ? (
+        <ChipGroup<LanternStyle>
+          title={t('character.lanternStyle')}
+          options={LANTERNS}
+          labelKey={(o) => `character.lantern.${o}` as CoreKey}
+          selected={character.lanternStyle ?? 'classic'}
+          onSelect={(o) => set('lanternStyle', o)}
+          lockedLevel={(o) => lockOf({ kind: 'lanternStyle', id: o })}
+        />
+      ) : null}
     </View>
   );
 }
@@ -113,12 +163,15 @@ function ChipGroup<T extends string>({
   labelKey,
   selected,
   onSelect,
+  lockedLevel,
 }: {
   title: string;
   options: T[];
   labelKey: (option: T) => CoreKey;
   selected: T;
   onSelect: (option: T) => void;
+  /** Level needed for a locked option (0 = available). */
+  lockedLevel?: (option: T) => number;
 }) {
   const { t } = useI18n();
   const { c } = useTheme();
@@ -133,21 +186,35 @@ function ChipGroup<T extends string>({
         {options.map((option) => {
           const active = option === selected;
           const label = t(labelKey(option));
+          const lock = lockedLevel?.(option) ?? 0;
           return (
             <Pressable
               key={option}
               accessibilityRole="radio"
-              accessibilityState={{ selected: active }}
-              accessibilityLabel={t('character.option', { group: title, value: label })}
+              accessibilityState={{ selected: active, disabled: lock > 0 }}
+              accessibilityLabel={lock > 0 ? t('character.lockedOption', { group: title, value: label, level: lock }) : t('character.option', { group: title, value: label })}
               onPress={() => {
+                if (lock > 0) {
+                  feedback.failure();
+                  return;
+                }
                 feedback.tap();
                 onSelect(option);
               }}
-              style={[styles.chip, active && styles.chipActive]}
+              style={[styles.chip, active && styles.chipActive, lock > 0 && styles.chipLocked]}
             >
-              <AppText variant="small" color={active ? c.onPrimary : c.text}>
-                {label}
-              </AppText>
+              {lock > 0 ? (
+                <View style={styles.chipLocked}>
+                  <Icon name="lock" size={14} color={c.textMuted} />
+                  <AppText variant="small" color={c.textMuted}>
+                    {`${label} · ${t('common.level', { level: lock })}`}
+                  </AppText>
+                </View>
+              ) : (
+                <AppText variant="small" color={active ? c.onPrimary : c.text}>
+                  {label}
+                </AppText>
+              )}
             </Pressable>
           );
         })}
@@ -161,11 +228,16 @@ function SwatchGroup({
   colorsList,
   selected,
   onSelect,
+  lockedLevel,
+  firstLabel,
 }: {
   title: string;
   colorsList: readonly string[];
   selected: number;
   onSelect: (index: number) => void;
+  lockedLevel?: (index: number) => number;
+  /** Label of swatch 0 when it means "matching" (empty colour). */
+  firstLabel?: string;
 }) {
   const { t } = useI18n();
   const { c } = useTheme();
@@ -179,20 +251,38 @@ function SwatchGroup({
       <View style={styles.swatches}>
         {colorsList.map((color, index) => {
           const active = index === selected;
+          const lock = lockedLevel?.(index) ?? 0;
+          const value = index === 0 && firstLabel ? firstLabel : String(index + 1);
           return (
-            <Pressable
-              key={color}
-              accessibilityRole="radio"
-              accessibilityState={{ selected: active }}
-              accessibilityLabel={t('character.option', { group: title, value: String(index + 1) })}
-              onPress={() => {
-                feedback.tap();
-                onSelect(index);
-              }}
-              style={[styles.swatch, { backgroundColor: color }, active && styles.swatchActive]}
-            >
-              {active ? <Icon name="check" size={20} color={c.onAccent} strokeWidth={3} /> : null}
-            </Pressable>
+            <View key={`${index}-${color}`} style={styles.swatchCell}>
+              <Pressable
+                accessibilityRole="radio"
+                accessibilityState={{ selected: active, disabled: lock > 0 }}
+                accessibilityLabel={lock > 0 ? t('character.lockedOption', { group: title, value, level: lock }) : t('character.option', { group: title, value })}
+                onPress={() => {
+                  if (lock > 0) {
+                    feedback.failure();
+                    return;
+                  }
+                  feedback.tap();
+                  onSelect(index);
+                }}
+                style={[styles.swatch, { backgroundColor: color || c.surfaceAlt }, !color && { borderColor: c.border }, active && styles.swatchActive, lock > 0 && styles.locked]}
+              >
+                {lock > 0 ? (
+                  <Icon name="lock" size={18} color={c.onAccent} />
+                ) : active ? (
+                  <Icon name="check" size={20} color={color ? c.onAccent : c.text} strokeWidth={3} />
+                ) : !color ? (
+                  <Icon name="sparkle" size={18} color={c.textMuted} />
+                ) : null}
+              </Pressable>
+              {lock > 0 ? (
+                <AppText variant="tiny" color={c.textMuted}>
+                  {t('common.level', { level: lock })}
+                </AppText>
+              ) : null}
+            </View>
           );
         })}
       </View>

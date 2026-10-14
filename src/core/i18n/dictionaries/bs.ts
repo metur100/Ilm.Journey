@@ -1,4 +1,9 @@
 import type { CoreDictionary } from './en';
+import engagementSegment from './segments/engagement';
+import lessonSegment from './segments/lesson';
+import questionsSegment from './segments/questions';
+import collectionSegment from './segments/collection';
+
 
 const bs: CoreDictionary = {
   // ---------- common ----------
@@ -35,7 +40,6 @@ const bs: CoreDictionary = {
   'tabs.learn': 'Uči',
   'tabs.stories': 'Kazivanja',
   'tabs.seerah': 'Sira',
-  'tabs.profile': 'Profil',
 
   // ---------- onboarding ----------
   'onboarding.step': 'Korak {current} od {total}',
@@ -218,7 +222,7 @@ const bs: CoreDictionary = {
   'daily.empty': 'Trenutno nema dostupnog izazova.',
 
   // ---------- profile ----------
-  'profile.title': 'Profil',
+  'profile.title': 'Ja',
   'profile.edit': 'Uredi junaka',
   'profile.xpToNext': 'Još {xp} XP do nivoa {level}',
   'profile.learner': 'Uči kao: {group}',
@@ -381,6 +385,12 @@ const bs: CoreDictionary = {
   'a11y.speak': 'Pusti izgovor',
   'a11y.stars': '{count} od 3 zvjezdice',
   'a11y.xpBar': '{xp} od {total} XP do sljedećeg nivoa',
+
+  // ---------- v2 segments (games, garden, collection, lesson cards, questions) ----------
+  ...engagementSegment.bs,
+  ...lessonSegment.bs,
+  ...questionsSegment.bs,
+  ...collectionSegment.bs,
 };
 
 export default bs;

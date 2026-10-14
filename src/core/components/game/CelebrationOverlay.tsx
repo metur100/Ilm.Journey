@@ -10,6 +10,9 @@ import { useFeedback } from '@/core/hooks/useFeedback';
 import { badgeDescription, badgeName, useI18n } from '@/core/i18n';
 import { useAppStore } from '@/core/store/appStore';
 import { makeStyles, spacing, useTheme } from '@/core/theme';
+import { unlocksBetween } from '@/core/unlockables';
+
+import { LevelUnlocks } from './LevelUnlocks';
 
 const useStyles = makeStyles((c) => ({
   content: { alignItems: 'center', gap: spacing.md },
@@ -74,6 +77,7 @@ export function CelebrationOverlay() {
             <AppText variant="body" align="center" color={c.textMuted}>
               {t('celebrate.levelBody', { level: next.level })}
             </AppText>
+            <LevelUnlocks unlocks={unlocksBetween(next.from ?? next.level - 1, next.level)} />
           </>
         )}
         <Button label={t('common.continue')} onPress={dismiss} />

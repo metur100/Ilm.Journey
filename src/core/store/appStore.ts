@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { earn } from '../garden/earn';
+import { milestoneFromTarget, streakMilestone } from '../garden/rules';
 import type { AnswerMode, AnswerRef, AppData, Celebration, Character, Language, LearnerGroup, Profile, QuestEvent, Settings } from '../models';
 import { collectFeatureMetrics, getQuestCandidates, hydrateFeatures, resetFeatures } from '../registry';
 import {
@@ -8,6 +10,7 @@ import {
   applyAwardXp,
   applyDailyComplete,
   applyQuestEvent,
+  applyQueueReview,
   applyReviewSessionComplete,
   APP_DATA_VERSION,
   createInitialData,
@@ -48,6 +51,11 @@ export interface AppActions {
   registerActivity: () => void;
   /** Reports a quest event, e.g. `{ type: 'complete', target: 'stories:story:adam' }`. Returns quest XP. */
   reportQuestEvent: (event: QuestEvent) => number;
+  /**
+   * Puts a question into the review queue without scoring it (no stats, no XP) – e.g. a game fact the learner
+   * missed (`game:<gameId>:<factId>`, resolved through the registry like any other question key).
+   */
+  queueReview: (ref: AnswerRef) => void;
   completeDaily: (day: string) => number;
   completeReviewSession: () => void;
   /** Deletes all progress (global + every feature via registered resets). Settings are kept. */
@@ -75,14 +83,22 @@ export const useAppStore = create<AppStore>((set, get) => {
   /** Applies badges and queues celebrations (new badges, level-ups) after every step. */
   const commit = (next: AppData) => {
     const before = get();
+    // Garden: every 7-day stretch of the streak plants seeds (see core/garden/earn.ts).
+    if (next.streak !== before.streak) {
+      const streak = streakMilestone(next.streak.current);
+      if (streak) earn(streak);
+    }
     const { data, newBadges } = finalizeBadges(next, collectFeatureMetrics(), new Date());
     const celebrations: Celebration[] = [
       ...before.celebrations,
-      ...(data.level > before.level ? [{ kind: 'level' as const, level: data.level }] : []),
+      ...(data.level > before.level ? [{ kind: 'level' as const, level: data.level, from: before.level }] : []),
       ...newBadges.map((id) => ({ kind: 'badge' as const, id })),
     ];
     set({ ...data, celebrations });
   };
+
+  /** Meaningful learning waters the garden (a few drops per day, see EARN_TABLE / DAILY_WATER_CAP). */
+  const learned = () => earn({ type: 'activity' });
 
   return {
     ...createInitialData('en'),
@@ -128,6 +144,7 @@ export const useAppStore = create<AppStore>((set, get) => {
     recordAnswer: (ref, correct, mode) => {
       const { data, xp } = applyAnswer(selectData(get()), ref, correct, mode, new Date());
       commit(data);
+      if (mode !== 'practice') learned();
       return xp;
     },
 
@@ -137,21 +154,33 @@ export const useAppStore = create<AppStore>((set, get) => {
       return xp;
     },
 
-    registerActivity: () => commit(applyActivity(selectData(get()), new Date())),
+    registerActivity: () => {
+      commit(applyActivity(selectData(get()), new Date()));
+      learned();
+    },
 
     reportQuestEvent: (event) => {
       const { data, xp } = applyQuestEvent(selectData(get()), event);
       commit(data);
+      // Completing a unit, master, quest, story, episode or game level plants seeds once (core/garden/earn.ts).
+      const milestone = event.type === 'complete' ? milestoneFromTarget(event.target) : null;
+      if (milestone) earn(milestone);
       return xp;
     },
+
+    queueReview: (ref) => commit(applyQueueReview(selectData(get()), ref, new Date())),
 
     completeDaily: (day) => {
       const { data, xp } = applyDailyComplete(selectData(get()), day, new Date());
       commit(data);
+      learned();
       return xp;
     },
 
-    completeReviewSession: () => commit(applyReviewSessionComplete(selectData(get()), new Date())),
+    completeReviewSession: () => {
+      commit(applyReviewSessionComplete(selectData(get()), new Date()));
+      learned();
+    },
 
     resetProgress: async () => {
       const settings = get().settings;

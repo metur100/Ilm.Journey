@@ -36,6 +36,10 @@ export const DEFAULT_CHARACTER: Character = {
   outfit: 'jacket',
   outfitColor: 1,
   accessory: 'none',
+  headwearColor: 0,
+  scarfPattern: 'plain',
+  backpackPattern: 'plain',
+  lanternStyle: 'classic',
 };
 
 export function createInitialData(language: Language = 'en'): AppData {
@@ -127,6 +131,13 @@ export function applyAnswer(data: AppData, ref: AnswerRef, correct: boolean, mod
   );
   const quest = applyQuestEvent(base, { type: 'answer', topicArea: ref.topicArea, correct, review: mode === 'review' });
   return { data: quest.data, xp: xp + quest.xp };
+}
+
+/** Adds a question to the review queue as a mistake, without scoring (no stats, XP or streak). */
+export function applyQueueReview(data: AppData, ref: AnswerRef, now: Date): AppData {
+  const existing = data.review[ref.key];
+  if (existing && !existing.mastered && existing.box === 0) return data;
+  return { ...data, review: { ...data.review, [ref.key]: recordMistake(existing, ref, now.toISOString()) } };
 }
 
 /** Grants XP once per reason key (e.g. `stories:adam:complete`). Repeated calls grant nothing. */

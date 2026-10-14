@@ -84,7 +84,7 @@ describe('awardXp', () => {
   it('queues a level-up celebration', () => {
     useAppStore.getState().awardXp('big', 120);
     expect(useAppStore.getState().level).toBe(2);
-    expect(useAppStore.getState().celebrations).toContainEqual({ kind: 'level', level: 2 });
+    expect(useAppStore.getState().celebrations).toContainEqual({ kind: 'level', level: 2, from: 1 });
   });
 });
 

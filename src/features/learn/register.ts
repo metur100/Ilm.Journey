@@ -14,6 +14,7 @@ import {
 import type { QuestCandidate } from '@/core/services/quests';
 import { topicThemes } from '@/core/theme';
 
+import { registerLearnCollection } from './collection';
 import { getQuestion, getUnit, LEARN_PREFIX, learnKey, testQuestionsOfArea, unitOfQuestion, UNITS } from './content';
 import { registerTopicTool, type TopicPathItem } from './extensions';
 import { learnI18n } from './i18n';
@@ -174,9 +175,10 @@ export function registerLearnFeature(): void {
     icon: 'kaaba',
     label: (lang) => translateNs(learnI18n, lang, 'tool.seerah'),
     description: (lang) => translateNs(learnI18n, lang, 'tool.seerahDesc'),
-    href: '/(tabs)/seerah',
+    href: { pathname: '/(tabs)/stories', params: { segment: 'seerah' } },
   });
 
   // islam-quest beginner quests and topic tools (owned by the islam-quest port).
   registerLearnQuests();
+  registerLearnCollection();
 }

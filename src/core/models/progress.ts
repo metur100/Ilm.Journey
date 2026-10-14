@@ -8,6 +8,9 @@ export type HairStyle = 'short' | 'curly' | 'long' | 'buzz' | 'bun';
 export type Headwear = 'none' | 'kufi' | 'hijab' | 'cap';
 export type Outfit = 'thobe' | 'hoodie' | 'jacket' | 'abaya';
 export type Accessory = 'none' | 'glasses' | 'backpack' | 'scarf' | 'lantern';
+/** Patterns of the scarf and the backpack (v2 unlockables). */
+export type HeroPattern = 'plain' | 'stripes' | 'stars' | 'geometric';
+export type LanternStyle = 'classic' | 'star' | 'crescent';
 
 /** The learner's own customisable hero (never used for prophets or other real persons). */
 export interface Character {
@@ -18,6 +21,12 @@ export interface Character {
   outfit: Outfit;
   outfitColor: number;
   accessory: Accessory;
+  // ---- v2 unlockables (optional so older saves stay valid; see core/unlockables) ----
+  /** 0 = matching the outfit (kufi stays white), 1+ = `HEADWEAR_COLORS`. */
+  headwearColor?: number;
+  scarfPattern?: HeroPattern;
+  backpackPattern?: HeroPattern;
+  lanternStyle?: LanternStyle;
 }
 
 /**
@@ -85,7 +94,7 @@ export interface Stats {
   reviewSessions: number;
 }
 
-export type QuestKind = 'daily' | 'learning' | 'knowledge' | 'review' | 'challenge' | 'story' | 'episode';
+export type QuestKind = 'daily' | 'learning' | 'knowledge' | 'review' | 'challenge' | 'story' | 'episode' | 'game';
 
 /** What counts towards a quest of the day. */
 export type QuestGoal =
@@ -148,4 +157,5 @@ export interface AppData {
   quests: Quest[];
 }
 
-export type Celebration = { kind: 'badge'; id: BadgeId } | { kind: 'level'; level: number };
+/** `from`: the level before the level-up (the overlay shows everything unlocked from from+1 to level). */
+export type Celebration = { kind: 'badge'; id: BadgeId } | { kind: 'level'; level: number; from?: number };

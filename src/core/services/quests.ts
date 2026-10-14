@@ -10,6 +10,7 @@ export const QUEST_XP: Record<QuestKind, number> = {
   challenge: 30,
   story: 20,
   episode: 20,
+  game: 15,
 };
 
 export const MAX_QUESTS = 5;

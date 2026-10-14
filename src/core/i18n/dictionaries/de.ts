@@ -1,4 +1,9 @@
 import type { CoreDictionary } from './en';
+import engagementSegment from './segments/engagement';
+import lessonSegment from './segments/lesson';
+import questionsSegment from './segments/questions';
+import collectionSegment from './segments/collection';
+
 
 const de: CoreDictionary = {
   // ---------- common ----------
@@ -35,7 +40,6 @@ const de: CoreDictionary = {
   'tabs.learn': 'Lernen',
   'tabs.stories': 'Geschichten',
   'tabs.seerah': 'Sira',
-  'tabs.profile': 'Profil',
 
   // ---------- onboarding ----------
   'onboarding.step': 'Schritt {current} von {total}',
@@ -218,7 +222,7 @@ const de: CoreDictionary = {
   'daily.empty': 'Gerade ist keine Herausforderung verfügbar.',
 
   // ---------- profile ----------
-  'profile.title': 'Profil',
+  'profile.title': 'Ich',
   'profile.edit': 'Held bearbeiten',
   'profile.xpToNext': 'Noch {xp} XP bis Stufe {level}',
   'profile.learner': 'Lernt als: {group}',
@@ -381,6 +385,12 @@ const de: CoreDictionary = {
   'a11y.speak': 'Aussprache abspielen',
   'a11y.stars': '{count} von 3 Sternen',
   'a11y.xpBar': '{xp} von {total} XP bis zur nächsten Stufe',
+
+  // ---------- v2 segments (games, garden, collection, lesson cards, questions) ----------
+  ...engagementSegment.de,
+  ...lessonSegment.de,
+  ...questionsSegment.de,
+  ...collectionSegment.de,
 };
 
 export default de;

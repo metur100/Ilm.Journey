@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { AppText } from '@/core/components/ui/AppText';
 import { Icon, type IconName } from '@/core/components/ui/Icon';
@@ -15,6 +15,7 @@ const ICONS: Record<QuestKind, IconName> = {
   challenge: 'trophy',
   story: 'scroll',
   episode: 'kaaba',
+  game: 'star',
 };
 
 /** Human-readable quest description. */
@@ -54,7 +55,8 @@ const useStyles = makeStyles((c) => ({
   bar: { flex: 1, width: undefined },
 }));
 
-export function QuestCard({ quest }: { quest: Quest }) {
+/** A quest of the day; `onPress` (optional) opens what the quest asks for (e.g. the daily challenge or a game). */
+export function QuestCard({ quest, onPress }: { quest: Quest; onPress?: () => void }) {
   const { t } = useI18n();
   const { c } = useTheme();
   const styles = useStyles();
@@ -63,8 +65,15 @@ export function QuestCard({ quest }: { quest: Quest }) {
   const status = quest.completed ? t('quests.done') : `${quest.progress}/${quest.target}`;
   const kindLabel = t(`quests.kind.${quest.kind}` as CoreKey);
 
+  const label = `${kindLabel}: ${text}. ${status}. +${quest.xp} XP`;
+  const Container = onPress ? Pressable : View;
   return (
-    <View style={[styles.card, quest.completed && styles.done]} accessible accessibilityLabel={`${kindLabel}: ${text}. ${status}. +${quest.xp} XP`}>
+    <Container
+      style={[styles.card, quest.completed && styles.done]}
+      accessible
+      accessibilityLabel={label}
+      {...(onPress ? { onPress, accessibilityRole: 'button' as const } : {})}
+    >
       <View style={[styles.icon, quest.completed && styles.iconDone]}>
         <Icon name={quest.completed ? 'check' : ICONS[quest.kind]} size={22} color={quest.completed ? c.onStatus : c.primaryText} />
       </View>
@@ -83,6 +92,6 @@ export function QuestCard({ quest }: { quest: Quest }) {
       <AppText variant="small" color={c.goldText}>
         +{quest.xp}
       </AppText>
-    </View>
+    </Container>
   );
 }

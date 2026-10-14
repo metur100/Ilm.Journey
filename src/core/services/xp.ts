@@ -26,6 +26,9 @@ export const XP = {
   // seerah (sira had no XP; episodes are worth about a unit)
   episodeComplete: 40,
   perfectEpisodeQuizBonus: 10,
+  // v2 mini-games (core/games): once per game level, plus a one-time bonus for a perfect level
+  gameLevel: 15,
+  gamePerfectBonus: 5,
 } as const;
 
 export interface LevelInfo {

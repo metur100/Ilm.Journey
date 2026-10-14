@@ -1,3 +1,8 @@
+import engagementSegment from './segments/engagement';
+import lessonSegment from './segments/lesson';
+import questionsSegment from './segments/questions';
+import collectionSegment from './segments/collection';
+
 /**
  * Core dictionary (namespace "core"): everything the shared platform shows.
  * Feature texts live in `src/features/<feature>/i18n/` and are registered with `defineNamespace`.
@@ -37,7 +42,6 @@ const en = {
   'tabs.learn': 'Learn',
   'tabs.stories': 'Stories',
   'tabs.seerah': 'Seerah',
-  'tabs.profile': 'Profile',
 
   // ---------- onboarding ----------
   'onboarding.step': 'Step {current} of {total}',
@@ -220,7 +224,7 @@ const en = {
   'daily.empty': 'There is no challenge available right now.',
 
   // ---------- profile ----------
-  'profile.title': 'Profile',
+  'profile.title': 'Me',
   'profile.edit': 'Edit hero',
   'profile.xpToNext': '{xp} XP to level {level}',
   'profile.learner': 'Learning as: {group}',
@@ -383,6 +387,12 @@ const en = {
   'a11y.speak': 'Play pronunciation',
   'a11y.stars': '{count} of 3 stars',
   'a11y.xpBar': '{xp} of {total} XP towards the next level',
+
+  // ---------- v2 segments (games, garden, collection, lesson cards, questions) ----------
+  ...engagementSegment.en,
+  ...lessonSegment.en,
+  ...questionsSegment.en,
+  ...collectionSegment.en,
 } as const;
 
 export type CoreKey = keyof typeof en;
