@@ -254,3 +254,13 @@ npx expo export --platform android --output-dir dist-check   # then delete dist-
 Sources on every lesson/question/scene, no invented verses/hadith/dialogue/dates, prophets never depicted (only
 SceneView landscapes/objects), "scholars differ" notes where relevant, Quran text only from generated data
 (`@/features/quran`), map positions approximate and labelled.
+
+## 11. v2 engagement extension points
+
+| What | How |
+| --- | --- |
+| Garden seeds | Automatic: completion targets reported with `reportQuestEvent({ type: 'complete', target })` that follow `<prefix>:<kind>:<id>` with kind `unit`/`master`/`story`/`episode`, beginner quests `quest:<id>` and game levels `game:<id>:<level>` pay seeds once (`milestoneFromTarget`, `EARN_TABLE` in `core/garden/rules.ts`). Learning activity (`recordAnswer`, `registerActivity`, daily, review) waters the garden. Features never call `earn()` directly. |
+| Collection cards | `registerCollectionCards(feature, cards)` with cards built from the feature's own content (fact + sources copied) and `registerAchievements(feature, () => keys)` reporting the earned achievement keys (`story:<id>:complete`, `episode:<id>`, `surah:<n>:memorised`, `dua:<id>:learned`, `letter:<x>:traced`, `unit:<id>:complete`, `quest:<id>:complete`, `master:<topic>:passed`). See `features/*/collection.ts`. |
+| Games | `registerGame(def)` – see [GAMES-FRAMEWORK.md](GAMES-FRAMEWORK.md). |
+| Review without scoring | `useAppStore.queueReview({ key, topic, topicArea })` |
+| Tabs | Home · Learn · Play · Stories (*Prophets* \| *Seerah* segments; `/seerah` and `/(tabs)/stories?segment=seerah` open the Seerah) · Me. |

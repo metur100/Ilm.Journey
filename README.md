@@ -11,17 +11,17 @@ short topic lessons, beginner quests, interactive prophet stories and a source-b
 - Bosnian, German and English · light and dark mode · larger text, high contrast, reduced motion, screen-reader labels
 - Expo SDK 57 (React Native 0.86) + TypeScript, Expo Router, Zustand, AsyncStorage
 
-Design spec: [`docs/DESIGN.md`](docs/DESIGN.md) · porting guide: [`docs/FEATURE-PORTING.md`](docs/FEATURE-PORTING.md)
+Design spec: [`docs/DESIGN.md`](docs/DESIGN.md) · v2 concept: [`docs/GAMES.md`](docs/GAMES.md) · game authors: [`docs/GAMES-FRAMEWORK.md`](docs/GAMES-FRAMEWORK.md) · porting guide: [`docs/FEATURE-PORTING.md`](docs/FEATURE-PORTING.md)
 
 ## Tabs
 
 | Tab | What it does |
 | --- | --- |
-| **Home** | Greeting + hero, “Continue” (last unit/quest/story/episode), daily challenge, review, today's quests, feature cards such as “Today's Seerah”, knowledge, recently completed |
+| **Home** | The Ilm Garden (sky follows the real time of day; learning waters it, milestones bring seeds to plant), level and streak, game of the day, “Continue”, today’s quests, reviews due, “Today’s Seerah” |
 | **Learn** | Eight topics – Salah, Quran, Prophets, Seerah, Akhlaq, Ramadan, Islamic History, Arabic – all open. Each topic has ONE path (beginner quests → units: learn → practise → test → why it matters → Master Challenge) where steps unlock in order, plus topic tools (Quran memorization, Arabic tracing, Ramadan calendar, links to Stories and Seerah) |
-| **Stories** | Eight interactive prophet stories and the story map (story-of-the-prophets) |
-| **Seerah** | The Seerah journey: episodes, timeline, map, people, places, search, bookmarks, reflections (sira) |
-| **Profile** | Hero editor, level/XP, streak, knowledge radar over the eight topics, 28 badges, statistics, global review centre, settings, about/privacy/sources |
+| **Play** | Mini-games on an illustrated shelf grouped by topic, with stars, “New” markers and the game of the day (game framework in `src/core/games`) |
+| **Stories** | Segmented: *Prophets* (eight interactive prophet stories and the story map) · *Seerah* (episodes, timeline, map, people, places, search, bookmarks, reflections); `/seerah` opens the Seerah segment |
+| **Me** | Hero editor with level wardrobe, level/XP, streak, Ilm Garden, collection album, knowledge radar, 28 badges, statistics, global review centre, settings, about/privacy/sources |
 
 Onboarding: welcome → language → who is learning (child / teen / adult – only changes recommendations) → name →
 hero → how it works → start. Settings: language, appearance (system/light/dark), sounds, vibration, narration,
