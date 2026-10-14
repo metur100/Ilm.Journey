@@ -97,8 +97,11 @@ function ReorderRow<T>({
   const slot = useSharedValue(index);
 
   useEffect(() => {
+    // While this row is dragged the UI thread owns its slot: re-renders from the moves it reported arrive late and
+    // must not reset it (that re-sent moves and scrambled the order on fast drags).
+    if (dragging.get() !== 0) return;
     slot.set(index);
-    if (dragging.get() === 0) y.set(reducedMotion ? index * step : withSpring(index * step, SPRING));
+    y.set(reducedMotion ? index * step : withSpring(index * step, SPRING));
   }, [index, step, reducedMotion, y, slot, dragging]);
 
   const move = useCallback((from: number, to: number) => onMove(from, to), [onMove]);
