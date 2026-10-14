@@ -26,6 +26,7 @@ const useStyles = makeStyles((c) => ({
     overflow: 'hidden',
   },
   canvasDone: { borderColor: c.success },
+  guideLayer: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, alignItems: 'center', justifyContent: 'center' },
   guide: { fontFamily: fonts.arabic, fontSize: 170, lineHeight: 250, color: c.border, textAlign: 'center' },
   row: { flexDirection: 'row', gap: spacing.sm },
   cell: { flex: 1 },
@@ -118,9 +119,12 @@ export function TracingPad({ letter, onTraced, onChange }: TracingPadProps) {
           if (event.nativeEvent.actionName === 'activate') controller.markTraced();
         }}
       >
-        <AppText style={styles.guide} accessibilityElementsHidden importantForAccessibility="no">
-          {letter}
-        </AppText>
+        {/* Not touchable: touch coordinates (locationX/Y) must be relative to the canvas, not to the guide letter. */}
+        <View style={styles.guideLayer} pointerEvents="none">
+          <AppText style={styles.guide} accessibilityElementsHidden importantForAccessibility="no">
+            {letter}
+          </AppText>
+        </View>
         <Svg style={StyleSheet.absoluteFill} pointerEvents="none">
           {trace.paths.map((d, i) => (
             <Path key={i} d={d} stroke={c.primary} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round" fill="none" opacity={0.85} />
