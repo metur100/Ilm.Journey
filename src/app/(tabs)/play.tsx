@@ -43,13 +43,7 @@ export default function PlayScreen() {
   const state = { games: data, challengeMode };
 
   const byTopic = useMemo(() => {
-    const shelves = TOPIC_IDS.map((topic) => ({ topic, title: t(topicName(topic)), games: games.filter((game) => game.topicId === topic && game.shelfGroup !== 'sufara') })).filter((shelf) => shelf.games.length > 0);
-    const sufara = games.filter((game) => game.shelfGroup === 'sufara');
-    if (sufara.length > 0) {
-      const arabicShelf = shelves.findIndex((shelf) => shelf.topic === 'arabic');
-      shelves.splice(arabicShelf + 1, 0, { topic: 'arabic', title: t('play.sufaraGames'), games: sufara });
-    }
-    return shelves;
+    return TOPIC_IDS.map((topic) => ({ topic, title: t(topicName(topic)), games: games.filter((game) => game.topicId === topic) })).filter((shelf) => shelf.games.length > 0);
   }, [games, t]);
   const title = (g: GameDef<unknown>) => translateNs(g.i18n, language, 'title');
   const open = (g: GameDef<unknown>) => router.push({ pathname: '/game/[id]', params: { id: g.id } });

@@ -86,6 +86,13 @@ export interface GameApi<C = unknown> {
   t: (key: string, params?: Params) => string;
   /** Localizes content text. */
   l: (text: LocalizedText | undefined) => string;
+  /** Topic of the game (the kit's GameBoard tints itself with the topic colours). Set by the GameShell. */
+  topicId?: TopicId;
+  /**
+   * Progress of the level for the shell header's progress bar (`done` of `total`; `total` 0 hides it).
+   * Kit engines report it automatically inside a `GameBoard`. Set by the GameShell.
+   */
+  setProgress?: (done: number, total: number) => void;
 }
 
 export interface GameDef<C = unknown> {
@@ -105,9 +112,7 @@ export interface GameDef<C = unknown> {
   cards?: CollectionCard[];
   /** Topic area / existing question keys the game practises (radar & recommendations; optional). */
   teaches?: { questionKeys?: string[] };
-  /** Optional sub-shelf (e.g. Sufara) within the topic's Play section. */
-  shelfGroup?: 'sufara';
-  /** Shelf order inside the topic (default 0). */
+  /** Order inside the topic's Play section grid (default 0). */
   order?: number;
   /** Development fixture: hidden from the Play tab, game of the day and quests in production builds. */
   dev?: boolean;

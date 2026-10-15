@@ -2,8 +2,8 @@ import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { AccessibilityInfo, BackHandler, Pressable, ScrollView, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AccessibilityInfo, BackHandler, ScrollView, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Art } from '../../art';
 import { AppText } from '../../components/ui/AppText';
@@ -20,11 +20,13 @@ import { type CoreKey, localize, type Params, topicName, translateNs, useI18n } 
 import type { LocalizedText } from '../../models';
 import { playSound, type SoundName } from '../../services/sound';
 import { useAppStore } from '../../store/appStore';
-import { makeStyles, radius, spacing, TOUCH_TARGET, topicThemes, useTheme } from '../../theme';
+import { makeStyles, radius, shadows, spacing, topicThemes, useTheme } from '../../theme';
 import { useGameProgress } from '../hooks';
+import { kitColors } from '../kit/theme';
 import { getGame } from '../registry';
 import { type LevelSummary, useGamesStore } from '../store';
 import { type GameApi, type GameLevel, type GameResultInput, type HapticKind } from '../types';
+import { GameHeader } from './GameHeader';
 import { GameResult } from './GameResult';
 import { HowToHint } from './parts';
 
@@ -42,31 +44,28 @@ const HAPTICS: Record<HapticKind, () => Promise<void>> = {
 
 const useStyles = makeStyles((c) => ({
   root: { flex: 1, backgroundColor: c.background },
-  hero: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xl, borderBottomLeftRadius: 28, borderBottomRightRadius: 28, gap: spacing.md, alignItems: 'center' },
-  heroTop: { alignSelf: 'stretch' },
-  coverCircle: { width: 230, height: 230, borderRadius: 115, backgroundColor: 'rgba(255,255,255,0.14)', alignItems: 'center', justifyContent: 'center' },
   body: { padding: spacing.lg, gap: spacing.lg, paddingBottom: spacing.xxl },
-  pill: { alignSelf: 'center', backgroundColor: 'rgba(255,255,255,0.18)', borderRadius: radius.pill, paddingHorizontal: spacing.md, paddingVertical: 4 },
+  cover: { borderRadius: radius.xl, borderWidth: 1, padding: spacing.lg, alignItems: 'center', gap: spacing.md, overflow: 'hidden', ...shadows(c.shadow).card },
+  coverCircle: { width: 200, height: 200, borderRadius: 100, alignItems: 'center', justifyContent: 'center' },
+  pill: { alignSelf: 'center', borderRadius: radius.pill, paddingHorizontal: spacing.md, paddingVertical: 4 },
   levelCard: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
   levelBadge: { width: 56, height: 56, borderRadius: 28, alignItems: 'center', justifyContent: 'center' },
   flex: { flex: 1, gap: 2 },
-  playBody: { flex: 1, padding: spacing.lg },
-  playHeader: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.sm, minHeight: 56, gap: spacing.sm },
-  iconButton: { width: TOUCH_TARGET, height: TOUCH_TARGET, alignItems: 'center', justifyContent: 'center' },
+  playBody: { flex: 1, paddingHorizontal: spacing.md, paddingTop: spacing.md, paddingBottom: spacing.sm },
 }));
 
 /**
  * GameShell – the frame around every mini-game: illustrated intro → animated "how to play" hint → level select →
  * play (renders the game component with a typed `GameApi`) → result (stars, best, XP once per level, seeds/water,
  * "You learned" facts with sources, collection cards, review items) → replay / next level / back.
+ * Every phase has the same header (GameHeader: back, game title, subtitle, progress) – games never draw a title.
  * Route: `/game/[id]`. Games never navigate themselves – they call `api.onComplete` or `api.onExit`.
  */
 export function GameShell({ gameId }: { gameId: string }) {
   const def = getGame(gameId);
   const { t, language } = useI18n();
-  const { c } = useTheme();
+  const { c, dark, highContrast } = useTheme();
   const styles = useStyles();
-  const insets = useSafeAreaInsets();
   const reduced = useReducedMotion();
   const soundOn = useAppStore((s) => s.settings.sound);
   const hapticsOn = useAppStore((s) => s.settings.haptics);
@@ -81,10 +80,12 @@ export function GameShell({ gameId }: { gameId: string }) {
   const [level, setLevel] = useState<GameLevel>(1);
   const [playKey, setPlayKey] = useState(0);
   const [summary, setSummary] = useState<LevelSummary | null>(null);
+  const [playProgress, setPlayProgress] = useState<{ done: number; total: number }>({ done: 0, total: 0 });
   // One token per play: a game reporting the same play twice is ignored (see `finishedPlays`).
   const [playToken, setPlayToken] = useState<object>(() => ({}));
 
-  useStatusBar(phase === 'intro');
+  // The header is always the dark topic gradient.
+  useStatusBar(true);
 
   // Level-up and badge pop-ups wait while a level is being played.
   useEffect(() => {
@@ -108,11 +109,15 @@ export function GameShell({ gameId }: { gameId: string }) {
     [def, language],
   );
   const l = useCallback((text: LocalizedText | undefined) => localize(text, language), [language]);
+  const setProgress = useCallback((done: number, total: number) => {
+    setPlayProgress((prev) => (prev.done === done && prev.total === total ? prev : { done, total }));
+  }, []);
 
   const start = useCallback((next: GameLevel) => {
     setPlayToken({});
     setLevel(next);
     setSummary(null);
+    setPlayProgress({ done: 0, total: 0 });
     setPlayKey((k) => k + 1);
     setPhase('play');
   }, []);
@@ -126,11 +131,13 @@ export function GameShell({ gameId }: { gameId: string }) {
       level,
       config: levelDef.config,
       facts: levelDef.facts,
+      topicId: def.topicId,
       language,
       t: gt,
       l,
       reducedMotion: reduced,
       challengeMode,
+      setProgress,
       playSound: (name: SoundName) => {
         if (soundOn) playSound(name);
       },
@@ -147,7 +154,7 @@ export function GameShell({ gameId }: { gameId: string }) {
         AccessibilityInfo.announceForAccessibility(t('a11y.stars', { count: next.stars }));
       },
     };
-  }, [challengeMode, completeLevel, def, gt, hapticsOn, l, language, level, levelDef, playToken, reduced, soundOn, t]);
+  }, [challengeMode, completeLevel, def, gt, hapticsOn, l, language, level, levelDef, playToken, reduced, setProgress, soundOn, t]);
 
   if (!def) {
     return (
@@ -159,34 +166,75 @@ export function GameShell({ gameId }: { gameId: string }) {
   }
 
   const theme = topicThemes[def.topicId];
+  const k = kitColors(c, def.topicId, dark, highContrast);
   const title = gt('title');
   const leave = () => (router.canGoBack() ? router.back() : router.replace('/(tabs)/play'));
+  const levelLabel = (n: GameLevel) => `${t('common.level', { level: n })} · ${t(`games.difficulty.${n}` as CoreKey)}`;
+  const topicLabel = t('games.topic', { topic: t(topicName(def.topicId)) });
+  const starsLabel = t('games.totalStars', { count: progress.totalStars, total: def.levels.length * 3 });
+
+  if (phase === 'play' && api) {
+    const Game = def.component;
+    const fraction = playProgress.total > 0 ? playProgress.done / playProgress.total : undefined;
+    return (
+      <View style={styles.root}>
+        <GameHeader
+          title={title}
+          subtitle={levelLabel(level)}
+          topic={def.topicId}
+          backIcon="close"
+          backLabel={t('games.exit')}
+          onBack={() => setPhase('levels')}
+          progress={fraction ?? 0}
+          progressLabel={t('a11y.progress', { percent: Math.round((fraction ?? 0) * 100) })}
+          reducedMotion={reduced}
+        />
+        <SafeAreaView style={styles.playBody} edges={['left', 'right', 'bottom']}>
+          <Game key={playKey} {...api} />
+        </SafeAreaView>
+      </View>
+    );
+  }
+
+  if (phase === 'result' && summary && levelDef) {
+    const nextLevel = def.levels.find((x) => x.level === level + 1)?.level;
+    return (
+      <View style={styles.root}>
+        <GameHeader title={title} subtitle={levelLabel(level)} topic={def.topicId} backLabel={t('games.levels')} onBack={() => setPhase('levels')} />
+        <GameResult
+          level={level}
+          summary={summary}
+          facts={levelDef.facts}
+          accent={theme.accent}
+          onReplay={() => start(level)}
+          onNext={nextLevel ? () => start(nextLevel) : undefined}
+          onBack={() => setPhase('levels')}
+          onLeave={leave}
+        />
+      </View>
+    );
+  }
 
   if (phase === 'intro' || phase === 'howto') {
     return (
-      <ScrollView style={styles.root} contentContainerStyle={{ paddingBottom: spacing.xxl }}>
-        <LinearGradient colors={theme.gradient} style={[styles.hero, { paddingTop: insets.top + spacing.sm }]}>
-          <View style={styles.heroTop}>
-            <TopBar dark onBack={phase === 'howto' ? () => setPhase('intro') : leave} />
-          </View>
-          <View style={styles.coverCircle}>
-            <Art name={def.coverArt} size={190} />
-          </View>
-          <View style={styles.pill}>
-            <AppText variant="label" color={c.onAccent}>
-              {t('games.topic', { topic: t(topicName(def.topicId)) }).toUpperCase()}
-            </AppText>
-          </View>
-          <AppText variant="display" color={c.onAccent} align="center" accessibilityRole="header">
-            {title}
-          </AppText>
-          <AppText variant="body" color={c.onAccent} align="center">
-            {gt('description')}
-          </AppText>
-        </LinearGradient>
-        <View style={styles.body}>
+      <View style={styles.root}>
+        <GameHeader title={title} subtitle={topicLabel} topic={def.topicId} backLabel={t('a11y.back')} onBack={phase === 'howto' ? () => setPhase('intro') : leave} />
+        <ScrollView contentContainerStyle={styles.body}>
           {phase === 'intro' ? (
             <>
+              <LinearGradient colors={k.board} style={[styles.cover, { borderColor: k.boardBorder }]}>
+                <View style={[styles.coverCircle, { backgroundColor: k.accentSoft }]}>
+                  <Art name={def.coverArt} size={170} />
+                </View>
+                <View style={[styles.pill, { backgroundColor: theme.accent }]}>
+                  <AppText variant="label" color={c.onAccent}>
+                    {topicLabel.toUpperCase()}
+                  </AppText>
+                </View>
+                <AppText variant="body" align="center">
+                  {gt('description')}
+                </AppText>
+              </LinearGradient>
               <Button label={t('games.letsPlay')} icon="play" variant="gold" onPress={() => setPhase('howto')} />
               {progress.progress.introSeen ? <Button label={t('games.chooseLevel')} variant="secondary" onPress={() => setPhase('levels')} /> : null}
             </>
@@ -207,62 +255,21 @@ export function GameShell({ gameId }: { gameId: string }) {
               />
             </>
           )}
-        </View>
-      </ScrollView>
-    );
-  }
-
-  if (phase === 'play' && api) {
-    const Game = def.component;
-    return (
-      <SafeAreaView style={styles.root} edges={['top', 'left', 'right', 'bottom']}>
-        <View style={styles.playHeader}>
-          <Pressable onPress={() => setPhase('levels')} accessibilityRole="button" accessibilityLabel={t('games.exit')} style={styles.iconButton} hitSlop={8}>
-            <Icon name="close" size={26} color={c.text} />
-          </Pressable>
-          <View style={styles.flex}>
-            <AppText variant="bodyBold" numberOfLines={1} accessibilityRole="header">
-              {title}
-            </AppText>
-            <AppText variant="tiny" color={c.textMuted}>
-              {`${t('common.level', { level })} · ${t(`games.difficulty.${level}` as CoreKey)}`}
-            </AppText>
-          </View>
-        </View>
-        <View style={styles.playBody}>
-          <Game key={playKey} {...api} />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
-  if (phase === 'result' && summary && levelDef) {
-    const nextLevel = def.levels.find((x) => x.level === level + 1)?.level;
-    return (
-      <GameResult
-        title={title}
-        level={level}
-        summary={summary}
-        facts={levelDef.facts}
-        accent={theme.accent}
-        onReplay={() => start(level)}
-        onNext={nextLevel ? () => start(nextLevel) : undefined}
-        onBack={() => setPhase('levels')}
-        onLeave={leave}
-      />
+        </ScrollView>
+      </View>
     );
   }
 
   // Level select
   return (
-    <SafeAreaView style={styles.root} edges={['top', 'left', 'right']}>
-      <TopBar title={title} onBack={leave} />
+    <View style={styles.root}>
+      <GameHeader title={title} subtitle={starsLabel} topic={def.topicId} backLabel={t('a11y.back')} onBack={leave} />
       <ScrollView contentContainerStyle={styles.body}>
-        <Card tone="alt" onPress={() => setPhase('intro')} accessibilityLabel={`${title}. ${t('games.howToTitle')}`}>
+        <Card tone="alt" onPress={() => setPhase('intro')} accessibilityLabel={`${gt('description')}. ${t('games.howToTitle')}`}>
           <View style={styles.levelCard}>
             <Art name={def.coverArt} size={72} />
             <View style={styles.flex}>
-              <AppText variant="bodyBold">{gt('description')}</AppText>
+              <AppText variant="body">{gt('description')}</AppText>
               <AppText variant="small" color={c.primaryText}>
                 {t('games.howToTitle')}
               </AppText>
@@ -275,7 +282,7 @@ export function GameShell({ gameId }: { gameId: string }) {
         {def.levels.map(({ level: n }) => {
           const unlocked = progress.isUnlocked(n);
           const best = progress.level(n);
-          const label = `${t('common.level', { level: n })} · ${t(`games.difficulty.${n}` as CoreKey)}`;
+          const label = levelLabel(n);
           const status = !unlocked
             ? t('games.lockedLevel', { level: n - 1 })
             : best
@@ -308,9 +315,9 @@ export function GameShell({ gameId }: { gameId: string }) {
           <ToggleRow icon="flame" label={t('games.challenge')} description={t('games.challengeDesc')} value={challengeMode} onChange={setChallengeMode} />
         </Card>
         <AppText variant="tiny" color={c.textMuted} align="center">
-          {t('games.totalStars', { count: progress.totalStars, total: def.levels.length * 3 })}
+          {starsLabel}
         </AppText>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

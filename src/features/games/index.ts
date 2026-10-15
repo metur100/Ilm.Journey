@@ -1,3 +1,5 @@
+import { registerKitDemos } from '@/core/games/kit/demos';
+
 import { registerArkOfNuhGame } from './ark-of-nuh/register';
 import { registerAyahBuilderGame } from './ayah-builder/register';
 import { registerFindQiblaGame } from './find-qibla/register';
@@ -20,7 +22,6 @@ import { registerSeerahGames } from './sections/seerah';
 import { registerAkhlaqGames } from './sections/akhlaq';
 import { registerRamadanGames } from './sections/ramadan';
 import { registerHistoryGames } from './sections/history';
-import { registerTopicArcadeGames } from './topic-arcade';
 import { registerWordBuilderGame } from './word-builder/register';
 import { registerWuduFlowGame } from './wudu-flow/register';
 import { registerYusufStoryPathGame } from './yusuf-story-path/register';
@@ -45,7 +46,8 @@ export function registerGames(): void {
   registerSurahGardenGame();
   registerLetterLanternsGame();
   registerWordBuilderGame();
-  registerTopicArcadeGames();
+  // Kit demo games (development fixtures, one per engine – hidden in production builds)
+  registerKitDemos();
   // v3 sections (docs/GAMES-V3.md)
   registerSalahPrayersGames();
   registerSalahGames();

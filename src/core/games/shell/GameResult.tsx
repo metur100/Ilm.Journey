@@ -18,7 +18,6 @@ import type { GameFact, GameLevel } from '../types';
 import { FactCard, StarsBurst } from './parts';
 
 interface GameResultProps {
-  title: string;
   level: GameLevel;
   summary: LevelSummary;
   facts: GameFact[];
@@ -41,8 +40,8 @@ const useStyles = makeStyles((c) => ({
   actions: { gap: spacing.sm },
 }));
 
-/** Result screen of a level: stars, best, rewards, "You learned", new collection cards, next steps. */
-export function GameResult({ title, level, summary, facts, onReplay, onNext, onBack, onLeave }: GameResultProps) {
+/** Result screen of a level (under the shell's GameHeader): stars, best, rewards, "You learned", new cards, next steps. */
+export function GameResult({ summary, facts, onReplay, onNext, onBack, onLeave }: GameResultProps) {
   const { t } = useI18n();
   const { c } = useTheme();
   const styles = useStyles();
@@ -57,12 +56,9 @@ export function GameResult({ title, level, summary, facts, onReplay, onNext, onB
   const heading = summary.stars === 3 ? t('games.result.3') : summary.stars === 2 ? t('games.result.2') : t('games.result.1');
 
   return (
-    <SafeAreaView style={styles.root} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.root} edges={['left', 'right']}>
       <ScrollView contentContainerStyle={styles.body}>
         <View style={styles.head}>
-          <AppText variant="label" color={c.textMuted}>
-            {`${title} · ${t('common.level', { level })}`.toUpperCase()}
-          </AppText>
           <StarsBurst stars={summary.stars} reduced={reduced} />
           <AppText variant="title" align="center" accessibilityRole="header">
             {heading}

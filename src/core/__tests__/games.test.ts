@@ -26,8 +26,6 @@ import { XP } from '@/core/services/xp';
 import { useAppStore } from '@/core/store/appStore';
 import { TOPIC_IDS } from '@/core/models';
 import { registerFeatures } from '@/features';
-import { SUFARA_LETTER_ORDER } from '@/features/games/topic-arcade';
-import { LETTERS } from '@/features/games/letter-lanterns/letters';
 
 registerFeatures();
 registerDemoGame();
@@ -99,23 +97,13 @@ describe('game registry', () => {
     expect(() => validateGame(badCard as GameDef<unknown>)).toThrow(/card/);
   });
 
-  it('provides ten separate games for every topic plus ten Sufara games', () => {
-    const games = listGames({ includeDev: false });
-    for (const topic of TOPIC_IDS) {
-      const topicGames = games.filter((game) => game.topicId === topic && game.shelfGroup !== 'sufara');
-      expect(topicGames).toHaveLength(10);
-      expect(new Set(topicGames.map((game) => game.id)).size).toBe(10);
+  it('lists every registered game once, in a known topic, with existing cover art', () => {
+    const games = listGames({ includeDev: true });
+    expect(new Set(games.map((game) => game.id)).size).toBe(games.length);
+    for (const game of games) {
+      expect(TOPIC_IDS).toContain(game.topicId);
+      expect({ id: game.id, cover: hasArt(game.coverArt) }).toEqual({ id: game.id, cover: true });
     }
-    const sufaraGames = games.filter((game) => game.shelfGroup === 'sufara');
-    expect(sufaraGames).toHaveLength(10);
-    expect(new Set(sufaraGames.map((game) => game.id)).size).toBe(10);
-    expect(SUFARA_LETTER_ORDER).toHaveLength(LETTERS.length);
-    expect(new Set(SUFARA_LETTER_ORDER).size).toBe(LETTERS.length);
-    for (const game of sufaraGames) {
-      expect(game.levels.map((level) => level.level)).toEqual([1, 2, 3]);
-      expect(game.levels.flatMap((level) => (level.config as { positions: number[] }).positions)).toEqual(SUFARA_LETTER_ORDER);
-    }
-    for (const game of games) expect(hasArt(game.coverArt)).toBe(true);
   });
 
   it('picks a deterministic game of the day', () => {
