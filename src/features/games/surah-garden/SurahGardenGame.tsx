@@ -219,7 +219,7 @@ export function SurahGardenGame({ gameId, level, config, onComplete, playSound, 
                   style={[styles.card, styles.answerCard, done && styles.matched]}
                 >
                   {config.mode === 'opening' ? (
-                    <Text allowFontScaling={false} style={{ fontFamily: fonts.quran, fontSize: quranSize, lineHeight: quranSize * 1.9, color: c.text, textAlign: 'center', writingDirection: 'rtl' }}>
+                    <Text allowFontScaling={false} style={{ fontFamily: fonts.quran, fontSize: quranSize, lineHeight: quranSize * 2.4, color: c.text, textAlign: 'center', writingDirection: 'rtl' }}>
                       {text}
                     </Text>
                   ) : (

@@ -266,7 +266,7 @@ export function AyahBuilderGame({ gameId, level, config, onComplete, playSound, 
           {tiles.slice(0, placed).map((word, i) => (
             <GrowIn key={`${ayah.globalNumber}-${i}`} reducedMotion={reducedMotion} style={styles.placed}>
               <Glow color={c.gold} active={i === placed - 1 && phase === 'build'} reducedMotion={reducedMotion} radius={radius.sm} />
-              <Text allowFontScaling={false} style={{ fontFamily: fonts.quran, fontSize: wordSize, lineHeight: wordSize * 1.9, color: c.text, writingDirection: 'rtl' }}>
+              <Text allowFontScaling={false} style={{ fontFamily: fonts.quran, fontSize: wordSize, lineHeight: wordSize * 2.4, color: c.text, writingDirection: 'rtl' }}>
                 {word}
               </Text>
             </GrowIn>
@@ -304,7 +304,7 @@ export function AyahBuilderGame({ gameId, level, config, onComplete, playSound, 
               >
                 <View style={styles.tile}>
                   <Glow color={c.gold} active={hintIndex === i} reducedMotion={reducedMotion} radius={radius.md} />
-                  <Text allowFontScaling={false} style={{ fontFamily: fonts.quran, fontSize: wordSize, lineHeight: wordSize * 1.9, color: c.text, writingDirection: 'rtl' }}>
+                  <Text allowFontScaling={false} style={{ fontFamily: fonts.quran, fontSize: wordSize, lineHeight: wordSize * 2.4, color: c.text, writingDirection: 'rtl' }}>
                     {tiles[i]}
                   </Text>
                 </View>

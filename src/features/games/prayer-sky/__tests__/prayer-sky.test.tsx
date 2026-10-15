@@ -183,7 +183,7 @@ describe('Prayer Sky – play', () => {
     const { root, results, unmount } = await render(1);
     expect(texts(root)).toContain('Move the sun to the time of Fajr');
     await press(root, 'Time for Fajr'); // s = 0.3, morning → mistake
-    expect(texts(root)).toContain('Fajr – dawn');
+    expect(texts(root)).toContain('Not yet – remember: Fajr is prayed between dawn and sunrise.');
     await press(root, 'Earlier', 9); // 0.12 → dawn
     await press(root, 'Time for Fajr');
     expect(texts(root)).toContain(PRAYER_BODY.fajr.en);

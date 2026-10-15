@@ -13,10 +13,10 @@ import { Glow, GrowIn, SparkleBurst, useArabicVoice } from '../ayah-builder/kit'
 import { letterInfo } from './letters';
 import { buildSteps, lanternResult, type LanternOption, type LetterLanternsConfig, syllableReading, type WrongTap } from './logic';
 
-const LANTERN_W = 84;
+const LANTERN_W = 90;
 const LAMP_W = 50;
 const LAMP_H = Math.round(LAMP_W / artAspect('object.lantern-ramadan'));
-const CARD_W = 58;
+const CARD_W = 70;
 const CARD_H = Math.round((CARD_W * 182) / 140);
 const LANTERN_H = 12 + LAMP_H + CARD_H;
 /** Where each lane starts its rise (fraction of the way up), so the sky is never empty at the start of a step. */
