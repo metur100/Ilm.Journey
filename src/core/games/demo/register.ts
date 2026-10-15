@@ -67,7 +67,6 @@ export const DEMO_GAME_ID = 'demo-stars';
 
 export const demoGame: GameDef<DemoStarsConfig> = {
   id: DEMO_GAME_ID,
-  challengeCount: 16,
   topicId: 'prophets',
   i18n: demoI18n,
   coverArt: 'garden.stars',

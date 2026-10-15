@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Pressable, View } from 'react-native';
-import Svg, { Circle, Path, Rect } from 'react-native-svg';
+import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
@@ -119,7 +119,20 @@ export function SalahGuideGame({ config, facts, language, onComplete, playSound,
       </View>
 
       <View style={styles.stage}>
-        <SalahIllustration pose={prayerDone || taslim || finalSitting ? 'final-sitting' : !prayerStarted || movement === 0 ? null : RAKAH_MOVEMENTS[movement - 1]} size={148} />
+        <SalahIllustration
+          pose={
+            prayerDone || taslim
+              ? 'taslim'
+              : finalSitting
+                ? 'prostrating-again'
+                : !prayerStarted
+                  ? 'takbir'
+                  : movement === 0
+                    ? 'standing'
+                    : RAKAH_MOVEMENTS[movement - 1]
+          }
+          size={148}
+        />
         <AppText variant="bodyBold" align="center">{prayerDone ? t('play.prayerDone', { prayer: prayerName(prayer), count: RAKAHS[prayer] }) : t('play.nextMovement')}</AppText>
       </View>
 
@@ -147,43 +160,59 @@ export function SalahGuideGame({ config, facts, language, onComplete, playSound,
 
 function SalahIllustration({ pose, size }: { pose: SalahPose | null; size: number }) {
   const { c } = useTheme();
-  const stroke = c.primaryText;
-  const head = <Circle cx={80} cy={28} r={12} fill={c.primary} />;
-  if (!pose) {
-    return <Svg width={size} height={size * 0.84} viewBox="0 0 160 190"><Rect x={12} y={158} width={136} height={10} rx={5} fill={c.goldSoft} /><Path d="M30 158v-10M130 158v-10" stroke={c.border} strokeWidth={3} /></Svg>;
-  }
-  if (pose === 'standing' || pose === 'rising') {
-    return (
-      <Svg width={size} height={size * 0.84} viewBox="0 0 160 190">
-        <Rect x={12} y={158} width={136} height={10} rx={5} fill={c.goldSoft} />
-        {head}
-        <Path d="M80 42v68M80 58 56 100M80 58l24 42M80 110l-18 48M80 110l18 48" stroke={stroke} strokeWidth={10} strokeLinecap="round" fill="none" />
-      </Svg>
-    );
-  }
-  if (pose === 'bowing') {
-    return (
-      <Svg width={size} height={size * 0.84} viewBox="0 0 160 190">
-        <Rect x={12} y={158} width={136} height={10} rx={5} fill={c.goldSoft} />
-        <Circle cx={50} cy={62} r={12} fill={c.primary} />
-        <Path d="M62 68 108 82M74 72l-8 26M96 78l10 17M108 82l-5 42M108 82l24 6M103 124l-14 34M103 124l25 34" stroke={stroke} strokeWidth={10} strokeLinecap="round" fill="none" />
-      </Svg>
-    );
-  }
-  if (pose === 'prostrating' || pose === 'prostrating-again') {
-    return (
-      <Svg width={size} height={size * 0.84} viewBox="0 0 160 190">
-        <Rect x={12} y={158} width={136} height={10} rx={5} fill={c.goldSoft} />
-        <Circle cx={43} cy={132} r={10} fill={c.primary} />
-        <Path d="M54 132 90 124 112 139 130 146M70 129l-25 22M87 125l-12 23M110 140l-20 17M112 140l29 17" stroke={stroke} strokeWidth={10} strokeLinecap="round" fill="none" />
-      </Svg>
-    );
-  }
-  return (
-    <Svg width={size} height={size * 0.84} viewBox="0 0 160 190">
-      <Rect x={12} y={158} width={136} height={10} rx={5} fill={c.goldSoft} />
-      <Circle cx={80} cy={58} r={12} fill={c.primary} />
-      <Path d="M80 72v42M80 86 58 110M80 86l22 24M80 114 52 144 112 144 134 158M80 114l16 28" stroke={stroke} strokeWidth={10} strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    </Svg>
+  const outline = c.primaryText;
+  const rug = <><Rect x={12} y={158} width={136} height={10} rx={5} fill={c.goldSoft} /><Path d="M24 158v-5m112 5v-5M50 163h60" stroke={c.goldBorder} strokeWidth={2} strokeLinecap="round" /></>;
+  const head = (x: number, y: number) => (
+    <G>
+      <Circle cx={x} cy={y} r={12} fill={c.gold} />
+      <Path d={`M${x - 11} ${y - 4}q11-13 22 0v4h-22Z`} fill={outline} />
+    </G>
   );
+  const legs = <Path d="M70 110v43m20-43v43m-20 0-7 4m27-4 7 4" stroke={outline} strokeWidth={10} strokeLinecap="round" strokeLinejoin="round" fill="none" />;
+  const standing = (
+    <G>
+      {head(80, 30)}
+      <Path d="M67 47q13-8 26 0l8 62q-21 12-42 0Z" fill={c.primary} stroke={outline} strokeWidth={3} strokeLinejoin="round" />
+      {legs}
+      {pose === 'takbir' ? (
+        <G>
+          <Path d="M67 55 54 37m39 18 13-18" stroke={c.primary} strokeWidth={11} strokeLinecap="round" />
+          <Path d="M67 55 54 37m39 18 13-18" stroke={outline} strokeWidth={3} strokeLinecap="round" />
+          <Circle cx={52} cy={34} r={5} fill={c.gold} /><Circle cx={108} cy={34} r={5} fill={c.gold} />
+        </G>
+      ) : (
+        <Path d="M67 55 61 91m32-36 6 36" stroke={c.primary} strokeWidth={11} strokeLinecap="round" />
+      )}
+    </G>
+  );
+  const bowing = (
+    <G>
+      {head(119, 67)}
+      <Path d="m64 57 43 7-4 21-42-8Z" fill={c.primary} stroke={outline} strokeWidth={3} strokeLinejoin="round" />
+      <Path d="m65 76-2 75m20-70 4 70m-21 0-7 4m28-4 7 4" stroke={outline} strokeWidth={10} strokeLinecap="round" />
+      <Path d="m78 63-8 31m28-27-3 28" stroke={c.primary} strokeWidth={9} strokeLinecap="round" />
+      <Path d="m78 63-8 31m28-27-3 28" stroke={outline} strokeWidth={3} strokeLinecap="round" />
+      <Circle cx={70} cy={97} r={4} fill={c.gold} /><Circle cx={95} cy={97} r={4} fill={c.gold} />
+    </G>
+  );
+  const prostrating = (
+    <G>
+      {head(48, 131)}
+      <Path d="m59 124 31-16 21 12-26 20-25-5Z" fill={c.primary} stroke={outline} strokeWidth={3} strokeLinejoin="round" />
+      <Path d="m64 126-17 24m42-15-10 17m32-32 14 28m-25-12 24 12" stroke={outline} strokeWidth={9} strokeLinecap="round" />
+      <Path d="m63 128-16 18m30-5-7 13" stroke={c.primary} strokeWidth={7} strokeLinecap="round" />
+      <Circle cx={46} cy={151} r={4} fill={c.gold} /><Circle cx={70} cy={158} r={4} fill={c.gold} />
+    </G>
+  );
+  const sitting = (
+    <G>
+      {head(80, 45)}
+      <Path d="M67 62q13-8 26 0l7 45q-18 9-38 0Z" fill={c.primary} stroke={outline} strokeWidth={3} strokeLinejoin="round" />
+      <Path d="m69 70-7 33m29-33 7 33m-28 5-16 20 47 1 23 13m-54-34 5 22" stroke={outline} strokeWidth={9} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      {pose === 'taslim' ? <Path d="M54 44q-18 7-20 22m72-22q18 7 20 22" stroke={c.goldBorder} strokeWidth={3} strokeLinecap="round" fill="none" /> : null}
+    </G>
+  );
+  const figure = pose === 'bowing' ? bowing : pose === 'prostrating' || pose === 'prostrating-again' ? prostrating : pose === 'sitting-between' || pose === 'final-sitting' || pose === 'taslim' ? sitting : standing;
+
+  return <Svg width={size} height={size * 0.84} viewBox="0 0 160 190">{rug}{figure}</Svg>;
 }

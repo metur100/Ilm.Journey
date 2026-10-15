@@ -20,7 +20,6 @@ const LazyArkOfNuhGame: ComponentType<GameApi<ArkConfig>> = (props) => {
 
 export const arkGame: GameDef<ArkConfig> = {
   id: ARK_GAME_ID,
-  challengeCount: 18,
   topicId: 'prophets',
   i18n: arkI18n,
   coverArt: 'object.ark',

@@ -23,7 +23,6 @@ export const SURAH_GARDEN_ART = [...FLOWERS, 'scene.garden-lawn', 'ui.seed', 'ui
 
 export const surahGardenGame: GameDef<SurahGardenConfig> = {
   id: SURAH_GARDEN_ID,
-  challengeCount: 18,
   topicId: 'quran',
   i18n: surahGardenI18n,
   coverArt: 'garden.flower-rose',

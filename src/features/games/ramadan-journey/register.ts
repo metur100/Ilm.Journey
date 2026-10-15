@@ -6,7 +6,6 @@ import { translateNs } from '@/core/i18n';
 import { DEEDS_FACTS } from '../good-deeds-day/register';
 import type { DeedsConfig } from '../good-deeds-day/GoodDeedsDayGame';
 import { deedsI18n } from '../good-deeds-day/i18n';
-import { RAMADAN_DAY } from '../good-deeds-day/content';
 import { ramadanJourneyI18n } from './i18n';
 
 export const RAMADAN_JOURNEY_ID = 'ramadan-journey';
@@ -21,7 +20,6 @@ const LazyRamadanJourney: ComponentType<GameApi<DeedsConfig>> = (props) => {
 
 export const ramadanJourneyGame: GameDef<DeedsConfig> = {
   id: RAMADAN_JOURNEY_ID,
-  challengeCount: RAMADAN_DAY.length,
   topicId: 'ramadan',
   i18n: ramadanJourneyI18n,
   coverArt: 'object.lantern-ramadan',

@@ -14,6 +14,7 @@ const en = {
 
   // ---------- play shelf ----------
   'play.title': 'Play',
+  'play.sufaraGames': 'Sufara',
   'play.subtitle': 'Small games: do something, learn something – every game ends with what you learned.',
   'play.gameOfDay': 'Game of the day',
   'play.new': 'New',
@@ -23,7 +24,6 @@ const en = {
   // ---------- game shell ----------
   'games.notFound': 'This game is not available.',
   'games.topic': '{topic} game',
-  'games.challengeCount': '{count} challenges',
   'games.letsPlay': 'Let’s play',
   'games.chooseLevel': 'Choose a level',
   'games.howToTitle': 'How to play',
@@ -168,6 +168,7 @@ const de: Record<Key, string> = {
   'home.openGarden': 'Dein Garten',
 
   'play.title': 'Spielen',
+  'play.sufaraGames': 'Sufara',
   'play.subtitle': 'Kleine Spiele: etwas tun, etwas lernen – jedes Spiel endet mit dem, was du gelernt hast.',
   'play.gameOfDay': 'Spiel des Tages',
   'play.new': 'Neu',
@@ -176,7 +177,6 @@ const de: Record<Key, string> = {
 
   'games.notFound': 'Dieses Spiel ist nicht verfügbar.',
   'games.topic': 'Spiel: {topic}',
-  'games.challengeCount': '{count} Herausforderungen',
   'games.letsPlay': 'Los geht’s',
   'games.chooseLevel': 'Wähle ein Level',
   'games.howToTitle': 'So wird gespielt',
@@ -315,6 +315,7 @@ const bs: Record<Key, string> = {
   'home.openGarden': 'Tvoja bašča',
 
   'play.title': 'Igraj',
+  'play.sufaraGames': 'Sufara',
   'play.subtitle': 'Male igre: uradi nešto, nauči nešto – svaka igra završava onim što si naučio.',
   'play.gameOfDay': 'Igra dana',
   'play.new': 'Novo',
@@ -323,7 +324,6 @@ const bs: Record<Key, string> = {
 
   'games.notFound': 'Ova igra nije dostupna.',
   'games.topic': 'Igra: {topic}',
-  'games.challengeCount': '{count} izazova',
   'games.letsPlay': 'Igrajmo',
   'games.chooseLevel': 'Izaberi nivo',
   'games.howToTitle': 'Kako se igra',

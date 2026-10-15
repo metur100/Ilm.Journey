@@ -52,10 +52,9 @@ function api(config: YusufPathConfig, onComplete: (result: GameResultInput) => v
 }
 
 describe('Yusuf Story Trail', () => {
-  it('uses ten distinct events and has at least ten challenges', () => {
+  it('uses ten distinct story events', () => {
     expect(YUSUF_EVENTS).toHaveLength(10);
     expect(new Set(YUSUF_EVENTS.map((event) => event.id)).size).toBe(10);
-    expect(yusufStoryPathGame.challengeCount).toBe(10);
     expect(() => validateGame(getGame(yusufStoryPathGame.id)!)).not.toThrow();
   });
 

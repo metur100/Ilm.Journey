@@ -60,7 +60,6 @@ export const HIJRAH_GAME_ID = 'hijrah-path';
 
 export const hijrahGame: GameDef<HijrahConfig> = {
   id: HIJRAH_GAME_ID,
-  challengeCount: 20,
   topicId: 'seerah',
   i18n: hijrahI18n,
   coverArt: 'scene.map-hijaz',

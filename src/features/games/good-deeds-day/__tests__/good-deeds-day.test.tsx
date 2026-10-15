@@ -120,7 +120,6 @@ describe('A Day of Good Deeds – content comes from the Learn content', () => {
     expect(() => validateGame(getGame(DEEDS_GAME_ID)!)).not.toThrow();
     expect(() => validateGame(getGame(RAMADAN_JOURNEY_ID)!)).not.toThrow();
     expect(RAMADAN_DAY).toHaveLength(10);
-    expect(ramadanJourneyGame.challengeCount).toBe(RAMADAN_DAY.length);
     for (const lang of ['en', 'de', 'bs'] as const) {
       for (const s of allScenes) expect(translateNs(deedsGame.i18n, lang, `scene.${s.id}`)).not.toBe(`scene.${s.id}`);
       for (const s of allScenes)

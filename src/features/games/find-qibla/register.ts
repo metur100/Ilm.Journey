@@ -12,7 +12,6 @@ import type { QiblaConfig } from './logic';
  */
 export const findQiblaGame: GameDef<QiblaConfig> = {
   id: 'find-qibla',
-  challengeCount: 14,
   topicId: 'salah',
   i18n: qiblaI18n,
   coverArt: 'object.compass',

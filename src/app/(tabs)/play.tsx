@@ -9,7 +9,7 @@ import { HeroHeader } from '@/core/components/ui/HeroHeader';
 import { Icon } from '@/core/components/ui/Icon';
 import { Stars } from '@/core/components/ui/Stars';
 import { EmptyState } from '@/core/components/ui/States';
-import { type GameDef, isNewGame, totalStars, useGameOfTheDay, useGames, useGamesStore } from '@/core/games';
+import { type GameDef, totalStars, useGameOfTheDay, useGames, useGamesStore } from '@/core/games';
 import { topicName, translateNs, useI18n } from '@/core/i18n';
 import { TOPIC_IDS, type TopicId } from '@/core/models';
 import { makeStyles, radius, shadows, spacing, topicThemes, useTheme } from '@/core/theme';
@@ -28,11 +28,10 @@ const useStyles = makeStyles((c) => ({
   card: { width: 200, backgroundColor: c.surface, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, overflow: 'hidden', ...shadows(c.shadow).card },
   cardArt: { height: 150, alignItems: 'center', justifyContent: 'center' },
   cardBody: { padding: spacing.md, gap: 4 },
-  newBadge: { position: 'absolute', top: spacing.sm, right: spacing.sm, backgroundColor: c.gold, borderRadius: radius.pill, paddingHorizontal: spacing.sm, paddingVertical: 2 },
   pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
 }));
 
-/** Play tab: the illustrated game shelf grouped by topic, with "Game of the day", stars and "New" markers. */
+/** Play tab: the illustrated game shelf grouped by topic, with "Game of the day" and stars. */
 export default function PlayScreen() {
   const { t, language } = useI18n();
   const { c } = useTheme();
@@ -43,8 +42,16 @@ export default function PlayScreen() {
   const challengeMode = useGamesStore((s) => s.challengeMode);
   const state = { games: data, challengeMode };
 
-  const byTopic = useMemo(() => TOPIC_IDS.map((topic) => ({ topic, games: games.filter((g) => g.topicId === topic) })).filter((g) => g.games.length > 0), [games]);
-  const title = (g: GameDef<unknown>) => `${translateNs(g.i18n, language, 'title')} · ${t('games.challengeCount', { count: g.challengeCount })}`;
+  const byTopic = useMemo(() => {
+    const shelves = TOPIC_IDS.map((topic) => ({ topic, title: t(topicName(topic)), games: games.filter((game) => game.topicId === topic && game.shelfGroup !== 'sufara') })).filter((shelf) => shelf.games.length > 0);
+    const sufara = games.filter((game) => game.shelfGroup === 'sufara');
+    if (sufara.length > 0) {
+      const arabicShelf = shelves.findIndex((shelf) => shelf.topic === 'arabic');
+      shelves.splice(arabicShelf + 1, 0, { topic: 'arabic', title: t('play.sufaraGames'), games: sufara });
+    }
+    return shelves;
+  }, [games, t]);
+  const title = (g: GameDef<unknown>) => translateNs(g.i18n, language, 'title');
   const open = (g: GameDef<unknown>) => router.push({ pathname: '/game/[id]', params: { id: g.id } });
 
   return (
@@ -88,29 +95,21 @@ export default function PlayScreen() {
           </Pressable>
         ) : null}
 
-        {byTopic.map(({ topic, games: list }) => (
-          <TopicShelf key={topic} topic={topic}>
+        {byTopic.map(({ topic, title: shelfTitle, games: list }, index) => (
+          <TopicShelf key={`${topic}-${index}`} topic={topic} title={shelfTitle}>
             {list.map((g) => {
               const stars = totalStars(state, g.id);
-              const isNew = isNewGame(state, g.id);
               return (
                 <Pressable
                   key={g.id}
                   onPress={() => open(g)}
                   accessibilityRole="button"
-                  accessibilityLabel={`${title(g)}${isNew ? `, ${t('play.new')}` : ''}. ${t('games.totalStars', { count: stars, total: g.levels.length * 3 })}`}
+                  accessibilityLabel={`${title(g)}. ${t('games.totalStars', { count: stars, total: g.levels.length * 3 })}`}
                   style={({ pressed }) => [styles.card, pressed && styles.pressed]}
                 >
                   <LinearGradient colors={[topicThemes[g.topicId].gradient[1], topicThemes[g.topicId].gradient[0]]} style={styles.cardArt}>
                     <Art name={g.coverArt} size={120} />
                   </LinearGradient>
-                  {isNew ? (
-                    <View style={styles.newBadge}>
-                      <AppText variant="label" color={c.onGold}>
-                        {t('play.new').toUpperCase()}
-                      </AppText>
-                    </View>
-                  ) : null}
                   <View style={styles.cardBody}>
                     <AppText variant="bodyBold" numberOfLines={2}>
                       {title(g)}
@@ -132,8 +131,7 @@ export default function PlayScreen() {
   );
 }
 
-function TopicShelf({ topic, children }: { topic: TopicId; children: ReactNode }) {
-  const { t } = useI18n();
+function TopicShelf({ topic, title, children }: { topic: TopicId; title: string; children: ReactNode }) {
   const { c } = useTheme();
   const styles = useStyles();
   const theme = topicThemes[topic];
@@ -142,7 +140,7 @@ function TopicShelf({ topic, children }: { topic: TopicId; children: ReactNode }
       <LinearGradient colors={theme.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.topicHeader}>
         <Icon name={theme.icon} size={22} color={c.onAccent} />
         <AppText variant="heading" color={c.onAccent} accessibilityRole="header">
-          {t(topicName(topic))}
+          {title}
         </AppText>
       </LinearGradient>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.shelf}>

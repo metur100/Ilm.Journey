@@ -3,8 +3,6 @@ import { type GameDef, type GameFact, registerGame } from '@/core/games';
 import {
   AMANAH,
   AMANAH_SOURCES,
-  DILEMMAS,
-  EVERYDAY,
   FORGIVENESS,
   FORGIVENESS_SOURCES,
   IFTAR,
@@ -43,7 +41,6 @@ export const DEEDS_GAME_ID = 'good-deeds-day';
 
 export const deedsGame: GameDef<DeedsConfig> = {
   id: DEEDS_GAME_ID,
-  challengeCount: EVERYDAY.length + DILEMMAS.length,
   topicId: 'akhlaq',
   i18n: deedsI18n,
   coverArt: 'object.coin-jar',

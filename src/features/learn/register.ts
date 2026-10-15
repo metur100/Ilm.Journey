@@ -23,7 +23,6 @@ import { registerLearnQuests } from './quests/register';
 import { buildTopicPath, nextPathEntry, pathItemHref, startedTopics } from './path';
 import { isMasterPassed } from './services/progression';
 import { masterTarget, startLearnAutoSave, unitTarget, useLearnStore } from './store/learnStore';
-import { SUFARA_CHALLENGE_COUNT } from './sufara/logic';
 
 const topicText = (topic: TopicId): LocalizedText => localizedFrom((lang) => translate(lang, topicName(topic)));
 const masterTitle = (topic: TopicId): LocalizedText =>
@@ -184,7 +183,7 @@ export function registerLearnFeature(): void {
     topic: 'arabic',
     order: 30,
     icon: 'letter',
-    label: (lang) => ({ bs: `Sufara · ${SUFARA_CHALLENGE_COUNT} izazova`, de: `Sufara · ${SUFARA_CHALLENGE_COUNT} Übungen`, en: `Sufara · ${SUFARA_CHALLENGE_COUNT} challenges` })[lang],
+    label: () => 'Sufara',
     description: (lang) => ({
       bs: 'Vježbaj svaki harf, njegove oblike i kratke vokale.',
       de: 'Übe jeden Buchstaben, seine Formen und kurze Vokale.',

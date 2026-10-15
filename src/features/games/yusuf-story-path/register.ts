@@ -3,14 +3,12 @@ import { registerGame, type GameDef, type GameFact } from '@/core/games';
 import { YUSUF_FACTS } from '../yusuf-storehouse/facts';
 import type { YusufPathConfig } from './logic';
 import { YusufStoryPathGame } from './YusufStoryPathGame';
-import { YUSUF_EVENTS } from './content';
 import { yusufStoryI18n } from './i18n';
 
 const storyFact = (id: string, fact: GameFact): GameFact => ({ ...fact, id });
 
 export const yusufStoryPathGame: GameDef<YusufPathConfig> = {
   id: 'yusuf-story-path',
-  challengeCount: YUSUF_EVENTS.length,
   topicId: 'prophets',
   i18n: yusufStoryI18n,
   coverArt: 'garden.stars',

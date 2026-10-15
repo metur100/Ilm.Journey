@@ -54,7 +54,6 @@ describe('Salah Guide', () => {
   it('covers all five prayers and exactly 17 fard rak‘ahs', () => {
     expect(PRAYER_IDS).toEqual(['fajr', 'dhuhr', 'asr', 'maghrib', 'isha']);
     expect(rakahsInGuide(PRAYER_IDS)).toBe(17);
-    expect(salahGuideGame.challengeCount).toBe(17);
   });
 
   it('offers one correct next-posture choice for every movement and final sitting', () => {

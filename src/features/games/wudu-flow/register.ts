@@ -12,7 +12,6 @@ import { WuduFlowGame } from './WuduFlowGame';
  */
 export const wuduFlowGame: GameDef<WuduConfig> = {
   id: 'wudu-flow',
-  challengeCount: 25,
   topicId: 'salah',
   i18n: wuduI18n,
   coverArt: 'body.water-on-hands',

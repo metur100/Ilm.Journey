@@ -91,8 +91,6 @@ export interface GameApi<C = unknown> {
 export interface GameDef<C = unknown> {
   /** kebab-case, unique (e.g. `wudu-flow`). Route: `/game/<id>`, i18n namespace `game.<id>`, XP `game:<id>:<level>`. */
   id: string;
-  /** Total real, playable challenges across all levels, shown on the shelf and game title. */
-  challengeCount: number;
   topicId: TopicId;
   /** Namespace `game.<id>` with at least `title`, `description`, `howTo` (+ the game's own keys). */
   i18n: Namespace<string>;
@@ -107,6 +105,8 @@ export interface GameDef<C = unknown> {
   cards?: CollectionCard[];
   /** Topic area / existing question keys the game practises (radar & recommendations; optional). */
   teaches?: { questionKeys?: string[] };
+  /** Optional sub-shelf (e.g. Sufara) within the topic's Play section. */
+  shelfGroup?: 'sufara';
   /** Shelf order inside the topic (default 0). */
   order?: number;
   /** Development fixture: hidden from the Play tab, game of the day and quests in production builds. */

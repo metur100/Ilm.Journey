@@ -1,7 +1,7 @@
 import { registerGame, type GameDef, type GameFact } from '@/core/games';
 import salahBasics from '@/features/learn/content/salah/salah-basics.json';
 
-import { RAKAHS, SKY_FACTS, type PrayerId } from '../prayer-sky/content';
+import { SKY_FACTS, type PrayerId } from '../prayer-sky/content';
 import { salahGuideI18n } from './i18n';
 import type { SalahGuideConfig } from './logic';
 import { SalahGuideGame } from './SalahGuideGame';
@@ -21,7 +21,6 @@ export const SALAH_GUIDE_ID = 'salah-guide';
 
 export const salahGuideGame: GameDef<SalahGuideConfig> = {
   id: SALAH_GUIDE_ID,
-  challengeCount: Object.values(RAKAHS).reduce((total, count) => total + count, 0),
   topicId: 'salah',
   i18n: salahGuideI18n,
   coverArt: 'object.prayer-mat',
