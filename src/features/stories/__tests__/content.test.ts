@@ -1,7 +1,30 @@
+import { hasArt } from '@/core/art';
+import { isForbiddenStageArt, stageArtNames, validateStage, type StageSpec } from '@/core/components/scene/stage';
 import { LANGUAGES, type LocalizedText } from '@/core/models';
 import { getQuestion, LESSONS, QUESTIONS, SCENES, STORIES } from '@/features/stories/content';
-import { PLACES } from '@/features/stories/content/places';
+import { PROPHET_COUNT, PROPHET_ORDER } from '@/features/stories/content/order';
+import { isMapPlace, PLACES } from '@/features/stories/content/places';
+import { STORY_STAGES } from '@/features/stories/content/stages';
 import { storiesI18n } from '@/features/stories/i18n';
+
+/** "State truths directly" (GAMES-V3 §2): phrasings that are never used in story text. */
+const FORBIDDEN_PHRASES = [
+  /muslims? (believe|think)/i,
+  /for muslims/i,
+  /according to islam/i,
+  /muslime glauben/i,
+  /für muslime/i,
+  /laut (dem )?islam/i,
+  /im islamischen glauben/i,
+  /muslimani vjeruju/i,
+  /za muslimane/i,
+  /prema islamu/i,
+];
+
+const storyStages = (story: (typeof STORIES)[number]): { where: string; stage: StageSpec }[] =>
+  [{ where: `${story.id} cover`, stage: story.coverStage }, ...story.scenes.map((s) => ({ where: s.id, stage: s.stage }))].filter(
+    (x): x is { where: string; stage: StageSpec } => !!x.stage,
+  );
 
 const SCENE_ELEMENTS = new Set([
   'stars', 'crescent', 'fullMoon', 'sun', 'clouds', 'rain', 'mountains', 'hills', 'dunes', 'sea', 'partedSea', 'waves', 'palms', 'garden',
@@ -18,9 +41,17 @@ function localizedTexts(value: unknown, path = ''): { path: string; text: Locali
 }
 
 describe('story content', () => {
-  it('contains the eight prophets in chronological order', () => {
-    expect(STORIES.map((s) => s.id)).toEqual(['adam', 'nuh', 'ibrahim', 'musa', 'yusuf', 'yunus', 'isa', 'muhammad']);
-    expect(STORIES.map((s) => s.order)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+  it('orders the stories uniquely within the 25 prophets (missing stories are fine)', () => {
+    const orders = STORIES.map((s) => s.order);
+    expect(new Set(orders).size).toBe(orders.length);
+    for (const story of STORIES) {
+      expect({ id: story.id, ok: Number.isInteger(story.order) && story.order >= 1 && story.order <= PROPHET_COUNT }).toEqual({ id: story.id, ok: true });
+      if (PROPHET_ORDER[story.id] !== undefined) expect(story.order).toBe(PROPHET_ORDER[story.id]);
+    }
+    expect([...orders].sort((a, b) => a - b)).toEqual(orders);
+    expect(new Set(Object.values(PROPHET_ORDER)).size).toBe(PROPHET_COUNT);
+    // The stories of v2 keep their ids (progress is stored by id).
+    for (const id of ['adam', 'nuh', 'ibrahim', 'musa', 'yusuf', 'yunus', 'isa', 'muhammad']) expect(STORIES.some((s) => s.id === id)).toBe(true);
   });
 
   it('uses unique ids', () => {
@@ -41,7 +72,7 @@ describe('story content', () => {
 
   it('has scenes, lessons and sources for every story', () => {
     for (const story of STORIES) {
-      expect(story.scenes.length).toBe(3);
+      expect(story.scenes.length).toBeGreaterThanOrEqual(3);
       expect(story.lessons.length).toBeGreaterThanOrEqual(2);
       expect(story.sources.length).toBeGreaterThan(0);
       for (const lesson of story.lessons) {
@@ -107,6 +138,39 @@ describe('story content', () => {
       }
       if (q.type === 'ordering') expect(q.items.length).toBeGreaterThanOrEqual(4);
       if (q.type === 'memory' || q.type === 'matching') expect(q.pairs.length).toBeGreaterThanOrEqual(3);
+    }
+  });
+
+  it('never says "Muslims believe" – truths are stated directly (all languages)', () => {
+    for (const story of STORIES) {
+      for (const { path, text } of localizedTexts(story)) {
+        for (const lang of LANGUAGES) {
+          const hit = FORBIDDEN_PHRASES.find((re) => re.test(text[lang] ?? ''));
+          expect({ story: story.id, path, lang, phrase: hit?.source ?? null }).toEqual({ story: story.id, path, lang, phrase: null });
+        }
+      }
+    }
+  });
+
+  it('uses only existing art in stages and symbols – and never people', () => {
+    for (const story of STORIES) {
+      const names = [...(story.symbolArt ? [story.symbolArt] : []), ...storyStages(story).flatMap(({ stage }) => stageArtNames(stage))];
+      for (const name of names) {
+        expect({ story: story.id, name, exists: hasArt(name), person: isForbiddenStageArt(name) }).toEqual({ story: story.id, name, exists: true, person: false });
+      }
+      for (const { where, stage } of storyStages(story)) expect({ where, problems: validateStage(stage) }).toEqual({ where, problems: [] });
+    }
+  });
+
+  it('puts stories only on known map places', () => {
+    for (const story of STORIES) for (const place of story.mapPlaces ?? []) expect({ story: story.id, place, ok: isMapPlace(place) }).toEqual({ story: story.id, place, ok: true });
+  });
+
+  it('keeps the stage overlay in step with the stories', () => {
+    for (const [id, overlay] of Object.entries(STORY_STAGES)) {
+      const story = STORIES.find((s) => s.id === id);
+      if (!story) continue;
+      for (const sceneId of Object.keys(overlay.scenes ?? {})) expect({ id, sceneId, ok: story.scenes.some((s) => s.id === sceneId) }).toEqual({ id, sceneId, ok: true });
     }
   });
 

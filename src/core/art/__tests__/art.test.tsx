@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, create, type ReactTestRenderer } from 'react-test-renderer';
 
-import { ArabicLetterCard, Art, artAspect, artNames, catalogue, hasArt, HIJAZ_POINTS, projectWorld, SKY_SUN, svgString } from '../index';
+import { ArabicLetterCard, Art, artAspect, artCategories, artNames, catalogue, hasArt, HIJAZ_POINTS, projectWorld, SKY_SUN, svgString } from '../index';
 
 /** Names other features rely on (docs/GAMES.md art library brief). */
 const REQUIRED: Record<string, string[]> = {
@@ -18,7 +18,8 @@ const REQUIRED: Record<string, string[]> = {
   pattern: ['star-tile', 'arabesque-border', 'mashrabiya', 'geometric-bg'],
 };
 
-const NAME = /^(garden|place|object|animal|body|pose|food|sky|scene|ui|pattern)\.[a-z0-9]+(-[a-z0-9]+)*$/;
+/** `<category>.<kebab-name>` for every registered category (the v3 section files add their own categories). */
+const NAME = new RegExp(`^(${artCategories.join('|')})\\.[a-z0-9]+(-[a-z0-9]+)*$`);
 
 function render(el: React.ReactElement): ReactTestRenderer {
   let r: ReactTestRenderer | undefined;

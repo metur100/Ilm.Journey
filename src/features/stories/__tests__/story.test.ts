@@ -122,12 +122,13 @@ describe('metrics and map data', () => {
     expect(storiesMetrics({ ...EMPTY_STORIES, learnedLessons: sabr.slice(0, 1) }, STORIES)['stories.sabrLessonsLearned']).toBe(0);
   });
 
-  it('places the stories on the map by their map questions', () => {
+  it('places the stories on the map by their map places and map questions, in story order', () => {
     const byPlace = storiesByPlace(STORIES);
     expect(byPlace.judi?.map((s) => s.id)).toEqual(['nuh']);
-    expect(byPlace.egypt?.map((s) => s.id)).toEqual(['musa', 'yusuf']);
-    expect(byPlace.makkah?.map((s) => s.id)).toEqual(['ibrahim']);
+    expect(byPlace.egypt?.map((s) => s.id)).toEqual(['yusuf', 'musa']);
+    expect(byPlace.makkah?.map((s) => s.id)).toEqual(['ibrahim', 'muhammad']);
     expect(byPlace.madinah?.map((s) => s.id)).toEqual(['muhammad']);
+    expect(byPlace.nineveh?.map((s) => s.id)).toEqual(['yunus']);
   });
 
   it('rotates the featured story', () => {

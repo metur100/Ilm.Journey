@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 
-import { SceneView } from '@/core/components/scene/SceneView';
+import type { StageSpec } from '@/core/components/scene/stage';
+import { StoryStage } from '@/core/components/scene/StoryStage';
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
 import { Icon } from '@/core/components/ui/Icon';
@@ -29,19 +30,21 @@ interface StoryPageProps {
   title?: LocalizedText;
   body: LocalizedText;
   scene: SceneSpec;
+  /** Animated illustration (falls back to an animated `scene`). */
+  stage?: StageSpec;
   sources?: SourceRef[];
   large?: boolean;
 }
 
-/** A story page: symbolic illustration (never a depiction of a prophet) and narration text. */
-export function StoryPage({ label, title, body, scene, sources, large }: StoryPageProps) {
+/** A story page: animated illustration (never a depiction of a prophet) and narration text. */
+export function StoryPage({ label, title, body, scene, stage, sources, large }: StoryPageProps) {
   const { t, l, language } = useStoriesI18n();
   const { c } = useTheme();
   const styles = useStyles();
   const narration = useAppStore((s) => s.settings.narration);
   return (
     <View style={styles.root}>
-      <SceneView scene={scene} height={large ? 240 : 200} />
+      <StoryStage stage={stage} scene={scene} height={large ? 250 : 220} />
       <View style={styles.page}>
         <AppText variant="label" color={c.goldText}>
           {label.toUpperCase()}

@@ -227,7 +227,7 @@ function StoryPlayer({ story }: { story: Story }) {
       case 'intro':
         return (
           <>
-            <StoryPage label={t('player.intro')} title={story.title} body={story.intro} scene={story.cover} sources={story.sources} large />
+            <StoryPage key="intro" label={t('player.intro')} title={story.title} body={story.intro} scene={story.cover} stage={story.coverStage} sources={story.sources} large />
             <Button label={t('common.start')} iconRight="chevron" fullWidth onPress={() => advance()} />
           </>
         );
@@ -236,7 +236,7 @@ function StoryPlayer({ story }: { story: Story }) {
         if (!scene) return <Button label={t('common.continue')} onPress={() => advance()} />;
         return (
           <>
-            <StoryPage label={t('player.scene', { number: sceneNumber(scene.id) })} title={scene.title} body={scene.text} scene={scene.scene} sources={scene.sources} />
+            <StoryPage key={scene.id} label={t('player.scene', { number: sceneNumber(scene.id) })} title={scene.title} body={scene.text} scene={scene.scene} stage={scene.stage} sources={scene.sources} />
             <Button label={t('common.continue')} iconRight="chevron" fullWidth onPress={() => advance()} />
           </>
         );

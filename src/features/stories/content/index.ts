@@ -4,6 +4,8 @@ import type { Story, StoryLesson, StoryScene } from '../models';
 import { GROUP_A } from './prophets/groupA';
 import { GROUP_B } from './prophets/groupB';
 import { GROUP_C } from './prophets/groupC';
+import { PROPHET_ORDER } from './order';
+import { STORY_STAGES } from './stages';
 
 /** Question key prefix of the stories feature (`stories:<questionId>`). */
 export const STORIES_PREFIX = 'stories';
@@ -12,12 +14,20 @@ export const storiesKey = (questionId: string) => questionKey(STORIES_PREFIX, qu
 /**
  * The JSON files are copied unchanged from story-of-the-prophets. At load time every question is
  * tagged with the learning topic (`areaId: 'prophets'`); questions without their own references
- * (values-based lesson choices, memory games) show the story's Quran references.
+ * (values-based lesson choices, memory games) show the story's Quran references. Stages, symbol art and map
+ * places missing in the JSON come from the overlay `stages.ts` (docs/STORIES-V3.md §5); the order comes from the
+ * canonical table `order.ts`.
  */
 function prepare(raw: unknown): Story {
   const story = raw as Story;
+  const overlay = STORY_STAGES[story.id];
   return {
     ...story,
+    order: PROPHET_ORDER[story.id] ?? story.order,
+    coverStage: story.coverStage ?? overlay?.cover,
+    symbolArt: story.symbolArt ?? overlay?.symbolArt,
+    mapPlaces: story.mapPlaces ?? overlay?.mapPlaces,
+    scenes: story.scenes.map((scene) => ({ ...scene, stage: scene.stage ?? overlay?.scenes?.[scene.id] })),
     questions: story.questions.map((q) => ({
       ...q,
       storyId: story.id,

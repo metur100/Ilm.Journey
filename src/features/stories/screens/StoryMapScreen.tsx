@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 
-import { SceneView } from '@/core/components/scene/SceneView';
+import { hasArt } from '@/core/art';
+import { StoryStage } from '@/core/components/scene/StoryStage';
 import { AppText } from '@/core/components/ui/AppText';
 import { Card } from '@/core/components/ui/Card';
 import { HeroHeader } from '@/core/components/ui/HeroHeader';
@@ -87,7 +88,7 @@ const useStyles = makeStyles((c) => ({
   cardBody: { padding: spacing.md, gap: 2 },
 }));
 
-/** Story map: the places of the stories on a simple map and the timeline of the prophets. Never a person. */
+/** Story map: the places of the 25 prophets' stories on a simple map and the timeline of the prophets. Never a person. */
 export default function StoryMapScreen() {
   const { t, l } = useStoriesI18n();
   const { c } = useTheme();
@@ -184,7 +185,18 @@ export default function StoryMapScreen() {
                     .join('. ')}
                   style={({ pressed }) => [styles.card, locked && styles.cardLocked, pressed && styles.pressed]}
                 >
-                  <SceneView scene={{ sky: story.cover.sky, elements: [story.symbol] }} height={96} rounded={false} style={locked ? styles.dim : undefined} />
+                  <StoryStage
+                    still
+                    height={96}
+                    rounded={false}
+                    style={locked ? styles.dim : undefined}
+                    scene={{ sky: story.cover.sky, elements: [story.symbol] }}
+                    stage={
+                      story.symbolArt && hasArt(story.symbolArt)
+                        ? { sky: story.cover.sky, vignette: false, layers: [{ art: story.symbolArt, x: 200, y: 150, w: 110, anchor: 'center' }] }
+                        : undefined
+                    }
+                  />
                   <View style={styles.cardBody}>
                     <ProphetName story={story} variant="bodyBold" />
                     <AppText variant="small" color={c.goldText}>

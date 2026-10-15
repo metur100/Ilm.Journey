@@ -1,7 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 
-import { SceneView } from '@/core/components/scene/SceneView';
+import { StoryStage } from '@/core/components/scene/StoryStage';
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
 import { Card } from '@/core/components/ui/Card';
@@ -68,7 +68,7 @@ export default function StoryScreen() {
         <View style={styles.topBar}>
           <TopBar dark />
         </View>
-        <SceneView scene={story.cover} height={200} />
+        <StoryStage stage={story.coverStage} scene={story.cover} height={210} />
         <ProphetName story={story} variant="title" dark />
         <AppText variant="heading" color={c.gold} accessibilityRole="header">
           {l(story.title)}

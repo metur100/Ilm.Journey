@@ -17,6 +17,7 @@ import { quran } from './pieces/sections/quran';
 import { ramadan } from './pieces/sections/ramadan';
 import { salah } from './pieces/sections/salah';
 import { seerah } from './pieces/sections/seerah';
+import { story } from './pieces/sections/story';
 
 /** All art definitions by category; the full name of a piece is `<category>.<key>`. */
 export const categories = {
@@ -41,6 +42,8 @@ export const categories = {
   ramadan,
   history,
   kit,
+  // Generic story backdrops for the animated story / Seerah stages (story-fx author, docs/STORIES-V3.md).
+  story,
 };
 
 export type ArtCategory = keyof typeof categories;

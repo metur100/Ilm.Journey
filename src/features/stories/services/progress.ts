@@ -46,15 +46,17 @@ export function featuredStoryFor(day: DayKey, stories: readonly Story[]): Story 
   return stories[((n % stories.length) + stories.length) % stories.length];
 }
 
-/** Stories whose map question points at a place (used to label the story map). */
+/** Stories of each map place: the story's `mapPlaces` plus the places its map questions point at. */
 export function storiesByPlace(stories: readonly Story[]): Partial<Record<MapPlaceId, Story[]>> {
   const result: Partial<Record<MapPlaceId, Story[]>> = {};
-  for (const story of stories) {
-    for (const q of story.questions) {
-      if (q.type !== 'map' || !isMapPlace(q.correctPlace)) continue;
-      const list = (result[q.correctPlace] ??= []);
-      if (!list.includes(story)) list.push(story);
-    }
+  const add = (place: string, story: Story) => {
+    if (!isMapPlace(place)) return;
+    const list = (result[place] ??= []);
+    if (!list.includes(story)) list.push(story);
+  };
+  for (const story of [...stories].sort((a, b) => a.order - b.order)) {
+    for (const place of story.mapPlaces ?? []) add(place, story);
+    for (const q of story.questions) if (q.type === 'map') add(q.correctPlace, story);
   }
   return result;
 }
