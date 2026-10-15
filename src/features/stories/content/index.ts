@@ -1,14 +1,9 @@
 import { questionKey, type Question } from '@/core/models';
 
 import type { Story, StoryLesson, StoryScene } from '../models';
-import adam from './prophets/adam.json';
-import ibrahim from './prophets/ibrahim.json';
-import isa from './prophets/isa.json';
-import muhammad from './prophets/muhammad.json';
-import musa from './prophets/musa.json';
-import nuh from './prophets/nuh.json';
-import yunus from './prophets/yunus.json';
-import yusuf from './prophets/yusuf.json';
+import { GROUP_A } from './prophets/groupA';
+import { GROUP_B } from './prophets/groupB';
+import { GROUP_C } from './prophets/groupC';
 
 /** Question key prefix of the stories feature (`stories:<questionId>`). */
 export const STORIES_PREFIX = 'stories';
@@ -33,7 +28,7 @@ function prepare(raw: unknown): Story {
 }
 
 // JSON imports are widened by TypeScript; the content test suite verifies the shape.
-export const STORIES: readonly Story[] = [adam, nuh, ibrahim, musa, yusuf, yunus, isa, muhammad].map(prepare).sort((a, b) => a.order - b.order);
+export const STORIES: readonly Story[] = [...GROUP_A, ...GROUP_B, ...GROUP_C].map(prepare).sort((a, b) => a.order - b.order);
 
 export const QUESTIONS: readonly Question[] = STORIES.flatMap((s) => s.questions);
 export const LESSONS: readonly StoryLesson[] = STORIES.flatMap((s) => s.lessons);

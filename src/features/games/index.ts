@@ -9,6 +9,17 @@ import { registerPrayerSkyGame } from './prayer-sky/register';
 import { registerRamadanJourneyGame } from './ramadan-journey/register';
 import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSalahGuideGame } from './salah-guide/register';
+import { registerSalahPrayersGames } from './sections/salah-prayers';
+import { registerSalahGames } from './sections/salah';
+import { registerQuranGames } from './sections/quran';
+import { registerArabicGames } from './sections/arabic';
+import { registerProphetsAGames } from './sections/prophets-a';
+import { registerProphetsBGames } from './sections/prophets-b';
+import { registerProphetsCGames } from './sections/prophets-c';
+import { registerSeerahGames } from './sections/seerah';
+import { registerAkhlaqGames } from './sections/akhlaq';
+import { registerRamadanGames } from './sections/ramadan';
+import { registerHistoryGames } from './sections/history';
 import { registerTopicArcadeGames } from './topic-arcade';
 import { registerWordBuilderGame } from './word-builder/register';
 import { registerWuduFlowGame } from './wudu-flow/register';
@@ -35,4 +46,16 @@ export function registerGames(): void {
   registerLetterLanternsGame();
   registerWordBuilderGame();
   registerTopicArcadeGames();
+  // v3 sections (docs/GAMES-V3.md)
+  registerSalahPrayersGames();
+  registerSalahGames();
+  registerQuranGames();
+  registerArabicGames();
+  registerProphetsAGames();
+  registerProphetsBGames();
+  registerProphetsCGames();
+  registerSeerahGames();
+  registerAkhlaqGames();
+  registerRamadanGames();
+  registerHistoryGames();
 }

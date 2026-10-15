@@ -8,6 +8,15 @@ import { pattern } from './pieces/patterns';
 import { place } from './pieces/places';
 import { scene, sky } from './pieces/sky';
 import { ui } from './pieces/ui';
+import { akhlaq } from './pieces/sections/akhlaq';
+import { arabic } from './pieces/sections/arabic';
+import { history } from './pieces/sections/history';
+import { kit } from './pieces/sections/kit';
+import { prophet } from './pieces/sections/prophet';
+import { quran } from './pieces/sections/quran';
+import { ramadan } from './pieces/sections/ramadan';
+import { salah } from './pieces/sections/salah';
+import { seerah } from './pieces/sections/seerah';
 
 /** All art definitions by category; the full name of a piece is `<category>.<key>`. */
 export const categories = {
@@ -22,6 +31,16 @@ export const categories = {
   scene,
   ui,
   pattern,
+  // Section art (v3): one file per section, see docs/GAMES-V3.md.
+  salah,
+  quran,
+  arabic,
+  prophet,
+  seerah,
+  akhlaq,
+  ramadan,
+  history,
+  kit,
 };
 
 export type ArtCategory = keyof typeof categories;
