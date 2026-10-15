@@ -23,6 +23,7 @@ import { registerLearnQuests } from './quests/register';
 import { buildTopicPath, nextPathEntry, pathItemHref, startedTopics } from './path';
 import { isMasterPassed } from './services/progression';
 import { masterTarget, startLearnAutoSave, unitTarget, useLearnStore } from './store/learnStore';
+import { SUFARA_CHALLENGE_COUNT } from './sufara/logic';
 
 const topicText = (topic: TopicId): LocalizedText => localizedFrom((lang) => translate(lang, topicName(topic)));
 const masterTitle = (topic: TopicId): LocalizedText =>
@@ -178,6 +179,19 @@ export function registerLearnFeature(): void {
     description: (lang) => translateNs(learnI18n, lang, 'tool.seerahDesc'),
     href: { pathname: '/(tabs)/stories', params: { segment: 'seerah' } },
   });
+  registerTopicTool({
+    id: 'arabic-sufara',
+    topic: 'arabic',
+    order: 30,
+    icon: 'letter',
+    label: (lang) => ({ bs: `Sufara · ${SUFARA_CHALLENGE_COUNT} izazova`, de: `Sufara · ${SUFARA_CHALLENGE_COUNT} Übungen`, en: `Sufara · ${SUFARA_CHALLENGE_COUNT} challenges` })[lang],
+    description: (lang) => ({
+      bs: 'Vježbaj svaki harf, njegove oblike i kratke vokale.',
+      de: 'Übe jeden Buchstaben, seine Formen und kurze Vokale.',
+      en: 'Practise every letter, its word forms and short vowels.',
+    })[lang],
+    href: '/sufara',
+  });
 
   // v2 game linked from topic pages ("A Day of Good Deeds" – its level 3 is a Ramadan day). Texts come from the game.
   const gameText = (id: string, lang: Language, key: 'title' | 'description') => {
@@ -185,17 +199,33 @@ export function registerLearnFeature(): void {
     // Until the game registers (games register after the features), the label falls back to the core "Play".
     return game ? translateNs(game.i18n, lang, key) : key === 'title' ? translate(lang, 'play.title') : '';
   };
-  for (const topic of ['akhlaq', 'ramadan'] as const) {
-    registerTopicTool({
-      id: `game-good-deeds-day-${topic}`,
-      topic,
-      order: 40,
-      icon: 'play',
-      label: (lang) => gameText('good-deeds-day', lang, 'title'),
-      description: (lang) => gameText('good-deeds-day', lang, 'description'),
-      href: { pathname: '/game/[id]', params: { id: 'good-deeds-day' } },
-    });
-  }
+  registerTopicTool({
+    id: 'game-good-deeds-day-akhlaq',
+    topic: 'akhlaq',
+    order: 40,
+    icon: 'play',
+    label: (lang) => gameText('good-deeds-day', lang, 'title'),
+    description: (lang) => gameText('good-deeds-day', lang, 'description'),
+    href: { pathname: '/game/[id]', params: { id: 'good-deeds-day' } },
+  });
+  registerTopicTool({
+    id: 'game-salah-guide',
+    topic: 'salah',
+    order: 40,
+    icon: 'play',
+    label: (lang) => gameText('salah-guide', lang, 'title'),
+    description: (lang) => gameText('salah-guide', lang, 'description'),
+    href: { pathname: '/game/[id]', params: { id: 'salah-guide' } },
+  });
+  registerTopicTool({
+    id: 'game-ramadan-journey',
+    topic: 'ramadan',
+    order: 40,
+    icon: 'play',
+    label: (lang) => gameText('ramadan-journey', lang, 'title'),
+    description: (lang) => gameText('ramadan-journey', lang, 'description'),
+    href: { pathname: '/game/[id]', params: { id: 'ramadan-journey' } },
+  });
 
   // islam-quest beginner quests and topic tools (owned by the islam-quest port).
   registerLearnQuests();

@@ -23,6 +23,7 @@ const en = {
   // ---------- game shell ----------
   'games.notFound': 'This game is not available.',
   'games.topic': '{topic} game',
+  'games.challengeCount': '{count} challenges',
   'games.letsPlay': 'Let’s play',
   'games.chooseLevel': 'Choose a level',
   'games.howToTitle': 'How to play',
@@ -175,6 +176,7 @@ const de: Record<Key, string> = {
 
   'games.notFound': 'Dieses Spiel ist nicht verfügbar.',
   'games.topic': 'Spiel: {topic}',
+  'games.challengeCount': '{count} Herausforderungen',
   'games.letsPlay': 'Los geht’s',
   'games.chooseLevel': 'Wähle ein Level',
   'games.howToTitle': 'So wird gespielt',
@@ -321,6 +323,7 @@ const bs: Record<Key, string> = {
 
   'games.notFound': 'Ova igra nije dostupna.',
   'games.topic': 'Igra: {topic}',
+  'games.challengeCount': '{count} izazova',
   'games.letsPlay': 'Igrajmo',
   'games.chooseLevel': 'Izaberi nivo',
   'games.howToTitle': 'Kako se igra',

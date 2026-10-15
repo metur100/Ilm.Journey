@@ -20,6 +20,7 @@ const LazyYusufStorehouseGame: ComponentType<GameApi<StorehouseConfig>> = (props
 
 export const yusufGame: GameDef<StorehouseConfig> = {
   id: YUSUF_GAME_ID,
+  challengeCount: 14,
   topicId: 'prophets',
   i18n: yusufI18n,
   coverArt: 'object.storehouse',

@@ -23,6 +23,7 @@ export const LETTER_LANTERNS_ART = ['object.lantern-ramadan', 'garden.stars', 'g
 
 export const letterLanternsGame: GameDef<LetterLanternsConfig> = {
   id: LETTER_LANTERNS_ID,
+  challengeCount: 24,
   topicId: 'arabic',
   i18n: letterLanternsI18n,
   coverArt: 'object.lantern-ramadan',

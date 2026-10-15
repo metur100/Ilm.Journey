@@ -15,7 +15,7 @@ import { makeStyles, radius, shadows, spacing, useTheme } from '@/core/theme';
 
 import { DAYS, type DayId, FASTING_NOTE, GOOD_DEEDS, type GoodDeedId, type Scene, type Step, WHO_FASTS, WHO_FASTS_SOURCES } from './content';
 import { Draggable } from './Draggable';
-import { advance, answerChoice, dayResult, deedsDone, isSunset, NEW_SCENE, type SceneState, stepDone, sunAt, sunProgress, toggleDeed } from './logic';
+import { advance, answerChoice, dayResult, deedsDone, isSunset, NEW_SCENE, targetInFrontOfHero, type SceneState, stepDone, sunAt, sunProgress, toggleDeed } from './logic';
 
 export interface DeedsConfig {
   day: DayId;
@@ -30,6 +30,7 @@ const useStyles = makeStyles((c) => ({
   flex: { flex: 1 },
   stage: { borderRadius: radius.lg, overflow: 'hidden', alignSelf: 'center' },
   abs: { position: 'absolute' },
+  targetPreview: { opacity: 0.4 },
   sun: { position: 'absolute', backgroundColor: c.gold, borderWidth: 4, borderColor: c.goldBorder },
   badge: { position: 'absolute', minWidth: 26, height: 26, borderRadius: 13, backgroundColor: c.gold, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 6 },
   controls: { gap: spacing.sm, paddingBottom: spacing.sm },
@@ -126,13 +127,13 @@ export function GoodDeedsDayGame({ config, onComplete, playSound, haptic, reduce
     if (step?.kind !== 'choice' || tried.includes(i)) return;
     const option = step.choice.options[i];
     if (answerChoice(step.choice, i) === 'good') {
-      setFeedback({ good: true, text: l(option.feedback) });
+      setFeedback({ good: true, text: l(option.feedback ?? step.choice.explanation) });
       haptic('success');
       nextStep(state);
       return;
     }
     setTried([...tried, i]);
-    setFeedback({ good: false, text: `${l(option.feedback)} ${t('play.tryAgain')}` });
+    setFeedback({ good: false, text: `${l(option.feedback ?? step.choice.explanation)} ${t('play.tryAgain')}` });
     haptic('warning');
     if (!state.retried) {
       setState({ ...state, retried: true });
@@ -177,7 +178,16 @@ export function GoodDeedsDayGame({ config, onComplete, playSound, haptic, reduce
   const hero = { x: SW * 0.04, y: H - heroS * 1.1 - H * 0.03, w: heroS, h: heroS * 1.1 };
   const targetS = H * 0.36;
   const targetArt = step?.kind === 'drag' || step?.kind === 'tap' ? step.target : null;
-  const targetBox = targetArt === 'hero' ? hero : { x: SW - targetS - SW * 0.04, y: H - targetS - H * 0.06, w: targetS, h: targetS };
+  const targetPreview =
+    targetArt === 'hero' && step?.kind === 'drag'
+      ? step.items.includes('object.prayer-mat')
+        ? 'object.prayer-mat'
+        : 'object.plate'
+      : targetArt;
+  const targetBox =
+    targetArt === 'hero'
+      ? targetInFrontOfHero(SW, H, targetS, hero)
+      : { x: SW - targetS - SW * 0.04, y: H - targetS - H * 0.06, w: targetS, h: targetS };
   const itemS = H * 0.24;
   const sky = step?.kind === 'sun' ? 'sky.afternoon' : `sky.${scene.time}`;
   const sun = sunAt(sunT);
@@ -319,7 +329,13 @@ export function GoodDeedsDayGame({ config, onComplete, playSound, haptic, reduce
           ) : null}
 
           {scene.decor && !targetArt ? <Art name={scene.decor} size={H * 0.3} style={[styles.abs, { left: SW * 0.62, top: H * 0.48 }]} /> : null}
-          {targetArt && targetArt !== 'hero' ? <Art name={targetArt} size={targetS} style={[styles.abs, { left: targetBox.x, top: targetBox.y }]} /> : null}
+          {targetPreview ? (
+            <Art
+              name={targetPreview}
+              size={targetS}
+              style={[styles.abs, { left: targetBox.x, top: targetBox.y }, targetArt === 'hero' && styles.targetPreview]}
+            />
+          ) : null}
 
           <View style={[styles.abs, { left: hero.x, top: hero.y }]} pointerEvents="none">
             <Avatar character={character} size={heroS} />

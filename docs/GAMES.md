@@ -59,22 +59,28 @@ intro → how to play (1 animated hint) → play → result (stars, best, XP onc
 fact wrong. Gestures via react-native's PanResponder/Animated or react-native-gesture-handler + reanimated (add via
 `npx expo install` if needed; keep Hermes/new-arch compatible).
 
-## Game catalogue v2 (12 games)
+## Game catalogue
 
-| # | Topic | Game | What you do | What you learn (sources from existing content) |
-| --- | --- | --- | --- | --- |
-| 1 | Salah | **Wudu Flow** | drag water to the body-part icons in order; L2 sort fard/sunnah; L3 fix a mixed-up sequence | steps of wudu (5:6), scholars-differ notes |
-| 2 | Salah | **Prayer Sky** | drag the sun across the sky to each prayer's moment; then stack rakʿah blocks per prayer | 5 prayers, their times, rakʿah counts |
-| 3 | Salah | **Find the Qibla** | rotate a compass on illustrated maps (Düsseldorf, Sarajevo, London, Jakarta …) to face the Kaaba | qibla (2:144), direction differs by place |
-| 4 | Quran | **Ayah Builder** | drag word tiles to rebuild ayahs of memorised surahs; Listen button; hint glow | Juz ʿAmma surahs (generated text only) |
-| 5 | Quran | **Surah Garden** | match surah cards (name ↔ meaning ↔ ayah count) to grow flowers | surah names/meanings |
-| 6 | Arabic | **Letter Lanterns** | lanterns with letters float up; light the one you hear (TTS) / see in another form | letters, forms, harakat |
-| 7 | Arabic | **Word Builder** | connect letters into a word; the word's picture appears | vocabulary from arabic content |
-| 8 | Prophets | **Ark of Nuh** | find matching pairs of animals and lead them onto the ark | "two of every kind" (11:40) |
-| 9 | Prophets | **Yusuf's Storehouse** | plan grain over 7 good + 7 hard years by moving sacks into the storehouse | 12:47–49 planning & trust |
-| 10 | Seerah | **Hijrah Path** | trace the route Makkah → Cave Thawr → Madinah, stop at checkpoints to reveal events | Hijrah facts (sira content) |
-| 11 | Seerah | **Build the Masjid** | assemble Masjid an-Nabawi: palm-trunk pillars, palm-leaf roof, suffa, qibla change | sira episode 6 facts |
-| 12 | Akhlaq/Ramadan | **A Day of Good Deeds** | an illustrated day (dawn → night): choose actions in little scenes; each good deed plants something; Ramadan variant with suhoor/iftar timing | akhlaq & ramadan lessons |
+The Play shelf currently registers 14 games. Every entry exposes at least 10 playable challenge units; the count shown in the app is not a level count.
+
+| # | Topic | Game | Challenges | What you do |
+| --- | --- | --- | ---: | --- |
+| 1 | Prophets | **Ark of Nuh** | 18 | Match animal pairs and guide them to the ark. |
+| 2 | Prophets | **Yusuf Story Trail** | 10 | Put ten sourced events from Yusuf’s story in sequence. |
+| 3 | Seerah | **Hijrah Path** | 20 | Follow the route and order sourced Hijrah events. |
+| 4 | Seerah | **Build the Masjid** | 12 | Assemble the described early mosque features and practise the qibla change; no undocumented roof or pillar details are presented. |
+| 5 | Akhlaq | **A Day of Good Deeds** | 16 | Complete everyday actions and sourced character dilemmas; choices give gentle feedback. |
+| 6 | Ramadan | **Ramadan Journey** | 10 | Play ten scenes covering suhoor, fasting, safe practice, iftar, Ramadan nights, and Eid preparation. |
+| 7 | Salah | **Wudu Flow** | 25 | Practise the steps, distinguish Quran-named parts from common Sunnah steps, and repair a sequence. |
+| 8 | Salah | **Prayer Sky** | 20 | Match prayer times and obligatory rak‘ahs, then order the day. |
+| 9 | Salah | **Salah Guide** | 17 | Practise the five prayers’ 17 fard rak‘ahs, including opening takbir, common postures, final sitting, and closing salam. |
+| 10 | Salah | **Find the Qibla** | 14 | Turn the compass toward the Kaaba from cities around the world. |
+| 11 | Quran | **Ayah Builder** | 13 | Rebuild short Quran passages with word tiles and optional recitation. |
+| 12 | Quran | **Surah Garden** | 18 | Match surah names, meanings, ayah counts, and openings. |
+| 13 | Arabic | **Letter Lanterns** | 24 | Identify isolated letters, connected forms, and harakat. |
+| 14 | Arabic | **Word Builder** | 12 | Build Arabic vocabulary from letter tiles. |
+
+Ramadan Journey uses the authored Ramadan Learn questions and sources. Sufara is a separate Arabic learning path: 28 letters with four recognition and vowel exercises per letter (112 exercises), linked from the Arabic topic.
 
 Existing question types stay for units/master challenges and review, but are visually upgraded (illustrated
 options, card flips, drag feedback).

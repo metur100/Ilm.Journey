@@ -6,10 +6,12 @@ import { registerGoodDeedsDayGame } from './good-deeds-day/register';
 import { registerHijrahPathGame } from './hijrah-path/register';
 import { registerLetterLanternsGame } from './letter-lanterns/register';
 import { registerPrayerSkyGame } from './prayer-sky/register';
+import { registerRamadanJourneyGame } from './ramadan-journey/register';
 import { registerSurahGardenGame } from './surah-garden/register';
+import { registerSalahGuideGame } from './salah-guide/register';
 import { registerWordBuilderGame } from './word-builder/register';
 import { registerWuduFlowGame } from './wudu-flow/register';
-import { registerYusufStorehouseGame } from './yusuf-storehouse/register';
+import { registerYusufStoryPathGame } from './yusuf-story-path/register';
 
 /**
  * The v2 mini-games. Each game lives in `src/features/games/<id>/` and exports a `register<Name>Game()` that calls
@@ -18,12 +20,14 @@ import { registerYusufStorehouseGame } from './yusuf-storehouse/register';
 export function registerGames(): void {
   // e.g. registerWuduFlowGame();
   registerArkOfNuhGame();
-  registerYusufStorehouseGame();
+  registerYusufStoryPathGame();
   registerHijrahPathGame();
   registerBuildTheMasjidGame();
   registerGoodDeedsDayGame();
+  registerRamadanJourneyGame();
   registerWuduFlowGame();
   registerPrayerSkyGame();
+  registerSalahGuideGame();
   registerFindQiblaGame();
   registerAyahBuilderGame();
   registerSurahGardenGame();

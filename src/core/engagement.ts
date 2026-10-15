@@ -1,5 +1,4 @@
 import { registerCollectionCore } from './collection/store';
-import { registerDemoGame } from './games/demo/register';
 import { gameAchievements } from './games/progress';
 import { factQuestion, findFact, gameOfTheDay, gameTarget, gameTitle, getGame } from './games/registry';
 import { startGamesAutoSave, useGamesStore } from './games/store';
@@ -10,7 +9,7 @@ import { topicThemes } from './theme/topics';
 /**
  * Registers the core v2 engagement systems with the registry: the games and garden stores (hydrate / reset /
  * auto-save), game fact review questions (`game:<gameId>:<factId>`), game achievements for the collection album,
- * "play today's game" quests and the demo game fixture. Called once from `registerFeatures()` before hydration.
+ * and "play today's game" quests. Development fixtures are registered only by tests.
  */
 export function registerEngagement(): void {
   registerLifecycle('games', {
@@ -50,6 +49,4 @@ export function registerEngagement(): void {
     const game = gameOfTheDay(day);
     return game ? [{ id: `game-${game.id}`, kind: 'game', target: gameTarget(game.id), title: gameTitle(game), topicArea: game.topicId, priority: 6 }] : [];
   });
-
-  registerDemoGame();
 }

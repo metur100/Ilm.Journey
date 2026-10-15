@@ -91,6 +91,8 @@ export interface GameApi<C = unknown> {
 export interface GameDef<C = unknown> {
   /** kebab-case, unique (e.g. `wudu-flow`). Route: `/game/<id>`, i18n namespace `game.<id>`, XP `game:<id>:<level>`. */
   id: string;
+  /** Total real, playable challenges across all levels, shown on the shelf and game title. */
+  challengeCount: number;
   topicId: TopicId;
   /** Namespace `game.<id>` with at least `title`, `description`, `howTo` (+ the game's own keys). */
   i18n: Namespace<string>;

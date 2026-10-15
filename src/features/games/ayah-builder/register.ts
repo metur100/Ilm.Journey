@@ -33,6 +33,7 @@ export const AYAH_BUILDER_ART = ['object.quran-stand', 'object.book', 'ui.sparkl
 
 export const ayahBuilderGame: GameDef<AyahBuilderConfig> = {
   id: AYAH_BUILDER_ID,
+  challengeCount: 13,
   topicId: 'quran',
   i18n: ayahBuilderI18n,
   coverArt: 'object.quran-stand',

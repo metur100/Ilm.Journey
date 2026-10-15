@@ -1,6 +1,7 @@
-import { type AudioPlayer, createAudioPlayer, setAudioModeAsync } from 'expo-audio';
+import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useState } from 'react';
 
+import { configureAudioSession } from '@/core/services/audioSession';
 import { audioUrlForAyah } from '@/features/quran';
 
 /**
@@ -14,25 +15,16 @@ export const STREAM_TIMEOUT_MS = 8000;
 
 let player: AudioPlayer | null = null;
 let currentAyah: number | null = null;
-let configured = false;
+let streamTimeout: ReturnType<typeof setTimeout> | null = null;
 const listeners = new Set<() => void>();
 
 function notify() {
   for (const listener of listeners) listener();
 }
 
-async function configure() {
-  if (configured) return;
-  configured = true;
-  try {
-    // Recitation is deliberately requested by the learner, so it may play in silent mode.
-    await setAudioModeAsync({ playsInSilentMode: true, shouldPlayInBackground: false });
-  } catch {
-    // best effort
-  }
-}
-
 export function stopRecitation(): void {
+  if (streamTimeout) clearTimeout(streamTimeout);
+  streamTimeout = null;
   if (player) {
     try {
       player.pause();
@@ -49,28 +41,42 @@ export function stopRecitation(): void {
 /** Starts streaming one ayah (global ayah number). Returns false when audio cannot be created. */
 export function playRecitation(globalAyah: number, onEnd: (error: boolean) => void): boolean {
   stopRecitation();
-  void configure();
   try {
     const next = createAudioPlayer({ uri: audioUrlForAyah(globalAyah) });
     player = next;
     currentAyah = globalAyah;
-    const timeout = setTimeout(() => {
-      if (player === next && !next.isLoaded) {
+    streamTimeout = setTimeout(() => {
+      if (player === next && (!next.isLoaded || !next.playing)) {
         stopRecitation();
         onEnd(true);
       }
     }, STREAM_TIMEOUT_MS);
     next.addListener('playbackStatusUpdate', (status) => {
       if (player !== next) return;
-      if (status.isLoaded) clearTimeout(timeout);
+      if (status.error) {
+        stopRecitation();
+        onEnd(true);
+        return;
+      }
+      if (status.playing) {
+        if (streamTimeout) clearTimeout(streamTimeout);
+        streamTimeout = null;
+      }
       if (status.didJustFinish) {
-        clearTimeout(timeout);
         stopRecitation();
         onEnd(false);
       }
     });
-    next.play();
     notify();
+    void configureAudioSession()
+      .then(() => {
+        if (player === next) next.play();
+      })
+      .catch(() => {
+        if (player !== next) return;
+        stopRecitation();
+        onEnd(true);
+      });
     return true;
   } catch {
     stopRecitation();

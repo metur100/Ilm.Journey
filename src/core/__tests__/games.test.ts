@@ -17,7 +17,7 @@ import {
   validateGame,
 } from '@/core/games';
 import { demoResult, starPositions } from '@/core/games/demo/DemoStarsGame';
-import { DEMO_GAME_ID, demoGame } from '@/core/games/demo/register';
+import { DEMO_GAME_ID, demoGame, registerDemoGame } from '@/core/games/demo/register';
 import { createGarden, EARN_TABLE, useGardenStore } from '@/core/garden';
 import { getQuestCandidates, getQuestionByKey } from '@/core/registry';
 import { createInitialData } from '@/core/services/engine';
@@ -26,6 +26,7 @@ import { useAppStore } from '@/core/store/appStore';
 import { registerFeatures } from '@/features';
 
 registerFeatures();
+registerDemoGame();
 
 const text = (en: string) => ({ en, de: en, bs: en });
 const src = [{ sourceName: 'Quran', sourceReference: '6:74–79' }];
@@ -38,6 +39,7 @@ const testI18n = defineNamespace('game.test-game', {
 
 const testGame: GameDef<{ n: number }> = {
   id: 'test-game',
+  challengeCount: 10,
   topicId: 'salah',
   i18n: testI18n,
   coverArt: 'garden.stars',
@@ -82,6 +84,7 @@ describe('game registry', () => {
 
   it('validates definitions', () => {
     expect(() => validateGame(testGame as GameDef<unknown>)).not.toThrow();
+    expect(() => validateGame({ ...testGame, challengeCount: 9 } as GameDef<unknown>)).toThrow(/10 playable challenges/);
     expect(() => validateGame({ ...testGame, id: 'Bad Id' } as GameDef<unknown>)).toThrow(/kebab/);
     expect(() => validateGame({ ...testGame, i18n: demoGame.i18n } as GameDef<unknown>)).toThrow(/namespace/);
     expect(() => validateGame({ ...testGame, levels: [] } as GameDef<unknown>)).toThrow(/levels/);
@@ -92,6 +95,10 @@ describe('game registry', () => {
     expect(() => validateGame(dup as GameDef<unknown>)).toThrow(/duplicate/);
     const badCard = { ...testGame, cards: [{ ...testGame.cards![0], unlock: 'story:adam:complete' }] };
     expect(() => validateGame(badCard as GameDef<unknown>)).toThrow(/card/);
+  });
+
+  it('every registered game declares at least ten playable challenges', () => {
+    for (const game of listGames({ includeDev: true })) expect(game.challengeCount).toBeGreaterThanOrEqual(10);
   });
 
   it('picks a deterministic game of the day', () => {
@@ -124,7 +131,7 @@ describe('facts as review questions', () => {
     const resolved = getQuestionByKey('game:test-game:fact-a');
     expect(resolved?.question.type).toBe('trueFalse');
     expect(resolved?.topicArea).toBe('salah');
-    expect(resolved?.context?.title?.en).toBe('Test');
+    expect(resolved?.context?.title?.en).toBe('Test · 10 challenges');
     expect(getQuestionByKey('game:test-game:missing')).toBeUndefined();
     expect(getQuestionByKey('game:nope:fact-a')).toBeUndefined();
   });

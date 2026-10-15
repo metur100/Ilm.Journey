@@ -12,6 +12,7 @@ import { PrayerSkyGame } from './PrayerSkyGame';
  */
 export const prayerSkyGame: GameDef<SkyConfig> = {
   id: 'prayer-sky',
+  challengeCount: 20,
   topicId: 'salah',
   i18n: prayerSkyI18n,
   coverArt: 'object.sundial',

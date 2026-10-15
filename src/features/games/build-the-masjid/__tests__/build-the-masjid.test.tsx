@@ -235,7 +235,7 @@ describe('Build the Masjid – render', () => {
     const tree = await mount(1, onComplete);
     expect(texts(tree.root)).toContain('Next: The plot of land');
     for (const part of ['The plot of land', 'Brick walls', 'Palm grove']) {
-      await press(tree.root, `Part: ${part}`);
+      await press(tree.root, `Build: ${part}`);
       expect(texts(tree.root)).toContain('Established fact');
       await press(tree.root, 'Continue');
     }
@@ -246,10 +246,10 @@ describe('Build the Masjid – render', () => {
   it('level 2: a part before its base is gently refused', async () => {
     const onComplete = jest.fn();
     const tree = await mount(2, onComplete);
-    await press(tree.root, 'Part: The qibla wall');
+    await press(tree.root, 'Build: The qibla wall');
     expect(texts(tree.root)).toContain('First comes: Brick walls.');
     for (const part of ['The plot of land', 'Brick walls', 'The qibla wall', 'Palm grove']) {
-      await press(tree.root, `Part: ${part}`);
+      await press(tree.root, `Build: ${part}`);
       await press(tree.root, 'Continue');
     }
     expect(onComplete).toHaveBeenCalledWith({ score: 36, maxScore: 40, stars: 3, mistakes: 1, factsMissed: [] });

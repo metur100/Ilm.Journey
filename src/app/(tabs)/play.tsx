@@ -44,7 +44,7 @@ export default function PlayScreen() {
   const state = { games: data, challengeMode };
 
   const byTopic = useMemo(() => TOPIC_IDS.map((topic) => ({ topic, games: games.filter((g) => g.topicId === topic) })).filter((g) => g.games.length > 0), [games]);
-  const title = (g: GameDef<unknown>) => translateNs(g.i18n, language, 'title');
+  const title = (g: GameDef<unknown>) => `${translateNs(g.i18n, language, 'title')} · ${t('games.challengeCount', { count: g.challengeCount })}`;
   const open = (g: GameDef<unknown>) => router.push({ pathname: '/game/[id]', params: { id: g.id } });
 
   return (
@@ -112,7 +112,7 @@ export default function PlayScreen() {
                     </View>
                   ) : null}
                   <View style={styles.cardBody}>
-                    <AppText variant="bodyBold" numberOfLines={1}>
+                    <AppText variant="bodyBold" numberOfLines={2}>
                       {title(g)}
                     </AppText>
                     <AppText variant="tiny" color={c.textMuted} numberOfLines={2}>

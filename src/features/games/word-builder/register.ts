@@ -24,6 +24,7 @@ export const WORD_BUILDER_ART = [...new Set([...WORDS.map((w) => w.art), 'object
 
 export const wordBuilderGame: GameDef<WordBuilderConfig> = {
   id: WORD_BUILDER_ID,
+  challengeCount: 12,
   topicId: 'arabic',
   i18n: wordBuilderI18n,
   coverArt: 'object.book',

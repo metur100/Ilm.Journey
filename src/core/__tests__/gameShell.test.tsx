@@ -2,7 +2,7 @@
 import type React from 'react';
 
 import { EMPTY_GAMES, useGamesStore } from '@/core/games';
-import { DEMO_GAME_ID } from '@/core/games/demo/register';
+import { DEMO_GAME_ID, registerDemoGame } from '@/core/games/demo/register';
 import { GameShell } from '@/core/games/shell/GameShell';
 import { createGarden, useGardenStore } from '@/core/garden';
 import { createInitialData } from '@/core/services/engine';
@@ -19,6 +19,7 @@ jest.mock('expo-router', () => ({
 jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 
 registerFeatures();
+registerDemoGame();
 
 /** Minimal local typing of react-test-renderer (the package ships no types here). */
 interface ReactTestInstance {

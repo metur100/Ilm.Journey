@@ -1,4 +1,4 @@
-import { localizedFrom, translateNs } from '../i18n';
+import { localizedFrom, translate, translateNs } from '../i18n';
 import { type DayKey, factSourceProblem, type LocalizedText, type Question } from '../models';
 import { registerCollectionCards } from '../registry';
 import { dayNumber } from '../utils/date';
@@ -22,6 +22,7 @@ export function validateGame(def: GameDef<unknown>): void {
     throw new Error(`Game "${def.id}": ${msg}`);
   };
   if (!ID_PATTERN.test(def.id)) fail('id must be kebab-case');
+  if (!Number.isInteger(def.challengeCount) || def.challengeCount < 10) fail('needs at least 10 playable challenges');
   if (def.i18n.name !== `game.${def.id}`) fail(`i18n namespace must be named "game.${def.id}"`);
   for (const key of REQUIRED_TEXT) if (!def.i18n.dictionaries.en[key]) fail(`i18n key "${key}" missing`);
   if (def.levels.length < 1 || def.levels.length > 3) fail('needs 1–3 levels');
@@ -97,7 +98,7 @@ export function findFact(def: GameDef<unknown>, factId: string): GameFact | unde
 
 /** The game's title in every language (for registry contexts and quests). */
 export function gameTitle(def: GameDef<unknown>): LocalizedText {
-  return localizedFrom((lang) => translateNs(def.i18n, lang, 'title'));
+  return localizedFrom((lang) => `${translateNs(def.i18n, lang, 'title')} · ${translate(lang, 'games.challengeCount', { count: def.challengeCount })}`);
 }
 
 /** Global review key of a game fact: `game:<gameId>:<factId>`. */

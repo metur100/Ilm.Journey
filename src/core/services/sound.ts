@@ -1,4 +1,6 @@
-import { type AudioPlayer, createAudioPlayer, setAudioModeAsync } from 'expo-audio';
+import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
+
+import { configureAudioSession } from './audioSession';
 
 export type SoundName = 'click' | 'success' | 'failure' | 'reward';
 
@@ -12,18 +14,6 @@ const SOURCES: Record<SoundName, number> = {
 const VOLUME: Record<SoundName, number> = { click: 0.7, success: 0.9, failure: 0.8, reward: 1 };
 
 const players = new Map<SoundName, AudioPlayer>();
-let configured = false;
-
-async function configure() {
-  if (configured) return;
-  configured = true;
-  try {
-    // Respect the silent switch: UI sounds should never surprise a child in class.
-    await setAudioModeAsync({ playsInSilentMode: false, shouldPlayInBackground: false });
-  } catch {
-    // Audio mode is a best-effort optimisation.
-  }
-}
 
 function playerFor(name: SoundName): AudioPlayer | null {
   try {
@@ -41,13 +31,11 @@ function playerFor(name: SoundName): AudioPlayer | null {
 
 /** Plays a short UI sound. Audio is optional: failures are ignored so the app keeps working. */
 export function playSound(name: SoundName): void {
-  void configure();
-  const player = playerFor(name);
-  if (!player) return;
-  try {
-    player.seekTo(0).catch(() => undefined);
-    player.play();
-  } catch {
-    // ignore
-  }
+  void configureAudioSession()
+    .then(() => {
+      const player = playerFor(name);
+      if (!player) return;
+      return player.seekTo(0).then(() => player.play());
+    })
+    .catch(() => undefined);
 }

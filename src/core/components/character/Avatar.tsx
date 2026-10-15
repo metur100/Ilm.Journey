@@ -53,7 +53,7 @@ export function Avatar({ character, size = 160 }: AvatarProps) {
       {!hijab ? <Rect x={88} y={128} width={24} height={24} rx={8} fill={shade(skin, -15)} /> : null}
 
       {/* Hijab drape behind the face */}
-      {hijab ? <Path d="M48 100C48 40 152 40 152 100V160C140 172 60 172 48 160Z" fill={headDark} /> : null}
+      {hijab ? <Path d="M42 106C42 33 158 33 158 106V186C140 204 60 204 42 186Z" fill={headDark} /> : null}
 
       {/* Ears */}
       {!hijab ? (
@@ -71,7 +71,7 @@ export function Avatar({ character, size = 160 }: AvatarProps) {
 
       {/* Hijab front */}
       {hijab ? (
-        <Path d="M60 98C60 52 140 52 140 98 140 70 120 58 100 58S60 70 60 98Z" fill={headMain} />
+        <Path d="M52 101C50 42 150 42 148 101 141 72 125 57 100 56 75 57 59 72 52 101Z" fill={headMain} />
       ) : null}
 
       {/* Face */}
@@ -192,7 +192,7 @@ function renderStrapPattern(pattern: HeroPattern) {
 function renderHair(style: Character['hairStyle'], color: string) {
   switch (style) {
     case 'short':
-      return <Path d="M56 98C48 38 152 38 144 98 140 82 124 74 100 76 76 74 60 82 56 98Z" fill={color} />;
+      return <Path d="M52 101C44 30 156 30 148 101 142 82 130 70 114 66 102 62 96 62 84 66 68 70 58 82 52 101Z" fill={color} />;
     case 'curly':
       return (
         <G fill={color}>

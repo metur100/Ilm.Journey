@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { type LayoutChangeEvent, View } from 'react-native';
+import { Pressable, type LayoutChangeEvent, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown, ZoomIn } from 'react-native-reanimated';
 import Svg, { Rect } from 'react-native-svg';
 
@@ -10,7 +10,6 @@ import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
 import { BlockCard } from './BlockCard';
-import { Draggable } from './Draggable';
 import { checkPlacement, masjidResult, nextPart, PARTS, type PartId, SITE } from './logic';
 import { PartArt, thumbSize } from './Parts';
 import { QiblaTurn } from './QiblaTurn';
@@ -32,7 +31,7 @@ const useStyles = makeStyles((c) => ({
   target: { width: 96, alignItems: 'center', backgroundColor: c.surface, borderRadius: radius.md, borderWidth: 1, borderColor: c.border, paddingVertical: 4 },
   board: { flex: 1 },
   stage: { position: 'absolute', borderRadius: radius.lg, overflow: 'hidden', backgroundColor: c.surfaceAlt },
-  partCard: { flex: 1, borderRadius: radius.md, backgroundColor: c.surface, borderWidth: 2, borderColor: c.border, alignItems: 'center', justifyContent: 'center', padding: 4, gap: 2 },
+  partCard: { position: 'absolute', borderRadius: radius.md, backgroundColor: c.surface, borderWidth: 2, borderColor: c.border, alignItems: 'center', justifyContent: 'center', padding: 4, gap: 2 },
   glow: { borderColor: c.gold, backgroundColor: c.goldSoft },
   ghostLabel: { position: 'absolute', backgroundColor: c.surface, borderRadius: radius.pill, paddingHorizontal: spacing.sm, paddingVertical: 1, borderWidth: 1, borderColor: c.goldBorder },
   overlay: { position: 'absolute', left: 0, right: 0, bottom: 0 },
@@ -112,7 +111,7 @@ function BuildSite({ gameId, level, config, onComplete, playSound, haptic, reduc
   };
 
   const ghost = guidedNext ? PARTS[guidedNext].slot : null;
-  const instruction = done ? t('play.complete') : guidedNext ? t('play.next', { part: name(guidedNext) }) : t('play.drag');
+  const instruction = done ? t('play.complete') : guidedNext ? t('play.next', { part: name(guidedNext) }) : t('play.build');
 
   return (
     <View style={styles.root}>
@@ -164,42 +163,29 @@ function BuildSite({ gameId, level, config, onComplete, playSound, haptic, reduc
 
             {tray.map((id, k) => {
               if (placed.includes(id)) return null;
-              const thumb = thumbSize(id, cardSize - 26);
+              const thumb = thumbSize(id, Math.min(44, cardSize * 0.48));
               const glow = id === guidedNext;
               return (
-                <Draggable
+                <Pressable
                   key={id}
-                  x={trayX + k * (cardSize + TRAY_GAP)}
-                  y={trayY}
-                  width={cardSize}
-                  height={cardSize}
-                  reducedMotion={reducedMotion}
                   disabled={card !== null}
-                  label={t('a11y.part', { part: name(id) })}
-                  onLift={() => haptic('selection')}
-                  onDrop={(cx, cy) => {
-                    if (cy > stageH + 4) return null;
-                    const res = checkPlacement(id, placed, { x: (cx - stageX) / scale, y: cy / scale });
-                    if (!res.ok) {
-                      explain(id, res);
-                      return null;
-                    }
-                    const s = PARTS[id].slot;
-                    return { x: stageX + (s.x + s.w / 2) * scale - cardSize / 2, y: (s.y + s.h / 2) * scale - cardSize / 2 };
-                  }}
-                  onSnapped={() => place(id)}
-                  onTap={() => {
+                  accessibilityRole="button"
+                  accessibilityLabel={t('a11y.part', { part: name(id) })}
+                  onPress={() => {
                     const res = checkPlacement(id, placed, null);
                     if (res.ok) place(id);
                     else explain(id, res);
                   }}
-                  style={[styles.partCard, glow && styles.glow]}
+                  style={[styles.partCard, { left: trayX + k * (cardSize + TRAY_GAP), top: trayY, width: cardSize, height: cardSize }, glow && styles.glow]}
                 >
                   <PartArt id={id} width={thumb.w} height={thumb.h} thumb />
                   <AppText variant="tiny" align="center" numberOfLines={1}>
                     {name(id)}
                   </AppText>
-                </Draggable>
+                  <AppText variant="tiny" color={c.primaryText}>
+                    {t('play.buildAction')}
+                  </AppText>
+                </Pressable>
               );
             })}
           </>

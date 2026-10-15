@@ -13,8 +13,10 @@ import { registerLearnFeature } from '@/features/learn/register';
 
 import { type ContentChoice, DAYS, DEEDS_ART, DILEMMAS, EVERYDAY, GOOD_DEEDS, RAMADAN_DAY, type Scene } from '../content';
 import { type DeedsConfig, GoodDeedsDayGame } from '../GoodDeedsDayGame';
-import { advance, answerChoice, dayResult, deedsDone, gardenPlants, isSunset, mayEat, NEW_SCENE, sceneScore, starsFor, stepDone, sunAt, sunProgress, SUNSET_T, toggleDeed } from '../logic';
+import { deedsI18n } from '../i18n';
+import { advance, answerChoice, dayResult, deedsDone, gardenPlants, isSunset, mayEat, NEW_SCENE, sceneScore, starsFor, stepDone, sunAt, sunProgress, SUNSET_T, targetInFrontOfHero, toggleDeed } from '../logic';
 import { DEEDS_FACTS, DEEDS_GAME_ID, deedsGame, registerGoodDeedsDayGame } from '../register';
+import { RAMADAN_JOURNEY_ID, ramadanJourneyGame, registerRamadanJourneyGame } from '../../ramadan-journey/register';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 jest.mock('react-native-safe-area-context', () => require('react-native-safe-area-context/jest/mock').default);
@@ -23,6 +25,7 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 // Only what these tests need (independent of the other games in progress).
 registerLearnFeature();
 registerGoodDeedsDayGame();
+registerRamadanJourneyGame();
 
 interface Lesson {
   id: string;
@@ -41,7 +44,10 @@ interface Question {
 const worlds = [akhlaq, ramadan, salah] as unknown as { lessons: Lesson[]; questions: Question[]; facts: { text: LocalizedText; sources?: SourceRef[] }[] }[];
 const lessons = worlds.flatMap((w) => w.lessons);
 const questions = worlds.flatMap((w) => w.questions);
-const contentTexts = [...lessons.flatMap((l) => l.sections.map((s) => s.body)), ...worlds.flatMap((w) => w.facts.map((f) => f.text))];
+const contentTexts = [
+  ...lessons.flatMap((l) => l.sections.map((s) => s.body)),
+  ...worlds.flatMap((w) => [...w.facts.map((f) => f.text), ...w.questions.map((q) => q.explanation)]),
+];
 /** Sources the content gives for a text: its lesson's sources or the fact's sources. */
 const sourcesOf = (text: LocalizedText): SourceRef[] => {
   const lesson = lessons.find((l) => l.sections.some((s) => s.body.en === text.en));
@@ -102,15 +108,19 @@ describe('A Day of Good Deeds – content comes from the Learn content', () => {
   });
 
   it('is linked from the Akhlaq and Ramadan topic pages', () => {
-    for (const topic of ['akhlaq', 'ramadan'] as const) {
-      const tool = getTopicTools(topic).find((x) => x.id === `game-good-deeds-day-${topic}`)!;
-      expect(tool.label('en')).toBe('A Day of Good Deeds');
-      expect(tool.href).toEqual({ pathname: '/game/[id]', params: { id: 'good-deeds-day' } });
-    }
+    const akhlaq = getTopicTools('akhlaq').find((x) => x.id === 'game-good-deeds-day-akhlaq')!;
+    expect(akhlaq.label('en')).toBe('A Day of Good Deeds');
+    expect(akhlaq.href).toEqual({ pathname: '/game/[id]', params: { id: DEEDS_GAME_ID } });
+    const ramadan = getTopicTools('ramadan').find((x) => x.id === 'game-ramadan-journey')!;
+    expect(ramadan.label('en')).toBe('Ramadan Journey');
+    expect(ramadan.href).toEqual({ pathname: '/game/[id]', params: { id: RAMADAN_JOURNEY_ID } });
   });
 
   it('registers a valid game with complete texts', () => {
     expect(() => validateGame(getGame(DEEDS_GAME_ID)!)).not.toThrow();
+    expect(() => validateGame(getGame(RAMADAN_JOURNEY_ID)!)).not.toThrow();
+    expect(RAMADAN_DAY).toHaveLength(10);
+    expect(ramadanJourneyGame.challengeCount).toBe(RAMADAN_DAY.length);
     for (const lang of ['en', 'de', 'bs'] as const) {
       for (const s of allScenes) expect(translateNs(deedsGame.i18n, lang, `scene.${s.id}`)).not.toBe(`scene.${s.id}`);
       for (const s of allScenes)
@@ -123,6 +133,14 @@ describe('A Day of Good Deeds – content comes from the Learn content', () => {
 });
 
 describe('A Day of Good Deeds – scene logic', () => {
+  it('places a prayer mat or iftar plate in front of the hero, not over the avatar', () => {
+    const hero = { x: 16, y: 158, w: 120, h: 132 };
+    const target = targetInFrontOfHero(400, 300, 108, hero);
+    expect(target.x).toBeGreaterThanOrEqual(hero.x + hero.w);
+    expect(target.x + target.w).toBeLessThanOrEqual(400);
+    expect(target.y + target.h).toBeLessThanOrEqual(300);
+  });
+
   it('a dilemma continues only with the good option', () => {
     const cup = DILEMMAS[0].steps[0];
     if (cup.kind !== 'choice') throw new Error('choice expected');
@@ -146,13 +164,13 @@ describe('A Day of Good Deeds – scene logic', () => {
     expect(sceneScore(false)).toBe(10);
     expect(sceneScore(true)).toBe(5);
     expect(dayResult(EVERYDAY, [])).toEqual({ score: 60, maxScore: 60, stars: 3, mistakes: 0, factsMissed: [] });
-    expect(dayResult(DILEMMAS, ['cup', 'new-student', 'wallet'])).toEqual({ score: 45, maxScore: 60, stars: 2, mistakes: 3, factsMissed: ['sidq', 'amanah'] });
+    expect(dayResult(DILEMMAS, ['cup', 'new-student', 'wallet'])).toEqual({ score: 85, maxScore: 100, stars: 3, mistakes: 3, factsMissed: ['sidq', 'amanah'] });
     expect(starsFor(20, 60)).toBe(1);
   });
 
   it('grows one plant per finished scene and pre-ticks the deeds of the day', () => {
     expect(gardenPlants(EVERYDAY, 2)).toEqual(['garden.flower-tulip', 'garden.flower-jasmine']);
-    expect(deedsDone(RAMADAN_DAY, 6)).toEqual(['prayed', 'charity']);
+    expect(deedsDone(RAMADAN_DAY, 10)).toEqual(['prayed', 'charity']);
     expect(toggleDeed(['prayed'], 'dua')).toEqual(['prayed', 'dua']);
     expect(toggleDeed(['prayed', 'dua'], 'prayed')).toEqual(['dua']);
   });
@@ -175,7 +193,7 @@ describe('A Day of Good Deeds – Ramadan timing', () => {
   });
 
   it('the Ramadan day runs suhoor → Fajr → day → sunset → night', () => {
-    expect(RAMADAN_DAY.map((s) => s.time)).toEqual(['night', 'dawn', 'noon', 'afternoon', 'sunset', 'night']);
+    expect(RAMADAN_DAY.map((s) => s.time)).toEqual(['night', 'dawn', 'noon', 'noon', 'afternoon', 'sunset', 'night', 'night', 'night', 'dawn']);
     expect(RAMADAN_DAY[0].steps[0].kind).toBe('mode');
     expect(RAMADAN_DAY.find((s) => s.id === 'iftar')!.steps.map((s) => s.kind)).toEqual(['sun', 'drag']);
     expect(Object.keys(DAYS)).toEqual(['everyday', 'dilemmas', 'ramadan']);
@@ -207,10 +225,11 @@ const texts = (root: Node) =>
 const en = (k: string, p?: Record<string, string | number>) => translateNs(deedsGame.i18n, 'en', k, p);
 
 function api(level: 1 | 2 | 3, onComplete: (r: GameResultInput) => void): GameApi<DeedsConfig> {
-  const def = deedsGame.levels[level - 1];
+  const game = level === 3 ? ramadanJourneyGame : deedsGame;
+  const def = game.levels[level === 3 ? 0 : level - 1];
   return {
-    gameId: DEEDS_GAME_ID,
-    level,
+    gameId: game.id,
+    level: level === 3 ? 1 : level,
     config: def.config,
     facts: def.facts,
     onComplete,
@@ -220,7 +239,7 @@ function api(level: 1 | 2 | 3, onComplete: (r: GameResultInput) => void): GameAp
     reducedMotion: true,
     challengeMode: false,
     language: 'en',
-    t: (k, p) => translateNs(deedsGame.i18n, 'en', k, p),
+    t: (k, p) => translateNs(deedsI18n, 'en', k as never, p),
     l: (text) => text?.en ?? '',
   };
 }
@@ -267,7 +286,11 @@ describe('A Day of Good Deeds – render', () => {
       await playScene(tree.root, scene, level === 2 && i === 0);
     }
     expect(onComplete).toHaveBeenCalledTimes(1);
-    const expected = level === 2 ? { score: 55, maxScore: 60, stars: 3, mistakes: 1, factsMissed: ['sidq'] } : { score: 60, maxScore: 60, stars: 3, mistakes: 0, factsMissed: [] };
+    const expected = level === 2
+      ? { score: 95, maxScore: 100, stars: 3, mistakes: 1, factsMissed: ['sidq'] }
+      : level === 3
+        ? { score: 100, maxScore: 100, stars: 3, mistakes: 0, factsMissed: [] }
+        : { score: 60, maxScore: 60, stars: 3, mistakes: 0, factsMissed: [] };
     expect(onComplete.mock.calls[0][0]).toEqual(expected);
     await act(() => tree.unmount());
   });

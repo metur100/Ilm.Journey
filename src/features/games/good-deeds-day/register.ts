@@ -3,6 +3,8 @@ import { type GameDef, type GameFact, registerGame } from '@/core/games';
 import {
   AMANAH,
   AMANAH_SOURCES,
+  DILEMMAS,
+  EVERYDAY,
   FORGIVENESS,
   FORGIVENESS_SOURCES,
   IFTAR,
@@ -23,10 +25,7 @@ import {
 import { type DeedsConfig, GoodDeedsDayGame } from './GoodDeedsDayGame';
 import { deedsI18n } from './i18n';
 
-/*
- * A Day of Good Deeds (Akhlaq; level 3 Ramadan). Facts are lesson sections / facts of the Learn content with their
- * sources; each points to an existing quest question for review.
- */
+/* Akhlaq scenes and facts are copied from Learn content, with their original sources and review questions. */
 
 export const DEEDS_FACTS = {
   smile: { id: 'smile-charity', text: SMILE, sources: SMILE_SOURCES, art: 'object.coin-jar', reviewKey: 'quest:akhlaq-smile' },
@@ -44,6 +43,7 @@ export const DEEDS_GAME_ID = 'good-deeds-day';
 
 export const deedsGame: GameDef<DeedsConfig> = {
   id: DEEDS_GAME_ID,
+  challengeCount: EVERYDAY.length + DILEMMAS.length,
   topicId: 'akhlaq',
   i18n: deedsI18n,
   coverArt: 'object.coin-jar',
@@ -52,7 +52,6 @@ export const deedsGame: GameDef<DeedsConfig> = {
   levels: [
     { level: 1, config: { day: 'everyday' }, facts: [DEEDS_FACTS.smile, DEEDS_FACTS.amanah, DEEDS_FACTS.shukr] },
     { level: 2, config: { day: 'dilemmas' }, facts: [DEEDS_FACTS.sidq, DEEDS_FACTS.rahmah, DEEDS_FACTS.forgiveness] },
-    { level: 3, config: { day: 'ramadan' }, facts: [DEEDS_FACTS.suhoor, DEEDS_FACTS.iftar, DEEDS_FACTS.safe] },
   ],
   teaches: { questionKeys: Object.values(DEEDS_FACTS).map((f) => f.reviewKey) },
   order: 10,

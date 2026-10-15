@@ -1,5 +1,7 @@
 import type { SkyTime } from '@/core/art';
 import type { LocalizedText, SourceRef } from '@/core/models';
+import akhlaqQuestData from '@/features/learn/content/quests/akhlaq.json';
+import ramadanQuestData from '@/features/learn/content/quests/ramadan.json';
 
 /*
  * Content of A Day of Good Deeds – copied unchanged from the Learn content (src/features/learn/content/quests:
@@ -12,10 +14,52 @@ import type { LocalizedText, SourceRef } from '@/core/models';
 export interface ContentChoice {
   id: string;
   prompt: LocalizedText;
-  options: { text: LocalizedText; feedback: LocalizedText }[];
+  options: { text: LocalizedText; feedback?: LocalizedText }[];
   correctIndex: number;
   explanation: LocalizedText;
   sources: SourceRef[];
+}
+
+type AkhlaqChoiceQuestion = {
+  id: string;
+  prompt: LocalizedText;
+  options: { id: string; text: LocalizedText; feedback?: LocalizedText }[];
+  correctOptionId: string;
+  explanation: LocalizedText;
+  sources: SourceRef[];
+};
+
+const AKHLAQ_CHOICES = akhlaqQuestData.questions as unknown as AkhlaqChoiceQuestion[];
+const RAMADAN_CHOICES = ramadanQuestData.questions as unknown as AkhlaqChoiceQuestion[];
+
+function choiceFromAkhlaq(id: string): ContentChoice {
+  const question = AKHLAQ_CHOICES.find((item) => item.id === id);
+  if (!question) throw new Error(`Akhlaq question not found: ${id}`);
+  const correctIndex = question.options.findIndex((option) => option.id === question.correctOptionId);
+  if (correctIndex < 0) throw new Error(`Akhlaq question has no correct option: ${id}`);
+  return {
+    id: question.id,
+    prompt: question.prompt,
+    options: question.options.map(({ text, feedback }) => ({ text, feedback })),
+    correctIndex,
+    explanation: question.explanation,
+    sources: question.sources,
+  };
+}
+
+function choiceFromRamadan(id: string): ContentChoice {
+  const question = RAMADAN_CHOICES.find((item) => item.id === id);
+  if (!question) throw new Error(`Ramadan question not found: ${id}`);
+  const correctIndex = question.options.findIndex((option) => option.id === question.correctOptionId);
+  if (correctIndex < 0) throw new Error(`Ramadan question has no correct option: ${id}`);
+  return {
+    id: question.id,
+    prompt: question.prompt,
+    options: question.options.map(({ text, feedback }) => ({ text, feedback })),
+    correctIndex,
+    explanation: question.explanation,
+    sources: question.sources,
+  };
 }
 
 // ---------- copied content ----------
@@ -153,6 +197,14 @@ export const Q_FORGIVE: ContentChoice = {
   explanation: { en: "The Quran asks: would you not love for Allah to forgive you? Forgiving others is noble.", de: "Der Koran fragt: Möchtet ihr nicht, dass Allah euch vergibt? Anderen zu vergeben ist edel.", bs: "Kur'an pita: zar ne želite da vam Allah oprosti? Opraštati drugima je plemenito." },
   sources: [{ sourceName: "Quran", sourceReference: "24:22" }],
 };
+export const Q_TOY = choiceFromAkhlaq('akhlaq-toy');
+export const Q_HELPING_NEIGHBOUR = choiceFromAkhlaq('akhlaq-helping-scenario');
+export const Q_PARENTS_DUA = choiceFromAkhlaq('akhlaq-parents-dua');
+export const Q_SABR = choiceFromAkhlaq('akhlaq-sabr-mc');
+export const Q_TAQWA = choiceFromRamadan('ramadan-taqwa');
+export const Q_QADR = choiceFromRamadan('ramadan-qadr');
+export const Q_QADR_WHEN = choiceFromRamadan('ramadan-qadr-when');
+export const Q_ZAKAT_FITR = choiceFromRamadan('ramadan-zakat-fitr');
 /** ramadan-fasting · section 0 */
 export const FASTING: LocalizedText = { en: "Fasting (sawm) means not eating or drinking from dawn (Fajr) until sunset (Maghrib). The Quran says fasting was prescribed so that we may become mindful of Allah (taqwa). Fasting is also about guarding our tongue and behaving well.", de: "Fasten (Saum) bedeutet, von der Morgendämmerung (Fadschr) bis Sonnenuntergang (Maghrib) nicht zu essen und nicht zu trinken. Der Koran sagt, das Fasten wurde vorgeschrieben, damit wir gottesbewusst werden (Taqwa). Beim Fasten geht es auch darum, die Zunge zu hüten und sich gut zu benehmen.", bs: "Post (savm) znači ne jesti i ne piti od zore (sabaha) do zalaska sunca (akšama). Kur'an kaže da je post propisan kako bismo postali bogobojazni (takva). Post znači i čuvati jezik i lijepo se ponašati." };
 export const FASTING_SOURCES: SourceRef[] = [{ sourceName: "Quran", sourceReference: "2:183–185" }, { sourceName: "Quran", sourceReference: "2:187" }];
@@ -381,6 +433,38 @@ export const DILEMMAS: readonly Scene[] = [
     decor: 'ui.heart',
     factId: 'forgiveness',
   },
+  {
+    id: 'toy-conflict',
+    time: 'morning',
+    steps: [{ kind: 'choice', choice: Q_TOY }],
+    card: { texts: [Q_TOY.explanation], sources: Q_TOY.sources },
+    plant: 'garden.flower-jasmine',
+    decor: 'object.book',
+  },
+  {
+    id: 'help-neighbour',
+    time: 'noon',
+    steps: [{ kind: 'choice', choice: Q_HELPING_NEIGHBOUR }],
+    card: { texts: [Q_HELPING_NEIGHBOUR.explanation], sources: Q_HELPING_NEIGHBOUR.sources },
+    plant: 'garden.olive',
+    decor: 'object.basket',
+  },
+  {
+    id: 'parents-dua',
+    time: 'afternoon',
+    steps: [{ kind: 'choice', choice: Q_PARENTS_DUA }],
+    card: { texts: [Q_PARENTS_DUA.explanation], sources: Q_PARENTS_DUA.sources },
+    plant: 'garden.flower-lily',
+    decor: 'object.book',
+  },
+  {
+    id: 'sabr',
+    time: 'sunset',
+    steps: [{ kind: 'choice', choice: Q_SABR }],
+    card: { texts: [Q_SABR.explanation], sources: Q_SABR.sources },
+    plant: 'garden.sprout',
+    decor: 'garden.olive',
+  },
 ];
 
 /** Level 3 – a Ramadan day: suhoor before dawn, the fasting day, iftar at sunset, the night prayer and the tracker. */
@@ -401,6 +485,13 @@ export const RAMADAN_DAY: readonly Scene[] = [
     plant: 'garden.flower-tulip',
     decor: 'object.crescent',
     deed: 'prayed',
+  },
+  {
+    id: 'taqwa',
+    time: 'noon',
+    steps: [{ kind: 'choice', choice: Q_TAQWA }],
+    card: { texts: [Q_TAQWA.explanation], sources: Q_TAQWA.sources },
+    plant: 'garden.flower-tulip',
   },
   {
     id: 'dizzy',
@@ -435,6 +526,29 @@ export const RAMADAN_DAY: readonly Scene[] = [
     steps: [{ kind: 'tap', item: 'object.lantern-ramadan', target: 'garden.masjid-small', count: 1, hint: 'hint.lantern' }, { kind: 'tracker' }],
     card: { texts: [TARAWEEH], sources: TARAWEEH_FACT_SOURCES, note: TARAWEEH_NOTE },
     plant: 'garden.olive',
+  },
+  {
+    id: 'qadr-worth',
+    time: 'night',
+    steps: [{ kind: 'choice', choice: Q_QADR }],
+    card: { texts: [Q_QADR.explanation], sources: Q_QADR.sources },
+    plant: 'garden.flower-lily',
+    decor: 'garden.stars',
+  },
+  {
+    id: 'qadr-nights',
+    time: 'night',
+    steps: [{ kind: 'choice', choice: Q_QADR_WHEN }],
+    card: { texts: [Q_QADR_WHEN.explanation], sources: Q_QADR_WHEN.sources },
+    plant: 'garden.flower-jasmine',
+    decor: 'garden.moon',
+  },
+  {
+    id: 'zakat-fitr',
+    time: 'dawn',
+    steps: [{ kind: 'choice', choice: Q_ZAKAT_FITR }],
+    card: { texts: [Q_ZAKAT_FITR.explanation], sources: Q_ZAKAT_FITR.sources },
+    plant: 'garden.pomegranate',
   },
 ];
 

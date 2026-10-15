@@ -58,6 +58,7 @@ export const MASJID_GAME_ID = 'build-the-masjid';
 
 export const masjidGame: GameDef<MasjidConfig> = {
   id: MASJID_GAME_ID,
+  challengeCount: 12,
   topicId: 'seerah',
   i18n: masjidI18n,
   coverArt: 'place.masjid-nabawi-early',

@@ -159,7 +159,7 @@ export function GameShell({ gameId }: { gameId: string }) {
   }
 
   const theme = topicThemes[def.topicId];
-  const title = gt('title');
+  const title = `${gt('title')} · ${t('games.challengeCount', { count: def.challengeCount })}`;
   const leave = () => (router.canGoBack() ? router.back() : router.replace('/(tabs)/play'));
 
   if (phase === 'intro' || phase === 'howto') {

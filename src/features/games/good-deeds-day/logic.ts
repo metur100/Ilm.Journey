@@ -29,6 +29,19 @@ export interface SceneState {
   retried: boolean;
 }
 
+export interface StageBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/** Prayer/iftar items belong on the ground in front of the learner, not over the avatar. */
+export function targetInFrontOfHero(stageWidth: number, stageHeight: number, targetSize: number, hero: StageBox): StageBox {
+  const x = Math.min(stageWidth - targetSize, Math.max(hero.x + hero.w + stageWidth * 0.08, stageWidth - targetSize - stageWidth * 0.04));
+  return { x, y: stageHeight - targetSize - stageHeight * 0.06, w: targetSize, h: targetSize };
+}
+
 export const NEW_SCENE: SceneState = { step: 0, dragged: 0, tapped: 0, retried: false };
 
 /** Is the current step finished with these counts? */
