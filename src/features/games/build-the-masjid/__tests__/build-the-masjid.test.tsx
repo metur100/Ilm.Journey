@@ -3,13 +3,14 @@ import type React from 'react';
 import { hasArt } from '@/core/art';
 import { type GameApi, type GameResultInput, getGame, validateGame } from '@/core/games';
 import { translateNs } from '@/core/i18n';
+import { LANGUAGES } from '@/core/models';
 import { getQuestionByKey } from '@/core/registry';
 import { registerSeerahFeature } from '@/features/seerah/register';
 import { EPISODES, EVENTS, getPlace, getSource, PLACES, QUESTIONS } from '@/features/seerah/content';
 import { sourceShortLabel } from '@/features/seerah/services/sources';
 
 import { BuildTheMasjidGame, type MasjidConfig } from '../BuildTheMasjidGame';
-import { MADINAH, MAKKAH, type SeerahBlock, type SeerahSourceId, SOURCE_REFS } from '../content';
+import { MADINAH, MAKKAH, MOSQUE_DATE, QIBLA_DATE, type SeerahBlock, type SeerahSourceId, SOURCE_REFS } from '../content';
 import {
   angleDiff,
   angleFromCenter,
@@ -17,14 +18,20 @@ import {
   buildScore,
   checkPlacement,
   checkQibla,
+  dropZone,
   JERUSALEM_BEARING,
   KAABA_BEARING,
+  LAYER_ORDER,
   masjidResult,
   nearestTurn,
   nextPart,
   PARTS,
   type PartId,
+  project,
   qiblaScore,
+  SITE,
+  slotBox,
+  slotCentre,
   starsFor,
 } from '../logic';
 import { MASJID_FACTS, MASJID_GAME_ID, masjidGame, registerBuildTheMasjidGame } from '../register';
@@ -37,35 +44,56 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerSeerahFeature();
 registerBuildTheMasjidGame();
 
-const centre = (id: PartId) => {
-  const s = PARTS[id].slot;
-  return { x: s.x + s.w / 2, y: s.y + s.h / 2 };
-};
+const BUILD: PartId[] = ['ground', 'walls', 'pillars', 'roof'];
 
 describe('Build the Masjid – assembly validation', () => {
   it('builds from the ground up', () => {
-    expect(checkPlacement('plot', [], centre('plot'))).toEqual({ ok: true });
-    expect(checkPlacement('walls', [], { x: 50, y: 110 })).toEqual({ ok: false, reason: 'needs-first', missing: 'plot' });
-    expect(checkPlacement('walls', ['plot'], { x: 50, y: 110 })).toEqual({ ok: true });
-    expect(checkPlacement('qibla-wall', ['plot'], centre('qibla-wall'))).toEqual({ ok: false, reason: 'needs-first', missing: 'walls' });
-    expect(checkPlacement('qibla-wall', ['plot', 'walls'], centre('qibla-wall'))).toEqual({ ok: true });
-    expect(checkPlacement('palms', ['plot'], { x: 30, y: 80 })).toEqual({ ok: true });
+    expect(checkPlacement('ground', [], slotCentre('ground'))).toEqual({ ok: true });
+    expect(checkPlacement('walls', [], slotCentre('walls'))).toEqual({ ok: false, reason: 'needs-first', missing: 'ground' });
+    expect(checkPlacement('walls', ['ground'], slotCentre('walls'))).toEqual({ ok: true });
+    expect(checkPlacement('roof', ['ground', 'walls'], slotCentre('roof'))).toEqual({ ok: false, reason: 'needs-first', missing: 'pillars' });
+    expect(checkPlacement('roof', ['ground', 'pillars'], slotCentre('roof'))).toEqual({ ok: true });
+    expect(checkPlacement('suffa', BUILD.slice(0, 3), slotCentre('suffa'))).toEqual({ ok: false, reason: 'needs-first', missing: 'roof' });
+    expect(checkPlacement('shade-south', BUILD, slotCentre('shade-south'))).toEqual({ ok: true });
   });
 
   it('needs the right spot on the site', () => {
-    expect(checkPlacement('plot', [], { x: 150, y: 30 })).toEqual({ ok: false, reason: 'wrong-spot' });
-    expect(checkPlacement('walls', ['plot'], { x: 150, y: 100 })).toEqual({ ok: false, reason: 'wrong-spot' });
-    expect(checkPlacement('palms', ['plot'], { x: 150, y: 100 })).toEqual({ ok: false, reason: 'wrong-spot' });
-    expect(checkPlacement('plot', ['plot'], centre('plot'))).toEqual({ ok: false, reason: 'placed' });
+    const sky = { x: 180, y: 20 };
+    expect(checkPlacement('ground', [], sky)).toEqual({ ok: false, reason: 'wrong-spot' });
+    expect(checkPlacement('pillars', ['ground'], sky)).toEqual({ ok: false, reason: 'wrong-spot' });
+    // The new shade belongs to the front (qibla) side, the Suffa to the back.
+    expect(checkPlacement('shade-south', BUILD, slotCentre('suffa'))).toEqual({ ok: false, reason: 'wrong-spot' });
+    expect(checkPlacement('suffa', BUILD, slotCentre('shade-south'))).toEqual({ ok: false, reason: 'wrong-spot' });
+    expect(checkPlacement('ground', ['ground'], slotCentre('ground'))).toEqual({ ok: false, reason: 'placed' });
     // The tap alternative skips the spot, not the order.
-    expect(checkPlacement('walls', [], null)).toEqual({ ok: false, reason: 'needs-first', missing: 'plot' });
+    expect(checkPlacement('roof', ['ground'], null)).toEqual({ ok: false, reason: 'needs-first', missing: 'pillars' });
+  });
+
+  it('places every slot on the site and every layer in the drawing order', () => {
+    for (const id of Object.keys(PARTS) as PartId[]) {
+      const b = slotBox(id);
+      expect(b.x).toBeGreaterThanOrEqual(0);
+      expect(b.y).toBeGreaterThanOrEqual(0);
+      expect(b.x + b.w).toBeLessThanOrEqual(SITE.w);
+      expect(b.y + b.h).toBeLessThanOrEqual(SITE.h);
+      const z = dropZone(id);
+      const c = slotCentre(id);
+      expect(c.x > z.x && c.x < z.x + z.w && c.y > z.y && c.y < z.y + z.h).toBe(true);
+      for (const layer of PARTS[id].layers) {
+        expect(LAYER_ORDER).toContain(layer);
+        expect(hasArt(layer)).toBe(true);
+      }
+    }
+    // The projection is the one of the art (back-left corner of the plot, front-right corner).
+    expect(project(0, 0)).toEqual({ x: 100, y: 150 });
+    expect(project(1, 1)).toEqual({ x: 254, y: 214 });
   });
 
   it('guides the next part in order', () => {
-    const order: PartId[] = ['plot', 'walls', 'qibla-wall', 'palms'];
-    expect(nextPart(order, [])).toBe('plot');
-    expect(nextPart(order, ['plot'])).toBe('walls');
-    expect(nextPart(order, ['plot', 'walls', 'qibla-wall', 'palms'])).toBeNull();
+    expect(nextPart(BUILD, [])).toBe('ground');
+    expect(nextPart(BUILD, ['ground'])).toBe('walls');
+    expect(nextPart(BUILD, ['ground', 'walls'])).toBe('pillars');
+    expect(nextPart(BUILD, BUILD)).toBeNull();
   });
 
   it('scores parts and maps to stars', () => {
@@ -74,7 +102,7 @@ describe('Build the Masjid – assembly validation', () => {
     expect(starsFor(40, 40)).toBe(3);
     expect(starsFor(32, 40)).toBe(2);
     expect(starsFor(10, 40)).toBe(1);
-    expect(masjidResult({ parts: 3, partsWithMistakes: 0, buildMistakes: 0 })).toEqual({ score: 30, maxScore: 30, stars: 3, mistakes: 0, factsMissed: [] });
+    expect(masjidResult({ parts: 4, partsWithMistakes: 0, buildMistakes: 0 })).toEqual({ score: 40, maxScore: 40, stars: 3, mistakes: 0, factsMissed: [] });
   });
 });
 
@@ -113,22 +141,16 @@ describe('Build the Masjid – qibla rotation', () => {
     expect(qiblaScore(0).score).toBe(30);
     expect(qiblaScore(1).score).toBe(20);
     expect(qiblaScore(3).score).toBe(10);
-    expect(masjidResult({ parts: 3, partsWithMistakes: 0, buildMistakes: 0, qiblaMistakes: 0 })).toMatchObject({ score: 60, maxScore: 60, stars: 3, factsMissed: [] });
-    expect(masjidResult({ parts: 3, partsWithMistakes: 0, buildMistakes: 0, qiblaMistakes: 2 })).toMatchObject({ score: 40, stars: 2, mistakes: 2, factsMissed: ['qibla-change'] });
+    expect(masjidResult({ parts: 6, partsWithMistakes: 0, buildMistakes: 0, qiblaMistakes: 0 })).toMatchObject({ score: 90, maxScore: 90, stars: 3, factsMissed: [] });
+    expect(masjidResult({ parts: 6, partsWithMistakes: 0, buildMistakes: 0, qiblaMistakes: 2 })).toMatchObject({ score: 70, stars: 2, mistakes: 2, factsMissed: ['qibla-change'] });
   });
 });
 
-describe('Build the Masjid – content comes from the Seerah', () => {
+describe('Build the Masjid – content and sources', () => {
   const e06 = EPISODES.find((e) => e.id === 'episode-06')!;
   const allBlocks = [...e06.context, ...e06.mainEvent, ...EVENTS.flatMap((e) => e.summary), ...PLACES.flatMap((p) => p.description)] as unknown as SeerahBlock[];
 
-  it('every part block and fact is a Seerah block with its label and sources', () => {
-    const blocks = [...Object.values(PARTS).map((p) => p.block)];
-    for (const block of blocks) {
-      const match = allBlocks.find((b) => b.text.en === block.text.en);
-      expect(match).toBeDefined();
-      expect(match).toMatchObject({ kind: block.kind, text: block.text, sourceIds: block.sourceIds });
-    }
+  it('every result fact is a Seerah block with its label and sources', () => {
     for (const fact of Object.values(MASJID_FACTS)) {
       const match = allBlocks.find((b) => b.text.en === fact.text.en);
       expect(match).toBeDefined();
@@ -137,10 +159,19 @@ describe('Build the Masjid – content comes from the Seerah', () => {
     }
   });
 
+  it('every inline caption has sources: the Seerah sources or the cited hadith of the building (Bukhari 446, 602)', () => {
+    const seerahRefs = Object.values(SOURCE_REFS);
+    const hadith = ['446', '602'].map((n) => ({ sourceName: 'Sahih al-Bukhari', sourceReference: n }));
+    for (const part of Object.values(PARTS)) {
+      expect(part.sources.length).toBeGreaterThan(0);
+      for (const s of part.sources) expect([...seerahRefs, ...hadith]).toContainEqual(s);
+    }
+  });
+
   it('dates come from the events', () => {
-    expect(PARTS.plot.date).toEqual({ label: EVENTS.find((e) => e.id === 'mosque')!.date.label, certainty: 'established', note: null });
+    expect(MOSQUE_DATE).toEqual({ label: EVENTS.find((e) => e.id === 'mosque')!.date.label, certainty: 'established', note: null });
     const qibla = EVENTS.find((e) => e.id === 'qibla')!;
-    expect(PARTS['qibla-wall'].date).toEqual({ label: qibla.date.label, certainty: qibla.date.certainty, note: qibla.date.note });
+    expect(QIBLA_DATE).toEqual({ label: qibla.date.label, certainty: qibla.date.certainty, note: qibla.date.note });
   });
 
   it('source refs render the Seerah short labels', () => {
@@ -160,19 +191,22 @@ describe('Build the Masjid – content comes from the Seerah', () => {
   });
 
   it('uses only existing art', () => {
-    for (const p of Object.values(PARTS)) expect(hasArt(p.art)).toBe(true);
     for (const f of Object.values(MASJID_FACTS)) expect(hasArt(f.art)).toBe(true);
-    for (const name of ['place.masjid-nabawi-early', 'sky.morning', 'garden.palm', 'object.kaaba-icon', 'object.prayer-mat']) expect(hasArt(name)).toBe(true);
+    const scene = ['morning', 'noon', 'evening'].map((time) => `seerah.masjid-sky-${time}`);
+    for (const name of [...scene, 'seerah.masjid-foreground', 'seerah.masjid-finished', 'seerah.masjid-finished-qibla', 'object.kaaba-icon', masjidGame.coverArt]) {
+      expect(hasArt(name)).toBe(true);
+    }
   });
 
   it('registers a valid game with complete texts', () => {
     const game = getGame(MASJID_GAME_ID)!;
     expect(() => validateGame(game)).not.toThrow();
-    for (const lang of ['en', 'de', 'bs'] as const) for (const key of ['title', 'description', 'howTo', 'part.qibla-wall']) expect(translateNs(masjidGame.i18n, lang, key)).not.toBe(key);
+    const keys = ['title', 'description', 'howTo', ...(Object.keys(PARTS) as PartId[]).flatMap((id) => [`part.${id}`, `short.${id}`, `caption.${id}`])];
+    for (const lang of LANGUAGES) for (const key of keys) expect(translateNs(masjidGame.i18n, lang, key)).not.toBe(key);
   });
 });
 
-// ---------- render ----------
+// ---------- render: play every level to the end ----------
 
 interface Node {
   props: Record<string, any>;
@@ -184,12 +218,15 @@ const { act, create } = require('react-test-renderer') as {
   create: (element: React.ReactElement) => { root: Node; unmount: () => void };
 };
 
+const en = (key: string, params?: Record<string, string | number>) => translateNs(masjidGame.i18n, 'en', key, params);
 const findPress = (root: Node, label: string) => root.findAll((n) => typeof n.props.onPress === 'function' && n.props.accessibilityLabel === label)[0];
+const findButton = (root: Node, label: string) => root.findAll((n) => typeof n.props.onPress === 'function' && n.props.label === label)[0];
 async function press(root: Node, label: string) {
-  const node = findPress(root, label);
+  const node = findPress(root, label) ?? findButton(root, label);
   if (!node) throw new Error(`control not found: ${label}`);
   await act(() => node.props.onPress());
 }
+const place = (root: Node, id: PartId) => press(root, en('a11y.part', { part: en(`part.${id}`) }));
 async function layout(root: Node) {
   for (const node of root.findAll((n) => typeof n.props.onLayout === 'function')) {
     await act(() => node.props.onLayout({ nativeEvent: { layout: { x: 0, y: 0, width: 360, height: 620 } } }));
@@ -215,7 +252,7 @@ function api(level: 1 | 2 | 3, onComplete: (r: GameResultInput) => void): GameAp
     reducedMotion: true,
     challengeMode: false,
     language: 'en',
-    t: (key, params) => translateNs(masjidGame.i18n, 'en', key, params),
+    t: (key, params) => en(key, params),
     l: (text) => text?.en ?? '',
   };
 }
@@ -229,49 +266,77 @@ async function mount(level: 1 | 2 | 3, onComplete: jest.Mock) {
   return tree;
 }
 
-describe('Build the Masjid – render', () => {
-  it('level 1: places the parts in order and reveals their facts', async () => {
-    const onComplete = jest.fn();
-    const tree = await mount(1, onComplete);
-    expect(texts(tree.root)).toContain('Next: The plot of land');
-    for (const part of ['The plot of land', 'Brick walls', 'Palm grove']) {
-      await press(tree.root, `Build: ${part}`);
-      expect(texts(tree.root)).toContain('Established fact');
-      await press(tree.root, 'Continue');
-    }
-    expect(onComplete).toHaveBeenCalledWith({ score: 30, maxScore: 30, stars: 3, mistakes: 0, factsMissed: [] });
+/** Places a part and checks the build goes on without any dialog: an inline caption, no Continue step. */
+async function placeInline(root: Node, id: PartId) {
+  await place(root, id);
+  const shown = texts(root);
+  expect(shown).toContain(en(`caption.${id}`));
+  expect(findButton(root, 'Continue')).toBeUndefined();
+  expect(shown).not.toContain('Continue');
+}
+
+/** The finished masjid is revealed as a picture; its button leads to the shell's result. */
+async function finishReveal(root: Node, art: string) {
+  expect(root.findAll((n) => n.props.name === art).length).toBeGreaterThan(0);
+  expect(texts(root)).toContain(en('reveal.title'));
+  await press(root, en('reveal.finish'));
+}
+
+describe('Build the Masjid – play every level to completion', () => {
+  it('never draws its own title (the GameShell header is the only one)', async () => {
+    const tree = await mount(1, jest.fn());
+    expect(texts(tree.root)).not.toContain(en('title'));
+    expect(tree.root.findAll((n) => n.props.accessibilityRole === 'header')).toHaveLength(0);
     await act(() => tree.unmount());
   });
 
-  it('level 2: a part before its base is gently refused', async () => {
+  it('level 1 (guided): the next part and its place glow; each part snaps in with a caption, then the masjid is revealed', async () => {
+    const onComplete = jest.fn();
+    const tree = await mount(1, onComplete);
+    for (const id of BUILD) {
+      expect(texts(tree.root)).toContain(en('play.next', { part: en(`part.${id}`) }));
+      await placeInline(tree.root, id);
+      if (id !== 'roof') expect(onComplete).not.toHaveBeenCalled();
+    }
+    expect(onComplete).not.toHaveBeenCalled();
+    await finishReveal(tree.root, 'seerah.masjid-finished');
+    expect(onComplete).toHaveBeenCalledTimes(1);
+    expect(onComplete).toHaveBeenCalledWith({ score: 40, maxScore: 40, stars: 3, mistakes: 0, factsMissed: [] });
+    await act(() => tree.unmount());
+  });
+
+  it('level 2 (from memory): a part before its base is gently refused inline', async () => {
     const onComplete = jest.fn();
     const tree = await mount(2, onComplete);
-    await press(tree.root, 'Build: The qibla wall');
-    expect(texts(tree.root)).toContain('First comes: Brick walls.');
-    for (const part of ['The plot of land', 'Brick walls', 'The qibla wall', 'Palm grove']) {
-      await press(tree.root, `Build: ${part}`);
-      await press(tree.root, 'Continue');
-    }
+    expect(texts(tree.root)).toContain(en('play.memory'));
+    await place(tree.root, 'roof');
+    expect(texts(tree.root)).toContain(en('play.needsFirst', { part: en('part.pillars') }));
+    expect(texts(tree.root)).not.toContain(en('caption.roof'));
+    for (const id of ['ground', 'pillars', 'walls', 'roof'] as PartId[]) await placeInline(tree.root, id);
+    await finishReveal(tree.root, 'seerah.masjid-finished');
     expect(onComplete).toHaveBeenCalledWith({ score: 36, maxScore: 40, stars: 3, mistakes: 1, factsMissed: [] });
     await act(() => tree.unmount());
   });
 
-  it('level 3: rows face Jerusalem, then the arrow turns to the Kaʿbah', async () => {
+  it('level 3: build, turn the qibla from Jerusalem to the Kaʿbah, add the new shade and the Suffa', async () => {
     const onComplete = jest.fn();
     const tree = await mount(3, onComplete);
-    for (const n of [1, 2, 3]) await press(tree.root, `Prayer row ${n}`);
-    expect(texts(tree.root)).toContain('The Muslims had prayed towards Jerusalem');
-    await press(tree.root, 'Continue');
+    for (const id of BUILD) await placeInline(tree.root, id);
+    expect(texts(tree.root)).toContain(en('play.turn'));
     // Facing east first is a gentle mistake.
-    for (let i = 0; i < 6; i++) await press(tree.root, 'Turn right');
-    await press(tree.root, 'Face this way');
-    expect(texts(tree.root)).toContain('Madinah lies north of Makkah.');
+    for (let i = 0; i < 6; i++) await press(tree.root, en('play.turnRight'));
+    await press(tree.root, en('play.face'));
+    expect(texts(tree.root)).toContain(en('play.hint'));
     // Continue turning to the south (332° + 13 × 15° = 167°).
-    for (let i = 0; i < 7; i++) await press(tree.root, 'Turn right');
-    await press(tree.root, 'Face this way');
+    for (let i = 0; i < 7; i++) await press(tree.root, en('play.turnRight'));
+    await press(tree.root, en('play.face'));
     expect(texts(tree.root)).toContain('Sixteen or seventeen months after the Hijrah');
-    await press(tree.root, 'Continue');
-    expect(onComplete).toHaveBeenCalledWith({ score: 50, maxScore: 60, stars: 2, mistakes: 1, factsMissed: ['qibla-change'] });
+    expect(findButton(tree.root, 'Continue')).toBeUndefined();
+    // The new parts come only after the turn.
+    await placeInline(tree.root, 'shade-south');
+    await placeInline(tree.root, 'suffa');
+    await finishReveal(tree.root, 'seerah.masjid-finished-qibla');
+    expect(onComplete).toHaveBeenCalledWith({ score: 80, maxScore: 90, stars: 3, mistakes: 1, factsMissed: ['qibla-change'] });
     await act(() => tree.unmount());
   });
 });

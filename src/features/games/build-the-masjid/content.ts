@@ -1,10 +1,14 @@
 import type { LocalizedText, SourceRef } from '@/core/models';
 
 /*
- * Content of Build the Masjid – copied unchanged from the Seerah content (src/features/seerah/content: episode-06.json,
- * events.json "mosque" / "qibla", places.json "makkah" / "madinah", questions/episode-06.json). Each placed part reveals
- * one of these blocks with its label and sources. Parts the Seerah content does not describe (palm-trunk pillars,
- * palm-leaf roof, the suffa) are left out on purpose.
+ * Content of Build the Masjid – the facts of the result screen are copied unchanged from the Seerah content
+ * (src/features/seerah/content: episode-06.json, events.json "mosque" / "qibla", places.json "makkah" / "madinah",
+ * questions/episode-06.json).
+ *
+ * The short inline captions while building (i18n `caption.*`) also name the building materials and the Suffa. They
+ * follow the hadith text directly: Sahih al-Bukhari 446 (Ibn ʿUmar: the masjid was built of mud bricks, its roof of
+ * palm leaves, its pillars of palm trunks) and 602 (the people of the Suffa were poor; whoever had food for two should
+ * take a third). These two hadith are not (yet) in the Seerah sources list, so they are cited as plain SourceRefs.
  */
 
 export type SeerahSourceId = 'bukhari-428' | 'bukhari-3905' | 'bukhari-40' | 'q-2-144' | 'ibn-hisham';
