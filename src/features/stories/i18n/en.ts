@@ -12,6 +12,15 @@ const en = {
   'tab.progress': 'Your progress',
   'tab.storyNumber': 'Story {number}',
 
+  'journey.title': 'The journey of the prophets',
+  'journey.subtitle': 'From Adam to Muhammad ﷺ, in the order of the prophets.',
+  'journey.part': 'Part {number}',
+  'journey.range': '{first} – {last}',
+  'journey.here': 'You are here',
+  'journey.count': '{done} of {total} stories',
+  'journey.more': 'More prophets are joining the journey soon, in sha Allah.',
+  'journey.symbol': 'Symbol of the story: {name}',
+
   'honorific.alayhis-salam': 'peace be upon him',
   'honorific.sallallahu-alayhi-wa-sallam': 'peace and blessings be upon him',
 
@@ -60,6 +69,14 @@ const en = {
   'place.jerusalem': 'Bayt al-Maqdis',
   'place.judi': 'Al-Judi',
   'place.mesopotamia': 'Mesopotamia',
+  'place.nineveh': 'Nineveh',
+  'place.canaan': 'Canaan (Palestine)',
+  'place.lut': 'Cities of Lut (Dead Sea)',
+  'place.sinai': 'Sinai (Mount Tur)',
+  'place.madyan': 'Madyan',
+  'place.hijr': 'Al-Hijr',
+  'place.ahqaf': 'Al-Ahqaf',
+  'place.saba': "Saba' (Yemen)",
 
   'reward.title': 'Story complete!',
   'reward.lines.storyComplete': 'Story completed',

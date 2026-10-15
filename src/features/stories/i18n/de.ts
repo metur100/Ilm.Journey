@@ -13,6 +13,15 @@ const de: Record<StoriesKey, string> = {
   'tab.progress': 'Dein Fortschritt',
   'tab.storyNumber': 'Geschichte {number}',
 
+  'journey.title': 'Die Reise der Propheten',
+  'journey.subtitle': 'Von Adam bis Muhammad ﷺ, in der Reihenfolge der Propheten.',
+  'journey.part': 'Teil {number}',
+  'journey.range': '{first} – {last}',
+  'journey.here': 'Du bist hier',
+  'journey.count': '{done} von {total} Geschichten',
+  'journey.more': 'Bald kommen weitere Propheten auf die Reise, in scha Allah.',
+  'journey.symbol': 'Symbol der Geschichte: {name}',
+
   'honorific.alayhis-salam': 'Friede sei mit ihm',
   'honorific.sallallahu-alayhi-wa-sallam': 'Allahs Segen und Frieden seien auf ihm',
 
@@ -61,6 +70,14 @@ const de: Record<StoriesKey, string> = {
   'place.jerusalem': 'Bait al-Maqdis',
   'place.judi': 'Al-Dschudi',
   'place.mesopotamia': 'Mesopotamien',
+  'place.nineveh': 'Ninive',
+  'place.canaan': 'Kanaan (Palästina)',
+  'place.lut': 'Städte Luts (Totes Meer)',
+  'place.sinai': 'Sinai (Berg Tur)',
+  'place.madyan': 'Madyan',
+  'place.hijr': 'Al-Hidschr',
+  'place.ahqaf': 'Al-Ahqaf',
+  'place.saba': 'Saba (Jemen)',
 
   'reward.title': 'Geschichte geschafft!',
   'reward.lines.storyComplete': 'Geschichte abgeschlossen',

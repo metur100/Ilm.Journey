@@ -13,6 +13,15 @@ const bs: Record<StoriesKey, string> = {
   'tab.progress': 'Tvoj napredak',
   'tab.storyNumber': 'Kazivanje {number}',
 
+  'journey.title': 'Putovanje kroz kazivanja o poslanicima',
+  'journey.subtitle': 'Od Adema, a.s., do Muhammeda, s.a.v.s., redom kojim su poslanici dolazili.',
+  'journey.part': 'Dio {number}',
+  'journey.range': '{first} – {last}',
+  'journey.here': 'Ovdje si',
+  'journey.count': '{done} od {total} kazivanja',
+  'journey.more': 'Uskoro će se putovanju pridružiti još poslanika, in šā Allah.',
+  'journey.symbol': 'Simbol kazivanja: {name}',
+
   'honorific.alayhis-salam': 'a.s.',
   'honorific.sallallahu-alayhi-wa-sallam': 's.a.v.s.',
 
@@ -61,6 +70,14 @@ const bs: Record<StoriesKey, string> = {
   'place.jerusalem': 'Bejtul-Makdis',
   'place.judi': 'Džudi',
   'place.mesopotamia': 'Mezopotamija',
+  'place.nineveh': 'Ninive',
+  'place.canaan': 'Kanaan (Palestina)',
+  'place.lut': 'Lutovi gradovi (Mrtvo more)',
+  'place.sinai': 'Sinaj (brdo Tur)',
+  'place.madyan': 'Medjen',
+  'place.hijr': 'El-Hidžr',
+  'place.ahqaf': 'El-Ahkaf',
+  'place.saba': 'Saba (Jemen)',
 
   'reward.title': 'Kazivanje završeno!',
   'reward.lines.storyComplete': 'Kazivanje završeno',
