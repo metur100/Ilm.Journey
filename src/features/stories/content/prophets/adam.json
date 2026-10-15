@@ -34,9 +34,9 @@
       "id": "adam-s2",
       "title": { "en": "The Garden", "de": "Der Garten", "bs": "Džennet" },
       "text": {
-        "en": "Adam and his wife (known in Islamic tradition as Hawwa) lived in the Garden. They could eat from everything except one tree. Shaytan whispered to them, and they ate from that tree.",
-        "de": "Adam und seine Frau (in der islamischen Überlieferung als Hawwa bekannt) lebten im Garten. Sie durften von allem essen, außer von einem Baum. Schaitan flüsterte ihnen ein, und sie aßen von diesem Baum.",
-        "bs": "Adem i njegova žena (u islamskoj predaji poznata kao Hava) živjeli su u Džennetu. Smjeli su jesti od svega osim s jednog drveta. Šejtan im je došaptavao i oni su jeli s tog drveta."
+        "en": "Adam and his wife (named Hawwa in the hadith) lived in the Garden. They could eat from everything except one tree. Shaytan whispered to them, and they ate from that tree.",
+        "de": "Adam und seine Frau (im Hadith Hawwa genannt) lebten im Garten. Sie durften von allem essen, außer von einem Baum. Schaitan flüsterte ihnen ein, und sie aßen von diesem Baum.",
+        "bs": "Adem i njegova žena (u hadisu nazvana Hava) živjeli su u Džennetu. Smjeli su jesti od svega osim s jednog drveta. Šejtan im je došaptavao i oni su jeli s tog drveta."
       },
       "scene": { "sky": "sunset", "elements": ["garden", "tree", "hills"] },
       "interactionId": "adam-sorry",

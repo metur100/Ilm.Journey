@@ -155,9 +155,9 @@
       "topic": "arabic-prayer",
       "title": { "en": "Words of prayer and remembrance", "de": "Wörter des Gebets und Gedenkens", "bs": "Riječi namaza i zikra" },
       "summary": {
-        "en": "Phrases Muslims say every day.",
-        "de": "Sätze, die Muslime jeden Tag sagen.",
-        "bs": "Izrazi koje muslimani izgovaraju svaki dan."
+        "en": "Phrases of remembrance for every day.",
+        "de": "Sätze des Gedenkens für jeden Tag.",
+        "bs": "Izrazi zikra za svaki dan."
       },
       "sections": [
         { "arabic": "بِسْمِ اللّٰه", "transliteration": "bismillāh", "body": { "en": "In the name of Allah – said before eating, reading, starting something.", "de": "Im Namen Allahs – sagt man vor dem Essen, Lesen, wenn man etwas beginnt.", "bs": "U ime Allaha – izgovara se prije jela, čitanja, početka nečega." } },

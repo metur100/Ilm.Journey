@@ -165,10 +165,39 @@ describe('islam-quest content in Ilm Journey', () => {
 describe('copied, not retyped', () => {
   const sibling = fs.existsSync(ISLAM_QUEST) ? it : it.skip;
 
-  sibling('the world files are byte-identical to islam-quest', () => {
+  // The only deliberate differences: GAMES-V3 §2 ("state truths directly", no "Muslims believe …").
+  const PHRASING_EDITS: Record<string, [string, string][]> = {
+    salah: [
+      ['"Why do Muslims pray?", "de": "Warum beten Muslime?", "bs": "Zašto muslimani klanjaju?"', '"Why do we pray?", "de": "Warum beten wir?", "bs": "Zašto klanjamo?"'],
+      ['Muslims pray because Allah asked them to and because they love to obey Him.', 'We pray because Allah commanded it and because we love to obey Him.'],
+      ['Muslime beten, weil Allah es von ihnen verlangt und weil sie Ihm gerne gehorchen.', 'Wir beten, weil Allah es geboten hat und weil wir Ihm gerne gehorchen.'],
+      ['Muslimani klanjaju jer je Allah to od njih tražio i jer Mu se rado pokoravaju.', 'Klanjamo jer je Allah to naredio i jer Mu se rado pokoravamo.'],
+    ],
+    quran: [
+      ['Muslims believe the Quran is the word of Allah.', 'The Quran is the word of Allah.'],
+      ['Muslime glauben, dass der Koran das Wort Allahs ist.', 'Der Koran ist das Wort Allahs.'],
+      ["Muslimani vjeruju da je Kur'an Allahov govor.", "Kur'an je Allahov govor."],
+    ],
+    akhlaq: [
+      ['Islam teaches us to control our anger.', 'Controlling our anger is good character.'],
+      ['Der Islam lehrt uns, unseren Zorn zu beherrschen.', 'Den eigenen Zorn zu beherrschen ist guter Charakter.'],
+      ['Islam nas uči da obuzdamo ljutnju.', 'Obuzdati ljutnju je lijep ahlak.'],
+    ],
+    arabic: [
+      ['Phrases Muslims say every day.', 'Phrases of remembrance for every day.'],
+      ['Sätze, die Muslime jeden Tag sagen.', 'Sätze des Gedenkens für jeden Tag.'],
+      ['Izrazi koje muslimani izgovaraju svaki dan.', 'Izrazi zikra za svaki dan.'],
+    ],
+  };
+
+  sibling('the world files are identical to islam-quest (apart from the v3 phrasing edits)', () => {
     for (const world of ['salah', 'quran', 'akhlaq', 'ramadan', 'arabic']) {
       const ours = fs.readFileSync(path.join(CONTENT_DIR, `${world}.json`), 'utf8');
-      const theirs = fs.readFileSync(path.join(ISLAM_QUEST, 'content', `${world}.json`), 'utf8');
+      let theirs = fs.readFileSync(path.join(ISLAM_QUEST, 'content', `${world}.json`), 'utf8');
+      for (const [from, to] of PHRASING_EDITS[world] ?? []) {
+        expect({ world, from, found: theirs.includes(from) }).toEqual({ world, from, found: true });
+        theirs = theirs.split(from).join(to);
+      }
       expect({ world, same: ours === theirs }).toEqual({ world, same: true });
     }
   });

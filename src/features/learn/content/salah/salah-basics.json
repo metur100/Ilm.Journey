@@ -4,7 +4,7 @@
   "order": 1,
   "difficulty": 1,
   "title": { "en": "What is Salah?", "de": "Was ist das Gebet?", "bs": "Šta je namaz?" },
-  "description": { "en": "The pillar of prayer and why Muslims pray.", "de": "Die Säule des Gebets und warum Muslime beten.", "bs": "Temelj namaza i zašto muslimani klanjaju." },
+  "description": { "en": "The pillar of prayer and why we pray.", "de": "Die Säule des Gebets und warum wir beten.", "bs": "Temelj namaza i zašto klanjamo." },
   "lesson": [
     {
       "body": {
@@ -16,7 +16,7 @@
       "transliteration": "ṣalāh"
     },
     {
-      "heading": { "en": "Why do Muslims pray?", "de": "Warum beten Muslime?", "bs": "Zašto muslimani klanjaju?" },
+      "heading": { "en": "Why do we pray?", "de": "Warum beten wir?", "bs": "Zašto klanjamo?" },
       "body": {
         "en": "Allah commands the prayer many times in the Quran. He says the prayer is for His remembrance, and that prayer keeps a person away from shameful and evil deeds.",
         "de": "Allah gebietet das Gebet viele Male im Koran. Er sagt, das Gebet diene Seinem Gedenken und halte den Menschen von schändlichen und bösen Taten ab.",

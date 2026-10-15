@@ -287,9 +287,9 @@
       ],
       "correctOptionId": "c",
       "explanation": {
-        "en": "Islam teaches us to control our anger. The Quran praises those who restrain their anger and pardon people.",
-        "de": "Der Islam lehrt uns, unseren Zorn zu beherrschen. Der Koran lobt die, die ihren Zorn zurückhalten und den Menschen verzeihen.",
-        "bs": "Islam nas uči da obuzdamo ljutnju. Kur'an hvali one koji suzbijaju srdžbu i ljudima opraštaju."
+        "en": "Controlling our anger is good character. The Quran praises those who restrain their anger and pardon people.",
+        "de": "Den eigenen Zorn zu beherrschen ist guter Charakter. Der Koran lobt die, die ihren Zorn zurückhalten und den Menschen verzeihen.",
+        "bs": "Obuzdati ljutnju je lijep ahlak. Kur'an hvali one koji suzbijaju srdžbu i ljudima opraštaju."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "3:134" }]
     },

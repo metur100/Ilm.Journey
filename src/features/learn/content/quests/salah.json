@@ -53,7 +53,7 @@
       "id": "salah-why",
       "worldId": "salah",
       "topic": "salah-basics",
-      "title": { "en": "Why do Muslims pray?", "de": "Warum beten Muslime?", "bs": "Zašto muslimani klanjaju?" },
+      "title": { "en": "Why do we pray?", "de": "Warum beten wir?", "bs": "Zašto klanjamo?" },
       "summary": {
         "en": "Allah commanded Salah. It helps us remember Him and stay on the good path.",
         "de": "Allah hat das Gebet geboten. Es hilft uns, an Ihn zu denken und auf dem guten Weg zu bleiben.",
@@ -64,9 +64,9 @@
         {
           "heading": { "en": "Allah commanded it", "de": "Allah hat es geboten", "bs": "Allah je to naredio" },
           "body": {
-            "en": "Many times the Quran tells believers to establish the prayer. Muslims pray because Allah asked them to and because they love to obey Him.",
-            "de": "Der Koran fordert die Gläubigen viele Male auf, das Gebet zu verrichten. Muslime beten, weil Allah es von ihnen verlangt und weil sie Ihm gerne gehorchen.",
-            "bs": "Kur'an mnogo puta poziva vjernike da obavljaju namaz. Muslimani klanjaju jer je Allah to od njih tražio i jer Mu se rado pokoravaju."
+            "en": "Many times the Quran tells believers to establish the prayer. We pray because Allah commanded it and because we love to obey Him.",
+            "de": "Der Koran fordert die Gläubigen viele Male auf, das Gebet zu verrichten. Wir beten, weil Allah es geboten hat und weil wir Ihm gerne gehorchen.",
+            "bs": "Kur'an mnogo puta poziva vjernike da obavljaju namaz. Klanjamo jer je Allah to naredio i jer Mu se rado pokoravamo."
           }
         },
         {
@@ -402,7 +402,7 @@
       "type": "multipleChoice",
       "worldId": "salah",
       "topic": "salah-basics",
-      "prompt": { "en": "Why do Muslims pray?", "de": "Warum beten Muslime?", "bs": "Zašto muslimani klanjaju?" },
+      "prompt": { "en": "Why do we pray?", "de": "Warum beten wir?", "bs": "Zašto klanjamo?" },
       "options": [
         { "id": "a", "text": { "en": "Because Allah commanded it and to remember Him", "de": "Weil Allah es geboten hat und um an Ihn zu denken", "bs": "Jer je Allah to naredio i da bi Ga se sjećali" } },
         { "id": "b", "text": { "en": "Only to do some exercise", "de": "Nur um Sport zu machen", "bs": "Samo radi vježbanja" } },
