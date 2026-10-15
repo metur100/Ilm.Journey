@@ -1,7 +1,7 @@
 import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useState } from 'react';
 
-import { configureAudioSession } from '@/core/services/audioSession';
+import { audioSessionReady } from '@/core/services/audioSession';
 import { audioUrlForAyah } from '@/features/quran';
 
 /**
@@ -68,15 +68,16 @@ export function playRecitation(globalAyah: number, onEnd: (error: boolean) => vo
       }
     });
     notify();
-    void configureAudioSession()
-      .then(() => {
-        if (player === next) next.play();
-      })
-      .catch(() => {
-        if (player !== next) return;
+    // Configure the app audio mode first (audible in silent mode); play even if that native call failed.
+    void audioSessionReady().then(() => {
+      if (player !== next) return;
+      try {
+        next.play();
+      } catch {
         stopRecitation();
         onEnd(true);
-      });
+      }
+    });
     return true;
   } catch {
     stopRecitation();

@@ -1,6 +1,7 @@
-import { type AudioPlayer, createAudioPlayer, setAudioModeAsync } from 'expo-audio';
+import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { configureAudioSession } from '@/core/services/audioSession';
 import { audioUrlForAyah } from '@/features/quran';
 
 /**
@@ -44,7 +45,6 @@ export function useAyahRecitation() {
         return;
       }
       try {
-        void setAudioModeAsync({ playsInSilentMode: true, shouldPlayInBackground: false }).catch(() => undefined);
         const next = createAudioPlayer({ uri: audioUrlForAyah(globalAyah) });
         player.current = next;
         setState('loading');
@@ -53,10 +53,19 @@ export function useAyahRecitation() {
         }, STREAM_TIMEOUT_MS);
         next.addListener('playbackStatusUpdate', (status) => {
           if (player.current !== next) return;
+          if (status.error) {
+            stop('unavailable');
+            return;
+          }
           if (status.isLoaded) setState('playing');
           if (status.didJustFinish) stop();
         });
-        next.play();
+        // Same app-wide audio mode as UI sounds and the Quran player (audible in silent mode, speaker output).
+        void configureAudioSession()
+          .catch(() => undefined)
+          .then(() => {
+            if (player.current === next) next.play();
+          });
       } catch {
         stop('unavailable');
       }

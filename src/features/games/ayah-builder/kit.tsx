@@ -1,4 +1,3 @@
-import * as Speech from 'expo-speech';
 import { type ReactNode, useEffect, useState } from 'react';
 import { Pressable, type StyleProp, StyleSheet, View, type ViewStyle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -14,7 +13,14 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { Art } from '@/core/art';
-import { speakArabic } from '@/core/services/speech';
+import {
+  arabicVoiceStatus,
+  detectArabicVoice,
+  onArabicVoiceStatus,
+  resetArabicVoiceForTests,
+  speakArabic,
+  stopSpeaking,
+} from '@/core/services/speech';
 
 /*
  * Small play kit shared by the Quran & Arabic games (Ayah Builder, Surah Garden, Letter Lanterns, Word Builder):
@@ -208,50 +214,34 @@ export function GrowIn({ children, reducedMotion, delay = 0, style }: { children
   return <Animated.View style={[style, animated]}>{children}</Animated.View>;
 }
 
-// ---------- Arabic voice (offline device TTS) ----------
-
-let arabicVoice: boolean | null = null;
-
-async function detectArabicVoice(): Promise<boolean> {
-  try {
-    const voices = await Speech.getAvailableVoicesAsync();
-    return Array.isArray(voices) && voices.some((v) => typeof v?.language === 'string' && v.language.toLowerCase().startsWith('ar'));
-  } catch {
-    return false;
-  }
-}
+// ---------- Arabic voice (device TTS, see docs/AUDIO.md) ----------
 
 /**
- * Whether the device has an Arabic text-to-speech voice (checked once). Without one, games show the target visually
- * instead of saying it. `speak` uses the core speech service (offline, optional).
+ * Whether the device has an Arabic text-to-speech voice (detected once by the core speech service). Without one, games
+ * show the target visually instead of saying it, and the app-wide hint explains how to install a voice.
  */
 export function useArabicVoice() {
-  const [available, setAvailable] = useState<boolean>(arabicVoice === true);
+  const [available, setAvailable] = useState<boolean>(arabicVoiceStatus() === 'available');
   useEffect(() => {
     let alive = true;
-    if (arabicVoice === null) {
-      void Promise.resolve()
-        .then(detectArabicVoice)
-        .then((found) => {
-          arabicVoice = found;
-          if (alive) setAvailable(found);
-        });
-    }
+    const off = onArabicVoiceStatus((s) => {
+      if (alive) setAvailable(s === 'available');
+    });
+    void detectArabicVoice().then((s) => {
+      if (alive) setAvailable(s === 'available');
+    });
     return () => {
       alive = false;
-      try {
-        Speech.stop();
-      } catch {
-        // ignore
-      }
+      off();
+      stopSpeaking();
     };
   }, []);
   return { available, speak: speakArabic };
 }
 
-/** Tests: pretend a voice is (or is not) installed. */
+/** Tests: pretend a voice is (or is not) installed; `null` forgets the answer. */
 export function setArabicVoiceForTests(value: boolean | null): void {
-  arabicVoice = value;
+  resetArabicVoiceForTests(value === null ? 'unknown' : value ? 'available' : 'missing');
 }
 
 const styles = StyleSheet.create({

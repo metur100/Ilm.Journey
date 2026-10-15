@@ -1,6 +1,6 @@
 import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 
-import { configureAudioSession } from './audioSession';
+import { audioSessionReady } from './audioSession';
 
 export type SoundName = 'click' | 'success' | 'failure' | 'reward';
 
@@ -29,13 +29,31 @@ function playerFor(name: SoundName): AudioPlayer | null {
   }
 }
 
-/** Plays a short UI sound. Audio is optional: failures are ignored so the app keeps working. */
+function rewindAndPlay(player: AudioPlayer): void {
+  try {
+    // Rewind first (the player stays at the end after the previous play), but never let a failed seek swallow the sound.
+    player
+      .seekTo(0)
+      .catch(() => undefined)
+      .then(() => player.play())
+      .catch(() => undefined);
+  } catch {
+    // Audio is optional.
+  }
+}
+
+/**
+ * Plays a short UI sound. Audio is optional: failures are ignored so the app keeps working, and a failed audio-mode
+ * call does not prevent playback (see docs/AUDIO.md).
+ */
 export function playSound(name: SoundName): void {
-  void configureAudioSession()
-    .then(() => {
-      const player = playerFor(name);
-      if (!player) return;
-      return player.seekTo(0).then(() => player.play());
-    })
-    .catch(() => undefined);
+  void audioSessionReady().then(() => {
+    const player = playerFor(name);
+    if (player) rewindAndPlay(player);
+  });
+}
+
+/** Tests: drop the cached players. */
+export function resetSoundsForTests(): void {
+  players.clear();
 }

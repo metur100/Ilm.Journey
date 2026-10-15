@@ -30,6 +30,7 @@ import { AppState, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { ArabicVoiceHint } from "@/core/components/audio/ArabicVoiceHint";
 import { CelebrationOverlay } from "@/core/components/game/CelebrationOverlay";
 import { ErrorState } from "@/core/components/ui/States";
 import { languageFromLocale, translate } from "@/core/i18n";
@@ -162,6 +163,7 @@ export default function RootLayout() {
             />
           </Stack>
           <CelebrationOverlay />
+          <ArabicVoiceHint />
         </SafeAreaProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
