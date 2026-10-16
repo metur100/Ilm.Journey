@@ -32,7 +32,7 @@ const DEEDS: Record<string, { art: string; ref: string; good: boolean }> = {
   forgive: { art: 'object.prayer-beads', ref: '110:3', good: true },
   mock: { art: 'body.mouth', ref: '104:1', good: false },
   hoard: { art: 'object.coin-jar', ref: '104:2', good: false },
-  repel: { art: 'object.fence', ref: '107:2', good: false },
+  repel: { art: 'garden.fence', ref: '107:2', good: false },
   scold: { art: 'object.envelope', ref: '93:10', good: false },
   showoff: { art: 'object.lamp', ref: '107:6', good: false },
   withhold: { art: 'object.key', ref: '107:7', good: false },
