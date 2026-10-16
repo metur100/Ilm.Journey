@@ -193,7 +193,7 @@ export function BuildScene(props: BuildSceneProps) {
       <InlineCaption text={selected ? env.kt('fb.selected', { label: label(parts.find((p) => p.id === selected)!) }) : core.caption?.text} tone={selected ? 'hint' : core.caption?.tone} />
       <Tray label={env.kt('tray')} style={styles.tray}>
         {visible.map((part) => (
-          <Animated.View key={part.id} entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(20)} layout={reduced ? undefined : LinearTransition.springify().damping(16)}>
+          <Animated.View key={part.id} entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(20)} layout={reduced ? undefined : LinearTransition.duration(220)}>
             <DragTile
               id={part.id}
               selected={selected === part.id}

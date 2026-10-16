@@ -174,7 +174,7 @@ export function JigsawReveal(props: JigsawRevealProps) {
                     hoverStyle={{ borderRadius: 6, borderWidth: 3, borderColor: k.gold, backgroundColor: k.slotHover }}
                   >
                     {piece !== null ? (
-                      <Animated.View entering={reduced || swap ? undefined : ZoomIn.springify().damping(13)}>
+                      <Animated.View entering={reduced || swap ? undefined : ZoomIn.springify().damping(16)}>
                         <Piece art={art} index={piece} cols={cols} rows={rows} w={cellW - (swap ? 2 : 0)} h={cellH - (swap ? 2 : 0)} />
                         {right && !swap ? <Burst trigger={1} distance={cellW * 0.5} size={10} /> : null}
                       </Animated.View>

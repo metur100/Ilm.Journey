@@ -374,6 +374,9 @@ function SequencePath(props: SequenceBoardProps) {
   const centers = pos.map((p) => [p.x + stoneW / 2, p.y + stoneH / 2] as [number, number]);
   const pathD = centers.length > 1 ? smoothOpen(centers, 0.6) : '';
   const tileW = Math.min(stoneW, pictures ? 96 : 150);
+  // Word tiles share one width: 2 per row, 3 when there are many.
+  const wordCols = items.length > 4 ? 3 : 2;
+  const wordW = size.w > 0 ? Math.floor((size.w - spacing.sm * (wordCols - 1)) / wordCols) : 120;
 
   return (
     <View style={styles.root} testID={testID}>
@@ -399,7 +402,7 @@ function SequencePath(props: SequenceBoardProps) {
                     style={{ flex: 1 }}
                   >
                     {placed ? (
-                      <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(12)} style={{ flex: 1, alignSelf: 'stretch' }}>
+                      <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(16)} style={{ flex: 1, alignSelf: 'stretch' }}>
                         <Tile state="placed" height={stoneH} padding={4}>
                           <FaceView face={item} artSize={Math.min(44, stoneH - 26)} arabicSize={22} variant="tiny" numberOfLines={2} />
                         </Tile>
@@ -426,7 +429,7 @@ function SequencePath(props: SequenceBoardProps) {
         {tray
           .filter((item) => !filled.includes(item.id))
           .map((item) => (
-            <Animated.View key={item.id} layout={reduced ? undefined : LinearTransition.springify().damping(16)}>
+            <Animated.View key={item.id} layout={reduced ? undefined : LinearTransition.duration(220)}>
               <DragTile
                 id={item.id}
                 selected={selected === item.id}
@@ -442,7 +445,7 @@ function SequencePath(props: SequenceBoardProps) {
                 }}
                 onDrop={(zone) => (zone.startsWith('step-') ? place(item.id, Number(zone.slice(5))) : false)}
               >
-                <Tile state={selected === item.id ? 'selected' : 'idle'} width={pictures ? tileW : undefined} minHeight={52} style={!pictures ? { maxWidth: size.w || undefined } : undefined}>
+                <Tile state={selected === item.id ? 'selected' : 'idle'} width={pictures ? tileW : wordW} minHeight={52}>
                   <FaceView face={item} artSize={40} arabicSize={22} variant={pictures ? 'tiny' : 'small'} numberOfLines={2} />
                 </Tile>
               </DragTile>
@@ -460,7 +463,7 @@ const styles = StyleSheet.create({
   rowFace: { flexDirection: 'row', alignItems: 'center', paddingLeft: spacing.sm, gap: spacing.sm },
   rowContent: { flex: 1, justifyContent: 'center' },
   number: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center' },
-  move: { width: 40, height: TOUCH_TARGET, alignItems: 'center', justifyContent: 'center' },
+  move: { width: 44, height: TOUCH_TARGET, alignItems: 'center', justifyContent: 'center' },
   pathArea: { flex: 1, minHeight: 160 },
   pathTray: { minHeight: 60, paddingTop: spacing.xs },
 });

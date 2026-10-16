@@ -170,7 +170,7 @@ export function LetterJoin(props: LetterJoinProps) {
                   style={{ flex: 1 }}
                 >
                   {i < placed ? (
-                    <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(12)} style={{ flex: 1, alignSelf: 'stretch' }}>
+                    <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(16)} style={{ flex: 1, alignSelf: 'stretch' }}>
                       <Tile state="placed" height={72} padding={0}>
                         <AppText script="arabic" style={{ fontFamily: fonts.arabicBold, fontSize: 30, lineHeight: 50 }} color={k.text}>
                           {letter}
@@ -190,7 +190,7 @@ export function LetterJoin(props: LetterJoinProps) {
         {pool
           .filter((t) => !used.includes(t.id))
           .map((t) => (
-            <Animated.View key={t.id} layout={reduced ? undefined : LinearTransition.springify().damping(16)}>
+            <Animated.View key={t.id} layout={reduced ? undefined : LinearTransition.duration(220)}>
               <DragTile
                 id={t.id}
                 nudge={nudge[t.id] ?? 0}
