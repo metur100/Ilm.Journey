@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -33,6 +33,27 @@ export interface ScrubWashProps extends EngineProps {
   keepOrder?: boolean;
 }
 
+/** Mutable bookkeeping read synchronously by the rub handler (React state is what renders). */
+function createScrubStore() {
+  let cover: Record<string, number> = {};
+  let done: string[] = [];
+  let last: { x: number; y: number } | null = null;
+  return {
+    cover: () => cover,
+    done: () => done,
+    last: () => last,
+    setCover: (v: Record<string, number>) => {
+      cover = v;
+    },
+    setDone: (v: string[]) => {
+      done = v;
+    },
+    setLast: (v: { x: number; y: number } | null) => {
+      last = v;
+    },
+  };
+}
+
 /** Finger travel (in card widths) that covers one card completely. */
 const RUB_TO_FULL = 2.2;
 const TAP_STEP = 0.34;
@@ -49,9 +70,9 @@ export function ScrubWash(props: ScrubWashProps) {
   const k = useKitColors();
   const grid = useMemo(() => (ordered || props.keepOrder ? [...parts] : kitShuffle(parts, `${core.seed}:scrub`)), [parts, ordered, props.keepOrder, core.seed]);
   const [cover, setCover] = useState<Record<string, number>>({});
-  const coverRef = useRef<Record<string, number>>({});
   const [doneIds, setDoneIds] = useState<string[]>([]);
-  const doneRef = useRef<string[]>([]);
+  // Mutable bookkeeping read synchronously by the rub handler (state below is what renders).
+  const store = useMemo(() => createScrubStore(), []);
   const [shakeTick, setShakeTick] = useState<{ id: string; n: number }>({ id: '', n: 0 });
   const area = useMeasure();
   const testID = props.testID ?? 'scrub-wash';
@@ -66,18 +87,18 @@ export function ScrubWash(props: ScrubWashProps) {
   const cardH = area.h > 0 ? Math.max(84, Math.min(cardW * 1.1, (area.h - gap * (rows - 1)) / rows)) : 100;
 
   const complete = (id: string) => {
-    if (doneRef.current.includes(id)) return;
-    doneRef.current = [...doneRef.current, id];
-    setDoneIds(doneRef.current);
-    core.progress(doneRef.current.length);
+    if (store.done().includes(id)) return;
+    store.setDone([...store.done(), id]);
+    setDoneIds(store.done());
+    core.progress(store.done().length);
     const part = parts.find((p) => p.id === id)!;
     core.right({ caption: part.caption ? `${label(part)} – ${env.text(part.caption)}` : label(part), tone: part.caption ? 'fact' : 'right' });
-    if (doneRef.current.length === parts.length) core.finish(reduced ? 300 : 1100);
+    if (store.done().length === parts.length) core.finish(reduced ? 300 : 1100);
   };
 
   const add = (id: string, amount: number, fromTap: boolean) => {
-    if (core.finishedRef.current || doneRef.current.includes(id)) return;
-    const nextId = parts.find((p) => !doneRef.current.includes(p.id))?.id;
+    if (core.finishedRef.current || store.done().includes(id)) return;
+    const nextId = parts.find((p) => !store.done().includes(p.id))?.id;
     if (ordered && id !== nextId) {
       if (fromTap) {
         core.wrong(id, props.wrongText ? env.text(props.wrongText) : undefined);
@@ -85,18 +106,17 @@ export function ScrubWash(props: ScrubWashProps) {
       }
       return;
     }
-    const value = Math.min(1, (coverRef.current[id] ?? 0) + amount);
-    coverRef.current = { ...coverRef.current, [id]: value };
-    setCover(coverRef.current);
+    const value = Math.min(1, (store.cover()[id] ?? 0) + amount);
+    store.setCover({ ...store.cover(), [id]: value });
+    setCover(store.cover());
     if (fromTap) core.touch();
     if (value >= 0.999) complete(id);
   };
 
   // Finger rubbing: hit-test the grid on the JS side (positions relative to the grid).
-  const last = useRef<{ x: number; y: number } | null>(null);
   const rubAt = (x: number, y: number) => {
-    const prev = last.current;
-    last.current = { x, y };
+    const prev = store.last();
+    store.setLast({ x, y });
     if (!prev) return;
     const col = Math.floor(x / (cardW + gap));
     const row = Math.floor(y / (cardH + gap));
@@ -109,7 +129,7 @@ export function ScrubWash(props: ScrubWashProps) {
     add(part.id, rubCoverage(0, d, cardW), false);
   };
   const endRub = () => {
-    last.current = null;
+    store.setLast(null);
   };
   const pan = useMemo(
     () =>
@@ -132,7 +152,7 @@ export function ScrubWash(props: ScrubWashProps) {
     },
     mistake: () => {
       if (!ordered) return false;
-      const other = parts.find((p) => !doneRef.current.includes(p.id) && p.id !== next?.id);
+      const other = parts.find((p) => !store.done().includes(p.id) && p.id !== next?.id);
       if (!other) return false;
       add(other.id, TAP_STEP, true);
       return true;
