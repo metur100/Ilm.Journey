@@ -14,7 +14,6 @@ const en = {
 
   // ---------- play shelf ----------
   'play.title': 'Play',
-  'play.sufaraGames': 'Sufara',
   'play.subtitle': 'Small games: do something, learn something – every game ends with what you learned.',
   'play.gameOfDay': 'Game of the day',
   'play.new': 'New',
@@ -168,7 +167,6 @@ const de: Record<Key, string> = {
   'home.openGarden': 'Dein Garten',
 
   'play.title': 'Spielen',
-  'play.sufaraGames': 'Sufara',
   'play.subtitle': 'Kleine Spiele: etwas tun, etwas lernen – jedes Spiel endet mit dem, was du gelernt hast.',
   'play.gameOfDay': 'Spiel des Tages',
   'play.new': 'Neu',
@@ -315,7 +313,6 @@ const bs: Record<Key, string> = {
   'home.openGarden': 'Tvoja bašča',
 
   'play.title': 'Igraj',
-  'play.sufaraGames': 'Sufara',
   'play.subtitle': 'Male igre: uradi nešto, nauči nešto – svaka igra završava onim što si naučio.',
   'play.gameOfDay': 'Igra dana',
   'play.new': 'Novo',
