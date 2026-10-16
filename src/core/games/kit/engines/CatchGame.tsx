@@ -250,10 +250,12 @@ function FallingItem({
   }, []);
   const style = useAnimatedStyle(() => ({ transform: [{ translateY: y.value }, { translateX: Math.sin(sway.value * Math.PI * 3) * 6 }, { rotate: `${Math.sin(sway.value * Math.PI * 2) * 8}deg` }] }));
   return (
-    <Animated.View entering={reduced ? FadeIn.duration(300) : undefined} exiting={FadeOut.duration(150)} style={[styles.item, { left: x }, style]}>
+    <Animated.View entering={reduced ? FadeIn.duration(300) : undefined} exiting={FadeOut.duration(150)} style={[styles.item, { left: x }]}>
+      <Animated.View style={style}>
       <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={label} testID={`catch-item-${falling.item.id}`} style={[styles.bubble, { backgroundColor: face, borderColor: border }]}>
         <FaceView face={{ ...falling.item, label: falling.item.art ? undefined : falling.item.label }} artSize={40} arabicSize={26} variant="tiny" numberOfLines={2} />
       </Pressable>
+      </Animated.View>
     </Animated.View>
   );
 }

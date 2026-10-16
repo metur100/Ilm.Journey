@@ -118,8 +118,8 @@ export function BalanceScale(props: BalanceScaleProps) {
 
   const W = area.w > 0 ? area.w : 320;
   const beamW = Math.min(W - 24, 340);
-  const half = beamW / 2 - 18;
-  const panW = Math.min(132, beamW * 0.42);
+  const panW = Math.min(132, beamW * 0.4);
+  const half = beamW / 2 - panW / 2 - 4;
   const beamStyle = useAnimatedStyle(() => ({ transform: [{ rotate: `${tilt.value}deg` }] }));
   const leftPan = useAnimatedStyle(() => ({ transform: [{ translateY: -Math.sin((tilt.value * Math.PI) / 180) * half }] }));
   const rightPan = useAnimatedStyle(() => ({ transform: [{ translateY: Math.sin((tilt.value * Math.PI) / 180) * half }] }));
@@ -155,7 +155,7 @@ export function BalanceScale(props: BalanceScaleProps) {
             <Circle cx={beamW / 2} cy={44} r={11} fill={k.gold} />
           </Svg>
           {/* beam */}
-          <Animated.View style={[styles.beam, { left: 6, width: beamW - 12, top: 38, backgroundColor: k.accent }, beamStyle]} />
+          <Animated.View style={[styles.beam, { left: beamW / 2 - half - 12, width: 2 * half + 24, top: 38, backgroundColor: k.accent }, beamStyle]} />
           {/* pans */}
           <Animated.View style={[styles.panWrap, { left: beamW / 2 - half - panW / 2, width: panW }, leftPan]} accessible accessibilityLabel={env.kt('scale.pan.left', { label: left.map(label).join(', ') })}>
             <Svg width={panW} height={70} style={styles.strings} pointerEvents="none">
