@@ -1,4 +1,5 @@
 import { registerFindQiblaGame } from './find-qibla/register';
+import { registerGhuslGame } from './ghusl/register';
 import { registerPrayerSkyGame } from './prayer-sky/register';
 import { registerWuduFlowGame } from './wudu-flow/register';
 
@@ -9,6 +10,7 @@ import { registerWuduFlowGame } from './wudu-flow/register';
  */
 export function registerSalahGames(): void {
   registerWuduFlowGame();
+  registerGhuslGame();
   registerPrayerSkyGame();
   registerFindQiblaGame();
 }
