@@ -1,9 +1,6 @@
 import { SKY_HORIZON, SKY_W, type KnownArtName, type SkyTime } from '@/core/art';
-import type { GameResultInput } from '@/core/games';
-import { shuffle, shuffleNotIdentity } from '@/core/utils/random';
 
-import { mistakesResult } from '../wudu-flow/kit/scoring';
-import { PRAYER_IDS, RAKAHS, SKY_FACTS, type PrayerId } from './content';
+import type { PrayerId } from './content';
 
 export { PRAYER_IDS, RAKAHS, type PrayerId } from './content';
 
@@ -106,75 +103,9 @@ export function layerOpacity(s: number, i: number): number {
   return clamp01((s - from) / (to - from));
 }
 
-export type SkyMode = 'sun' | 'rakahs' | 'day';
-
-export interface SkyConfig {
-  mode: SkyMode;
+/** Which way the learner should move the sun from s to reach the prayer (the day runs from left to right). */
+export function sunDirection(s: number, prayer: PrayerId): 'earlier' | 'later' {
+  return s > PRAYER_SPOT[prayer] ? 'earlier' : 'later';
 }
 
-/** The two answers a learner can give in level 2: too few / too many / right. */
-export function rakahFeedback(prayer: PrayerId, count: number): 'more' | 'fewer' | 'right' {
-  const target = RAKAHS[prayer];
-  return count === target ? 'right' : count < target ? 'more' : 'fewer';
-}
-
-export const MAX_BLOCKS = 6;
-
-/** Level 3 start: the five prayers mixed up (never already in order). */
-export function mixedPrayers(random: () => number = Math.random): PrayerId[] {
-  return shuffleNotIdentity(PRAYER_IDS, random);
-}
-
-export function skyTilesOrder(random: () => number = Math.random): PrayerId[] {
-  return shuffle(PRAYER_IDS, random);
-}
-
-export function isDayOrder(order: readonly PrayerId[]): boolean {
-  return order.length === PRAYER_IDS.length && order.every((p, i) => p === PRAYER_IDS[i]);
-}
-
-type Bonus = { points: number; max: number } | undefined;
-
-/** Level 1: five sun placements. Maghrib missed → its fact; two or more prayers missed → the fixed-times fact. */
-export function sunResult(wrongByPrayer: Partial<Record<PrayerId, number>>, bonus?: Bonus): GameResultInput {
-  const mistakes = Object.values(wrongByPrayer).reduce((a, b) => a + (b ?? 0), 0);
-  const missedPrayers = PRAYER_IDS.filter((p) => (wrongByPrayer[p] ?? 0) > 0);
-  const facts: string[] = [];
-  if ((wrongByPrayer.maghrib ?? 0) > 0) facts.push(SKY_FACTS.maghrib.id);
-  if (missedPrayers.length >= 2) facts.push(SKY_FACTS.fixedTimes.id);
-  return mistakesResult(PRAYER_IDS.length, mistakes, facts, bonus);
-}
-
-/** Level 2: rak'ah stacks. Any wrong count → the 17-rak'ahs fact; Fajr wrong → also its own fact. */
-export function rakahResult(wrongByPrayer: Partial<Record<PrayerId, number>>, bonus?: Bonus): GameResultInput {
-  const mistakes = Object.values(wrongByPrayer).reduce((a, b) => a + (b ?? 0), 0);
-  const facts: string[] = [];
-  if (mistakes > 0) facts.push(SKY_FACTS.rakahs.id);
-  if ((wrongByPrayer.fajr ?? 0) > 0) facts.push(SKY_FACTS.fajrTwo.id);
-  return mistakesResult(PRAYER_IDS.length, mistakes, facts, bonus);
-}
-
-/** Level 3: order the day (failed checks) + match each prayer to its sky (wrong matches). */
-export function dayResult(failedChecks: number, wrongMatches: Partial<Record<PrayerId, number>>, bonus?: Bonus): GameResultInput {
-  const matchMistakes = Object.values(wrongMatches).reduce((a, b) => a + (b ?? 0), 0);
-  const facts: string[] = [];
-  if (failedChecks > 0 || PRAYER_IDS.some((p) => p !== 'maghrib' && (wrongMatches[p] ?? 0) > 0)) facts.push(SKY_FACTS.dayOrder.id);
-  if ((wrongMatches.maghrib ?? 0) > 0) facts.push(SKY_FACTS.maghrib.id);
-  return mistakesResult(PRAYER_IDS.length * 2, failedChecks + matchMistakes, facts, bonus);
-}
-
-export const PAR_MS: Record<SkyMode, number> = { sun: 45_000, rakahs: 45_000, day: 60_000 };
-
-export const SKY_ART: readonly string[] = [
-  'sky.dawn',
-  'sky.morning',
-  'sky.noon',
-  'sky.afternoon',
-  'sky.sunset',
-  'sky.night',
-  'pose.standing',
-  'pose.bowing',
-  'object.prayer-mat',
-  'object.clock',
-  'ui.sparkle',
-];
+export const SKY_ART: readonly string[] = ['sky.dawn', 'sky.noon', 'sky.afternoon', 'sky.sunset', 'sky.night', 'object.sundial', 'sky.morning', 'object.clock'];
