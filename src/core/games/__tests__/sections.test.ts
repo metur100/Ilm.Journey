@@ -13,7 +13,7 @@ describe('Play sections', () => {
     expect(translateNs(playI18n, 'en', 'section.arabic')).toBe('Arabic / Sufara');
     expect(translateNs(playI18n, 'bs', 'section.arabic')).toBe('Arapski / Sufara');
     expect(translateNs(playI18n, 'de', 'section.arabic')).toBe('Arabisch / Sufara');
-    for (const id of [...PLAY_SECTIONS, DEV_SECTION]) expect(hasArt(SECTION_ART[id])).toBe(true);
+    for (const id of [...PLAY_SECTIONS, DEV_SECTION] as (keyof typeof SECTION_ART)[]) expect(hasArt(SECTION_ART[id])).toBe(true);
   });
 
   it('puts every game in exactly one section and dev fixtures only in the dev section', () => {

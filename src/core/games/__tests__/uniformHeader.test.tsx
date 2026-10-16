@@ -19,6 +19,7 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerFeatures();
 
 interface Node {
+  type: unknown;
   props: Record<string, any>;
   findAll: (predicate: (node: Node) => boolean) => Node[];
 }
