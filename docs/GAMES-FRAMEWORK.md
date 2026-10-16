@@ -483,3 +483,12 @@ end of a test (it stops the hint timers).
 | `arabic` faces for Arabic (RTL, Arabic font), `quran: true` only for generated Quran text | Typing ayahs by hand; Quran words as things to catch or throw |
 | Calm motion; trust the engines' reduced-motion paths | Fast, flashing or large motion; timers outside Challenge mode |
 | Check 360 dp width, dark mode, high contrast and the length of bs / de texts | Labels that only fit in English |
+
+## 12. Play tab sections
+
+The Play tab shows the game of the day and one card per section in the order of GAMES-V3 §3 (`PLAY_SECTIONS` in
+`src/core/games/sections.ts`): Salah, Quran, Arabic / Sufara, Prophets, Seerah, Akhlaq, Ramadan, History. A game's
+`topicId` decides its section; `order` sorts it inside the section grid (`/play/[section]`). Arabic and Sufara are one
+section (`topicId: 'arabic'`) whose screen also links the Sufara path (`/sufara`). There is no `shelfGroup` any more.
+Development fixtures (`dev: true`: the kit demos and Star Path) appear only in development builds, in the
+"Game kit (dev)" section.
