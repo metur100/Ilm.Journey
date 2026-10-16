@@ -1,0 +1,333 @@
+{
+  "id": "dawud",
+  "order": 17,
+  "prophetName": { "en": "Dawud", "de": "Dawud (David)", "bs": "Davud" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "Iron, Mountains and the Zabur", "de": "Eisen, Berge und der Zabur", "bs": "Željezo, planine i Zebur" },
+  "description": {
+    "en": "A brave young believer, mountains and birds praising Allah with him, iron made soft – and the Zabur.",
+    "de": "Ein mutiger junger Gläubiger, Berge und Vögel, die mit ihm Allah preisen, weich gemachtes Eisen – und der Zabur.",
+    "bs": "Hrabri mladi vjernik, planine i ptice koje s njim veličaju Allaha, omekšano željezo – i Zebur."
+  },
+  "place": { "en": "The land of the Children of Israel", "de": "Das Land der Kinder Israels", "bs": "Zemlja sinova Israilovih" },
+  "symbol": "mountains",
+  "symbolArt": "prophet.dawud-armour",
+  "cover": { "sky": "dawn", "elements": ["mountains", "sun"] },
+  "coverStage": {
+    "sky": "dawn",
+    "layers": [
+      { "art": "prophet.dawud-mountains-birds", "x": 200, "y": 240, "w": 400 },
+      { "art": "prophet.dawud-armour", "x": 200, "y": 150, "w": 100, "anchor": "center", "enter": "zoom", "at": 600, "anim": "glow" }
+    ],
+    "effects": [{ "type": "sunrays", "x": 200, "y": 150, "at": 600 }, { "type": "birds", "intensity": 2 }, { "type": "sparkle", "x": 200, "y": 150, "w": 120, "h": 100, "intensity": 1, "at": 1200 }]
+  },
+  "intro": {
+    "en": "Dawud (peace be upon him) was a prophet and a king. Allah gave him wisdom and the Zabur, and the mountains and the birds glorified Allah together with him.",
+    "de": "Dawud (Friede sei mit ihm) war ein Prophet und ein König. Allah gab ihm Weisheit und den Zabur, und die Berge und die Vögel priesen Allah zusammen mit ihm.",
+    "bs": "Davud, a.s., bio je poslanik i vladar. Allah mu je dao mudrost i Zebur, a planine i ptice su zajedno s njim veličale Allaha."
+  },
+  "scenes": [
+    {
+      "id": "dawud-s1",
+      "title": { "en": "Talut and Jalut", "de": "Talut und Dschalut", "bs": "Talut i Džalut" },
+      "text": {
+        "en": "The believers under King Talut faced the great army of Jalut. Only a small group stayed firm and said: \"How often has a small group overcome a large one by Allah's permission! Allah is with the patient.\" They prayed: \"Our Lord, pour patience upon us and make our feet firm.\" By Allah's permission they won; Dawud defeated Jalut, and Allah gave him kingship and wisdom.",
+        "de": "Die Gläubigen unter König Talut standen dem großen Heer Dschaluts gegenüber. Nur eine kleine Gruppe blieb standhaft und sagte: „Wie oft hat eine kleine Schar mit Allahs Erlaubnis eine große besiegt! Allah ist mit den Geduldigen.“ Sie beteten: „Unser Herr, gieße Geduld über uns aus und festige unsere Füße.“ Mit Allahs Erlaubnis siegten sie; Dawud besiegte Dschalut, und Allah gab ihm Herrschaft und Weisheit.",
+        "bs": "Vjernici pod vođstvom kralja Taluta stali su pred veliku Džalutovu vojsku. Samo mala skupina ostala je čvrsta i rekla: „Koliko je puta mala skupina, Allahovom voljom, nadvladala veliku! Allah je sa strpljivima.“ Molili su: „Gospodaru naš, podaj nam izdržljivosti i učvrsti korake naše.“ Allahovom voljom pobijedili su; Davud je savladao Džaluta, a Allah mu je dao vlast i mudrost."
+      },
+      "scene": { "sky": "dawn", "elements": ["hills", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "camera": "panRight",
+        "layers": [
+          { "art": "story.valley" },
+          { "art": "story.rocks", "x": 90, "y": 240, "w": 120 },
+          { "art": "story.tents", "x": 300, "y": 232, "w": 150, "opacity": 0.9 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 80, "y": 70 }, { "type": "dust", "intensity": 1 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 2400 }]
+      },
+      "interactionId": "dawud-few",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:249–251" }]
+    },
+    {
+      "id": "dawud-s2",
+      "title": { "en": "Mountains and birds", "de": "Berge und Vögel", "bs": "Planine i ptice" },
+      "text": {
+        "en": "Allah gave Dawud a great favour: \"O mountains, glorify Allah with him – and you birds as well!\" The mountains glorified Allah with him in the evening and after sunrise, and the birds gathered, all turning to Allah.",
+        "de": "Allah gab Dawud eine große Gunst: „O ihr Berge, preist Allah mit ihm – und ihr Vögel ebenso!“ Die Berge priesen Allah mit ihm am Abend und nach Sonnenaufgang, und die Vögel versammelten sich, alle Allah zugewandt.",
+        "bs": "Allah je Davudu dao veliku blagodat: „O planine, slavite Allaha zajedno s njim, i vi, ptice!“ Planine su s njim veličale Allaha navečer i nakon izlaska sunca, a ptice su se okupljale, sve se Allahu obraćajući."
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "sun", "clouds"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 320, "y": 110, "w": 70, "anchor": "center", "enter": "rise", "at": 300, "duration": 2400 },
+          { "art": "prophet.dawud-mountains-birds", "x": 200, "y": 244, "w": 400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 320, "y": 110, "at": 1200 }, { "type": "birds", "intensity": 3, "at": 800 }, { "type": "sparkle", "x": 200, "y": 90, "w": 300, "h": 80, "intensity": 1, "at": 1600 }]
+      },
+      "interactionId": "dawud-praise",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "34:10; 38:17–19" }]
+    },
+    {
+      "id": "dawud-s3",
+      "title": { "en": "Iron made soft", "de": "Weich gemachtes Eisen", "bs": "Omekšano željezo" },
+      "text": {
+        "en": "Allah made iron soft for Dawud: \"Make full coats of mail and measure the links well, and do good.\" Allah taught him to make armour to protect people in times of danger.",
+        "de": "Allah machte das Eisen für Dawud weich: „Fertige volle Panzerhemden an und miss die Ringe gut ab, und tut Gutes.“ Allah lehrte ihn, Rüstungen zu fertigen, um die Menschen in Zeiten der Gefahr zu schützen.",
+        "bs": "Allah je Davudu omekšao željezo: „Pravi široke oklope i pravilno spajaj karike, i dobra djela činite.“ Allah ga je naučio izrađivati oklope da bi štitili ljude u vremenima opasnosti."
+      },
+      "scene": { "sky": "sunset", "elements": ["mountains", "fire"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "warm",
+        "layers": [
+          { "art": "story.mountains", "opacity": 0.85 },
+          { "art": "prophet.dawud-iron", "x": 120, "y": 230, "w": 130, "enter": "rise", "at": 300 },
+          { "art": "prophet.dawud-chain", "x": 240, "y": 160, "w": 120, "anchor": "center", "enter": "fade", "at": 1000 },
+          { "art": "prophet.dawud-armour", "x": 320, "y": 232, "w": 96, "enter": "rise", "at": 1800 }
+        ],
+        "effects": [{ "type": "flameGlow", "x": 120, "y": 200, "intensity": 1 }, { "type": "sparkle", "x": 260, "y": 170, "w": 160, "h": 80, "intensity": 1, "at": 1800 }]
+      },
+      "interactionId": "dawud-iron",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "34:10–11; 21:80" }]
+    },
+    {
+      "id": "dawud-s4",
+      "title": { "en": "The Zabur", "de": "Der Zabur", "bs": "Zebur" },
+      "text": {
+        "en": "Allah says: \"And to Dawud We gave the Zabur.\" The Zabur is one of the books Allah revealed to His prophets, like the Tawrah to Musa and the Quran to Muhammad ﷺ.",
+        "de": "Allah sagt: „Und Dawud gaben Wir den Zabur.“ Der Zabur ist eines der Bücher, die Allah Seinen Propheten offenbarte, wie die Tora an Musa und der Koran an Muhammad ﷺ.",
+        "bs": "Allah kaže: „A Davudu smo dali Zebur.“ Zebur je jedna od knjiga koje je Allah objavio Svojim poslanicima, kao Tevrat Musau i Kur'an Muhammedu, s.a.v.s."
+      },
+      "scene": { "sky": "dusk", "elements": ["stars", "book", "lanterns"] },
+      "stage": {
+        "sky": "dusk",
+        "layers": [
+          { "art": "story.columns-hall", "opacity": 0.7 },
+          { "art": "prophet.dawud-zabur", "x": 200, "y": 228, "w": 150, "enter": "rise", "at": 400 },
+          { "art": "story.lamp", "x": 330, "y": 232, "w": 46, "enter": "fade", "at": 900 }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 330, "y": 214, "intensity": 1, "at": 900 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 1200 }]
+      },
+      "interactionId": "dawud-zabur",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "4:163; 17:55" }]
+    },
+    {
+      "id": "dawud-s5",
+      "title": { "en": "Judge with truth", "de": "Richte mit Wahrheit", "bs": "Sudi po istini" },
+      "text": {
+        "en": "Allah strengthened Dawud's kingdom and gave him wisdom and clear judgement. Allah told him: \"O Dawud, We have made you a successor on the earth, so judge between people with truth and do not follow your own desires.\" And though he was a king, Dawud ate from what he earned with his own hands.",
+        "de": "Allah festigte Dawuds Herrschaft und gab ihm Weisheit und ein klares Urteil. Allah sagte zu ihm: „O Dawud, Wir haben dich zum Nachfolger auf der Erde gemacht, so richte zwischen den Menschen mit Wahrheit und folge nicht deinen Neigungen.“ Und obwohl er ein König war, aß Dawud von dem, was er mit seinen eigenen Händen verdiente.",
+        "bs": "Allah je učvrstio Davudovu vlast i dao mu mudrost i jasno rasuđivanje. Allah mu je rekao: „O Davude, Mi smo te namjesnikom na Zemlji učinili, zato sudi ljudima po istini i ne povodi se za strašću.“ Iako je bio vladar, Davud je jeo od onoga što je zaradio svojim rukama."
+      },
+      "scene": { "sky": "day", "elements": ["city", "sun"] },
+      "stage": {
+        "sky": "day",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.city-ancient" },
+          { "art": "object.scales", "x": 200, "y": 226, "w": 110, "enter": "zoom", "at": 400 },
+          { "art": "prophet.dawud-chain", "x": 320, "y": 230, "w": 90, "enter": "fade", "at": 1000 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 80, "at": 400 }, { "type": "sparkle", "x": 200, "y": 170, "w": 120, "h": 60, "intensity": 1, "at": 1000 }]
+      },
+      "sources": [
+        { "sourceName": "Quran", "sourceReference": "38:20; 38:26" },
+        { "sourceName": "Bukhari", "sourceReference": "2072" }
+      ]
+    }
+  ],
+  "miniGameId": "dawud-decision",
+  "quizIds": ["dawud-memory", "dawud-work", "dawud-lesson"],
+  "lessons": [
+    {
+      "id": "dawud-l1",
+      "value": "justice",
+      "title": { "en": "Judge fairly", "de": "Gerecht urteilen", "bs": "Sudi pravedno" },
+      "explanation": {
+        "en": "Allah told Dawud to judge between people with truth and not to follow his own wishes. Fairness means listening to both sides.",
+        "de": "Allah befahl Dawud, zwischen den Menschen mit Wahrheit zu richten und nicht seinen eigenen Wünschen zu folgen. Gerechtigkeit heißt, beide Seiten anzuhören.",
+        "bs": "Allah je naredio Davudu da sudi ljudima po istini i da se ne povodi za svojim željama. Pravednost znači saslušati obje strane."
+      },
+      "example": {
+        "en": "Two friends argue about a ball. You listen to both before you say who is right.",
+        "de": "Zwei Freunde streiten um einen Ball. Du hörst beide an, bevor du sagst, wer recht hat.",
+        "bs": "Dva prijatelja se svađaju oko lopte. Saslušaš obojicu prije nego kažeš ko je u pravu."
+      },
+      "reflection": {
+        "en": "Do you listen to both sides before you decide?",
+        "de": "Hörst du beide Seiten an, bevor du entscheidest?",
+        "bs": "Saslušaš li obje strane prije nego što odlučiš?"
+      }
+    },
+    {
+      "id": "dawud-l2",
+      "value": "dhikr",
+      "title": { "en": "Glorify Allah – and work with your hands", "de": "Allah preisen – und mit den Händen arbeiten", "bs": "Veličaj Allaha – i radi svojim rukama" },
+      "explanation": {
+        "en": "Dawud glorified Allah so beautifully that the mountains and birds joined him. And he worked with his own hands. Dhikr and honest work go together.",
+        "de": "Dawud pries Allah so schön, dass die Berge und Vögel mit einstimmten. Und er arbeitete mit seinen eigenen Händen. Dhikr und ehrliche Arbeit gehören zusammen.",
+        "bs": "Davud je tako lijepo veličao Allaha da su mu se planine i ptice pridružile. I radio je svojim rukama. Zikr i pošten rad idu zajedno."
+      },
+      "example": {
+        "en": "You help to make dinner and say \"SubhanAllah\" while you work.",
+        "de": "Du hilfst beim Abendessen und sagst „SubhanAllah“, während du arbeitest.",
+        "bs": "Pomažeš spremati večeru i dok radiš izgovaraš „Subhanallah“."
+      },
+      "reflection": {
+        "en": "When could you remember Allah during your day?",
+        "de": "Wann könntest du im Laufe deines Tages an Allah denken?",
+        "bs": "Kada bi tokom dana mogao spomenuti Allaha?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "dawud-few",
+      "type": "trueFalse",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "The believers said: by Allah's permission a small group can overcome a large one.", "de": "Die Gläubigen sagten: Mit Allahs Erlaubnis kann eine kleine Schar eine große besiegen.", "bs": "Vjernici su rekli: Allahovom voljom mala skupina može nadvladati veliku." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"and Allah is with the patient\".",
+        "de": "Ja – „und Allah ist mit den Geduldigen“.",
+        "bs": "Da – „a Allah je sa strpljivima“."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:249" }]
+    },
+    {
+      "id": "dawud-praise",
+      "type": "multipleChoice",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "What glorified Allah together with Dawud?", "de": "Was pries Allah zusammen mit Dawud?", "bs": "Šta je zajedno s Davudom veličalo Allaha?" },
+      "options": [
+        { "id": "a", "text": { "en": "The mountains and the birds", "de": "Die Berge und die Vögel", "bs": "Planine i ptice" } },
+        { "id": "b", "text": { "en": "The ships on the sea", "de": "Die Schiffe auf dem Meer", "bs": "Lađe na moru" } },
+        { "id": "c", "text": { "en": "Nothing at all", "de": "Gar nichts", "bs": "Ništa" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"O mountains, glorify Allah with him – and you birds as well!\"",
+        "de": "„O ihr Berge, preist Allah mit ihm – und ihr Vögel ebenso!“",
+        "bs": "„O planine, slavite Allaha zajedno s njim, i vi, ptice!“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "34:10; 38:18–19" }]
+    },
+    {
+      "id": "dawud-iron",
+      "type": "trueFalse",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "Allah made iron soft for Dawud and taught him to make coats of mail.", "de": "Allah machte das Eisen für Dawud weich und lehrte ihn, Panzerhemden zu fertigen.", "bs": "Allah je Davudu omekšao željezo i naučio ga izrađivati oklope." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"make full coats of mail and measure the links well\".",
+        "de": "Ja – „fertige volle Panzerhemden an und miss die Ringe gut ab“.",
+        "bs": "Da – „pravi široke oklope i pravilno spajaj karike“."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "34:10–11; 21:80" }]
+    },
+    {
+      "id": "dawud-zabur",
+      "type": "multipleChoice",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "Which book did Allah give to Dawud?", "de": "Welches Buch gab Allah Dawud?", "bs": "Koju knjigu je Allah dao Davudu?" },
+      "options": [
+        { "id": "a", "text": { "en": "The Zabur", "de": "Den Zabur", "bs": "Zebur" } },
+        { "id": "b", "text": { "en": "The Tawrah", "de": "Die Tora", "bs": "Tevrat" } },
+        { "id": "c", "text": { "en": "The Injil", "de": "Das Indschil", "bs": "Indžil" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"And to Dawud We gave the Zabur.\" The Tawrah was given to Musa and the Injil to Isa.",
+        "de": "„Und Dawud gaben Wir den Zabur.“ Die Tora wurde Musa gegeben und das Indschil Isa.",
+        "bs": "„A Davudu smo dali Zebur.“ Tevrat je dat Musau, a Indžil Isau."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "4:163; 17:55" }]
+    },
+    {
+      "id": "dawud-decision",
+      "type": "scenario",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": {
+        "en": "Decision: your little brother and your best friend both say the last biscuit is theirs. You must decide. What would Dawud's example teach you?",
+        "de": "Entscheidung: Dein kleiner Bruder und dein bester Freund sagen beide, der letzte Keks gehöre ihnen. Du musst entscheiden. Was lehrt dich Dawuds Beispiel?",
+        "bs": "Odluka: tvoj mlađi brat i najbolji prijatelj obojica kažu da je posljednji keks njihov. Ti moraš odlučiti. Čemu te uči Davudov primjer?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Listen to both and decide by what is true", "de": "Beide anhören und nach der Wahrheit entscheiden", "bs": "Saslušati obojicu i odlučiti po istini" }, "feedback": { "en": "Yes – judge with truth, not with your wishes.", "de": "Ja – mit Wahrheit urteilen, nicht nach deinen Wünschen.", "bs": "Da – suditi po istini, a ne po željama." } },
+        { "id": "b", "text": { "en": "Give it to your best friend because you like him more", "de": "Ihn dem besten Freund geben, weil du ihn lieber magst", "bs": "Dati ga prijatelju jer ga više voliš" }, "feedback": { "en": "That would be following your own wishes.", "de": "Das hieße, den eigenen Wünschen zu folgen.", "bs": "To bi bilo povođenje za svojim željama." } },
+        { "id": "c", "text": { "en": "Eat it yourself", "de": "Ihn selbst essen", "bs": "Pojesti ga sam" }, "feedback": { "en": "A judge does not take what belongs to others.", "de": "Ein Richter nimmt nicht, was anderen gehört.", "bs": "Sudija ne uzima ono što pripada drugima." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"Judge between people with truth and do not follow your own desires.\"",
+        "de": "„Richte zwischen den Menschen mit Wahrheit und folge nicht deinen Neigungen.“",
+        "bs": "„Sudi ljudima po istini i ne povodi se za strašću.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "38:26" }]
+    },
+    {
+      "id": "dawud-memory",
+      "type": "memory",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "Memory: match each gift Allah gave Dawud.", "de": "Memory: Ordne die Gaben zu, die Allah Dawud gab.", "bs": "Memorija: spoji darove koje je Allah dao Davudu." },
+      "pairs": [
+        { "id": "p1", "left": { "en": "Mountains and birds", "de": "Berge und Vögel", "bs": "Planine i ptice" }, "right": { "en": "Glorified Allah with him", "de": "Priesen Allah mit ihm", "bs": "Veličali Allaha s njim" } },
+        { "id": "p2", "left": { "en": "Iron", "de": "Eisen", "bs": "Željezo" }, "right": { "en": "Made soft", "de": "Weich gemacht", "bs": "Omekšano" } },
+        { "id": "p3", "left": { "en": "A book", "de": "Ein Buch", "bs": "Knjiga" }, "right": { "en": "The Zabur", "de": "Der Zabur", "bs": "Zebur" } },
+        { "id": "p4", "left": { "en": "Kingship", "de": "Herrschaft", "bs": "Vlast" }, "right": { "en": "With wisdom", "de": "Mit Weisheit", "bs": "S mudrošću" } }
+      ],
+      "explanation": {
+        "en": "Allah gave Dawud many gifts – and he was thankful and glorified Allah.",
+        "de": "Allah gab Dawud viele Gaben – und er war dankbar und pries Allah.",
+        "bs": "Allah je Davudu dao mnoge darove – a on je bio zahvalan i veličao je Allaha."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:251; 34:10; 4:163" }]
+    },
+    {
+      "id": "dawud-work",
+      "type": "trueFalse",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "Even though he was a king, Dawud ate from the work of his own hands.", "de": "Obwohl er ein König war, aß Dawud von der Arbeit seiner eigenen Hände.", "bs": "Iako je bio vladar, Davud je jeo od rada svojih ruku." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – the Prophet ﷺ said that Dawud ate only from what he earned with his own hands.",
+        "de": "Ja – der Prophet ﷺ sagte, dass Dawud nur von dem aß, was er mit seinen eigenen Händen verdiente.",
+        "bs": "Da – Poslanik, s.a.v.s., rekao je da je Davud jeo samo od onoga što je zaradio svojim rukama."
+      },
+      "sources": [{ "sourceName": "Bukhari", "sourceReference": "2072" }]
+    },
+    {
+      "id": "dawud-lesson",
+      "type": "lessonChoice",
+      "storyId": "dawud",
+      "topic": "dawud",
+      "prompt": { "en": "What does the story of Dawud teach us?", "de": "Was lehrt uns die Geschichte Dawuds?", "bs": "Čemu nas uči kazivanje o Davudu?" },
+      "options": [
+        { "id": "a", "text": { "en": "Glorify Allah, work honestly and judge fairly", "de": "Allah preisen, ehrlich arbeiten und gerecht urteilen", "bs": "Veličati Allaha, pošteno raditi i pravedno suditi" } },
+        { "id": "b", "text": { "en": "Kings do not need to work", "de": "Könige müssen nicht arbeiten", "bs": "Vladari ne moraju raditi" } },
+        { "id": "c", "text": { "en": "Big armies always win", "de": "Große Heere gewinnen immer", "bs": "Velike vojske uvijek pobjeđuju" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Dawud's dhikr, his honest work and his fair judgement are an example for us.",
+        "de": "Dawuds Dhikr, seine ehrliche Arbeit und sein gerechtes Urteil sind ein Vorbild für uns.",
+        "bs": "Davudov zikr, njegov pošten rad i pravedno suđenje uzor su nam."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "2:249–251" },
+    { "sourceName": "Quran", "sourceReference": "34:10–11; 21:78–80" },
+    { "sourceName": "Quran", "sourceReference": "38:17–26" },
+    { "sourceName": "Quran", "sourceReference": "4:163; 17:55" }
+  ]
+}

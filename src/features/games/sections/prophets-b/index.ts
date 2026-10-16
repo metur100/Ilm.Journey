@@ -1,4 +1,5 @@
 import { registerAyyubGardenGame } from './ayyub-garden/register';
+import { registerDawudArmourGame } from './dawud-armour/register';
 import { registerDhulkiflLampsGame } from './dhulkifl-lanterns/register';
 import { registerHarunHelperGame } from './harun-helper/register';
 import { registerMusaSpringsGame } from './musa-springs/register';
@@ -21,4 +22,5 @@ export function registerProphetsBGames(): void {
   registerMusaSpringsGame();
   registerHarunHelperGame();
   registerDhulkiflLampsGame();
+  registerDawudArmourGame();
 }
