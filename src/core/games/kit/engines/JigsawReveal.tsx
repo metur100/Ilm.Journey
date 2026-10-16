@@ -142,13 +142,15 @@ export function JigsawReveal(props: JigsawRevealProps) {
   });
 
   const aspect = catalogue[art]?.aspect ?? 1;
-  const trayH = swap ? 0 : 92;
-  const boardW = area.w > 0 ? Math.min(area.w, Math.max(120, area.h - trayH) * aspect) : 0;
+  // Tray: up to 4 pieces at a time, all the same size (big enough to recognise and to grab).
+  const traySide = area.w > 0 ? Math.max(60, Math.min(96, Math.floor((area.w - spacing.sm * 3) / 4) - 10)) : 72;
+  const boardW = area.w > 0 ? Math.min(area.w - 8, Math.max(120, area.h - 8) * aspect) : 0;
   const boardH = boardW / aspect;
   const cellW = boardW / cols;
   const cellH = boardH / rows;
-  const trayScale = Math.min(1, 64 / Math.max(cellW, cellH));
+  const trayScale = Math.min(1, traySide / Math.max(cellW, cellH, 1));
   const tray = order.filter((p) => !cells.includes(p));
+  const trayVisible = tray.slice(0, 4);
 
   return (
     <View style={styles.root} testID={testID}>
@@ -161,7 +163,7 @@ export function JigsawReveal(props: JigsawRevealProps) {
               const row = Math.floor(cell / cols);
               const right = piece === cell;
               return (
-                <View key={cell} style={{ position: 'absolute', left: 4 + col * cellW, top: 4 + row * cellH, width: cellW, height: cellH }}>
+                <View key={cell} style={{ position: 'absolute', left: col * cellW, top: row * cellH, width: cellW, height: cellH }}>
                   <DropZone
                     id={`cell-${cell}`}
                     testID={`zone-cell-${cell}`}
@@ -189,9 +191,9 @@ export function JigsawReveal(props: JigsawRevealProps) {
       </View>
       <InlineCaption text={selected !== null && !swap ? env.kt('fb.selected', { label: env.kt('jigsaw.piece', { number: selected + 1 }) }) : core.caption?.text} tone={selected !== null && !swap ? 'hint' : core.caption?.tone} />
       {!swap ? (
-        <Tray label={env.kt('tray')} style={styles.tray}>
-          {tray.map((p) => (
-            <Animated.View key={p} entering={reduced ? FadeIn : undefined} layout={reduced ? undefined : LinearTransition.springify().damping(16)}>
+        <Tray label={env.kt('tray')} style={[styles.tray, { minHeight: traySide + 14 }]}>
+          {trayVisible.map((p) => (
+            <Animated.View key={p} entering={FadeIn.duration(200)} layout={reduced ? undefined : LinearTransition.duration(220)}>
               <DragTile
                 id={`piece-${p}`}
                 selected={selected === p}
@@ -235,7 +237,7 @@ const styles = StyleSheet.create({
   area: { flex: 1, alignItems: 'center', justifyContent: 'center', minHeight: 180 },
   frame: { borderRadius: radius.md, borderWidth: 4 },
   cell: { flex: 1, borderStyle: 'dashed', borderRadius: 4, overflow: 'hidden' },
-  tray: { minHeight: 76 },
+  tray: { alignItems: 'center' },
   trayPiece: { padding: 3, borderRadius: 9, borderWidth: 2, borderBottomWidth: 5 },
   srOnly: { position: 'absolute', width: 1, height: 1, opacity: 0 },
 });
