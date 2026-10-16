@@ -887,6 +887,125 @@ const lut = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Ismail – the valley without plants (14:37), Safa and Marwa (2:158), the spring of Zamzam (Bukhari 3364)
+
+/** A rocky hill (Safa / Marwa) standing on y. */
+function Hill({ c, x, y, w, h, color = '#A88672' }: { c: Ctx; x: number; y: number; w: number; h: number; color?: string }) {
+  return (
+    <G>
+      <Path d={`M${x - w / 2} ${y}C${x - w * 0.4} ${y - h * 0.7} ${x - w * 0.15} ${y - h} ${x} ${y - h}C${x + w * 0.2} ${y - h} ${x + w * 0.42} ${y - h * 0.6} ${x + w / 2} ${y}Z`} fill={dim(c, color)} />
+      <Path d={`M${x + w * 0.05} ${y - h}C${x + w * 0.2} ${y - h} ${x + w * 0.42} ${y - h * 0.6} ${x + w / 2} ${y}H${x + w * 0.1}C${x + w * 0.16} ${y - h * 0.5} ${x + w * 0.12} ${y - h * 0.8} ${x + w * 0.05} ${y - h}Z`} fill={dim(c, shade(color, 0.25))} opacity={0.6} />
+      {[0.3, 0.55].map((t) => (
+        <Ellipse key={t} cx={x - w * 0.18 + t * w * 0.4} cy={y - h * t} rx={w * 0.06} ry={h * 0.04} fill={dim(c, shade(color, 0.3))} opacity={0.5} />
+      ))}
+    </G>
+  );
+}
+
+/** The spring: water welling up in a ring of stones. */
+function ZamzamSpring({ c, cx, cy, s = 1 }: { c: Ctx; cx: number; cy: number; s?: number }) {
+  return (
+    <G transform={`translate(${cx} ${cy}) scale(${s})`}>
+      <Glow c={c} k={`zz${Math.round(cx)}`} cx={0} cy={-6} r={50} color={C.waterPale} opacity={0.7} />
+      <Ellipse cx={0} cy={0} rx={46} ry={13} fill={dim(c, C.stone, 0.2)} />
+      <Ellipse cx={0} cy={-1} rx={38} ry={9} fill={C.water} />
+      <Ellipse cx={-6} cy={-2} rx={20} ry={3} fill={C.waterLight} opacity={0.8} />
+      <Path d="M0 -4C-3 -16 -8 -24 -12 -28M0 -4C3 -16 8 -24 12 -28M0 -4V-32" stroke={C.waterLight} strokeWidth={2.6} strokeLinecap="round" fill="none" />
+      <Path d={dropPath(-13, -38, 8)} fill={C.waterLight} />
+      <Path d={dropPath(13, -38, 8)} fill={C.waterLight} />
+      <Path d={dropPath(0, -44, 9)} fill={C.waterPale} />
+    </G>
+  );
+}
+
+const ismail = {
+  /** "An uncultivated valley near Your sacred House" (14:37): bare hills, sand, no plants. */
+  'ismail-valley': art(W, H, (c) => (
+    <>
+      <Path d="M0 170L40 100 90 138 140 84 190 150Z" fill={dim(c, '#9E7A66')} />
+      <Path d="M400 170L370 92 320 130 270 80 220 150Z" fill={dim(c, '#94705C')} />
+      <Path d="M140 84L190 150H160L146 116Z M270 80L220 150H252L268 112Z" fill={dim(c, '#7A5A4C')} opacity={0.5} />
+      <Path d="M0 176C100 160 300 160 400 176V240H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 206C120 194 280 194 400 206V240H0Z" fill={dim(c, C.sandDeep)} />
+      {[[60, 214, 6], [150, 228, 5], [260, 220, 7], [350, 230, 5]].map(([x, y, r], i) => (
+        <Ellipse key={i} cx={x} cy={y} rx={r} ry={r * 0.55} fill={dim(c, C.stone)} />
+      ))}
+    </>
+  )),
+
+  /** The spring of Zamzam with its little basin (Bukhari 3364). */
+  'ismail-zamzam': art(140, 100, (c) => (
+    <>
+      <Shadow c={c} cx={70} cy={92} rx={58} />
+      <ZamzamSpring c={c} cx={70} cy={80} s={1.2} />
+      <Spark x={20} y={24} r={5} />
+      <Spark x={120} y={30} r={4} />
+    </>
+  )),
+
+  /** A rocky hill – Safa or Marwa (2:158). */
+  'ismail-hill': art(160, 100, (c) => (
+    <>
+      <Shadow c={c} cx={80} cy={96} rx={72} />
+      <Hill c={c} x={80} y={96} w={150} h={84} />
+    </>
+  )),
+
+  /** A leather waterskin. */
+  'ismail-waterskin': art(70, 80, (c) => (
+    <>
+      <Shadow c={c} cx={35} cy={76} rx={26} />
+      <Path d="M26 8H44V16C58 22 64 38 62 54C60 68 50 76 35 76C20 76 10 68 8 54C6 38 12 22 26 16Z" fill={C.woodLight} />
+      <Path d="M35 18C50 26 54 44 50 58C48 68 42 74 35 76C50 76 60 68 62 54C64 38 58 22 44 16Z" fill={C.wood} opacity={0.5} />
+      <Rect x={24} y={4} width={22} height={7} rx={3} fill={C.woodDark} />
+      <Path d="M18 34Q35 30 52 34" stroke={C.woodDark} strokeWidth={2} fill="none" opacity={0.5} />
+      <Path d={dropPath(35, 40, 16)} fill={C.waterLight} opacity={0.8} />
+    </>
+  )),
+
+  /** Safa (left) and Marwa (right) with the valley between them (game map with its own sky). */
+  'ismail-safa-marwa': art(400, 240, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#2B2F6E' : '#F7C98F'], [1, c.dark ? '#7A5A86' : '#FDEBCB']]} />
+      </Defs>
+      <Rect x={0} y={0} width={400} height={240} fill={c.url('sky')} />
+      <Path d="M0 140L60 96 120 126 200 90 280 124 340 92 400 130V170H0Z" fill={dim(c, '#C39C84', 0.4)} opacity={0.7} />
+      <Path d="M0 170C100 156 300 156 400 170V240H0Z" fill={dim(c, C.sand)} />
+      <Path d="M70 196C150 186 250 186 330 196" stroke={dim(c, C.sandLight)} strokeWidth={26} strokeLinecap="round" fill="none" opacity={0.6} />
+      <Hill c={c} x={58} y={206} w={120} h={92} />
+      <Hill c={c} x={346} y={206} w={110} h={80} color="#9C7C68" />
+      <Path d="M0 214C120 204 280 204 400 214V240H0Z" fill={dim(c, C.sandDeep)} />
+    </>
+  )),
+
+  /** The spring in the valley before the basin is built (game scene). */
+  'ismail-zamzam-site': art(400, 300, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#2B2F6E' : '#9FD0E8'], [1, c.dark ? '#7A5A86' : '#FCEBD0']]} />
+      </Defs>
+      <Rect x={0} y={0} width={400} height={300} fill={c.url('sky')} />
+      <Path d="M0 200L50 120 110 168 160 110 220 190Z" fill={dim(c, '#9E7A66')} />
+      <Path d="M400 200L360 112 300 160 250 104 190 190Z" fill={dim(c, '#94705C')} />
+      <Path d="M0 206C100 192 300 192 400 206V300H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 266C120 256 280 256 400 266V300H0Z" fill={dim(c, C.sandDeep)} />
+      <ZamzamSpring c={c} cx={200} cy={232} />
+    </>
+  )),
+
+  'ismail-basin-back': art(120, 23, (c) => (
+    <Path d="M2 21C10 6 40 2 60 2S110 6 118 21L104 21C96 12 80 10 60 10S24 12 16 21Z" fill={dim(c, C.stoneLight, 0.2)} />
+  )),
+  'ismail-basin-front': art(140, 28, (c) => (
+    <>
+      <Path d="M2 4C14 20 40 26 70 26S126 20 138 4L124 4C112 14 92 18 70 18S28 14 16 4Z" fill={dim(c, C.stone, 0.2)} />
+      <Path d="M30 14L34 22M70 18V26M108 14L104 22" stroke={C.stoneDark} strokeWidth={1.2} opacity={0.5} />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
@@ -897,6 +1016,7 @@ export const prophetA = {
   ...salih,
   ...ibrahim,
   ...lut,
+  ...ismail,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).

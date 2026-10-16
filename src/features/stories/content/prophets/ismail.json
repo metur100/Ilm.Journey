@@ -1,0 +1,304 @@
+{
+  "id": "ismail",
+  "order": 8,
+  "prophetName": { "en": "Ismail", "de": "Ismail", "bs": "Ismail" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Spring in the Valley", "de": "Die Quelle im Tal", "bs": "Izvor u dolini" },
+  "description": {
+    "en": "A mother's trust, seven runs between two hills, the spring of Zamzam – and a son true to his promise.",
+    "de": "Das Vertrauen einer Mutter, sieben Läufe zwischen zwei Hügeln, die Quelle Zamzam – und ein Sohn, der sein Versprechen hielt.",
+    "bs": "Povjerenje jedne majke, sedam trčanja između dva brežuljka, izvor Zemzem – i sin vjeran obećanju."
+  },
+  "place": { "en": "The valley of Makkah", "de": "Das Tal von Mekka", "bs": "Dolina Mekke" },
+  "symbol": "well",
+  "symbolArt": "prophet.ismail-zamzam",
+  "mapPlaces": ["makkah"],
+  "cover": { "sky": "dawn", "elements": ["mountains", "well"] },
+  "coverStage": {
+    "sky": "dawn",
+    "layers": [
+      { "art": "prophet.ismail-valley" },
+      { "art": "prophet.ismail-zamzam", "x": 200, "y": 230, "w": 120, "enter": "rise", "at": 500 }
+    ],
+    "effects": [{ "type": "sunrays", "x": 200, "y": 90, "intensity": 2 }, { "type": "ripples", "x": 200, "y": 206, "w": 70, "intensity": 2, "at": 900 }, { "type": "birds", "intensity": 1, "at": 1600 }]
+  },
+  "intro": {
+    "en": "Ismail (peace be upon him) was the son of Ibrahim and Hajar. His story begins in a dry valley where nothing grew – the valley of Makkah.",
+    "de": "Ismail (Friede sei mit ihm) war der Sohn von Ibrahim und Hadschar. Seine Geschichte beginnt in einem trockenen Tal, in dem nichts wuchs – dem Tal von Mekka.",
+    "bs": "Ismail, a.s., bio je sin Ibrahima i Hadžere. Njegovo kazivanje počinje u suhoj dolini u kojoj ništa nije raslo – u dolini Mekke."
+  },
+  "scenes": [
+    {
+      "id": "ismail-s1",
+      "title": { "en": "Trust in Allah", "de": "Vertrauen auf Allah", "bs": "Oslonac na Allaha" },
+      "text": {
+        "en": "Ibrahim brought Hajar and the baby Ismail to the valley of Makkah, near the place of the House, with some dates and a waterskin. Hajar asked: \"Has Allah commanded you this?\" He said yes. She said: \"Then He will not leave us.\" Ibrahim prayed: \"Our Lord, I have settled some of my family in a valley without plants, near Your Sacred House.\"",
+        "de": "Ibrahim brachte Hadschar und das Baby Ismail ins Tal von Mekka, nahe der Stelle des Hauses, mit etwas Datteln und einem Wasserschlauch. Hadschar fragte: „Hat Allah dir das befohlen?“ Er sagte ja. Sie sagte: „Dann wird Er uns nicht im Stich lassen.“ Ibrahim betete: „Unser Herr, ich habe einige meiner Familie in einem Tal ohne Pflanzen angesiedelt, bei Deinem heiligen Haus.“",
+        "bs": "Ibrahim je doveo Hadžeru i malog Ismaila u dolinu Mekke, blizu mjesta Kuće, s malo hurmi i mješinom vode. Hadžera je upitala: „Je li ti Allah ovo naredio?“ Rekao je da jeste. Ona je rekla: „Onda nas On neće napustiti.“ Ibrahim je molio: „Gospodaru naš, nastanio sam neke od svoje porodice u dolini bez rastinja, kod Tvoje svete Kuće.“"
+      },
+      "scene": { "sky": "day", "elements": ["mountains", "dunes"] },
+      "stage": {
+        "sky": "day",
+        "camera": "slowZoom",
+        "layers": [
+          { "art": "story.sun", "x": 320, "y": 50, "w": 64, "anchor": "center" },
+          { "art": "prophet.ismail-valley" },
+          { "art": "object.dates", "x": 170, "y": 222, "w": 36, "enter": "fade", "at": 700 },
+          { "art": "prophet.ismail-waterskin", "x": 220, "y": 224, "w": 34, "enter": "fade", "at": 1100 }
+        ],
+        "effects": [{ "type": "sand", "intensity": 1 }, { "type": "sunrays", "x": 320, "y": 50, "intensity": 1 }]
+      },
+      "interactionId": "ismail-trust",
+      "sources": [
+        { "sourceName": "Quran", "sourceReference": "14:37" },
+        { "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }
+      ]
+    },
+    {
+      "id": "ismail-s2",
+      "title": { "en": "Between Safa and Marwa", "de": "Zwischen Safa und Marwa", "bs": "Između Safe i Merve" },
+      "text": {
+        "en": "When the water ran out, Hajar climbed the hill of Safa to look for help, then hurried across the valley to Marwa – seven times. The Prophet ﷺ said: \"That is the sa'y that people make between them.\" Safa and Marwa are among the symbols of Allah.",
+        "de": "Als das Wasser zu Ende ging, stieg Hadschar auf den Hügel Safa, um nach Hilfe zu suchen, und eilte dann durch das Tal nach Marwa – siebenmal. Der Prophet ﷺ sagte: „Das ist der Sa'y, den die Menschen zwischen ihnen machen.“ Safa und Marwa gehören zu den Zeichen Allahs.",
+        "bs": "Kad je voda nestala, Hadžera se popela na brežuljak Safu tražeći pomoć, a zatim požurila preko doline do Merve – sedam puta. Poslanik, s.a.v.s., rekao je: „To je sa'j koji ljudi čine između njih.“ Safa i Merva su od Allahovih obilježja."
+      },
+      "scene": { "sky": "day", "elements": ["hills", "dunes"] },
+      "stage": {
+        "sky": "day",
+        "layers": [{ "art": "prophet.ismail-safa-marwa", "fill": true }],
+        "effects": [
+          { "type": "sparkle", "x": 60, "y": 130, "w": 40, "h": 30, "intensity": 1, "at": 300 },
+          { "type": "sparkle", "x": 346, "y": 140, "w": 40, "h": 30, "intensity": 1, "at": 1600 },
+          { "type": "sand", "intensity": 1 },
+          { "type": "sunrays", "x": 200, "y": 40, "intensity": 1 }
+        ]
+      },
+      "interactionId": "ismail-seven",
+      "sources": [
+        { "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" },
+        { "sourceName": "Quran", "sourceReference": "2:158" }
+      ]
+    },
+    {
+      "id": "ismail-s3",
+      "title": { "en": "The spring of Zamzam", "de": "Die Quelle Zamzam", "bs": "Izvor Zemzem" },
+      "text": {
+        "en": "Then, by Allah's mercy, water came forth from the ground beside the baby – the spring of Zamzam. Hajar made a little basin around it and filled her waterskin. Birds began to circle above the valley, travellers saw them and came, and the valley came to life.",
+        "de": "Dann kam durch Allahs Barmherzigkeit neben dem Baby Wasser aus der Erde – die Quelle Zamzam. Hadschar baute ein kleines Becken darum und füllte ihren Wasserschlauch. Vögel begannen über dem Tal zu kreisen, Reisende sahen sie und kamen, und das Tal erwachte zum Leben.",
+        "bs": "Tada je, Allahovom milošću, pored djeteta iz zemlje potekla voda – izvor Zemzem. Hadžera je oko njega napravila mali bazen i napunila svoju mješinu. Ptice su počele kružiti iznad doline, putnici su ih vidjeli i došli, i dolina je oživjela."
+      },
+      "scene": { "sky": "dawn", "elements": ["well", "mountains"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "prophet.ismail-valley" },
+          { "art": "prophet.ismail-zamzam", "x": 200, "y": 232, "w": 130, "enter": "zoom", "at": 600, "duration": 1600 }
+        ],
+        "effects": [
+          { "type": "sparkle", "x": 200, "y": 190, "w": 140, "h": 60, "intensity": 2, "at": 1200 },
+          { "type": "ripples", "x": 200, "y": 210, "w": 70, "intensity": 2, "at": 1400 },
+          { "type": "birds", "intensity": 2, "at": 2600 }
+        ]
+      },
+      "interactionId": "ismail-zamzam",
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ismail-s4",
+      "title": { "en": "The dream and the great sacrifice", "de": "Der Traum und das große Opfer", "bs": "San i veliki kurban" },
+      "text": {
+        "en": "When Ismail was old enough to walk with his father, Ibrahim told him about a dream: he had been commanded to sacrifice him. Ismail answered: \"O my father, do as you are commanded. You will find me, if Allah wills, among the patient.\" When both submitted to Allah, Allah called out to Ibrahim that he had fulfilled the dream – and ransomed Ismail with a great sacrifice, a ram. We remember this at Eid al-Adha.",
+        "de": "Als Ismail alt genug war, mit seinem Vater zu gehen, erzählte Ibrahim ihm von einem Traum: Ihm war befohlen worden, ihn zu opfern. Ismail antwortete: „O mein Vater, tu, was dir befohlen wird. Du wirst mich, so Allah will, unter den Geduldigen finden.“ Als beide sich Allah ergeben hatten, rief Allah Ibrahim zu, dass er den Traum erfüllt habe – und löste Ismail mit einem großen Opfer aus, einem Widder. Daran denken wir am Opferfest.",
+        "bs": "Kad je Ismail stasao da ide s ocem, Ibrahim mu je ispričao san: naređeno mu je da ga žrtvuje. Ismail je odgovorio: „O oče moj, učini ono što ti se naređuje. Naći ćeš me, ako Allah da, među strpljivima.“ Kad su se obojica pokorili Allahu, Allah je Ibrahima dozvao da je san ispunio – i otkupio Ismaila velikom žrtvom, ovnom. Toga se sjećamo na Kurban-bajram."
+      },
+      "scene": { "sky": "sunset", "elements": ["mountains", "sun"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.sun", "x": 300, "y": 110, "w": 80, "anchor": "center" },
+          { "art": "story.mountains" },
+          { "art": "animal.ram", "x": 200, "y": 228, "w": 80, "enter": "fade", "at": 2400, "duration": 1400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 300, "y": 110, "intensity": 2 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 2200 }, { "type": "sparkle", "x": 200, "y": 190, "w": 120, "h": 60, "intensity": 1, "at": 2800 }]
+      },
+      "interactionId": "ismail-order",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:101–107" }]
+    },
+    {
+      "id": "ismail-s5",
+      "title": { "en": "True to his promise", "de": "Seinem Versprechen treu", "bs": "Vjeran obećanju" },
+      "text": {
+        "en": "Ismail helped his father raise the walls of the Kaaba. Allah praised him: he was true to his promise, a messenger and a prophet. He told his family to pray and give zakah, and his Lord was pleased with him.",
+        "de": "Ismail half seinem Vater, die Mauern der Kaaba zu errichten. Allah lobte ihn: Er hielt sein Versprechen, war ein Gesandter und ein Prophet. Er hielt seine Familie zum Gebet und zur Zakat an, und sein Herr hatte Wohlgefallen an ihm.",
+        "bs": "Ismail je pomogao ocu da podigne zidove Kabe. Allah ga je pohvalio: bio je vjeran obećanju, poslanik i vjerovjesnik. Svojoj porodici je naređivao namaz i zekat, a njegov Gospodar bio je njime zadovoljan."
+      },
+      "scene": { "sky": "dawn", "elements": ["kaaba", "mountains"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "prophet.ismail-valley" },
+          { "art": "prophet.ibrahim-kaaba-rising", "x": 200, "y": 228, "w": 170, "enter": "rise", "at": 400 },
+          { "art": "prophet.ibrahim-stone", "x": 316, "y": 232, "w": 40, "enter": "slideLeft", "at": 1400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 100, "intensity": 2 }, { "type": "birds", "intensity": 1, "at": 1600 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:54–55; 2:127" }]
+    }
+  ],
+  "miniGameId": "ismail-memory",
+  "quizIds": ["ismail-map", "ismail-promise", "ismail-lesson"],
+  "lessons": [
+    {
+      "id": "ismail-l1",
+      "value": "tawakkul",
+      "title": { "en": "Tawakkul – trust and effort", "de": "Tawakkul – Vertrauen und Einsatz", "bs": "Tevekkul – povjerenje i trud" },
+      "explanation": {
+        "en": "Hajar trusted Allah completely – and she still ran and searched. Tawakkul means doing our best and trusting Allah with the result.",
+        "de": "Hadschar vertraute Allah ganz – und trotzdem lief und suchte sie. Tawakkul heißt, sein Bestes zu tun und Allah das Ergebnis anzuvertrauen.",
+        "bs": "Hadžera se potpuno oslonila na Allaha – a ipak je trčala i tražila. Tevekkul znači dati sve od sebe i ishod prepustiti Allahu."
+      },
+      "example": {
+        "en": "Before a test you study well, make dua – and then stay calm.",
+        "de": "Vor einer Prüfung lernst du gut, machst Dua – und bleibst dann ruhig.",
+        "bs": "Prije testa dobro učiš, proučiš dovu – i onda ostaneš miran."
+      },
+      "reflection": {
+        "en": "What can you do your best at today – and leave the rest to Allah?",
+        "de": "Wobei kannst du heute dein Bestes geben – und den Rest Allah überlassen?",
+        "bs": "U čemu danas možeš dati sve od sebe – a ostalo prepustiti Allahu?"
+      }
+    },
+    {
+      "id": "ismail-l2",
+      "value": "promise",
+      "title": { "en": "Keeping promises", "de": "Versprechen halten", "bs": "Držati obećanje" },
+      "explanation": {
+        "en": "Allah praised Ismail as true to his promise. A believer keeps his word, in small things and big things.",
+        "de": "Allah lobte Ismail als einen, der sein Versprechen hielt. Ein Gläubiger hält sein Wort, im Kleinen wie im Großen.",
+        "bs": "Allah je pohvalio Ismaila kao vjernog obećanju. Vjernik drži riječ, u malim i velikim stvarima."
+      },
+      "example": {
+        "en": "You promised to help your grandmother on Saturday. A friend invites you to play – you go to your grandmother first.",
+        "de": "Du hast versprochen, deiner Oma am Samstag zu helfen. Ein Freund lädt dich zum Spielen ein – du gehst zuerst zu deiner Oma.",
+        "bs": "Obećao si nani da ćeš joj u subotu pomoći. Drug te zove da se igrate – ti prvo odeš kod nane."
+      },
+      "reflection": {
+        "en": "Which promise do you want to keep this week?",
+        "de": "Welches Versprechen willst du diese Woche halten?",
+        "bs": "Koje obećanje želiš održati ove sedmice?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "ismail-trust",
+      "type": "trueFalse",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "When Hajar heard that Allah had commanded it, she said: \"Then He will not leave us.\"", "de": "Als Hadschar hörte, dass Allah es befohlen hatte, sagte sie: „Dann wird Er uns nicht im Stich lassen.“", "bs": "Kad je Hadžera čula da je to Allah naredio, rekla je: „Onda nas On neće napustiti.“" },
+      "correct": true,
+      "explanation": { "en": "Yes – she trusted Allah completely.", "de": "Ja – sie vertraute Allah vollkommen.", "bs": "Da – potpuno se oslonila na Allaha." },
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ismail-seven",
+      "type": "multipleChoice",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "How many times did Hajar go between Safa and Marwa?", "de": "Wie oft ging Hadschar zwischen Safa und Marwa?", "bs": "Koliko je puta Hadžera prešla između Safe i Merve?" },
+      "options": [
+        { "id": "a", "text": { "en": "Seven times", "de": "Siebenmal", "bs": "Sedam puta" } },
+        { "id": "b", "text": { "en": "Three times", "de": "Dreimal", "bs": "Tri puta" } },
+        { "id": "c", "text": { "en": "Once", "de": "Einmal", "bs": "Jednom" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Seven times – and pilgrims walk between Safa and Marwa seven times in Hajj and Umrah.", "de": "Siebenmal – und Pilger gehen bei Haddsch und Umra siebenmal zwischen Safa und Marwa.", "bs": "Sedam puta – i hadžije na hadžu i umri sedam puta prelaze između Safe i Merve." },
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ismail-zamzam",
+      "type": "trueFalse",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "Hajar made a little basin around the spring of Zamzam.", "de": "Hadschar baute ein kleines Becken um die Quelle Zamzam.", "bs": "Hadžera je oko izvora Zemzem napravila mali bazen." },
+      "correct": true,
+      "explanation": { "en": "Yes – she made a basin around it and filled her waterskin.", "de": "Ja – sie baute ein Becken darum und füllte ihren Wasserschlauch.", "bs": "Da – napravila je bazen oko njega i napunila mješinu." },
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ismail-order",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "Put the story of Ismail in order.", "de": "Bring die Geschichte Ismails in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Ismailu." },
+      "items": [
+        { "id": "valley", "text": { "en": "Hajar and the baby in the valley", "de": "Hadschar und das Baby im Tal", "bs": "Hadžera i dijete u dolini" } },
+        { "id": "runs", "text": { "en": "Seven runs between Safa and Marwa", "de": "Sieben Läufe zwischen Safa und Marwa", "bs": "Sedam trčanja između Safe i Merve" } },
+        { "id": "zamzam", "text": { "en": "The spring of Zamzam", "de": "Die Quelle Zamzam", "bs": "Izvor Zemzem" } },
+        { "id": "ransom", "text": { "en": "The dream and the great sacrifice", "de": "Der Traum und das große Opfer", "bs": "San i veliki kurban" } },
+        { "id": "kaaba", "text": { "en": "Building the Kaaba with Ibrahim", "de": "Mit Ibrahim die Kaaba bauen", "bs": "Gradnja Kabe s Ibrahimom" } }
+      ],
+      "explanation": { "en": "The valley, the runs, Zamzam, the ransom – and the Kaaba.", "de": "Das Tal, die Läufe, Zamzam, die Auslösung – und die Kaaba.", "bs": "Dolina, trčanje, Zemzem, otkup – i Kaba." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "14:37; 37:101–107; 2:127" }, { "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ismail-memory",
+      "type": "memory",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "Memory: match the parts of the story of Ismail.", "de": "Memory: Ordne die Teile der Geschichte Ismails zu.", "bs": "Memorija: spoji dijelove kazivanja o Ismailu." },
+      "pairs": [
+        { "id": "safa", "left": { "en": "Safa and Marwa", "de": "Safa und Marwa", "bs": "Safa i Merva" }, "right": { "en": "Seven runs", "de": "Sieben Läufe", "bs": "Sedam trčanja" } },
+        { "id": "zamzam", "left": { "en": "Zamzam", "de": "Zamzam", "bs": "Zemzem" }, "right": { "en": "A spring in the valley", "de": "Eine Quelle im Tal", "bs": "Izvor u dolini" } },
+        { "id": "ram", "left": { "en": "The ram", "de": "Der Widder", "bs": "Ovan" }, "right": { "en": "A great sacrifice", "de": "Ein großes Opfer", "bs": "Veliki kurban" } },
+        { "id": "promise", "left": { "en": "Ismail", "de": "Ismail", "bs": "Ismail" }, "right": { "en": "True to his promise", "de": "Seinem Versprechen treu", "bs": "Vjeran obećanju" } }
+      ],
+      "explanation": { "en": "Seven runs, the spring of Zamzam, the great sacrifice – and Ismail, true to his promise.", "de": "Sieben Läufe, die Quelle Zamzam, das große Opfer – und Ismail, seinem Versprechen treu.", "bs": "Sedam trčanja, izvor Zemzem, veliki kurban – i Ismail, vjeran obećanju." },
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }, { "sourceName": "Quran", "sourceReference": "37:107; 19:54" }]
+    },
+    {
+      "id": "ismail-map",
+      "type": "map",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "Where is the spring of Zamzam? Tap the place.", "de": "Wo ist die Quelle Zamzam? Tippe auf den Ort.", "bs": "Gdje je izvor Zemzem? Dodirni mjesto." },
+      "places": ["makkah", "madinah", "hijr", "canaan"],
+      "correctPlace": "makkah",
+      "explanation": { "en": "Zamzam is in Makkah, near the Kaaba – it still flows today.", "de": "Zamzam ist in Mekka, nahe der Kaaba – die Quelle fließt bis heute.", "bs": "Zemzem je u Mekki, blizu Kabe – i danas teče." },
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ismail-promise",
+      "type": "trueFalse",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "Allah praised Ismail as true to his promise.", "de": "Allah lobte Ismail als einen, der sein Versprechen hielt.", "bs": "Allah je pohvalio Ismaila kao vjernog obećanju." },
+      "correct": true,
+      "explanation": { "en": "Yes – \"He was true to his promise, and he was a messenger and a prophet.\"", "de": "Ja – „Er hielt sein Versprechen, und er war ein Gesandter und ein Prophet.“", "bs": "Da – „On je bio vjeran obećanju i bio je poslanik i vjerovjesnik.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:54" }]
+    },
+    {
+      "id": "ismail-lesson",
+      "type": "lessonChoice",
+      "storyId": "ismail",
+      "topic": "ismail",
+      "prompt": { "en": "Which lesson do we learn from Hajar and Ismail?", "de": "Welche Lehre lernen wir von Hadschar und Ismail?", "bs": "Koju pouku učimo od Hadžere i Ismaila?" },
+      "options": [
+        { "id": "a", "text": { "en": "Trust Allah and keep trying", "de": "Allah vertrauen und sich weiter bemühen", "bs": "Osloniti se na Allaha i nastaviti se truditi" } },
+        { "id": "b", "text": { "en": "Wait and do nothing", "de": "Warten und nichts tun", "bs": "Čekati i ništa ne raditi" } },
+        { "id": "c", "text": { "en": "Give up when it is hard", "de": "Aufgeben, wenn es schwer ist", "bs": "Odustati kad je teško" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Hajar trusted Allah and searched with all her strength – and Allah sent Zamzam.", "de": "Hadschar vertraute Allah und suchte mit aller Kraft – und Allah schenkte Zamzam.", "bs": "Hadžera se oslonila na Allaha i tražila svom snagom – i Allah je dao Zemzem." }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "14:35–41" },
+    { "sourceName": "Quran", "sourceReference": "2:125–129; 2:158" },
+    { "sourceName": "Quran", "sourceReference": "37:99–111" },
+    { "sourceName": "Quran", "sourceReference": "19:54–55" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }
+  ]
+}
