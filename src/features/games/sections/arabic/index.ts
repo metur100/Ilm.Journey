@@ -1,3 +1,6 @@
+import { registerHarakatSoundsGame } from './harakat-sounds/register';
+import { registerJoinLettersGame } from './join-letters/register';
+import { registerLetterTraceGame } from './letter-trace/register';
 import { registerAlphabetPathGame } from './alphabet-path/register';
 import { registerLetterLanternsGame } from './letter-lanterns/register';
 import { registerLetterFormsGame } from './letter-forms/register';
@@ -11,13 +14,16 @@ import { registerWordMemoryGame } from './word-memory/register';
  * Owned by one author – do not register this section's games anywhere else.
  */
 export function registerArabicGames(): void {
+  registerLetterTraceGame();
   registerLetterLanternsGame();
   registerAlphabetPathGame();
   registerTwinLettersGame();
   registerLetterFormsGame();
+  registerJoinLettersGame();
+  registerHarakatSoundsGame();
   registerWordBuilderGame();
   registerWordMemoryGame();
 }
 
 /** Game ids of the section in sufara-path order (the Sufara screen links to them). */
-export const ARABIC_GAME_IDS = ['letter-lanterns', 'alphabet-path', 'twin-letters', 'letter-forms', 'word-builder', 'word-memory'] as const;
+export const ARABIC_GAME_IDS = ['letter-trace', 'letter-lanterns', 'alphabet-path', 'twin-letters', 'letter-forms', 'join-letters', 'harakat-sounds', 'word-builder', 'word-memory'] as const;
