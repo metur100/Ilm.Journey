@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/core/components/ui/AppText';
@@ -43,12 +43,13 @@ export function SyllableReadingGame(api: GameApi<SyllableReadingConfig>) {
   const [step, setStep] = useState(0);
   const [read, setRead] = useState<string[]>([]);
   const [shake, setShake] = useState<string | null>(null);
+  const endedRef = useRef(false);
   const [mistakes, setMistakes] = useState({ n: 0, ids: [] as string[] });
   const target = order[Math.min(step, order.length - 1)];
   const finished = step >= order.length;
 
   const tap = (chip: ReadingChip) => {
-    if (finished || core.finishedRef.current) return;
+    if (finished || endedRef.current) return;
     say(chip.arabic);
     if (chip.id !== target.id) {
       if (read.includes(chip.id)) return; // re-hearing a read one is free
@@ -64,7 +65,7 @@ export function SyllableReadingGame(api: GameApi<SyllableReadingConfig>) {
     core.progress(next);
     core.right({ caption: `${chip.arabic} – ${api.l(chip.reading)}`, tone: 'right' });
     if (next >= order.length) {
-      core.finishedRef.current = true;
+      endedRef.current = true;
       const m = mistakes;
       setTimeout(() => api.onComplete(kitResult({ moves: order.length, mistakes: m.n, factsMissed: missedFacts(m.ids, api.facts) })), api.reducedMotion ? 400 : 1300);
     } else if (mode === 'find') setTimeout(() => say(order[next].arabic), 700);
@@ -74,7 +75,7 @@ export function SyllableReadingGame(api: GameApi<SyllableReadingConfig>) {
     engine: 'SyllableReading',
     testID: 'syllable-reading',
     step: () => {
-      if (finished || core.finishedRef.current) return false;
+      if (finished || endedRef.current) return false;
       tap(target);
       return true;
     },
@@ -84,7 +85,7 @@ export function SyllableReadingGame(api: GameApi<SyllableReadingConfig>) {
       tap(wrong);
       return true;
     },
-    done: () => finished || core.finishedRef.current,
+    done: () => finished || endedRef.current,
   });
 
   return (

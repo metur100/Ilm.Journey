@@ -51,6 +51,7 @@ export const marksWorkshopGame = arabicGame<MarksWorkshopConfig>({
   i18n: marksWorkshopI18n,
   coverArt: 'arabic.marks',
   hintArt: 'arabic.marks',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./MarksWorkshopGame') as typeof import('./MarksWorkshopGame')).MarksWorkshopGame,
   levels: [
     { config: { mode: 'sukun', rounds: 6, hints: true }, facts: [MARK_FACTS.sukun, FACTS.harakatMatch] },

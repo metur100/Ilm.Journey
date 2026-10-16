@@ -45,6 +45,7 @@ export const maddStretchGame = arabicGame<MaddStretchConfig>({
   i18n: maddStretchI18n,
   coverArt: 'arabic.stretch',
   hintArt: 'arabic.stretch',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./MaddStretchGame') as typeof import('./MaddStretchGame')).MaddStretchGame,
   levels: [
     { config: { harakat: ['fatha'], rounds: 4, hints: true }, facts: [letterFact('ا')] },

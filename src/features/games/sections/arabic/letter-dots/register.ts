@@ -57,6 +57,7 @@ export const letterDotsGame = arabicGame<LetterDotsConfig>({
   i18n: letterDotsI18n,
   coverArt: 'arabic.dots-inkwell',
   hintArt: 'arabic.dots-inkwell',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./LetterDotsGame') as typeof import('./LetterDotsGame')).LetterDotsGame,
   levels: [
     { config: { letters: ['ب', 'ت', 'ث', 'ن', 'ي'], hints: true, voiceOnly: false }, facts: [FACTS.dots] },

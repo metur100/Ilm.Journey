@@ -61,6 +61,7 @@ export const nonJoinersGame = arabicGame<NonJoinersConfig>({
   i18n: nonJoinersI18n,
   coverArt: 'arabic.broken-link',
   hintArt: 'arabic.broken-link',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./NonJoinersGame') as typeof import('./NonJoinersGame')).NonJoinersGame,
   levels: [
     {

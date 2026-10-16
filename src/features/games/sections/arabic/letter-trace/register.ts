@@ -42,6 +42,7 @@ export const letterTraceGame = arabicGame<LetterTraceConfig>({
   i18n: letterTraceI18n,
   coverArt: 'arabic.trace-tablet',
   hintArt: 'kit.trace',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./LetterTraceGame') as typeof import('./LetterTraceGame')).LetterTraceGame,
   levels: [
     { config: { letters: range(1, 9), hints: true, tolerance: 11 }, facts: [FACTS.alphabet, FACTS.order] },

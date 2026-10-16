@@ -47,6 +47,7 @@ export const alphabetPathGame = arabicGame<SequenceConfig>({
   i18n: alphabetPathI18n,
   coverArt: 'arabic.alphabet-path',
   hintArt: 'kit.path-stone',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('../shared/engineGames') as typeof import('../shared/engineGames')).SequenceGame,
   levels: [
     { config: { items: letterItems(['ا', 'ب', 'ت', 'ث', 'ج', 'ح']), variant: 'path', columns: 3, hints: true, prompt: 'play.path' }, facts: [FACTS.order] },

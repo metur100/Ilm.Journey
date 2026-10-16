@@ -65,6 +65,7 @@ export const syllableReadingGame = arabicGame<SyllableReadingConfig>({
   i18n: syllableReadingI18n,
   coverArt: 'arabic.sufara-book',
   hintArt: 'arabic.sufara-book',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./SyllableReadingGame') as typeof import('./SyllableReadingGame')).SyllableReadingGame,
   levels: [
     { config: { lines: [line('ب', 'b'), line('ت', 't'), line('ن', 'n'), line('م', 'm')], mode: 'along', hints: true }, facts: [FACTS.harakat] },

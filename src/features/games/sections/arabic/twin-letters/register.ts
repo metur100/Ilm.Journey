@@ -76,6 +76,7 @@ export const twinLettersGame = arabicGame<SortConfig>({
   i18n: twinLettersI18n,
   coverArt: 'arabic.twin-letters',
   hintArt: 'kit.basket',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('../shared/engineGames') as typeof import('../shared/engineGames')).SortGame,
   levels: [level(['ba', 'ha'], true, [FACTS.dots, letterFact('ج')]), level(['dal', 'ra', 'sin'], false, [FACTS.shin, letterFact('ز')]), level(['ba', 'sad', 'ta', 'ayn'], false, [FACTS.dad, letterFact('غ')])],
   teaches: { questionKeys: ['quest:arabic-dots-ba', 'quest:arabic-shin'] },

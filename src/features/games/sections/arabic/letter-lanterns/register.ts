@@ -48,6 +48,7 @@ export const letterLanternsGame = arabicGame<LetterLanternsConfig>({
   i18n: letterLanternsI18n,
   coverArt: 'object.lantern-ramadan',
   hintArt: 'kit.catch',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./LetterLanternsGame') as typeof import('./LetterLanternsGame')).LetterLanternsGame,
   levels: [
     { config: { mode: 'isolated', pool: range(1, 14), rounds: 4, hints: true }, facts: [FACTS.dots, FACTS.alphabet] },

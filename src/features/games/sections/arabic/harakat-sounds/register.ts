@@ -42,6 +42,7 @@ export const harakatSoundsGame = arabicGame<HarakatSoundsConfig>({
   i18n: harakatSoundsI18n,
   coverArt: 'arabic.harakat-sounds',
   hintArt: 'kit.catch',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./HarakatSoundsGame') as typeof import('./HarakatSoundsGame')).HarakatSoundsGame,
   levels: [
     { config: { harakat: ['fatha', 'kasra'], rounds: 4, hints: true, hidden: false, otherLetters: false }, facts: [MARK_FACTS.fatha, MARK_FACTS.kasra] },

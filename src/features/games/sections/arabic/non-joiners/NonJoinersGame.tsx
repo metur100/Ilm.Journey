@@ -50,6 +50,7 @@ function Bridges(props: { api: GameApi<NonJoinersConfig>; words: string[] }) {
   const [wordIndex, setWordIndex] = useState(0);
   const [built, setBuilt] = useState<number[]>([]);
   const [shake, setShake] = useState<number | null>(null);
+  const endedRef = useRef(false);
   const [done, setDone] = useState(0);
   const [mistakes, setMistakes] = useState({ n: 0, ids: [] as string[] });
   const current = items[wordIndex];
@@ -70,7 +71,7 @@ function Bridges(props: { api: GameApi<NonJoinersConfig>; words: string[] }) {
   const finishLevel = (m: { n: number; ids: string[] }) => api.onComplete(kitResult({ moves: total, mistakes: m.n, factsMissed: missedFacts(m.ids, api.facts) }));
 
   const tap = (gap: Gap) => {
-    if (complete || built.includes(gap.index) || core.finishedRef.current) return;
+    if (complete || built.includes(gap.index) || endedRef.current) return;
     if (!gap.joins) {
       core.wrong(current.word.id, api.t('play.noBridge', { letter: gap.before, name: api.l(mustLetter(gap.before).name) }));
       setShake(gap.index);
@@ -85,7 +86,7 @@ function Bridges(props: { api: GameApi<NonJoinersConfig>; words: string[] }) {
       say(current.word.arabic);
       core.right({ caption: `${current.word.arabic} – ${current.word.translit} · ${api.l(current.word.meaning)}`, tone: 'fact' });
       if (last) {
-        core.finishedRef.current = true;
+        endedRef.current = true;
         const m = mistakes;
         setTimeout(() => finishLevel(m), api.reducedMotion ? 400 : 1400);
       } else {
@@ -99,7 +100,7 @@ function Bridges(props: { api: GameApi<NonJoinersConfig>; words: string[] }) {
     engine: 'Bridges',
     testID: 'bridges',
     step: () => {
-      if (core.finishedRef.current) return false;
+      if (endedRef.current) return false;
       if (complete) {
         next();
         return true;
@@ -114,7 +115,7 @@ function Bridges(props: { api: GameApi<NonJoinersConfig>; words: string[] }) {
       tap(g);
       return true;
     },
-    done: () => core.finishedRef.current || (last && complete),
+    done: () => endedRef.current || (last && complete),
   });
 
   return (

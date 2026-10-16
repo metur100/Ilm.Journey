@@ -54,6 +54,7 @@ export const letterFormsGame = arabicGame<ConnectConfig>({
   i18n: letterFormsI18n,
   coverArt: 'arabic.four-forms',
   hintArt: 'kit.connect',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('../shared/engineGames') as typeof import('../shared/engineGames')).ConnectGame,
   levels: [
     { config: level(['ب', 'ج', 'س', 'ع'], 'initial', true), facts: [FACTS.fourForms] },

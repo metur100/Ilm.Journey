@@ -108,7 +108,7 @@ export function MaddStretchGame(api: GameApi<MaddStretchConfig>) {
   const { say } = useArabicVoice();
   const rounds = useMemo(
     () => maddRounds(api.config, api.language),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
     [api.config, api.language],
   );
   const byId = (id: string) => rounds.find((r) => r.id === id)!;

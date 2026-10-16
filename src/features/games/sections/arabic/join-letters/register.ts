@@ -58,6 +58,7 @@ export const joinLettersGame = arabicGame<JoinLettersConfig>({
   i18n: joinLettersI18n,
   coverArt: 'arabic.join-letters',
   hintArt: 'kit.join',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./JoinLettersGame') as typeof import('./JoinLettersGame')).JoinLettersGame,
   levels: [
     { config: { pairs: PAIRS, count: 5, hints: true, extra: false }, facts: [FACTS.joining, FACTS.lamAlif] },

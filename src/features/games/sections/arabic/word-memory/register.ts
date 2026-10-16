@@ -54,6 +54,7 @@ export const wordMemoryGame = arabicGame<MemoryConfig>({
   i18n: wordMemoryI18n,
   coverArt: 'arabic.word-cards',
   hintArt: 'kit.cards',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('../shared/engineGames') as typeof import('../shared/engineGames')).MemoryGame,
   levels: [
     {

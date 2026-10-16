@@ -46,6 +46,7 @@ export const wordBuilderGame = arabicGame<WordBuilderConfig>({
   i18n: wordBuilderI18n,
   coverArt: 'object.book',
   hintArt: 'kit.tiles',
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./WordBuilderGame') as typeof import('./WordBuilderGame')).WordBuilderGame,
   levels: [
     { config: { anchors: ['nur'], pool: THREE, words: 4, hints: true, distractors: false }, facts: [FACTS.joining, wordFact('nur', ['kitab', 'masjid'])] },
