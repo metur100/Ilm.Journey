@@ -1,8 +1,8 @@
-import type { GameApi } from "@/core/games";
-import { GameBoard, kitResult, PathTrace } from "@/core/games/kit";
+import type { GameApi } from '@/core/games';
+import { GameBoard, kitResult, PathTrace } from '@/core/games/kit';
 
-import { factsFor } from "../shared";
-import { SULAYMAN_MISSED, type SulaymanConfig } from "./register";
+import { factsFor } from '../shared';
+import { SULAYMAN_MISSED, type SulaymanConfig } from './register';
 
 /** The valley of the ants (27:18) and the hoopoe's way to Saba' (27:28) – a PathTrace board. */
 export function SulaymanGame(api: GameApi<SulaymanConfig>) {

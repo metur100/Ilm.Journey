@@ -1,8 +1,8 @@
-import type { GameApi } from "@/core/games";
-import { BuildScene, GameBoard, kitResult } from "@/core/games/kit";
+import type { GameApi } from '@/core/games';
+import { BuildScene, GameBoard, kitResult } from '@/core/games/kit';
 
-import { factsFor } from "../shared";
-import { ILYAS_MISSED, type IlyasConfig } from "./register";
+import { factsFor } from '../shared';
+import { ILYAS_MISSED, type IlyasConfig } from './register';
 
 /** Lanterns of the Call (37:123–132) – the path lights up lantern by lantern, in the order of the ayahs. */
 export function IlyasGame(api: GameApi<IlyasConfig>) {
@@ -18,8 +18,8 @@ export function IlyasGame(api: GameApi<IlyasConfig>) {
         visible={visible}
         prompt={api.t(prompt)}
         reveal={{
-          title: api.t("reveal.title"),
-          caption: api.t("reveal.caption"),
+          title: api.t('reveal.title'),
+          caption: api.t('reveal.caption'),
         }}
         onDone={({ mistakes, missed }) =>
           api.onComplete(
