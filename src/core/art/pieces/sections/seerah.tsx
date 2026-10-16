@@ -2,6 +2,7 @@ import { Circle, Defs, Ellipse, G, Path, Rect } from 'react-native-svg';
 
 import { art, Cloud, crescentPath, Glow, House, Lin, Palm, type ArtDef, type Ctx } from '../../kit';
 import { C, mix } from '../../palette';
+import { seerahScenes } from './seerahScenes';
 
 // ---------------------------------------------------------------------------------------------------------------
 // Masjid an-Nabawi in its early form (game "build-the-masjid"). Architecture, landscape and one resting camel only –
@@ -372,4 +373,6 @@ export const seerah = {
   'masjid-finished': art(MW, MH, (c) => <MasjidFinished c={c} qibla={false} />),
   /** After the change of the qibla (2 AH): the shade on the side of the Kaʿbah and the Suffa under the old shade. */
   'masjid-finished-qibla': art(MW, MH, (c) => <MasjidFinished c={c} qibla />),
+  // --- Seerah scenes and objects for the episode stages and the Seerah games (seerahScenes.tsx, Seerah author). ---
+  ...seerahScenes,
 } satisfies Record<string, ArtDef>;
