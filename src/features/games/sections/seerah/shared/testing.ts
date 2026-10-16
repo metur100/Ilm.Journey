@@ -43,12 +43,19 @@ export function describeSeerahGame(id: string, register: () => void): void {
     });
 
     it('reports a mistake as a missed fact', async () => {
-      const lvl = game().levels.findIndex((l) => Object.keys(l.config.factMap ?? {}).length > 0);
-      if (lvl < 0) return;
-      const r = await renderGame(game(), (lvl + 1) as 1 | 2 | 3);
-      const result = await playToEnd(r, { mistakes: 1 });
-      expect(result.mistakes).toBeGreaterThan(0);
-      await r.unmount();
+      let found = false;
+      for (const level of [1, 2, 3] as const) {
+        if (!Object.keys(game().levels[level - 1].config.factMap ?? {}).length) continue;
+        const r = await renderGame(game(), level);
+        const result = await playToEnd(r, { mistakes: 1 });
+        await r.unmount();
+        if (result.mistakes > 0) {
+          expect(result.factsMissed.length).toBeGreaterThan(0);
+          found = true;
+          break;
+        }
+      }
+      expect(found).toBe(true);
     });
   });
 }

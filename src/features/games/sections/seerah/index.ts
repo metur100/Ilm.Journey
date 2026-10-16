@@ -1,3 +1,4 @@
+import { registerConquestOfMakkahGame } from './conquest-of-makkah/register';
 import { registerHudaybiyyahTreatyGame } from './hudaybiyyah-treaty/register';
 import { registerTheTrenchGame } from './the-trench/register';
 import { registerBadrWellsGame } from './badr-wells/register';
@@ -19,4 +20,5 @@ export function registerSeerahGames(): void {
   registerBadrWellsGame();
   registerTheTrenchGame();
   registerHudaybiyyahTreatyGame();
+  registerConquestOfMakkahGame();
 }
