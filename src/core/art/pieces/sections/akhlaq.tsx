@@ -399,8 +399,104 @@ const storm = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Home: a room with a kitchen corner (no people) and the things to help with
+
+const home = {
+  'home-room': art(400, 300, (c) => {
+    const wall = dk(c, '#F6E7CF', 0.45);
+    const wallShade = dk(c, '#EBD5B3', 0.45);
+    return (
+      <>
+        <Rect x={0} y={0} width={400} height={300} fill={wall} />
+        <Rect x={0} y={0} width={400} height={18} fill={wallShade} />
+        {/* tiled border */}
+        {Array.from({ length: 20 }, (_, i) => (
+          <Path key={i} d={star8Path(10 + i * 20, 9, 5)} fill={dk(c, C.teal, 0.4)} opacity={0.35} />
+        ))}
+        {/* window with arch */}
+        <Path d="M40 150V70Q40 36 80 34Q120 36 120 70V150Z" fill={dk(c, C.woodLight)} />
+        <Path d="M48 144V72Q48 44 80 42Q112 44 112 72V144Z" fill={c.dark ? '#2E3380' : '#BFE6F5'} />
+        {c.dark ? <Circle cx={96} cy={64} r={7} fill={C.goldPale} /> : <Circle cx={96} cy={64} r={9} fill={C.goldLight} />}
+        <Path d="M80 42V144M48 100H112" stroke={dk(c, C.woodLight)} strokeWidth={4} />
+        <Rect x={34} y={148} width={92} height={8} rx={3} fill={dk(c, C.wood)} />
+        {/* framed star ornament */}
+        <Rect x={168} y={46} width={54} height={54} rx={4} fill={dk(c, C.woodLight)} />
+        <Rect x={174} y={52} width={42} height={42} rx={2} fill={dk(c, C.cream)} />
+        <Path d={star8Path(195, 73, 15)} fill={dk(c, C.teal)} />
+        <Path d={star8Path(195, 73, 7)} fill={C.gold} />
+        {/* kitchen corner */}
+        <Rect x={262} y={40} width={124} height={40} rx={4} fill={dk(c, C.tealMid)} />
+        <Path d="M324 40V80" stroke={dk(c, C.teal)} strokeWidth={2} />
+        <Rect x={256} y={150} width={140} height={14} rx={3} fill={dk(c, C.stonePale)} />
+        <Rect x={260} y={164} width={132} height={70} fill={dk(c, C.tealMid)} />
+        <Path d="M304 164V234M348 164V234" stroke={dk(c, C.teal)} strokeWidth={2} />
+        <Circle cx={296} cy={200} r={2.6} fill={C.gold} />
+        <Circle cx={312} cy={200} r={2.6} fill={C.gold} />
+        <Circle cx={356} cy={200} r={2.6} fill={C.gold} />
+        <Path d="M372 150V120Q372 110 382 110" stroke={C.grey} strokeWidth={4} fill="none" />
+        {/* floor and rug */}
+        <Rect x={0} y={234} width={400} height={66} fill={dk(c, C.woodPale, 0.4)} />
+        {[250, 268, 286].map((y) => (
+          <Path key={y} d={`M0 ${y}H400`} stroke={dk(c, C.woodLight, 0.4)} strokeWidth={1.4} opacity={0.5} />
+        ))}
+        <Ellipse cx={170} cy={268} rx={110} ry={22} fill={dk(c, C.berry)} />
+        <Ellipse cx={170} cy={268} rx={92} ry={16} fill="none" stroke={C.gold} strokeWidth={3} opacity={0.8} />
+        {/* sofa */}
+        <Rect x={140} y={170} width={110} height={30} rx={10} fill={dk(c, C.teal)} />
+        <Rect x={132} y={190} width={126} height={36} rx={10} fill={dk(c, C.tealMid)} />
+        <Rect x={146} y={200} width={46} height={18} rx={6} fill={dk(c, C.tealLight)} />
+        <Rect x={198} y={200} width={46} height={18} rx={6} fill={dk(c, C.tealLight)} />
+        <Rect x={138} y={224} width={8} height={12} rx={2} fill={C.woodDark} />
+        <Rect x={244} y={224} width={8} height={12} rx={2} fill={C.woodDark} />
+        {/* door */}
+        <Rect x={0} y={150} width={26} height={86} fill={dk(c, C.wood)} />
+      </>
+    );
+  }),
+  'shopping-bags': art(100, 90, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={86} rx={44} />
+      <Path d="M12 34H52L56 84H8Z" fill={C.sandLight} />
+      <Path d="M22 34Q22 16 32 16Q42 16 42 34" stroke={C.sandDark} strokeWidth={3.5} fill="none" />
+      <Circle cx={24} cy={30} r={8} fill={C.berry} />
+      <Rect x={34} y={20} width={10} height={16} rx={2} fill={C.lemon} />
+      <Path d="M46 40H90L94 86H42Z" fill={C.tealMid} />
+      <Path d="M56 40Q56 22 68 22Q80 22 80 40" stroke={C.teal} strokeWidth={3.5} fill="none" />
+      <Ellipse cx={62} cy={36} rx={7} ry={9} fill={C.leafLight} />
+      <Path d={star8Path(68, 64, 9)} fill={C.goldLight} opacity={0.8} />
+    </>
+  )),
+  dishes: art(100, 80, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={76} rx={44} />
+      {[60, 52, 44].map((y, i) => (
+        <G key={y}>
+          <Ellipse cx={44} cy={y + 4} rx={36} ry={8} fill={C.tealMid} />
+          <Ellipse cx={44} cy={y} rx={36} ry={8} fill={i === 2 ? C.cream : C.ivory} />
+        </G>
+      ))}
+      <Circle cx={34} cy={42} r={3} fill={C.terracotta} opacity={0.6} />
+      <Circle cx={52} cy={40} r={2} fill={C.leaf} opacity={0.6} />
+      <Path d="M70 20H92L88 50H74Z" fill={C.sky} />
+      <Path d="M92 26Q100 28 98 36 96 42 90 42" stroke={C.waterDeep} strokeWidth={3} fill="none" />
+      <Path d="M20 30L30 12M28 32L40 14" stroke={C.grey} strokeWidth={3} strokeLinecap="round" />
+    </>
+  )),
+  'game-pad': art(100, 70, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={64} rx={40} />
+      <Path d="M20 16H80Q96 16 96 40Q96 62 82 62Q72 62 66 50H34Q28 62 18 62Q4 62 4 40Q4 16 20 16Z" fill={C.indigo} />
+      <Path d="M22 30V46M14 38H30" stroke={C.white} strokeWidth={5} strokeLinecap="round" />
+      <Circle cx={72} cy={32} r={5} fill={C.coral} />
+      <Circle cx={82} cy={42} r={5} fill={C.lemon} />
+    </>
+  )),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...home,
   ...storm,
   ...tidy,
   ...trust,

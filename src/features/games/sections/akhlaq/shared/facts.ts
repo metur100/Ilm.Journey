@@ -5,7 +5,7 @@ import { abuDawud, bukhari, lessonFact, muslim, quran, questFact, T } from './co
 /*
  * "You learned" facts of the akhlaq games. Lesson facts are copied from the Learn content (see content.ts); the
  * others quote a Quran passage or a hadith (Sahih al-Bukhari / Sahih Muslim / Sunan Abi Dawud with its number).
- * Truths are stated directly – never "Muslims believe …" (docs/GAMES-V3.md §2).
+ * Truths are stated directly, never framed as somebody's opinion (docs/GAMES-V3.md §2).
  */
 
 // ---------- copied from the Learn content ----------
