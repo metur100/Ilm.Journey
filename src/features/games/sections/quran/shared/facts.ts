@@ -1,9 +1,9 @@
 import type { FactCheck, GameFact } from '@/core/games';
-import { type Namespace, type Params, translateNs } from '@/core/i18n';
+import { type Namespace, type Params, translate, translateNs } from '@/core/i18n';
 import type { Language, LocalizedText, SourceRef } from '@/core/models';
 import { QURAN_SOURCE } from '@/features/quran';
 
-import { ayahRef, LANGS, rangeMeaning, surahName } from './quran';
+import { ayahRef, LANGS, rangeMeaning, surah, surahMeaning, surahName } from './quran';
 
 /*
  * "You learned" facts of the Quran games. Two kinds, both without new claims:
@@ -51,3 +51,26 @@ export function nsText<K extends string>(ns: Namespace<K>, key: K, params?: Para
 
 /** Same text in every language (names, numbers). */
 export const same = (text: string): LocalizedText => ({ en: text, de: text, bs: text });
+
+/** Sources of a fact composed from the data fields of one surah (name meaning, ayah count, revelation place). */
+export function surahSources(n: number): SourceRef[] {
+  const s = surah(n);
+  return [
+    { sourceName: 'Quran', sourceReference: `${s.number}:1–${s.ayahCount}` },
+    { sourceName: QURAN_SOURCE.text, sourceReference: '' },
+  ];
+}
+
+/** "Surah X means “…”. It has N ayahs and was revealed in Makkah/Madinah." (core template of the collection). */
+export function surahFactText(n: number): LocalizedText {
+  const s = surah(n);
+  const meaning = surahMeaning(n);
+  const build = (lang: Language) =>
+    translate(lang, 'collection.surahFact', {
+      name: s.nameTransliterated,
+      meaning: meaning[lang],
+      count: s.ayahCount,
+      place: translate(lang, s.revelationType === 'madani' ? 'collection.revelation.madani' : 'collection.revelation.makki'),
+    });
+  return { en: build('en'), de: build('de'), bs: build('bs') };
+}

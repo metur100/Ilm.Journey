@@ -1,3 +1,4 @@
+import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSurahMessagesGame } from './surah-messages/register';
 
 /**
@@ -5,5 +6,6 @@ import { registerSurahMessagesGame } from './surah-messages/register';
  * Owned by one author – do not register this section's games anywhere else.
  */
 export function registerQuranGames(): void {
+  registerSurahGardenGame();
   registerSurahMessagesGame();
 }
