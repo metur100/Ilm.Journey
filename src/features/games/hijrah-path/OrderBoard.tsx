@@ -93,7 +93,7 @@ export function OrderBoard({ seed, reducedMotion, playSound, haptic, t, l, onDon
 
   return (
     <View style={styles.root}>
-      <AppText variant="heading" accessibilityRole="header">
+      <AppText variant="bodyBold">
         {t('play.order.title')}
       </AppText>
       <AppText variant="small" color={c.textMuted}>

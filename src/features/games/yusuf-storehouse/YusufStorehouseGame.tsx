@@ -240,7 +240,7 @@ export function YusufStorehouseGame({ config, onComplete, playSound, haptic, red
     <ScrollView style={styles.scroll} contentContainerStyle={styles.content} scrollEnabled={!dragging}>
       <View style={styles.header}>
         <View style={styles.headerRow}>
-          <AppText variant="heading" accessibilityRole="header" style={styles.flex}>
+          <AppText variant="bodyBold" style={styles.flex}>
             {heading}
           </AppText>
           {target && phase === 'good' ? (

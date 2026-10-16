@@ -307,7 +307,7 @@ export function GoodDeedsDayGame({ config, onComplete, playSound, haptic, reduce
             </View>
           ))}
         </View>
-        <AppText variant="heading" style={styles.flex} numberOfLines={1} accessibilityRole="header">
+        <AppText variant="bodyBold" style={styles.flex} numberOfLines={1}>
           {title}
         </AppText>
       </View>
