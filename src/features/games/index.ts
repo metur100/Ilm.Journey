@@ -2,12 +2,10 @@ import { registerKitDemos } from '@/core/games/kit/demos';
 
 import { registerArkOfNuhGame } from './ark-of-nuh/register';
 import { registerAyahBuilderGame } from './ayah-builder/register';
-import { registerFindQiblaGame } from './find-qibla/register';
 import { registerBuildTheMasjidGame } from './build-the-masjid/register';
 import { registerGoodDeedsDayGame } from './good-deeds-day/register';
 import { registerHijrahPathGame } from './hijrah-path/register';
 import { registerLetterLanternsGame } from './letter-lanterns/register';
-import { registerPrayerSkyGame } from './prayer-sky/register';
 import { registerRamadanJourneyGame } from './ramadan-journey/register';
 import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSalahPrayersGames } from './sections/salah-prayers';
@@ -22,7 +20,6 @@ import { registerAkhlaqGames } from './sections/akhlaq';
 import { registerRamadanGames } from './sections/ramadan';
 import { registerHistoryGames } from './sections/history';
 import { registerWordBuilderGame } from './word-builder/register';
-import { registerWuduFlowGame } from './wudu-flow/register';
 import { registerYusufStoryPathGame } from './yusuf-story-path/register';
 
 /**
@@ -37,9 +34,6 @@ export function registerGames(): void {
   registerBuildTheMasjidGame();
   registerGoodDeedsDayGame();
   registerRamadanJourneyGame();
-  registerWuduFlowGame();
-  registerPrayerSkyGame();
-  registerFindQiblaGame();
   registerAyahBuilderGame();
   registerSurahGardenGame();
   registerLetterLanternsGame();
