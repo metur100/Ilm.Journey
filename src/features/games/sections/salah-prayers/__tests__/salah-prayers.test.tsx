@@ -6,10 +6,9 @@ import { type GameDef, validateGame } from '@/core/games';
 import { namespaceProblems, playToEnd, renderGame, type RenderedGame } from '@/core/games/kit/testing';
 
 import { mainPart, partOutline, partSteps, PRAYER_IDS, PRAYERS, rakatPlans, sittingsOf, totalRakats } from '../data/prayers';
-import { expectedReading, leadSteps, readsFatiha } from '../logic';
+import { expectedReading, leadSteps, readsFatiha , GESTURE } from '../logic';
 import { PrayerFigure } from '../figure/PrayerFigure';
 import { SALAH_PRAYER_GAMES } from '../register';
-import { GESTURE } from '../logic';
 
 jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 

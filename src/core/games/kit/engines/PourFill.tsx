@@ -65,10 +65,15 @@ export function PourFill(props: PourFillProps) {
   const liquid = props.liquid === 'milk' ? k.tileFace : props.liquid === 'grain' ? k.gold : k.water;
   const liquidTop = props.liquid === 'milk' ? k.tileBorder : props.liquid === 'grain' ? k.goldEdge : k.waterSoft;
 
-  useEffect(() => {
-    level.set(0);
+  // A new vessel starts empty (state is reset while rendering, the shared value in an effect).
+  const [shownIndex, setShownIndex] = useState(index);
+  if (shownIndex !== index) {
+    setShownIndex(index);
     setShown(0);
     setRight(false);
+  }
+  useEffect(() => {
+    level.set(0);
   }, [index, level]);
 
   const evaluate = (value: number) => {

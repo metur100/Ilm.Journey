@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { cancelAnimation, Easing, FadeIn, FadeOut, runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
@@ -58,7 +58,9 @@ export function CatchGame(props: CatchGameProps) {
   const [pop, setPop] = useState(0);
   const laneRef = useRef(lane);
   const fallingRef = useRef<Falling[]>([]);
-  fallingRef.current = falling;
+  useLayoutEffect(() => {
+    fallingRef.current = falling;
+  }, [falling]);
   const caughtRef = useRef(0);
   const keyRef = useRef(0);
   const queue = useRef<CatchItem[]>([]);

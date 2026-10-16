@@ -478,7 +478,8 @@ const ROUND_FACTS: Record<RoundKind, (prayer: string) => string[]> = {
 };
 
 function OrderPlay({ api, variant, onVariant }: PlayProps) {
-  const rounds = api.config.rounds ?? ['rakat'];
+  const configRounds = api.config.rounds;
+  const rounds = useMemo<readonly RoundKind[]>(() => configRounds ?? ['rakat'], [configRounds]);
   const [round, setRound] = useState(0);
   const mistakes = useRef(0);
   const moves = useRef(0);

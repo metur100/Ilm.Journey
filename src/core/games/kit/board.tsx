@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { type StyleProp, StyleSheet, View, type ViewStyle } from 'react-native';
 import Animated, {
   cancelAnimation,
@@ -187,26 +187,27 @@ export function HintPointer({ from, to, visible = true, size = 44 }: { from: { x
 
 /** True after `delay` ms without a move (the learner seems stuck) – resets whenever `moves` changes. */
 export function useIdleHint(enabled: boolean, moves: number, delay = 6000): boolean {
-  const [idle, setIdle] = useState(false);
+  // Idle belongs to one (moves, delay) state: a new move makes the stored key stale, so the hint hides at once.
+  const key = `${moves}:${delay}`;
+  const [idleKey, setIdleKey] = useState<string | null>(null);
   useEffect(() => {
-    setIdle(false);
     if (!enabled) return;
-    const id = setTimeout(() => setIdle(true), delay);
+    const id = setTimeout(() => setIdleKey(key), delay);
     return () => clearTimeout(id);
-  }, [enabled, moves, delay]);
-  return idle;
+  }, [enabled, key, delay]);
+  return enabled && idleKey === key;
 }
 
 /** Milliseconds since mount (ticks every second while `active`). Measures always; show it only in Challenge mode. */
 export function useStopwatch(active: boolean): { elapsed: () => number; ms: number } {
-  const start = useRef(Date.now());
+  const [start] = useState(() => Date.now());
   const [ms, setMs] = useState(0);
   useEffect(() => {
     if (!active) return;
-    const id = setInterval(() => setMs(Date.now() - start.current), 1000);
+    const id = setInterval(() => setMs(Date.now() - start), 1000);
     return () => clearInterval(id);
-  }, [active]);
-  return { elapsed: () => Date.now() - start.current, ms };
+  }, [active, start]);
+  return { elapsed: () => Date.now() - start, ms };
 }
 
 /** Calm stopwatch pill for Challenge mode (counts up – there is never a "time's up"). */

@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { View, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, { Easing, FadeIn, runOnJS, useAnimatedProps, useDerivedValue, useSharedValue, withTiming, type SharedValue } from 'react-native-reanimated';
 import Svg, { G, Path } from 'react-native-svg';
@@ -98,7 +98,9 @@ export function PrayerFigure({ position, variant, width, view = FULL_VIEW, cues,
   const cueOpacity = useSharedValue(1);
   const last = useRef({ position, variant });
   const settledCb = useRef(onSettled);
-  settledCb.current = onSettled;
+  useLayoutEffect(() => {
+    settledCb.current = onSettled;
+  });
 
   useEffect(() => {
     const prev = last.current;
@@ -109,31 +111,33 @@ export function PrayerFigure({ position, variant, width, view = FULL_VIEW, cues,
       settledCb.current?.(p);
     };
     if (reducedMotion || prev.variant !== variant) {
-      keys.value = [prayerPose(position, variant)];
-      progress.value = 0;
+      keys.set([prayerPose(position, variant)]);
+      progress.set(0);
       arrive(position);
       return;
     }
     // start from wherever the figure is now (a new move may interrupt a running one)
-    const ks = keys.value;
+    const ks = keys.get();
     const n = ks.length;
-    const p = Math.max(0, Math.min(n - 1, progress.value));
+    const p = Math.max(0, Math.min(n - 1, progress.get()));
     const seg = Math.min(Math.max(0, n - 2), Math.floor(p));
     const t = p - seg;
     const e = t * t * (3 - 2 * t);
     const current = n === 1 ? ks[0] : mixPose(ks[seg], ks[seg + 1], e);
     const path = movementPath(prev.position, position);
     const next = [current, ...path.slice(1).map((q) => prayerPose(q, variant))];
-    cueOpacity.value = 0;
-    keys.value = next;
-    progress.value = 0;
-    progress.value = withTiming(next.length - 1, { duration: speed * (next.length - 1), easing: Easing.linear }, (finished) => {
-      if (finished) runOnJS(arrive)(position);
-    });
+    cueOpacity.set(0);
+    keys.set(next);
+    progress.set(0);
+    progress.set(
+      withTiming(next.length - 1, { duration: speed * (next.length - 1), easing: Easing.linear }, (finished) => {
+        if (finished) runOnJS(arrive)(position);
+      }),
+    );
   }, [position, variant, reducedMotion, speed, keys, progress, cueOpacity]);
 
   useEffect(() => {
-    cueOpacity.value = reducedMotion ? 1 : withTiming(1, { duration: 260 });
+    cueOpacity.set(reducedMotion ? 1 : withTiming(1, { duration: 260 }));
   }, [settled, reducedMotion, cueOpacity]);
 
   const frame = useDerivedValue(() => {

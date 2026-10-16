@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 /**
  * Test probes: every mounted engine registers a small handle that can play its next correct move through the same
@@ -26,7 +26,9 @@ export function getKitProbes(): KitProbe[] {
 /** Registers the engine's probe while it is mounted. The handle reads the latest state through a ref. */
 export function useKitProbe(probe: KitProbe): void {
   const ref = useRef(probe);
-  ref.current = probe;
+  useLayoutEffect(() => {
+    ref.current = probe;
+  });
   useEffect(() => {
     const handle: KitProbe = {
       get engine() {

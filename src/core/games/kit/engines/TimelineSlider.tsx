@@ -7,8 +7,6 @@ import { Art, hasArt } from '../../../art';
 import { AppText } from '../../../components/ui/AppText';
 import { Button } from '../../../components/ui/Button';
 import { fonts, radius, spacing } from '../../../theme';
-
-const CARD_RADIUS = radius.lg;
 import { ChallengeClock, HintPointer, InlineCaption, ProgressDots } from '../board';
 import { useEngineCore } from '../engine';
 import { Burst, useShake } from '../fx';
@@ -16,6 +14,8 @@ import { useMeasure } from '../layout';
 import { FaceView, faceLabel, Tile } from '../primitives';
 import { useKitProbe } from '../probe';
 import type { EngineProps, KitItem, KitText } from '../types';
+
+const CARD_RADIUS = radius.lg;
 
 export interface TimelineMark {
   id: string;
