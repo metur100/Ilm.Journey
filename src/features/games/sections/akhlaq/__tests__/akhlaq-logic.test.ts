@@ -27,3 +27,15 @@ describe('share the plate', () => {
     expect(rule.wrong(placed)).toEqual({ item: 'dates-2', target: 'a' });
   });
 });
+
+import { nearestFirstRule } from '../gifts-for-neighbours/logic';
+
+describe('gifts for the neighbours', () => {
+  const rule = nearestFirstRule(['a', 'b', 'c'], ['d1', 'd2', 'd3'], 'nearest', 'full');
+  it('serves the nearest door first', () => {
+    expect(rule.check([], { item: 'a', target: 'd2' })).toBe('nearest');
+    expect(rule.check([], { item: 'a', target: 'd1' })).toBe(true);
+    expect(rule.check([{ item: 'a', target: 'd1' }], { item: 'b', target: 'd1' })).toBe('full');
+    expect(rule.next([{ item: 'a', target: 'd1' }])).toEqual({ item: 'b', target: 'd2' });
+  });
+});

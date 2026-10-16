@@ -757,8 +757,60 @@ const table = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Neighbours: a street in perspective. Houses from the nearest to the farthest (ground centre x, y and scale in the
+// 400 × 300 viewBox) – the game "gifts-for-neighbours" uses the same list for its doors.
+
+export const STREET_HOUSES: { x: number; y: number; s: number }[] = [
+  { x: 352, y: 270, s: 1.4 },
+  { x: 82, y: 222, s: 1.15 },
+  { x: 288, y: 178, s: 0.85 },
+  { x: 130, y: 148, s: 0.66 },
+  { x: 252, y: 126, s: 0.5 },
+  { x: 168, y: 110, s: 0.4 },
+];
+
+const HOUSE_COLOURS: [string, string][] = [
+  [C.cream, C.coral],
+  [C.sandLight, C.tealMid],
+  [C.pinkPale, C.plum],
+  [C.tealPale, C.teal],
+  [C.goldPale, C.terracotta],
+  [C.marble, C.indigo],
+];
+
+const street = {
+  street: art(400, 300, (c) => (
+    <>
+      <Rect x={0} y={0} width={400} height={300} fill={c.dark ? '#232861' : '#CDEBF7'} />
+      <Glow c={c} k="stsun" cx={210} cy={60} r={60} color={C.goldPale} opacity={c.dark ? 0.25 : 0.8} />
+      {c.dark ? <Circle cx={210} cy={60} r={10} fill={C.goldPale} /> : <Circle cx={210} cy={60} r={13} fill={C.goldLight} />}
+      <Path d="M0 100H400V300H0Z" fill={dk(c, '#BFE3A6', 0.45)} />
+      <Path d="M150 300L196 100H214L330 300Z" fill={dk(c, C.sandLight, 0.4)} />
+      <Path d="M150 300L196 100M330 300L214 100" stroke={dk(c, C.sandDeep, 0.4)} strokeWidth={3} />
+      {[0, 1, 2, 3, 4].map((i) => {
+        const t = i / 5;
+        const y = 290 - 190 * t * (2 - t);
+        return <Rect key={i} x={238 - 34 * (1 - t) - 2 * t} y={y - 8 * (1 - t)} width={6 * (1 - t) + 2} height={14 * (1 - t) + 3} rx={2} fill={C.white} opacity={0.7} />;
+      })}
+      {[...STREET_HOUSES].reverse().map((h, i) => {
+        const [wall, roof] = HOUSE_COLOURS[STREET_HOUSES.length - 1 - i];
+        return <TownHouse key={i} x={h.x} y={h.y} s={h.s} wall={dk(c, wall)} roof={dk(c, roof)} />;
+      })}
+      {/* your own home, bottom left */}
+      <G transform="translate(40 300) scale(2)">
+        <Rect x={-26} y={-30} width={46} height={32} rx={2} fill={dk(c, C.cream)} />
+        <Path d="M-30-28L-3-46 24-28Z" fill={dk(c, C.coral)} />
+        <Rect x={-2} y={-18} width={12} height={20} rx={1.5} fill={C.wood} />
+        <Path d={star8Path(-14, -14, 5)} fill={C.gold} />
+      </G>
+    </>
+  )),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...street,
   ...table,
   ...market,
   ...town,
