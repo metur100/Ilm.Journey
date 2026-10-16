@@ -315,8 +315,93 @@ const gratitude = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Calm the storm: skies, calm and angry reactions
+
+/** Soft round cloud (centre x, y; r = size). */
+function Puff({ x, y, r, fill, shade }: { x: number; y: number; r: number; fill: string; shade: string }) {
+  return (
+    <G>
+      <Ellipse cx={x} cy={y + r * 0.35} rx={r * 1.9} ry={r * 0.7} fill={shade} />
+      <Circle cx={x - r * 0.9} cy={y + r * 0.1} r={r * 0.75} fill={fill} />
+      <Circle cx={x} cy={y - r * 0.25} r={r} fill={fill} />
+      <Circle cx={x + r * 0.95} cy={y + r * 0.05} r={r * 0.8} fill={fill} />
+      <Rect x={x - r * 1.6} y={y} width={r * 3.2} height={r * 0.75} rx={r * 0.37} fill={fill} />
+    </G>
+  );
+}
+
+const storm = {
+  'calm-sky': art(240, 320, (c) => (
+    <>
+      <Rect x={0} y={0} width={240} height={320} fill={c.dark ? '#232861' : '#BFE6F5'} />
+      <Rect x={0} y={200} width={240} height={120} fill={c.dark ? '#2E3380' : '#E6F5F2'} opacity={0.8} />
+      <Glow c={c} k="calmsun" cx={180} cy={60} r={70} color={c.dark ? C.goldPale : '#FFF4C4'} opacity={c.dark ? 0.3 : 0.9} />
+      {c.dark ? <Circle cx={180} cy={60} r={18} fill={C.goldPale} /> : <Circle cx={180} cy={60} r={22} fill={C.goldLight} />}
+      <Puff x={60} y={90} r={16} fill={c.dark ? '#3A4590' : C.white} shade={c.dark ? '#2B3270' : '#DCE8F2'} />
+      <Puff x={150} y={150} r={11} fill={c.dark ? '#3A4590' : C.white} shade={c.dark ? '#2B3270' : '#DCE8F2'} />
+      <Path d="M0 290Q60 270 120 285T240 280V320H0Z" fill={c.dark ? '#24543F' : C.leafPale} />
+    </>
+  )),
+  'storm-sky': art(240, 320, (c) => (
+    <>
+      <Rect x={0} y={0} width={240} height={320} fill={c.dark ? '#151832' : '#7E86A6'} />
+      <Puff x={50} y={60} r={26} fill={c.dark ? '#2A2D52' : '#5D6485'} shade={c.dark ? '#1E2142' : '#4C5272'} />
+      <Puff x={170} y={50} r={30} fill={c.dark ? '#2F3360' : '#666E90'} shade={c.dark ? '#1E2142' : '#4C5272'} />
+      <Puff x={120} y={120} r={22} fill={c.dark ? '#2A2D52' : '#5D6485'} shade={c.dark ? '#1E2142' : '#4C5272'} />
+      <Path d="M150 80L134 118H148L136 152 166 108H150L160 80Z" fill={C.goldLight} />
+      {Array.from({ length: 22 }, (_, i) => {
+        const x = 12 + ((i * 47) % 220);
+        const y = 140 + ((i * 61) % 150);
+        return <Path key={i} d={`M${x} ${y}l-5 12`} stroke={C.waterLight} strokeWidth={2} strokeLinecap="round" opacity={0.7} />;
+      })}
+    </>
+  )),
+  chair: art(80, 100, (c) => (
+    <>
+      <Shadow c={c} cx={40} cy={96} rx={30} />
+      <Rect x={16} y={8} width={48} height={44} rx={8} fill={C.woodLight} />
+      <Rect x={22} y={14} width={36} height={32} rx={5} fill={C.tealMid} />
+      <Rect x={10} y={50} width={60} height={12} rx={5} fill={C.wood} />
+      <Rect x={14} y={60} width={7} height={34} rx={3} fill={C.woodDark} />
+      <Rect x={59} y={60} width={7} height={34} rx={3} fill={C.woodDark} />
+      <Path d={star8Path(40, 30, 8)} fill={C.goldLight} opacity={0.8} />
+    </>
+  )),
+  'shout-bubble': art(90, 70, () => (
+    <Path d="M10 10L24 18 30 4 42 16 54 2 60 18 78 8 74 26 88 32 74 40 82 56 62 50 56 66 46 52 32 64 30 48 12 52 20 38 2 30 18 24Z" fill={C.coral} stroke={C.berry} strokeWidth={3} strokeLinejoin="round" />
+  )),
+  'mean-bubble': art(90, 70, () => (
+    <Bubble fill={C.greyLight} stroke={C.greyDark}>
+      <Path d="M22 30Q28 18 34 30T46 30T58 30T70 30" stroke={C.ink} strokeWidth={3} fill="none" strokeLinecap="round" />
+      <Path d="M30 40L60 22" stroke={C.berry} strokeWidth={3} strokeLinecap="round" />
+    </Bubble>
+  )),
+  'slam-door': art(90, 100, (c) => (
+    <>
+      <Shadow c={c} cx={45} cy={96} rx={34} />
+      <Rect x={22} y={8} width={46} height={86} rx={3} fill={C.woodDark} />
+      <Path d="M26 12H64V92H26Z" fill={C.terracotta} />
+      <Rect x={32} y={20} width={26} height={26} rx={2} fill="none" stroke={C.berry} strokeWidth={2} />
+      <Rect x={32} y={56} width={26} height={26} rx={2} fill="none" stroke={C.berry} strokeWidth={2} />
+      <Circle cx={58} cy={52} r={3} fill={C.gold} />
+      <Path d="M76 30L86 24M78 50H88M76 70L86 76M14 30L4 24M12 50H2M14 70L4 76" stroke={C.berry} strokeWidth={3} strokeLinecap="round" />
+    </>
+  )),
+  'broken-cup': art(90, 80, (c) => (
+    <>
+      <Shadow c={c} cx={45} cy={74} rx={36} />
+      <Path d="M14 30H40L36 46 42 58 34 70H22Q14 60 14 46Z" fill={C.tealMid} />
+      <Path d="M48 34H74V46Q74 62 64 70H50L56 58 46 48Z" fill={C.tealMid} />
+      <Path d="M74 40Q86 40 84 50 82 58 72 58" stroke={C.teal} strokeWidth={4} fill="none" />
+      <Path d="M10 72L16 66M78 74L72 68M44 72L46 64" stroke={C.greyDark} strokeWidth={2} strokeLinecap="round" />
+    </>
+  )),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...storm,
   ...tidy,
   ...trust,
   ...gratitude,
