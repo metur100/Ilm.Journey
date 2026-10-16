@@ -1,11 +1,7 @@
 import { registerKitDemos } from '@/core/games/kit/demos';
 
-import { registerArkOfNuhGame } from './ark-of-nuh/register';
-import { registerAyahBuilderGame } from './ayah-builder/register';
 import { registerBuildTheMasjidGame } from './build-the-masjid/register';
 import { registerGoodDeedsDayGame } from './good-deeds-day/register';
-import { registerRamadanJourneyGame } from './ramadan-journey/register';
-import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSalahPrayersGames } from './sections/salah-prayers';
 import { registerSalahGames } from './sections/salah';
 import { registerQuranGames } from './sections/quran';
@@ -17,21 +13,14 @@ import { registerSeerahGames } from './sections/seerah';
 import { registerAkhlaqGames } from './sections/akhlaq';
 import { registerRamadanGames } from './sections/ramadan';
 import { registerHistoryGames } from './sections/history';
-import { registerYusufStoryPathGame } from './yusuf-story-path/register';
 
 /**
- * The v2 mini-games. Each game lives in `src/features/games/<id>/` and exports a `register<Name>Game()` that calls
- * `registerGame(def)` from `@/core/games`. Add one line per game below – see docs/GAMES-FRAMEWORK.md.
+ * Registers every game exactly once: the two remaining v2 games with their own folder, the kit demos and the v3
+ * sections (each section registers the games of its folder) – see docs/GAMES-FRAMEWORK.md and docs/GAMES-V3.md.
  */
 export function registerGames(): void {
-  // e.g. registerWuduFlowGame();
-  registerArkOfNuhGame();
-  registerYusufStoryPathGame();
   registerBuildTheMasjidGame();
   registerGoodDeedsDayGame();
-  registerRamadanJourneyGame();
-  registerAyahBuilderGame();
-  registerSurahGardenGame();
   // Kit demo games (development fixtures, one per engine – hidden in production builds)
   registerKitDemos();
   // v3 sections (docs/GAMES-V3.md)

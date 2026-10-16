@@ -13,11 +13,8 @@ import { thirtyLanternsGame } from './thirty-lanterns/game';
 import { whoFastsGame } from './who-fasts/game';
 import { zakatAlFitrGame } from './zakat-al-fitr/game';
 
-/**
- * All games of the Ramadan section in shelf order. Ramadan Journey keeps its v2 entry point
- * (`../../ramadan-journey/register.ts`, already wired in `src/features/games/index.ts`), so it is listed here but
- * registered there.
- */
+/** All games of the Ramadan section in shelf order – all registered by `registerRamadanGames()`. */
 export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame, suhoorIftarSkyGame, fastKeeperGame, newCrescentGame, thirtyLanternsGame, oddNightsGame, iftarTableGame, zakatAlFitrGame, bajramMorningGame, whoFastsGame, taraweehTowerGame, ramadanWordsGame];
 
-export const REGISTERED_ELSEWHERE = new Set([ramadanJourneyGame.id]);
+/** Games of this list registered by another entry point (none since the v2 shims were removed). */
+export const REGISTERED_ELSEWHERE = new Set<string>();
