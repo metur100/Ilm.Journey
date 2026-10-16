@@ -12,8 +12,8 @@ export function describeSeerahGame(id: string, register: () => void): void {
 
   describe(`seerah game ${id}`, () => {
     it('is valid and complete in en / de / bs', () => {
-      expect(() => validateGame(game())).not.toThrow();
-      expect(namespaceProblems(game())).toEqual([]);
+      expect(() => validateGame(game() as unknown as GameDef<unknown>)).not.toThrow();
+      expect(namespaceProblems(game() as unknown as GameDef<unknown>)).toEqual([]);
     });
 
     it('uses existing art, existing i18n keys, and sourced facts (direct wording: src/core/__tests__/phrasing.test.ts)', () => {

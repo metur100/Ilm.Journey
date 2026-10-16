@@ -1,4 +1,3 @@
-/* eslint-disable */
 // GENERATED – copied unchanged from src/features/seerah/content (episodes, events, people, sources).
 // Do not edit by hand; the test shared/__tests__/content.test.ts compares every entry with the Seerah JSON.
 import type { LocalizedText, SourceRef } from '@/core/models';

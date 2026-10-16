@@ -1,3 +1,4 @@
+import { registerHijrahPathGame } from './hijrah-path/register';
 import { registerPeopleOfTheSeerahGame } from './people-of-the-seerah/register';
 import { registerMadinahBrotherhoodGame } from './madinah-brotherhood/register';
 import { registerFarewellSermonGame } from './farewell-sermon/register';
@@ -27,4 +28,5 @@ export function registerSeerahGames(): void {
   registerFarewellSermonGame();
   registerMadinahBrotherhoodGame();
   registerPeopleOfTheSeerahGame();
+  registerHijrahPathGame();
 }

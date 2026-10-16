@@ -4,7 +4,6 @@ import { registerArkOfNuhGame } from './ark-of-nuh/register';
 import { registerAyahBuilderGame } from './ayah-builder/register';
 import { registerBuildTheMasjidGame } from './build-the-masjid/register';
 import { registerGoodDeedsDayGame } from './good-deeds-day/register';
-import { registerHijrahPathGame } from './hijrah-path/register';
 import { registerRamadanJourneyGame } from './ramadan-journey/register';
 import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSalahPrayersGames } from './sections/salah-prayers';
@@ -28,7 +27,6 @@ export function registerGames(): void {
   // e.g. registerWuduFlowGame();
   registerArkOfNuhGame();
   registerYusufStoryPathGame();
-  registerHijrahPathGame();
   registerBuildTheMasjidGame();
   registerGoodDeedsDayGame();
   registerRamadanJourneyGame();
