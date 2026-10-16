@@ -5,6 +5,7 @@ import { Card } from '@/core/components/ui/Card';
 import { Icon, type IconName } from '@/core/components/ui/Icon';
 import { ProgressBar } from '@/core/components/ui/ProgressBar';
 import { SceneView } from '@/core/components/scene/SceneView';
+import { StoryStage } from '@/core/components/scene/StoryStage';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 
 import { getEpisode, getEvent, getPerson, getPlace, getTheme, toSceneSpec } from '../content';
@@ -14,6 +15,7 @@ import { openNode } from '../navigation';
 import type { NodeType } from '../services/connections';
 import { episodeProgress } from '../services/progress';
 import { useSeerahStore } from '../store/seerahStore';
+import { episodeStage } from '../stages';
 import { precisionColor, SEERAH_ACCENT } from '../theme';
 import { PersonName } from './PersonName';
 
@@ -63,7 +65,11 @@ export function EpisodeCard({ episode, onPress }: { episode: Episode; onPress?: 
       style={styles.episode}
       accessibilityLabel={`${t('episode.label', { number: episode.order })}: ${l(episode.title)}. ${l(episode.subtitle)}${status}`}
     >
-      <SceneView scene={toSceneSpec(episode.scene)} height={96} rounded={false} />
+      {episodeStage(episode) ? (
+        <StoryStage still stage={episodeStage(episode)} scene={toSceneSpec(episode.scene)} height={96} rounded={false} />
+      ) : (
+        <SceneView scene={toSceneSpec(episode.scene)} height={96} rounded={false} />
+      )}
       <View style={styles.episodeBody}>
         <View style={styles.row}>
           <AppText variant="label" color={c.goldText} style={styles.flex}>

@@ -2,6 +2,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 import { View } from 'react-native';
 
+import { StoryStage } from '@/core/components/scene/StoryStage';
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
 import { Card } from '@/core/components/ui/Card';
@@ -17,6 +18,7 @@ import { BookmarkButton, ChapterHeader, FilterChip } from '../components/Control
 import { getEvent, getSource, getTheme, resolve } from '../content';
 import { useSeerahI18n } from '../i18n';
 import { openConnections, openNode } from '../navigation';
+import { eventStage } from '../stages';
 import { useSeerahStore } from '../store/seerahStore';
 
 const useStyles = makeStyles(() => ({
@@ -47,6 +49,7 @@ export default function EventScreen() {
 
   return (
     <Screen header={<TopBar title={t('type.event')} right={<BookmarkButton type="event" id={event.id} />} />}>
+      {eventStage(event) ? <StoryStage stage={eventStage(event)} height={190} /> : null}
       <ChapterHeader label={t(`era.${event.era}`)} title={l(event.title)} />
       <Card tone="alt" style={styles.card}>
         <AppText variant="label" color={c.textMuted}>

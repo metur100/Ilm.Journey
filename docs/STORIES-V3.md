@@ -14,7 +14,7 @@ final report.
 
 ## 1. The 25 stories
 
-| order | id (suggested) | prophet | group | list file |
+| order | id | prophet | group | list file |
 | --- | --- | --- | --- | --- |
 | 1 | `adam` | Adam | A | `groupA.ts` |
 | 2 | `idris` | Idris | A | |
@@ -42,8 +42,9 @@ final report.
 | 24 | `isa` | Isa | C | |
 | 25 | `muhammad` | Muhammad ﷺ | C | |
 
-- `order` is exactly the number above (GAMES-V3 §3.4). The existing 8 JSONs still carry the old orders 1–8; each
-  group renumbers its own files. Orders must be unique; missing stories are fine (the journey shows the registered
+- Use exactly these ids. The loader takes `order` from the canonical table `src/features/stories/content/order.ts`
+  by id, so the journey is right even before a JSON is renumbered – still set `order` in your JSON to the number
+  above (GAMES-V3 §3.4). Orders are unique within 1..25; missing stories are fine (the journey shows the registered
   ones), so groups can land their stories one by one.
 - A story is registered by importing its JSON in the group's list file (`groupA.ts`, `groupB.ts`, `groupC.ts`).
   The loader sorts by `order`, so list order does not matter.
@@ -87,7 +88,8 @@ Rules checked by `src/features/stories/__tests__/content.test.ts`:
 - **every scene has `sources`** (Quran surah:ayah, or hadith collection + number, or Ibn Kathir);
 - every question has sources (questions without their own fall back to the story sources);
 - every art name in `symbolArt`, `coverStage` and every scene `stage` exists (`hasArt`), and is never `body.*` or
-  `pose.*`; effect / animation / entry names are valid;
+  `pose.*`; effect / animation / entry names and numbers are valid (`validateStage`);
+- at least 3 scenes and 2 lessons per story;
 - no "Muslims believe …" phrasing in any story text: not "Muslims believe", "for Muslims", "according to Islam",
   "Muslime glauben", "für Muslime", "laut dem Islam", "Muslimani vjeruju", "za muslimane", "prema islamu".
   State the truth directly ("Allah is One.", "Allah je Jedan.", "Allah ist Einer.") and cite the source.
@@ -121,10 +123,10 @@ y ≈ 40 and inside x 30..370.
 | field | meaning | default |
 | --- | --- | --- |
 | `art` | art library name (`story.*`, `place.*`, `object.*`, `animal.*`, `garden.*`, `prophet.*`, `seerah.*` …) | required |
-| `fill` | covers the whole canvas (backdrops); `x/y/w` ignored | `false` (but pieces 400 wide default to full width) |
+| `fill` | covers the whole canvas (crop to fit); `x/y/w` ignored | `false` |
 | `x` | horizontal centre | 200 |
 | `y` | bottom edge (`anchor: "bottom"`) or centre (`anchor: "center"`) | 240 / 120 |
-| `w` | width in canvas units; height follows the art's aspect | 120 (400 for 400-wide pieces) |
+| `w` | width in canvas units; height follows the art's aspect | the piece's own viewBox width (so 400 × 240 bands fill the frame) |
 | `anchor` | `bottom` (things standing on the ground) or `center` (sky things) | `bottom` |
 | `z` | draw order; layers are drawn in array order (z = index × 10 + 10) unless set | |
 | `flip`, `rotate`, `opacity` | mirror, degrees, 0..1 | |
@@ -267,8 +269,9 @@ rain and wave effects), so nothing breaks while art is being made.
 
 ## 8. Seerah episodes
 
-Episodes and events use the **same stage format**. Put it in the episode JSON (or ask story-fx to use the overlay
-`src/features/seerah/stages.ts`):
+Episodes and events use the **same stage format**. Put it in the episode JSON (it wins), or extend the overlay
+`src/features/seerah/stages.ts` (`EPISODE_STAGES`, `EVENT_STAGES`), which already gives all 10 episodes an animated
+cover made from existing art (replace them with `seerah.*` art when it exists):
 
 ```jsonc
 {
@@ -281,6 +284,18 @@ Episodes and events use the **same stage format**. Put it in the episode JSON (o
 }
 ```
 
-Events (`content/events/events.json`) may carry `"stage": { … }`, shown at the top of the event screen. Art for the
+Where it shows: the cover on the introduction step, the episode card (as a still picture) and the finish screen; a
+step stage at the top of that step; an event stage at the top of the event screen. Events
+(`content/events/events.json`) may carry `"stage": { … }`. `src/features/seerah/__tests__/stages.test.ts` checks
+every Seerah stage like the story stages. Art for the
 Seerah lives in `seerah.*` (`src/core/art/pieces/sections/seerah.tsx`). The same rules apply: the Prophet ﷺ, his
 family and companions are never depicted – only places, objects, animals, light and nature.
+
+## 9. Tools
+
+- Preview art and stage compositions (layers only, no effects) as HTML:
+  `STAGE_SHEET_DIR=<dir> npx jest --testMatch "**/scene/__dev__/stageSheet.gen.tsx"` (set `STAGE_SHEET_PREFIX=prophet.`
+  to preview your own pieces), then screenshot `art-light.html`, `art-dark.html` and `stages.html` with headless
+  Edge/Chrome.
+- Engine: `src/core/components/scene/StoryStage.tsx` (component), `stage.ts` (format + `validateStage`),
+  `stageEffects.tsx` (presets), `stageMotion.tsx` (clock, particles), `stageFallback.ts` (old scenes → effects).

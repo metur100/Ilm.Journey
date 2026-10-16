@@ -1,11 +1,11 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { RewardAnimation } from '@/core/components/game/RewardAnimation';
 import { QuestionView } from '@/core/components/questions/QuestionView';
-import { SceneView } from '@/core/components/scene/SceneView';
+import { StoryStage } from '@/core/components/scene/StoryStage';
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
 import { Card } from '@/core/components/ui/Card';
@@ -15,7 +15,7 @@ import { EmptyState } from '@/core/components/ui/States';
 import { gameTitle, getGame } from '@/core/games';
 import { useStatusBar } from '@/core/hooks/useStatusBar';
 import { useAppStore } from '@/core/store/appStore';
-import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
+import { makeStyles, spacing, useTheme } from '@/core/theme';
 
 import { BlockView, SourceSections } from '../components/Blocks';
 import { EventCard, PersonCard, PlaceCard, TimelineItem } from '../components/Cards';
@@ -31,6 +31,7 @@ import { openConnections, openNode } from '../navigation';
 import { connectionChain } from '../services/connections';
 import { CHALLENGE_INDEX, EPISODE_STEPS } from '../services/engine';
 import { sortChronologically } from '../services/timeline';
+import { episodeStage, episodeStepStage } from '../stages';
 import { type EpisodeOutcome, useSeerahStore } from '../store/seerahStore';
 import { blockColors, SEERAH_ACCENT } from '../theme';
 
@@ -41,7 +42,6 @@ const useStyles = makeStyles((c) => ({
   headerText: { flex: 1, alignItems: 'center' },
   progress: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingHorizontal: spacing.lg, paddingBottom: spacing.sm },
   content: { padding: spacing.lg, paddingBottom: spacing.xxl * 2, gap: spacing.lg },
-  scene: { borderRadius: radius.lg, overflow: 'hidden' },
   intro: { fontStyle: 'italic' },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
@@ -76,6 +76,7 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
   const completeEpisode = useSeerahStore((s) => s.completeEpisode);
   const recordAnswer = useAppStore((s) => s.recordAnswer);
   const setPaused = useAppStore((s) => s.setCelebrationsPaused);
+  const focused = useIsFocused();
 
   // Resume where the reader stopped; after the challenge, resume at the challenge so the quiz is not skipped.
   const [stepIndex, setStepIndex] = useState(() => {
@@ -129,6 +130,8 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
   if (outcome) return <EpisodeDone episode={episode} outcome={outcome} answerXp={answerXp} />;
 
   const stepName = t(`episode.step.${step}`);
+  const stepStage = episodeStepStage(episode, step);
+
   const isLast = stepIndex === EPISODE_STEPS.length - 1;
   const canContinue = step !== 'challenge' || challengeDone;
   const close = () => (router.canGoBack() ? router.back() : router.replace('/seerah'));
@@ -162,11 +165,10 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
       </View>
 
       <ScrollView ref={scrollRef} scrollEnabled={scrollEnabled} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+        {step !== 'introduction' && stepStage ? <StoryStage key={step} stage={stepStage} height={180} paused={!focused} /> : null}
         {step === 'introduction' ? (
           <>
-            <View style={styles.scene}>
-              <SceneView scene={toSceneSpec(episode.scene)} height={190} />
-            </View>
+            <StoryStage key="cover" stage={episodeStepStage(episode, 'introduction') ?? episodeStage(episode)} scene={toSceneSpec(episode.scene)} height={210} paused={!focused} />
             <ChapterHeader label={`${t('episode.label', { number: episode.order })} · ${l(episode.period)}`} title={l(episode.title)} subtitle={l(episode.subtitle)} />
             <NarrationButton episodeId={episode.id} />
             <AppText variant="reading" style={styles.intro}>
@@ -375,9 +377,7 @@ function EpisodeDone({ episode, outcome, answerXp }: { episode: Episode; outcome
   return (
     <SafeAreaView style={styles.fill}>
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.scene}>
-          <SceneView scene={toSceneSpec(episode.scene)} height={160} />
-        </View>
+        <StoryStage stage={episodeStage(episode)} scene={toSceneSpec(episode.scene)} height={170} />
         <ChapterHeader label={t('episode.completed')} title={t('episode.doneTitle')} subtitle={t('episode.doneBody', { title: l(episode.title) })} />
         {outcome.score.total > 0 ? (
           <Card tone="gold">
