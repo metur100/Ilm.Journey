@@ -731,8 +731,35 @@ const market = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Sharing food: a table cloth seen from above
+
+const table = {
+  table: art(400, 300, (c) => (
+    <>
+      <Rect x={0} y={0} width={400} height={300} fill={dk(c, '#E9D6B4', 0.45)} />
+      {Array.from({ length: 8 }, (_, i) => (
+        <Path key={i} d={`M0 ${i * 40 + 12}H400`} stroke={dk(c, '#DCC39A', 0.45)} strokeWidth={2} opacity={0.6} />
+      ))}
+      <Rect x={22} y={22} width={356} height={256} rx={26} fill={dk(c, C.wood, 0.25)} />
+      <Rect x={30} y={30} width={340} height={240} rx={20} fill={dk(c, C.woodLight, 0.25)} />
+      {Array.from({ length: 6 }, (_, i) => (
+        <Path key={i} d={`M38 ${60 + i * 36}Q200 ${52 + i * 36} 362 ${62 + i * 36}`} stroke={dk(c, C.wood, 0.25)} strokeWidth={1.5} opacity={0.35} fill="none" />
+      ))}
+      <Rect x={70} y={60} width={260} height={180} rx={14} fill={dk(c, C.cream, 0.35)} />
+      <Rect x={78} y={68} width={244} height={164} rx={10} fill="none" stroke={dk(c, C.teal, 0.3)} strokeWidth={3} strokeDasharray="10 6" />
+      {[[78, 68], [322, 68], [78, 232], [322, 232]].map(([x, y], i) => (
+        <Path key={i} d={star8Path(x, y, 9)} fill={C.gold} />
+      ))}
+      <Path d={star8Path(200, 150, 26)} fill={dk(c, C.tealPale, 0.3)} opacity={0.7} />
+      <Path d={star8Path(200, 150, 12)} fill={C.goldLight} opacity={0.7} />
+    </>
+  )),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...table,
   ...market,
   ...town,
   ...water,

@@ -4,8 +4,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-na
 
 import { Art } from '@/core/art';
 import { type GameApi, type GameDef, registerGame } from '@/core/games';
-import { CatchGame, GameBoard, kitResult } from '@/core/games/kit';
-import { useMeasure } from '@/core/games/kit/layout';
+import { CatchGame, GameBoard, kitResult, useMeasure } from '@/core/games/kit';
 
 import { F, L } from '../shared/facts';
 import { stormI18n } from './i18n';
