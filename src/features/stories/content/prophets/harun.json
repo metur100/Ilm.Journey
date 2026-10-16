@@ -1,0 +1,332 @@
+{
+  "id": "harun",
+  "order": 15,
+  "prophetName": { "en": "Harun", "de": "Harun (Aaron)", "bs": "Harun" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Brother Who Helped", "de": "Der Bruder, der half", "bs": "Brat koji je pomagao" },
+  "description": {
+    "en": "A dua answered, two brothers side by side, and gentle words before a tyrant.",
+    "de": "Ein erhörtes Bittgebet, zwei Brüder Seite an Seite und sanfte Worte vor einem Tyrannen.",
+    "bs": "Uslišana dova, dva brata rame uz rame i blage riječi pred silnikom."
+  },
+  "place": { "en": "Egypt and Sinai", "de": "Ägypten und Sinai", "bs": "Egipat i Sinaj" },
+  "symbol": "lanterns",
+  "symbolArt": "prophet.harun-lanterns",
+  "cover": { "sky": "dusk", "elements": ["stars", "mountains", "lanterns"] },
+  "coverStage": {
+    "sky": "dusk",
+    "layers": [
+      { "art": "story.mountains" },
+      { "art": "prophet.harun-lanterns", "x": 200, "y": 150, "w": 130, "anchor": "center", "anim": { "type": "sway", "amp": 2, "period": 5000 }, "enter": "fade", "at": 300 }
+    ],
+    "effects": ["stars", { "type": "lanternGlow", "x": 168, "y": 160, "intensity": 2, "at": 600 }, { "type": "lanternGlow", "x": 232, "y": 160, "intensity": 2, "at": 900 }]
+  },
+  "mapPlaces": ["egypt", "sinai"],
+  "intro": {
+    "en": "Harun (peace be upon him) was the brother of Musa. Out of His mercy Allah gave Musa his brother Harun as a prophet, to stand at his side.",
+    "de": "Harun (Friede sei mit ihm) war der Bruder Musas. Aus Seiner Barmherzigkeit gab Allah Musa seinen Bruder Harun als Propheten, um an seiner Seite zu stehen.",
+    "bs": "Harun, a.s., bio je Musaov brat. Iz Svoje milosti Allah je Musau dao njegovog brata Haruna za poslanika, da mu bude uz bok."
+  },
+  "scenes": [
+    {
+      "id": "harun-s1",
+      "title": { "en": "A dua for a helper", "de": "Ein Bittgebet um einen Helfer", "bs": "Dova za pomagača" },
+      "text": {
+        "en": "When Allah sent Musa to Fir'awn, Musa prayed: \"My Lord, expand my chest, ease my task and untie the knot from my tongue, so they understand my speech. Give me a helper from my family – Harun, my brother. Strengthen me through him and let him share my task, so that we glorify You much and remember You much.\" Allah answered: \"Your request is granted, O Musa.\"",
+        "de": "Als Allah Musa zu Pharao sandte, betete Musa: „Mein Herr, weite mir meine Brust, erleichtere mir meine Aufgabe und löse den Knoten von meiner Zunge, damit sie meine Rede verstehen. Gib mir einen Helfer aus meiner Familie – Harun, meinen Bruder. Stärke mich durch ihn und lass ihn an meiner Aufgabe teilhaben, damit wir Dich viel preisen und viel an Dich denken.“ Allah antwortete: „Deine Bitte ist dir gewährt, o Musa.“",
+        "bs": "Kada je Allah poslao Musaa faraonu, Musa je zamolio: „Gospodaru moj, prostranim učini prsa moja, olakšaj zadatak moj i odriješi uzao s jezika moga da bi razumjeli govor moj. Podaj mi pomagača iz porodice moje – Haruna, brata mog. Osnaži me njime i učini ga sudionikom u zadatku mome, da bismo Te mnogo hvalili i mnogo Te spominjali.“ Allah je odgovorio: „Ispunjena ti je molba, o Musa.“"
+      },
+      "scene": { "sky": "night", "elements": ["stars", "mountains", "fire"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.valley" },
+          { "art": "prophet.musa-bush", "x": 200, "y": 230, "w": 100, "anim": "breathe" },
+          { "art": "prophet.harun-lanterns", "x": 320, "y": 120, "w": 70, "anchor": "center", "enter": "fade", "at": 2600, "anim": "float" }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 200, "y": 180, "intensity": 2 }, { "type": "sparkle", "x": 320, "y": 120, "w": 80, "h": 60, "intensity": 1, "at": 3000 }]
+      },
+      "interactionId": "harun-dua",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:24–36" }]
+    },
+    {
+      "id": "harun-s2",
+      "title": { "en": "Clear in speech", "de": "Klar in der Rede", "bs": "Rječit u govoru" },
+      "text": {
+        "en": "Musa said: \"My brother Harun is more eloquent than me in speech, so send him with me as a helper who confirms me.\" Allah said: \"We will strengthen your arm through your brother and give you both authority.\"",
+        "de": "Musa sagte: „Mein Bruder Harun ist redegewandter als ich, so sende ihn mit mir als Helfer, der mich bestätigt.“ Allah sprach: „Wir werden deinen Arm durch deinen Bruder stärken und euch beiden Macht verleihen.“",
+        "bs": "Musa je rekao: „Brat moj Harun je rječitiji od mene, pa ga pošalji sa mnom kao pomagača koji će me potvrditi.“ Allah je rekao: „Osnažit ćemo tvoju mišicu bratom tvojim i obojici vam dati vlast.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "book"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.mountains" },
+          { "art": "prophet.harun-voice", "x": 150, "y": 200, "w": 70, "enter": "rise", "at": 400 },
+          { "art": "prophet.harun-pillars", "x": 260, "y": 210, "w": 80, "enter": "rise", "at": 900 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 330, "y": 70 }, { "type": "birds", "intensity": 1 }]
+      },
+      "interactionId": "harun-eloquent",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "28:33–35" }]
+    },
+    {
+      "id": "harun-s3",
+      "title": { "en": "Gentle words", "de": "Sanfte Worte", "bs": "Blage riječi" },
+      "text": {
+        "en": "Allah said to them: \"Go, both of you, to Fir'awn – he has gone too far. Speak to him with gentle words; perhaps he will remember or fear.\" They said they were afraid of him. Allah said: \"Do not fear. I am with you both – I hear and I see.\"",
+        "de": "Allah sprach zu ihnen: „Geht beide zu Pharao – er hat das Maß überschritten. Sprecht zu ihm mit sanften Worten; vielleicht lässt er sich ermahnen oder fürchtet sich.“ Sie sagten, dass sie ihn fürchteten. Allah sprach: „Fürchtet euch nicht. Ich bin mit euch beiden – Ich höre und sehe.“",
+        "bs": "Allah im je rekao: „Idite vas dvojica faraonu – on se uistinu osilio. Govorite mu blagim riječima, ne bi li se urazumio ili pobojao.“ Rekli su da se boje. Allah je rekao: „Ne bojte se, Ja sam s vama – sve čujem i vidim.“"
+      },
+      "scene": { "sky": "day", "elements": ["city", "river", "palms"] },
+      "stage": {
+        "sky": "day",
+        "camera": "panLeft",
+        "layers": [
+          { "art": "story.nile" },
+          { "art": "story.columns-hall", "opacity": 0.75 },
+          { "art": "prophet.harun-lanterns", "x": 200, "y": 140, "w": 90, "anchor": "center", "anim": "float", "enter": "fade", "at": 600 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 70, "y": 60 }, { "type": "sparkle", "x": 200, "y": 140, "w": 100, "h": 60, "intensity": 1, "at": 1000 }]
+      },
+      "interactionId": "harun-gentle",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:42–46" }]
+    },
+    {
+      "id": "harun-s4",
+      "title": { "en": "Taking Musa's place", "de": "An Musas Stelle", "bs": "Na Musaovom mjestu" },
+      "text": {
+        "en": "When Musa went to the mountain to meet his Lord for forty nights, he told Harun: \"Take my place among my people, do what is right and do not follow the way of those who spread corruption.\" When some of the people began to worship a calf, Harun told them: \"My people, you are only being tested by it. Your Lord is the Most Merciful – so follow me and obey my word.\"",
+        "de": "Als Musa für vierzig Nächte zum Berg ging, um seinem Herrn zu begegnen, sagte er zu Harun: „Vertritt mich bei meinem Volk, handle recht und folge nicht dem Weg derer, die Unheil stiften.“ Als einige aus dem Volk begannen, ein Kalb anzubeten, sagte Harun: „Mein Volk, ihr werdet damit nur geprüft. Euer Herr ist der Allerbarmer – so folgt mir und gehorcht meinem Wort.“",
+        "bs": "Kada je Musa otišao na brdo na susret sa svojim Gospodarom na četrdeset noći, rekao je Harunu: „Zamijeni me u narodu mome, čini dobro i ne slijedi put onih koji nered čine.“ Kada su neki iz naroda počeli obožavati tele, Harun im je rekao: „Narode moj, vi ste time samo stavljeni na iskušenje. Gospodar vaš je Milostivi – zato slijedite mene i poslušajte moju riječ.“"
+      },
+      "scene": { "sky": "sunset", "elements": ["mountains", "dunes"] },
+      "stage": {
+        "sky": "sunset",
+        "layers": [
+          { "art": "place.mount-sinai", "x": 250, "y": 210, "w": 240, "opacity": 0.9 },
+          { "art": "story.desert-flat", "y": 262 },
+          { "art": "story.tents", "x": 120, "y": 234, "w": 170 },
+          { "art": "story.lamp", "x": 220, "y": 236, "w": 40, "enter": "fade", "at": 800 }
+        ],
+        "effects": [{ "type": "lanternGlow", "x": 220, "y": 220, "intensity": 1, "at": 800 }, { "type": "sand", "intensity": 1 }]
+      },
+      "interactionId": "harun-map",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:142; 20:90" }]
+    },
+    {
+      "id": "harun-s5",
+      "title": { "en": "Peace be upon Musa and Harun", "de": "Friede sei auf Musa und Harun", "bs": "Mir Musau i Harunu" },
+      "text": {
+        "en": "Allah says: \"We gave Musa and Harun the clear Scripture, guided them both on the straight path and left for them a good name among later generations: Peace be upon Musa and Harun!\"",
+        "de": "Allah sagt: „Wir gaben Musa und Harun die klare Schrift, leiteten beide auf den geraden Weg und ließen ihnen einen guten Namen bei den späteren Generationen: Friede sei auf Musa und Harun!“",
+        "bs": "Allah kaže: „Mi smo Musau i Harunu dali jasnu Knjigu, obojicu uputili na Pravi put i ostavili im lijep spomen u kasnijim pokoljenjima: Mir Musau i Harunu!“"
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "book", "lanterns"] },
+      "stage": {
+        "sky": "dawn",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.mountains" },
+          { "art": "prophet.musa-tablets", "x": 200, "y": 228, "w": 96, "enter": "rise", "at": 400 },
+          { "art": "prophet.harun-lanterns", "x": 200, "y": 70, "w": 90, "anchor": "center", "enter": "fade", "at": 1200 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 80, "at": 1000 }, { "type": "sparkle", "x": 200, "y": 120, "w": 200, "h": 80, "intensity": 1, "at": 1400 }, { "type": "birds", "intensity": 1 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:114–120" }]
+    }
+  ],
+  "miniGameId": "harun-decision",
+  "quizIds": ["harun-with", "harun-memory", "harun-lesson"],
+  "lessons": [
+    {
+      "id": "harun-l1",
+      "value": "teamwork",
+      "title": { "en": "Stronger together", "de": "Gemeinsam stärker", "bs": "Zajedno jači" },
+      "explanation": {
+        "en": "Musa asked Allah for a helper, and Allah gave him his brother. Asking for help and helping others in good things is a strength, not a weakness.",
+        "de": "Musa bat Allah um einen Helfer, und Allah gab ihm seinen Bruder. Um Hilfe zu bitten und anderen im Guten zu helfen ist eine Stärke, keine Schwäche.",
+        "bs": "Musa je zamolio Allaha za pomagača, i Allah mu je dao brata. Tražiti pomoć i pomagati drugima u dobru je snaga, a ne slabost."
+      },
+      "example": {
+        "en": "Your sister is better at drawing, you are better at writing. You make the class poster together.",
+        "de": "Deine Schwester kann besser malen, du kannst besser schreiben. Ihr macht das Klassenplakat zusammen.",
+        "bs": "Sestra ti bolje crta, a ti bolje pišeš. Zajedno pravite plakat za razred."
+      },
+      "reflection": {
+        "en": "Who helps you – and whom could you help?",
+        "de": "Wer hilft dir – und wem könntest du helfen?",
+        "bs": "Ko tebi pomaže – i kome bi ti mogao pomoći?"
+      }
+    },
+    {
+      "id": "harun-l2",
+      "value": "gentleness",
+      "title": { "en": "Gentle words", "de": "Sanfte Worte", "bs": "Blage riječi" },
+      "explanation": {
+        "en": "Allah told Musa and Harun to speak gently – even to a tyrant. Kind words open hearts.",
+        "de": "Allah befahl Musa und Harun, sanft zu sprechen – selbst zu einem Tyrannen. Freundliche Worte öffnen Herzen.",
+        "bs": "Allah je naredio Musau i Harunu da govore blago – čak i silniku. Lijepe riječi otvaraju srca."
+      },
+      "example": {
+        "en": "A friend did something wrong. You tell them calmly and kindly instead of shouting.",
+        "de": "Ein Freund hat etwas falsch gemacht. Du sagst es ihm ruhig und freundlich, statt zu schreien.",
+        "bs": "Prijatelj je pogriješio. Kažeš mu to mirno i lijepo umjesto da vičeš."
+      },
+      "reflection": {
+        "en": "When is it hardest for you to speak gently?",
+        "de": "Wann fällt es dir am schwersten, sanft zu sprechen?",
+        "bs": "Kada ti je najteže govoriti blago?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "harun-dua",
+      "type": "ordering",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "Put Musa's dua in order.", "de": "Bringe Musas Bittgebet in die richtige Reihenfolge.", "bs": "Poredaj Musaovu dovu." },
+      "items": [
+        { "id": "chest", "text": { "en": "Expand my chest", "de": "Weite meine Brust", "bs": "Prostranim učini prsa moja" } },
+        { "id": "task", "text": { "en": "Ease my task", "de": "Erleichtere meine Aufgabe", "bs": "Olakšaj zadatak moj" } },
+        { "id": "tongue", "text": { "en": "Untie the knot from my tongue", "de": "Löse den Knoten von meiner Zunge", "bs": "Odriješi uzao s jezika moga" } },
+        { "id": "helper", "text": { "en": "Give me a helper – Harun", "de": "Gib mir einen Helfer – Harun", "bs": "Podaj mi pomagača – Haruna" } }
+      ],
+      "explanation": {
+        "en": "Musa asked for an open heart, an easy task, clear speech – and his brother at his side.",
+        "de": "Musa bat um eine weite Brust, eine leichte Aufgabe, eine klare Rede – und seinen Bruder an seiner Seite.",
+        "bs": "Musa je tražio prostrana prsa, lahak zadatak, jasan govor – i brata uz sebe."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:25–30" }]
+    },
+    {
+      "id": "harun-eloquent",
+      "type": "trueFalse",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "Musa said that his brother Harun was more eloquent than him.", "de": "Musa sagte, sein Bruder Harun sei redegewandter als er.", "bs": "Musa je rekao da je njegov brat Harun rječitiji od njega." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – and he asked Allah to send Harun with him as a helper.",
+        "de": "Ja – und er bat Allah, Harun als Helfer mit ihm zu senden.",
+        "bs": "Da – i zamolio je Allaha da pošalje Haruna s njim kao pomagača."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "28:34" }]
+    },
+    {
+      "id": "harun-gentle",
+      "type": "multipleChoice",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "How did Allah tell Musa and Harun to speak to Fir'awn?", "de": "Wie sollten Musa und Harun nach Allahs Befehl zu Pharao sprechen?", "bs": "Kako je Allah naredio Musau i Harunu da govore faraonu?" },
+      "options": [
+        { "id": "a", "text": { "en": "With gentle words", "de": "Mit sanften Worten", "bs": "Blagim riječima" } },
+        { "id": "b", "text": { "en": "With angry shouting", "de": "Mit wütendem Geschrei", "bs": "Ljutitom vikom" } },
+        { "id": "c", "text": { "en": "They should not speak at all", "de": "Gar nicht", "bs": "Nikako" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"Speak to him with gentle words; perhaps he will remember or fear.\"",
+        "de": "„Sprecht zu ihm mit sanften Worten; vielleicht lässt er sich ermahnen oder fürchtet sich.“",
+        "bs": "„Govorite mu blagim riječima, ne bi li se urazumio ili pobojao.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:44" }]
+    },
+    {
+      "id": "harun-map",
+      "type": "map",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "Where did Musa go for forty nights, leaving Harun with the people? Tap it on the map.", "de": "Wohin ging Musa für vierzig Nächte, während Harun beim Volk blieb? Tippe es auf der Karte an.", "bs": "Gdje je Musa otišao na četrdeset noći, ostavivši Haruna s narodom? Dodirni na mapi." },
+      "places": ["sinai", "egypt", "makkah", "nineveh"],
+      "correctPlace": "sinai",
+      "explanation": {
+        "en": "Musa went to the mountain (Tur in Sinai) to meet his Lord, and Harun took his place among the people.",
+        "de": "Musa ging zum Berg (Tur im Sinai), um seinem Herrn zu begegnen, und Harun vertrat ihn beim Volk.",
+        "bs": "Musa je otišao na brdo (Tur na Sinaju) na susret sa Gospodarom, a Harun ga je zamijenio u narodu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:142–143" }]
+    },
+    {
+      "id": "harun-decision",
+      "type": "scenario",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": {
+        "en": "Decision: you must present a project in class, but speaking in front of others is hard for you. Your friend speaks well. What could you do?",
+        "de": "Entscheidung: Du musst ein Projekt in der Klasse vorstellen, aber vor anderen zu sprechen fällt dir schwer. Dein Freund spricht gut. Was könntest du tun?",
+        "bs": "Odluka: moraš predstaviti projekat u razredu, ali ti je teško govoriti pred drugima. Tvoj prijatelj lijepo govori. Šta bi mogao uraditi?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Make dua and ask your friend to present it with you", "de": "Du'a machen und den Freund bitten, es mit dir vorzustellen", "bs": "Uputiti dovu i zamoliti prijatelja da ga predstavite zajedno" }, "feedback": { "en": "Like Musa and Harun – a dua and a helper.", "de": "Wie Musa und Harun – ein Bittgebet und ein Helfer.", "bs": "Kao Musa i Harun – dova i pomagač." } },
+        { "id": "b", "text": { "en": "Pretend to be ill", "de": "So tun, als wärst du krank", "bs": "Praviti se bolestan" }, "feedback": { "en": "Running away does not make the task easier – asking for help does.", "de": "Weglaufen macht die Aufgabe nicht leichter – um Hilfe zu bitten schon.", "bs": "Bježanje ne olakšava zadatak – traženje pomoći olakšava." } },
+        { "id": "c", "text": { "en": "Let your friend do all the work", "de": "Den Freund die ganze Arbeit machen lassen", "bs": "Pustiti prijatelja da sve uradi" }, "feedback": { "en": "Harun shared the task – he did not carry it alone.", "de": "Harun teilte die Aufgabe – er trug sie nicht allein.", "bs": "Harun je dijelio zadatak – nije ga nosio sam." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Musa asked Allah for help and for his brother at his side – and they shared the task.",
+        "de": "Musa bat Allah um Hilfe und um seinen Bruder an seiner Seite – und sie teilten die Aufgabe.",
+        "bs": "Musa je tražio od Allaha pomoć i brata uz sebe – i dijelili su zadatak."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:25–32" }]
+    },
+    {
+      "id": "harun-with",
+      "type": "trueFalse",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "Allah told Musa and Harun: \"Do not fear. I am with you both – I hear and I see.\"", "de": "Allah sagte zu Musa und Harun: „Fürchtet euch nicht. Ich bin mit euch beiden – Ich höre und sehe.“", "bs": "Allah je rekao Musau i Harunu: „Ne bojte se, Ja sam s vama – sve čujem i vidim.“" },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – Allah was with them both.",
+        "de": "Ja – Allah war mit ihnen beiden.",
+        "bs": "Da – Allah je bio s obojicom."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:46" }]
+    },
+    {
+      "id": "harun-memory",
+      "type": "memory",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "Memory: match each request of Musa's dua with its meaning.", "de": "Memory: Ordne jeder Bitte aus Musas Bittgebet ihre Bedeutung zu.", "bs": "Memorija: spoji svaku molbu iz Musaove dove s njenim značenjem." },
+      "pairs": [
+        { "id": "p1", "left": { "en": "Expand my chest", "de": "Weite meine Brust", "bs": "Prostrana prsa" }, "right": { "en": "A calm, open heart", "de": "Ein ruhiges, offenes Herz", "bs": "Mirno, otvoreno srce" } },
+        { "id": "p2", "left": { "en": "Untie my tongue", "de": "Löse meine Zunge", "bs": "Odriješi mi jezik" }, "right": { "en": "Clear speech", "de": "Klare Rede", "bs": "Jasan govor" } },
+        { "id": "p3", "left": { "en": "A helper", "de": "Ein Helfer", "bs": "Pomagač" }, "right": { "en": "Harun, my brother", "de": "Harun, mein Bruder", "bs": "Harun, moj brat" } },
+        { "id": "p4", "left": { "en": "Why?", "de": "Wozu?", "bs": "Zašto?" }, "right": { "en": "To remember Allah much", "de": "Um viel an Allah zu denken", "bs": "Da mnogo spominjemo Allaha" } }
+      ],
+      "explanation": {
+        "en": "Musa's dua: an open heart, an easy task, clear speech, a helper – to glorify and remember Allah much.",
+        "de": "Musas Bittgebet: eine weite Brust, eine leichte Aufgabe, klare Rede, ein Helfer – um Allah viel zu preisen und an Ihn zu denken.",
+        "bs": "Musaova dova: prostrana prsa, lahak zadatak, jasan govor, pomagač – da se Allah mnogo hvali i spominje."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:25–34" }]
+    },
+    {
+      "id": "harun-lesson",
+      "type": "lessonChoice",
+      "storyId": "harun",
+      "topic": "harun",
+      "prompt": { "en": "What does the story of Harun teach us?", "de": "Was lehrt uns die Geschichte Haruns?", "bs": "Čemu nas uči kazivanje o Harunu?" },
+      "options": [
+        { "id": "a", "text": { "en": "Help each other in good things and speak gently", "de": "Einander im Guten helfen und sanft sprechen", "bs": "Pomagati jedni drugima u dobru i govoriti blago" } },
+        { "id": "b", "text": { "en": "Always do everything alone", "de": "Immer alles allein machen", "bs": "Uvijek sve raditi sam" } },
+        { "id": "c", "text": { "en": "Loud words win arguments", "de": "Laute Worte gewinnen jeden Streit", "bs": "Glasne riječi pobjeđuju u svađi" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Two brothers, one task – and gentle words, by Allah's command.",
+        "de": "Zwei Brüder, eine Aufgabe – und sanfte Worte, auf Allahs Befehl.",
+        "bs": "Dva brata, jedan zadatak – i blage riječi, po Allahovoj naredbi."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "19:53" },
+    { "sourceName": "Quran", "sourceReference": "20:24–47; 20:90" },
+    { "sourceName": "Quran", "sourceReference": "28:33–35" },
+    { "sourceName": "Quran", "sourceReference": "37:114–120" }
+  ]
+}
