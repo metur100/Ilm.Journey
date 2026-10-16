@@ -586,8 +586,107 @@ const water = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Salam street: a little town seen from above (route points shared with the game "salam-street")
+
+/** Route of the town in viewBox units (400 × 300), in walking order – the game uses the same points / 400, / 300. */
+export const TOWN_ROUTE: [number, number][] = [
+  [40, 255], [120, 210], [200, 234], [272, 192], [344, 216], [320, 120], [208, 108], [88, 66],
+];
+
+/** A small house from above-front (x, y = ground centre). */
+function TownHouse({ x, y, wall, roof, s = 1 }: { x: number; y: number; wall: string; roof: string; s?: number }) {
+  return (
+    <G transform={`translate(${x} ${y}) scale(${s})`}>
+      <Ellipse cx={0} cy={2} rx={22} ry={4} fill={C.ink} opacity={0.1} />
+      <Rect x={-18} y={-26} width={36} height={28} rx={2} fill={wall} />
+      <Path d="M-22-24L0-40 22-24Z" fill={roof} />
+      <Rect x={-5} y={-14} width={10} height={16} rx={1.5} fill={C.wood} />
+      <Rect x={-15} y={-20} width={7} height={7} rx={1} fill={C.skyPale} />
+      <Rect x={8} y={-20} width={7} height={7} rx={1} fill={C.skyPale} />
+    </G>
+  );
+}
+
+const town = {
+  'village-map': art(400, 300, (c) => {
+    const grass = dk(c, '#BFE3A6', 0.45);
+    const road = dk(c, '#F1DDB0', 0.4);
+    const d = TOWN_ROUTE.map(([x, y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join('');
+    return (
+      <>
+        <Rect x={0} y={0} width={400} height={300} fill={grass} />
+        {[[30, 30], [370, 30], [380, 280], [150, 290], [260, 40], [10, 160]].map(([x, y], i) => (
+          <Circle key={i} cx={x} cy={y} r={14} fill={dk(c, C.leaf, 0.4)} opacity={0.7} />
+        ))}
+        <Path d={d} stroke={dk(c, C.sandDeep, 0.4)} strokeWidth={30} strokeLinejoin="round" strokeLinecap="round" fill="none" />
+        <Path d={d} stroke={road} strokeWidth={24} strokeLinejoin="round" strokeLinecap="round" fill="none" />
+        {/* home */}
+        <TownHouse x={40} y={238} wall={C.cream} roof={C.coral} s={1.1} />
+        <Path d={star8Path(40, 200, 6)} fill={C.gold} />
+        {/* neighbours */}
+        <TownHouse x={118} y={192} wall={C.sandLight} roof={C.tealMid} />
+        <TownHouse x={150} y={262} wall={C.pinkPale} roof={C.plum} s={0.9} />
+        {/* shop with awning */}
+        <G transform="translate(200 218)">
+          <Rect x={-24} y={-26} width={48} height={28} rx={2} fill={C.cream} />
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <Path key={i} d={`M${-26 + i * 9} -30H${-17 + i * 9}L${-18 + i * 9} -20H${-25 + i * 9}Z`} fill={i % 2 ? C.cream : C.terracotta} />
+          ))}
+          <Circle cx={-12} cy={-8} r={5} fill={C.orange} />
+          <Circle cx={-2} cy={-8} r={5} fill={C.leafLight} />
+          <Rect x={8} y={-14} width={10} height={16} rx={1.5} fill={C.wood} />
+        </G>
+        {/* bakery */}
+        <G transform="translate(272 176)">
+          <Rect x={-20} y={-26} width={40} height={28} rx={2} fill={C.sandLight} />
+          <Path d="M-24-24L0-38 24-24Z" fill={C.woodLight} />
+          <Rect x={10} y={-44} width={7} height={14} fill={C.stone} />
+          <Ellipse cx={-6} cy={-10} rx={9} ry={5} fill={C.sandDeep} />
+          <Rect x={4} y={-14} width={10} height={16} rx={1.5} fill={C.wood} />
+        </G>
+        {/* school */}
+        <G transform="translate(344 200)">
+          <Rect x={-26} y={-26} width={52} height={28} rx={2} fill={C.terracotta} />
+          <Rect x={-8} y={-38} width={16} height={40} rx={2} fill={C.coral} />
+          <Circle cx={0} cy={-28} r={5} fill={C.cream} />
+          {[-20, -12, 12, 20].map((x) => (
+            <Rect key={x} x={x - 3} y={-18} width={6} height={7} rx={1} fill={C.skyPale} />
+          ))}
+        </G>
+        {/* park */}
+        <G transform="translate(330 96)">
+          <Ellipse cx={0} cy={4} rx={36} ry={14} fill={dk(c, C.leafPale, 0.4)} />
+          <Circle cx={-20} cy={-10} r={13} fill={C.leaf} />
+          <Circle cx={18} cy={-14} r={15} fill={C.leafDark} />
+          <Rect x={-8} y={0} width={18} height={4} rx={2} fill={C.wood} />
+          <Circle cx={0} cy={-2} r={5} fill={C.water} />
+        </G>
+        {/* library */}
+        <G transform="translate(208 92)">
+          <Rect x={-26} y={-24} width={52} height={26} fill={C.marble} />
+          <Path d="M-30-22L0-38 30-22Z" fill={C.stonePale} />
+          {[-18, -6, 6, 18].map((x) => (
+            <Rect key={x} x={x - 2} y={-20} width={4} height={22} fill={C.stoneLight} />
+          ))}
+        </G>
+        {/* masjid */}
+        <G transform="translate(88 50)">
+          <Rect x={-30} y={-20} width={60} height={26} rx={2} fill={C.marble} />
+          <Path d="M-14-20Q-14-42 0-46Q14-42 14-20Z" fill={C.domeGreen} />
+          <Rect x={32} y={-50} width={8} height={56} rx={2} fill={C.marble} />
+          <Path d="M30-50L36-62 42-50Z" fill={C.domeGreen} />
+          <Path d="M-6 6V-6Q0-12 6-6V6Z" fill={C.wood} />
+          <Path d="M0-48V-54" stroke={C.gold} strokeWidth={2} />
+        </G>
+      </>
+    );
+  }),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...town,
   ...water,
   ...home,
   ...storm,

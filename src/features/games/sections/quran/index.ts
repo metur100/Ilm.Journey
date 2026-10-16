@@ -1,3 +1,4 @@
+import { registerGoodDeedsGame } from './good-deeds-catch/register';
 import { registerSurahOrderGame } from './surah-order/register';
 import { registerJuzPathGame } from './juz-amma-path/register';
 import { registerSignsGame } from './signs-in-the-sky/register';
@@ -22,4 +23,5 @@ export function registerQuranGames(): void {
   registerSignsGame();
   registerJuzPathGame();
   registerSurahOrderGame();
+  registerGoodDeedsGame();
 }
