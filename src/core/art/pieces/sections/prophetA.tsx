@@ -490,12 +490,131 @@ const nuh = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Hud – ʿAd in al-Ahqaf (46:21), Iram of the lofty pillars (89:6–8), gardens and springs (26:133–134)
+
+/** A tall landmark tower of ʿAd (26:128–129) with its pillar-like body. */
+function Tower({ c, x, y, w, h, color = C.sandDark }: { c: Ctx; x: number; y: number; w: number; h: number; color?: string }) {
+  return (
+    <G>
+      <Path d={`M${x - w / 2} ${y}L${x - w * 0.4} ${y - h}H${x + w * 0.4}L${x + w / 2} ${y}Z`} fill={dim(c, color)} />
+      <Path d={`M${x + w * 0.1} ${y - h}H${x + w * 0.4}L${x + w / 2} ${y}H${x + w * 0.1}Z`} fill={dim(c, shade(color, 0.25))} opacity={0.6} />
+      <Rect x={x - w * 0.52} y={y - h - w * 0.16} width={w * 1.04} height={w * 0.18} rx={2} fill={dim(c, shade(color, 0.12))} />
+      {[0.25, 0.5, 0.75].map((t) => (
+        <Path key={t} d={`M${x - w * 0.4 - w * 0.1 * t} ${y - h + h * t}H${x + w * 0.4 + w * 0.1 * t}`} stroke={dim(c, shade(color, 0.3))} strokeWidth={1.2} opacity={0.5} />
+      ))}
+      <Rect x={x - w * 0.09} y={y - h * 0.82} width={w * 0.18} height={w * 0.3} rx={w * 0.09} fill={dim(c, C.woodDark)} />
+    </G>
+  );
+}
+
+/** A slim column with a capital (Iram "of the lofty pillars", 89:7). */
+function Pillar({ c, x, y, h, w = 12 }: { c: Ctx; x: number; y: number; h: number; w?: number }) {
+  return (
+    <G>
+      <Rect x={x - w / 2} y={y - h} width={w} height={h} fill={dim(c, C.sandLight)} />
+      <Rect x={x} y={y - h} width={w / 2} height={h} fill={dim(c, C.sandDeep)} opacity={0.6} />
+      <Rect x={x - w * 0.8} y={y - h - 6} width={w * 1.6} height={7} rx={2} fill={dim(c, C.sandDeep)} />
+      <Rect x={x - w * 0.75} y={y - 4} width={w * 1.5} height={5} rx={1.5} fill={dim(c, C.sandDeep)} />
+    </G>
+  );
+}
+
+/** Spring in a garden: water rising from rocks into a pool (26:134). */
+function Spring({ c }: { c: Ctx }) {
+  return (
+    <G>
+      <Shadow c={c} cx={100} cy={124} rx={86} />
+      <Ellipse cx={100} cy={108} rx={84} ry={20} fill={c.green(C.leafLight)} />
+      <Ellipse cx={100} cy={106} rx={62} ry={13} fill={C.water} />
+      <Ellipse cx={92} cy={103} rx={40} ry={6} fill={C.waterLight} opacity={0.7} />
+      <Rock c={{ ...c, dark: false }} x={58} y={104} w={34} h={26} />
+      <Rock c={{ ...c, dark: false }} x={138} y={104} w={30} h={22} color={C.stoneLight} />
+      <Path d="M100 102C98 80 92 66 86 56M100 102C102 80 110 66 116 56M100 102V52" stroke={C.waterLight} strokeWidth={3} strokeLinecap="round" fill="none" />
+      <Path d={dropPath(86, 44, 10)} fill={C.waterLight} />
+      <Path d={dropPath(116, 44, 10)} fill={C.waterLight} />
+      <Path d={dropPath(100, 38, 12)} fill={C.waterLight} />
+      <Tuft x={30} y={112} s={1.1} color={c.green(C.leafDark)} />
+      <Tuft x={172} y={112} s={1} color={c.green(C.leafDark)} />
+    </G>
+  );
+}
+
+const hud = {
+  /** Al-Ahqaf – long, curving sand ridges (46:21). */
+  'hud-ahqaf': art(W, H, (c) => (
+    <>
+      <Path d="M0 150C60 120 120 128 170 148S260 110 320 124 380 150 400 140V240H0Z" fill={dim(c, '#E2B98A', 0.45)} />
+      <Path d="M0 150C60 120 120 128 170 148S260 110 320 124 380 150 400 140" stroke={dim(c, C.sandLight)} strokeWidth={2.4} fill="none" />
+      <Path d="M0 180C40 160 100 150 150 168S250 196 300 170 370 150 400 160V240H0Z" fill={dim(c, C.sand)} />
+      <Path d="M150 168C200 186 250 196 300 170V240H160C170 216 170 190 150 168Z" fill={dim(c, C.sandDark)} opacity={0.35} />
+      <Path d="M0 180C40 160 100 150 150 168S250 196 300 170 370 150 400 160" stroke={dim(c, C.sandLight)} strokeWidth={2.6} fill="none" />
+      <Path d="M0 210C80 196 140 200 200 212S320 198 400 206V240H0Z" fill={dim(c, C.sandDeep)} />
+      <Path d="M0 210C80 196 140 200 200 212S320 198 400 206" stroke={dim(c, C.sandLight)} strokeWidth={2} fill="none" opacity={0.7} />
+      <G stroke={dim(c, C.sandDark)} strokeWidth={1.2} fill="none" opacity={0.5} strokeLinecap="round">
+        <Path d="M40 196q12-4 24 0M220 222q14-4 28 0M320 186q12-3 24 0M120 230q14-4 28 0" />
+      </G>
+    </>
+  )),
+
+  /** Iram of the lofty pillars – a proud city of towers and columns, quiet and without people (89:6–8). */
+  'hud-iram': art(W, H, (c) => (
+    <>
+      <Path d="M0 160C80 150 160 152 240 158S360 150 400 154V240H0Z" fill={dim(c, C.sand)} />
+      <Tower c={c} x={70} y={168} w={34} h={96} />
+      <Tower c={c} x={330} y={166} w={38} h={110} color={C.clay} />
+      <Rect x={110} y={120} width={180} height={48} fill={dim(c, C.sandDeep)} />
+      <Rect x={110} y={112} width={180} height={10} rx={2} fill={dim(c, C.sandDark)} />
+      {[124, 150, 176, 202, 228, 254, 280].map((x) => (
+        <Pillar key={x} c={c} x={x} y={176} h={96} w={11} />
+      ))}
+      <Rect x={104} y={70} width={192} height={10} rx={3} fill={dim(c, C.sandDark)} />
+      <Path d="M116 70V60H146V50H176V42H224V50H254V60H284V70Z" fill={dim(c, C.sandDeep)} />
+      <Path d="M0 186C100 174 200 178 300 188S380 182 400 184V240H0Z" fill={dim(c, C.sandDeep)} />
+      <Path d="M0 214C100 204 220 208 300 216S380 210 400 212V240H0Z" fill={dim(c, '#D29E5E')} />
+    </>
+  )),
+
+  /** A tall landmark tower on a rise (26:128). */
+  'hud-tower': art(90, 170, (c) => (
+    <>
+      <Shadow c={c} cx={45} cy={164} rx={40} />
+      <Path d="M4 166Q45 140 86 166Z" fill={dim(c, C.sandDeep)} />
+      <Tower c={c} x={45} y={156} w={40} h={128} />
+    </>
+  )),
+
+  /** Gardens and springs (26:134). */
+  'hud-spring': art(200, 130, (c) => <Spring c={c} />),
+
+  /** The valley of ʿAd before Hud's call: open land with space for livestock, gardens and a spring (game scene). */
+  'hud-valley': art(400, 300, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#28306A' : '#8FCBE6'], [1, c.dark ? '#6A5A90' : '#F6E3C2']]} />
+      </Defs>
+      <Rect x={0} y={0} width={400} height={300} fill={c.url('sky')} />
+      <Path d="M0 130C60 104 120 112 170 126S260 96 320 108 380 130 400 122V300H0Z" fill={dim(c, '#E2B98A', 0.45)} />
+      <Tower c={c} x={340} y={136} w={30} h={84} />
+      <Tower c={c} x={60} y={130} w={22} h={56} color={C.clay} />
+      <Path d="M0 160C80 140 160 144 240 156S360 140 400 150V300H0Z" fill={c.green(dim(c, '#B9C784'))} />
+      <Path d="M0 200C90 184 180 188 260 198S370 186 400 192V300H0Z" fill={c.green(dim(c, '#9DBB6F'))} />
+      <Path d="M0 250C100 238 220 242 300 250S380 244 400 246V300H0Z" fill={c.green(dim(c, '#86AA5E'))} />
+      {[[20, 290, 1.2], [140, 286, 1], [250, 294, 1.1], [380, 280, 1]].map(([x, y, s], i) => (
+        <Tuft key={i} x={x} y={y} s={s} color={c.green(dim(c, C.leafDark))} />
+      ))}
+      <LeafyTree c={c} x={200} y={182} s={0.4} leaf={dim(c, C.leaf)} leafDark={dim(c, C.leafDark)} leafLight={dim(c, C.leafLight)} />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
   ...adam,
   ...idris,
   ...nuh,
+  ...hud,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).

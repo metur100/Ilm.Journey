@@ -1,0 +1,339 @@
+{
+  "id": "hud",
+  "order": 4,
+  "prophetName": { "en": "Hud", "de": "Hud", "bs": "Hud" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The People of the Sand Dunes", "de": "Das Volk der Sanddünen", "bs": "Narod pješčanih dina" },
+  "description": {
+    "en": "A strong people with tall towers, gardens and springs – and a prophet who called them to thank Allah.",
+    "de": "Ein starkes Volk mit hohen Türmen, Gärten und Quellen – und ein Prophet, der sie aufrief, Allah zu danken.",
+    "bs": "Snažan narod s visokim kulama, baščama i izvorima – i poslanik koji ih je pozivao da budu zahvalni Allahu."
+  },
+  "place": { "en": "Al-Ahqaf – the curving sand dunes", "de": "Al-Ahqaf – die geschwungenen Sanddünen", "bs": "El-Ahkaf – vijugave pješčane dine" },
+  "symbol": "dunes",
+  "symbolArt": "prophet.hud-tower",
+  "mapPlaces": ["ahqaf"],
+  "cover": { "sky": "sunset", "elements": ["dunes", "city"] },
+  "coverStage": {
+    "sky": "sunset",
+    "mood": "warm",
+    "layers": [
+      { "art": "story.sun", "x": 320, "y": 70, "w": 80, "anchor": "center" },
+      { "art": "prophet.hud-ahqaf" },
+      { "art": "prophet.hud-tower", "x": 120, "y": 200, "w": 52, "enter": "rise", "at": 400 },
+      { "art": "prophet.hud-tower", "x": 170, "y": 196, "w": 40, "enter": "rise", "at": 800 }
+    ],
+    "effects": [{ "type": "sand", "intensity": 2 }, { "type": "sunrays", "x": 320, "y": 70, "intensity": 1 }]
+  },
+  "intro": {
+    "en": "Hud (peace be upon him) was sent to his own people, ʿAd. They lived in al-Ahqaf, among curving sand dunes, and Allah had given them great strength and many blessings.",
+    "de": "Hud (Friede sei mit ihm) wurde zu seinem eigenen Volk gesandt, den ʿAd. Sie lebten in al-Ahqaf zwischen geschwungenen Sanddünen, und Allah hatte ihnen große Stärke und viele Gaben geschenkt.",
+    "bs": "Hud, a.s., poslan je svom narodu, Adu. Živjeli su u El-Ahkafu, među vijugavim pješčanim dinama, a Allah im je dao veliku snagu i mnoge blagodati."
+  },
+  "scenes": [
+    {
+      "id": "hud-s1",
+      "title": { "en": "Gifts from Allah", "de": "Gaben Allahs", "bs": "Allahove blagodati" },
+      "text": {
+        "en": "Allah gave ʿAd livestock and children, gardens and springs. He made them strong and tall. They built Iram, the city of lofty pillars, whose like had not been made in the lands.",
+        "de": "Allah gab den ʿAd Vieh und Kinder, Gärten und Quellen. Er machte sie stark und groß. Sie bauten Iram, die Stadt der hohen Säulen, deren Gleichen im Land nicht erschaffen worden war.",
+        "bs": "Allah je Adu dao stoku i djecu, bašče i izvore. Učinio ih je snažnim i visokim. Sagradili su Irem, grad visokih stubova, kakav nije bio stvoren u zemljama."
+      },
+      "scene": { "sky": "day", "elements": ["garden", "palms", "city"] },
+      "stage": {
+        "sky": "day",
+        "camera": "panRight",
+        "layers": [
+          { "art": "prophet.hud-iram" },
+          { "art": "prophet.hud-spring", "x": 70, "y": 236, "w": 110, "enter": "fade", "at": 1000 },
+          { "art": "animal.cow", "x": 330, "y": 236, "w": 56, "enter": "slideLeft", "at": 1600 },
+          { "art": "animal.sheep", "x": 280, "y": 238, "w": 40, "enter": "slideLeft", "at": 2000 }
+        ],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "birds", "intensity": 1 }, { "type": "ripples", "x": 70, "y": 222, "w": 40, "intensity": 1, "at": 1200 }]
+      },
+      "interactionId": "hud-gifts",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:132–134; 7:69; 89:6–8" }]
+    },
+    {
+      "id": "hud-s2",
+      "title": { "en": "Hud's call", "de": "Huds Aufruf", "bs": "Hudov poziv" },
+      "text": {
+        "en": "Hud said: \"O my people, worship Allah – you have no god other than Him. Ask your Lord for forgiveness and turn to Him. He will send you rain in abundance and add strength to your strength.\"",
+        "de": "Hud sagte: „O mein Volk, dient Allah – ihr habt keinen Gott außer Ihm. Bittet euren Herrn um Vergebung und wendet euch Ihm zu. Er wird euch reichlich Regen senden und eurer Stärke Stärke hinzufügen.“",
+        "bs": "Hud je rekao: „O narode moj, robujte Allahu – vi nemate drugog boga osim Njega. Tražite oprost od Gospodara svoga i Njemu se pokajte. On će vam slati obilnu kišu i dodati snagu vašoj snazi.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["dunes", "clouds"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "prophet.hud-ahqaf" },
+          { "art": "story.cloud", "x": 120, "y": 70, "w": 90, "anchor": "center", "anim": "drift", "enter": "fade", "at": 1400 },
+          { "art": "story.cloud", "x": 290, "y": 56, "w": 70, "anchor": "center", "anim": "drift", "enter": "fade", "at": 1900 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 150, "intensity": 2 }, { "type": "rain", "x": 60, "w": 280, "h": 160, "intensity": 1, "at": 2800 }]
+      },
+      "interactionId": "hud-istighfar",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:65; 11:50–52" }]
+    },
+    {
+      "id": "hud-s3",
+      "title": { "en": "Who is stronger?", "de": "Wer ist stärker?", "bs": "Ko je jači?" },
+      "text": {
+        "en": "Hud asked them: \"Do you build a landmark on every height for amusement, and fine buildings as if you will live forever?\" But they grew proud and said: \"Who is stronger than us?\" Did they not see that Allah, who created them, is far stronger than them?",
+        "de": "Hud fragte sie: „Baut ihr auf jeder Anhöhe ein Wahrzeichen zum Zeitvertreib und prächtige Bauten, als würdet ihr ewig leben?“ Doch sie wurden hochmütig und sagten: „Wer ist stärker als wir?“ Sahen sie nicht, dass Allah, der sie erschaffen hat, viel stärker ist als sie?",
+        "bs": "Hud ih je upitao: „Zar na svakom uzvišenju gradite znamenje radi zabave i podižete dvorce kao da ćete vječno živjeti?“ Ali oni su se uzoholili i rekli: „Ko je od nas jači?“ Zar nisu vidjeli da je Allah, koji ih je stvorio, mnogo jači od njih?"
+      },
+      "scene": { "sky": "sunset", "elements": ["city", "dunes"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.dunes" },
+          { "art": "prophet.hud-tower", "x": 100, "y": 214, "w": 60, "enter": "rise", "at": 300 },
+          { "art": "prophet.hud-tower", "x": 200, "y": 206, "w": 72, "enter": "rise", "at": 800 },
+          { "art": "prophet.hud-tower", "x": 300, "y": 212, "w": 56, "enter": "rise", "at": 1300 }
+        ],
+        "effects": [{ "type": "sand", "intensity": 1 }, { "type": "dust", "intensity": 1 }]
+      },
+      "interactionId": "hud-proud",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:128–130; 41:15" }]
+    },
+    {
+      "id": "hud-s4",
+      "title": { "en": "The cloud and the wind", "de": "Die Wolke und der Wind", "bs": "Oblak i vjetar" },
+      "text": {
+        "en": "When they saw a cloud coming towards their valleys, they said: \"This cloud will bring us rain.\" But it was a wind that blew for seven nights and eight days. Afterwards nothing could be seen of them – only their empty dwellings.",
+        "de": "Als sie eine Wolke auf ihre Täler zukommen sahen, sagten sie: „Diese Wolke bringt uns Regen.“ Doch es war ein Wind, der sieben Nächte und acht Tage wehte. Danach war von ihnen nichts mehr zu sehen – nur ihre leeren Wohnstätten.",
+        "bs": "Kad su vidjeli oblak kako se primiče njihovim dolinama, rekli su: „Ovaj oblak će nam donijeti kišu.“ Ali to je bio vjetar koji je puhao sedam noći i osam dana. Poslije se od njih ništa nije vidjelo – samo njihova prazna boravišta."
+      },
+      "scene": { "sky": "storm", "elements": ["dunes", "clouds"] },
+      "stage": {
+        "sky": "storm",
+        "camera": "drift",
+        "layers": [
+          { "art": "story.rain-clouds", "y": 90, "w": 420, "enter": "fade", "at": 200, "exitAt": 5200 },
+          { "art": "prophet.hud-ahqaf" },
+          { "art": "story.ruins", "opacity": 0.9, "enter": "fade", "at": 5000, "duration": 1800 }
+        ],
+        "effects": [{ "type": "wind", "intensity": 3, "at": 1600, "until": 5200 }, { "type": "sand", "intensity": 3, "at": 1600, "until": 5600 }, { "type": "dust", "intensity": 1, "at": 5600 }]
+      },
+      "interactionId": "hud-order",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "46:24–25; 69:6–8" }]
+    },
+    {
+      "id": "hud-s5",
+      "title": { "en": "Saved by mercy", "de": "Durch Barmherzigkeit gerettet", "bs": "Spašeni milošću" },
+      "text": {
+        "en": "Allah saved Hud and those who believed with him, by His mercy. The story of ʿAd is a reminder: every blessing comes from Allah, so be grateful and humble.",
+        "de": "Allah rettete Hud und die, die mit ihm glaubten, durch Seine Barmherzigkeit. Die Geschichte der ʿAd ist eine Erinnerung: Jede Gabe kommt von Allah – darum sei dankbar und demütig.",
+        "bs": "Allah je Svojom milošću spasio Huda i one koji su s njim vjerovali. Kazivanje o Adu je opomena: svaka blagodat je od Allaha, zato budi zahvalan i skroman."
+      },
+      "scene": { "sky": "dawn", "elements": ["sun", "dunes"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 200, "y": 150, "w": 90, "anchor": "center", "enter": "rise", "at": 300, "duration": 2400 },
+          { "art": "prophet.hud-ahqaf" },
+          { "art": "prophet.hud-spring", "x": 290, "y": 232, "w": 100, "enter": "fade", "at": 2200 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 150, "intensity": 3, "at": 1400 }, { "type": "birds", "intensity": 1, "at": 2600 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:58; 7:72" }]
+    }
+  ],
+  "miniGameId": "hud-memory",
+  "quizIds": ["hud-map", "hud-saved", "hud-lesson"],
+  "lessons": [
+    {
+      "id": "hud-l1",
+      "value": "gratitude",
+      "title": { "en": "Shukr – thanking Allah for His gifts", "de": "Schukr – Allah für Seine Gaben danken", "bs": "Šukr – zahvalnost Allahu na blagodatima" },
+      "explanation": {
+        "en": "Everything good we have – health, family, food, strength – is a gift from Allah. Gratitude means remembering the Giver and using the gift well.",
+        "de": "Alles Gute, was wir haben – Gesundheit, Familie, Essen, Kraft – ist ein Geschenk Allahs. Dankbarkeit heißt, an den Geber zu denken und die Gabe gut zu nutzen.",
+        "bs": "Sve dobro što imamo – zdravlje, porodica, hrana, snaga – dar je od Allaha. Zahvalnost znači sjećati se Darovatelja i dar lijepo koristiti."
+      },
+      "example": {
+        "en": "After a good meal you say \"Alhamdulillah\" and help clear the table.",
+        "de": "Nach einem guten Essen sagst du „Alhamdulillah“ und hilfst beim Abräumen.",
+        "bs": "Poslije lijepog obroka kažeš „Elhamdulillah“ i pomogneš pospremiti sto."
+      },
+      "reflection": {
+        "en": "Name three gifts of Allah you enjoyed today.",
+        "de": "Nenne drei Gaben Allahs, über die du dich heute gefreut hast.",
+        "bs": "Nabroji tri Allahove blagodati koje si danas uživao."
+      }
+    },
+    {
+      "id": "hud-l2",
+      "value": "humility",
+      "title": { "en": "Strength belongs to Allah", "de": "Die Stärke gehört Allah", "bs": "Snaga pripada Allahu" },
+      "explanation": {
+        "en": "ʿAd said: \"Who is stronger than us?\" Pride made them forget Allah. A believer stays humble – however strong, clever or rich he becomes.",
+        "de": "Die ʿAd sagten: „Wer ist stärker als wir?“ Hochmut ließ sie Allah vergessen. Ein Gläubiger bleibt demütig – egal wie stark, klug oder reich er wird.",
+        "bs": "Ad je rekao: „Ko je od nas jači?“ Oholost ih je navela da zaborave Allaha. Vjernik ostaje skroman – ma koliko bio jak, pametan ili bogat."
+      },
+      "example": {
+        "en": "You are the fastest runner in your class. You cheer for the others instead of laughing at them.",
+        "de": "Du bist der schnellste Läufer in deiner Klasse. Du feuerst die anderen an, statt über sie zu lachen.",
+        "bs": "Najbrži si trkač u razredu. Bodriš druge umjesto da im se smiješ."
+      },
+      "reflection": {
+        "en": "What talent has Allah given you – and how can you use it to help others?",
+        "de": "Welche Begabung hat Allah dir geschenkt – und wie kannst du damit anderen helfen?",
+        "bs": "Koji ti je talenat Allah dao – i kako njime možeš pomoći drugima?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "hud-gifts",
+      "type": "find",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": { "en": "Find the gifts Allah gave the people of ʿAd.", "de": "Finde die Gaben, die Allah den ʿAd gegeben hatte.", "bs": "Pronađi blagodati koje je Allah dao Adu." },
+      "items": [
+        { "id": "garden", "element": "garden", "label": { "en": "Gardens", "de": "Gärten", "bs": "Bašče" } },
+        { "id": "springs", "element": "river", "label": { "en": "Springs", "de": "Quellen", "bs": "Izvori" } },
+        { "id": "ark", "element": "ark", "label": { "en": "Ark", "de": "Arche", "bs": "Lađa" } },
+        { "id": "whale", "element": "whale", "label": { "en": "Whale", "de": "Wal", "bs": "Kit" } },
+        { "id": "kaaba", "element": "kaaba", "label": { "en": "Kaaba", "de": "Kaaba", "bs": "Kaba" } }
+      ],
+      "correctIds": ["garden", "springs"],
+      "explanation": {
+        "en": "Hud reminded them: Allah gave you livestock and children, gardens and springs.",
+        "de": "Hud erinnerte sie: Allah gab euch Vieh und Kinder, Gärten und Quellen.",
+        "bs": "Hud ih je podsjetio: Allah vam je dao stoku i djecu, bašče i izvore."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:133–134" }]
+    },
+    {
+      "id": "hud-istighfar",
+      "type": "trueFalse",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": {
+        "en": "Hud told his people that asking Allah for forgiveness brings rain and more strength.",
+        "de": "Hud sagte seinem Volk, dass die Bitte um Vergebung Regen und mehr Stärke bringt.",
+        "bs": "Hud je rekao svom narodu da traženje oprosta od Allaha donosi kišu i više snage."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"He will send you rain in abundance and add strength to your strength.\"",
+        "de": "Ja – „Er wird euch reichlich Regen senden und eurer Stärke Stärke hinzufügen.“",
+        "bs": "Da – „On će vam slati obilnu kišu i dodati snagu vašoj snazi.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:52" }]
+    },
+    {
+      "id": "hud-proud",
+      "type": "scenario",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": {
+        "en": "Decision: you built the best sandcastle on the beach. A younger child wants to build too. What would you do?",
+        "de": "Entscheidung: Du hast die schönste Sandburg am Strand gebaut. Ein jüngeres Kind möchte auch bauen. Was tust du?",
+        "bs": "Odluka: napravio si najljepši dvorac od pijeska na plaži. Mlađe dijete želi i ono graditi. Šta ćeš uraditi?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Help it and say \"Masha'Allah\" about its castle", "de": "Ihm helfen und „Masha'Allah“ zu seiner Burg sagen", "bs": "Pomoći mu i reći „Mašallah“ za njegov dvorac" }, "feedback": { "en": "Humble and kind – the opposite of the pride of ʿAd.", "de": "Demütig und freundlich – das Gegenteil vom Hochmut der ʿAd.", "bs": "Skromno i lijepo – suprotno oholosti Ada." } },
+        { "id": "b", "text": { "en": "Say: \"Nobody builds better than me!\"", "de": "Sagen: „Niemand baut besser als ich!“", "bs": "Reći: „Niko ne gradi bolje od mene!“" }, "feedback": { "en": "That sounds like \"Who is stronger than us?\" – pride.", "de": "Das klingt wie „Wer ist stärker als wir?“ – Hochmut.", "bs": "To zvuči kao „Ko je od nas jači?“ – oholost." } },
+        { "id": "c", "text": { "en": "Send it away", "de": "Es wegschicken", "bs": "Otjerati ga" }, "feedback": { "en": "Sharing the joy is better.", "de": "Die Freude zu teilen ist besser.", "bs": "Bolje je podijeliti radost." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "ʿAd became proud of their strength. A believer thanks Allah and stays humble.",
+        "de": "Die ʿAd wurden stolz auf ihre Stärke. Ein Gläubiger dankt Allah und bleibt demütig.",
+        "bs": "Ad se uzoholio zbog svoje snage. Vjernik zahvaljuje Allahu i ostaje skroman."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "41:15" }]
+    },
+    {
+      "id": "hud-order",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": { "en": "Put the story of Hud in order.", "de": "Bring die Geschichte Huds in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Hudu." },
+      "items": [
+        { "id": "gifts", "text": { "en": "Allah gives ʿAd strength and gardens", "de": "Allah gibt den ʿAd Stärke und Gärten", "bs": "Allah daje Adu snagu i bašče" } },
+        { "id": "call", "text": { "en": "Hud calls them to Allah", "de": "Hud ruft sie zu Allah", "bs": "Hud ih poziva Allahu" } },
+        { "id": "pride", "text": { "en": "They say: \"Who is stronger than us?\"", "de": "Sie sagen: „Wer ist stärker als wir?“", "bs": "Govore: „Ko je od nas jači?“" } },
+        { "id": "wind", "text": { "en": "The cloud and the wind", "de": "Die Wolke und der Wind", "bs": "Oblak i vjetar" } },
+        { "id": "saved", "text": { "en": "Hud and the believers are saved", "de": "Hud und die Gläubigen werden gerettet", "bs": "Hud i vjernici su spašeni" } }
+      ],
+      "explanation": {
+        "en": "Gifts, the call, pride, the wind – and Allah's mercy for the believers.",
+        "de": "Gaben, der Aufruf, Hochmut, der Wind – und Allahs Barmherzigkeit für die Gläubigen.",
+        "bs": "Blagodati, poziv, oholost, vjetar – i Allahova milost vjernicima."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:123–140; 46:21–25; 11:58" }]
+    },
+    {
+      "id": "hud-memory",
+      "type": "memory",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": { "en": "Memory: match the parts of the story of Hud.", "de": "Memory: Ordne die Teile der Geschichte Huds zu.", "bs": "Memorija: spoji dijelove kazivanja o Hudu." },
+      "pairs": [
+        { "id": "ahqaf", "left": { "en": "Al-Ahqaf", "de": "Al-Ahqaf", "bs": "El-Ahkaf" }, "right": { "en": "Curving sand dunes", "de": "Geschwungene Sanddünen", "bs": "Vijugave dine" } },
+        { "id": "iram", "left": { "en": "Iram", "de": "Iram", "bs": "Irem" }, "right": { "en": "Lofty pillars", "de": "Hohe Säulen", "bs": "Visoki stubovi" } },
+        { "id": "forgive", "left": { "en": "Asking forgiveness", "de": "Um Vergebung bitten", "bs": "Traženje oprosta" }, "right": { "en": "Rain and strength", "de": "Regen und Stärke", "bs": "Kiša i snaga" } },
+        { "id": "mercy", "left": { "en": "The believers", "de": "Die Gläubigen", "bs": "Vjernici" }, "right": { "en": "Saved by mercy", "de": "Durch Barmherzigkeit gerettet", "bs": "Spašeni milošću" } }
+      ],
+      "explanation": {
+        "en": "ʿAd lived in al-Ahqaf and built Iram of the pillars. Hud promised rain for istighfar, and Allah saved the believers.",
+        "de": "Die ʿAd lebten in al-Ahqaf und bauten Iram mit den Säulen. Hud versprach Regen für Istighfar, und Allah rettete die Gläubigen.",
+        "bs": "Ad je živio u El-Ahkafu i sagradio Irem sa stubovima. Hud je obećao kišu za istigfar, a Allah je spasio vjernike."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "46:21; 89:6–8; 11:52; 11:58" }]
+    },
+    {
+      "id": "hud-map",
+      "type": "map",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": { "en": "Where did the people of ʿAd live? Tap al-Ahqaf.", "de": "Wo lebten die ʿAd? Tippe auf al-Ahqaf.", "bs": "Gdje je živio narod Ad? Dodirni El-Ahkaf." },
+      "places": ["ahqaf", "egypt", "judi", "madyan"],
+      "correctPlace": "ahqaf",
+      "explanation": {
+        "en": "The Quran says Hud warned his people in al-Ahqaf. Scholars place it in the south of the Arabian Peninsula.",
+        "de": "Der Koran sagt, dass Hud sein Volk in al-Ahqaf warnte. Gelehrte verorten es im Süden der Arabischen Halbinsel.",
+        "bs": "Kur'an kaže da je Hud opominjao svoj narod u El-Ahkafu. Učenjaci ga smještaju na jug Arabijskog poluotoka."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "46:21" }]
+    },
+    {
+      "id": "hud-saved",
+      "type": "trueFalse",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": { "en": "Allah saved Hud and the believers by His mercy.", "de": "Allah rettete Hud und die Gläubigen durch Seine Barmherzigkeit.", "bs": "Allah je Svojom milošću spasio Huda i vjernike." },
+      "correct": true,
+      "explanation": { "en": "Yes – \"We saved Hud and those who believed with him by mercy from Us.\"", "de": "Ja – „Wir retteten Hud und die mit ihm glaubten durch Barmherzigkeit von Uns.“", "bs": "Da – „Mi smo Svojom milošću spasili Huda i one koji su s njim vjerovali.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:58" }]
+    },
+    {
+      "id": "hud-lesson",
+      "type": "lessonChoice",
+      "storyId": "hud",
+      "topic": "hud",
+      "prompt": { "en": "Which lesson do we learn from the story of Hud?", "de": "Welche Lehre lernen wir aus der Geschichte Huds?", "bs": "Koju pouku učimo iz kazivanja o Hudu?" },
+      "options": [
+        { "id": "a", "text": { "en": "Thank Allah for His gifts and stay humble", "de": "Allah für Seine Gaben danken und demütig bleiben", "bs": "Zahvaljivati Allahu na blagodatima i ostati skroman" } },
+        { "id": "b", "text": { "en": "Strong people do not need anyone", "de": "Starke Menschen brauchen niemanden", "bs": "Jakim ljudima niko nije potreban" } },
+        { "id": "c", "text": { "en": "Big buildings make us better than others", "de": "Große Gebäude machen uns besser als andere", "bs": "Velike građevine nas čine boljim od drugih" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "All strength and every gift come from Allah.", "de": "Alle Stärke und jede Gabe kommen von Allah.", "bs": "Sva snaga i svaka blagodat dolaze od Allaha." }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "7:65–72" },
+    { "sourceName": "Quran", "sourceReference": "11:50–60" },
+    { "sourceName": "Quran", "sourceReference": "26:123–140" },
+    { "sourceName": "Quran", "sourceReference": "46:21–26" },
+    { "sourceName": "Quran", "sourceReference": "69:6–8" },
+    { "sourceName": "Quran", "sourceReference": "89:6–8" }
+  ]
+}
