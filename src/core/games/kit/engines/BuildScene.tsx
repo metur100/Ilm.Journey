@@ -121,7 +121,6 @@ export function BuildScene(props: BuildSceneProps) {
   const sceneH = sceneW / aspect;
   const onLayout = area.onLayout;
   const visible = tray.filter((p) => !built.includes(p.id)).slice(0, props.visible ?? 4);
-  const remaining = parts.length - built.length;
   const hintPart = ordered ? nextPart : visible[0];
 
   const sceneLayers = (w: number, h: number, interactive: boolean) => (
@@ -216,11 +215,6 @@ export function BuildScene(props: BuildSceneProps) {
             </DragTile>
           </Animated.View>
         ))}
-        {remaining > visible.length ? (
-          <View style={[styles.more, { borderColor: k.slotBorder }]}>
-            <FaceView face={{ label: `+${remaining - visible.length}` }} color={k.textMuted} />
-          </View>
-        ) : null}
       </Tray>
       <FinishReveal
         visible={revealed}

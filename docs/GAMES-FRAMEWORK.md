@@ -492,3 +492,10 @@ The Play tab shows the game of the day and one card per section in the order of 
 section (`topicId: 'arabic'`) whose screen also links the Sufara path (`/sufara`). There is no `shelfGroup` any more.
 Development fixtures (`dev: true`: the kit demos and Star Path) appear only in development builds, in the
 "Game kit (dev)" section.
+
+### 11.7 Custom engines
+
+For a mechanic the kit does not have, build it from the same parts so it behaves like the others:
+`useEngineCore(props, total)` (mistakes / missed ids, progress to the header, caption state, `right()` / `wrong(id)` /
+`touch()` feedback, idle hint timer, stopwatch, `finish()` once), `useKitProbe({ engine, testID, step, mistake, done })`
+(so `playToEnd` can finish it in tests), `useMeasure()` (layout size with a Jest default) and `useKitColors()`.

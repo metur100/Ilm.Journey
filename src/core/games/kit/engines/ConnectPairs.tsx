@@ -291,7 +291,7 @@ function Item({
     <Animated.View style={[{ position: 'absolute', left: x, top: y, width: w, height: h }, style]}>
       <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ selected, disabled: done }} testID={testID} style={{ flex: 1 }}>
         <Tile state={done ? 'right' : selected ? 'selected' : 'idle'} height={h} padding={4} faceStyle={{ paddingHorizontal: spacing.sm }}>
-          <FaceView face={face} row={hasArt && w > 130} artSize={Math.min(40, h - 18)} arabicSize={Math.min(28, h * 0.42)} variant="small" numberOfLines={2} />
+          <FaceView face={face} row={hasArt && w > 130} artSize={Math.min(64, h - 16)} arabicSize={Math.min(28, h * 0.42)} variant="small" numberOfLines={2} />
         </Tile>
         <View style={[styles.dot, side === 'L' ? { right: -7 } : { left: -7 }, { top: h / 2 - 9, backgroundColor: done ? dotColor : 'transparent', borderColor: dotColor }]} pointerEvents="none" />
         <CheckBadge show={done} size={18} style={side === 'L' ? { left: -6, right: undefined, top: -6 } : undefined} />

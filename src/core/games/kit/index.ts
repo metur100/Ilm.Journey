@@ -43,3 +43,9 @@ export { BalanceScale, balancingSet, tiltFor, type BalanceScaleProps, type Scale
 export { TimelineSlider, type TimelineEvent, type TimelineMark, type TimelineSliderProps } from './engines/TimelineSlider';
 export { PourFill, pourResult, type PourFillProps, type PourVessel } from './engines/PourFill';
 export { samplePath } from './pathSample';
+
+// Building blocks for custom engines (same bookkeeping, test probes and measuring as the kit engines).
+export { useEngineCore, type CaptionState } from './engine';
+export { useKitProbe } from './probe';
+export { useMeasure } from './layout';
+export { useEngineFlags, useKitMaybe } from './context';
