@@ -1,4 +1,4 @@
-import { type ComponentType, createElement } from 'react';
+import { type ComponentType, createElement, useRef, useState } from 'react';
 
 import type { GameApi, GameFact } from '@/core/games';
 import { kitResult } from '@/core/games/kit';
@@ -31,3 +31,24 @@ export function finishWith<C>(api: GameApi<C>, moves: number, factFor?: (itemId:
 
 /** Ids of facts of a level (for the review mapping). */
 export const factIds = (facts: readonly GameFact[]) => facts.map((f) => f.id);
+
+/**
+ * Several engine rounds in one level (one ayah after another): sums the mistakes and missed items of every round
+ * and completes the level after the last one. Remount the engine with `key={round}`.
+ */
+export function useRounds<C>(api: GameApi<C>, rounds: number, movesPerRound: (round: number) => number, factFor?: (round: number, itemId: string) => string | undefined) {
+  const [round, setRound] = useState(0);
+  const total = useRef({ mistakes: 0, missed: [] as string[], moves: 0 });
+  const onRoundDone = (info: KitDoneInfo) => {
+    const t = total.current;
+    t.mistakes += info.mistakes;
+    t.moves += movesPerRound(round);
+    for (const id of info.missed) {
+      const fact = factFor ? factFor(round, id) : api.facts[0]?.id;
+      if (fact) t.missed.push(fact);
+    }
+    if (round + 1 >= rounds) api.onComplete(kitResult({ moves: t.moves, mistakes: t.mistakes, factsMissed: t.missed }));
+    else setRound(round + 1);
+  };
+  return { round, onRoundDone };
+}
