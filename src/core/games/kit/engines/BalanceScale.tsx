@@ -127,7 +127,7 @@ export function BalanceScale(props: BalanceScaleProps) {
   const pile = (items: ScaleWeight[], removable: boolean) => (
     <View style={styles.pile}>
       {items.map((w) => (
-        <Animated.View key={w.id} entering={reduced ? FadeIn : ZoomIn.springify().damping(12)}>
+        <Animated.View key={w.id} entering={reduced ? FadeIn : ZoomIn.duration(220)}>
           <Pressable
             disabled={!removable || balanced}
             onPress={() => toggle(w.id)}
@@ -136,7 +136,7 @@ export function BalanceScale(props: BalanceScaleProps) {
             testID={removable ? `pan-${w.id}` : undefined}
             style={[styles.pileItem, { backgroundColor: k.tileFace, borderColor: k.tileBorder }]}
           >
-            <FaceView face={w} artSize={26} arabicSize={18} variant="tiny" numberOfLines={1} />
+            <FaceView face={w} artSize={28} arabicSize={18} variant="tiny" numberOfLines={1} />
           </Pressable>
         </Animated.View>
       ))}
@@ -189,9 +189,9 @@ export function BalanceScale(props: BalanceScaleProps) {
         {weights
           .filter((w) => !onPan.includes(w.id))
           .map((w) => (
-            <Animated.View key={w.id} layout={reduced ? undefined : LinearTransition.springify().damping(16)}>
+            <Animated.View key={w.id} layout={reduced ? undefined : LinearTransition.duration(220)}>
               <DragTile id={w.id} accessibilityLabel={env.kt('a11y.tile', { label: label(w) })} onLift={core.touch} onPress={() => toggle(w.id)} onDrop={(zone) => (zone === 'right-pan' ? toggle(w.id) : false)} disabled={balanced}>
-                <Tile minHeight={60} style={{ minWidth: 64 }}>
+                <Tile minHeight={68} style={{ minWidth: 72 }}>
                   <FaceView face={w} artSize={32} variant="tiny" numberOfLines={2} />
                 </Tile>
               </DragTile>
@@ -208,8 +208,8 @@ const styles = StyleSheet.create({
   beam: { position: 'absolute', height: 10, borderRadius: 5 },
   panWrap: { position: 'absolute', top: 43, alignItems: 'center' },
   strings: { position: 'absolute', top: 0 },
-  pan: { marginTop: 64, alignSelf: 'stretch', minHeight: 64, borderRadius: radius.md, borderWidth: 2, borderTopWidth: 5, padding: 4, justifyContent: 'flex-end' },
+  pan: { marginTop: 64, alignSelf: 'stretch', minHeight: 72, borderRadius: radius.md, borderWidth: 2, borderTopWidth: 5, padding: 4, justifyContent: 'flex-end' },
   pile: { flexDirection: 'row', flexWrap: 'wrap-reverse', justifyContent: 'center', gap: 3 },
-  pileItem: { borderRadius: 8, borderWidth: 1, paddingHorizontal: 3, paddingVertical: 2, minWidth: 30, minHeight: 30, alignItems: 'center', justifyContent: 'center' },
+  pileItem: { borderRadius: 8, borderWidth: 1, paddingHorizontal: 3, paddingVertical: 2, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   tray: { minHeight: 64 },
 });
