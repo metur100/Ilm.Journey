@@ -140,42 +140,98 @@ function Waves({ c, y, w, color, crest = C.white }: { c: Ctx; y: number; w: numb
   );
 }
 
+function AntsValley({ c }: { c: Ctx }) {
+  const ant = c.dark ? '#D07A54' : '#7A3420';
+  return (
+    <>
+      <Path d="M0 120C40 112 80 120 120 140S170 168 200 172L200 240H0Z" fill={dim(c, '#B98F6E')} />
+      <Path d="M400 112C360 108 320 118 286 138S236 166 200 172L200 240H400Z" fill={dim(c, '#A97F60')} />
+      <Path d="M0 146C50 140 90 152 130 166S170 182 200 186V240H0Z" fill={dim(c, '#C9A07A')} />
+      <Path d="M400 142C350 138 310 150 270 166S230 182 200 186V240H400Z" fill={dim(c, '#BE9471')} />
+      <Path d="M30 124C60 128 90 140 116 156M350 120C320 126 296 138 274 154" stroke={dim(c, '#8E6A50')} strokeWidth={2.2} fill="none" opacity={0.55} strokeLinecap="round" />
+      <Path d="M0 192C80 180 160 180 240 186S360 182 400 186V240H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 214C100 204 200 206 300 212S380 208 400 210V240H0Z" fill={dim(c, C.sandDeep)} />
+      {/* the ants' road */}
+      <Path d={smoothOpen([[20, 228], [90, 214], [170, 220], [240, 206], [320, 214], [390, 202]])} stroke={dim(c, '#B78553')} strokeWidth={7} fill="none" opacity={0.45} strokeLinecap="round" />
+      {Array.from({ length: 22 }, (_, i) => {
+        const t = i / 21;
+        const x = 24 + t * 360;
+        const y = 226 - t * 20 + Math.sin(t * 9) * 6;
+        return <Ant key={i} x={x} y={y} s={0.85} color={ant} flip={i % 5 === 0} />;
+      })}
+      <Anthill c={c} x={70} y={204} w={52} ant={ant} />
+      <Anthill c={c} x={196} y={198} w={64} ant={ant} />
+      <Anthill c={c} x={330} y={200} w={56} ant={ant} />
+      {[[24, 196], [128, 202], [262, 194], [376, 196]].map(([x, y], i) => (
+        <G key={`g${i}`} stroke={c.green(dim(c, C.olive))} strokeWidth={1.8} strokeLinecap="round">
+          <Path d={`M${x} ${y}l-4-9M${x} ${y}l0-11M${x} ${y}l4-9`} />
+        </G>
+      ))}
+    </>
+  );
+}
+
+function JourneyMap({ c }: { c: Ctx }) {
+  return (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#2B3270' : '#F7C98A'], [1, c.dark ? '#4B4A8F' : '#FCEBD0']]} />
+      </Defs>
+      <Rect x={0} y={0} width={W} height={H} fill={c.url('sky')} />
+      <Circle cx={200} cy={40} r={20} fill={c.dark ? '#FFF3C4' : C.goldLight} opacity={0.9} />
+      <Path d="M0 120C60 108 120 112 200 120S330 108 400 114V240H0Z" fill={dim(c, '#E6C291', 0.48)} />
+      <Path d="M0 150C80 134 150 138 220 150S340 136 400 144V240H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 196C90 180 170 184 250 194S360 184 400 188V240H0Z" fill={dim(c, C.sandDeep)} />
+      {/* Sulayman's camp (tents) on the left */}
+      {[[40, 150, 46], [86, 156, 38]].map(([x, y, w], i) => (
+        <G key={i}>
+          <Path d={`M${x - w / 2} ${y}L${x} ${y - w * 0.7}L${x + w / 2} ${y}Z`} fill={dim(c, i ? C.teal : C.tealMid)} />
+          <Path d={`M${x - w * 0.12} ${y}L${x} ${y - w * 0.3}L${x + w * 0.12} ${y}Z`} fill={dim(c, C.night, 0.1)} />
+          <Path d={`M${x} ${y - w * 0.7}V${y - w * 0.95}`} stroke={C.woodDark} strokeWidth={2} />
+          <Path d={`M${x} ${y - w * 0.95}h10l-3 4 3 4h-10Z`} fill={C.gold} />
+        </G>
+      ))}
+      {/* an oasis in the middle */}
+      <Ellipse cx={200} cy={186} rx={34} ry={8} fill={dim(c, C.water, 0.3)} />
+      <Palm c={c} x={180} y={184} h={60} lean={-6} />
+      <Palm c={c} x={220} y={186} h={50} lean={8} />
+      {/* Saba' on the right */}
+      {[[300, 150, 36, 40], [338, 156, 30, 52], [372, 150, 32, 36]].map(([x, y, w, h], i) => (
+        <G key={`h${i}`}>
+          <Rect x={x - w / 2} y={y - h} width={w} height={h} rx={2} fill={dim(c, i === 1 ? C.sandLight : '#EBD3A8')} />
+          <Rect x={x - w / 2 - 2} y={y - h - 3} width={w + 4} height={4} fill={dim(c, C.sandDark)} />
+          <Path d={archPath(x, y - h * 0.5, w * 0.3, y)} fill={dim(c, C.wood)} />
+        </G>
+      ))}
+      <Path d="M338 104V92" stroke={C.goldDeep} strokeWidth={2} />
+      <Circle cx={338} cy={90} r={3} fill={C.gold} />
+      <Path d={smoothOpen([[20, 230], [120, 214], [210, 222], [300, 210], [390, 220]])} stroke={dim(c, C.sandDark)} strokeWidth={1.4} fill="none" strokeDasharray="3 6" opacity={0.6} />
+    </>
+  );
+}
+
 // ---------------------------------------------------------------------------------------------------------------
 
 export const prophetC = {
   // ======================= Sulayman (27:15–44, 21:81, 34:12) =======================
 
   /** The valley of the ants (27:18): sandy valley floor, ant trails and anthills. Full-width band. */
-  'sulayman-ants-valley': art(W, H, (c) => {
-    const ant = c.dark ? '#D07A54' : '#7A3420';
-    return (
-      <>
-        <Path d="M0 120C40 112 80 120 120 140S170 168 200 172L200 240H0Z" fill={dim(c, '#B98F6E')} />
-        <Path d="M400 112C360 108 320 118 286 138S236 166 200 172L200 240H400Z" fill={dim(c, '#A97F60')} />
-        <Path d="M0 146C50 140 90 152 130 166S170 182 200 186V240H0Z" fill={dim(c, '#C9A07A')} />
-        <Path d="M400 142C350 138 310 150 270 166S230 182 200 186V240H400Z" fill={dim(c, '#BE9471')} />
-        <Path d="M30 124C60 128 90 140 116 156M350 120C320 126 296 138 274 154" stroke={dim(c, '#8E6A50')} strokeWidth={2.2} fill="none" opacity={0.55} strokeLinecap="round" />
-        <Path d="M0 192C80 180 160 180 240 186S360 182 400 186V240H0Z" fill={dim(c, C.sand)} />
-        <Path d="M0 214C100 204 200 206 300 212S380 208 400 210V240H0Z" fill={dim(c, C.sandDeep)} />
-        {/* the ants' road */}
-        <Path d={smoothOpen([[20, 228], [90, 214], [170, 220], [240, 206], [320, 214], [390, 202]])} stroke={dim(c, '#B78553')} strokeWidth={7} fill="none" opacity={0.45} strokeLinecap="round" />
-        {Array.from({ length: 22 }, (_, i) => {
-          const t = i / 21;
-          const x = 24 + t * 360;
-          const y = 226 - t * 20 + Math.sin(t * 9) * 6;
-          return <Ant key={i} x={x} y={y} s={0.85} color={ant} flip={i % 5 === 0} />;
-        })}
-        <Anthill c={c} x={70} y={204} w={52} ant={ant} />
-        <Anthill c={c} x={196} y={198} w={64} ant={ant} />
-        <Anthill c={c} x={330} y={200} w={56} ant={ant} />
-        {[[24, 196], [128, 202], [262, 194], [376, 196]].map(([x, y], i) => (
-          <G key={`g${i}`} stroke={c.green(dim(c, C.olive))} strokeWidth={1.8} strokeLinecap="round">
-            <Path d={`M${x} ${y}l-4-9M${x} ${y}l0-11M${x} ${y}l4-9`} />
-          </G>
-        ))}
-      </>
-    );
-  }),
+  'sulayman-ants-valley': art(W, H, (c) => <AntsValley c={c} />),
+
+  /** Game map: the ants' valley with its sky (PathTrace board). */
+  'sulayman-valley-map': art(W, H, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#2B3270' : '#8FD0EC'], [1, c.dark ? '#4B4A8F' : '#E8F6FB']]} />
+      </Defs>
+      <Rect x={0} y={0} width={W} height={H} fill={c.url('sky')} />
+      <Circle cx={330} cy={44} r={18} fill={c.dark ? '#FFF3C4' : C.goldLight} opacity={0.9} />
+      <AntsValley c={c} />
+    </>
+  )),
+
+  /** Game map: the hoopoe's way from Sulayman's camp across the desert to Saba' (27:20–28). */
+  'sulayman-journey-map': art(W, H, (c) => <JourneyMap c={c} />),
 
   /** One anthill with its ants (27:18). */
   'sulayman-anthill': art(100, 60, (c) => <Anthill c={c} x={50} y={52} w={56} ant={c.dark ? '#D07A54' : '#7A3420'} />),
