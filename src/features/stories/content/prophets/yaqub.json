@@ -1,0 +1,325 @@
+{
+  "id": "yaqub",
+  "order": 10,
+  "prophetName": { "en": "Yaqub", "de": "Yaqub (Jakob)", "bs": "Jakub" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "Beautiful Patience", "de": "Schöne Geduld", "bs": "Lijepo strpljenje" },
+  "description": {
+    "en": "A father who lost his dearest son – and never lost hope in Allah's mercy.",
+    "de": "Ein Vater, der seinen liebsten Sohn verlor – und nie die Hoffnung auf Allahs Barmherzigkeit.",
+    "bs": "Otac koji je izgubio najdražeg sina – a nikada nije izgubio nadu u Allahovu milost."
+  },
+  "place": { "en": "Canaan", "de": "Kanaan", "bs": "Kanaan" },
+  "symbol": "well",
+  "symbolArt": "prophet.yaqub-shirt",
+  "cover": { "sky": "dusk", "elements": ["stars", "hills", "tree"] },
+  "coverStage": {
+    "sky": "dusk",
+    "mood": "golden",
+    "layers": [
+      { "art": "story.moon-crescent", "x": 318, "y": 54, "w": 48, "anchor": "center", "anim": "glow" },
+      { "art": "story.hills" },
+      { "art": "prophet.yaqub-home", "x": 200, "y": 224, "w": 190, "enter": "rise", "at": 300 },
+      { "art": "prophet.yaqub-shirt", "x": 300, "y": 120, "w": 60, "anchor": "center", "anim": "float", "enter": "fade", "at": 1400 }
+    ],
+    "effects": ["stars", { "type": "sparkle", "x": 300, "y": 120, "w": 80, "h": 60, "intensity": 1, "at": 1600 }, { "type": "fireflies", "intensity": 1 }]
+  },
+  "mapPlaces": ["canaan", "egypt"],
+  "intro": {
+    "en": "Yaqub (peace be upon him) was the son of Prophet Ishaq and the grandson of Prophet Ibrahim. Allah made them leaders who guided people by His command. Yaqub had many sons – and one of them was Yusuf.",
+    "de": "Yaqub (Friede sei mit ihm) war der Sohn des Propheten Ishaq und der Enkel des Propheten Ibrahim. Allah machte sie zu Vorbildern, die die Menschen nach Seinem Befehl leiteten. Yaqub hatte viele Söhne – einer von ihnen war Yusuf.",
+    "bs": "Jakub, a.s., bio je sin poslanika Ishaka i unuk poslanika Ibrahima. Allah ih je učinio predvodnicima koji su ljude upućivali po Njegovoj naredbi. Jakub je imao mnogo sinova – a jedan od njih bio je Jusuf."
+  },
+  "scenes": [
+    {
+      "id": "yaqub-s1",
+      "title": { "en": "A family of prophets", "de": "Eine Familie von Propheten", "bs": "Porodica poslanika" },
+      "text": {
+        "en": "Allah gave Ibrahim his son Ishaq and his grandson Yaqub as a gift, and made all of them righteous. They did good deeds, prayed and gave charity, and they worshipped Allah alone.",
+        "de": "Allah schenkte Ibrahim seinen Sohn Ishaq und seinen Enkel Yaqub und machte sie alle rechtschaffen. Sie taten Gutes, beteten, gaben Almosen und dienten Allah allein.",
+        "bs": "Allah je Ibrahimu poklonio sina Ishaka i unuka Jakuba i sve ih učinio dobrima. Činili su dobra djela, klanjali namaz, davali zekat i robovali samo Allahu."
+      },
+      "scene": { "sky": "dawn", "elements": ["hills", "tree"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.olive-grove" },
+          { "art": "story.tents", "x": 200, "y": 228, "w": 220, "enter": "rise", "at": 400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 70, "y": 80 }, { "type": "birds", "intensity": 1 }, { "type": "leaves", "intensity": 1 }]
+      },
+      "interactionId": "yaqub-find",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:72–73" }]
+    },
+    {
+      "id": "yaqub-s2",
+      "title": { "en": "\"Beautiful patience\"", "de": "„Schöne Geduld“", "bs": "„Lijepo strpljenje“" },
+      "text": {
+        "en": "One evening the brothers came home without Yusuf. They brought his shirt with false blood on it. Yaqub knew they were not telling the truth, and he said: \"Patience is most fitting – beautiful patience. Allah is the One whose help is sought.\"",
+        "de": "Eines Abends kamen die Brüder ohne Yusuf nach Hause. Sie brachten sein Hemd mit falschem Blut daran. Yaqub wusste, dass sie nicht die Wahrheit sagten, und sprach: „So ist schöne Geduld das Beste. Allah ist Der, bei Dem Hilfe gesucht wird.“",
+        "bs": "Jedne večeri braća su se vratila kući bez Jusufa. Donijeli su njegovu košulju s lažnom krvlju. Jakub je znao da ne govore istinu i rekao je: „Lijepo strpljenje! Allah je Onaj od Koga se pomoć traži.“"
+      },
+      "scene": { "sky": "dusk", "elements": ["stars", "hills"] },
+      "stage": {
+        "sky": "dusk",
+        "mood": "cool",
+        "layers": [
+          { "art": "story.moon-crescent", "x": 90, "y": 60, "w": 44, "anchor": "center", "anim": "glow" },
+          { "art": "story.hills" },
+          { "art": "prophet.yaqub-home", "x": 220, "y": 226, "w": 180 },
+          { "art": "story.lamp", "x": 330, "y": 232, "w": 44, "enter": "fade", "at": 900 }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 330, "y": 214, "intensity": 1, "at": 900 }]
+      },
+      "interactionId": "yaqub-next",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:16–18" }]
+    },
+    {
+      "id": "yaqub-s3",
+      "title": { "en": "Never despair", "de": "Niemals verzweifeln", "bs": "Nikada ne gubi nadu" },
+      "text": {
+        "en": "Years passed, and Yaqub also had to let another son go. He grieved so much that his eyes turned white with sorrow. Yet he said: \"I only complain of my grief and sorrow to Allah.\" He told his sons: \"Go and look for Yusuf and his brother, and do not despair of the mercy of Allah.\"",
+        "de": "Jahre vergingen, und Yaqub musste auch einen anderen Sohn ziehen lassen. Er trauerte so sehr, dass seine Augen vor Kummer weiß wurden. Doch er sagte: „Ich klage meinen Kummer und meine Trauer nur Allah.“ Seinen Söhnen sagte er: „Geht und sucht nach Yusuf und seinem Bruder, und gebt die Hoffnung auf Allahs Barmherzigkeit nicht auf.“",
+        "bs": "Prolazile su godine, a Jakub je morao pustiti i drugog sina. Toliko je tugovao da su mu oči pobijelile od žalosti. Ipak je rekao: „Ja se samo Allahu žalim na svoju tugu i brigu.“ Sinovima je rekao: „Idite i raspitajte se o Jusufu i njegovom bratu, i ne gubite nadu u Allahovu milost.“"
+      },
+      "scene": { "sky": "night", "elements": ["stars", "crescent", "hills"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.night-horizon" },
+          { "art": "prophet.yaqub-home", "x": 200, "y": 232, "w": 170 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 2200 }, { "type": "sparkle", "x": 200, "y": 90, "w": 160, "h": 60, "intensity": 1, "at": 2600 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:83–87" }]
+    },
+    {
+      "id": "yaqub-s4",
+      "title": { "en": "The shirt from Egypt", "de": "Das Hemd aus Ägypten", "bs": "Košulja iz Egipta" },
+      "text": {
+        "en": "In Egypt, Yusuf gave his brothers his shirt: \"Cast it over my father's face – he will see again.\" As the caravan left Egypt, Yaqub said: \"I sense the scent of Yusuf.\" The bringer of good news came and cast the shirt over his face – and by Allah's will he could see again.",
+        "de": "In Ägypten gab Yusuf seinen Brüdern sein Hemd: „Legt es auf das Gesicht meines Vaters – er wird wieder sehen.“ Als die Karawane Ägypten verließ, sagte Yaqub: „Ich spüre den Duft Yusufs.“ Der Freudenbote kam und legte das Hemd auf sein Gesicht – und mit Allahs Willen konnte er wieder sehen.",
+        "bs": "U Egiptu je Jusuf dao braći svoju košulju: „Prebacite je preko lica mog oca – progledat će.“ Kada je karavan krenuo iz Egipta, Jakub je rekao: „Ja osjećam miris Jusufov.“ Došao je donosilac radosne vijesti i prebacio košulju preko njegovog lica – i Allahovom voljom on je ponovo vidio."
+      },
+      "scene": { "sky": "dawn", "elements": ["dunes", "caravan", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "camera": "panRight",
+        "layers": [
+          { "art": "story.sun", "x": 320, "y": 96, "w": 80, "anchor": "center", "enter": "rise", "at": 2400, "duration": 2400 },
+          { "art": "story.dunes" },
+          { "art": "animal.camel", "x": 120, "y": 222, "w": 70, "enter": "slideRight", "at": 300, "duration": 2400 },
+          { "art": "prophet.yaqub-shirt", "x": 250, "y": 150, "w": 64, "anchor": "center", "anim": "float", "enter": "zoom", "at": 1400 }
+        ],
+        "effects": [{ "type": "sand", "intensity": 1 }, { "type": "sunrays", "x": 320, "y": 96, "at": 2800 }, { "type": "sparkle", "x": 250, "y": 150, "w": 90, "h": 60, "intensity": 2, "at": 1800 }]
+      },
+      "interactionId": "yaqub-map",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:93–96" }]
+    },
+    {
+      "id": "yaqub-s5",
+      "title": { "en": "His advice to his sons", "de": "Sein Rat an seine Söhne", "bs": "Njegov savjet sinovima" },
+      "text": {
+        "en": "When death came near, Yaqub asked his sons: \"What will you worship after me?\" They said: \"We will worship your God, the God of your fathers Ibrahim, Ismail and Ishaq – One God. And to Him we submit.\" Ibrahim and Yaqub both advised their children: Allah has chosen this religion for you, so stay Muslims until your last breath.",
+        "de": "Als der Tod nahte, fragte Yaqub seine Söhne: „Wem werdet ihr nach mir dienen?“ Sie sagten: „Wir werden deinem Gott dienen, dem Gott deiner Väter Ibrahim, Ismail und Ishaq – einem einzigen Gott. Und Ihm ergeben wir uns.“ Ibrahim und Yaqub rieten beide ihren Kindern: Allah hat euch diese Religion erwählt, so bleibt Muslime bis zum letzten Atemzug.",
+        "bs": "Kada mu se približila smrt, Jakub je upitao sinove: „Šta ćete obožavati poslije mene?“ Rekli su: „Obožavat ćemo tvoga Boga, Boga tvojih predaka Ibrahima, Ismaila i Ishaka – jednog jedinog Boga. Njemu smo mi predani.“ I Ibrahim i Jakub savjetovali su svoju djecu: Allah vam je odabrao ovu vjeru, zato ostanite muslimani do posljednjeg daha."
+      },
+      "scene": { "sky": "sunset", "elements": ["hills", "tree", "book"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.olive-grove" },
+          { "art": "prophet.yaqub-home", "x": 140, "y": 228, "w": 170 },
+          { "art": "object.book", "x": 300, "y": 226, "w": 64, "enter": "rise", "at": 600 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 330, "y": 70 }, { "type": "birds", "intensity": 1 }, { "type": "sparkle", "x": 300, "y": 196, "w": 80, "h": 40, "intensity": 1, "at": 1000 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:132–133" }]
+    }
+  ],
+  "miniGameId": "yaqub-decision",
+  "quizIds": ["yaqub-patience", "yaqub-order", "yaqub-lesson"],
+  "lessons": [
+    {
+      "id": "yaqub-l1",
+      "value": "sabr",
+      "title": { "en": "Beautiful patience", "de": "Schöne Geduld", "bs": "Lijepo strpljenje" },
+      "explanation": {
+        "en": "\"Beautiful patience\" means bearing a hard time without complaining about Allah to people, while asking Allah for help. Yaqub was sad – and still patient.",
+        "de": "„Schöne Geduld“ heißt, eine schwere Zeit zu tragen, ohne sich bei den Menschen über Allah zu beklagen, und dabei Allah um Hilfe zu bitten. Yaqub war traurig – und trotzdem geduldig.",
+        "bs": "„Lijepo strpljenje“ znači podnijeti teško vrijeme bez žaljenja ljudima na Allaha, a pri tome od Allaha tražiti pomoć. Jakub je bio tužan – a ipak strpljiv."
+      },
+      "example": {
+        "en": "Your best friend moves away. You are sad, you make dua for them and you stay kind to everyone around you.",
+        "de": "Dein bester Freund zieht weg. Du bist traurig, machst Du'a für ihn und bleibst freundlich zu allen um dich herum.",
+        "bs": "Najbolji prijatelj ti se odselio. Tužan si, upućuješ dovu za njega i ostaješ ljubazan prema svima oko sebe."
+      },
+      "reflection": {
+        "en": "When you feel sad, to whom do you turn first?",
+        "de": "Wenn du traurig bist, an wen wendest du dich zuerst?",
+        "bs": "Kada si tužan, kome se prvo obraćaš?"
+      }
+    },
+    {
+      "id": "yaqub-l2",
+      "value": "hope",
+      "title": { "en": "Never despair of Allah's mercy", "de": "Niemals an Allahs Barmherzigkeit verzweifeln", "bs": "Nikada ne gubi nadu u Allahovu milost" },
+      "explanation": {
+        "en": "After many years Yaqub still sent his sons to search, saying: do not despair of the mercy of Allah. And Allah brought his sons back to him.",
+        "de": "Nach vielen Jahren schickte Yaqub seine Söhne immer noch auf die Suche und sagte: Gebt die Hoffnung auf Allahs Barmherzigkeit nicht auf. Und Allah brachte ihm seine Söhne zurück.",
+        "bs": "Nakon mnogo godina Jakub je i dalje slao sinove u potragu, govoreći: ne gubite nadu u Allahovu milost. I Allah mu je vratio sinove."
+      },
+      "example": {
+        "en": "Your dua has not been answered yet. You keep asking Allah and keep doing your best.",
+        "de": "Dein Du'a wurde noch nicht erhört. Du bittest Allah weiter und gibst weiter dein Bestes.",
+        "bs": "Tvoja dova još nije uslišana. Nastavljaš moliti Allaha i dati sve od sebe."
+      },
+      "reflection": {
+        "en": "What are you hoping for – and have you asked Allah for it today?",
+        "de": "Worauf hoffst du – und hast du Allah heute darum gebeten?",
+        "bs": "Čemu se nadaš – i jesi li danas zamolio Allaha za to?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "yaqub-find",
+      "type": "find",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "Find the three things that belong to the story of Yaqub and his sons.", "de": "Finde die drei Dinge, die zur Geschichte von Yaqub und seinen Söhnen gehören.", "bs": "Pronađi tri stvari koje pripadaju kazivanju o Jakubu i njegovim sinovima." },
+      "items": [
+        { "id": "well", "element": "well", "label": { "en": "Well", "de": "Brunnen", "bs": "Bunar" } },
+        { "id": "caravan", "element": "caravan", "label": { "en": "Caravan", "de": "Karawane", "bs": "Karavan" } },
+        { "id": "grain", "element": "grain", "label": { "en": "Grain", "de": "Getreide", "bs": "Žito" } },
+        { "id": "whale", "element": "whale", "label": { "en": "Whale", "de": "Wal", "bs": "Kit" } },
+        { "id": "ark", "element": "ark", "label": { "en": "Ark", "de": "Arche", "bs": "Lađa" } }
+      ],
+      "correctIds": ["well", "caravan", "grain"],
+      "explanation": {
+        "en": "Yusuf was put in a well, a caravan took him to Egypt, and his brothers later came to Egypt to buy grain.",
+        "de": "Yusuf wurde in einen Brunnen geworfen, eine Karawane brachte ihn nach Ägypten, und später kamen seine Brüder nach Ägypten, um Getreide zu kaufen.",
+        "bs": "Jusuf je bačen u bunar, karavan ga je odveo u Egipat, a braća su kasnije došla u Egipat da kupe žito."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:15; 12:19; 12:58–59" }]
+    },
+    {
+      "id": "yaqub-next",
+      "type": "multipleChoice",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "What did Yaqub say when his sons came back without Yusuf?", "de": "Was sagte Yaqub, als seine Söhne ohne Yusuf zurückkamen?", "bs": "Šta je Jakub rekao kada su se sinovi vratili bez Jusufa?" },
+      "options": [
+        { "id": "a", "text": { "en": "\"Beautiful patience – Allah's help is sought\"", "de": "„Schöne Geduld – bei Allah wird Hilfe gesucht“", "bs": "„Lijepo strpljenje – od Allaha se pomoć traži“" } },
+        { "id": "b", "text": { "en": "\"I will punish you all\"", "de": "„Ich werde euch alle bestrafen“", "bs": "„Sve ću vas kazniti“" } },
+        { "id": "c", "text": { "en": "\"I will never speak to you again\"", "de": "„Ich spreche nie wieder mit euch“", "bs": "„Nikada više neću razgovarati s vama“" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Yaqub chose beautiful patience and turned to Allah for help.",
+        "de": "Yaqub wählte schöne Geduld und wandte sich an Allah um Hilfe.",
+        "bs": "Jakub je izabrao lijepo strpljenje i od Allaha zatražio pomoć."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:18" }]
+    },
+    {
+      "id": "yaqub-map",
+      "type": "map",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "From which land did the caravan bring Yusuf's shirt? Tap it on the map.", "de": "Aus welchem Land brachte die Karawane Yusufs Hemd? Tippe es auf der Karte an.", "bs": "Iz koje je zemlje karavan donio Jusufovu košulju? Dodirni je na mapi." },
+      "places": ["egypt", "mesopotamia", "makkah", "nineveh"],
+      "correctPlace": "egypt",
+      "explanation": {
+        "en": "The shirt came from Egypt, where Yusuf was in charge of the storehouses, to his father in Canaan.",
+        "de": "Das Hemd kam aus Ägypten, wo Yusuf die Vorratskammern verwaltete, zu seinem Vater nach Kanaan.",
+        "bs": "Košulja je stigla iz Egipta, gdje je Jusuf upravljao riznicama, do njegovog oca u Kanaanu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:55; 12:93–94" }]
+    },
+    {
+      "id": "yaqub-decision",
+      "type": "scenario",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": {
+        "en": "Decision: you have been waiting a long time for something you asked Allah for. What would Yaqub's example teach you?",
+        "de": "Entscheidung: Du wartest schon lange auf etwas, worum du Allah gebeten hast. Was lehrt dich Yaqubs Beispiel?",
+        "bs": "Odluka: dugo čekaš nešto za šta si molio Allaha. Čemu te uči Jakubov primjer?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Keep making dua and never lose hope", "de": "Weiter Du'a machen und nie die Hoffnung verlieren", "bs": "Nastaviti s dovom i nikada ne gubiti nadu" }, "feedback": { "en": "Yes – that is beautiful patience.", "de": "Ja – das ist schöne Geduld.", "bs": "Da – to je lijepo strpljenje." } },
+        { "id": "b", "text": { "en": "Stop asking – it will never happen", "de": "Aufhören zu bitten – es passiert nie", "bs": "Prestati moliti – nikada se neće desiti" }, "feedback": { "en": "Yaqub said: do not despair of Allah's mercy.", "de": "Yaqub sagte: Gebt die Hoffnung auf Allahs Barmherzigkeit nicht auf.", "bs": "Jakub je rekao: ne gubite nadu u Allahovu milost." } },
+        { "id": "c", "text": { "en": "Complain to everyone all day", "de": "Den ganzen Tag bei allen klagen", "bs": "Cijeli dan se žaliti svima" }, "feedback": { "en": "Yaqub complained of his sorrow only to Allah.", "de": "Yaqub klagte seinen Kummer nur Allah.", "bs": "Jakub se na svoju tugu žalio samo Allahu." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Yaqub waited many years, turned to Allah with his grief and never gave up hope.",
+        "de": "Yaqub wartete viele Jahre, wandte sich mit seinem Kummer an Allah und gab die Hoffnung nie auf.",
+        "bs": "Jakub je čekao mnogo godina, sa svojom tugom se obraćao Allahu i nikada nije izgubio nadu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:86–87" }]
+    },
+    {
+      "id": "yaqub-patience",
+      "type": "trueFalse",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "Yaqub said: \"I only complain of my grief and sorrow to Allah.\"", "de": "Yaqub sagte: „Ich klage meinen Kummer und meine Trauer nur Allah.“", "bs": "Jakub je rekao: „Ja se samo Allahu žalim na svoju tugu i brigu.“" },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – he was sad, but he brought his sadness to Allah.",
+        "de": "Ja – er war traurig, doch er brachte seine Trauer zu Allah.",
+        "bs": "Da – bio je tužan, ali je svoju tugu iznosio pred Allaha."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:86" }]
+    },
+    {
+      "id": "yaqub-order",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "Timeline: put the story of Yaqub in order.", "de": "Zeitleiste: Bringe die Geschichte Yaqubs in die richtige Reihenfolge.", "bs": "Vremenska linija: poredaj kazivanje o Jakubu." },
+      "items": [
+        { "id": "shirt-blood", "text": { "en": "The brothers return without Yusuf", "de": "Die Brüder kommen ohne Yusuf zurück", "bs": "Braća se vraćaju bez Jusufa" } },
+        { "id": "patience", "text": { "en": "\"Beautiful patience\"", "de": "„Schöne Geduld“", "bs": "„Lijepo strpljenje“" } },
+        { "id": "search", "text": { "en": "\"Go and look for Yusuf\"", "de": "„Geht und sucht nach Yusuf“", "bs": "„Idite i potražite Jusufa“" } },
+        { "id": "scent", "text": { "en": "The scent of Yusuf", "de": "Der Duft Yusufs", "bs": "Miris Jusufov" } },
+        { "id": "sight", "text": { "en": "The shirt – he sees again", "de": "Das Hemd – er sieht wieder", "bs": "Košulja – ponovo vidi" } }
+      ],
+      "explanation": {
+        "en": "Loss, patience, hope, the scent from afar – and the shirt that Allah made a cause of his healing.",
+        "de": "Verlust, Geduld, Hoffnung, der Duft aus der Ferne – und das Hemd, durch das Allah ihn heilte.",
+        "bs": "Gubitak, strpljenje, nada, miris izdaleka – i košulja kojom ga je Allah izliječio."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:16–18; 12:87; 12:94–96" }]
+    },
+    {
+      "id": "yaqub-lesson",
+      "type": "memory",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "Memory: match each moment with what Yaqub said or did.", "de": "Memory: Ordne jedem Moment zu, was Yaqub sagte oder tat.", "bs": "Memorija: spoji svaki trenutak s onim što je Jakub rekao ili uradio." },
+      "pairs": [
+        { "id": "p1", "left": { "en": "Shirt with false blood", "de": "Hemd mit falschem Blut", "bs": "Košulja s lažnom krvlju" }, "right": { "en": "Beautiful patience", "de": "Schöne Geduld", "bs": "Lijepo strpljenje" } },
+        { "id": "p2", "left": { "en": "Great sorrow", "de": "Großer Kummer", "bs": "Velika tuga" }, "right": { "en": "Complains only to Allah", "de": "Klagt nur Allah", "bs": "Žali se samo Allahu" } },
+        { "id": "p3", "left": { "en": "Years of waiting", "de": "Jahre des Wartens", "bs": "Godine čekanja" }, "right": { "en": "Never despair", "de": "Niemals verzweifeln", "bs": "Nikada ne gubi nadu" } },
+        { "id": "p4", "left": { "en": "Before his death", "de": "Vor seinem Tod", "bs": "Prije smrti" }, "right": { "en": "Worship One God", "de": "Dient dem Einen Gott", "bs": "Obožavajte Jednog Boga" } }
+      ],
+      "explanation": {
+        "en": "Patience, hope and tawhid – the legacy Yaqub left to his children.",
+        "de": "Geduld, Hoffnung und Tauhid – das Erbe, das Yaqub seinen Kindern hinterließ.",
+        "bs": "Strpljenje, nada i tevhid – nasljedstvo koje je Jakub ostavio svojoj djeci."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:18; 12:86–87; 2:133" }]
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "12:4–18" },
+    { "sourceName": "Quran", "sourceReference": "12:83–100" },
+    { "sourceName": "Quran", "sourceReference": "2:132–133" },
+    { "sourceName": "Quran", "sourceReference": "21:72–73" }
+  ]
+}

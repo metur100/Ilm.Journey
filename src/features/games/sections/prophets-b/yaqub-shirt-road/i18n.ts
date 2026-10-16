@@ -1,0 +1,77 @@
+import { defineNamespace } from '@/core/i18n';
+
+const en = {
+  title: "The Shirt's Road",
+  description: "Lay a road across the desert so the caravan can bring Yusuf's shirt from Egypt to his father Yaqub in Canaan.",
+  howTo: 'Tap the desert next to the end of the road to make it longer. Go around the rocks. Tap the last piece again to take it back.',
+  'play.prompt': 'Build the road from Egypt to Canaan – one step at a time.',
+  'play.promptWells': 'The way is long: let the caravan rest at both wells before it reaches Canaan.',
+  'play.rock': 'Rocks block the way – go around them.',
+  'play.far': 'The road grows only from its end (the camel).',
+  'play.used': 'The road already passes here.',
+  'play.wellsFirst': 'Not yet – the caravan still needs water. Pass by every well.',
+  'play.well': 'The caravan rests and drinks at the well.',
+  'play.step': 'Good – the caravan moves on.',
+  'play.arrived': 'The shirt has reached Canaan',
+  'play.arrivedText': 'The bringer of good news cast the shirt over Yaqub’s face, and by Allah’s will he could see again (Quran 12:96).',
+  'play.steps': 'Road: {count} steps',
+  'a11y.start': 'Egypt – the start of the road',
+  'a11y.goal': 'Canaan – the home of Yaqub',
+  'a11y.rock': 'Rocks',
+  'a11y.road': 'Road',
+  'a11y.head': 'The camel with the shirt',
+  'a11y.well': 'Well',
+  'a11y.sand': 'Desert',
+} as const;
+
+type Key = keyof typeof en;
+
+const de: Record<Key, string> = {
+  title: 'Der Weg des Hemdes',
+  description: 'Lege einen Weg durch die Wüste, damit die Karawane Yusufs Hemd aus Ägypten zu seinem Vater Yaqub nach Kanaan bringen kann.',
+  howTo: 'Tippe auf die Wüste neben dem Ende des Weges, um ihn zu verlängern. Geh um die Felsen herum. Tippe das letzte Stück noch einmal an, um es zurückzunehmen.',
+  'play.prompt': 'Baue den Weg von Ägypten nach Kanaan – Schritt für Schritt.',
+  'play.promptWells': 'Der Weg ist weit: Lass die Karawane an beiden Brunnen rasten, bevor sie Kanaan erreicht.',
+  'play.rock': 'Felsen versperren den Weg – geh um sie herum.',
+  'play.far': 'Der Weg wächst nur an seinem Ende (beim Kamel).',
+  'play.used': 'Hier verläuft der Weg schon.',
+  'play.wellsFirst': 'Noch nicht – die Karawane braucht noch Wasser. Komm an jedem Brunnen vorbei.',
+  'play.well': 'Die Karawane rastet und trinkt am Brunnen.',
+  'play.step': 'Gut – die Karawane zieht weiter.',
+  'play.arrived': 'Das Hemd ist in Kanaan angekommen',
+  'play.arrivedText': 'Der Freudenbote legte das Hemd auf Yaqubs Gesicht, und mit Allahs Willen konnte er wieder sehen (Koran 12:96).',
+  'play.steps': 'Weg: {count} Schritte',
+  'a11y.start': 'Ägypten – der Anfang des Weges',
+  'a11y.goal': 'Kanaan – das Zuhause Yaqubs',
+  'a11y.rock': 'Felsen',
+  'a11y.road': 'Weg',
+  'a11y.head': 'Das Kamel mit dem Hemd',
+  'a11y.well': 'Brunnen',
+  'a11y.sand': 'Wüste',
+};
+
+const bs: Record<Key, string> = {
+  title: 'Put košulje',
+  description: 'Napravi put kroz pustinju kako bi karavan donio Jusufovu košulju iz Egipta njegovom ocu Jakubu u Kanaan.',
+  howTo: 'Dodirni pustinju pored kraja puta da ga produžiš. Zaobiđi stijene. Ponovo dodirni posljednji dio da ga vratiš.',
+  'play.prompt': 'Napravi put od Egipta do Kanaana – korak po korak.',
+  'play.promptWells': 'Put je dug: neka se karavan odmori kod oba bunara prije nego što stigne u Kanaan.',
+  'play.rock': 'Stijene zatvaraju put – zaobiđi ih.',
+  'play.far': 'Put raste samo na svom kraju (kod deve).',
+  'play.used': 'Ovuda put već prolazi.',
+  'play.wellsFirst': 'Još ne – karavanu još treba vode. Prođi pored svakog bunara.',
+  'play.well': 'Karavan se odmara i pije vodu kod bunara.',
+  'play.step': 'Dobro – karavan ide dalje.',
+  'play.arrived': 'Košulja je stigla u Kanaan',
+  'play.arrivedText': "Donosilac radosne vijesti prebacio je košulju preko Jakubovog lica, i Allahovom voljom on je ponovo vidio (Kur'an 12:96).",
+  'play.steps': 'Put: {count} koraka',
+  'a11y.start': 'Egipat – početak puta',
+  'a11y.goal': 'Kanaan – Jakubov dom',
+  'a11y.rock': 'Stijene',
+  'a11y.road': 'Put',
+  'a11y.head': 'Deva s košuljom',
+  'a11y.well': 'Bunar',
+  'a11y.sand': 'Pustinja',
+};
+
+export const yaqubRoadI18n = defineNamespace('game.yaqub-shirt-road', { en, de, bs });
