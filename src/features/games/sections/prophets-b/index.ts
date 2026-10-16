@@ -1,4 +1,5 @@
 import { registerAyyubGardenGame } from './ayyub-garden/register';
+import { registerMusaSpringsGame } from './musa-springs/register';
 import { registerShuaybScalesGame } from './shuayb-scales/register';
 import { registerYaqubRoadGame } from './yaqub-shirt-road/register';
 import { registerYusufStorehouseGame } from './yusuf-storehouse/register';
@@ -15,4 +16,5 @@ export function registerProphetsBGames(): void {
   registerYusufStoryPathGame();
   registerAyyubGardenGame();
   registerShuaybScalesGame();
+  registerMusaSpringsGame();
 }

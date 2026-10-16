@@ -1,17 +1,27 @@
 {
   "id": "musa",
-  "order": 4,
+  "order": 14,
   "prophetName": { "en": "Musa", "de": "Musa (Mose)", "bs": "Musa" },
   "honorific": "alayhis-salam",
   "title": { "en": "The Journey", "de": "Die Reise", "bs": "Putovanje" },
   "description": {
-    "en": "A basket on the Nile, a call at Mount Tur and a sea that parts.",
-    "de": "Eine Kiste auf dem Nil, ein Ruf am Berg Tur und ein Meer, das sich teilt.",
-    "bs": "Sanduk na Nilu, poziv na brdu Tur i more koje se razdvaja."
+    "en": "A chest on the Nile, a light in the valley of Tuwa, a path through the sea, twelve springs and the tablets.",
+    "de": "Eine Kiste auf dem Nil, ein Licht im Tal Tuwa, ein Weg durch das Meer, zwölf Quellen und die Tafeln.",
+    "bs": "Sanduk na Nilu, svjetlo u dolini Tuva, put kroz more, dvanaest izvora i ploče."
   },
-  "place": { "en": "Egypt and Sinai", "de": "Ägypten und Sinai", "bs": "Egipat i Sinaj" },
+  "place": { "en": "Egypt, Madyan and Sinai", "de": "Ägypten, Madyan und Sinai", "bs": "Egipat, Medjen i Sinaj" },
   "symbol": "partedSea",
+  "symbolArt": "prophet.musa-staff",
   "cover": { "sky": "night", "elements": ["stars", "partedSea"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "prophet.musa-sea-path", "fill": true },
+      { "art": "prophet.musa-staff", "x": 200, "y": 226, "w": 26, "enter": "rise", "at": 600, "anim": "glow" }
+    ],
+    "effects": ["stars", { "type": "lightBeam", "x": 200, "intensity": 1, "at": 900 }, { "type": "waves", "y": 196, "intensity": 1 }, { "type": "mist", "y": 150, "h": 40, "intensity": 1 }]
+  },
+  "mapPlaces": ["egypt", "madyan", "sinai"],
   "intro": {
     "en": "In Egypt, Fir'awn (Pharaoh) was a tyrant who oppressed the Children of Israel. In those days a baby was born: Musa (peace be upon him).",
     "de": "In Ägypten war Pharao ein Tyrann, der die Kinder Israels unterdrückte. In jener Zeit wurde ein Baby geboren: Musa (Friede sei mit ihm).",
@@ -20,42 +30,135 @@
   "scenes": [
     {
       "id": "musa-s1",
-      "title": { "en": "A basket on the river", "de": "Eine Kiste auf dem Fluss", "bs": "Sanduk na rijeci" },
+      "title": { "en": "A chest on the river", "de": "Eine Kiste auf dem Fluss", "bs": "Sanduk na rijeci" },
       "text": {
-        "en": "Musa's mother was afraid for her baby. Allah inspired her to nurse him and, if she feared for him, to place him in the river – and not to be sad, because Allah would return him to her.",
-        "de": "Musas Mutter hatte Angst um ihr Baby. Allah gab ihr ein, es zu stillen und es, wenn sie um es fürchtete, auf den Fluss zu setzen – und nicht traurig zu sein, denn Allah würde es ihr zurückgeben.",
-        "bs": "Musaova majka se bojala za svoje dijete. Allah ju je nadahnuo da ga doji, a ako se bude bojala za njega, da ga spusti u rijeku – i da ne tuguje, jer će joj ga Allah vratiti."
+        "en": "Musa's mother was afraid for her baby. Allah inspired her to place him in a chest on the river and not to be sad, because Allah would return him to her. The river carried the chest to the household of Fir'awn, who took the baby in. Musa refused every nurse – so Allah returned him to his mother, to comfort her.",
+        "de": "Musas Mutter hatte Angst um ihr Baby. Allah gab ihr ein, ihn in eine Kiste auf den Fluss zu legen und nicht traurig zu sein, denn Allah würde ihn ihr zurückgeben. Der Fluss trug die Kiste zum Haus des Pharao, wo man das Baby aufnahm. Musa wollte von keiner Amme trinken – so gab Allah ihn seiner Mutter zurück, um sie zu trösten.",
+        "bs": "Musaova majka se bojala za svoje dijete. Allah ju je nadahnuo da ga stavi u sanduk na rijeku i da ne tuguje, jer će joj ga Allah vratiti. Rijeka je odnijela sanduk do faraonove porodice, koja je uzela dijete. Musa nije htio sisati ni kod jedne dojilje – pa ga je Allah vratio majci, da je obraduje."
       },
       "scene": { "sky": "day", "elements": ["sun", "river", "palms", "basket"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.sun", "x": 330, "y": 52, "w": 80, "anchor": "center" },
+          { "art": "story.nile" },
+          { "art": "prophet.musa-chest", "x": 210, "y": 198, "w": 80, "anim": "bob", "enter": "slideLeft", "at": 300, "duration": 2400 },
+          { "art": "story.reeds", "x": 56, "y": 240, "w": 84 },
+          { "art": "story.reeds", "x": 352, "y": 240, "w": 76, "flip": true }
+        ],
+        "effects": [{ "type": "ripples", "x": 210, "y": 194, "w": 70 }, { "type": "birds", "intensity": 1 }]
+      },
       "interactionId": "musa-next",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "28:7" }]
+      "sources": [{ "sourceName": "Quran", "sourceReference": "28:7–13; 20:38–40" }]
     },
     {
       "id": "musa-s2",
-      "title": { "en": "Home again – and a calling", "de": "Wieder zu Hause – und eine Berufung", "bs": "Ponovo kod kuće – i poziv" },
+      "title": { "en": "A light in the valley of Tuwa", "de": "Ein Licht im Tal Tuwa", "bs": "Svjetlo u dolini Tuva" },
       "text": {
-        "en": "The chest reached Fir'awn's household, and they took the baby in. Allah returned Musa to his mother so that she could nurse him and be comforted. Years later, at Mount Tur, Allah spoke to Musa and chose him as a messenger, with his brother Harun as his helper.",
-        "de": "Die Kiste erreichte das Haus des Pharao, und man nahm das Baby auf. Allah gab Musa seiner Mutter zurück, damit sie ihn stillen konnte und getröstet war. Jahre später sprach Allah am Berg Tur zu Musa und erwählte ihn zum Gesandten, mit seinem Bruder Harun als Helfer.",
-        "bs": "Sanduk je stigao do faraonove porodice i oni su uzeli dijete. Allah je vratio Musaa majci da ga doji i da se smiri. Godinama kasnije, na brdu Tur, Allah je govorio Musau i odabrao ga za poslanika, a brata Haruna za pomagača."
+        "en": "Years later, travelling with his family from Madyan on a dark night, Musa saw a fire near the mountain. \"Stay here – perhaps I can bring you a flame or find guidance there.\" When he came to it, he was called: \"O Musa, I am your Lord. Take off your sandals – you are in the sacred valley of Tuwa. I have chosen you, so listen to what is revealed.\"",
+        "de": "Jahre später, als er mit seiner Familie in einer dunklen Nacht aus Madyan reiste, sah Musa ein Feuer am Berg. „Bleibt hier – vielleicht bringe ich euch eine Flamme oder finde dort Rechtleitung.“ Als er hinkam, wurde er gerufen: „O Musa, Ich bin dein Herr. Zieh deine Sandalen aus – du bist im heiligen Tal Tuwa. Ich habe dich erwählt, so höre auf das, was offenbart wird.“",
+        "bs": "Godinama kasnije, putujući s porodicom iz Medjena jedne tamne noći, Musa je ugledao vatru kod brda. „Ostanite ovdje – možda vam donesem plamen ili tamo nađem uputu.“ Kada joj je prišao, začuo je: „O Musa, Ja sam tvoj Gospodar. Izuj obuću svoju – ti si u blagoslovljenoj dolini Tuva. Ja sam te izabrao, zato slušaj ono što se objavljuje.“"
       },
-      "scene": { "sky": "dusk", "elements": ["stars", "mountains", "fire"] },
-      "interactionId": "musa-map",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "28:8–13; 20:9–36" }]
+      "scene": { "sky": "night", "elements": ["stars", "mountains", "fire"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.valley" },
+          { "art": "place.mount-sinai", "x": 200, "y": 200, "w": 230, "opacity": 0.85 },
+          { "art": "prophet.musa-bush", "x": 200, "y": 232, "w": 120, "enter": "fade", "at": 900, "duration": 1800, "anim": "breathe" }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 200, "y": 180, "intensity": 2, "at": 1200 }, { "type": "lightBeam", "x": 200, "y": 180, "intensity": 1, "at": 2000 }]
+      },
+      "interactionId": "musa-tuwa",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:9–13; 28:29–30" }]
+    },
+    {
+      "id": "musa-s4",
+      "title": { "en": "The staff, the hand – and a helper", "de": "Der Stab, die Hand – und ein Helfer", "bs": "Štap, ruka – i pomagač" },
+      "text": {
+        "en": "Allah asked: \"What is that in your right hand, O Musa?\" – \"It is my staff. I lean on it and shake down leaves for my sheep.\" At Allah's command he threw it down, and it became a moving snake; Allah told him not to fear and returned it as it was. His hand came out white, without harm – another sign. Musa asked Allah to make his brother Harun his helper, and Allah granted his request.",
+        "de": "Allah fragte: „Was ist das in deiner Rechten, o Musa?“ – „Das ist mein Stab. Ich stütze mich darauf und schlage damit Laub für meine Schafe ab.“ Auf Allahs Befehl warf er ihn hin, und er wurde zu einer sich bewegenden Schlange; Allah sagte ihm, er solle sich nicht fürchten, und machte ihn wieder, wie er war. Seine Hand kam weiß hervor, ohne Übel – ein weiteres Zeichen. Musa bat Allah, seinen Bruder Harun zu seinem Helfer zu machen, und Allah erfüllte seine Bitte.",
+        "bs": "Allah je upitao: „A šta ti je to u desnoj ruci, o Musa?“ – „To je moj štap. Na njega se oslanjam i njime lišće ovcama svojim stresam.“ Po Allahovoj naredbi bacio ga je, i on je postao zmija koja se kreće; Allah mu je rekao da se ne boji i vratio ga u prijašnje stanje. Njegova ruka izašla je bijela, bez mahane – još jedan znak. Musa je zamolio Allaha da mu brat Harun bude pomagač, i Allah mu je ispunio molbu."
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.mountains" },
+          { "art": "prophet.musa-staff", "x": 200, "y": 226, "w": 34, "enter": "rise", "at": 400, "anim": "glow" },
+          { "art": "prophet.harun-lanterns", "x": 320, "y": 210, "w": 70, "enter": "fade", "at": 2600 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 90, "at": 600 }, { "type": "sparkle", "x": 200, "y": 150, "w": 80, "h": 100, "intensity": 2, "at": 1200 }]
+      },
+      "interactionId": "musa-harun",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:17–36" }]
     },
     {
       "id": "musa-s3",
-      "title": { "en": "The sea parts", "de": "Das Meer teilt sich", "bs": "More se razdvaja" },
+      "title": { "en": "The path through the sea", "de": "Der Weg durch das Meer", "bs": "Put kroz more" },
       "text": {
-        "en": "Musa called Fir'awn to believe in Allah and to let the Children of Israel go, but Fir'awn refused. Musa left with the believers at night. At the sea, with Fir'awn's army behind them, Musa said that his Lord was with him and would guide him. Allah told him to strike the sea with his staff – and the sea parted. The believers crossed safely.",
-        "de": "Musa rief Pharao auf, an Allah zu glauben und die Kinder Israels ziehen zu lassen, doch Pharao weigerte sich. Musa zog nachts mit den Gläubigen fort. Am Meer, das Heer des Pharao hinter sich, sagte Musa, dass sein Herr mit ihm sei und ihn leiten werde. Allah befahl ihm, mit seinem Stab auf das Meer zu schlagen – und das Meer teilte sich. Die Gläubigen zogen sicher hindurch.",
-        "bs": "Musa je pozvao faraona da vjeruje u Allaha i pusti sinove Israilove, ali je faraon odbio. Musa je noću krenuo s vjernicima. Kod mora, s faraonovom vojskom iza sebe, Musa je rekao da je njegov Gospodar s njim i da će ga uputiti. Allah mu je naredio da udari more štapom – i more se razdvojilo. Vjernici su sigurno prešli."
+        "en": "Musa and Harun called Fir'awn to believe in Allah and to let the Children of Israel go, but Fir'awn refused. Musa left with the believers at night. At the sea, with Fir'awn's army behind them, his people said: \"We will be caught!\" Musa said: \"No! My Lord is with me – He will guide me.\" Allah told him to strike the sea with his staff, and it parted, each part like a great mountain. Allah saved Musa and all who were with him.",
+        "de": "Musa und Harun riefen Pharao auf, an Allah zu glauben und die Kinder Israels ziehen zu lassen, doch Pharao weigerte sich. Musa zog nachts mit den Gläubigen fort. Am Meer, das Heer des Pharao hinter sich, sagten seine Leute: „Wir werden eingeholt!“ Musa sagte: „Nein! Mein Herr ist mit mir – Er wird mich leiten.“ Allah befahl ihm, mit seinem Stab auf das Meer zu schlagen, und es teilte sich, jeder Teil wie ein gewaltiger Berg. Allah rettete Musa und alle, die bei ihm waren.",
+        "bs": "Musa i Harun pozvali su faraona da vjeruje u Allaha i pusti sinove Israilove, ali je faraon odbio. Musa je noću krenuo s vjernicima. Kod mora, s faraonovom vojskom iza sebe, njegovi ljudi su rekli: „Stići će nas!“ Musa je rekao: „Neće! Sa mnom je moj Gospodar – On će me uputiti.“ Allah mu je naredio da udari more štapom, i ono se razdvojilo, svaki dio kao veliko brdo. Allah je spasio Musaa i sve koji su bili s njim."
       },
       "scene": { "sky": "night", "elements": ["stars", "partedSea"] },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "26:16–66" }]
+      "stage": {
+        "sky": "night",
+        "camera": "slowZoom",
+        "layers": [
+          { "art": "story.sea", "fill": true, "exitAt": 2600 },
+          { "art": "prophet.musa-sea-path", "fill": true, "enter": "fade", "at": 2400, "duration": 2200 }
+        ],
+        "effects": ["stars", { "type": "waves", "y": 196, "intensity": 1, "until": 3000 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 3600 }, { "type": "sparkle", "x": 200, "y": 170, "w": 60, "h": 80, "intensity": 1, "at": 4200 }]
+      },
+      "interactionId": "musa-sea",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:16–67; 20:47" }]
+    },
+    {
+      "id": "musa-s5",
+      "title": { "en": "Twelve springs", "de": "Zwölf Quellen", "bs": "Dvanaest izvora" },
+      "text": {
+        "en": "In the desert Musa asked Allah for water for his people. Allah said: \"Strike the rock with your staff.\" Twelve springs gushed out of it, and every tribe knew its own drinking place. \"Eat and drink from what Allah provides, and do not spread corruption on the earth.\"",
+        "de": "In der Wüste bat Musa Allah um Wasser für sein Volk. Allah sprach: „Schlag mit deinem Stab auf den Felsen.“ Zwölf Quellen sprudelten daraus hervor, und jeder Stamm kannte seine eigene Trinkstelle. „Esst und trinkt von dem, was Allah euch versorgt, und stiftet kein Unheil auf der Erde.“",
+        "bs": "U pustinji je Musa molio Allaha da napoji svoj narod. Allah je rekao: „Udari štapom svojim po kamenu!“ Iz njega je provrelo dvanaest izvora, i svako pleme je znalo svoje pojilo. „Jedite i pijte od onoga čime vas Allah opskrbljuje i ne činite nered po Zemlji.“"
+      },
+      "scene": { "sky": "day", "elements": ["dunes", "river"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.desert-flat" },
+          { "art": "prophet.musa-springs", "x": 200, "y": 236, "w": 240, "enter": "fade", "at": 400, "duration": 1600 },
+          { "art": "prophet.musa-camp-1", "x": 50, "y": 236, "w": 50, "enter": "fade", "at": 1600 },
+          { "art": "prophet.musa-camp-3", "x": 352, "y": 236, "w": 50, "enter": "fade", "at": 1800 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 330, "y": 50, "intensity": 1 }, { "type": "ripples", "x": 200, "y": 228, "w": 160, "at": 1400 }, { "type": "sparkle", "x": 200, "y": 190, "w": 140, "h": 50, "intensity": 1, "at": 1600 }]
+      },
+      "interactionId": "musa-map",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:60; 7:160" }]
+    },
+    {
+      "id": "musa-s6",
+      "title": { "en": "The tablets", "de": "Die Tafeln", "bs": "Ploče" },
+      "text": {
+        "en": "Allah appointed forty nights for Musa at the mountain. Then Allah wrote for him on the tablets guidance and an explanation of all things: \"Take them with strength, and tell your people to hold to the best of them.\"",
+        "de": "Allah bestimmte Musa vierzig Nächte am Berg. Dann schrieb Allah für ihn auf die Tafeln Ermahnung und eine Erklärung aller Dinge: „Nimm sie mit Kraft und befiehl deinem Volk, sich an das Beste darin zu halten.“",
+        "bs": "Allah je Musau odredio četrdeset noći na brdu. Zatim mu je Allah na pločama napisao pouku i objašnjenje svega: „Prihvati ih čvrsto i naredi svom narodu da se drži onoga što je u njima najljepše.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "book"] },
+      "stage": {
+        "sky": "dawn",
+        "mood": "golden",
+        "layers": [
+          { "art": "place.mount-sinai", "x": 200, "y": 236, "w": 300 },
+          { "art": "prophet.musa-tablets", "x": 200, "y": 150, "w": 100, "anchor": "center", "enter": "zoom", "at": 900, "anim": "glow" }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 150, "at": 900 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 600 }, { "type": "sparkle", "x": 200, "y": 150, "w": 120, "h": 80, "intensity": 1, "at": 1400 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:142–145" }]
     }
   ],
   "miniGameId": "musa-timeline",
-  "quizIds": ["musa-sea", "musa-harun", "musa-lesson"],
+  "quizIds": ["musa-find", "musa-memory", "musa-lesson"],
   "lessons": [
     {
       "id": "musa-l1",
@@ -82,9 +185,9 @@
       "value": "justice",
       "title": { "en": "Standing up against injustice", "de": "Gegen Ungerechtigkeit aufstehen", "bs": "Ustati protiv nepravde" },
       "explanation": {
-        "en": "Musa and Harun went to a powerful tyrant and called him to justice. We speak up for what is right – wisely and with good words.",
-        "de": "Musa und Harun gingen zu einem mächtigen Tyrannen und riefen ihn zur Gerechtigkeit auf. Wir setzen uns für das Richtige ein – klug und mit guten Worten.",
-        "bs": "Musa i Harun otišli su moćnom silniku i pozvali ga pravdi. Zalažemo se za ispravno – mudro i lijepim riječima."
+        "en": "Musa and Harun went to a powerful tyrant and called him to justice. We too speak up for what is right – wisely and with good words.",
+        "de": "Musa und Harun gingen zu einem mächtigen Tyrannen und riefen ihn zur Gerechtigkeit auf. Auch wir setzen uns für das Richtige ein – klug und mit guten Worten.",
+        "bs": "Musa i Harun otišli su moćnom silniku i pozvali ga pravdi. I mi se zalažemo za ispravno – mudro i lijepim riječima."
       },
       "example": {
         "en": "Someone is being bullied. You stand by them and tell a teacher.",
@@ -96,6 +199,26 @@
         "de": "Wem könntest du heute helfen, indem du an seiner Seite stehst?",
         "bs": "Kome bi danas mogao pomoći tako što ćeš stati uz njega?"
       }
+    },
+    {
+      "id": "musa-l3",
+      "value": "gratitude",
+      "title": { "en": "Thank Allah for His provision", "de": "Allah für Seine Versorgung danken", "bs": "Zahvaljuj Allahu na opskrbi" },
+      "explanation": {
+        "en": "In the desert Allah gave each tribe its own spring and told them: eat and drink from Allah's provision and do not spread corruption. Using Allah's gifts well is a way of thanking Him.",
+        "de": "In der Wüste gab Allah jedem Stamm eine eigene Quelle und sagte: Esst und trinkt von Allahs Versorgung und stiftet kein Unheil. Allahs Gaben gut zu nutzen ist eine Art, Ihm zu danken.",
+        "bs": "U pustinji je Allah svakom plemenu dao njegov izvor i rekao: jedite i pijte od Allahove opskrbe i ne činite nered. Dobro koristiti Allahove darove način je da Mu zahvalimo."
+      },
+      "example": {
+        "en": "You turn off the tap while brushing your teeth and do not waste water.",
+        "de": "Du drehst beim Zähneputzen den Wasserhahn zu und verschwendest kein Wasser.",
+        "bs": "Zatvoriš slavinu dok pereš zube i ne rasipaš vodu."
+      },
+      "reflection": {
+        "en": "Which gift of Allah could you use more carefully?",
+        "de": "Welche Gabe Allahs könntest du sorgsamer nutzen?",
+        "bs": "Koji Allahov dar bi mogao pažljivije koristiti?"
+      }
     }
   ],
   "questions": [
@@ -104,7 +227,7 @@
       "type": "multipleChoice",
       "storyId": "musa",
       "topic": "musa",
-      "prompt": { "en": "What do you think Musa's mother did?", "de": "Was denkst du, tat Musas Mutter?", "bs": "Šta misliš, šta je uradila Musaova majka?" },
+      "prompt": { "en": "What did Musa's mother do, as Allah inspired her?", "de": "Was tat Musas Mutter, wie Allah es ihr eingab?", "bs": "Šta je Musaova majka uradila, kako ju je Allah nadahnuo?" },
       "options": [
         { "id": "a", "text": { "en": "She placed him in a chest on the river, trusting Allah", "de": "Sie legte ihn in einer Kiste auf den Fluss und vertraute Allah", "bs": "Stavila ga je u sanduk na rijeku, oslanjajući se na Allaha" } },
         { "id": "b", "text": { "en": "She hid him in a cave", "de": "Sie versteckte ihn in einer Höhle", "bs": "Sakrila ga je u pećinu" } },
@@ -119,59 +242,18 @@
       "sources": [{ "sourceName": "Quran", "sourceReference": "28:7" }]
     },
     {
-      "id": "musa-map",
-      "type": "map",
+      "id": "musa-tuwa",
+      "type": "trueFalse",
       "storyId": "musa",
       "topic": "musa",
-      "prompt": { "en": "In which land did Musa grow up? Tap it on the map.", "de": "In welchem Land wuchs Musa auf? Tippe es auf der Karte an.", "bs": "U kojoj je zemlji Musa odrastao? Dodirni je na mapi." },
-      "places": ["egypt", "makkah", "mesopotamia", "madinah"],
-      "correctPlace": "egypt",
+      "prompt": { "en": "In the valley of Tuwa, Allah told Musa to take off his sandals.", "de": "Im Tal Tuwa sagte Allah Musa, er solle seine Sandalen ausziehen.", "bs": "U dolini Tuva Allah je rekao Musau da izuje obuću." },
+      "correct": true,
       "explanation": {
-        "en": "Musa grew up in Egypt, in the household of Fir'awn, by the river Nile.",
-        "de": "Musa wuchs in Ägypten auf, im Haus des Pharao, am Nil.",
-        "bs": "Musa je odrastao u Egiptu, u faraonovoj kući, pored rijeke Nil."
+        "en": "Yes – \"you are in the sacred valley of Tuwa\".",
+        "de": "Ja – „du bist im heiligen Tal Tuwa“.",
+        "bs": "Da – „ti si u blagoslovljenoj dolini Tuva“."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "28:8–9" }]
-    },
-    {
-      "id": "musa-timeline",
-      "type": "ordering",
-      "timeline": true,
-      "storyId": "musa",
-      "topic": "musa",
-      "prompt": { "en": "Timeline: put Musa's journey in order.", "de": "Zeitleiste: Bringe Musas Reise in die richtige Reihenfolge.", "bs": "Vremenska linija: poredaj Musaovo putovanje." },
-      "items": [
-        { "id": "river", "text": { "en": "Placed on the river", "de": "Auf den Fluss gesetzt", "bs": "Spušten u rijeku" } },
-        { "id": "mother", "text": { "en": "Returned to his mother", "de": "Zur Mutter zurückgebracht", "bs": "Vraćen majci" } },
-        { "id": "tur", "text": { "en": "Called at Mount Tur", "de": "Am Berg Tur berufen", "bs": "Pozvan na brdu Tur" } },
-        { "id": "firawn", "text": { "en": "Calls Fir'awn to believe", "de": "Ruft Pharao zum Glauben auf", "bs": "Poziva faraona u vjeru" } },
-        { "id": "sea", "text": { "en": "The sea parts", "de": "Das Meer teilt sich", "bs": "More se razdvaja" } }
-      ],
-      "explanation": {
-        "en": "River, mother, Mount Tur, Fir'awn – and finally the parting of the sea.",
-        "de": "Fluss, Mutter, Berg Tur, Pharao – und schließlich die Teilung des Meeres.",
-        "bs": "Rijeka, majka, brdo Tur, faraon – i na kraju razdvajanje mora."
-      },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "28:7–13; 20:9–36; 26:10–66" }]
-    },
-    {
-      "id": "musa-sea",
-      "type": "multipleChoice",
-      "storyId": "musa",
-      "topic": "musa",
-      "prompt": { "en": "What happened when Musa struck the sea with his staff?", "de": "Was geschah, als Musa mit seinem Stab auf das Meer schlug?", "bs": "Šta se desilo kada je Musa udario more štapom?" },
-      "options": [
-        { "id": "a", "text": { "en": "It parted, each part like a great mountain", "de": "Es teilte sich, jeder Teil wie ein gewaltiger Berg", "bs": "Razdvojilo se, svaki dio kao golemo brdo" } },
-        { "id": "b", "text": { "en": "It froze", "de": "Es gefror", "bs": "Zaledilo se" } },
-        { "id": "c", "text": { "en": "Nothing happened", "de": "Nichts geschah", "bs": "Ništa se nije desilo" } }
-      ],
-      "correctOptionId": "a",
-      "explanation": {
-        "en": "By Allah's command the sea parted, and Allah saved Musa and those with him.",
-        "de": "Auf Allahs Befehl teilte sich das Meer, und Allah rettete Musa und die, die mit ihm waren.",
-        "bs": "Po Allahovoj naredbi more se razdvojilo, i Allah je spasio Musaa i one s njim."
-      },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "26:63–65" }]
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:12" }]
     },
     {
       "id": "musa-harun",
@@ -186,6 +268,101 @@
         "bs": "Da – Allah mu je ispunio molbu."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "20:29–36" }]
+    },
+    {
+      "id": "musa-sea",
+      "type": "multipleChoice",
+      "storyId": "musa",
+      "topic": "musa",
+      "prompt": { "en": "What happened when Musa struck the sea with his staff?", "de": "Was geschah, als Musa mit seinem Stab auf das Meer schlug?", "bs": "Šta se desilo kada je Musa udario more štapom?" },
+      "options": [
+        { "id": "a", "text": { "en": "It parted, each part like a great mountain", "de": "Es teilte sich, jeder Teil wie ein gewaltiger Berg", "bs": "Razdvojilo se, svaki dio kao veliko brdo" } },
+        { "id": "b", "text": { "en": "It froze", "de": "Es gefror", "bs": "Zaledilo se" } },
+        { "id": "c", "text": { "en": "Nothing happened", "de": "Nichts geschah", "bs": "Ništa se nije desilo" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "By Allah's command the sea parted, and Allah saved Musa and those with him.",
+        "de": "Auf Allahs Befehl teilte sich das Meer, und Allah rettete Musa und die, die mit ihm waren.",
+        "bs": "Po Allahovoj naredbi more se razdvojilo, i Allah je spasio Musaa i one s njim."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:63–65" }]
+    },
+    {
+      "id": "musa-map",
+      "type": "map",
+      "storyId": "musa",
+      "topic": "musa",
+      "prompt": { "en": "Out of which land did Musa lead the believers? Tap it on the map.", "de": "Aus welchem Land führte Musa die Gläubigen hinaus? Tippe es auf der Karte an.", "bs": "Iz koje je zemlje Musa izveo vjernike? Dodirni je na mapi." },
+      "places": ["egypt", "makkah", "mesopotamia", "madinah"],
+      "correctPlace": "egypt",
+      "explanation": {
+        "en": "Musa grew up in Egypt and later led the Children of Israel out of it, across the sea.",
+        "de": "Musa wuchs in Ägypten auf und führte die Kinder Israels später daraus hinaus, durch das Meer.",
+        "bs": "Musa je odrastao u Egiptu i kasnije iz njega izveo sinove Israilove, preko mora."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "28:8–9; 26:52" }]
+    },
+    {
+      "id": "musa-timeline",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "musa",
+      "topic": "musa",
+      "prompt": { "en": "Timeline: put Musa's journey in order.", "de": "Zeitleiste: Bringe Musas Reise in die richtige Reihenfolge.", "bs": "Vremenska linija: poredaj Musaovo putovanje." },
+      "items": [
+        { "id": "river", "text": { "en": "The chest on the river", "de": "Die Kiste auf dem Fluss", "bs": "Sanduk na rijeci" } },
+        { "id": "tur", "text": { "en": "The call in the valley of Tuwa", "de": "Der Ruf im Tal Tuwa", "bs": "Poziv u dolini Tuva" } },
+        { "id": "firawn", "text": { "en": "Calling Fir'awn to believe", "de": "Pharao zum Glauben aufrufen", "bs": "Pozivanje faraona u vjeru" } },
+        { "id": "sea", "text": { "en": "The path through the sea", "de": "Der Weg durch das Meer", "bs": "Put kroz more" } },
+        { "id": "springs", "text": { "en": "Twelve springs", "de": "Zwölf Quellen", "bs": "Dvanaest izvora" } }
+      ],
+      "explanation": {
+        "en": "River, Tuwa, Fir'awn, the sea – and the springs in the desert.",
+        "de": "Fluss, Tuwa, Pharao, das Meer – und die Quellen in der Wüste.",
+        "bs": "Rijeka, Tuva, faraon, more – i izvori u pustinji."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "28:7–13; 20:9–36; 26:10–66; 2:60" }]
+    },
+    {
+      "id": "musa-find",
+      "type": "find",
+      "storyId": "musa",
+      "topic": "musa",
+      "prompt": { "en": "Find the three things that belong to the story of Musa.", "de": "Finde die drei Dinge, die zur Geschichte Musas gehören.", "bs": "Pronađi tri stvari koje pripadaju kazivanju o Musau." },
+      "items": [
+        { "id": "basket", "element": "basket", "label": { "en": "Chest", "de": "Kiste", "bs": "Sanduk" } },
+        { "id": "parted", "element": "partedSea", "label": { "en": "Parted sea", "de": "Geteiltes Meer", "bs": "Razdvojeno more" } },
+        { "id": "fire", "element": "fire", "label": { "en": "Fire in the valley", "de": "Feuer im Tal", "bs": "Vatra u dolini" } },
+        { "id": "whale", "element": "whale", "label": { "en": "Whale", "de": "Wal", "bs": "Kit" } },
+        { "id": "ark", "element": "ark", "label": { "en": "Ark", "de": "Arche", "bs": "Lađa" } }
+      ],
+      "correctIds": ["basket", "parted", "fire"],
+      "explanation": {
+        "en": "The chest on the river, the fire he saw in the valley of Tuwa and the path through the sea.",
+        "de": "Die Kiste auf dem Fluss, das Feuer im Tal Tuwa und der Weg durch das Meer.",
+        "bs": "Sanduk na rijeci, vatra u dolini Tuva i put kroz more."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:10; 20:39; 26:63" }]
+    },
+    {
+      "id": "musa-memory",
+      "type": "memory",
+      "storyId": "musa",
+      "topic": "musa",
+      "prompt": { "en": "Memory: match each place with what happened there.", "de": "Memory: Ordne jedem Ort zu, was dort geschah.", "bs": "Memorija: spoji svako mjesto s onim što se tamo desilo." },
+      "pairs": [
+        { "id": "p1", "left": { "en": "The river", "de": "Der Fluss", "bs": "Rijeka" }, "right": { "en": "A chest with a baby", "de": "Eine Kiste mit einem Baby", "bs": "Sanduk s djetetom" } },
+        { "id": "p2", "left": { "en": "Valley of Tuwa", "de": "Tal Tuwa", "bs": "Dolina Tuva" }, "right": { "en": "Take off your sandals", "de": "Zieh die Sandalen aus", "bs": "Izuj obuću" } },
+        { "id": "p3", "left": { "en": "The sea", "de": "Das Meer", "bs": "More" }, "right": { "en": "A dry path", "de": "Ein trockener Weg", "bs": "Suh put" } },
+        { "id": "p4", "left": { "en": "The rock", "de": "Der Felsen", "bs": "Kamen" }, "right": { "en": "Twelve springs", "de": "Zwölf Quellen", "bs": "Dvanaest izvora" } }
+      ],
+      "explanation": {
+        "en": "At every step of the journey Allah cared for Musa and his people.",
+        "de": "Bei jedem Schritt der Reise sorgte Allah für Musa und sein Volk.",
+        "bs": "Na svakom koraku putovanja Allah se brinuo o Musau i njegovom narodu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "20:39; 20:12; 26:63; 2:60" }]
     },
     {
       "id": "musa-lesson",
@@ -207,8 +384,9 @@
     }
   ],
   "sources": [
-    { "sourceName": "Quran", "sourceReference": "28:3–13" },
+    { "sourceName": "Quran", "sourceReference": "28:3–30" },
     { "sourceName": "Quran", "sourceReference": "20:9–79" },
-    { "sourceName": "Quran", "sourceReference": "26:10–68" }
+    { "sourceName": "Quran", "sourceReference": "26:10–68" },
+    { "sourceName": "Quran", "sourceReference": "2:60; 7:142–145; 7:160" }
   ]
 }
