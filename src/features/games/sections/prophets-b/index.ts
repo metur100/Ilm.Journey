@@ -1,3 +1,4 @@
+import { registerAyyubGardenGame } from './ayyub-garden/register';
 import { registerYaqubRoadGame } from './yaqub-shirt-road/register';
 import { registerYusufStorehouseGame } from './yusuf-storehouse/register';
 import { registerYusufStoryPathGame } from './yusuf-story-path/register';
@@ -11,4 +12,5 @@ export function registerProphetsBGames(): void {
   registerYaqubRoadGame();
   registerYusufStorehouseGame();
   registerYusufStoryPathGame();
+  registerAyyubGardenGame();
 }

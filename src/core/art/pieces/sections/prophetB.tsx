@@ -355,6 +355,25 @@ export const prophetB = {
     </>
   )),
 
+  /** An empty garden bed (the garden game: it waits for a seed). */
+  'ayyub-soil': art(70, 80, (c) => (
+    <>
+      <Ellipse cx={35} cy={70} rx={28} ry={9} fill={dim(c, '#9C7A55')} />
+      <Ellipse cx={35} cy={67} rx={22} ry={5} fill={dim(c, '#B48E66')} />
+      <Path d="M20 70q4-3 8 0M40 71q4-3 8 0" stroke={dim(c, '#7E5F42')} strokeWidth={1.4} fill="none" opacity={0.7} />
+    </>
+  )),
+
+  /** A garden bed with a seed in it (the garden game: it waits for water). */
+  'ayyub-soil-seed': art(70, 80, (c) => (
+    <>
+      <Ellipse cx={35} cy={70} rx={28} ry={9} fill={dim(c, '#8E6A48')} />
+      <Ellipse cx={35} cy={67} rx={22} ry={5} fill={dim(c, '#A27C58')} />
+      <Ellipse cx={35} cy={63} rx={4.5} ry={3.2} fill={dim(c, C.woodLight)} />
+      <Path d="M35 60Q37 54 41 52" stroke={c.green(C.leafLight)} strokeWidth={2} strokeLinecap="round" fill="none" />
+    </>
+  )),
+
   /** A thirsty plant in the garden game (it waits for care – never dead). */
   'ayyub-plant-dry': art(70, 80, (c) => (
     <>
