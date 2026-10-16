@@ -140,21 +140,20 @@ export function playOrder(config: QiblaConfig, random: () => number = Math.rando
  * average (≥ 2.5 → 3, ≥ 1.5 → 2, else 1); a "mistake" is a city more than 25° off; a city more than 45° off means the
  * learner missed the "everywhere you are, face the Kaaba" idea → that fact comes back in review.
  */
-export function qiblaResult(errors: readonly number[], bonus?: { points: number; max: number }): GameResultInput {
+export function qiblaResult(errors: readonly number[], missedFact: string = QIBLA_FACTS.everywhere.id): GameResultInput {
   const points = errors.map(roundPoints);
   const score = points.reduce((a, b) => a + b, 0);
   const maxScore = errors.length * 3;
   const avg = errors.length ? score / errors.length : 3;
   const stars = avg >= 2.5 ? 3 : avg >= 1.5 ? 2 : 1;
   return {
-    score: score + (bonus?.points ?? 0),
-    maxScore: maxScore + (bonus?.max ?? 0),
+    score,
+    maxScore,
     stars,
     mistakes: errors.filter((e) => e > 25).length,
-    factsMissed: errors.some((e) => e > 45) ? [QIBLA_FACTS.everywhere.id] : [],
+    factsMissed: errors.some((e) => e > 45) ? [missedFact] : [],
   };
 }
 
-export const PAR_MS: Record<QiblaMode, number> = { europe: 40_000, world: 60_000, free: 60_000 };
 
 export const QIBLA_ART: readonly string[] = ['scene.map-world-simple', 'object.compass', 'object.compass-face', 'object.kaaba-icon', 'object.qibla-arrow', 'place.kaaba', 'ui.sparkle'];
