@@ -2,6 +2,7 @@
 import { hasArt } from '@/core/art';
 import { getGame, validateGame } from '@/core/games';
 import { namespaceProblems, playToEnd, renderGame } from '@/core/games/kit/testing';
+import { findForbiddenPhrases } from '@/core/i18n/phrasing';
 
 /**
  * Standard checks of a salah game: valid definition, en / de / bs complete, every art name exists, every level plays
@@ -20,7 +21,8 @@ export function describeSalahGame(id: string, art: readonly string[], mistakeLev
         for (const fact of level.facts) {
           expect(fact.sources.length).toBeGreaterThan(0);
           for (const lang of ['en', 'de', 'bs'] as const) expect(fact.text[lang]?.trim()).toBeTruthy();
-          expect(`${fact.text.en} ${fact.text.de} ${fact.text.bs}`).not.toMatch(/Muslims believe|Muslime glauben|Muslimani vjeruju/);
+          // State truths directly (GAMES-V3 §2) – the same patterns as the repository-wide phrasing scan.
+          for (const lang of ['en', 'de', 'bs'] as const) expect({ fact: fact.id, lang, hits: findForbiddenPhrases(fact.text[lang] ?? '') }).toEqual({ fact: fact.id, lang, hits: [] });
         }
       }
     });
