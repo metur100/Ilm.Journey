@@ -1,6 +1,7 @@
 import type { GameDef } from '@/core/games';
 
 import { fastKeeperGame } from './fast-keeper/game';
+import { iftarTableGame } from './iftar-table/game';
 import { newCrescentGame } from './new-crescent/game';
 import { oddNightsGame } from './odd-nights/game';
 import { ramadanJourneyGame } from './ramadan-journey/game';
@@ -12,6 +13,6 @@ import { thirtyLanternsGame } from './thirty-lanterns/game';
  * (`../../ramadan-journey/register.ts`, already wired in `src/features/games/index.ts`), so it is listed here but
  * registered there.
  */
-export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame, suhoorIftarSkyGame, fastKeeperGame, newCrescentGame, thirtyLanternsGame, oddNightsGame];
+export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame, suhoorIftarSkyGame, fastKeeperGame, newCrescentGame, thirtyLanternsGame, oddNightsGame, iftarTableGame];
 
 export const REGISTERED_ELSEWHERE = new Set([ramadanJourneyGame.id]);

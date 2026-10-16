@@ -23,6 +23,7 @@ const ORIGIN: Record<keyof typeof CONTENT, L> = {
   suhoor: section('ramadan-suhoor-iftar', 0),
   iftar: section('ramadan-suhoor-iftar', 1),
   fastTime: questions.find((q) => q.id === 'ramadan-fast-time')!.explanation,
+  iftarDates: questions.find((q) => q.id === 'ramadan-iftar-dates')!.explanation,
   taraweeh: section('ramadan-nights', 0),
   quranMonth: section('ramadan-nights', 1),
   qadr: section('ramadan-nights', 2),

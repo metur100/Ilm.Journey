@@ -67,6 +67,12 @@ export const CONTENT = {
     'Das Fasten dauert von der Morgendämmerung (Fadschr) bis Sonnenuntergang (Maghrib). Nachts darf man essen und trinken.',
     'Post traje od zore (sabaha) do zalaska sunca (akšama). Noću je dozvoljeno jesti i piti.',
   ),
+  /** quests/ramadan.json · question ramadan-iftar-dates · explanation */
+  iftarDates: T(
+    'He ﷺ broke his fast with fresh dates, or dry dates, or a few sips of water.',
+    'Er ﷺ brach sein Fasten mit frischen oder getrockneten Datteln oder ein paar Schlucken Wasser.',
+    'Iftario je svježim ili suhim hurmama ili s nekoliko gutljaja vode.',
+  ),
   /** quests/ramadan.json · ramadan-nights · section 0 */
   taraweeh: T(
     'Taraweeh is the special night prayer in Ramadan, prayed after Isha. The Prophet ﷺ said that whoever stands in prayer in Ramadan with faith and hoping for reward, his past sins will be forgiven.',
@@ -119,6 +125,7 @@ export const FACTS = {
   staySafe: { id: 'stay-safe', text: CONTENT.staySafe, sources: [Q('2:185')], art: 'food.water', reviewKey: 'quest:ramadan-dizzy' },
   suhoor: { id: 'suhoor-blessing', text: CONTENT.suhoor, sources: [BUKHARI('1923'), MUSLIM('1095')], art: 'food.dates', reviewKey: 'quest:ramadan-suhoor-blessing' },
   iftar: { id: 'iftar-sunset', text: CONTENT.iftar, sources: [BUKHARI('1957'), ABU_DAWUD('2356')], art: 'ramadan.fresh-dates', reviewKey: 'quest:ramadan-iftar-dates' },
+  iftarDates: { id: 'dates-or-water', text: CONTENT.iftarDates, sources: [ABU_DAWUD('2356')], art: 'food.dates', reviewKey: 'quest:ramadan-iftar-dates' },
   fastTime: { id: 'dawn-to-sunset', text: CONTENT.fastTime, sources: [Q('2:187')], art: 'ramadan.sky-arc', reviewKey: 'quest:ramadan-fast-time' },
   taraweeh: { id: 'taraweeh', text: CONTENT.taraweeh, sources: [BUKHARI('37')], art: 'ramadan.night-mosque' },
   quranMonth: { id: 'month-of-quran', text: CONTENT.quranMonth, sources: [BUKHARI('6')], art: 'object.quran-stand' },
