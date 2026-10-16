@@ -46,6 +46,9 @@ export interface KitColors {
   /** Text on the board. */
   text: string;
   textMuted: string;
+  /** Distinct colours for matched pairs (ConnectPairs lines, dots, borders) and their soft tints. */
+  pairColors: string[];
+  pairSoft: string[];
   /** Card backs (memory) – topic gradient. */
   cardBack: [string, string];
   shadow: string;
@@ -63,6 +66,11 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
   if (hit) return hit;
   const accent = topicThemes[topic].accent;
   const tint = highContrast ? 0.5 : 1;
+  // The topic accent first, then gold, then the other topic accents with clearly different hues.
+  const others = (['salah', 'arabic', 'prophets', 'quran', 'seerah', 'akhlaq'] as const).filter((t) => t !== topic).map((t) => topicThemes[t].accent);
+  const pairBase = [accent, c.gold, ...others];
+  const pairColors = dark ? pairBase.map((p) => mix(p, '#FFFFFF', 0.3)) : pairBase;
+  const pairSoft = pairColors.map((p) => (dark ? mix(c.surfaceAlt, p, 0.28) : mix(c.surface, p, 0.14)));
   const colors: KitColors = dark
     ? {
         board: [mix(c.surface, accent, 0.2 * tint), mix(c.background, accent, 0.1 * tint)],
@@ -94,6 +102,8 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
         waterSoft: mix(c.info, '#FFFFFF', 0.35),
         text: c.text,
         textMuted: c.textMuted,
+        pairColors,
+        pairSoft,
         cardBack: [mix(accent, '#000000', 0.15), mix(accent, '#000000', 0.4)],
         shadow: c.shadow,
       }
@@ -127,6 +137,8 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
         waterSoft: mix(c.info, '#FFFFFF', 0.55),
         text: c.text,
         textMuted: c.textMuted,
+        pairColors,
+        pairSoft,
         cardBack: [mix(accent, '#FFFFFF', 0.08), mix(accent, '#000000', 0.22)],
         shadow: c.shadow,
       };

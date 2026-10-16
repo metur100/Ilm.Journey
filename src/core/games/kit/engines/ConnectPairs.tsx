@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
 import { spacing } from '../../../theme';
 import { ChallengeClock, HintPointer, InlineCaption } from '../board';
@@ -52,7 +52,10 @@ export function ConnectPairs(props: ConnectPairsProps) {
   const onLayout = size.onLayout;
   const testID = props.testID ?? 'connect-pairs';
   const label = (f: KitFace) => faceLabel(f, env.text);
-  const lineColors = [k.accent, k.gold, k.right];
+  // Every matched pair keeps its own colour (line, end dots, card borders), so crossing lines stay readable.
+  const pairIndex = (id: string) => joined.indexOf(id);
+  const pairColor = (id: string) => k.pairColors[pairIndex(id) % k.pairColors.length];
+  const pairSoft = (id: string) => k.pairSoft[pairIndex(id) % k.pairSoft.length];
 
   const n = pairs.length;
   const colW = size.w > 0 ? Math.floor((size.w - MIDDLE) * (props.leftShare ?? 0.5)) : 120;
@@ -191,13 +194,17 @@ export function ConnectPairs(props: ConnectPairsProps) {
           {size.w > 0 ? (
             <>
               <Svg width={size.w} height={size.h} style={StyleSheet.absoluteFill} pointerEvents="none">
-                {joined.map((id, i) => {
+                {joined.map((id) => {
                   const a = anchorL(left.findIndex((p) => p.id === id));
                   const b = anchorR(right.findIndex((p) => p.id === id));
                   const mx = (a.x + b.x) / 2;
-                  const color = lineColors[i % lineColors.length];
+                  const d = `M${a.x} ${a.y}C${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`;
                   return (
-                    <Path key={id} d={`M${a.x} ${a.y}C${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`} stroke={color} strokeWidth={5} strokeLinecap="round" fill="none" />
+                    <G key={id}>
+                      {/* A halo in the board colour keeps crossing lines apart. */}
+                      <Path d={d} stroke={k.board[1]} strokeWidth={10} strokeLinecap="round" fill="none" />
+                      <Path d={d} stroke={pairColor(id)} strokeWidth={5} strokeLinecap="round" fill="none" />
+                    </G>
                   );
                 })}
                 <AnimatedPath animatedProps={liveLine} stroke={k.gold} strokeWidth={5} strokeDasharray="1 9" strokeLinecap="round" fill="none" />
@@ -219,7 +226,8 @@ export function ConnectPairs(props: ConnectPairsProps) {
                   testID={`left-${p.id}`}
                   label={joined.includes(p.id) ? env.kt('connect.done', { label: label(p.left) }) : env.kt('connect.item', { label: label(p.left) })}
                   onPress={() => tap('L', p.id)}
-                  dotColor={k.accent}
+                  dotColor={joined.includes(p.id) ? pairColor(p.id) : k.accent}
+                  doneSoft={joined.includes(p.id) ? pairSoft(p.id) : undefined}
                 />
               ))}
               {right.map((p, i) => (
@@ -238,7 +246,8 @@ export function ConnectPairs(props: ConnectPairsProps) {
                   testID={`right-${p.id}`}
                   label={joined.includes(p.id) ? env.kt('connect.done', { label: label(p.right) }) : env.kt('connect.item', { label: label(p.right) })}
                   onPress={() => tap('R', p.id)}
-                  dotColor={k.accent}
+                  dotColor={joined.includes(p.id) ? pairColor(p.id) : k.accent}
+                  doneSoft={joined.includes(p.id) ? pairSoft(p.id) : undefined}
                 />
               ))}
               {core.hintsOn && core.idle && !selected && firstOpen >= 0 && hintTo >= 0 ? <HintPointer from={anchorL(firstOpen)} to={anchorR(hintTo)} /> : null}
@@ -266,6 +275,7 @@ function Item({
   label,
   onPress,
   dotColor,
+  doneSoft,
 }: {
   face: KitFace;
   x: number;
@@ -281,6 +291,7 @@ function Item({
   label: string;
   onPress: () => void;
   dotColor: string;
+  doneSoft?: string;
 }) {
   const { style, shake } = useShake(reduced);
   useEffect(() => {
@@ -290,7 +301,12 @@ function Item({
   return (
     <Animated.View style={[{ position: 'absolute', left: x, top: y, width: w, height: h }, style]}>
       <Pressable onPress={onPress} accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ selected, disabled: done }} testID={testID} style={{ flex: 1 }}>
-        <Tile state={done ? 'right' : selected ? 'selected' : 'idle'} height={h} padding={4} faceStyle={{ paddingHorizontal: spacing.sm }}>
+        <Tile
+          state={done ? 'right' : selected ? 'selected' : 'idle'}
+          height={h}
+          padding={4}
+          faceStyle={[{ paddingHorizontal: spacing.sm }, done ? { borderColor: dotColor, borderWidth: 2.5, backgroundColor: doneSoft } : null]}
+        >
           <FaceView face={face} row={hasArt && w > 130} artSize={Math.min(64, h - 16)} arabicSize={Math.min(28, h * 0.42)} variant="small" numberOfLines={2} />
         </Tile>
         <View style={[styles.dot, side === 'L' ? { right: -7 } : { left: -7 }, { top: h / 2 - 9, backgroundColor: done ? dotColor : 'transparent', borderColor: dotColor }]} pointerEvents="none" />
