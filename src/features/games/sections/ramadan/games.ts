@@ -1,12 +1,13 @@
 import type { GameDef } from '@/core/games';
 
 import { ramadanJourneyGame } from './ramadan-journey/game';
+import { suhoorIftarSkyGame } from './suhoor-iftar-sky/game';
 
 /**
  * All games of the Ramadan section in shelf order. Ramadan Journey keeps its v2 entry point
  * (`../../ramadan-journey/register.ts`, already wired in `src/features/games/index.ts`), so it is listed here but
  * registered there.
  */
-export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame];
+export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame, suhoorIftarSkyGame];
 
 export const REGISTERED_ELSEWHERE = new Set([ramadanJourneyGame.id]);
