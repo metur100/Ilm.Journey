@@ -24,6 +24,7 @@ export function useRecitation() {
   const player = useRef<AudioPlayer | null>(null);
   const queue = useRef<number[]>([]);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const nextRef = useRef<() => void>(() => undefined);
 
   const release = useCallback(() => {
     if (timer.current) clearTimeout(timer.current);
@@ -72,7 +73,7 @@ export function useRecitation() {
           return;
         }
         if (status.isLoaded) setState('playing');
-        if (status.didJustFinish) playNext();
+        if (status.didJustFinish) nextRef.current();
       });
       void configureAudioSession()
         .catch(() => undefined)
@@ -83,6 +84,10 @@ export function useRecitation() {
       stop('unavailable');
     }
   }, [release, stop]);
+
+  useEffect(() => {
+    nextRef.current = playNext;
+  }, [playNext]);
 
   /** Plays the ayahs (global numbers) in a row, or stops when something is playing. */
   const toggle = useCallback(

@@ -1,4 +1,5 @@
 import { registerAyahBuilderGame } from './ayah-builder/register';
+import { registerListenAndOrderGame } from './listen-and-order/register';
 import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSurahMessagesGame } from './surah-messages/register';
 
@@ -10,4 +11,5 @@ export function registerQuranGames(): void {
   registerAyahBuilderGame();
   registerSurahGardenGame();
   registerSurahMessagesGame();
+  registerListenAndOrderGame();
 }
