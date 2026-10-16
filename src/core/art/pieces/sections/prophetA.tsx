@@ -1006,6 +1006,98 @@ const ismail = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Ishaq – the honoured guests of Ibrahim (51:24–27, 11:69) and the glad tidings of Ishaq and Yaqub (11:71)
+
+/** A wide open tent of welcome. */
+function WelcomeTent({ c, x, y, s = 1 }: { c: Ctx; x: number; y: number; s?: number }) {
+  return (
+    <G transform={`translate(${x} ${y}) scale(${s})`}>
+      <Path d="M-100 0L-80 -70 0 -96 80 -70 100 0Z" fill={dim(c, '#E8D3B0')} />
+      <Path d="M0 -96L80 -70 100 0H30Z" fill={dim(c, '#D6BC92')} />
+      <Path d="M-100 0L-80 -70 -40 -82 -54 0Z" fill={dim(c, '#C9A97C')} />
+      {[-60, -20, 20, 60].map((sx) => (
+        <Path key={sx} d={`M${sx} -${86 - Math.abs(sx) * 0.25}L${sx * 1.2} 0`} stroke={dim(c, '#B89466')} strokeWidth={1.4} opacity={0.6} />
+      ))}
+      <Path d="M-34 0V-56Q0 -72 34 -56V0Z" fill={dim(c, '#6E4A2E', 0.3)} />
+      <Path d="M-34 -56Q0 -72 34 -56L40 -62Q0 -80 -40 -62Z" fill={C.terracotta} />
+      <Path d="M-100 0L-80 -70M100 0L80 -70" stroke={C.woodDark} strokeWidth={3} />
+      <Path d="M0 -96V-108" stroke={C.woodDark} strokeWidth={3} strokeLinecap="round" />
+    </G>
+  );
+}
+
+function Platter({ c }: { c: Ctx }) {
+  return (
+    <G>
+      <Shadow c={c} cx={60} cy={58} rx={52} />
+      <Ellipse cx={60} cy={50} rx={54} ry={12} fill={C.goldDeep} />
+      <Ellipse cx={60} cy={47} rx={50} ry={10} fill={C.gold} />
+      <Path d="M24 46C24 30 40 22 60 22S96 30 96 46Z" fill={C.clay} />
+      <Path d="M32 44C34 34 44 28 60 28" stroke={C.terracotta} strokeWidth={3} fill="none" strokeLinecap="round" opacity={0.7} />
+      <Path d="M60 22C70 24 80 30 84 38" stroke={C.sandLight} strokeWidth={2} fill="none" strokeLinecap="round" opacity={0.6} />
+      {[18, 30, 90, 102].map((x, i) => (
+        <Circle key={x} cx={x} cy={46 + (i % 2)} r={4} fill={c.green(C.leafLight)} />
+      ))}
+      <Path d="M48 16Q44 10 48 4M60 14Q56 8 60 2M72 16Q68 10 72 4" stroke={C.white} strokeWidth={2} fill="none" strokeLinecap="round" opacity={c.dark ? 0.5 : 0.8} />
+    </G>
+  );
+}
+
+const ishaq = {
+  /** Ibrahim's tent of welcome for his honoured guests (51:24). */
+  'ishaq-tent': art(220, 130, (c) => (
+    <>
+      <Shadow c={c} cx={110} cy={122} rx={104} />
+      <WelcomeTent c={c} x={110} y={122} />
+      <Glow c={c} k="door" cx={110} cy={100} r={30} color={C.goldPale} opacity={c.dark ? 0.5 : 0.25} />
+    </>
+  )),
+
+  /** The roasted calf brought quickly for the guests, served on a platter (11:69, 51:26–27). */
+  'ishaq-platter': art(120, 66, (c) => <Platter c={c} />),
+
+  /** A woven rug for the guests. */
+  'ishaq-rug': art(200, 40, (c) => (
+    <>
+      <Path d="M10 6H190L200 34H0Z" fill={dim(c, C.berry, 0.2)} />
+      <Path d="M22 11H178L186 29H14Z" fill="none" stroke={C.goldLight} strokeWidth={2} />
+      {[50, 100, 150].map((x) => (
+        <Path key={x} d={`M${x} 13L${x + 8} 20 ${x} 27 ${x - 8} 20Z`} fill={C.goldLight} />
+      ))}
+      {Array.from({ length: 11 }, (_, i) => (
+        <Path key={i} d={`M${2 + i * 19.6} 34V39`} stroke={C.goldDeep} strokeWidth={2} />
+      ))}
+    </>
+  )),
+
+  /** A cushion. */
+  'ishaq-cushion': art(70, 40, (c) => (
+    <>
+      <Shadow c={c} cx={35} cy={36} rx={30} />
+      <Path d="M6 30C2 18 8 8 20 8H50C62 8 68 18 64 30C60 36 10 36 6 30Z" fill={dim(c, C.teal, 0.2)} />
+      <Path d="M14 16H56" stroke={C.goldLight} strokeWidth={2} opacity={0.8} />
+      <Circle cx={35} cy={22} r={3} fill={C.goldLight} />
+    </>
+  )),
+
+  /** In front of the tent, ready to welcome guests (game scene with its own sky). */
+  'ishaq-tent-site': art(400, 300, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#2B2F6E' : '#A9D6EA'], [1, c.dark ? '#6A5A90' : '#FBEBD0']]} />
+      </Defs>
+      <Rect x={0} y={0} width={400} height={300} fill={c.url('sky')} />
+      <Path d="M0 170C80 150 160 152 240 162S360 148 400 156V300H0Z" fill={c.green(dim(c, '#C9C08A'))} />
+      <WelcomeTent c={c} x={200} y={196} s={1.15} />
+      <Path d="M0 196C100 186 300 186 400 196V300H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 270C120 262 280 262 400 270V300H0Z" fill={dim(c, C.sandDeep)} />
+      <LeafyTree c={c} x={52} y={198} s={0.6} leaf={dim(c, C.olive)} leafDark={dim(c, C.oliveDark)} leafLight={dim(c, C.leafPale)} />
+      <LeafyTree c={c} x={356} y={198} s={0.5} leaf={dim(c, C.olive)} leafDark={dim(c, C.oliveDark)} leafLight={dim(c, C.leafPale)} />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
@@ -1017,6 +1109,7 @@ export const prophetA = {
   ...ibrahim,
   ...lut,
   ...ismail,
+  ...ishaq,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).

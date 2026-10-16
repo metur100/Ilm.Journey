@@ -1,0 +1,264 @@
+{
+  "id": "ishaq",
+  "order": 9,
+  "prophetName": { "en": "Ishaq", "de": "Ishaq (Isaak)", "bs": "Ishak" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Glad Tidings", "de": "Die frohe Botschaft", "bs": "Radosna vijest" },
+  "description": {
+    "en": "Honoured guests, a meal brought in haste – and the joyful news of a son and a grandson.",
+    "de": "Geehrte Gäste, ein schnell gebrachtes Mahl – und die freudige Nachricht von einem Sohn und einem Enkel.",
+    "bs": "Ugledni gosti, brzo iznesena gozba – i radosna vijest o sinu i unuku."
+  },
+  "place": { "en": "Canaan – the home of Ibrahim", "de": "Kanaan – das Zuhause Ibrahims", "bs": "Kanaan – Ibrahimov dom" },
+  "symbol": "stars",
+  "symbolArt": "prophet.ishaq-tent",
+  "mapPlaces": ["canaan"],
+  "cover": { "sky": "dusk", "elements": ["stars", "hills"] },
+  "coverStage": {
+    "sky": "dusk",
+    "layers": [
+      { "art": "story.moon-crescent", "x": 320, "y": 50, "w": 44, "anchor": "center", "anim": "glow" },
+      { "art": "story.hills" },
+      { "art": "prophet.ishaq-tent", "x": 200, "y": 214, "w": 190, "enter": "rise", "at": 300 }
+    ],
+    "effects": ["stars", { "type": "lanternGlow", "x": 200, "y": 190, "intensity": 1, "at": 900 }, { "type": "fireflies", "intensity": 1, "at": 1400 }]
+  },
+  "intro": {
+    "en": "Ishaq (peace be upon him) was the son of Ibrahim and his wife Sarah, and the father of the prophet Yaqub. His story begins with guests at Ibrahim's door.",
+    "de": "Ishaq (Friede sei mit ihm) war der Sohn Ibrahims und seiner Frau Sara und der Vater des Propheten Yaqub. Seine Geschichte beginnt mit Gästen an Ibrahims Tür.",
+    "bs": "Ishak, a.s., bio je sin Ibrahima i njegove žene Sare i otac poslanika Jakuba. Njegovo kazivanje počinje gostima na Ibrahimovim vratima."
+  },
+  "scenes": [
+    {
+      "id": "ishaq-s1",
+      "title": { "en": "Honoured guests", "de": "Geehrte Gäste", "bs": "Ugledni gosti" },
+      "text": {
+        "en": "Guests came to Ibrahim and said: \"Salam – peace!\" He answered: \"Salam – peace!\" Then he went quietly to his family and quickly brought a roasted calf. He set it near them and said: \"Will you not eat?\"",
+        "de": "Gäste kamen zu Ibrahim und sagten: „Salam – Friede!“ Er antwortete: „Salam – Friede!“ Dann ging er still zu seiner Familie und brachte schnell ein gebratenes Kalb. Er stellte es ihnen hin und sagte: „Wollt ihr nicht essen?“",
+        "bs": "Ibrahimu su došli gosti i rekli: „Selam – mir!“ On je odgovorio: „Selam – mir!“ Zatim je tiho otišao svojoj porodici i brzo donio pečeno tele. Primakao ga je njima i rekao: „Zar nećete jesti?“"
+      },
+      "scene": { "sky": "day", "elements": ["hills", "clouds"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.hills" },
+          { "art": "prophet.ishaq-tent", "x": 200, "y": 206, "w": 180 },
+          { "art": "prophet.ishaq-rug", "x": 200, "y": 238, "w": 170, "enter": "fade", "at": 500 },
+          { "art": "prophet.ishaq-platter", "x": 200, "y": 230, "w": 80, "enter": "rise", "at": 1400 }
+        ],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "birds", "intensity": 1 }, { "type": "sparkle", "x": 200, "y": 200, "w": 90, "h": 30, "intensity": 1, "at": 1800 }]
+      },
+      "interactionId": "ishaq-salam",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:69; 51:24–27" }]
+    },
+    {
+      "id": "ishaq-s2",
+      "title": { "en": "Glad tidings", "de": "Frohe Botschaft", "bs": "Radosna vijest" },
+      "text": {
+        "en": "The guests did not eat, and Ibrahim felt uneasy. They said: \"Do not be afraid – we are messengers sent to the people of Lut.\" Ibrahim's wife was standing there and laughed. Then they gave her the glad tidings of Ishaq – and after Ishaq, of Yaqub.",
+        "de": "Die Gäste aßen nicht, und Ibrahim wurde unruhig. Sie sagten: „Fürchte dich nicht – wir sind Gesandte zum Volk Luts.“ Ibrahims Frau stand dabei und lachte. Da verkündeten sie ihr die frohe Botschaft von Ishaq – und nach Ishaq von Yaqub.",
+        "bs": "Gosti nisu jeli i Ibrahim se uznemirio. Rekli su: „Ne boj se – mi smo poslani Lutovom narodu.“ Ibrahimova žena je stajala tu i nasmijala se. Tada su joj donijeli radosnu vijest o Ishaku – a poslije Ishaka o Jakubu."
+      },
+      "scene": { "sky": "sunset", "elements": ["hills", "sun"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.sun", "x": 320, "y": 120, "w": 70, "anchor": "center" },
+          { "art": "story.hills" },
+          { "art": "prophet.ishaq-tent", "x": 180, "y": 206, "w": 180 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 320, "y": 120, "intensity": 2 }, { "type": "sparkle", "x": 200, "y": 120, "w": 240, "h": 100, "intensity": 2, "at": 1400 }]
+      },
+      "interactionId": "ishaq-after",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:70–71; 51:28" }]
+    },
+    {
+      "id": "ishaq-s3",
+      "title": { "en": "Amazing news", "de": "Eine erstaunliche Nachricht", "bs": "Čudesna vijest" },
+      "text": {
+        "en": "Ibrahim's wife Sarah said: \"How can I have a child when I am an old woman and my husband is an old man? That is amazing!\" They said: \"Are you amazed at Allah's command? The mercy of Allah and His blessings are upon you, people of the house.\"",
+        "de": "Ibrahims Frau Sara sagte: „Wie soll ich ein Kind bekommen, wo ich eine alte Frau bin und mein Mann ein alter Mann? Das ist erstaunlich!“ Sie sagten: „Wunderst du dich über Allahs Befehl? Die Barmherzigkeit Allahs und Seine Segnungen sind über euch, ihr Leute des Hauses.“",
+        "bs": "Ibrahimova žena Sara rekla je: „Kako ću roditi kad sam starica, a moj muž je starac? To je čudno!“ Rekli su: „Zar se čudiš Allahovoj odredbi? Allahova milost i Njegovi blagoslovi neka su na vama, ukućani.“"
+      },
+      "scene": { "sky": "night", "elements": ["stars", "hills"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.moon-crescent", "x": 80, "y": 54, "w": 44, "anchor": "center", "anim": "glow" },
+          { "art": "story.hills" },
+          { "art": "prophet.ishaq-tent", "x": 220, "y": 206, "w": 180 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "lanternGlow", "x": 220, "y": 186, "intensity": 2 }, { "type": "sparkle", "x": 220, "y": 90, "w": 220, "h": 80, "intensity": 2, "at": 1200 }]
+      },
+      "interactionId": "ishaq-order",
+      "sources": [
+        { "sourceName": "Quran", "sourceReference": "11:72–73" },
+        { "sourceName": "Sahih al-Bukhari", "sourceReference": "3358" }
+      ]
+    },
+    {
+      "id": "ishaq-s4",
+      "title": { "en": "A prophet among the righteous", "de": "Ein Prophet unter den Rechtschaffenen", "bs": "Poslanik od dobrih" },
+      "text": {
+        "en": "Allah gave Ibrahim the glad tidings of Ishaq, a prophet from among the righteous, and blessed him and Ishaq. Allah made Ishaq and Yaqub leaders who guided by His command; He inspired them to do good, to pray and to give zakah.",
+        "de": "Allah verkündete Ibrahim Ishaq, einen Propheten unter den Rechtschaffenen, und segnete ihn und Ishaq. Allah machte Ishaq und Yaqub zu Vorbildern, die nach Seinem Befehl leiteten; Er gab ihnen ein, Gutes zu tun, zu beten und die Zakat zu geben.",
+        "bs": "Allah je Ibrahimu obradovao Ishakom, poslanikom od dobrih, i blagoslovio njega i Ishaka. Allah je Ishaka i Jakuba učinio predvodnicima koji su upućivali po Njegovoj naredbi; nadahnuo ih je da čine dobro, klanjaju namaz i daju zekat."
+      },
+      "scene": { "sky": "dawn", "elements": ["sun", "hills"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 200, "y": 150, "w": 90, "anchor": "center", "enter": "rise", "at": 300, "duration": 2200 },
+          { "art": "story.olive-grove" }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 150, "intensity": 3, "at": 1200 }, { "type": "birds", "intensity": 1, "at": 2000 }, { "type": "leaves", "intensity": 1 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:112–113; 21:72–73" }]
+    }
+  ],
+  "miniGameId": "ishaq-memory",
+  "quizIds": ["ishaq-map", "ishaq-prophet", "ishaq-lesson"],
+  "lessons": [
+    {
+      "id": "ishaq-l1",
+      "value": "hospitality",
+      "title": { "en": "Honouring guests", "de": "Gäste ehren", "bs": "Počastiti goste" },
+      "explanation": {
+        "en": "Ibrahim greeted his guests with salam and hurried to bring them the best food he had. Welcoming guests warmly is a beautiful part of our faith.",
+        "de": "Ibrahim grüßte seine Gäste mit Salam und brachte ihnen eilig das beste Essen, das er hatte. Gäste herzlich aufzunehmen ist ein schöner Teil unseres Glaubens.",
+        "bs": "Ibrahim je goste pozdravio selamom i požurio da im donese najbolju hranu koju je imao. Lijepo dočekati goste divan je dio naše vjere."
+      },
+      "example": {
+        "en": "Visitors come to your home. You say \"As-salamu alaykum\", offer them a drink and make them feel welcome.",
+        "de": "Besuch kommt zu euch. Du sagst „As-salamu alaikum“, bietest etwas zu trinken an und sorgst dafür, dass sie sich willkommen fühlen.",
+        "bs": "Gosti dođu kod vas. Ti kažeš „Esselamu alejkum“, ponudiš im piće i pobrineš se da se osjećaju dobrodošlo."
+      },
+      "reflection": {
+        "en": "How can you help when guests come to your home?",
+        "de": "Wie kannst du helfen, wenn Gäste zu euch kommen?",
+        "bs": "Kako možeš pomoći kad vam dođu gosti?"
+      }
+    },
+    {
+      "id": "ishaq-l2",
+      "value": "hope",
+      "title": { "en": "Nothing is too hard for Allah", "de": "Für Allah ist nichts zu schwer", "bs": "Allahu ništa nije teško" },
+      "explanation": {
+        "en": "Ibrahim and Sarah were old, yet Allah gave them Ishaq. We never lose hope in Allah's mercy – we make dua and trust Him.",
+        "de": "Ibrahim und Sara waren alt, und doch schenkte Allah ihnen Ishaq. Wir verlieren nie die Hoffnung auf Allahs Barmherzigkeit – wir machen Dua und vertrauen Ihm.",
+        "bs": "Ibrahim i Sara su bili stari, a ipak im je Allah darovao Ishaka. Nikada ne gubimo nadu u Allahovu milost – činimo dovu i oslanjamo se na Njega."
+      },
+      "example": {
+        "en": "Your grandfather is ill. You make dua for him every day and visit him with a smile.",
+        "de": "Dein Opa ist krank. Du machst jeden Tag Dua für ihn und besuchst ihn mit einem Lächeln.",
+        "bs": "Djed ti je bolestan. Svaki dan činiš dovu za njega i posjećuješ ga s osmijehom."
+      },
+      "reflection": {
+        "en": "What do you want to ask Allah for today?",
+        "de": "Worum möchtest du Allah heute bitten?",
+        "bs": "Šta danas želiš zamoliti od Allaha?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "ishaq-salam",
+      "type": "trueFalse",
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "The guests greeted Ibrahim with \"Salam\", and he answered with \"Salam\".", "de": "Die Gäste grüßten Ibrahim mit „Salam“, und er antwortete mit „Salam“.", "bs": "Gosti su Ibrahima pozdravili sa „Selam“, a on im je odgovorio sa „Selam“." },
+      "correct": true,
+      "explanation": { "en": "Yes – greeting with salam and answering it is the way of the prophets.", "de": "Ja – mit Salam grüßen und ihn erwidern ist der Weg der Propheten.", "bs": "Da – nazvati selam i uzvratiti ga put je poslanika." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:69" }]
+    },
+    {
+      "id": "ishaq-after",
+      "type": "multipleChoice",
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "Glad tidings of Ishaq – and after Ishaq, of whom?", "de": "Frohe Botschaft von Ishaq – und nach Ishaq, von wem?", "bs": "Radosna vijest o Ishaku – a poslije Ishaka, o kome?" },
+      "options": [
+        { "id": "a", "text": { "en": "Yaqub", "de": "Yaqub", "bs": "Jakubu" } },
+        { "id": "b", "text": { "en": "Musa", "de": "Musa", "bs": "Musau" } },
+        { "id": "c", "text": { "en": "Nuh", "de": "Nuh", "bs": "Nuhu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "\"We gave her glad tidings of Ishaq, and after Ishaq, of Yaqub.\"", "de": "„Wir verkündeten ihr Ishaq und nach Ishaq Yaqub.“", "bs": "„Obradovali smo je Ishakom, a poslije Ishaka Jakubom.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:71" }]
+    },
+    {
+      "id": "ishaq-order",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "Put the story of the guests in order.", "de": "Bring die Geschichte der Gäste in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o gostima." },
+      "items": [
+        { "id": "salam", "text": { "en": "Salam – and salam in return", "de": "Salam – und Salam als Antwort", "bs": "Selam – i selam kao odgovor" } },
+        { "id": "calf", "text": { "en": "A roasted calf is brought", "de": "Ein gebratenes Kalb wird gebracht", "bs": "Iznosi se pečeno tele" } },
+        { "id": "noeat", "text": { "en": "The guests do not eat", "de": "Die Gäste essen nicht", "bs": "Gosti ne jedu" } },
+        { "id": "news", "text": { "en": "Glad tidings of Ishaq and Yaqub", "de": "Frohe Botschaft von Ishaq und Yaqub", "bs": "Radosna vijest o Ishaku i Jakubu" } },
+        { "id": "mercy", "text": { "en": "\"The mercy of Allah upon you\"", "de": "„Die Barmherzigkeit Allahs über euch“", "bs": "„Allahova milost na vama“" } }
+      ],
+      "explanation": { "en": "Greeting, the meal, the guests not eating, the glad tidings – and Allah's mercy and blessings.", "de": "Gruß, das Mahl, die Gäste essen nicht, die frohe Botschaft – und Allahs Barmherzigkeit und Segen.", "bs": "Pozdrav, gozba, gosti ne jedu, radosna vijest – i Allahova milost i blagoslovi." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:69–73" }]
+    },
+    {
+      "id": "ishaq-memory",
+      "type": "memory",
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "Memory: match the family of Ibrahim.", "de": "Memory: Ordne die Familie Ibrahims zu.", "bs": "Memorija: spoji Ibrahimovu porodicu." },
+      "pairs": [
+        { "id": "ishaq", "left": { "en": "Ishaq", "de": "Ishaq", "bs": "Ishak" }, "right": { "en": "Son of Ibrahim and Sarah", "de": "Sohn von Ibrahim und Sara", "bs": "Sin Ibrahima i Sare" } },
+        { "id": "ismail", "left": { "en": "Ismail", "de": "Ismail", "bs": "Ismail" }, "right": { "en": "Son of Ibrahim and Hajar", "de": "Sohn von Ibrahim und Hadschar", "bs": "Sin Ibrahima i Hadžere" } },
+        { "id": "yaqub", "left": { "en": "Yaqub", "de": "Yaqub", "bs": "Jakub" }, "right": { "en": "Son of Ishaq", "de": "Sohn von Ishaq", "bs": "Ishakov sin" } },
+        { "id": "yusuf", "left": { "en": "Yusuf", "de": "Yusuf", "bs": "Jusuf" }, "right": { "en": "Son of Yaqub", "de": "Sohn von Yaqub", "bs": "Jakubov sin" } }
+      ],
+      "explanation": { "en": "Ibrahim's sons were Ismail and Ishaq; Ishaq's son was Yaqub, and Yaqub's son was Yusuf.", "de": "Ibrahims Söhne waren Ismail und Ishaq; Ishaqs Sohn war Yaqub, und Yaqubs Sohn war Yusuf.", "bs": "Ibrahimovi sinovi bili su Ismail i Ishak; Ishakov sin bio je Jakub, a Jakubov sin Jusuf." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "14:39; 11:71; 12:6" }, { "sourceName": "Sahih al-Bukhari", "sourceReference": "3364" }]
+    },
+    {
+      "id": "ishaq-map",
+      "type": "map",
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "Where did Ibrahim live when the guests came? Tap Canaan.", "de": "Wo lebte Ibrahim, als die Gäste kamen? Tippe auf Kanaan.", "bs": "Gdje je živio Ibrahim kad su došli gosti? Dodirni Kanaan." },
+      "places": ["canaan", "makkah", "egypt", "ahqaf"],
+      "correctPlace": "canaan",
+      "explanation": { "en": "Ibrahim lived in the land of Canaan, in Palestine; the town of Hebron (al-Khalil) carries his name.", "de": "Ibrahim lebte im Land Kanaan in Palästina; die Stadt Hebron (al-Chalil) trägt seinen Namen.", "bs": "Ibrahim je živio u zemlji Kanaan, u Palestini; grad Hebron (El-Halil) nosi njegovo ime." },
+      "sources": [{ "sourceName": "Ibn Kathir, Qasas al-Anbiya", "sourceReference": "Ibrahim" }]
+    },
+    {
+      "id": "ishaq-prophet",
+      "type": "trueFalse",
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "Ishaq was a prophet from among the righteous.", "de": "Ishaq war ein Prophet unter den Rechtschaffenen.", "bs": "Ishak je bio poslanik od dobrih." },
+      "correct": true,
+      "explanation": { "en": "Yes – \"We gave him glad tidings of Ishaq, a prophet from among the righteous.\"", "de": "Ja – „Wir verkündeten ihm Ishaq, einen Propheten unter den Rechtschaffenen.“", "bs": "Da – „Obradovali smo ga Ishakom, poslanikom od dobrih.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:112" }]
+    },
+    {
+      "id": "ishaq-lesson",
+      "type": "lessonChoice",
+      "storyId": "ishaq",
+      "topic": "ishaq",
+      "prompt": { "en": "Which lesson do we learn from this story?", "de": "Welche Lehre lernen wir aus dieser Geschichte?", "bs": "Koju pouku učimo iz ovog kazivanja?" },
+      "options": [
+        { "id": "a", "text": { "en": "Honour guests and never lose hope in Allah", "de": "Gäste ehren und nie die Hoffnung auf Allah verlieren", "bs": "Počastiti goste i nikad ne gubiti nadu u Allaha" } },
+        { "id": "b", "text": { "en": "Guests should serve themselves", "de": "Gäste sollen sich selbst bedienen", "bs": "Gosti neka sami sebe posluže" } },
+        { "id": "c", "text": { "en": "Some things are too hard for Allah", "de": "Manches ist für Allah zu schwer", "bs": "Neke stvari su Allahu preteške" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Ibrahim honoured his guests, and Allah gave him Ishaq in his old age.", "de": "Ibrahim ehrte seine Gäste, und Allah schenkte ihm Ishaq im Alter.", "bs": "Ibrahim je počastio goste, a Allah mu je u starosti darovao Ishaka." }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "11:69–73" },
+    { "sourceName": "Quran", "sourceReference": "51:24–30" },
+    { "sourceName": "Quran", "sourceReference": "37:112–113" },
+    { "sourceName": "Quran", "sourceReference": "21:72–73" }
+  ]
+}

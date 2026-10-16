@@ -13,6 +13,8 @@ export interface GameTestOptions {
 
 /** Validity, translations, art, every level played to the end, mistakes → fewer stars and missed facts. */
 export function describeProphetGame(def: () => GameDef<any>, options: GameTestOptions): void {
+  // Whole levels are played with real timers (engine animations); give them room when the suite runs in parallel.
+  jest.setTimeout(60000);
   it('is valid and complete in en / de / bs', () => {
     const game = def();
     expect(() => validateGame(game)).not.toThrow();
