@@ -1,0 +1,273 @@
+{
+  "id": "idris",
+  "order": 2,
+  "prophetName": { "en": "Idris", "de": "Idris", "bs": "Idris" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "Raised to a High Station", "de": "Zu einem hohen Rang erhoben", "bs": "Uzdignut na visok položaj" },
+  "description": {
+    "en": "A man of truth and a prophet, patient and righteous – and raised by Allah to a high station.",
+    "de": "Ein Mann der Wahrhaftigkeit und ein Prophet, geduldig und rechtschaffen – von Allah zu einem hohen Rang erhoben.",
+    "bs": "Iskren čovjek i poslanik, strpljiv i dobar – Allah ga je uzdigao na visok položaj."
+  },
+  "place": { "en": "Mentioned in the Quran", "de": "Im Koran erwähnt", "bs": "Spomenut u Kur'anu" },
+  "symbol": "stars",
+  "symbolArt": "prophet.idris-star",
+  "cover": { "sky": "night", "elements": ["stars", "crescent", "mountains"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "story.moon-crescent", "x": 330, "y": 56, "w": 50, "anchor": "center", "anim": "glow" },
+      { "art": "prophet.idris-high-place" },
+      { "art": "prophet.idris-star", "x": 236, "y": 34, "w": 44, "anchor": "center", "anim": "pulse", "enter": "zoom", "at": 900, "duration": 1400 }
+    ],
+    "effects": [{ "type": "stars", "intensity": 3 }, { "type": "sparkle", "x": 236, "y": 40, "w": 80, "h": 40, "intensity": 1, "at": 1500 }]
+  },
+  "intro": {
+    "en": "Idris (peace be upon him) is one of the prophets named in the Quran. The Quran tells us only a little about him – but every word is a great honour.",
+    "de": "Idris (Friede sei mit ihm) ist einer der Propheten, die im Koran genannt werden. Der Koran erzählt nur wenig über ihn – doch jedes Wort ist eine große Ehre.",
+    "bs": "Idris, a.s., jedan je od poslanika koji se spominju u Kur'anu. Kur'an o njemu kazuje malo – ali svaka je riječ velika počast."
+  },
+  "scenes": [
+    {
+      "id": "idris-s1",
+      "title": { "en": "A man of truth", "de": "Ein Mann der Wahrhaftigkeit", "bs": "Iskren čovjek" },
+      "text": {
+        "en": "Allah says: \"And mention in the Book Idris. He was a man of truth and a prophet.\" Idris always spoke the truth and lived by it.",
+        "de": "Allah sagt: „Und gedenke im Buch des Idris. Er war ein Mann der Wahrhaftigkeit und ein Prophet.“ Idris sprach immer die Wahrheit und lebte nach ihr.",
+        "bs": "Allah kaže: „I spomeni u Knjizi Idrisa. On je bio iskren čovjek i poslanik.“ Idris je uvijek govorio istinu i po njoj živio."
+      },
+      "scene": { "sky": "dawn", "elements": ["stars", "mountains"] },
+      "stage": {
+        "sky": "dawn",
+        "camera": "slowZoom",
+        "layers": [{ "art": "story.mountains" }, { "art": "object.book", "x": 200, "y": 206, "w": 80, "enter": "rise", "at": 500 }],
+        "effects": [{ "type": "stars", "intensity": 1, "until": 2500 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 1200 }, { "type": "sparkle", "x": 200, "y": 170, "w": 120, "h": 50, "intensity": 1, "at": 1800 }]
+      },
+      "interactionId": "idris-truthful",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:56" }]
+    },
+    {
+      "id": "idris-s2",
+      "title": { "en": "Among the patient", "de": "Unter den Geduldigen", "bs": "Među strpljivima" },
+      "text": {
+        "en": "The Quran mentions Idris together with Ismail and Dhul-Kifl: \"All of them were among the patient.\" Allah admitted them into His mercy – they were among the righteous.",
+        "de": "Der Koran nennt Idris zusammen mit Ismail und Dhul-Kifl: „Alle gehörten zu den Geduldigen.“ Allah ließ sie in Seine Barmherzigkeit eingehen – sie gehörten zu den Rechtschaffenen.",
+        "bs": "Kur'an spominje Idrisa zajedno s Ismailom i Zul-Kiflom: „Svi su oni bili od strpljivih.“ Allah ih je uveo u Svoju milost – bili su od dobrih."
+      },
+      "scene": { "sky": "sunset", "elements": ["hills", "lanterns"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "warm",
+        "layers": [
+          { "art": "story.hills" },
+          { "art": "story.lamp", "x": 120, "y": 222, "w": 54, "enter": "fade", "at": 400 },
+          { "art": "story.lamp", "x": 200, "y": 216, "w": 58, "enter": "fade", "at": 900 },
+          { "art": "story.lamp", "x": 280, "y": 222, "w": 54, "enter": "fade", "at": 1400 }
+        ],
+        "effects": [
+          { "type": "lanternGlow", "x": 120, "y": 200, "intensity": 1, "at": 400 },
+          { "type": "lanternGlow", "x": 200, "y": 192, "intensity": 1, "at": 900 },
+          { "type": "lanternGlow", "x": 280, "y": 200, "intensity": 1, "at": 1400 },
+          { "type": "birds", "intensity": 1, "at": 2000 }
+        ]
+      },
+      "interactionId": "idris-with",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85–86" }]
+    },
+    {
+      "id": "idris-s3",
+      "title": { "en": "A high station", "de": "Ein hoher Rang", "bs": "Visok položaj" },
+      "text": {
+        "en": "Allah says about Idris: \"And We raised him to a high station.\" Allah honoured him greatly.",
+        "de": "Allah sagt über Idris: „Und Wir erhoben ihn zu einem hohen Rang.“ Allah ehrte ihn sehr.",
+        "bs": "Allah o Idrisu kaže: „I Mi smo ga na visoko mjesto uzdigli.“ Allah ga je mnogo počastio."
+      },
+      "scene": { "sky": "night", "elements": ["stars", "mountains"] },
+      "stage": {
+        "sky": "night",
+        "camera": "panRight",
+        "layers": [
+          { "art": "prophet.idris-high-place" },
+          { "art": "prophet.idris-star", "x": 236, "y": 30, "w": 40, "anchor": "center", "anim": "pulse", "enter": "zoom", "at": 1600, "duration": 1600 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "lightBeam", "x": 236, "intensity": 2, "at": 2200 }, { "type": "sparkle", "x": 236, "y": 50, "w": 100, "h": 60, "intensity": 2, "at": 2600 }]
+      },
+      "interactionId": "idris-steady",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:57" }]
+    },
+    {
+      "id": "idris-s4",
+      "title": { "en": "In the fourth heaven", "de": "Im vierten Himmel", "bs": "Na četvrtom nebu" },
+      "text": {
+        "en": "On the night of the Mi'raj, the Prophet Muhammad ﷺ was taken up through the heavens. In the fourth heaven he met Idris, who greeted him and welcomed him as a righteous brother and a righteous prophet.",
+        "de": "In der Nacht der Mi'radsch wurde der Prophet Muhammad ﷺ durch die Himmel emporgehoben. Im vierten Himmel traf er Idris, der ihn grüßte und als rechtschaffenen Bruder und rechtschaffenen Propheten willkommen hieß.",
+        "bs": "U noći Miradža Poslanik Muhammed, s.a.v.s., uzdignut je kroz nebesa. Na četvrtom nebu susreo je Idrisa, koji ga je pozdravio i dočekao kao dobrog brata i dobrog poslanika."
+      },
+      "scene": { "sky": "night", "elements": ["stars", "crescent"] },
+      "stage": {
+        "sky": "night",
+        "mood": "night",
+        "layers": [
+          { "art": "story.night-horizon" },
+          { "art": "prophet.idris-star", "x": 120, "y": 70, "w": 26, "anchor": "center", "anim": "glow", "enter": "fade", "at": 400 },
+          { "art": "prophet.idris-star", "x": 170, "y": 52, "w": 30, "anchor": "center", "anim": "glow", "enter": "fade", "at": 900 },
+          { "art": "prophet.idris-star", "x": 230, "y": 46, "w": 34, "anchor": "center", "anim": "glow", "enter": "fade", "at": 1400 },
+          { "art": "prophet.idris-star", "x": 290, "y": 58, "w": 44, "anchor": "center", "anim": "pulse", "enter": "zoom", "at": 1900 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "lightBeam", "x": 290, "intensity": 1, "at": 2400 }]
+      },
+      "sources": [
+        { "sourceName": "Sahih al-Bukhari", "sourceReference": "3207" },
+        { "sourceName": "Sahih Muslim", "sourceReference": "162" }
+      ]
+    }
+  ],
+  "miniGameId": "idris-memory",
+  "quizIds": ["idris-high", "idris-giveup", "idris-lesson"],
+  "lessons": [
+    {
+      "id": "idris-l1",
+      "value": "honesty",
+      "title": { "en": "Sidq – being truthful", "de": "Sidq – wahrhaftig sein", "bs": "Sidk – iskrenost" },
+      "explanation": {
+        "en": "Allah praised Idris as a man of truth. Being truthful means speaking the truth and keeping our word – even when it is hard.",
+        "de": "Allah lobte Idris als einen Mann der Wahrhaftigkeit. Wahrhaftig sein heißt, die Wahrheit zu sagen und sein Wort zu halten – auch wenn es schwer ist.",
+        "bs": "Allah je pohvalio Idrisa kao iskrenog čovjeka. Biti iskren znači govoriti istinu i držati riječ – čak i kad je teško."
+      },
+      "example": {
+        "en": "Your teacher asks who forgot the homework. You raise your hand and tell the truth.",
+        "de": "Deine Lehrerin fragt, wer die Hausaufgabe vergessen hat. Du meldest dich und sagst die Wahrheit.",
+        "bs": "Učiteljica pita ko je zaboravio zadaću. Podigneš ruku i kažeš istinu."
+      },
+      "reflection": {
+        "en": "When was it hard for you to tell the truth – and how did you feel afterwards?",
+        "de": "Wann fiel es dir schwer, die Wahrheit zu sagen – und wie hast du dich danach gefühlt?",
+        "bs": "Kada ti je bilo teško reći istinu – i kako si se poslije osjećao?"
+      }
+    },
+    {
+      "id": "idris-l2",
+      "value": "sabr",
+      "title": { "en": "Sabr – patience brings honour", "de": "Sabr – Geduld bringt Ehre", "bs": "Sabur – strpljivost donosi čast" },
+      "explanation": {
+        "en": "Idris was among the patient, and Allah raised him to a high station. Patience in doing good is never lost with Allah.",
+        "de": "Idris gehörte zu den Geduldigen, und Allah erhob ihn zu einem hohen Rang. Geduld beim Gutestun geht bei Allah nie verloren.",
+        "bs": "Idris je bio od strpljivih i Allah ga je uzdigao na visok položaj. Strpljivost u činjenju dobra kod Allaha nikad ne propada."
+      },
+      "example": {
+        "en": "Learning to read the Quran takes time. You keep practising every day with patience.",
+        "de": "Koranlesen zu lernen braucht Zeit. Du übst jeden Tag geduldig weiter.",
+        "bs": "Učenje čitanja Kur'ana traži vrijeme. Ti strpljivo vježbaš svaki dan."
+      },
+      "reflection": {
+        "en": "What is one good thing you want to keep doing patiently?",
+        "de": "Welche gute Sache möchtest du geduldig weitermachen?",
+        "bs": "Koju dobru stvar želiš strpljivo nastaviti raditi?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "idris-truthful",
+      "type": "trueFalse",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": { "en": "The Quran calls Idris \"a man of truth and a prophet\".", "de": "Der Koran nennt Idris „einen Mann der Wahrhaftigkeit und einen Propheten“.", "bs": "Kur'an Idrisa naziva „iskrenim čovjekom i poslanikom“." },
+      "correct": true,
+      "explanation": { "en": "Yes – Allah praised Idris for his truthfulness.", "de": "Ja – Allah lobte Idris für seine Wahrhaftigkeit.", "bs": "Da – Allah je pohvalio Idrisa zbog njegove iskrenosti." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:56" }]
+    },
+    {
+      "id": "idris-with",
+      "type": "multipleChoice",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": { "en": "With whom does the Quran mention Idris as \"among the patient\"?", "de": "Mit wem erwähnt der Koran Idris als „unter den Geduldigen“?", "bs": "S kim Kur'an spominje Idrisa kao „od strpljivih“?" },
+      "options": [
+        { "id": "a", "text": { "en": "Ismail and Dhul-Kifl", "de": "Ismail und Dhul-Kifl", "bs": "Ismailom i Zul-Kiflom" } },
+        { "id": "b", "text": { "en": "Musa and Harun", "de": "Musa und Harun", "bs": "Musaom i Harunom" } },
+        { "id": "c", "text": { "en": "Dawud and Sulayman", "de": "Dawud und Sulayman", "bs": "Davudom i Sulejmanom" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "\"And Ismail and Idris and Dhul-Kifl – all were among the patient.\"", "de": "„Und Ismail, Idris und Dhul-Kifl – alle gehörten zu den Geduldigen.“", "bs": "„I Ismail, i Idris, i Zul-Kifl – svi su bili od strpljivih.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85" }]
+    },
+    {
+      "id": "idris-steady",
+      "type": "scenario",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": {
+        "en": "Decision: your little brother keeps knocking over the tower you are building. What is the patient way?",
+        "de": "Entscheidung: Dein kleiner Bruder wirft immer wieder deinen Turm um. Was ist der geduldige Weg?",
+        "bs": "Odluka: mlađi brat ti stalno ruši kulu koju gradiš. Šta je strpljiv put?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Stay calm, explain kindly and build again", "de": "Ruhig bleiben, freundlich erklären und neu bauen", "bs": "Ostati miran, lijepo objasniti i opet graditi" }, "feedback": { "en": "That is sabr – calm, kind and not giving up.", "de": "Das ist Sabr – ruhig, freundlich und nicht aufgeben.", "bs": "To je sabur – mirno, lijepo i bez odustajanja." } },
+        { "id": "b", "text": { "en": "Shout at him", "de": "Ihn anschreien", "bs": "Vikati na njega" }, "feedback": { "en": "Anger makes it worse – patience makes it better.", "de": "Wut macht es schlimmer – Geduld macht es besser.", "bs": "Ljutnja pogoršava – strpljivost popravlja." } },
+        { "id": "c", "text": { "en": "Give up building forever", "de": "Für immer mit dem Bauen aufhören", "bs": "Zauvijek prestati graditi" }, "feedback": { "en": "Patience means not giving up on what is good.", "de": "Geduld heißt, das Gute nicht aufzugeben.", "bs": "Strpljivost znači ne odustati od dobrog." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Idris was among the patient – patience is calm, kind and steady.", "de": "Idris gehörte zu den Geduldigen – Geduld ist ruhig, freundlich und beständig.", "bs": "Idris je bio od strpljivih – strpljivost je mirna, blaga i postojana." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85" }]
+    },
+    {
+      "id": "idris-memory",
+      "type": "memory",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": { "en": "Memory: match what the Quran says about Idris.", "de": "Memory: Ordne zu, was der Koran über Idris sagt.", "bs": "Memorija: spoji ono što Kur'an kaže o Idrisu." },
+      "pairs": [
+        { "id": "truth", "left": { "en": "Siddiq", "de": "Siddiq", "bs": "Siddik" }, "right": { "en": "A man of truth", "de": "Ein Mann der Wahrhaftigkeit", "bs": "Iskren čovjek" } },
+        { "id": "patient", "left": { "en": "Sabir", "de": "Sabir", "bs": "Sabir" }, "right": { "en": "Patient", "de": "Geduldig", "bs": "Strpljiv" } },
+        { "id": "righteous", "left": { "en": "Salih", "de": "Salih", "bs": "Salih" }, "right": { "en": "Righteous", "de": "Rechtschaffen", "bs": "Dobar" } },
+        { "id": "high", "left": { "en": "Makan aliyy", "de": "Makan aliyy", "bs": "Mekan alijj" }, "right": { "en": "A high station", "de": "Ein hoher Rang", "bs": "Visok položaj" } }
+      ],
+      "explanation": {
+        "en": "Idris was truthful, patient and righteous, and Allah raised him to a high station.",
+        "de": "Idris war wahrhaftig, geduldig und rechtschaffen, und Allah erhob ihn zu einem hohen Rang.",
+        "bs": "Idris je bio iskren, strpljiv i dobar, a Allah ga je uzdigao na visok položaj."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:56–57; 21:85–86" }]
+    },
+    {
+      "id": "idris-high",
+      "type": "trueFalse",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": { "en": "Allah raised Idris to a high station.", "de": "Allah erhob Idris zu einem hohen Rang.", "bs": "Allah je Idrisa uzdigao na visok položaj." },
+      "correct": true,
+      "explanation": { "en": "Yes – \"And We raised him to a high station.\"", "de": "Ja – „Und Wir erhoben ihn zu einem hohen Rang.“", "bs": "Da – „I Mi smo ga na visoko mjesto uzdigli.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:57" }]
+    },
+    {
+      "id": "idris-giveup",
+      "type": "trueFalse",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": { "en": "The Quran says Idris was impatient.", "de": "Der Koran sagt, Idris sei ungeduldig gewesen.", "bs": "Kur'an kaže da je Idris bio nestrpljiv." },
+      "correct": false,
+      "explanation": { "en": "No – the Quran counts him among the patient.", "de": "Nein – der Koran zählt ihn zu den Geduldigen.", "bs": "Ne – Kur'an ga ubraja među strpljive." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85" }]
+    },
+    {
+      "id": "idris-lesson",
+      "type": "lessonChoice",
+      "storyId": "idris",
+      "topic": "idris",
+      "prompt": { "en": "Which lesson do we learn from Idris?", "de": "Welche Lehre lernen wir von Idris?", "bs": "Koju pouku učimo od Idrisa?" },
+      "options": [
+        { "id": "a", "text": { "en": "Truthfulness and patience are honoured by Allah", "de": "Wahrhaftigkeit und Geduld werden von Allah geehrt", "bs": "Allah cijeni iskrenost i strpljivost" } },
+        { "id": "b", "text": { "en": "Only famous people matter", "de": "Nur berühmte Menschen zählen", "bs": "Važni su samo poznati ljudi" } },
+        { "id": "c", "text": { "en": "A small lie is fine", "de": "Eine kleine Lüge ist in Ordnung", "bs": "Mala laž je u redu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Idris was truthful and patient – and Allah raised him high.", "de": "Idris war wahrhaftig und geduldig – und Allah erhob ihn hoch.", "bs": "Idris je bio iskren i strpljiv – i Allah ga je visoko uzdigao." }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "19:56–57" },
+    { "sourceName": "Quran", "sourceReference": "21:85–86" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "3207" }
+  ]
+}

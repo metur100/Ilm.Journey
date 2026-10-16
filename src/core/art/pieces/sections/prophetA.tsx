@@ -211,11 +211,98 @@ const adam = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Idris – "a man of truth and a prophet … We raised him to a high station" (19:56–57)
+
+/** Stone steps winding up a quiet mountain path. */
+function Steps({ c, pts, color }: { c: Ctx; pts: [number, number, number][]; color: string }) {
+  return (
+    <G>
+      {pts.map(([x, y, w], i) => (
+        <G key={i}>
+          <Rect x={x - w / 2} y={y} width={w} height={w * 0.26} rx={w * 0.08} fill={dim(c, shade(color, 0.25))} />
+          <Rect x={x - w / 2} y={y - w * 0.06} width={w} height={w * 0.22} rx={w * 0.08} fill={dim(c, color)} />
+        </G>
+      ))}
+    </G>
+  );
+}
+
+const idris = {
+  /** A high mountain whose summit glows under the stars – the "high station" (19:57), told only as light. */
+  'idris-high-place': art(W, H, (c) => (
+    <>
+      <Glow c={c} k="top" cx={236} cy={52} r={70} color={C.goldPale} opacity={c.dark ? 0.45 : 0.55} />
+      <Path d="M0 176L60 140 100 158 150 120 186 146Z" fill={dim(c, '#9A8FB0', 0.5)} />
+      <Path d="M300 160L350 130 400 150V180H290Z" fill={dim(c, '#9A8FB0', 0.5)} />
+      <Path d="M120 210L214 62Q236 40 258 62L352 210Z" fill={dim(c, '#8E7B8C')} />
+      <Path d="M236 48Q246 50 258 62L352 210H260L246 120Z" fill={dim(c, '#6F5E70')} opacity={0.75} />
+      <Path d="M222 62Q236 44 250 60L244 72 236 66 228 74Z" fill={dim(c, C.goldPale, 0.2)} />
+      <Steps
+        c={c}
+        color={C.stoneLight}
+        pts={[
+          [196, 200, 26],
+          [212, 184, 24],
+          [200, 168, 22],
+          [216, 152, 20],
+          [206, 136, 18],
+          [220, 120, 16],
+          [212, 106, 14],
+          [226, 92, 12],
+          [232, 78, 10],
+        ]}
+      />
+      <Path d="M0 196C80 180 160 186 240 196S360 184 400 190V240H0Z" fill={dim(c, '#B79C86')} />
+      <Path d="M0 220C100 210 220 214 300 222S380 216 400 218V240H0Z" fill={dim(c, '#A3876F')} />
+      <Spark x={236} y={36} r={10} color={C.goldLight} />
+      <Spark x={196} y={28} r={4} />
+      <Spark x={276} y={30} r={5} />
+    </>
+  )),
+
+  /** A glowing eight-pointed star (a stop on the path to the high station). */
+  'idris-star': art(80, 80, (c) => (
+    <>
+      <Glow c={c} k="g" cx={40} cy={40} r={38} color={C.goldPale} opacity={0.75} />
+      <G transform="rotate(45 40 40)">
+        <Path d={sparklePath(40, 40, 20, 0.2)} fill={C.goldLight} opacity={0.85} />
+      </G>
+      <Path d={sparklePath(40, 40, 32, 0.16)} fill={C.gold} />
+      <Path d={sparklePath(40, 40, 18, 0.2)} fill={C.goldPale} />
+      <Circle cx={40} cy={40} r={4.5} fill={C.white} />
+    </>
+  )),
+
+  /** Night sky above the mountain (portrait map for the star path game). */
+  'idris-sky-steps': art(300, 400, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, '#141A44'], [0.6, '#2E3380'], [1, '#5B4E95']]} />
+      </Defs>
+      <Rect x={0} y={0} width={300} height={400} fill={c.url('sky')} />
+      {(
+        [
+          [30, 40, 1.6], [80, 90, 1.2], [140, 30, 1.4], [210, 70, 1.8], [270, 30, 1.2], [250, 140, 1.4], [40, 170, 1.2], [120, 150, 1], [280, 220, 1.3], [20, 260, 1.4], [170, 210, 1],
+        ] as const
+      ).map(([x, y, r], i) => (
+        <Circle key={i} cx={x} cy={y} r={r} fill={C.white} opacity={0.75} />
+      ))}
+      <Path d={crescentPath(250, 64, 18, 8, -5, 16)} fill={C.goldLight} />
+      <Glow c={c} k="g" cx={150} cy={300} r={120} color={C.lilac} opacity={0.25} />
+      <Path d="M0 360L70 300 110 324 150 270 200 318 240 296 300 340V400H0Z" fill="#3E3566" />
+      <Path d="M150 270L200 318 170 318 156 296Z" fill="#2E2852" />
+      <Path d="M0 380C80 366 200 370 300 378V400H0Z" fill="#2B2448" />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
   ...adam,
+  ...idris,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).
-void [Defs, Lin, Rock, Star, StoneCourse, smoothOpen, W, H];
+void [Rock, Star, StoneCourse, smoothOpen];

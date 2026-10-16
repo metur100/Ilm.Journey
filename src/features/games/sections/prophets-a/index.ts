@@ -1,4 +1,5 @@
 import { registerAdamNamesGame } from './adam-garden-names/register';
+import { registerIdrisGame } from './idris-high-station/register';
 
 /**
  * Section "prophets-a" (docs/GAMES-V3.md): every game of this section lives in this folder and is registered here.
@@ -7,4 +8,5 @@ import { registerAdamNamesGame } from './adam-garden-names/register';
  */
 export function registerProphetsAGames(): void {
   registerAdamNamesGame();
+  registerIdrisGame();
 }
