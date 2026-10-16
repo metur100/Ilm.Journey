@@ -277,7 +277,7 @@ mistake; stars by `kitStars`: 3 without mistakes, 2 with ≤ max(1, 25 % of the 
 
 ### 11.2 Engines
 
-Status: ✅ ready · 🛠 props final, implementation landing next (changes will be additive only).
+All fifteen engines are ready (✅). The API is stable: later changes are additive only.
 
 **SequenceBoard** ✅ – put things in order.
 `items: KitItem[]` (correct order) · `variant?: 'list' | 'path'` · `columns?` (path) · `endArt?` (path, default
@@ -312,43 +312,43 @@ Each placed part grows in with a burst and its `caption` appears inline (keep th
 At the end `FinishReveal` shows the whole scene big with a Continue button → `onDone`.
 Test ids: `tile-<partId>`, `zone-<partId>`, `built-<partId>`.
 
-**CatchGame** 🛠 – items fall gently; collect the right ones in a basket. Calm: no lives, missed right items come
+**CatchGame** ✅ – items fall gently; collect the right ones in a basket. Calm: no lives, missed right items come
 again. `items: (KitItem & { good: boolean })[]` · `goal` (right items to collect) · `lanes?: 3 | 4` ·
 `speed?: 'calm' | 'normal'` · `basketArt?` · `sky?` (background art). Drag the basket (or tap a lane / a falling item).
 Reduced motion: items appear in place and are tapped. Test ids: `catch-item-<id>`, `catch-lane-<n>`.
 
-**TapScene** 🛠 – find things in an illustrated scene. `scene` (art) · `aspect?` ·
+**TapScene** ✅ – find things in an illustrated scene. `scene` (art) · `aspect?` ·
 `spots: (KitItem & { at: KitBox, target?: boolean })[]` · `ordered?` (asks "Find: …" for one target after another).
 Non-target spots count as mistakes; empty areas never do. Test ids: `spot-<id>`.
 
-**JigsawReveal** 🛠 – drag picture pieces to rebuild an illustration, then reveal it with a caption. `art` · `rows`,
+**JigsawReveal** ✅ – drag picture pieces to rebuild an illustration, then reveal it with a caption. `art` · `rows`,
 `cols` · `mode?: 'place' | 'swap'` · `reveal?`. Test ids: `tile-piece-<n>`, `zone-cell-<n>`.
 
-**PathTrace** 🛠 – trace a route with the finger through stops in order. `map?` (background art) · `aspect?` ·
+**PathTrace** ✅ – trace a route with the finger through stops in order. `map?` (background art) · `aspect?` ·
 `stops: (KitItem & { at: KitPoint, caption? })[]` · `tolerance?` (fraction, default 0.08) · `showRoute?` (dashed
 guide, default true). Tapping the stops in order works too. Test ids: `stop-<id>`.
 
-**WordTiles** 🛠 – build a word, phrase or ayah from tiles; right-to-left when the tiles are Arabic.
+**WordTiles** ✅ – build a word, phrase or ayah from tiles; right-to-left when the tiles are Arabic.
 `target: KitItem[]` (reading order) · `distractors?: KitItem[]` · `rtl?` (default: auto) · `quran?` (Quran font –
 generated data only). Test ids: `tile-<id>`, `zone-word-<n>`.
 
-**LetterJoin** 🛠 – drag Arabic letters into place and watch the joined word form (the font joins them).
+**LetterJoin** ✅ – drag Arabic letters into place and watch the joined word form (the font joins them).
 `words: { id, letters: string[], word?: string, meaning?: KitText }[]` (one word after another).
 Test ids: `tile-<wordId>-<n>`, `zone-join-<n>`.
 
-**TraceShape** 🛠 – trace a letter or a shape. `shapes: { id, label?, glyph?: string, strokes?: string[] }[]` –
+**TraceShape** ✅ – trace a letter or a shape. `shapes: { id, label?, glyph?: string, strokes?: string[] }[]` –
 `strokes` are SVG paths in a 100 × 100 box, traced in order (start dot + arrow); with only a `glyph` (an Arabic letter)
 the learner covers the big guide letter. Test ids: `trace-<id>` (+ `kit-trace-auto` for screen readers).
 
-**BalanceScale** 🛠 – weigh and balance (a fair measure). `left: (KitItem & { weight })[]` (fixed load) ·
+**BalanceScale** ✅ – weigh and balance (a fair measure). `left: (KitItem & { weight })[]` (fixed load) ·
 `weights: (KitItem & { weight })[]` (to put on the right pan). The beam tilts with a spring; balanced → done;
 overshooting counts as a mistake. Test ids: `tile-<id>` (tap to add / remove).
 
-**TimelineSlider** 🛠 – place events on a timeline. `marks: { id, label: KitText }[]` (ticks in order) ·
+**TimelineSlider** ✅ – place events on a timeline. `marks: { id, label: KitText }[]` (ticks in order) ·
 `events: (KitItem & { mark: string })[]` (one at a time). Drag the marker along the line, then "Place it here"; a
 wrong place says "earlier" / "later". Test ids: `timeline-mark-<id>`, `kit-place`.
 
-**PourFill** 🛠 – pour or fill to a line (water, milk, grain). `vessels: (KitFace & { id, target: number (0..1),
+**PourFill** ✅ – pour or fill to a line (water, milk, grain). `vessels: (KitFace & { id, target: number (0..1),
 tolerance? })[]` · `liquid?: 'water' | 'milk' | 'grain'` · `rate?`. Hold to pour, release to stop; in the band →
 right; overflow → a gentle "too much" and the vessel empties. Test ids: `pour-<vesselId>`.
 

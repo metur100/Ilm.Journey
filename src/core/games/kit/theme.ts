@@ -38,6 +38,9 @@ export interface KitColors {
   onGold: string;
   goldSoft: string;
   goldEdge: string;
+  /** Liquids (PourFill). */
+  water: string;
+  waterSoft: string;
   /** Text on the board. */
   text: string;
   textMuted: string;
@@ -84,6 +87,8 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
         onGold: c.onGold,
         goldSoft: c.goldSoft,
         goldEdge: mix(c.goldSoft, '#000000', 0.35),
+        water: c.info,
+        waterSoft: mix(c.info, '#FFFFFF', 0.35),
         text: c.text,
         textMuted: c.textMuted,
         cardBack: [mix(accent, '#000000', 0.15), mix(accent, '#000000', 0.4)],
@@ -114,6 +119,8 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
         onGold: c.onGold,
         goldSoft: c.goldSoft,
         goldEdge: c.goldBorder,
+        water: mix(c.info, '#FFFFFF', 0.2),
+        waterSoft: mix(c.info, '#FFFFFF', 0.55),
         text: c.text,
         textMuted: c.textMuted,
         cardBack: [mix(accent, '#FFFFFF', 0.08), mix(accent, '#000000', 0.22)],

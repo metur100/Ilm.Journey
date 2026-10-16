@@ -32,3 +32,14 @@ export { SortBins, isRightBin, type SortBin, type SortBinsProps, type SortItem }
 export { MemoryPairs, type MemoryPair, type MemoryPairsProps } from './engines/MemoryPairs';
 export { ConnectPairs, type ConnectPair, type ConnectPairsProps } from './engines/ConnectPairs';
 export { BuildScene, type BuildPart, type BuildSceneProps } from './engines/BuildScene';
+export { CatchGame, type CatchGameProps, type CatchItem } from './engines/CatchGame';
+export { TapScene, type SceneSpot, type TapSceneProps } from './engines/TapScene';
+export { JigsawReveal, type JigsawRevealProps } from './engines/JigsawReveal';
+export { PathTrace, type PathStop, type PathTraceProps } from './engines/PathTrace';
+export { WordTiles, type WordTilesProps } from './engines/WordTiles';
+export { LetterJoin, type JoinWord, type LetterJoinProps } from './engines/LetterJoin';
+export { TraceShape, type TraceShapeDef, type TraceShapeProps } from './engines/TraceShape';
+export { BalanceScale, balancingSet, tiltFor, type BalanceScaleProps, type ScaleWeight } from './engines/BalanceScale';
+export { TimelineSlider, type TimelineEvent, type TimelineMark, type TimelineSliderProps } from './engines/TimelineSlider';
+export { PourFill, pourResult, type PourFillProps, type PourVessel } from './engines/PourFill';
+export { samplePath } from './pathSample';
