@@ -1,40 +1,27 @@
 import { type GameDef, type GameFact, registerGame } from '@/core/games';
 
-import {
-  AMANAH,
-  AMANAH_SOURCES,
-  FORGIVENESS,
-  FORGIVENESS_SOURCES,
-  IFTAR,
-  IFTAR_FACT_SOURCES,
-  Q_DIZZY,
-  RAHMAH,
-  RAHMAH_SOURCES,
-  SHUKR,
-  SHUKR_SOURCES,
-  SIDQ,
-  SIDQ_SOURCES,
-  SMILE,
-  SMILE_SOURCES,
-  STAY_SAFE,
-  SUHOOR,
-  SUHOOR_FACT_SOURCES,
-} from './content';
-import { type DeedsConfig, GoodDeedsDayGame } from './GoodDeedsDayGame';
+import { L } from '../sections/akhlaq/shared/facts';
+import { DILEMMAS, EVERYDAY, WHOLE_DAY } from './content';
+import { type DeedsConfig, GoodDeedsDayGame } from './DayGame';
 import { deedsI18n } from './i18n';
 
-/* Akhlaq scenes and facts are copied from Learn content, with their original sources and review questions. */
+/*
+ * A Day of Good Deeds (v3 rework in the kit look, id kept). L1: an everyday day, moment by moment, hints.
+ * L2: harder moments (honesty, a toy taken, a stray cat, saying sorry), no hints. L3 (twist): the whole day at once –
+ * every good deed back to its moment. Moments and feedback are the Learn content's scenario questions; the facts are
+ * the Learn lessons (fact ids and review keys kept from v2).
+ */
 
 export const DEEDS_FACTS = {
-  smile: { id: 'smile-charity', text: SMILE, sources: SMILE_SOURCES, art: 'object.coin-jar', reviewKey: 'quest:akhlaq-smile' },
-  amanah: { id: 'amanah', text: AMANAH, sources: AMANAH_SOURCES, art: 'object.book', reviewKey: 'quest:akhlaq-amanah-mc' },
-  shukr: { id: 'shukr', text: SHUKR, sources: SHUKR_SOURCES, art: 'object.gift', reviewKey: 'quest:akhlaq-shukr-scenario' },
-  sidq: { id: 'sidq', text: SIDQ, sources: SIDQ_SOURCES, art: 'object.cup', reviewKey: 'quest:akhlaq-vase' },
-  rahmah: { id: 'rahmah', text: RAHMAH, sources: RAHMAH_SOURCES, art: 'animal.cat', reviewKey: 'quest:akhlaq-animal' },
-  forgiveness: { id: 'forgiveness', text: FORGIVENESS, sources: FORGIVENESS_SOURCES, art: 'ui.heart', reviewKey: 'quest:akhlaq-forgive-scenario' },
-  suhoor: { id: 'suhoor', text: SUHOOR, sources: SUHOOR_FACT_SOURCES, art: 'food.dates', reviewKey: 'quest:ramadan-suhoor-blessing' },
-  iftar: { id: 'iftar-dates', text: IFTAR, sources: IFTAR_FACT_SOURCES, art: 'food.water', reviewKey: 'quest:ramadan-iftar-dates' },
-  safe: { id: 'fast-safely', text: STAY_SAFE, sources: Q_DIZZY.sources, art: 'object.lantern-ramadan', reviewKey: 'quest:ramadan-dizzy' },
+  smile: { ...L.smileCharity(), id: 'smile-charity', reviewKey: 'quest:akhlaq-smile' },
+  amanah: { ...L.amanah(), reviewKey: 'quest:akhlaq-amanah-mc' },
+  shukr: { ...L.shukr(), reviewKey: 'quest:akhlaq-shukr-scenario' },
+  sidq: { ...L.sidq(), reviewKey: 'quest:akhlaq-vase' },
+  rahmah: { ...L.rahmah(), reviewKey: 'quest:akhlaq-animal' },
+  forgiveness: { ...L.forgiveness(), reviewKey: 'quest:akhlaq-forgive-scenario' },
+  helping: L.helping(),
+  parents: L.parents(),
+  character: L.character(),
 } satisfies Record<string, GameFact>;
 
 export const DEEDS_GAME_ID = 'good-deeds-day';
@@ -43,15 +30,28 @@ export const deedsGame: GameDef<DeedsConfig> = {
   id: DEEDS_GAME_ID,
   topicId: 'akhlaq',
   i18n: deedsI18n,
-  coverArt: 'object.coin-jar',
+  coverArt: 'garden.flower-tulip',
   hintArt: 'garden.sprout',
   component: GoodDeedsDayGame,
   levels: [
-    { level: 1, config: { day: 'everyday' }, facts: [DEEDS_FACTS.smile, DEEDS_FACTS.amanah, DEEDS_FACTS.shukr] },
-    { level: 2, config: { day: 'dilemmas' }, facts: [DEEDS_FACTS.sidq, DEEDS_FACTS.rahmah, DEEDS_FACTS.forgiveness] },
+    {
+      level: 1,
+      config: { mode: 'moments', moments: EVERYDAY, hints: true, facts: { present: 'shukr', wallet: 'amanah', 'new-student': 'smile-charity', table: 'shukr' } },
+      facts: [DEEDS_FACTS.shukr, DEEDS_FACTS.amanah, DEEDS_FACTS.smile],
+    },
+    {
+      level: 2,
+      config: { mode: 'moments', moments: DILEMMAS, hints: false, facts: { cup: 'sidq', toy: 'forgiveness', cat: 'rahmah', sorry: 'forgiveness' } },
+      facts: [DEEDS_FACTS.sidq, DEEDS_FACTS.rahmah, DEEDS_FACTS.forgiveness],
+    },
+    {
+      level: 3,
+      config: { mode: 'whole-day', moments: WHOLE_DAY, hints: false, facts: { neighbour: 'helping', wallet: 'helping', cat: 'great-character', table: 'parents' } },
+      facts: [DEEDS_FACTS.helping, DEEDS_FACTS.parents, DEEDS_FACTS.character],
+    },
   ],
-  teaches: { questionKeys: Object.values(DEEDS_FACTS).map((f) => f.reviewKey) },
-  order: 10,
+  teaches: { questionKeys: ['quest:akhlaq-smile', 'quest:akhlaq-amanah-mc', 'quest:akhlaq-shukr-scenario', 'quest:akhlaq-vase', 'quest:akhlaq-animal', 'quest:akhlaq-forgive-scenario'] },
+  order: 1,
 };
 
 export function registerGoodDeedsDayGame(): void {
