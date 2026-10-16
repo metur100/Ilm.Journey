@@ -41,7 +41,7 @@ export function artNames(value: unknown, out: string[] = []): string[] {
   if (Array.isArray(value)) value.forEach((v) => artNames(v, out));
   else if (value && typeof value === 'object') {
     for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
-      if (typeof v === 'string' && ['art', 'sceneArt', 'spotArt', 'map', 'scene', 'sky', 'basketArt', 'endArt', 'coverArt', 'hintArt'].includes(k)) out.push(v);
+      if (typeof v === 'string' && v.includes('.') && ['art', 'sceneArt', 'spotArt', 'map', 'scene', 'sky', 'basketArt', 'endArt', 'coverArt', 'hintArt'].includes(k)) out.push(v);
       else if (typeof v === 'object') artNames(v, out);
     }
   }
