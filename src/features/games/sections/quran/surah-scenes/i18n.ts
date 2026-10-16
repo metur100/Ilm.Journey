@@ -1,0 +1,81 @@
+import { defineNamespace } from '@/core/i18n';
+
+const en = {
+  title: 'Scenes of the Surahs',
+  description: 'Build the pictures that short surahs describe – the year of the elephant, the caravans of Quraysh and the signs of creation.',
+  howTo: 'Drag each piece onto its place in the picture. Every piece shows the ayah it comes from.',
+  'play.promptFil': 'Build the scene of Surah Al-Fil, piece by piece.',
+  'play.promptQuraysh': 'Build the scene of Surah Quraysh.',
+  'play.promptGhashiyah': 'Look at creation: place the camels, the sky, the mountains and the earth.',
+  'part.kaaba': 'The Kaaba',
+  'part.elephant': 'The elephant',
+  'part.birds': 'Birds in flocks',
+  'part.caravan': 'The caravan',
+  'part.winter': 'Winter',
+  'part.summer': 'Summer',
+  'part.house': 'This House',
+  'part.food': 'Food and safety',
+  'part.camels': 'The camels',
+  'part.sky': 'The sky',
+  'part.mountains': 'The mountains',
+  'part.earth': 'The earth',
+  'cap.kaaba': 'The Kaaba stands in the valley of Makkah.',
+  'reveal.fil': 'Surah Al-Fil',
+  'reveal.quraysh': 'Surah Quraysh',
+  'reveal.ghashiyah': 'Surah Al-Ghashiyah 88:17–20',
+} as const;
+
+type Key = keyof typeof en;
+
+const de: Record<Key, string> = {
+  title: 'Bilder der Suren',
+  description: 'Baue die Bilder, die kurze Suren beschreiben – das Jahr des Elefanten, die Karawanen der Quraisch und die Zeichen der Schöpfung.',
+  howTo: 'Zieh jedes Teil an seinen Platz im Bild. Jedes Teil zeigt den Vers, aus dem es kommt.',
+  'play.promptFil': 'Baue das Bild der Sure Al-Fil, Teil für Teil.',
+  'play.promptQuraysh': 'Baue das Bild der Sure Quraisch.',
+  'play.promptGhashiyah': 'Schau auf die Schöpfung: Setze die Kamele, den Himmel, die Berge und die Erde.',
+  'part.kaaba': 'Die Kaaba',
+  'part.elephant': 'Der Elefant',
+  'part.birds': 'Vögel in Schwärmen',
+  'part.caravan': 'Die Karawane',
+  'part.winter': 'Winter',
+  'part.summer': 'Sommer',
+  'part.house': 'Dieses Haus',
+  'part.food': 'Speise und Sicherheit',
+  'part.camels': 'Die Kamele',
+  'part.sky': 'Der Himmel',
+  'part.mountains': 'Die Berge',
+  'part.earth': 'Die Erde',
+  'cap.kaaba': 'Die Kaaba steht im Tal von Mekka.',
+  'reveal.fil': 'Sure Al-Fil',
+  'reveal.quraysh': 'Sure Quraisch',
+  'reveal.ghashiyah': 'Sure Al-Ghaschiya 88:17–20',
+};
+
+const bs: Record<Key, string> = {
+  title: 'Slike iz sura',
+  description: 'Složi slike koje opisuju kratke sure – godinu slona, karavane Kurejšija i znakove stvaranja.',
+  howTo: 'Prevuci svaki dio na njegovo mjesto na slici. Svaki dio pokazuje ajet iz kojeg dolazi.',
+  'play.promptFil': 'Složi sliku sure El-Fil, dio po dio.',
+  'play.promptQuraysh': 'Složi sliku sure Kurejš.',
+  'play.promptGhashiyah': 'Pogledaj stvaranje: postavi kamile, nebo, planine i Zemlju.',
+  'part.kaaba': "Ka'ba",
+  'part.elephant': 'Slon',
+  'part.birds': 'Jata ptica',
+  'part.caravan': 'Karavana',
+  'part.winter': 'Zima',
+  'part.summer': 'Ljeto',
+  'part.house': 'Ovaj Hram',
+  'part.food': 'Hrana i sigurnost',
+  'part.camels': 'Kamile',
+  'part.sky': 'Nebo',
+  'part.mountains': 'Planine',
+  'part.earth': 'Zemlja',
+  'cap.kaaba': "Ka'ba stoji u dolini Mekke.",
+  'reveal.fil': 'Sura El-Fil',
+  'reveal.quraysh': 'Sura Kurejš',
+  'reveal.ghashiyah': 'Sura El-Gašija 88:17–20',
+};
+
+export const surahScenesI18n = defineNamespace('game.surah-scenes', { en, de, bs });
+export type ScenesKey = Key;

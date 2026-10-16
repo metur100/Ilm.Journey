@@ -1,3 +1,4 @@
+import { registerSurahScenesGame } from './surah-scenes/register';
 import { registerQuranEtiquetteGame } from './quran-etiquette/register';
 import { registerAyahBuilderGame } from './ayah-builder/register';
 import { registerListenAndOrderGame } from './listen-and-order/register';
@@ -14,4 +15,5 @@ export function registerQuranGames(): void {
   registerSurahMessagesGame();
   registerListenAndOrderGame();
   registerQuranEtiquetteGame();
+  registerSurahScenesGame();
 }
