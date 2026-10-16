@@ -1,4 +1,4 @@
-import { EPISODES, EVENTS, PEOPLE, SOURCES } from '@/features/seerah/content';
+import { EPISODES, EVENTS, PEOPLE, PLACES, SOURCES } from '@/features/seerah/content';
 import { toSourceRef } from '@/features/seerah/services/sources';
 
 import { SEERAH_BLOCKS, SEERAH_EVENTS, SEERAH_PEOPLE, SEERAH_SOURCE_REFS } from '../seerahContent';
@@ -13,6 +13,7 @@ describe('seerah games: copied content', () => {
       ep.lessons.forEach((b, i) => expect(SEERAH_BLOCKS[`e${n}.lesson${i}`].text).toEqual(b.text));
     }
     for (const ev of EVENTS) ev.summary.forEach((b, i) => expect(SEERAH_BLOCKS[`ev.${ev.id}.${i}`]).toEqual(b));
+    for (const pl of PLACES) pl.description.forEach((b, i) => expect(SEERAH_BLOCKS[`pl.${pl.id}.${i}`]).toEqual(b));
   });
 
   it('events and people match', () => {

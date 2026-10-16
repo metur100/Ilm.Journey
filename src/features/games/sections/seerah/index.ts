@@ -1,3 +1,4 @@
+import { registerBadrWellsGame } from './badr-wells/register';
 import { registerSeerahTimelineGame } from './seerah-timeline/register';
 import { registerCaveHiraGame } from './cave-hira/register';
 import { registerJourneysMapGame } from './journeys-map/register';
@@ -13,4 +14,5 @@ export function registerSeerahGames(): void {
   registerCaveHiraGame();
   registerJourneysMapGame();
   registerSeerahTimelineGame();
+  registerBadrWellsGame();
 }

@@ -1787,6 +1787,138 @@ export const SEERAH_BLOCKS: Record<string, SeerahBlock> = {
    "bukhari-1241",
    "q-3-144"
   ]
+ },
+ "pl.makkah.0": {
+  "kind": "fact",
+  "text": {
+   "en": "Makkah lies in a dry valley of the Hijaz. The Kaʿbah stood at its centre, and the tribe of Quraysh, to which the Prophet ﷺ belonged, held authority over the city and its sanctuary.",
+   "de": "Mekka liegt in einem trockenen Tal des Hidschas. Im Zentrum stand die Kaaba, und der Stamm der Quraisch, dem der Prophet ﷺ angehörte, hatte die Führung über die Stadt und ihr Heiligtum.",
+   "bs": "Mekka leži u sušnoj dolini Hidžaza. U njenom središtu nalazila se Kaba, a pleme Kurejš, kojem je pripadao Poslanik ﷺ, imalo je vlast nad gradom i svetištem."
+  },
+  "sourceIds": [
+   "ibn-hisham"
+  ]
+ },
+ "pl.hira.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A small cave near the top of the mountain known today as Jabal al-Nur, north-east of the Kaʿbah. Before the revelation, the Prophet ﷺ used to spend nights there in worship.",
+   "de": "Eine kleine Höhle nahe dem Gipfel des Berges, der heute Dschabal an-Nur heißt, nordöstlich der Kaaba. Vor der Offenbarung verbrachte der Prophet ﷺ dort Nächte in Andacht.",
+   "bs": "Mala pećina blizu vrha brda koje se danas zove Džebel en-Nur, sjeveroistočno od Kabe. Prije Objave Poslanik ﷺ je tu provodio noći u ibadetu."
+  },
+  "sourceIds": [
+   "bukhari-3"
+  ]
+ },
+ "pl.thawr.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A cave in a mountain south of Makkah – in the opposite direction from Madinah. The Quran refers to the two in the cave in Surah al-Tawbah 9:40.",
+   "de": "Eine Höhle in einem Berg südlich von Mekka – in der Gegenrichtung zu Medina. Der Koran erwähnt die zwei in der Höhle in Sure at-Tauba 9:40.",
+   "bs": "Pećina u brdu južno od Mekke – u suprotnom smjeru od Medine. Kur'an spominje dvojicu u pećini u suri et-Tevbe 9:40."
+  },
+  "sourceIds": [
+   "q-9-40",
+   "bukhari-3905"
+  ]
+ },
+ "pl.taif.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A town in the mountains south-east of Makkah, home of the tribe of Thaqif.",
+   "de": "Eine Stadt in den Bergen südöstlich von Mekka, Heimat des Stammes Thaqif.",
+   "bs": "Grad u planinama jugoistočno od Mekke, dom plemena Sekif."
+  },
+  "sourceIds": [
+   "ibn-hisham"
+  ]
+ },
+ "pl.abyssinia.0": {
+  "kind": "fact",
+  "text": {
+   "en": "The kingdom of Aksum across the Red Sea, in the region of present-day Ethiopia and Eritrea.",
+   "de": "Das Königreich Aksum jenseits des Roten Meeres, in der Region des heutigen Äthiopien und Eritrea.",
+   "bs": "Kraljevstvo Aksum preko Crvenog mora, na području današnje Etiopije i Eritreje."
+  },
+  "sourceIds": [
+   "ibn-hisham"
+  ]
+ },
+ "pl.quba.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A settlement on the southern outskirts of Madinah. The Prophet ﷺ stayed there for some days before entering the town itself.",
+   "de": "Eine Siedlung am südlichen Stadtrand von Medina. Der Prophet ﷺ blieb dort einige Tage, bevor er in die Stadt selbst einzog.",
+   "bs": "Naselje na južnoj periferiji Medine. Poslanik ﷺ je tu ostao nekoliko dana prije nego što je ušao u sam grad."
+  },
+  "sourceIds": [
+   "bukhari-3905",
+   "ibn-hisham"
+  ]
+ },
+ "pl.madinah.0": {
+  "kind": "fact",
+  "text": {
+   "en": "An oasis town about 400 km north of Makkah, home of the Aws and Khazraj and of several Jewish tribes. After the Hijrah it became known as al-Madinah, \"the City\".",
+   "de": "Eine Oasenstadt etwa 400 km nördlich von Mekka, Heimat der Aus und Chazradsch sowie mehrerer jüdischer Stämme. Nach der Hidschra wurde sie als al-Madina, „die Stadt“, bekannt.",
+   "bs": "Oazni grad oko 400 km sjeverno od Mekke, dom Evsa i Hazredža te nekoliko jevrejskih plemena. Nakon Hidžre postao je poznat kao el-Medina, „Grad“."
+  },
+  "sourceIds": [
+   "ibn-hisham"
+  ]
+ },
+ "pl.badr.0": {
+  "kind": "fact",
+  "text": {
+   "en": "Wells on the caravan route between Syria and Makkah, south-west of Madinah near the Red Sea coast.",
+   "de": "Brunnen an der Karawanenroute zwischen Syrien und Mekka, südwestlich von Medina nahe der Küste des Roten Meeres.",
+   "bs": "Bunari na karavanskom putu između Šama i Mekke, jugozapadno od Medine, blizu obale Crvenog mora."
+  },
+  "sourceIds": [
+   "ibn-hisham"
+  ]
+ },
+ "pl.uhud.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A mountain just north of Madinah. The martyrs of the battle, including Hamzah, were buried at its foot.",
+   "de": "Ein Berg direkt nördlich von Medina. Die Märtyrer der Schlacht, darunter Hamza, wurden an seinem Fuß begraben.",
+   "bs": "Brdo neposredno sjeverno od Medine. Šehidi bitke, među njima i Hamza, ukopani su u njegovom podnožju."
+  },
+  "sourceIds": [
+   "ibn-hisham"
+  ]
+ },
+ "pl.hudaybiyyah.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A place at the edge of the sacred area on the road from Madinah, west of Makkah.",
+   "de": "Ein Ort am Rand des heiligen Bezirks an der Straße von Medina, westlich von Mekka.",
+   "bs": "Mjesto na rubu harema na putu iz Medine, zapadno od Mekke."
+  },
+  "sourceIds": [
+   "bukhari-2731"
+  ]
+ },
+ "pl.arafat.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A plain east of Makkah. Standing at ʿArafat on the 9th of Dhu al-Hijjah is the central rite of the Hajj.",
+   "de": "Eine Ebene östlich von Mekka. Das Stehen auf Arafat am 9. Dhu al-Hiddscha ist der zentrale Ritus des Haddsch.",
+   "bs": "Ravnica istočno od Mekke. Stajanje na Arefatu 9. zul-hidžeta središnji je obred hadža."
+  },
+  "sourceIds": [
+   "muslim-1218"
+  ]
+ },
+ "pl.jeddah.0": {
+  "kind": "fact",
+  "text": {
+   "en": "A modern reference point; it plays no role in the episodes of this app.",
+   "de": "Ein moderner Bezugspunkt; in den Episoden dieser App spielt die Stadt keine Rolle.",
+   "bs": "Savremena orijentacijska tačka; u epizodama ove aplikacije nema ulogu."
+  },
+  "sourceIds": []
  }
 };
 

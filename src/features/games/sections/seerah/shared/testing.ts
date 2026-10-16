@@ -5,8 +5,6 @@ import { namespaceProblems, playToEnd, renderGame } from '@/core/games/kit/testi
 
 import { levelArt, levelTexts, type SeerahLevelConfig } from './SeerahGame';
 
-const FORBIDDEN = /muslims believe|for muslims|according to islam|muslime glauben|für muslime|laut dem islam|muslimani vjeruju|za muslimane|prema islamu/i;
-
 /** The standard test suite of a Seerah section game. */
 export function describeSeerahGame(id: string, register: () => void): void {
   register();
@@ -18,7 +16,7 @@ export function describeSeerahGame(id: string, register: () => void): void {
       expect(namespaceProblems(game())).toEqual([]);
     });
 
-    it('uses existing art, existing i18n keys, sourced facts and direct wording', () => {
+    it('uses existing art, existing i18n keys, and sourced facts (direct wording: src/core/__tests__/phrasing.test.ts)', () => {
       const g = game();
       const dict = (g.i18n.dictionaries as unknown as Record<string, Record<string, string>>).en;
       const missingArt = [g.coverArt, ...(g.hintArt ? [g.hintArt] : []), ...g.levels.flatMap((l) => levelArt(l.config)), ...g.levels.flatMap((l) => l.facts.map((f) => f.art ?? '').filter(Boolean))].filter((a) => !hasArt(a));
@@ -30,16 +28,11 @@ export function describeSeerahGame(id: string, register: () => void): void {
           expect(f.sources.length).toBeGreaterThan(0);
           for (const lang of ['en', 'de', 'bs'] as const) {
             expect(f.text[lang]?.trim()).toBeTruthy();
-            expect(FORBIDDEN.test(f.text[lang])).toBe(false);
           }
         }
         // Every mapped fact id is a fact of the game.
         const ids = new Set(g.levels.flatMap((x) => x.facts.map((f) => f.id)));
         for (const factId of Object.values(l.config.factMap ?? {})) expect(ids.has(factId)).toBe(true);
-      }
-      for (const lang of ['en', 'de', 'bs'] as const) {
-        const all = Object.values((g.i18n.dictionaries as unknown as Record<string, Record<string, string>>)[lang]).join(' ');
-        expect(FORBIDDEN.test(all)).toBe(false);
       }
     });
 
