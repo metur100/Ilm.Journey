@@ -73,6 +73,27 @@ export const ARK_FACTS = {
     art: 'place.mount-judi',
     reviewKey: 'stories:nuh-judi',
   },
+  planks: {
+    id: 'ark-planks-nails',
+    text: {
+      en: 'Allah carried Nuh on a ship made of planks and nails.',
+      de: 'Allah trug Nuh auf einem Schiff aus Planken und Nägeln.',
+      bs: 'Allah je Nuha nosio na lađi od dasaka i klinova.',
+    },
+    sources: [{ sourceName: 'Quran', sourceReference: '54:13' }],
+    art: 'prophet.nuh-planks',
+  },
+  bismillah: {
+    id: 'ark-bismillah',
+    text: {
+      en: 'Nuh said: "Board it. In the name of Allah it sails and comes to rest."',
+      de: 'Nuh sagte: „Steigt ein. Im Namen Allahs fährt sie und kommt sie zur Ruhe.“',
+      bs: 'Nuh je rekao: „Ukrcajte se u nju. U ime Allaha ona plovi i pristaje.“',
+    },
+    sources: [{ sourceName: 'Quran', sourceReference: '11:41' }],
+    art: 'prophet.nuh-ark',
+    reviewKey: 'stories:nuh-board',
+  },
   sabr: {
     id: 'nuh-sabr',
     text: {

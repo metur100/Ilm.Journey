@@ -2,8 +2,8 @@ import type React from 'react';
 
 import { createInitialData } from '@/core/services/engine';
 import { useAppStore } from '@/core/store/appStore';
-import { registerArkOfNuhGame } from '@/features/games/ark-of-nuh/register';
-import { registerYusufStorehouseGame } from '@/features/games/yusuf-storehouse/register';
+import { registerArkOfNuhGame } from '../register';
+
 import StoryScreen from '@/features/stories/screens/StoryScreen';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -22,7 +22,7 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 
 // Only these games (not registerFeatures()): other games' modules must not affect these tests.
 registerArkOfNuhGame();
-registerYusufStorehouseGame();
+
 
 interface ReactTestInstance {
   props: Record<string, any>;
@@ -34,17 +34,14 @@ const { act, create } = require('react-test-renderer') as {
   create: (element: React.ReactElement) => { root: ReactTestInstance; unmount: () => void };
 };
 
-/** The story overview links to the story's mini-game (Nuh → Ark of Nuh, Yusuf → Yusuf's Storehouse). */
+/** The story overview links to the story's mini-game (Nuh → Ark of Nuh). */
 describe('story → game link', () => {
   beforeEach(() => {
     useAppStore.setState({ ...createInitialData('en'), hydrated: true, celebrations: [] });
     mockPush.mockClear();
   });
 
-  it.each([
-    ['nuh', 'ark-of-nuh'],
-    ['yusuf', 'yusuf-storehouse'],
-  ])('%s opens %s', async (story, game) => {
+  it.each([['nuh', 'ark-of-nuh']])('%s opens %s', async (story, game) => {
     mockParams.id = story;
     let tree!: { root: ReactTestInstance; unmount: () => void };
     await act(async () => {
@@ -57,13 +54,4 @@ describe('story → game link', () => {
     await act(async () => tree.unmount());
   });
 
-  it('shows no game link for a story without a game', async () => {
-    mockParams.id = 'adam';
-    let tree!: { root: ReactTestInstance; unmount: () => void };
-    await act(async () => {
-      tree = create(<StoryScreen />);
-    });
-    expect(tree.root.findAll((n) => n.props.accessibilityLabel === 'Play the game')).toHaveLength(0);
-    await act(async () => tree.unmount());
-  });
 });
