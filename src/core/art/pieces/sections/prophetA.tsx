@@ -480,7 +480,7 @@ const nuh = {
       <Path d="M0 170L70 70Q86 52 102 66L150 104 180 86 240 150V170Z" fill={dim(c, '#8E7468')} />
       <Path d="M86 56Q96 56 102 66L150 104 120 170H90L96 90Z" fill={dim(c, '#6E5850')} opacity={0.6} />
       <Path d="M0 170L40 128 90 150 150 124 240 160V170Z" fill={c.green(dim(c, '#7DA36A'))} />
-      <G transform="translate(36 -2) scale(0.42)">
+      <G transform="translate(30 16) scale(0.42)">
         <G transform="translate(-70 -36)">
           <ArkComposite c={c} ramp={false} />
         </G>
