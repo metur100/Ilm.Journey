@@ -1,4 +1,6 @@
 import { registerYaqubRoadGame } from './yaqub-shirt-road/register';
+import { registerYusufStorehouseGame } from './yusuf-storehouse/register';
+import { registerYusufStoryPathGame } from './yusuf-story-path/register';
 
 /**
  * Section "prophets-b" (docs/GAMES-V3.md): every game of this section lives in this folder and is registered here.
@@ -7,4 +9,6 @@ import { registerYaqubRoadGame } from './yaqub-shirt-road/register';
  */
 export function registerProphetsBGames(): void {
   registerYaqubRoadGame();
+  registerYusufStorehouseGame();
+  registerYusufStoryPathGame();
 }

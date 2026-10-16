@@ -1,32 +1,74 @@
 {
   "id": "yusuf",
-  "order": 5,
+  "order": 11,
   "prophetName": { "en": "Yusuf", "de": "Yusuf (Josef)", "bs": "Jusuf" },
   "honorific": "alayhis-salam",
   "title": { "en": "From the Well to the Palace", "de": "Vom Brunnen zum Palast", "bs": "Od bunara do dvora" },
   "description": {
-    "en": "A dream of stars, a dark well, an unfair prison – and beautiful forgiveness.",
-    "de": "Ein Traum von Sternen, ein dunkler Brunnen, ein ungerechtes Gefängnis – und schöne Vergebung.",
-    "bs": "San o zvijezdama, mračni bunar, nepravedna tamnica – i lijep oprost."
+    "en": "A dream of stars, a dark well, an unfair prison, full storehouses – and beautiful forgiveness.",
+    "de": "Ein Traum von Sternen, ein dunkler Brunnen, ein ungerechtes Gefängnis, volle Vorratshäuser – und schöne Vergebung.",
+    "bs": "San o zvijezdama, mračni bunar, nepravedna tamnica, puni ambari – i lijep oprost."
   },
   "place": { "en": "Canaan and Egypt", "de": "Kanaan und Ägypten", "bs": "Kanaan i Egipat" },
   "symbol": "well",
+  "symbolArt": "prophet.yusuf-dream",
   "cover": { "sky": "night", "elements": ["stars", "fullMoon", "dunes", "well"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "prophet.yusuf-dream", "x": 200, "y": 88, "w": 230, "anchor": "center", "anim": "glow", "enter": "fade", "at": 300, "duration": 1600 },
+      { "art": "story.dunes" },
+      { "art": "prophet.yusuf-well", "x": 200, "y": 228, "w": 90, "enter": "rise", "at": 200 }
+    ],
+    "effects": [{ "type": "stars", "intensity": 2 }, { "type": "sparkle", "x": 200, "y": 90, "w": 240, "h": 90, "intensity": 2, "at": 1200 }, { "type": "sand", "intensity": 1 }]
+  },
+  "mapPlaces": ["canaan", "egypt"],
   "intro": {
-    "en": "As a boy, Yusuf (peace be upon him) saw in a dream eleven stars, the sun and the moon prostrating to him. His father, Prophet Yaqub, told him not to tell his brothers.",
-    "de": "Als Junge sah Yusuf (Friede sei mit ihm) im Traum elf Sterne, die Sonne und den Mond, die sich vor ihm niederwarfen. Sein Vater, der Prophet Yaqub, sagte ihm, er solle es seinen Brüdern nicht erzählen.",
-    "bs": "Kao dječak, Jusuf, a.s., sanjao je jedanaest zvijezda, sunce i mjesec kako mu padaju na sedždu. Njegov otac, poslanik Jakub, rekao mu je da to ne priča braći."
+    "en": "Allah calls the story of Yusuf (peace be upon him) \"the best of stories\". Yusuf was a son of Prophet Yaqub. One night, as a boy, he saw a wonderful dream.",
+    "de": "Allah nennt die Geschichte von Yusuf (Friede sei mit ihm) „die schönste der Geschichten“. Yusuf war ein Sohn des Propheten Yaqub. Eines Nachts sah er als Junge einen wunderbaren Traum.",
+    "bs": "Allah kazivanje o Jusufu, a.s., naziva „najljepšim kazivanjem“. Jusuf je bio sin poslanika Jakuba. Jedne noći, kao dječak, usnio je divan san."
   },
   "scenes": [
+    {
+      "id": "yusuf-s0",
+      "title": { "en": "Eleven stars, the sun and the moon", "de": "Elf Sterne, die Sonne und der Mond", "bs": "Jedanaest zvijezda, sunce i mjesec" },
+      "text": {
+        "en": "Yusuf told his father: \"I saw eleven stars, the sun and the moon – I saw them prostrating to me.\" Yaqub said: \"Do not tell your brothers about your dream.\" He knew that Allah would choose Yusuf and teach him the meaning of dreams.",
+        "de": "Yusuf erzählte seinem Vater: „Ich sah elf Sterne, die Sonne und den Mond – ich sah, wie sie sich vor mir niederwarfen.“ Yaqub sagte: „Erzähle deinen Brüdern nichts von deinem Traum.“ Er wusste, dass Allah Yusuf erwählen und ihn die Deutung von Träumen lehren würde.",
+        "bs": "Jusuf je rekao ocu: „Usnio sam jedanaest zvijezda, sunce i mjesec – vidio sam ih kako mi se klanjaju.“ Jakub je rekao: „Ne pričaj svoj san braći.“ Znao je da će Allah odabrati Jusufa i naučiti ga tumačenju snova."
+      },
+      "scene": { "sky": "night", "elements": ["stars", "fullMoon", "hills"] },
+      "stage": {
+        "sky": "night",
+        "camera": "slowZoom",
+        "layers": [
+          { "art": "prophet.yusuf-dream", "x": 200, "y": 96, "w": 270, "anchor": "center", "anim": "glow", "enter": "fade", "at": 400, "duration": 2400 },
+          { "art": "story.hills", "opacity": 0.9 },
+          { "art": "prophet.yaqub-home", "x": 200, "y": 236, "w": 150 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "sparkle", "x": 200, "y": 100, "w": 260, "h": 100, "intensity": 2, "at": 1400 }]
+      },
+      "interactionId": "yusuf-stars",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:3–6" }]
+    },
     {
       "id": "yusuf-s1",
       "title": { "en": "The well", "de": "Der Brunnen", "bs": "Bunar" },
       "text": {
-        "en": "Yusuf's brothers were jealous because their father loved him so much. They took him out with them and made a terrible decision.",
-        "de": "Yusufs Brüder waren neidisch, weil ihr Vater ihn so sehr liebte. Sie nahmen ihn mit und trafen eine schreckliche Entscheidung.",
-        "bs": "Jusufova braća su mu zavidjela jer ga je otac toliko volio. Poveli su ga sa sobom i donijeli strašnu odluku."
+        "en": "Yusuf's brothers were jealous because their father loved him and his brother so much. They took him out with them and put him into the bottom of a well. But Allah inspired Yusuf that one day he would tell them about what they had done.",
+        "de": "Yusufs Brüder waren neidisch, weil ihr Vater ihn und seinen Bruder so sehr liebte. Sie nahmen ihn mit und ließen ihn auf den Grund eines Brunnens hinab. Doch Allah gab Yusuf ein, dass er ihnen eines Tages sagen würde, was sie getan hatten.",
+        "bs": "Jusufova braća su mu zavidjela jer je otac njega i njegovog brata toliko volio. Poveli su ga sa sobom i spustili ga na dno bunara. Ali Allah je Jusufu objavio da će ih jednog dana podsjetiti na ono što su uradili."
       },
       "scene": { "sky": "day", "elements": ["dunes", "well"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.desert-flat" },
+          { "art": "prophet.yusuf-well", "x": 190, "y": 226, "w": 104 },
+          { "art": "story.palms", "x": 330, "y": 220, "w": 120 }
+        ],
+        "effects": [{ "type": "sand", "intensity": 2 }, { "type": "sunrays", "x": 70, "y": 50, "intensity": 1 }, { "type": "lightBeam", "x": 190, "intensity": 1, "at": 2200 }]
+      },
       "interactionId": "yusuf-next",
       "sources": [{ "sourceName": "Quran", "sourceReference": "12:8–15" }]
     },
@@ -34,24 +76,92 @@
       "id": "yusuf-s2",
       "title": { "en": "A caravan and a prison", "de": "Eine Karawane und ein Gefängnis", "bs": "Karavan i tamnica" },
       "text": {
-        "en": "A caravan found Yusuf in the well and took him far away, where he was sold. He grew up in a noble household. Yusuf stayed honest and refused to do wrong – yet he was put in prison unjustly. Even in prison, he taught about Allah and explained dreams.",
-        "de": "Eine Karawane fand Yusuf im Brunnen und brachte ihn weit weg, wo er verkauft wurde. Er wuchs in einem vornehmen Haus auf. Yusuf blieb ehrlich und weigerte sich, Unrecht zu tun – dennoch kam er ungerecht ins Gefängnis. Selbst dort lehrte er über Allah und deutete Träume.",
-        "bs": "Karavan je pronašao Jusufa u bunaru i odveo ga daleko, gdje je prodan. Odrastao je u uglednoj kući. Jusuf je ostao iskren i odbio da čini loše – ali je ipak nepravedno bačen u tamnicu. Čak je i tamo poučavao o Allahu i tumačio snove."
+        "en": "A caravan found Yusuf in the well and took him to Egypt, where he was sold. He grew up in a noble household. Yusuf stayed honest and refused to do wrong – yet he was put in prison unjustly. Even in prison he taught about Allah, the One, and explained dreams.",
+        "de": "Eine Karawane fand Yusuf im Brunnen und brachte ihn nach Ägypten, wo er verkauft wurde. Er wuchs in einem vornehmen Haus auf. Yusuf blieb ehrlich und weigerte sich, Unrecht zu tun – dennoch kam er ungerecht ins Gefängnis. Selbst dort lehrte er über Allah, den Einen, und deutete Träume.",
+        "bs": "Karavan je pronašao Jusufa u bunaru i odveo ga u Egipat, gdje je prodan. Odrastao je u uglednoj kući. Jusuf je ostao iskren i odbio da čini loše – ali je ipak nepravedno bačen u tamnicu. Čak je i tamo poučavao o Allahu, Jedinom, i tumačio snove."
       },
       "scene": { "sky": "sunset", "elements": ["dunes", "caravan", "city"] },
+      "stage": {
+        "sky": "sunset",
+        "camera": "panRight",
+        "layers": [
+          { "art": "story.city-ancient", "opacity": 0.9 },
+          { "art": "story.dunes", "y": 268 },
+          { "art": "animal.camel", "x": 150, "y": 222, "w": 74, "enter": "slideRight", "at": 300, "duration": 2000 },
+          { "art": "animal.camel", "x": 232, "y": 226, "w": 64, "enter": "slideRight", "at": 700, "duration": 2000 }
+        ],
+        "effects": [{ "type": "sand", "intensity": 2 }, { "type": "birds", "intensity": 1 }]
+      },
       "interactionId": "yusuf-map",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "12:19–41" }]
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:19–42" }]
     },
     {
       "id": "yusuf-s3",
       "title": { "en": "The king's dream", "de": "Der Traum des Königs", "bs": "Kraljev san" },
       "text": {
-        "en": "The king dreamed of seven fat cows eaten by seven thin cows, and seven green ears of grain and others dry. Yusuf explained it: seven good years, then seven years of drought – so store the grain. The king put Yusuf in charge of the storehouses. When his brothers came to buy food, Yusuf forgave them, and the whole family was reunited.",
-        "de": "Der König träumte von sieben fetten Kühen, die von sieben mageren gefressen wurden, und von sieben grünen Ähren und anderen vertrockneten. Yusuf deutete es: sieben gute Jahre, dann sieben Jahre Dürre – also Getreide lagern. Der König übertrug Yusuf die Vorratskammern. Als seine Brüder kamen, um Nahrung zu kaufen, vergab Yusuf ihnen, und die ganze Familie fand wieder zusammen.",
-        "bs": "Kralj je sanjao sedam debelih krava koje jede sedam mršavih, te sedam zelenih klasova i drugih suhih. Jusuf je protumačio: sedam rodnih godina, zatim sedam sušnih – pa treba sačuvati žito. Kralj je Jusufa postavio nad riznicama. Kada su braća došla kupiti hranu, Jusuf im je oprostio, i cijela porodica se ponovo sastala."
+        "en": "The king dreamed of seven fat cows eaten by seven thin cows, and of seven green ears of grain and others dry. Yusuf explained it: for seven years you will sow as usual – leave what you harvest in its ears, except a little that you eat. Then seven hard years will come that eat up what you stored, except a little. Then a year will come in which the people are given rain.",
+        "de": "Der König träumte von sieben fetten Kühen, die von sieben mageren gefressen wurden, und von sieben grünen Ähren und anderen vertrockneten. Yusuf deutete es: Sieben Jahre lang sät ihr wie gewohnt – lasst, was ihr erntet, in seinen Ähren, außer wenigem, das ihr esst. Dann kommen sieben harte Jahre, die aufzehren, was ihr gelagert habt, außer wenigem. Danach kommt ein Jahr, in dem die Menschen Regen bekommen.",
+        "bs": "Kralj je sanjao sedam debelih krava koje jede sedam mršavih, te sedam zelenih klasova i drugih suhih. Jusuf je protumačio: sedam godina sijte kao i obično – ono što požanjete ostavite u klasu, osim malo što ćete jesti. Zatim će doći sedam teških godina koje će pojesti ono što ste sačuvali, osim malo. Potom će doći godina u kojoj će ljudima biti dana kiša."
       },
-      "scene": { "sky": "day", "elements": ["sun", "river", "grain", "city"] },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "12:43–100" }]
+      "scene": { "sky": "day", "elements": ["sun", "river", "grain"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.sun", "x": 330, "y": 50, "w": 76, "anchor": "center" },
+          { "art": "story.nile" },
+          { "art": "animal.cow", "x": 100, "y": 214, "w": 70, "enter": "fade", "at": 300 },
+          { "art": "prophet.yusuf-sheaf-green", "x": 210, "y": 228, "w": 50, "enter": "rise", "at": 900, "anim": "sway" },
+          { "art": "prophet.yusuf-sheaf-dry", "x": 290, "y": 228, "w": 50, "enter": "rise", "at": 1500 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 330, "y": 50, "intensity": 1 }, { "type": "birds", "intensity": 1 }]
+      },
+      "interactionId": "yusuf-cows",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:43–49" }]
+    },
+    {
+      "id": "yusuf-s4",
+      "title": { "en": "The storehouses of Egypt", "de": "Die Vorratshäuser Ägyptens", "bs": "Riznice Egipta" },
+      "text": {
+        "en": "The king found Yusuf innocent and trustworthy. Yusuf said: \"Put me in charge of the storehouses of the land – I am a knowing guardian.\" When the hard years came, his brothers travelled to Egypt to buy grain. Yusuf recognised them, but they did not recognise him.",
+        "de": "Der König erkannte, dass Yusuf unschuldig und vertrauenswürdig war. Yusuf sagte: „Setze mich über die Vorratskammern des Landes ein – ich bin ein kundiger Hüter.“ Als die harten Jahre kamen, reisten seine Brüder nach Ägypten, um Getreide zu kaufen. Yusuf erkannte sie, doch sie erkannten ihn nicht.",
+        "bs": "Kralj je uvidio da je Jusuf nevin i povjerljiv. Jusuf je rekao: „Postavi me nad riznicama zemlje – ja sam čuvar vješt.“ Kada su došle teške godine, braća su doputovala u Egipat da kupe žito. Jusuf ih je prepoznao, a oni njega nisu."
+      },
+      "scene": { "sky": "day", "elements": ["river", "grain", "city"] },
+      "stage": {
+        "sky": "day",
+        "mood": "warm",
+        "layers": [
+          { "art": "story.nile" },
+          { "art": "prophet.yusuf-granary", "x": 170, "y": 232, "w": 210, "enter": "rise", "at": 300 },
+          { "art": "object.grain-sack", "x": 312, "y": 232, "w": 44, "enter": "rise", "at": 1000 },
+          { "art": "animal.camel", "x": 360, "y": 230, "w": 60, "enter": "slideLeft", "at": 1600, "duration": 2000, "flip": true }
+        ],
+        "effects": [{ "type": "dust", "intensity": 1 }, { "type": "sunrays", "x": 330, "y": 50, "intensity": 1 }]
+      },
+      "interactionId": "yusuf-find",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:50–58" }]
+    },
+    {
+      "id": "yusuf-s5",
+      "title": { "en": "Forgiveness – and the dream comes true", "de": "Vergebung – und der Traum wird wahr", "bs": "Oprost – i san se ostvaruje" },
+      "text": {
+        "en": "At last Yusuf told his brothers who he was. They were ashamed, but he said: \"No blame upon you today. May Allah forgive you – He is the Most Merciful of the merciful.\" His parents and his brothers came to Egypt and bowed down before him, and Yusuf said: \"This is the meaning of my dream of long ago – my Lord has made it come true.\"",
+        "de": "Schließlich sagte Yusuf seinen Brüdern, wer er war. Sie schämten sich, doch er sagte: „Kein Tadel soll euch heute treffen. Allah möge euch vergeben – Er ist der Barmherzigste der Barmherzigen.“ Seine Eltern und seine Brüder kamen nach Ägypten und warfen sich vor ihm nieder, und Yusuf sagte: „Das ist die Deutung meines Traumes von früher – mein Herr hat ihn wahr gemacht.“",
+        "bs": "Najzad je Jusuf rekao braći ko je on. Postidjeli su se, ali on je rekao: „Danas nema prijekora za vas. Allah će vam oprostiti – On je od milostivih najmilostiviji.“ Njegovi roditelji i braća došli su u Egipat i pali pred njim na sedždu, a Jusuf je rekao: „Ovo je tumačenje mog davnašnjeg sna – moj Gospodar ga je obistinio.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["sun", "river", "palms"] },
+      "stage": {
+        "sky": "dawn",
+        "mood": "golden",
+        "layers": [
+          { "art": "prophet.yusuf-dream", "x": 200, "y": 82, "w": 220, "anchor": "center", "anim": "glow", "enter": "fade", "at": 1800, "duration": 2000 },
+          { "art": "story.nile" },
+          { "art": "story.palms", "x": 80, "y": 224, "w": 120 },
+          { "art": "prophet.yaqub-shirt", "x": 270, "y": 200, "w": 56, "anchor": "center", "anim": "float", "enter": "fade", "at": 600 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 90, "at": 1800 }, { "type": "sparkle", "x": 200, "y": 90, "w": 220, "h": 80, "intensity": 2, "at": 2200 }, { "type": "birds", "intensity": 1 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:89–100" }]
     }
   ],
   "miniGameId": "yusuf-decision",
@@ -96,9 +206,43 @@
         "de": "Gibt es jemanden, dem du heute vergeben könntest?",
         "bs": "Postoji li neko kome bi danas mogao oprostiti?"
       }
+    },
+    {
+      "id": "yusuf-l3",
+      "value": "planning",
+      "title": { "en": "Plan ahead and be trustworthy", "de": "Vorausplanen und vertrauenswürdig sein", "bs": "Planiraj unaprijed i budi povjerljiv" },
+      "explanation": {
+        "en": "Yusuf advised keeping the harvest of the good years for the hard years, and he looked after the storehouses as a trustworthy guardian. Good planning helped a whole land.",
+        "de": "Yusuf riet, die Ernte der guten Jahre für die harten Jahre aufzubewahren, und er hütete die Vorratskammern als vertrauenswürdiger Hüter. Gute Planung half einem ganzen Land.",
+        "bs": "Jusuf je savjetovao da se žetva rodnih godina sačuva za teške godine, i čuvao je riznice kao povjerljiv čuvar. Dobro planiranje pomoglo je cijeloj zemlji."
+      },
+      "example": {
+        "en": "You save part of your pocket money every week, so you can help when someone needs it.",
+        "de": "Du sparst jede Woche einen Teil deines Taschengeldes, damit du helfen kannst, wenn jemand es braucht.",
+        "bs": "Svake sedmice uštediš dio džeparca kako bi mogao pomoći kada nekome zatreba."
+      },
+      "reflection": {
+        "en": "What could you save today for a harder day?",
+        "de": "Was könntest du heute für einen schwereren Tag aufheben?",
+        "bs": "Šta bi danas mogao sačuvati za teži dan?"
+      }
     }
   ],
   "questions": [
+    {
+      "id": "yusuf-stars",
+      "type": "trueFalse",
+      "storyId": "yusuf",
+      "topic": "yusuf",
+      "prompt": { "en": "In his dream Yusuf saw eleven stars, the sun and the moon.", "de": "In seinem Traum sah Yusuf elf Sterne, die Sonne und den Mond.", "bs": "U snu je Jusuf vidio jedanaest zvijezda, sunce i mjesec." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – and his father told him not to tell his brothers.",
+        "de": "Ja – und sein Vater sagte ihm, er solle es seinen Brüdern nicht erzählen.",
+        "bs": "Da – a otac mu je rekao da to ne priča braći."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:4–5" }]
+    },
     {
       "id": "yusuf-next",
       "type": "multipleChoice",
@@ -106,15 +250,15 @@
       "topic": "yusuf",
       "prompt": { "en": "What do you think the jealous brothers did?", "de": "Was denkst du, taten die neidischen Brüder?", "bs": "Šta misliš, šta su uradila zavidna braća?" },
       "options": [
-        { "id": "a", "text": { "en": "They threw him into the bottom of a well", "de": "Sie warfen ihn auf den Grund eines Brunnens", "bs": "Bacili su ga na dno bunara" } },
+        { "id": "a", "text": { "en": "They put him into the bottom of a well", "de": "Sie ließen ihn auf den Grund eines Brunnens hinab", "bs": "Spustili su ga na dno bunara" } },
         { "id": "b", "text": { "en": "They gave him a present", "de": "Sie machten ihm ein Geschenk", "bs": "Dali su mu poklon" } },
         { "id": "c", "text": { "en": "They made him king", "de": "Sie machten ihn zum König", "bs": "Učinili su ga kraljem" } }
       ],
       "correctOptionId": "a",
       "explanation": {
-        "en": "Out of jealousy they threw Yusuf into a well – but Allah was with him.",
-        "de": "Aus Neid warfen sie Yusuf in einen Brunnen – doch Allah war mit ihm.",
-        "bs": "Iz zavisti su bacili Jusufa u bunar – ali Allah je bio s njim."
+        "en": "Out of jealousy they put Yusuf into a well – but Allah was with him.",
+        "de": "Aus Neid ließen sie Yusuf in einen Brunnen hinab – doch Allah war mit ihm.",
+        "bs": "Iz zavisti su Jusufa spustili u bunar – ali Allah je bio s njim."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "12:15" }]
     },
@@ -132,6 +276,46 @@
         "bs": "Jusuf je odveden u Egipat, gdje je kasnije upravljao riznicama zemlje."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "12:21; 12:55" }]
+    },
+    {
+      "id": "yusuf-cows",
+      "type": "memory",
+      "storyId": "yusuf",
+      "topic": "yusuf",
+      "prompt": { "en": "Memory: match each part of the king's dream with its meaning.", "de": "Memory: Ordne jedem Teil des Königstraums seine Bedeutung zu.", "bs": "Memorija: spoji svaki dio kraljevog sna s njegovim značenjem." },
+      "pairs": [
+        { "id": "fat", "left": { "en": "Seven fat cows", "de": "Sieben fette Kühe", "bs": "Sedam debelih krava" }, "right": { "en": "Seven good years", "de": "Sieben gute Jahre", "bs": "Sedam rodnih godina" } },
+        { "id": "thin", "left": { "en": "Seven thin cows", "de": "Sieben magere Kühe", "bs": "Sedam mršavih krava" }, "right": { "en": "Seven hard years", "de": "Sieben harte Jahre", "bs": "Sedam teških godina" } },
+        { "id": "green", "left": { "en": "Green ears of grain", "de": "Grüne Ähren", "bs": "Zeleni klasovi" }, "right": { "en": "A rich harvest to keep", "de": "Reiche Ernte zum Aufbewahren", "bs": "Bogata žetva za čuvanje" } },
+        { "id": "dry", "left": { "en": "Dry ears of grain", "de": "Vertrocknete Ähren", "bs": "Suhi klasovi" }, "right": { "en": "Years of drought", "de": "Jahre der Dürre", "bs": "Sušne godine" } }
+      ],
+      "explanation": {
+        "en": "Yusuf explained the dream and gave a plan: store in the good years for the hard years.",
+        "de": "Yusuf deutete den Traum und gab einen Plan: in den guten Jahren für die harten Jahre lagern.",
+        "bs": "Jusuf je protumačio san i dao plan: u rodnim godinama sačuvati za teške godine."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:43–49" }]
+    },
+    {
+      "id": "yusuf-find",
+      "type": "find",
+      "storyId": "yusuf",
+      "topic": "yusuf",
+      "prompt": { "en": "Find the three things you would see in Yusuf's Egypt.", "de": "Finde die drei Dinge, die du in Yusufs Ägypten sehen würdest.", "bs": "Pronađi tri stvari koje bi vidio u Jusufovom Egiptu." },
+      "items": [
+        { "id": "grain", "element": "grain", "label": { "en": "Grain", "de": "Getreide", "bs": "Žito" } },
+        { "id": "river", "element": "river", "label": { "en": "River", "de": "Fluss", "bs": "Rijeka" } },
+        { "id": "city", "element": "city", "label": { "en": "City", "de": "Stadt", "bs": "Grad" } },
+        { "id": "whale", "element": "whale", "label": { "en": "Whale", "de": "Wal", "bs": "Kit" } },
+        { "id": "ark", "element": "ark", "label": { "en": "Ark", "de": "Arche", "bs": "Lađa" } }
+      ],
+      "correctIds": ["grain", "river", "city"],
+      "explanation": {
+        "en": "Egypt by the river, its city and the grain of the storehouses that Yusuf looked after.",
+        "de": "Ägypten am Fluss, seine Stadt und das Getreide der Vorratskammern, die Yusuf hütete.",
+        "bs": "Egipat uz rijeku, njegov grad i žito iz riznica koje je Jusuf čuvao."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "12:47–58" }]
     },
     {
       "id": "yusuf-decision",

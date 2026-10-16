@@ -83,6 +83,7 @@
         "bs": "Prolazile su godine, a Jakub je morao pustiti i drugog sina. Toliko je tugovao da su mu oči pobijelile od žalosti. Ipak je rekao: „Ja se samo Allahu žalim na svoju tugu i brigu.“ Sinovima je rekao: „Idite i raspitajte se o Jusufu i njegovom bratu, i ne gubite nadu u Allahovu milost.“"
       },
       "scene": { "sky": "night", "elements": ["stars", "crescent", "hills"] },
+      "interactionId": "yaqub-patience",
       "stage": {
         "sky": "night",
         "layers": [
@@ -139,7 +140,7 @@
     }
   ],
   "miniGameId": "yaqub-decision",
-  "quizIds": ["yaqub-patience", "yaqub-order", "yaqub-lesson"],
+  "quizIds": ["yaqub-advice", "yaqub-order", "yaqub-lesson"],
   "lessons": [
     {
       "id": "yaqub-l1",
@@ -274,6 +275,20 @@
         "bs": "Da – bio je tužan, ali je svoju tugu iznosio pred Allaha."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "12:86" }]
+    },
+    {
+      "id": "yaqub-advice",
+      "type": "trueFalse",
+      "storyId": "yaqub",
+      "topic": "yaqub",
+      "prompt": { "en": "Yaqub's sons promised to worship One God – the God of Ibrahim, Ismail and Ishaq.", "de": "Yaqubs Söhne versprachen, dem Einen Gott zu dienen – dem Gott Ibrahims, Ismails und Ishaqs.", "bs": "Jakubovi sinovi obećali su da će obožavati Jednog Boga – Boga Ibrahimovog, Ismailovog i Ishakovog." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – that was his last question to them, and their answer.",
+        "de": "Ja – das war seine letzte Frage an sie und ihre Antwort.",
+        "bs": "Da – to je bilo njegovo posljednje pitanje njima i njihov odgovor."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:133" }]
     },
     {
       "id": "yaqub-order",

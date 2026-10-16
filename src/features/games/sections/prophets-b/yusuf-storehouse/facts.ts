@@ -69,12 +69,15 @@ export const YUSUF_FACTS = {
   ears: {
     id: 'leave-in-ears',
     text: {
-      en: 'Yusuf advised: what you harvest in the seven good years, leave in its ears – except a little that you eat.',
-      de: 'Yusuf riet: Was ihr in den sieben guten Jahren erntet, lasst in seinen Ähren – außer wenigem, das ihr esst.',
-      bs: 'Jusuf je savjetovao: ono što požanjete u sedam rodnih godina ostavite u klasu – osim malo onoga što ćete jesti.',
+      en: 'Yusuf advised: what you harvest in the seven good years, leave in its ears – except a little that you eat. Ibn Kathir explains that grain left in its ears keeps longer and does not spoil quickly.',
+      de: 'Yusuf riet: Was ihr in den sieben guten Jahren erntet, lasst in seinen Ähren – außer wenigem, das ihr esst. Ibn Kathir erklärt, dass Getreide in seinen Ähren länger hält und nicht schnell verdirbt.',
+      bs: 'Jusuf je savjetovao: ono što požanjete u sedam rodnih godina ostavite u klasu – osim malo onoga što ćete jesti. Ibn Kesir pojašnjava da se žito u klasu duže čuva i da se ne kvari brzo.',
     },
-    sources: [{ sourceName: 'Quran', sourceReference: '12:47' }],
-    art: 'object.grain-sack',
+    sources: [
+      { sourceName: 'Quran', sourceReference: '12:47' },
+      { sourceName: 'Ibn Kathir', sourceReference: 'Tafsir, 12:47' },
+    ],
+    art: 'prophet.yusuf-sheaf-green',
     check: {
       type: 'choice',
       prompt: {
@@ -93,19 +96,19 @@ export const YUSUF_FACTS = {
   hardYears: {
     id: 'hard-years-use-store',
     text: {
-      en: 'Then seven hard years would come and use up what had been stored for them, except a little.',
-      de: 'Danach würden sieben harte Jahre kommen und aufbrauchen, was für sie gelagert worden war, außer wenigem.',
-      bs: 'Zatim će doći sedam teških godina koje će potrošiti ono što je za njih sačuvano, osim malo.',
+      en: 'Then seven hard years would come that eat up what you had stored for them – except a little that you keep back.',
+      de: 'Danach würden sieben harte Jahre kommen, die aufzehren, was ihr für sie gelagert habt – außer wenigem, das ihr zurückbehaltet.',
+      bs: 'Zatim će doći sedam teških godina koje će pojesti ono što ste za njih sačuvali – osim malo što ćete ostaviti.',
     },
     sources: [{ sourceName: 'Quran', sourceReference: '12:48' }],
-    art: 'object.storehouse',
+    art: 'prophet.yusuf-granary',
   },
   relief: {
     id: 'year-of-relief',
     text: {
-      en: 'After that a year would come in which the people are given rain and relief.',
-      de: 'Danach würde ein Jahr kommen, in dem den Menschen Regen und Erleichterung geschenkt wird.',
-      bs: 'Nakon toga doći će godina u kojoj će ljudima biti dana kiša i olakšanje.',
+      en: 'After that a year would come in which the people are given rain and in which they press (fruit and oil).',
+      de: 'Danach würde ein Jahr kommen, in dem die Menschen Regen bekommen und in dem sie (Früchte und Öl) pressen.',
+      bs: 'Nakon toga doći će godina u kojoj će ljudima biti dana kiša i u kojoj će cijediti (plodove i ulje).',
     },
     sources: [{ sourceName: 'Quran', sourceReference: '12:49' }],
     art: 'garden.olive',
