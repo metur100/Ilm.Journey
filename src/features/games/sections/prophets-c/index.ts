@@ -2,6 +2,7 @@ import { registerAlyasaGame } from './alyasa-among-best/register';
 import { registerIlyasGame } from './ilyas-lanterns/register';
 import { registerSulaymanGame } from './sulayman-ants-valley/register';
 import { registerYunusGame } from './yunus-darkness-light/register';
+import { registerZakariyyaGame } from './zakariyya-mihrab/register';
 
 /**
  * Section "prophets-c" (docs/GAMES-V3.md): every game of this section lives in this folder and is registered here.
@@ -13,4 +14,5 @@ export function registerProphetsCGames(): void {
   registerIlyasGame();
   registerAlyasaGame();
   registerYunusGame();
+  registerZakariyyaGame();
 }

@@ -1,0 +1,289 @@
+{
+  "id": "zakariyya",
+  "order": 22,
+  "prophetName": { "en": "Zakariyya", "de": "Zakariyya (Zacharias)", "bs": "Zekerijja" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Quiet Dua in the Mihrab", "de": "Das leise Du'a im Mihrab", "bs": "Tiha dova u mihrabu" },
+  "description": {
+    "en": "Provision from Allah in the mihrab, a dua whispered in the night and the glad tidings of a son.",
+    "de": "Versorgung von Allah im Mihrab, ein in der Nacht geflüstertes Du'a und die frohe Botschaft eines Sohnes.",
+    "bs": "Opskrba od Allaha u mihrabu, dova šapnuta u noći i radosna vijest o sinu."
+  },
+  "place": { "en": "The mihrab", "de": "Der Mihrab", "bs": "Mihrab" },
+  "symbol": "lanterns",
+  "symbolArt": "prophet.zakariyya-mihrab",
+  "cover": { "sky": "night", "elements": ["stars", "lanterns", "mosque"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "story.arch-frame" },
+      { "art": "prophet.zakariyya-mihrab", "x": 200, "y": 240, "w": 150, "enter": "fade", "at": 300 }
+    ],
+    "effects": ["stars", { "type": "lanternGlow", "x": 200, "y": 120, "intensity": 2, "at": 600 }, { "type": "dust", "intensity": 1 }]
+  },
+  "intro": {
+    "en": "Zakariyya (peace be upon him) was a prophet and a servant of Allah. He had grown old, his wife could not have children, and he had no son. Allah placed the young Maryam in his care.",
+    "de": "Zakariyya (Friede sei mit ihm) war ein Prophet und ein Diener Allahs. Er war alt geworden, seine Frau konnte keine Kinder bekommen, und er hatte keinen Sohn. Allah gab die junge Maryam in seine Obhut.",
+    "bs": "Zekerijja, a.s., bio je poslanik i Allahov rob. Ostario je, žena mu je bila nerotkinja, a nije imao sina. Allah mu je dao da se brine o mladoj Merjemi."
+  },
+  "scenes": [
+    {
+      "id": "zakariyya-s1",
+      "title": { "en": "Provision in the mihrab", "de": "Versorgung im Mihrab", "bs": "Opskrba u mihrabu" },
+      "text": {
+        "en": "Zakariyya took care of Maryam. Every time he came to her in the mihrab, he found provision with her. He asked: \"O Maryam, where does this come from?\" She said: \"It is from Allah. Allah provides for whom He wills without measure.\"",
+        "de": "Zakariyya sorgte für Maryam. Jedes Mal, wenn er zu ihr in den Mihrab kam, fand er Versorgung bei ihr. Er fragte: „O Maryam, woher hast du das?“ Sie sagte: „Es ist von Allah. Allah versorgt, wen Er will, ohne zu rechnen.“",
+        "bs": "Zekerijja se brinuo o Merjemi. Kad god bi joj ušao u mihrab, kod nje bi našao hrane. Upitao bi: „O Merjema, odakle ti ovo?“ Ona bi rekla: „Od Allaha. Allah daje u izobilju onome kome hoće, bez računa.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["lanterns", "basket"] },
+      "stage": {
+        "sky": "dawn",
+        "mood": "warm",
+        "layers": [
+          { "art": "story.arch-frame" },
+          { "art": "prophet.zakariyya-mihrab", "x": 200, "y": 240, "w": 156 },
+          { "art": "prophet.zakariyya-provision", "x": 200, "y": 206, "w": 70, "enter": "zoom", "at": 1400, "duration": 1200 }
+        ],
+        "effects": [{ "type": "lanternGlow", "x": 200, "y": 126, "intensity": 1 }, { "type": "sparkle", "x": 200, "y": 190, "w": 90, "h": 50, "intensity": 2, "at": 1600 }, { "type": "dust", "intensity": 1 }]
+      },
+      "interactionId": "zakariyya-provision",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:37" }]
+    },
+    {
+      "id": "zakariyya-s2",
+      "title": { "en": "A quiet dua", "de": "Ein leises Du'a", "bs": "Tiha dova" },
+      "text": {
+        "en": "There and then, Zakariyya called upon his Lord in a quiet voice: \"My Lord, my bones have grown weak and my hair is white, and I have never been disappointed in calling upon You. Grant me from Yourself a good child – You hear every dua.\"",
+        "de": "Da rief Zakariyya seinen Herrn mit leiser Stimme an: „Mein Herr, meine Knochen sind schwach geworden und mein Haar ist weiß, und nie war ich enttäuscht, wenn ich Dich anrief. Schenke mir von Dir ein gutes Kind – Du hörst jedes Bittgebet.“",
+        "bs": "Tada je Zekerijja tihim glasom zamolio svoga Gospodara: „Gospodaru moj, kosti su mi oslabile i kosa mi je sijeda, a nikad nisam bio razočaran kada sam Ti se molio. Podari mi od Sebe dobro potomstvo – Ti doista dovu čuješ.“"
+      },
+      "scene": { "sky": "night", "elements": ["stars", "crescent", "lanterns"] },
+      "stage": {
+        "sky": "night",
+        "mood": "night",
+        "layers": [
+          { "art": "story.moon-crescent", "x": 320, "y": 50, "w": 50, "anchor": "center", "anim": "glow" },
+          { "art": "story.arch-frame" },
+          { "art": "story.lamp", "x": 200, "y": 224, "w": 90, "anim": "breathe", "enter": "fade", "at": 400 }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 220, "y": 182, "intensity": 2, "at": 600 }, { "type": "sparkle", "x": 200, "y": 90, "w": 220, "h": 70, "intensity": 1, "at": 2400 }]
+      },
+      "interactionId": "zakariyya-quiet",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:38; 19:2–6" }]
+    },
+    {
+      "id": "zakariyya-s3",
+      "title": { "en": "Glad tidings of Yahya", "de": "Die frohe Botschaft von Yahya", "bs": "Radosna vijest o Jahji" },
+      "text": {
+        "en": "While Zakariyya stood praying in the mihrab, the angels called to him: Allah gives you the glad tidings of a son named Yahya – a name Allah had given to no one before him. Zakariyya wondered: how, when he was old and his wife could not have children? It was said: Allah does what He wills.",
+        "de": "Während Zakariyya im Mihrab stand und betete, riefen ihm die Engel zu: Allah verkündet dir einen Sohn namens Yahya – einen Namen, den Allah vor ihm niemandem gegeben hatte. Zakariyya staunte: Wie, wo er doch alt war und seine Frau keine Kinder bekommen konnte? Es wurde gesagt: Allah tut, was Er will.",
+        "bs": "Dok je Zekerijja stajao u mihrabu i klanjao, meleki su ga zovnuli: Allah ti javlja radosnu vijest o sinu po imenu Jahja – ime koje Allah prije njega nikome nije dao. Zekerijja se začudio: kako, kada je star, a žena mu je nerotkinja? Rečeno je: Allah čini što On hoće."
+      },
+      "scene": { "sky": "dawn", "elements": ["lanterns", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.arch-frame" },
+          { "art": "prophet.zakariyya-mihrab", "x": 200, "y": 240, "w": 156 }
+        ],
+        "effects": [{ "type": "lightBeam", "x": 200, "intensity": 2, "at": 900 }, { "type": "sunrays", "x": 200, "y": 60, "intensity": 1, "at": 1400 }, { "type": "sparkle", "x": 200, "y": 120, "w": 180, "h": 90, "intensity": 2, "at": 1800 }]
+      },
+      "interactionId": "zakariyya-tidings",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:39–40; 19:7–9" }]
+    },
+    {
+      "id": "zakariyya-s4",
+      "title": { "en": "The sign of silence", "de": "Das Zeichen der Stille", "bs": "Znak šutnje" },
+      "text": {
+        "en": "Zakariyya asked for a sign. Allah said: for three days you will not speak to people except by signs – but remember your Lord much and glorify Him in the evening and the morning. So he came out of the mihrab to his people and signalled to them: glorify Allah morning and evening.",
+        "de": "Zakariyya bat um ein Zeichen. Allah sagte: Drei Tage lang wirst du nicht zu den Menschen sprechen, außer durch Zeichen – doch gedenke deines Herrn viel und preise Ihn am Abend und am Morgen. Da trat er aus dem Mihrab zu seinem Volk und gab ihnen zu verstehen: Preist Allah morgens und abends.",
+        "bs": "Zekerijja je zatražio znak. Allah je rekao: tri dana nećeš s ljudima govoriti osim znakovima – ali često spominji svoga Gospodara i hvali Ga navečer i ujutro. Tada je izišao iz mihraba svom narodu i dao im znak: hvalite Allaha ujutro i navečer."
+      },
+      "scene": { "sky": "sunset", "elements": ["city", "sun"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.sun", "x": 300, "y": 120, "w": 90, "anchor": "center" },
+          { "art": "story.city-ancient" },
+          { "art": "story.lanterns", "y": 92, "w": 400, "anim": "sway", "enter": "fade", "at": 1200 }
+        ],
+        "effects": [{ "type": "birds", "intensity": 2 }, { "type": "sunrays", "x": 300, "y": 120, "intensity": 1 }, { "type": "fireflies", "intensity": 1, "at": 2000 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:41; 19:10–11" }]
+    }
+  ],
+  "miniGameId": "zakariyya-order",
+  "quizIds": ["zakariyya-sign", "zakariyya-memory", "zakariyya-lesson"],
+  "lessons": [
+    {
+      "id": "zakariyya-l1",
+      "value": "dua",
+      "title": { "en": "Never stop asking Allah", "de": "Hör nie auf, Allah zu bitten", "bs": "Nikad ne prestaj moliti Allaha" },
+      "explanation": {
+        "en": "Zakariyya was old, yet he made dua with full hope: \"I have never been disappointed in calling upon You.\" Nothing is too hard for Allah.",
+        "de": "Zakariyya war alt, und doch machte er Du'a voller Hoffnung: „Nie war ich enttäuscht, wenn ich Dich anrief.“ Nichts ist zu schwer für Allah.",
+        "bs": "Zekerijja je bio star, a ipak je dovu upućivao puna nade: „Nikad nisam bio razočaran kada sam Ti se molio.“ Allahu ništa nije teško."
+      },
+      "example": {
+        "en": "Something you hope for has not happened yet. You keep making dua quietly, trusting Allah.",
+        "de": "Etwas, das du dir erhoffst, ist noch nicht geschehen. Du machst weiter leise Du'a und vertraust Allah.",
+        "bs": "Nešto čemu se nadaš još se nije desilo. I dalje tiho upućuješ dovu, oslanjajući se na Allaha."
+      },
+      "reflection": {
+        "en": "What would you like to ask Allah for quietly tonight?",
+        "de": "Worum möchtest du Allah heute Abend leise bitten?",
+        "bs": "Šta bi večeras tiho želio zamoliti od Allaha?"
+      }
+    },
+    {
+      "id": "zakariyya-l2",
+      "value": "shukr",
+      "title": { "en": "Every provision is from Allah", "de": "Jede Versorgung kommt von Allah", "bs": "Svaka opskrba je od Allaha" },
+      "explanation": {
+        "en": "Maryam said about her food: \"It is from Allah.\" Our food, home and family are gifts from Allah – so we thank Him.",
+        "de": "Maryam sagte über ihr Essen: „Es ist von Allah.“ Unser Essen, unser Zuhause und unsere Familie sind Gaben Allahs – darum danken wir Ihm.",
+        "bs": "Merjema je za svoju hranu rekla: „Od Allaha je.“ Naša hrana, dom i porodica su Allahovi darovi – zato Mu zahvaljujemo."
+      },
+      "example": {
+        "en": "Before eating you say \"Bismillah\", and afterwards \"Alhamdulillah\".",
+        "de": "Vor dem Essen sagst du „Bismillah“ und danach „Alhamdulillah“.",
+        "bs": "Prije jela kažeš „Bismillah“, a poslije „Elhamdulillah“."
+      },
+      "reflection": {
+        "en": "Which three gifts of Allah did you enjoy today?",
+        "de": "Welche drei Gaben Allahs hast du heute genossen?",
+        "bs": "U koja tri Allahova dara si danas uživao?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "zakariyya-provision",
+      "type": "multipleChoice",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "Where did Maryam say her provision came from?", "de": "Woher kam Maryams Versorgung nach ihren Worten?", "bs": "Odakle je, po Merjeminim riječima, bila njena opskrba?" },
+      "options": [
+        { "id": "a", "text": { "en": "From Allah", "de": "Von Allah", "bs": "Od Allaha" } },
+        { "id": "b", "text": { "en": "From the market", "de": "Vom Markt", "bs": "S pijace" } },
+        { "id": "c", "text": { "en": "She did not know", "de": "Sie wusste es nicht", "bs": "Nije znala" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"It is from Allah. Allah provides for whom He wills without measure.\"",
+        "de": "„Es ist von Allah. Allah versorgt, wen Er will, ohne zu rechnen.“",
+        "bs": "„Od Allaha. Allah daje u izobilju onome kome hoće, bez računa.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:37" }]
+    },
+    {
+      "id": "zakariyya-quiet",
+      "type": "trueFalse",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "Zakariyya called upon his Lord in a quiet voice.", "de": "Zakariyya rief seinen Herrn mit leiser Stimme an.", "bs": "Zekerijja je svoga Gospodara zazivao tihim glasom." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"when he called to his Lord a quiet call\" (19:3).",
+        "de": "Ja – „als er seinen Herrn im Verborgenen anrief“ (19:3).",
+        "bs": "Da – „kada je Gospodara svoga tiho zazvao“ (19:3)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:3" }]
+    },
+    {
+      "id": "zakariyya-tidings",
+      "type": "multipleChoice",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "What was the name of the son Allah promised Zakariyya?", "de": "Wie hieß der Sohn, den Allah Zakariyya verhieß?", "bs": "Kako se zvao sin kojeg je Allah obećao Zekerijji?" },
+      "options": [
+        { "id": "a", "text": { "en": "Yahya", "de": "Yahya", "bs": "Jahja" } },
+        { "id": "b", "text": { "en": "Ismail", "de": "Ismail", "bs": "Ismail" } },
+        { "id": "c", "text": { "en": "Yusuf", "de": "Yusuf", "bs": "Jusuf" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Yahya – a name Allah had given to no one before him (19:7).",
+        "de": "Yahya – ein Name, den Allah vor ihm niemandem gegeben hatte (19:7).",
+        "bs": "Jahja – ime koje Allah prije njega nikome nije dao (19:7)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:39; 19:7" }]
+    },
+    {
+      "id": "zakariyya-order",
+      "type": "ordering",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "Put the story of Zakariyya in order.", "de": "Bring die Geschichte von Zakariyya in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Zekerijji." },
+      "items": [
+        { "id": "provision", "text": { "en": "Provision with Maryam in the mihrab", "de": "Versorgung bei Maryam im Mihrab", "bs": "Opskrba kod Merjeme u mihrabu" } },
+        { "id": "dua", "text": { "en": "The quiet dua", "de": "Das leise Du'a", "bs": "Tiha dova" } },
+        { "id": "tidings", "text": { "en": "Glad tidings of Yahya", "de": "Frohe Botschaft von Yahya", "bs": "Radosna vijest o Jahji" } },
+        { "id": "sign", "text": { "en": "Three days without speaking", "de": "Drei Tage ohne Sprechen", "bs": "Tri dana bez govora" } }
+      ],
+      "explanation": {
+        "en": "The provision with Maryam moved Zakariyya to make dua; then came the glad tidings and the sign.",
+        "de": "Die Versorgung bei Maryam bewegte Zakariyya zum Du'a; dann kamen die frohe Botschaft und das Zeichen.",
+        "bs": "Opskrba kod Merjeme potakla je Zekerijju na dovu; zatim su došli radosna vijest i znak."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:37–41" }]
+    },
+    {
+      "id": "zakariyya-sign",
+      "type": "trueFalse",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "The sign for Zakariyya was that he would not speak to people for three days, except by signs.", "de": "Das Zeichen für Zakariyya war, dass er drei Tage lang nicht zu den Menschen sprechen würde, außer durch Zeichen.", "bs": "Znak za Zekerijju bio je da tri dana neće govoriti s ljudima, osim znakovima." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – and in those days he remembered Allah much and glorified Him.",
+        "de": "Ja – und in diesen Tagen gedachte er Allahs viel und pries Ihn.",
+        "bs": "Da – i tih dana je mnogo spominjao Allaha i hvalio Ga."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:41; 19:10" }]
+    },
+    {
+      "id": "zakariyya-memory",
+      "type": "memory",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "Memory: match the pairs from the story of Zakariyya.", "de": "Memory: Finde die Paare aus der Geschichte von Zakariyya.", "bs": "Memorija: spoji parove iz kazivanja o Zekerijji." },
+      "pairs": [
+        { "id": "mihrab", "left": { "en": "The mihrab", "de": "Der Mihrab", "bs": "Mihrab" }, "right": { "en": "Provision from Allah", "de": "Versorgung von Allah", "bs": "Opskrba od Allaha" } },
+        { "id": "dua", "left": { "en": "The dua", "de": "Das Du'a", "bs": "Dova" }, "right": { "en": "A quiet voice", "de": "Eine leise Stimme", "bs": "Tihi glas" } },
+        { "id": "yahya", "left": { "en": "Yahya", "de": "Yahya", "bs": "Jahja" }, "right": { "en": "A new name", "de": "Ein neuer Name", "bs": "Novo ime" } },
+        { "id": "sign", "left": { "en": "The sign", "de": "Das Zeichen", "bs": "Znak" }, "right": { "en": "Three days of silence", "de": "Drei Tage Stille", "bs": "Tri dana šutnje" } }
+      ],
+      "explanation": {
+        "en": "The mihrab, the quiet dua, the name Yahya and the sign of three days.",
+        "de": "Der Mihrab, das leise Du'a, der Name Yahya und das Zeichen der drei Tage.",
+        "bs": "Mihrab, tiha dova, ime Jahja i znak od tri dana."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:37–41; 19:3–10" }]
+    },
+    {
+      "id": "zakariyya-lesson",
+      "type": "lessonChoice",
+      "storyId": "zakariyya",
+      "topic": "zakariyya",
+      "prompt": { "en": "What does Zakariyya teach us about dua?", "de": "Was lehrt uns Zakariyya über das Du'a?", "bs": "Šta nas Zekerijja uči o dovi?" },
+      "options": [
+        { "id": "a", "text": { "en": "Ask Allah with hope, even when it seems impossible", "de": "Allah voller Hoffnung bitten, auch wenn es unmöglich scheint", "bs": "Moliti Allaha s nadom, i kada se čini nemogućim" } },
+        { "id": "b", "text": { "en": "Only ask for easy things", "de": "Nur um leichte Dinge bitten", "bs": "Moliti samo za lahke stvari" } },
+        { "id": "c", "text": { "en": "Stop asking when you are old", "de": "Aufhören zu bitten, wenn man alt ist", "bs": "Prestati moliti kada ostariš" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Zakariyya was old and his wife could not have children – and Allah answered his dua.",
+        "de": "Zakariyya war alt und seine Frau konnte keine Kinder bekommen – und Allah erhörte sein Du'a.",
+        "bs": "Zekerijja je bio star, a žena mu nerotkinja – i Allah mu je dovu uslišao."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "3:37–41" },
+    { "sourceName": "Quran", "sourceReference": "19:2–11" },
+    { "sourceName": "Quran", "sourceReference": "21:89–90" }
+  ]
+}

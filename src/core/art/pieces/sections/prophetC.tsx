@@ -1,6 +1,23 @@
 import { Circle, Defs, Ellipse, G, Path, Rect } from 'react-native-svg';
 
-import { archPath, art, Eye, Glow, LeafyTree, leafPath, Lin, Palm, Rad, Shadow, smoothOpen, sparklePath, star8Path, type ArtDef, type Ctx } from '../../kit';
+import {
+  archPath,
+  art,
+  crescentPath,
+  Eye,
+  Glow,
+  LeafyTree,
+  leafPath,
+  Lin,
+  Palm,
+  Rad,
+  Shadow,
+  smoothOpen,
+  sparklePath,
+  star8Path,
+  type ArtDef,
+  type Ctx,
+} from '../../kit';
 import { C, light, mix, shade } from '../../palette';
 
 /*
@@ -1321,6 +1338,111 @@ export const prophetC = {
       <Eye x={73} y={31} r={1.6} />
       <Path d="M62 40C70 44 72 50 70 52" stroke={c.green(C.leaf)} strokeWidth={2} fill="none" strokeLinecap="round" />
       <Path d={leafPath(70, 52, 8, 3, 70)} fill={c.green(C.leaf)} />
+    </>
+  )),
+
+  /**
+   * Game scene: the room of the mihrab (3:37) – a morning window on the left, an evening window on the right
+   * (glorify Him evening and morning, 3:41), the mihrab in the middle with its lamp, low shelves for the provision.
+   */
+  'zakariyya-room': art(W, 260, (c) => {
+    const wall = c.dark ? '#5A4A3C' : '#EBD9BC';
+    const wallSh = c.dark ? '#4A3C30' : '#D9C29E';
+    const floor = c.dark ? '#3E3128' : '#C9A27A';
+    return (
+      <>
+        <Rect x={0} y={0} width={W} height={260} fill={wall} />
+        <Rect x={0} y={0} width={W} height={14} fill={wallSh} />
+        {Array.from({ length: 13 }, (_, i) => (
+          <Path key={i} d={star8Path(16 + i * 31, 7, 4)} fill={C.gold} opacity={0.8} />
+        ))}
+        {/* morning window (left) */}
+        <Defs>
+          <Lin
+            id={c.id('am')}
+            stops={[
+              [0, '#F7C98A'],
+              [1, '#FCEBD0'],
+            ]}
+          />
+          <Lin
+            id={c.id('pm')}
+            stops={[
+              [0, '#2B2A66'],
+              [1, '#7A5A9F'],
+            ]}
+          />
+          <Lin
+            id={c.id('n')}
+            stops={[
+              [0, '#2B3166'],
+              [1, '#191D48'],
+            ]}
+          />
+        </Defs>
+        <Path d={archPath(66, 40, 76, 150)} fill={C.goldDeep} />
+        <Path d={archPath(66, 46, 66, 146)} fill={c.url('am')} />
+        <Circle cx={66} cy={120} r={14} fill={C.goldLight} />
+        <Path d="M36 146C50 132 82 132 96 146Z" fill={C.sandDeep} />
+        {/* evening window (right) */}
+        <Path d={archPath(334, 40, 76, 150)} fill={C.goldDeep} />
+        <Path d={archPath(334, 46, 66, 146)} fill={c.url('pm')} />
+        <Path d={crescentPath(340, 84, 11, 5, -4, 9)} fill={C.goldPale} />
+        <Circle cx={312} cy={70} r={1.4} fill={C.white} />
+        <Circle cx={356} cy={108} r={1.2} fill={C.white} />
+        {/* the mihrab */}
+        <Path d={archPath(200, 26, 128, 222)} fill={C.goldDeep} />
+        <Path d={archPath(200, 32, 116, 222)} fill={C.teal} />
+        <Path d={archPath(200, 40, 100, 222)} fill={c.url('n')} />
+        <Glow c={c} k="lamp" cx={200} cy={104} r={46} color={C.goldPale} opacity={0.5} />
+        <Path d="M200 40V76" stroke={C.goldDeep} strokeWidth={1.2} />
+        <Lantern c={{ ...c, dark: true }} x={200} y={76} s={1.1} />
+        <Rect x={156} y={176} width={88} height={8} rx={3} fill={C.woodLight} />
+        {/* shelves left and right */}
+        <Rect x={20} y={186} width={92} height={8} rx={3} fill={C.woodLight} />
+        <Rect x={288} y={186} width={92} height={8} rx={3} fill={C.woodLight} />
+        <Rect x={0} y={222} width={W} height={38} fill={floor} />
+        <Path d="M0 222H400" stroke={shade(floor, 0.2)} strokeWidth={3} />
+        <Path d="M120 260 150 222M280 260 250 222" stroke={shade(floor, 0.15)} strokeWidth={1.4} opacity={0.6} />
+      </>
+    );
+  }),
+
+  /** Morning sun in a small arch (tile art for "glorify Him in the morning", 3:41). */
+  'zakariyya-morning': art(80, 90, (c) => (
+    <>
+      <Defs>
+        <Lin
+          id={c.id('am')}
+          stops={[
+            [0, '#F7C98A'],
+            [1, '#FCEBD0'],
+          ]}
+        />
+      </Defs>
+      <Path d={archPath(40, 4, 70, 88)} fill={C.goldDeep} />
+      <Path d={archPath(40, 10, 60, 84)} fill={c.url('am')} />
+      <Circle cx={40} cy={62} r={13} fill={C.goldLight} />
+      <Path d="M12 84C24 72 56 72 68 84Z" fill={C.sandDeep} />
+    </>
+  )),
+
+  /** Evening crescent in a small arch (tile art for "and in the evening", 3:41). */
+  'zakariyya-evening': art(80, 90, (c) => (
+    <>
+      <Defs>
+        <Lin
+          id={c.id('pm')}
+          stops={[
+            [0, '#2B2A66'],
+            [1, '#7A5A9F'],
+          ]}
+        />
+      </Defs>
+      <Path d={archPath(40, 4, 70, 88)} fill={C.goldDeep} />
+      <Path d={archPath(40, 10, 60, 84)} fill={c.url('pm')} />
+      <Path d={crescentPath(44, 46, 12, 5, -4, 10)} fill={C.goldPale} />
+      <Circle cx={22} cy={36} r={1.4} fill={C.white} />
     </>
   )),
 } satisfies Record<string, ArtDef>;
