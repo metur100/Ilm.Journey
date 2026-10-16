@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 
 import { art, Shadow, star8Path, type ArtDef, type Ctx } from '../../kit';
@@ -183,8 +184,103 @@ function ShoePair({ x, y, s, color }: { x: number; y: number; s: number; color: 
 
 // ---------------------------------------------------------------------------------------------------------------
 
-export const akhlaq = {
-  ...tidy,
+// Return the trust: places and borrowed things; speech bubbles
+
+/** Speech bubble (90 × 70) with a tail at the lower left. */
+function Bubble({ fill, stroke, children }: { fill: string; stroke: string; children?: ReactNode }) {
+  return (
+    <G>
+      <Path d="M14 8H76Q84 8 84 16V46Q84 54 76 54H34L18 66 22 54H14Q6 54 6 46V16Q6 8 14 8Z" fill={fill} stroke={stroke} strokeWidth={3} strokeLinejoin="round" />
+      {children}
+    </G>
+  );
+}
+
+/** Small closed book (sign on the library). */
+function BookSign({ x, y }: { x: number; y: number }) {
+  return (
+    <G transform={`translate(${x} ${y})`}>
+      <Rect x={0} y={0} width={20} height={14} rx={2} fill={C.teal} />
+      <Rect x={9} y={0} width={2} height={14} fill={C.gold} />
+    </G>
+  );
+}
+
+const trust = {
+  library: art(120, 100, (c) => (
+    <>
+      <Shadow c={c} cx={60} cy={96} rx={56} />
+      <Rect x={10} y={88} width={100} height={8} rx={2} fill={dk(c, C.stoneLight)} />
+      <Rect x={16} y={40} width={88} height={48} fill={dk(c, C.marble)} />
+      <Path d="M8 42L60 10 112 42Z" fill={dk(c, C.stonePale)} />
+      <Path d="M20 38L60 16 100 38Z" fill={dk(c, C.marble)} />
+      <BookSign x={50} y={22} />
+      {[22, 40, 74, 92].map((x) => (
+        <Rect key={x} x={x} y={44} width={7} height={44} rx={2} fill={dk(c, C.stonePale)} />
+      ))}
+      <Path d="M52 88V62Q60 54 68 62V88Z" fill={C.wood} />
+      {c.dark && <Path d="M54 86V63Q60 57 66 63V86Z" fill={C.goldLight} opacity={0.45} />}
+    </>
+  )),
+  school: art(120, 100, (c) => (
+    <>
+      <Shadow c={c} cx={60} cy={96} rx={56} />
+      <Rect x={10} y={40} width={100} height={54} rx={3} fill={dk(c, C.terracotta)} />
+      <Rect x={44} y={20} width={32} height={74} rx={3} fill={dk(c, C.coral)} />
+      <Path d="M40 22L60 6 80 22Z" fill={dk(c, C.berry)} />
+      <Circle cx={60} cy={36} r={9} fill={C.cream} />
+      <Path d="M60 30V36L64 39" stroke={C.ink} strokeWidth={2} strokeLinecap="round" fill="none" />
+      {[16, 28, 84, 96].map((x) => (
+        <G key={x}>
+          <Rect x={x} y={52} width={9} height={12} rx={1.5} fill={c.dark ? C.goldLight : C.skyPale} />
+          <Rect x={x} y={72} width={9} height={12} rx={1.5} fill={c.dark ? C.goldLight : C.skyPale} />
+        </G>
+      ))}
+      <Rect x={52} y={68} width={16} height={26} rx={2} fill={C.woodDark} />
+    </>
+  )),
+  ladder: art(70, 110, (c) => (
+    <>
+      <Shadow c={c} cx={35} cy={106} rx={28} />
+      <Path d="M14 104L22 6M56 104L48 6" stroke={C.woodLight} strokeWidth={7} strokeLinecap="round" />
+      {[22, 40, 58, 76, 94].map((y) => (
+        <Path key={y} d={`M${21 - (y - 6) * 0.08} ${y}H${49 + (y - 6) * 0.08}`} stroke={C.wood} strokeWidth={5} strokeLinecap="round" />
+      ))}
+    </>
+  )),
+  umbrella: art(90, 100, (c) => (
+    <>
+      <Shadow c={c} cx={45} cy={96} rx={20} />
+      <Path d="M6 44Q8 8 45 6 82 8 84 44Q76 38 66 44 56 38 45 44 34 38 24 44 14 38 6 44Z" fill={C.purple} />
+      <Path d="M45 6Q30 20 24 44M45 6Q60 20 66 44" stroke={C.lilac} strokeWidth={2} fill="none" />
+      <Path d="M45 44V84Q45 92 37 92Q31 92 31 86" stroke={C.woodDark} strokeWidth={4} strokeLinecap="round" fill="none" />
+    </>
+  )),
+  'quiet-bubble': art(90, 70, () => (
+    <Bubble fill={C.tealPale} stroke={C.teal}>
+      {[30, 45, 60].map((x) => (
+        <Circle key={x} cx={x} cy={31} r={4.5} fill={C.teal} />
+      ))}
+    </Bubble>
+  )),
+  'salam-bubble': art(90, 70, () => (
+    <Bubble fill={C.goldPale} stroke={C.goldDeep}>
+      <Path d={star8Path(45, 31, 14)} fill={C.gold} />
+      <Path d={star8Path(45, 31, 6)} fill={C.cream} />
+    </Bubble>
+  )),
+  'secret-bubble': art(90, 70, () => (
+    <Bubble fill={C.pinkPale} stroke={C.plum}>
+      <Rect x={33} y={26} width={24} height={18} rx={3} fill={C.plum} />
+      <Path d="M38 26V20Q45 12 52 20V26" stroke={C.plum} strokeWidth={4} fill="none" />
+      <Circle cx={45} cy={34} r={2.6} fill={C.pinkPale} />
+    </Bubble>
+  )),
 } satisfies Record<string, ArtDef>;
 
-export { dk };
+// ---------------------------------------------------------------------------------------------------------------
+
+export const akhlaq = {
+  ...tidy,
+  ...trust,
+} satisfies Record<string, ArtDef>;
