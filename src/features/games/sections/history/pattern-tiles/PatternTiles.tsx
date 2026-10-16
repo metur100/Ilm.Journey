@@ -6,10 +6,7 @@ import Svg from 'react-native-svg';
 import { makeCtx } from '@/core/art/kit';
 import { GirihTile, girihRotation } from '@/core/art/pieces/sections/history';
 import { AppText } from '@/core/components/ui/AppText';
-import { Burst, ChallengeClock, CheckBadge, Glow, HintPointer, InlineCaption, type EngineProps } from '@/core/games/kit';
-import { useEngineCore } from '@/core/games/kit/engine';
-import { useMeasure } from '@/core/games/kit/layout';
-import { useKitProbe } from '@/core/games/kit/probe';
+import { Burst, ChallengeClock, CheckBadge, type EngineProps, Glow, HintPointer, InlineCaption, useEngineCore, useKitProbe, useMeasure } from '@/core/games/kit';
 import { radius, spacing } from '@/core/theme';
 import { hashString, seededRandom } from '@/core/utils/random';
 

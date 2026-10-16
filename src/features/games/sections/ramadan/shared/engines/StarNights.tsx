@@ -5,10 +5,7 @@ import Svg, { Circle, Path } from 'react-native-svg';
 
 import { star8Path } from '@/core/art/kit';
 import { AppText } from '@/core/components/ui/AppText';
-import { Burst, ChallengeClock, Glow, InlineCaption, useShake, type EngineProps } from '@/core/games/kit';
-import { useEngineCore } from '@/core/games/kit/engine';
-import { useMeasure } from '@/core/games/kit/layout';
-import { useKitProbe } from '@/core/games/kit/probe';
+import { Burst, ChallengeClock, type EngineProps, Glow, InlineCaption, useEngineCore, useKitProbe, useMeasure, useShake } from '@/core/games/kit';
 import { fonts, radius, spacing } from '@/core/theme';
 
 import { NightBackdrop } from '../ui';

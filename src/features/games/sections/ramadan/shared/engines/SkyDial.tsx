@@ -7,10 +7,7 @@ import Svg, { Circle, Defs, LinearGradient, Path, Rect, Stop } from 'react-nativ
 import { Art } from '@/core/art';
 import { crescentPath, sparklePath } from '@/core/art/kit';
 import { AppText } from '@/core/components/ui/AppText';
-import { Burst, ChallengeClock, Glow, InlineCaption, ProgressDots, type EngineProps, type KitText } from '@/core/games/kit';
-import { useEngineCore } from '@/core/games/kit/engine';
-import { useMeasure } from '@/core/games/kit/layout';
-import { useKitProbe } from '@/core/games/kit/probe';
+import { Burst, ChallengeClock, type EngineProps, Glow, InlineCaption, type KitText, ProgressDots, useEngineCore, useKitProbe, useMeasure } from '@/core/games/kit';
 import { radius, spacing } from '@/core/theme';
 
 import { STAR_FIELD, ActionButton } from '../ui';

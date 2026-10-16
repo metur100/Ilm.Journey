@@ -7,10 +7,7 @@ import Svg, { Path } from 'react-native-svg';
 import { Art } from '@/core/art';
 import { smoothOpen } from '@/core/art/kit';
 import { AppText } from '@/core/components/ui/AppText';
-import { Burst, ChallengeClock, Glow, HintPointer, InlineCaption, type EngineProps, type KitPoint, type KitText } from '@/core/games/kit';
-import { useEngineCore } from '@/core/games/kit/engine';
-import { useMeasure } from '@/core/games/kit/layout';
-import { useKitProbe } from '@/core/games/kit/probe';
+import { Burst, ChallengeClock, type EngineProps, Glow, HintPointer, InlineCaption, type KitPoint, type KitText, useEngineCore, useKitProbe, useMeasure } from '@/core/games/kit';
 import { fonts, radius, spacing } from '@/core/theme';
 
 /*
