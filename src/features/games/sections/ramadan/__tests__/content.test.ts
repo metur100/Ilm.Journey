@@ -5,6 +5,7 @@ import month from '@/features/learn/content/ramadan/ramadan-month.json';
 
 import { CONTENT, FACTS } from '../shared/facts';
 import { RAMADAN_GAMES } from '../games';
+import { W } from '../ramadan-words/game';
 import { DEEDS } from '../thirty-lanterns/game';
 
 type L = Record<string, string>;
@@ -66,6 +67,11 @@ describe('Ramadan content', () => {
 
   it('the lantern deeds are the Ramadan tracker deeds', () => {
     expect(DEEDS).toEqual((quest.goodDeeds as { label: L }[]).map((d) => d.label));
+  });
+
+  it('the Arabic words come from the Ramadan lessons', () => {
+    const arabic = (quest.lessons as unknown as { sections: { arabic?: string; transliteration?: string }[] }[]).flatMap((l) => l.sections).filter((x) => x.arabic);
+    for (const pair of Object.values(W)) expect(arabic).toContainEqual(expect.objectContaining({ arabic: pair.a.arabic, transliteration: pair.a.sub }));
   });
 
   it('section art exists', () => {

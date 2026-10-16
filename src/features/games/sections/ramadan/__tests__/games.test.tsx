@@ -31,10 +31,10 @@ describe('Ramadan games', () => {
     await game.unmount();
   });
 
-  it.each(ids)('%s reports a mistake as a missed fact of the level', async (id) => {
+  it.each(ids)('%s reports mistakes as missed facts of the level', async (id) => {
     const def = getGame(id)!;
     const game = await renderGame(def, 2);
-    const result = await playToEnd(game, { mistakes: 1 });
+    const result = await playToEnd(game, { mistakes: 2 });
     expect(result.mistakes).toBeGreaterThan(0);
     expect(result.stars).toBeLessThan(3);
     const levelFacts = def.levels[1].facts.map((f) => f.id);

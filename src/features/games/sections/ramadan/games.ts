@@ -6,6 +6,7 @@ import { iftarTableGame } from './iftar-table/game';
 import { newCrescentGame } from './new-crescent/game';
 import { oddNightsGame } from './odd-nights/game';
 import { ramadanJourneyGame } from './ramadan-journey/game';
+import { ramadanWordsGame } from './ramadan-words/game';
 import { suhoorIftarSkyGame } from './suhoor-iftar-sky/game';
 import { taraweehTowerGame } from './taraweeh-tower/game';
 import { thirtyLanternsGame } from './thirty-lanterns/game';
@@ -17,6 +18,6 @@ import { zakatAlFitrGame } from './zakat-al-fitr/game';
  * (`../../ramadan-journey/register.ts`, already wired in `src/features/games/index.ts`), so it is listed here but
  * registered there.
  */
-export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame, suhoorIftarSkyGame, fastKeeperGame, newCrescentGame, thirtyLanternsGame, oddNightsGame, iftarTableGame, zakatAlFitrGame, bajramMorningGame, whoFastsGame, taraweehTowerGame];
+export const RAMADAN_GAMES: GameDef<any>[] = [ramadanJourneyGame, suhoorIftarSkyGame, fastKeeperGame, newCrescentGame, thirtyLanternsGame, oddNightsGame, iftarTableGame, zakatAlFitrGame, bajramMorningGame, whoFastsGame, taraweehTowerGame, ramadanWordsGame];
 
 export const REGISTERED_ELSEWHERE = new Set([ramadanJourneyGame.id]);
