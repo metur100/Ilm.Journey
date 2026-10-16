@@ -5,6 +5,7 @@ import month from '@/features/learn/content/ramadan/ramadan-month.json';
 
 import { CONTENT, FACTS } from '../shared/facts';
 import { RAMADAN_GAMES } from '../games';
+import { DEEDS } from '../thirty-lanterns/game';
 
 type L = Record<string, string>;
 const lessons = quest.lessons as unknown as { id: string; sections: { body: L }[]; differenceNote?: L }[];
@@ -60,6 +61,10 @@ describe('Ramadan content', () => {
       const dicts = game.i18n.dictionaries as unknown as Record<string, L>;
       for (const lang of LANGUAGES) for (const v of Object.values(dicts[lang])) for (const re of BANNED) expect(v).not.toMatch(re);
     }
+  });
+
+  it('the lantern deeds are the Ramadan tracker deeds', () => {
+    expect(DEEDS).toEqual((quest.goodDeeds as { label: L }[]).map((d) => d.label));
   });
 
   it('section art exists', () => {
