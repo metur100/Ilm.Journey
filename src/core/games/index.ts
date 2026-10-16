@@ -7,3 +7,4 @@ export * from './progress';
 export * from './registry';
 export { GAMES_PERSIST, type LevelSummary, startGamesAutoSave, useGamesStore, type GamesStore } from './store';
 export * from './types';
+export * from './sections';

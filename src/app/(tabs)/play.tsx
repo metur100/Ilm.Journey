@@ -1,37 +1,44 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { type ReactNode, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 
 import { Art } from '@/core/art';
 import { AppText } from '@/core/components/ui/AppText';
 import { HeroHeader } from '@/core/components/ui/HeroHeader';
-import { Icon } from '@/core/components/ui/Icon';
 import { Stars } from '@/core/components/ui/Stars';
 import { EmptyState } from '@/core/components/ui/States';
-import { type GameDef, totalStars, useGameOfTheDay, useGames, useGamesStore } from '@/core/games';
-import { topicName, translateNs, useI18n } from '@/core/i18n';
-import { TOPIC_IDS, type TopicId } from '@/core/models';
+import {
+  DEV_SECTION,
+  type GameDef,
+  PLAY_SECTIONS,
+  playI18n,
+  type PlaySectionId,
+  sectionGames,
+  sectionStats,
+  SHOW_DEV_GAMES,
+  totalStars,
+  useGameOfTheDay,
+  useGames,
+  useGamesStore,
+} from '@/core/games';
+import { SectionCard } from '@/core/games/play/PlayCards';
+import { translateNs, useI18n } from '@/core/i18n';
 import { makeStyles, radius, shadows, spacing, topicThemes, useTheme } from '@/core/theme';
 
 const useStyles = makeStyles((c) => ({
   root: { flex: 1, backgroundColor: c.background },
   scroll: { paddingBottom: spacing.xxl },
-  body: { padding: spacing.lg, gap: spacing.xl },
+  body: { padding: spacing.lg, gap: spacing.lg },
   hero: { borderRadius: radius.xl, overflow: 'hidden', ...shadows(c.shadow).raised },
   heroInner: { padding: spacing.lg, flexDirection: 'row', alignItems: 'center', gap: spacing.md, minHeight: 170 },
   heroText: { flex: 1, gap: spacing.xs },
   pill: { alignSelf: 'flex-start', backgroundColor: c.gold, borderRadius: radius.pill, paddingHorizontal: spacing.md, paddingVertical: 4 },
-  topic: { gap: spacing.md },
-  topicHeader: { borderRadius: radius.lg, paddingHorizontal: spacing.lg, paddingVertical: spacing.md, flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  shelf: { gap: spacing.md, paddingRight: spacing.lg },
-  card: { width: 200, backgroundColor: c.surface, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, overflow: 'hidden', ...shadows(c.shadow).card },
-  cardArt: { height: 150, alignItems: 'center', justifyContent: 'center' },
-  cardBody: { padding: spacing.md, gap: 4 },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
   pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
 }));
 
-/** Play tab: the illustrated game shelf grouped by topic, with "Game of the day" and stars. */
+/** Play tab: game of the day + the sections (Salah, Quran, Arabic / Sufara, …) as cards → section screen. */
 export default function PlayScreen() {
   const { t, language } = useI18n();
   const { c } = useTheme();
@@ -40,13 +47,17 @@ export default function PlayScreen() {
   const today = useGameOfTheDay();
   const data = useGamesStore((s) => s.games);
   const challengeMode = useGamesStore((s) => s.challengeMode);
-  const state = { games: data, challengeMode };
+  const state = useMemo(() => ({ games: data, challengeMode }), [data, challengeMode]);
+  const [width, setWidth] = useState(0);
 
-  const byTopic = useMemo(() => {
-    return TOPIC_IDS.map((topic) => ({ topic, title: t(topicName(topic)), games: games.filter((game) => game.topicId === topic) })).filter((shelf) => shelf.games.length > 0);
-  }, [games, t]);
+  const sections = useMemo(() => {
+    const ids: PlaySectionId[] = [...PLAY_SECTIONS, ...(SHOW_DEV_GAMES ? [DEV_SECTION as PlaySectionId] : [])];
+    return ids.map((id) => ({ id, stats: sectionStats(sectionGames(id, games), state) })).filter((s) => s.id !== DEV_SECTION || s.stats.games > 0);
+  }, [games, state]);
+
   const title = (g: GameDef<unknown>) => translateNs(g.i18n, language, 'title');
   const open = (g: GameDef<unknown>) => router.push({ pathname: '/game/[id]', params: { id: g.id } });
+  const cardW = width > 0 ? Math.floor((width - spacing.md) / 2) : 150;
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -84,62 +95,20 @@ export default function PlayScreen() {
                 </AppText>
                 <Stars count={Math.min(3, Math.round(totalStars(state, today.id) / Math.max(1, today.levels.length)))} size={18} dark />
               </View>
-              <Art name={today.coverArt} size={130} />
+              <Art name={today.coverArt} size={120} />
             </LinearGradient>
           </Pressable>
         ) : null}
 
-        {byTopic.map(({ topic, title: shelfTitle, games: list }, index) => (
-          <TopicShelf key={`${topic}-${index}`} topic={topic} title={shelfTitle}>
-            {list.map((g) => {
-              const stars = totalStars(state, g.id);
-              return (
-                <Pressable
-                  key={g.id}
-                  onPress={() => open(g)}
-                  accessibilityRole="button"
-                  accessibilityLabel={`${title(g)}. ${t('games.totalStars', { count: stars, total: g.levels.length * 3 })}`}
-                  style={({ pressed }) => [styles.card, pressed && styles.pressed]}
-                >
-                  <LinearGradient colors={[topicThemes[g.topicId].gradient[1], topicThemes[g.topicId].gradient[0]]} style={styles.cardArt}>
-                    <Art name={g.coverArt} size={120} />
-                  </LinearGradient>
-                  <View style={styles.cardBody}>
-                    <AppText variant="bodyBold" numberOfLines={2}>
-                      {title(g)}
-                    </AppText>
-                    <AppText variant="tiny" color={c.textMuted} numberOfLines={2}>
-                      {translateNs(g.i18n, language, 'description')}
-                    </AppText>
-                    <AppText variant="tiny" color={c.goldText}>
-                      {`★ ${t('games.totalStars', { count: stars, total: g.levels.length * 3 })}`}
-                    </AppText>
-                  </View>
-                </Pressable>
-              );
-            })}
-          </TopicShelf>
-        ))}
+        <AppText variant="heading" accessibilityRole="header">
+          {translateNs(playI18n, language, 'sections')}
+        </AppText>
+        <View style={styles.grid} onLayout={(e) => setWidth(e.nativeEvent.layout.width)}>
+          {sections.map(({ id, stats }) => (
+            <SectionCard key={id} section={id} stats={stats} width={cardW} onPress={() => router.push({ pathname: '/play/[section]', params: { section: id } })} />
+          ))}
+        </View>
       </View>
     </ScrollView>
-  );
-}
-
-function TopicShelf({ topic, title, children }: { topic: TopicId; title: string; children: ReactNode }) {
-  const { c } = useTheme();
-  const styles = useStyles();
-  const theme = topicThemes[topic];
-  return (
-    <View style={styles.topic}>
-      <LinearGradient colors={theme.gradient} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.topicHeader}>
-        <Icon name={theme.icon} size={22} color={c.onAccent} />
-        <AppText variant="heading" color={c.onAccent} accessibilityRole="header">
-          {title}
-        </AppText>
-      </LinearGradient>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.shelf}>
-        {children}
-      </ScrollView>
-    </View>
   );
 }

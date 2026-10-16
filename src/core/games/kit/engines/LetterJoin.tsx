@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition, ZoomIn } from 'react-native-reanimated';
 
@@ -83,13 +83,20 @@ export function LetterJoin(props: LetterJoinProps) {
     if (next === word.letters.length) {
       core.right({ caption: word.meaning ? `${word.word ?? word.letters.join('')} – ${env.text(word.meaning)}` : env.kt('join.word', { word: word.word ?? word.letters.join('') }), tone: 'fact' });
       if (wordIndex === words.length - 1) core.finish(reduced ? 400 : 1600);
-      else setTimeout(() => goNext(), reduced ? 700 : 1500);
+      else {
+        const from = wordIndex;
+        setTimeout(() => goNext(from), reduced ? 700 : 1500);
+      }
     } else core.right({ caption: false });
     return true;
   };
 
-  const goNext = () => {
-    setWordIndex((i) => Math.min(words.length - 1, i + 1));
+  /** Moves on from word `from` once (the timer and a probe may both ask). */
+  const advanced = useRef(-1);
+  const goNext = (from: number) => {
+    if (advanced.current >= from) return;
+    advanced.current = from;
+    setWordIndex(Math.min(words.length - 1, from + 1));
     setPlaced(0);
   };
 
@@ -99,7 +106,7 @@ export function LetterJoin(props: LetterJoinProps) {
     step: () => {
       if (allDone) return false;
       if (complete) {
-        goNext();
+        goNext(wordIndex);
         return true;
       }
       const tile = pool.find((t) => t.index === placed)!;
