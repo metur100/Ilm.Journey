@@ -57,7 +57,7 @@ export function FaceView({ face, artSize = 44, arabicSize = 30, variant = 'small
   const sub = text(face.sub);
   return (
     <View style={[styles.face, row && styles.faceRow, align === 'left' && !row && { alignItems: 'flex-start' }]} importantForAccessibility="no-hide-descendants">
-      {face.art && hasArt(face.art) ? <Art name={face.art} size={artSize} /> : null}
+      {face.art && hasArt(face.art) ? <Art name={face.art} size={artSize} height={artSize} /> : null}
       {face.arabic ? (
         <AppText
           script={face.quran ? 'quran' : 'arabic'}

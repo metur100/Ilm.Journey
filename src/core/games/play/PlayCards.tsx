@@ -39,7 +39,7 @@ export function SectionCard({ section, stats, onPress, width }: { section: PlayS
         </Svg>
         <View style={styles.sectionTop}>
           <View style={styles.sectionArt}>
-            <Art name={SECTION_ART[section]} size={62} />
+            <Art name={SECTION_ART[section]} size={58} height={58} />
           </View>
           {stats.newGames > 0 ? (
             <View style={[styles.newPill, { backgroundColor: c.gold }]}>
