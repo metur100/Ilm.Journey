@@ -4,7 +4,9 @@ import { registerGame } from '@/core/games';
 import { fourCaliphsGame } from './four-caliphs';
 import { hijriCalendarGame } from './hijri-calendar';
 import { goldenAgeGame } from './golden-age';
+import { greatMosquesGame } from './great-mosques';
 import { houseOfWisdomGame } from './house-of-wisdom';
+import { islamicTimelineGame } from './islamic-timeline';
 import { mushafGame } from './mushaf';
 import { scholarsBooksGame } from './scholars-books';
 
@@ -12,7 +14,7 @@ import { scholarsBooksGame } from './scholars-books';
  * Section "history" (docs/GAMES-V3.md §3.6): every game of this section lives in this folder and is registered here.
  * Owned by one author – do not register this section's games anywhere else.
  */
-export const HISTORY_GAMES: GameDef<any>[] = [fourCaliphsGame, mushafGame, hijriCalendarGame, houseOfWisdomGame, goldenAgeGame, scholarsBooksGame];
+export const HISTORY_GAMES: GameDef<any>[] = [fourCaliphsGame, mushafGame, hijriCalendarGame, houseOfWisdomGame, goldenAgeGame, scholarsBooksGame, islamicTimelineGame, greatMosquesGame];
 
 export function registerHistoryGames(): void {
   for (const game of HISTORY_GAMES) registerGame(game);
