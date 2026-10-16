@@ -1,3 +1,4 @@
+import { registerAdhanGame } from './adhan-iqamah/register';
 import { registerFindQiblaGame } from './find-qibla/register';
 import { registerGhuslGame } from './ghusl/register';
 import { registerTayammumGame } from './tayammum/register';
@@ -13,6 +14,7 @@ export function registerSalahGames(): void {
   registerWuduFlowGame();
   registerGhuslGame();
   registerTayammumGame();
+  registerAdhanGame();
   registerPrayerSkyGame();
   registerFindQiblaGame();
 }
