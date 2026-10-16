@@ -1,17 +1,32 @@
 {
   "id": "muhammad",
-  "order": 8,
-  "prophetName": { "en": "Muhammad", "de": "Muhammad", "bs": "Muhammed" },
-  "honorific": "sallallahu-alayhi-wa-sallam",
-  "title": { "en": "The Final Messenger", "de": "Der letzte Gesandte", "bs": "Posljednji poslanik" },
-  "description": {
-    "en": "From the cave of Hira to Madinah – the story of the Seal of the Prophets.",
-    "de": "Von der Höhle Hira bis Medina – die Geschichte des Siegels der Propheten.",
-    "bs": "Od pećine Hira do Medine – kazivanje o pečatu poslanika."
+  "order": 25,
+  "prophetName": {
+    "en": "Muhammad",
+    "de": "Muhammad",
+    "bs": "Muhammed"
   },
-  "place": { "en": "Makkah and Madinah", "de": "Mekka und Medina", "bs": "Mekka i Medina" },
+  "honorific": "sallallahu-alayhi-wa-sallam",
+  "title": {
+    "en": "The Final Messenger",
+    "de": "Der letzte Gesandte",
+    "bs": "Posljednji poslanik"
+  },
+  "description": {
+    "en": "From the cave of Hira to Madinah – the final messenger, sent as a mercy to the worlds.",
+    "de": "Von der Höhle Hira bis Medina – der letzte Gesandte, gesandt als Barmherzigkeit für die Welten.",
+    "bs": "Od pećine Hira do Medine – posljednji poslanik, poslan kao milost svjetovima."
+  },
+  "place": {
+    "en": "Makkah and Madinah",
+    "de": "Mekka und Medina",
+    "bs": "Mekka i Medina"
+  },
   "symbol": "mosque",
-  "cover": { "sky": "sunset", "elements": ["mountains", "palms", "mosque"] },
+  "cover": {
+    "sky": "sunset",
+    "elements": ["mountains", "palms", "mosque"]
+  },
   "intro": {
     "en": "Muhammad ﷺ was born in Makkah. His father died before he was born and his mother when he was a small child, so he grew up as an orphan. His people knew him as Al-Amin – the trustworthy one.",
     "de": "Muhammad ﷺ wurde in Mekka geboren. Sein Vater starb vor seiner Geburt und seine Mutter, als er ein kleines Kind war – so wuchs er als Waise auf. Sein Volk kannte ihn als Al-Amin – den Vertrauenswürdigen.",
@@ -20,50 +35,263 @@
   "scenes": [
     {
       "id": "muhammad-s1",
-      "title": { "en": "The cave of Hira", "de": "Die Höhle Hira", "bs": "Pećina Hira" },
+      "title": {
+        "en": "The cave of Hira",
+        "de": "Die Höhle Hira",
+        "bs": "Pećina Hira"
+      },
       "text": {
         "en": "He used to go to the cave of Hira on a mountain near Makkah to reflect. There, at about the age of forty, the angel Jibril came to him with the first revelation.",
         "de": "Er ging oft in die Höhle Hira auf einem Berg bei Mekka, um nachzudenken. Dort kam im Alter von etwa vierzig Jahren der Engel Dschibril mit der ersten Offenbarung zu ihm.",
         "bs": "Odlazio je u pećinu Hira na brdu kod Mekke da razmišlja. Tu mu je, kada je imao oko četrdeset godina, došao melek Džibril s prvom objavom."
       },
-      "scene": { "sky": "night", "elements": ["stars", "mountains", "cave"] },
+      "scene": {
+        "sky": "night",
+        "elements": ["stars", "mountains", "cave"]
+      },
       "interactionId": "muhammad-iqra",
       "sources": [
-        { "sourceName": "Quran", "sourceReference": "96:1–5" },
-        { "sourceName": "Sahih al-Bukhari", "sourceReference": "3" }
-      ]
+        {
+          "sourceName": "Quran",
+          "sourceReference": "96:1–5"
+        },
+        {
+          "sourceName": "Sahih al-Bukhari",
+          "sourceReference": "3"
+        }
+      ],
+      "stage": {
+        "sky": "night",
+        "layers": [
+          {
+            "art": "prophet.muhammad-hira"
+          },
+          {
+            "art": "prophet.muhammad-pen",
+            "x": 92,
+            "y": 230,
+            "w": 76,
+            "enter": "rise",
+            "at": 2200
+          }
+        ],
+        "effects": [
+          {
+            "type": "stars",
+            "intensity": 3
+          },
+          {
+            "type": "sparkle",
+            "x": 220,
+            "y": 70,
+            "w": 80,
+            "h": 80,
+            "intensity": 1,
+            "at": 1400
+          }
+        ]
+      }
     },
     {
       "id": "muhammad-s2",
-      "title": { "en": "Patience and the Hijra", "de": "Geduld und die Hidschra", "bs": "Strpljenje i hidžra" },
+      "title": {
+        "en": "Patience and the Hijra",
+        "de": "Geduld und die Hidschra",
+        "bs": "Strpljenje i hidžra"
+      },
       "text": {
         "en": "For about thirteen years he called the people of Makkah to worship Allah alone, facing hardship with patience. Then he migrated with Abu Bakr – the Hijra. While hiding in a cave on the way, he told his companion not to grieve, for Allah was with them.",
         "de": "Etwa dreizehn Jahre lang rief er die Menschen in Mekka auf, Allah allein anzubeten, und ertrug Schwierigkeiten mit Geduld. Dann wanderte er mit Abu Bakr aus – die Hidschra. Als sie sich unterwegs in einer Höhle versteckten, sagte er zu seinem Gefährten, er solle nicht traurig sein, denn Allah sei mit ihnen.",
         "bs": "Oko trinaest godina pozivao je stanovnike Mekke da robuju samo Allahu, strpljivo podnoseći teškoće. Zatim je s Ebu Bekrom učinio hidžru. Dok su se na putu skrivali u pećini, rekao je svom drugu da ne tuguje, jer je Allah s njima."
       },
-      "scene": { "sky": "dusk", "elements": ["stars", "dunes", "caravan"] },
+      "scene": {
+        "sky": "dusk",
+        "elements": ["stars", "dunes", "caravan"]
+      },
       "interactionId": "muhammad-map",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "9:40" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "9:40"
+        }
+      ],
+      "stage": {
+        "sky": "dusk",
+        "layers": [
+          {
+            "art": "story.dunes"
+          },
+          {
+            "art": "place.cave-thawr",
+            "x": 300,
+            "y": 216,
+            "w": 150
+          },
+          {
+            "art": "object.spider-web",
+            "x": 300,
+            "y": 178,
+            "w": 30,
+            "enter": "fade",
+            "at": 1600
+          },
+          {
+            "art": "animal.camel",
+            "x": 110,
+            "y": 224,
+            "w": 64,
+            "enter": "slideLeft",
+            "at": 600,
+            "duration": 2000
+          }
+        ],
+        "effects": [
+          "stars",
+          {
+            "type": "sand",
+            "intensity": 1
+          }
+        ]
+      }
     },
     {
       "id": "muhammad-s3",
-      "title": { "en": "Madinah", "de": "Medina", "bs": "Medina" },
-      "text": {
-        "en": "In Madinah he built the masjid, and the believers who had migrated and those who welcomed them lived like brothers and sisters. The Quran calls him the Seal of the Prophets, describes his great character, and says he was sent as a mercy to all the worlds.",
-        "de": "In Medina baute er die Moschee, und die ausgewanderten Gläubigen und die, die sie aufnahmen, lebten wie Geschwister. Der Koran nennt ihn das Siegel der Propheten, beschreibt seinen großartigen Charakter und sagt, dass er als Barmherzigkeit für alle Welten gesandt wurde.",
-        "bs": "U Medini je sagradio džamiju, a vjernici koji su preselili i oni koji su ih dočekali živjeli su kao braća i sestre. Kur'an ga naziva pečatom vjerovjesnika, opisuje njegov uzvišeni ahlak i kaže da je poslan kao milost svim svjetovima."
+      "title": {
+        "en": "Madinah",
+        "de": "Medina",
+        "bs": "Medina"
       },
-      "scene": { "sky": "dawn", "elements": ["palms", "mosque", "lanterns"] },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "33:40; 68:4; 21:107" }]
+      "text": {
+        "en": "In Madinah he built the masjid, and the believers who had migrated and those who welcomed them lived like brothers and sisters. The Quran describes his great character and says that Allah sent him as a mercy to all the worlds.",
+        "de": "In Medina baute er die Moschee, und die ausgewanderten Gläubigen und die, die sie aufnahmen, lebten wie Geschwister. Der Koran beschreibt seinen großartigen Charakter und sagt, dass Allah ihn als Barmherzigkeit für alle Welten gesandt hat.",
+        "bs": "U Medini je sagradio džamiju, a vjernici koji su preselili i oni koji su ih dočekali živjeli su kao braća i sestre. Kur'an opisuje njegov uzvišeni ahlak i kaže da ga je Allah poslao kao milost svim svjetovima."
+      },
+      "scene": {
+        "sky": "dawn",
+        "elements": ["palms", "mosque", "lanterns"]
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "68:4; 21:107"
+        }
+      ],
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          {
+            "art": "story.hills"
+          },
+          {
+            "art": "place.masjid-nabawi-early",
+            "x": 200,
+            "y": 234,
+            "w": 240,
+            "enter": "rise",
+            "at": 300
+          },
+          {
+            "art": "story.palms",
+            "x": 60,
+            "y": 232,
+            "w": 100
+          }
+        ],
+        "effects": [
+          {
+            "type": "sunrays",
+            "x": 70,
+            "y": 70
+          },
+          {
+            "type": "birds",
+            "intensity": 1
+          },
+          {
+            "type": "leaves",
+            "intensity": 1
+          }
+        ]
+      },
+      "interactionId": "muhammad-mercy"
+    },
+    {
+      "id": "muhammad-s4",
+      "title": {
+        "en": "The Seal of the Prophets",
+        "de": "Das Siegel der Propheten",
+        "bs": "Pečat vjerovjesnika"
+      },
+      "text": {
+        "en": "Allah sent revelation to Muhammad ﷺ as He sent it to Nuh and the prophets after him – to Ibrahim, Ismail, Ishaq, Yaqub, Isa, Ayyub, Yunus, Harun, Sulayman and Dawud. Muhammad ﷺ is the Messenger of Allah and the Seal of the Prophets: after him no other prophet comes.",
+        "de": "Allah sandte Muhammad ﷺ Offenbarung, wie Er sie Nuh und den Propheten nach ihm sandte – Ibrahim, Ismail, Ishaq, Yaqub, Isa, Ayyub, Yunus, Harun, Sulaiman und Dawud. Muhammad ﷺ ist der Gesandte Allahs und das Siegel der Propheten: Nach ihm kommt kein Prophet mehr.",
+        "bs": "Allah je Muhammedu ﷺ slao objavu kao što ju je slao Nuhu i vjerovjesnicima poslije njega – Ibrahimu, Ismailu, Ishaku, Jakubu, Isau, Ejjubu, Junusu, Harunu, Sulejmanu i Davudu. Muhammed ﷺ je Allahov Poslanik i pečat vjerovjesnika: poslije njega nema više vjerovjesnika."
+      },
+      "scene": {
+        "sky": "night",
+        "elements": ["stars", "crescent", "mosque"]
+      },
+      "stage": {
+        "sky": "night",
+        "camera": "panRight",
+        "layers": [
+          {
+            "art": "story.moon-crescent",
+            "x": 60,
+            "y": 48,
+            "w": 46,
+            "anchor": "center",
+            "anim": "glow"
+          },
+          {
+            "art": "prophet.muhammad-star-chain",
+            "x": 200,
+            "y": 110,
+            "w": 400,
+            "anchor": "center",
+            "enter": "fade",
+            "at": 300,
+            "duration": 3200
+          },
+          {
+            "art": "story.night-horizon"
+          }
+        ],
+        "effects": [
+          {
+            "type": "stars",
+            "intensity": 2
+          },
+          {
+            "type": "sparkle",
+            "x": 355,
+            "y": 112,
+            "w": 60,
+            "h": 50,
+            "intensity": 2,
+            "at": 3200
+          }
+        ]
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "4:163–164; 33:40"
+        }
+      ]
     }
   ],
   "miniGameId": "muhammad-timeline",
-  "quizIds": ["muhammad-last", "muhammad-mercy", "muhammad-lesson"],
+  "quizIds": ["muhammad-last", "muhammad-revelation", "muhammad-lesson"],
   "lessons": [
     {
       "id": "muhammad-l1",
       "value": "rahmah",
-      "title": { "en": "Mercy to everyone", "de": "Barmherzigkeit für alle", "bs": "Milost prema svima" },
+      "title": {
+        "en": "Mercy to everyone",
+        "de": "Barmherzigkeit für alle",
+        "bs": "Milost prema svima"
+      },
       "explanation": {
         "en": "Allah sent the Prophet ﷺ as a mercy to the worlds. He was gentle with children, kind to the weak and merciful even to animals.",
         "de": "Allah sandte den Propheten ﷺ als Barmherzigkeit für die Welten. Er war sanft zu Kindern, freundlich zu den Schwachen und barmherzig sogar zu Tieren.",
@@ -83,7 +311,11 @@
     {
       "id": "muhammad-l2",
       "value": "amanah",
-      "title": { "en": "Be trustworthy like Al-Amin", "de": "Sei vertrauenswürdig wie Al-Amin", "bs": "Budi povjerljiv kao El-Emin" },
+      "title": {
+        "en": "Be trustworthy like Al-Amin",
+        "de": "Sei vertrauenswürdig wie Al-Amin",
+        "bs": "Budi povjerljiv kao El-Emin"
+      },
       "explanation": {
         "en": "Even people who did not follow him trusted the Prophet ﷺ, because he was always honest and kept his word.",
         "de": "Selbst Menschen, die ihm nicht folgten, vertrauten dem Propheten ﷺ, weil er immer ehrlich war und sein Wort hielt.",
@@ -107,11 +339,36 @@
       "type": "multipleChoice",
       "storyId": "muhammad",
       "topic": "muhammad",
-      "prompt": { "en": "What was the first word of the revelation?", "de": "Was war das erste Wort der Offenbarung?", "bs": "Koja je bila prva riječ objave?" },
+      "prompt": {
+        "en": "What was the first word of the revelation?",
+        "de": "Was war das erste Wort der Offenbarung?",
+        "bs": "Koja je bila prva riječ objave?"
+      },
       "options": [
-        { "id": "a", "text": { "en": "Iqra – Read!", "de": "Iqra – Lies!", "bs": "Ikre' – Čitaj!" } },
-        { "id": "b", "text": { "en": "Salam – Peace", "de": "Salam – Frieden", "bs": "Selam – mir" } },
-        { "id": "c", "text": { "en": "Sabr – Patience", "de": "Sabr – Geduld", "bs": "Sabur – strpljenje" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "Iqra – Read!",
+            "de": "Iqra – Lies!",
+            "bs": "Ikre' – Čitaj!"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Salam – Peace",
+            "de": "Salam – Frieden",
+            "bs": "Selam – mir"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Sabr – Patience",
+            "de": "Sabr – Geduld",
+            "bs": "Sabur – strpljenje"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -120,8 +377,14 @@
         "bs": "Prva objava počela je riječju „Ikre'“ – prvim ajetima sure El-Alek."
       },
       "sources": [
-        { "sourceName": "Quran", "sourceReference": "96:1–5" },
-        { "sourceName": "Sahih al-Bukhari", "sourceReference": "3" }
+        {
+          "sourceName": "Quran",
+          "sourceReference": "96:1–5"
+        },
+        {
+          "sourceName": "Sahih al-Bukhari",
+          "sourceReference": "3"
+        }
       ]
     },
     {
@@ -129,7 +392,11 @@
       "type": "map",
       "storyId": "muhammad",
       "topic": "muhammad",
-      "prompt": { "en": "The Hijra went from Makkah to which city? Tap it on the map.", "de": "Die Hidschra führte von Mekka in welche Stadt? Tippe sie auf der Karte an.", "bs": "Hidžra je bila iz Mekke u koji grad? Dodirni ga na mapi." },
+      "prompt": {
+        "en": "The Hijra went from Makkah to which city? Tap it on the map.",
+        "de": "Die Hidschra führte von Mekka in welche Stadt? Tippe sie auf der Karte an.",
+        "bs": "Hidžra je bila iz Mekke u koji grad? Dodirni ga na mapi."
+      },
       "places": ["madinah", "makkah", "jerusalem", "egypt"],
       "correctPlace": "madinah",
       "explanation": {
@@ -139,51 +406,40 @@
       }
     },
     {
-      "id": "muhammad-timeline",
-      "type": "ordering",
-      "timeline": true,
-      "storyId": "muhammad",
-      "topic": "muhammad",
-      "prompt": { "en": "Timeline: put the life of the Prophet ﷺ in order.", "de": "Zeitleiste: Bringe das Leben des Propheten ﷺ in die richtige Reihenfolge.", "bs": "Vremenska linija: poredaj život Poslanika ﷺ." },
-      "items": [
-        { "id": "born", "text": { "en": "Born in Makkah", "de": "Geboren in Mekka", "bs": "Rođen u Mekki" } },
-        { "id": "amin", "text": { "en": "Known as Al-Amin", "de": "Bekannt als Al-Amin", "bs": "Poznat kao El-Emin" } },
-        { "id": "hira", "text": { "en": "First revelation in Hira", "de": "Erste Offenbarung in Hira", "bs": "Prva objava u Hiri" } },
-        { "id": "makkah", "text": { "en": "Calling to Islam in Makkah", "de": "Aufruf zum Islam in Mekka", "bs": "Pozivanje u islam u Mekki" } },
-        { "id": "hijra", "text": { "en": "The Hijra to Madinah", "de": "Die Hidschra nach Medina", "bs": "Hidžra u Medinu" } },
-        { "id": "masjid", "text": { "en": "Building the masjid in Madinah", "de": "Bau der Moschee in Medina", "bs": "Gradnja džamije u Medini" } }
-      ],
-      "explanation": {
-        "en": "Born in Makkah, Al-Amin, revelation at about forty, years of calling in Makkah, the Hijra, and the masjid in Madinah.",
-        "de": "Geboren in Mekka, Al-Amin, Offenbarung mit etwa vierzig, Jahre des Aufrufs in Mekka, die Hidschra und die Moschee in Medina.",
-        "bs": "Rođen u Mekki, El-Emin, objava s oko četrdeset, godine pozivanja u Mekki, hidžra i džamija u Medini."
-      },
-      "sources": [{ "sourceName": "Ibn Hisham, As-Sirah an-Nabawiyyah", "sourceReference": "—" }]
-    },
-    {
-      "id": "muhammad-last",
-      "type": "trueFalse",
-      "storyId": "muhammad",
-      "topic": "muhammad",
-      "prompt": { "en": "Muhammad ﷺ is the last prophet.", "de": "Muhammad ﷺ ist der letzte Prophet.", "bs": "Muhammed ﷺ je posljednji poslanik." },
-      "correct": true,
-      "explanation": {
-        "en": "Yes – the Quran calls him the Seal of the Prophets.",
-        "de": "Ja – der Koran nennt ihn das Siegel der Propheten.",
-        "bs": "Da – Kur'an ga naziva pečatom vjerovjesnika."
-      },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "33:40" }]
-    },
-    {
       "id": "muhammad-mercy",
       "type": "multipleChoice",
       "storyId": "muhammad",
       "topic": "muhammad",
-      "prompt": { "en": "The Quran says Allah sent the Prophet ﷺ as…", "de": "Der Koran sagt, Allah sandte den Propheten ﷺ als…", "bs": "Kur'an kaže da je Allah poslao Poslanika ﷺ kao…" },
+      "prompt": {
+        "en": "The Quran says Allah sent the Prophet ﷺ as…",
+        "de": "Der Koran sagt, Allah sandte den Propheten ﷺ als…",
+        "bs": "Kur'an kaže da je Allah poslao Poslanika ﷺ kao…"
+      },
       "options": [
-        { "id": "a", "text": { "en": "a mercy to the worlds", "de": "Barmherzigkeit für die Welten", "bs": "milost svjetovima" } },
-        { "id": "b", "text": { "en": "a king", "de": "einen König", "bs": "kralja" } },
-        { "id": "c", "text": { "en": "a merchant only", "de": "nur einen Händler", "bs": "samo trgovca" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "a mercy to the worlds",
+            "de": "Barmherzigkeit für die Welten",
+            "bs": "milost svjetovima"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "a king",
+            "de": "einen König",
+            "bs": "kralja"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "a merchant only",
+            "de": "nur einen Händler",
+            "bs": "samo trgovca"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -191,18 +447,167 @@
         "de": "„Wir haben dich nur als Barmherzigkeit für die Welten gesandt“ – Sure Al-Anbiya, 107.",
         "bs": "„A tebe smo samo kao milost svjetovima poslali“ – sura El-Enbija, 107."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "21:107" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "21:107"
+        }
+      ]
+    },
+    {
+      "id": "muhammad-timeline",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "muhammad",
+      "topic": "muhammad",
+      "prompt": {
+        "en": "Timeline: put the life of the Prophet ﷺ in order.",
+        "de": "Zeitleiste: Bringe das Leben des Propheten ﷺ in die richtige Reihenfolge.",
+        "bs": "Vremenska linija: poredaj život Poslanika ﷺ."
+      },
+      "items": [
+        {
+          "id": "born",
+          "text": {
+            "en": "Born in Makkah",
+            "de": "Geboren in Mekka",
+            "bs": "Rođen u Mekki"
+          }
+        },
+        {
+          "id": "amin",
+          "text": {
+            "en": "Known as Al-Amin",
+            "de": "Bekannt als Al-Amin",
+            "bs": "Poznat kao El-Emin"
+          }
+        },
+        {
+          "id": "hira",
+          "text": {
+            "en": "First revelation in Hira",
+            "de": "Erste Offenbarung in Hira",
+            "bs": "Prva objava u Hiri"
+          }
+        },
+        {
+          "id": "makkah",
+          "text": {
+            "en": "Calling to Islam in Makkah",
+            "de": "Aufruf zum Islam in Mekka",
+            "bs": "Pozivanje u islam u Mekki"
+          }
+        },
+        {
+          "id": "hijra",
+          "text": {
+            "en": "The Hijra to Madinah",
+            "de": "Die Hidschra nach Medina",
+            "bs": "Hidžra u Medinu"
+          }
+        },
+        {
+          "id": "masjid",
+          "text": {
+            "en": "Building the masjid in Madinah",
+            "de": "Bau der Moschee in Medina",
+            "bs": "Gradnja džamije u Medini"
+          }
+        }
+      ],
+      "explanation": {
+        "en": "Born in Makkah, Al-Amin, revelation at about forty, years of calling in Makkah, the Hijra, and the masjid in Madinah.",
+        "de": "Geboren in Mekka, Al-Amin, Offenbarung mit etwa vierzig, Jahre des Aufrufs in Mekka, die Hidschra und die Moschee in Medina.",
+        "bs": "Rođen u Mekki, El-Emin, objava s oko četrdeset, godine pozivanja u Mekki, hidžra i džamija u Medini."
+      },
+      "sources": [
+        {
+          "sourceName": "Ibn Hisham, As-Sirah an-Nabawiyyah",
+          "sourceReference": "—"
+        }
+      ]
+    },
+    {
+      "id": "muhammad-last",
+      "type": "trueFalse",
+      "storyId": "muhammad",
+      "topic": "muhammad",
+      "prompt": {
+        "en": "Muhammad ﷺ is the last prophet.",
+        "de": "Muhammad ﷺ ist der letzte Prophet.",
+        "bs": "Muhammed ﷺ je posljednji poslanik."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – the Quran calls him the Seal of the Prophets.",
+        "de": "Ja – der Koran nennt ihn das Siegel der Propheten.",
+        "bs": "Da – Kur'an ga naziva pečatom vjerovjesnika."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "33:40"
+        }
+      ]
+    },
+    {
+      "id": "muhammad-revelation",
+      "type": "trueFalse",
+      "storyId": "muhammad",
+      "topic": "muhammad",
+      "prompt": {
+        "en": "Allah sent revelation to Muhammad ﷺ as He sent it to Nuh and the prophets after him.",
+        "de": "Allah sandte Muhammad ﷺ Offenbarung, wie Er sie Nuh und den Propheten nach ihm sandte.",
+        "bs": "Allah je Muhammedu ﷺ slao objavu kao što ju je slao Nuhu i vjerovjesnicima poslije njega."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – all the prophets brought the same message: worship Allah alone.",
+        "de": "Ja – alle Propheten brachten dieselbe Botschaft: Betet Allah allein an.",
+        "bs": "Da – svi poslanici donijeli su istu poruku: robujte samo Allahu."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "4:163; 21:25"
+        }
+      ]
     },
     {
       "id": "muhammad-lesson",
       "type": "lessonChoice",
       "storyId": "muhammad",
       "topic": "muhammad",
-      "prompt": { "en": "Why did people call him Al-Amin?", "de": "Warum nannten die Menschen ihn Al-Amin?", "bs": "Zašto su ga ljudi zvali El-Emin?" },
+      "prompt": {
+        "en": "Why did people call him Al-Amin?",
+        "de": "Warum nannten die Menschen ihn Al-Amin?",
+        "bs": "Zašto su ga ljudi zvali El-Emin?"
+      },
       "options": [
-        { "id": "a", "text": { "en": "Because he was honest and trustworthy", "de": "Weil er ehrlich und vertrauenswürdig war", "bs": "Jer je bio iskren i povjerljiv" } },
-        { "id": "b", "text": { "en": "Because he was very rich", "de": "Weil er sehr reich war", "bs": "Jer je bio jako bogat" } },
-        { "id": "c", "text": { "en": "Because he was the strongest", "de": "Weil er der Stärkste war", "bs": "Jer je bio najjači" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "Because he was honest and trustworthy",
+            "de": "Weil er ehrlich und vertrauenswürdig war",
+            "bs": "Jer je bio iskren i povjerljiv"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Because he was very rich",
+            "de": "Weil er sehr reich war",
+            "bs": "Jer je bio jako bogat"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Because he was the strongest",
+            "de": "Weil er der Stärkste war",
+            "bs": "Jer je bio najjači"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -210,12 +615,71 @@
         "de": "Al-Amin bedeutet „der Vertrauenswürdige“ – seine Ehrlichkeit kannten alle.",
         "bs": "El-Emin znači „povjerljivi“ – njegovu iskrenost poznavali su svi."
       },
-      "sources": [{ "sourceName": "Ibn Hisham, As-Sirah an-Nabawiyyah", "sourceReference": "—" }]
+      "sources": [
+        {
+          "sourceName": "Ibn Hisham, As-Sirah an-Nabawiyyah",
+          "sourceReference": "—"
+        }
+      ]
     }
   ],
   "sources": [
-    { "sourceName": "Quran", "sourceReference": "96:1–5; 9:40; 33:40; 68:4; 21:107" },
-    { "sourceName": "Sahih al-Bukhari", "sourceReference": "3" },
-    { "sourceName": "Ibn Hisham, As-Sirah an-Nabawiyyah", "sourceReference": "—" }
-  ]
+    {
+      "sourceName": "Quran",
+      "sourceReference": "96:1–5; 9:40; 33:40; 68:4; 21:107"
+    },
+    {
+      "sourceName": "Sahih al-Bukhari",
+      "sourceReference": "3"
+    },
+    {
+      "sourceName": "Ibn Hisham, As-Sirah an-Nabawiyyah",
+      "sourceReference": "—"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "4:163–164"
+    }
+  ],
+  "symbolArt": "prophet.muhammad-star-chain",
+  "mapPlaces": ["makkah", "madinah"],
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      {
+        "art": "prophet.muhammad-star-chain",
+        "x": 200,
+        "y": 70,
+        "w": 400,
+        "anchor": "center",
+        "enter": "fade",
+        "at": 300,
+        "duration": 2200
+      },
+      {
+        "art": "story.mountains",
+        "opacity": 0.85
+      },
+      {
+        "art": "place.masjid-nabawi-early",
+        "x": 200,
+        "y": 232,
+        "w": 220,
+        "enter": "rise",
+        "at": 900
+      }
+    ],
+    "effects": [
+      "stars",
+      {
+        "type": "sparkle",
+        "x": 360,
+        "y": 60,
+        "w": 50,
+        "h": 40,
+        "intensity": 1,
+        "at": 2400
+      }
+    ]
+  }
 }
