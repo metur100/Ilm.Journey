@@ -125,10 +125,13 @@ export function TimelineSlider(props: TimelineSliderProps) {
       {events.length > 1 ? <ProgressDots total={events.length} done={pinned.length} /> : null}
       <View style={styles.cardArea}>
         {!done ? (
-          <Animated.View key={event.id} entering={reduced ? FadeIn : FadeInDown.springify().damping(14)} style={shakeStyle}>
-            <Tile state="selected" minHeight={96} padding={spacing.md} style={styles.card}>
-              <FaceView face={event} row={!!event.art} artSize={64} variant="bodyBold" numberOfLines={3} align={event.art ? 'left' : 'center'} />
-            </Tile>
+          <Animated.View key={event.id} entering={reduced ? FadeIn : FadeInDown.springify().damping(14)}>
+            {/* The shake lives on an inner view: a layout animation would overwrite its transform. */}
+            <Animated.View style={shakeStyle}>
+              <Tile state="selected" minHeight={96} padding={spacing.md} style={styles.card}>
+                <FaceView face={event} row={!!event.art} artSize={64} variant="bodyBold" numberOfLines={3} align={event.art ? 'left' : 'center'} />
+              </Tile>
+            </Animated.View>
           </Animated.View>
         ) : (
           <Burst trigger={1} distance={80} size={16} />
@@ -191,7 +194,7 @@ const styles = StyleSheet.create({
   pin: { position: 'absolute', width: 44, alignItems: 'center' },
   tickHit: { position: 'absolute', top: 50, height: 80, alignItems: 'center' },
   tick: { width: 4, height: 30, borderRadius: 2 },
-  tickLabel: { marginTop: 2 },
+  tickLabel: { marginTop: 8 },
   handle: { position: 'absolute', top: 44, left: 0, width: HANDLE, height: HANDLE, borderRadius: HANDLE / 2, borderWidth: 4, alignItems: 'center', justifyContent: 'center', shadowOpacity: 0.25, shadowRadius: 5, shadowOffset: { width: 0, height: 3 }, elevation: 5 },
   handleDot: { width: 10, height: 10, borderRadius: 5 },
 });
