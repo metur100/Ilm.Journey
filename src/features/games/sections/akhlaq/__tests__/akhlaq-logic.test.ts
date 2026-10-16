@@ -39,3 +39,18 @@ describe('gifts for the neighbours', () => {
     expect(rule.next([{ item: 'a', target: 'd1' }])).toEqual({ item: 'b', target: 'd2' });
   });
 });
+
+import { goodOrSilentRule, treeStage } from '../good-word-tree/logic';
+
+describe('the good word tree', () => {
+  it('grows in five stages', () => {
+    expect([0, 1, 2, 3, 4].map((n) => treeStage(n, 4))).toEqual([0, 1, 2, 3, 4]);
+    expect(treeStage(6, 6)).toBe(4);
+  });
+  it('puts kind words on the tree and hurtful ones into silence', () => {
+    const rule = goodOrSilentRule([{ id: 'a', good: true }, { id: 'b', good: false }], 'tree', 'silent');
+    expect(rule.check([], { item: 'b', target: 'tree' })).toBe('silent');
+    expect(rule.check([], { item: 'a', target: 'silent' })).toBe('tree');
+    expect(rule.check([], { item: 'b', target: 'silent' })).toBe(true);
+  });
+});

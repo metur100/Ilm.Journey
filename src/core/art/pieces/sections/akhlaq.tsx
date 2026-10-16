@@ -808,8 +808,71 @@ const street = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// The good-word tree (14:24): a garden and a tree in five stages, from a sprout to a tree full of fruit
+
+function WordTree({ c, stage }: { c: Ctx; stage: number }) {
+  const g = (col: string) => c.green(col);
+  if (stage === 0) {
+    return (
+      <G>
+        <Ellipse cx={100} cy={196} rx={30} ry={6} fill={C.woodDark} opacity={0.35} />
+        <Path d="M100 196V170" stroke={g(C.leafDark)} strokeWidth={4} strokeLinecap="round" />
+        <Path d="M100 176Q84 164 80 172Q88 182 100 178ZM100 172Q116 158 122 166Q114 178 100 174Z" fill={g(C.leaf)} />
+      </G>
+    );
+  }
+  const s = [0, 0.45, 0.65, 0.85, 1][stage];
+  const trunkTop = 196 - 120 * s;
+  const crown: [number, number, number][] = [
+    [0, -1, 1], [-0.7, -0.6, 0.75], [0.7, -0.6, 0.78], [-0.35, -1.45, 0.7], [0.4, -1.4, 0.72], [-1.05, -0.05, 0.55], [1.05, 0, 0.55],
+  ];
+  const R = 46 * s;
+  const cy = trunkTop + 10 * s;
+  return (
+    <G>
+      <Ellipse cx={100} cy={198} rx={70 * s + 10} ry={8} fill={C.woodDark} opacity={0.3} />
+      {/* roots */}
+      <Path d={`M100 196Q86 204 70 204M100 196Q114 204 132 202M100 196Q100 206 96 210`} stroke={C.woodDark} strokeWidth={4 * s + 1} strokeLinecap="round" fill="none" />
+      <Path d={`M${100 - 10 * s} 198Q${100 - 4 * s} ${(196 + trunkTop) / 2} ${100 - 4 * s} ${trunkTop}H${100 + 4 * s}Q${100 + 4 * s} ${(196 + trunkTop) / 2} ${100 + 10 * s} 198Z`} fill={C.wood} />
+      {crown.slice(0, 3 + stage).map(([dx, dy, r], i) => (
+        <Circle key={`d${i}`} cx={100 + dx * R + 3} cy={cy + dy * R + 4} r={r * R} fill={g(C.leafDark)} />
+      ))}
+      {crown.slice(0, 3 + stage).map(([dx, dy, r], i) => (
+        <Circle key={`m${i}`} cx={100 + dx * R} cy={cy + dy * R} r={r * R * 0.92} fill={g(C.leaf)} />
+      ))}
+      <Circle cx={100 - R * 0.4} cy={cy - R * 1.1} r={R * 0.3} fill={g(C.leafLight)} opacity={0.4} />
+      {stage >= 3
+        ? [[-0.6, -0.5], [0.5, -0.8], [0.1, -0.2], [-0.2, -1.3], [0.9, -0.1], [-0.9, 0], [0.4, -1.5]].slice(0, stage === 3 ? 3 : 7).map(([dx, dy], i) => (
+            <G key={`f${i}`}>
+              <Circle cx={100 + dx * R} cy={cy + dy * R} r={5} fill={c.bloom(i % 2 ? C.berry : C.orange)} />
+              <Circle cx={100 + dx * R - 1.5} cy={cy + dy * R - 1.5} r={1.5} fill={C.white} opacity={0.6} />
+            </G>
+          ))
+        : null}
+    </G>
+  );
+}
+
+const wordTree = {
+  'word-garden': art(200, 220, (c) => (
+    <>
+      <Rect x={0} y={0} width={200} height={220} fill={c.dark ? '#232861' : '#D9F0F7'} />
+      <Glow c={c} k="wgsun" cx={164} cy={36} r={36} color={C.goldPale} opacity={c.dark ? 0.25 : 0.85} />
+      <Circle cx={164} cy={36} r={9} fill={c.dark ? C.goldPale : C.goldLight} />
+      <Path d="M0 186Q50 172 100 182T200 178V220H0Z" fill={dk(c, C.leafPale, 0.4)} />
+      <Path d="M0 200Q60 190 120 198T200 196V220H0Z" fill={dk(c, C.leafLight, 0.4)} />
+      {[[20, 200], [180, 198], [40, 212]].map(([x, y], i) => (
+        <Circle key={i} cx={x} cy={y} r={3} fill={i % 2 ? C.pink : C.lemon} />
+      ))}
+    </>
+  )),
+  ...Object.fromEntries([0, 1, 2, 3, 4].map((stage) => [`word-tree-${stage}`, art(200, 220, (c) => <WordTree c={c} stage={stage} />)])),
+} as Record<'word-garden' | `word-tree-${0 | 1 | 2 | 3 | 4}`, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...wordTree,
   ...street,
   ...table,
   ...market,
