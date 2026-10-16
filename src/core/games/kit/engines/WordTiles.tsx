@@ -14,6 +14,9 @@ import { useKitProbe } from '../probe';
 import { kitShuffle } from '../scoring';
 import type { EngineProps, KitItem } from '../types';
 
+/** Arabic marks (harakat, Quran annotation signs): they do not take width of their own. */
+const HARAKAT = /[\u064B-\u065F\u0670\u06D6-\u06ED]/g;
+
 export interface WordTilesProps extends EngineProps {
   /** Tiles in reading order (Arabic: right-to-left reading order). */
   target: KitItem[];
@@ -97,7 +100,10 @@ export function WordTiles(props: WordTilesProps) {
     .join(joiner);
   const n = target.length;
   const gap = spacing.sm;
-  const perRow = Math.min(n, measure.w > 0 && measure.w < 340 ? 4 : 5);
+  // Long words get wider slots (fewer per row) so Arabic and Quran words are never cut off.
+  const longest = Math.max(1, ...target.map((t) => (t.arabic ?? env.text(t.label) ?? '').replace(HARAKAT, '').length));
+  const perRowMax = longest > 9 ? 2 : longest > 5 ? 3 : measure.w > 0 && measure.w < 340 ? 4 : 5;
+  const perRow = Math.min(n, perRowMax);
   const slotW = measure.w > 0 ? Math.floor((measure.w - gap * (perRow - 1)) / perRow) : 64;
   const anyArabic = pool.some((p) => isArabic(p.arabic));
   const slotH = anyArabic ? 64 : 52;
@@ -133,9 +139,9 @@ export function WordTiles(props: WordTilesProps) {
                   style={{ flex: 1 }}
                 >
                   {filled ? (
-                    <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(12)} style={{ flex: 1, alignSelf: 'stretch' }}>
+                    <Animated.View entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(16)} style={{ flex: 1, alignSelf: 'stretch' }}>
                       <Tile state="placed" height={slotH} padding={2}>
-                        <FaceView face={t} artSize={28} arabicSize={quran ? 22 : 24} variant="small" numberOfLines={1} />
+                        <FaceView face={t} artSize={28} arabicSize={quran ? 22 : 24} variant="small" numberOfLines={2} />
                       </Tile>
                     </Animated.View>
                   ) : null}
@@ -151,7 +157,7 @@ export function WordTiles(props: WordTilesProps) {
         {pool
           .filter((p) => !placed.includes(p.id))
           .map((item) => (
-            <Animated.View key={item.id} layout={reduced ? undefined : LinearTransition.springify().damping(16)}>
+            <Animated.View key={item.id} layout={reduced ? undefined : LinearTransition.duration(220)}>
               <DragTile
                 id={item.id}
                 nudge={nudge[item.id] ?? 0}
