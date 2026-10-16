@@ -1,4 +1,5 @@
 import { registerYearOfTheElephantGame } from './year-of-the-elephant/register';
+import { registerCaveHiraGame } from './cave-hira/register';
 
 /**
  * Section "seerah" (docs/GAMES-V3.md): every game of this section lives in this folder and is registered here.
@@ -7,4 +8,5 @@ import { registerYearOfTheElephantGame } from './year-of-the-elephant/register';
  */
 export function registerSeerahGames(): void {
   registerYearOfTheElephantGame();
+  registerCaveHiraGame();
 }
