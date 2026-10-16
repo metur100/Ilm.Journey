@@ -14,11 +14,12 @@ import { SourceList } from '@/core/components/ui/SourceList';
 import { Stars } from '@/core/components/ui/Stars';
 import { EmptyState } from '@/core/components/ui/States';
 import { TopBar } from '@/core/components/ui/TopBar';
-import { getGame } from '@/core/games';
+import { gameTitle, getGame } from '@/core/games';
 import { makeStyles, spacing, topicThemes, useTheme } from '@/core/theme';
 
 import { ProphetName } from '../components/ProphetName';
 import { getStory, STORIES } from '../content';
+import { STORY_GAMES } from '../content/games';
 import { useStoriesI18n } from '../i18n';
 import { storyStatus, unlockingStory } from '../services/unlocking';
 import { useStoriesStore } from '../store/storiesStore';
@@ -33,8 +34,6 @@ const useStyles = makeStyles((c) => ({
   lessonRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
 }));
 
-/** Mini-game of a story (src/features/games); the link shows only when that game is registered. */
-const STORY_GAMES: Record<string, string> = { nuh: 'ark-of-nuh', yusuf: 'yusuf-storehouse' };
 
 /** Story overview: cover, description, place, lessons and sources; start / continue / read again; play its game. */
 export default function StoryScreen() {
@@ -59,8 +58,8 @@ export default function StoryScreen() {
   const previous = unlockingStory(story, STORIES);
   const resumable = run?.storyId === story.id;
   const play = () => router.push({ pathname: '/story/play/[id]', params: { id: story.id } });
-  const gameId = STORY_GAMES[story.id];
-  const game = gameId ? getGame(gameId) : undefined;
+  // The story's games (src/features/games); a link shows only for registered games.
+  const games = (STORY_GAMES[story.id] ?? []).flatMap((gid) => getGame(gid) ?? []);
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={styles.scroll}>
@@ -92,15 +91,16 @@ export default function StoryScreen() {
             onPress={play}
           />
         )}
-        {game ? (
+        {games.map((game) => (
           <Button
-            label={t('story.playGame')}
+            key={game.id}
+            label={games.length > 1 ? `${t('story.playGame')}: ${l(gameTitle(game))}` : t('story.playGame')}
             icon="star"
             variant="secondary"
             fullWidth
             onPress={() => router.push({ pathname: '/game/[id]', params: { id: game.id } })}
           />
-        ) : null}
+        ))}
 
         <SectionHeader title={t('story.overview')} />
         <Card>
