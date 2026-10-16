@@ -1,23 +1,19 @@
-import { useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import Animated, {
-  FadeIn,
-  LinearTransition,
-  ZoomIn,
-} from "react-native-reanimated";
+import { useMemo, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import Animated, { FadeIn, LinearTransition, ZoomIn } from 'react-native-reanimated';
 
-import { Art, hasArt } from "../../../art";
-import { AppText } from "../../../components/ui/AppText";
-import { radius, spacing } from "../../../theme";
-import { ChallengeClock, HintPointer, InlineCaption } from "../board";
-import { DragTile, DropZone } from "../drag";
-import { useEngineCore } from "../engine";
-import { Burst, Pop } from "../fx";
-import { FaceView, faceLabel, Tile, Tray } from "../primitives";
-import { useKitProbe } from "../probe";
-import { useMeasure } from "../layout";
-import { kitShuffle } from "../scoring";
-import type { EngineProps, KitFace, KitItem } from "../types";
+import { Art, hasArt } from '../../../art';
+import { AppText } from '../../../components/ui/AppText';
+import { fonts, radius, spacing } from '../../../theme';
+import { ChallengeClock, HintPointer, InlineCaption } from '../board';
+import { DragTile, DropZone } from '../drag';
+import { useEngineCore } from '../engine';
+import { Burst, Pop } from '../fx';
+import { useMeasure } from '../layout';
+import { FaceView, faceLabel, Tile, Tray } from '../primitives';
+import { useKitProbe } from '../probe';
+import { kitShuffle } from '../scoring';
+import type { EngineProps, KitFace, KitItem } from '../types';
 
 export interface SortBin extends KitFace {
   id: string;
@@ -38,31 +34,34 @@ export interface SortBinsProps extends EngineProps {
   ordered?: boolean;
 }
 
-const TRAY_GAP = spacing.sm;
+const GAP = spacing.sm;
+/** Largest picture tile in the tray (tablets) and the smallest touch target. */
+const MAX_TILE = 112;
+const MIN_TILE = 64;
 
 /** Pure rule: is `binId` the right bin for the item? */
-export function isRightBin(
-  items: readonly SortItem[],
-  itemId: string,
-  binId: string,
-): boolean {
+export function isRightBin(items: readonly SortItem[], itemId: string, binId: string): boolean {
   return items.find((i) => i.id === itemId)?.bin === binId;
 }
 
+/** Even tile width for `columns` tiles in `width` (pure – exported for tests). */
+export function evenTileWidth(width: number, columns: number, max = MAX_TILE): number {
+  if (width <= 0 || columns <= 0) return 80;
+  return Math.max(MIN_TILE, Math.min(max, Math.floor((width - GAP * (columns - 1)) / columns)));
+}
+
 /**
- * SortBins – drag each item into the right basket (2–4 illustrated bins). Right: the item drops in, the basket
- * bounces and its counter grows. Wrong: the item springs back with a soft shake. Tap an item, then a basket, works
- * too. Items come from a small tray, a few at a time.
+ * SortBins – drag each item into the right basket (2–4 illustrated bins). Right: the item drops in as a readable
+ * chip (picture + name), the basket bounces and its counter grows. Wrong: the item springs back with a soft shake.
+ * Tap an item, then a basket, works too. Items come from a small tray, a few at a time; all tray tiles have the same
+ * size, and the bins grow with what is inside them.
  */
 export function SortBins(props: SortBinsProps) {
   const { bins, items, ordered } = props;
   const core = useEngineCore(props, items.length);
   const { env, k, reduced } = core;
   const label = (f: KitFace) => faceLabel(f, env.text);
-  const queue = useMemo(
-    () => (ordered ? [...items] : kitShuffle(items, `${core.seed}:sort`)),
-    [items, ordered, core.seed],
-  );
+  const queue = useMemo(() => (ordered ? [...items] : kitShuffle(items, `${core.seed}:sort`)), [items, ordered, core.seed]);
   const pictures = items.every((i) => !!i.art);
   const visibleCount = props.visible ?? (pictures ? 4 : 3);
   const [placed, setPlaced] = useState<Record<string, string>>({});
@@ -70,8 +69,9 @@ export function SortBins(props: SortBinsProps) {
   const [nudge, setNudge] = useState<Record<string, number>>({});
   const [pops, setPops] = useState<Record<string, number>>({});
   const measured = useMeasure();
+  const [binsY, setBinsY] = useState(0);
   const width = measured.w;
-  const testID = props.testID ?? "sort-bins";
+  const testID = props.testID ?? 'sort-bins';
 
   const waiting = queue.filter((i) => !placed[i.id]);
   const visible = waiting.slice(0, visibleCount);
@@ -99,7 +99,7 @@ export function SortBins(props: SortBinsProps) {
   };
 
   useKitProbe({
-    engine: "SortBins",
+    engine: 'SortBins',
     testID,
     step: () => {
       const next = waiting[0];
@@ -117,50 +117,33 @@ export function SortBins(props: SortBinsProps) {
     done: () => waiting.length === 0,
   });
 
-  const onLayout = measured.onLayout;
-  const tileW =
-    width > 0
-      ? Math.floor(
-          (width - TRAY_GAP * (Math.min(visibleCount, pictures ? 4 : 2) - 1)) /
-            Math.min(visibleCount, pictures ? 4 : 2),
-        )
-      : 80;
-  const binW =
-    width > 0
-      ? Math.floor((width - spacing.sm * (bins.length - 1)) / bins.length)
-      : 100;
-  const artSize = Math.min(64, tileW - 24);
-  const showHint =
-    core.hintsOn && core.idle && !selected && visible.length > 0 && width > 0;
+  // Tray: every tile has the same width – 4 pictures or 2 words per row (words are wider).
+  const trayColumns = pictures ? Math.min(4, Math.max(visibleCount, 3)) : 2;
+  const tileW = evenTileWidth(width, trayColumns, pictures ? MAX_TILE : 220);
+  const tileArt = Math.min(56, tileW - 26);
+  const binW = width > 0 ? Math.floor((width - GAP * (bins.length - 1)) / bins.length) : 100;
+  // Sorted items inside a bin: two chips per row in wide bins, one in narrow ones.
+  const chipCols = binW >= 150 ? 2 : 1;
+  const chipW = Math.floor((binW - spacing.sm * 2 - 4 - (chipCols - 1) * 6) / chipCols);
+  const stackedChip = chipW < 96;
+  const basketSize = Math.max(44, Math.min(72, binW * 0.42));
+
+  const showHint = core.hintsOn && core.idle && !selected && visible.length > 0 && width > 0;
   const hintItem = visible[0];
-  const hintBinIndex = hintItem
-    ? bins.findIndex((b) => b.id === hintItem.bin)
-    : -1;
+  const hintBinIndex = hintItem ? bins.findIndex((b) => b.id === hintItem.bin) : -1;
 
   return (
-    <View style={styles.root} testID={testID} onLayout={onLayout}>
+    <View style={styles.root} testID={testID} onLayout={measured.onLayout}>
       {core.challenge ? <ChallengeClock ms={core.stopwatch.ms} /> : null}
-      <View style={styles.trayArea}>
-        <Tray label={env.kt("tray")}>
+      <View style={[styles.trayArea, { minHeight: pictures ? Math.min(tileW, MAX_TILE) + 8 : 64 }]}>
+        <Tray label={env.kt('tray')}>
           {visible.map((item) => (
-            <Animated.View
-              key={item.id}
-              entering={
-                reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(20)
-              }
-              layout={
-                reduced ? undefined : LinearTransition.springify().damping(16)
-              }
-            >
+            <Animated.View key={item.id} entering={reduced ? FadeIn.duration(150) : ZoomIn.springify().damping(20)} layout={reduced ? undefined : LinearTransition.duration(220)}>
               <DragTile
                 id={item.id}
                 selected={selected === item.id}
                 nudge={nudge[item.id] ?? 0}
-                accessibilityLabel={
-                  selected === item.id
-                    ? env.kt("a11y.selected", { label: label(item) })
-                    : env.kt("a11y.tile", { label: label(item) })
-                }
+                accessibilityLabel={selected === item.id ? env.kt('a11y.selected', { label: label(item) }) : env.kt('a11y.tile', { label: label(item) })}
                 onLift={() => {
                   setSelected(null);
                   core.touch();
@@ -171,22 +154,8 @@ export function SortBins(props: SortBinsProps) {
                 }}
                 onDrop={(zone) => (zone ? place(item.id, zone) : false)}
               >
-                <Tile
-                  state={selected === item.id ? "selected" : "idle"}
-                  width={pictures ? tileW : undefined}
-                  minHeight={pictures ? tileW : 52}
-                  style={
-                    !pictures
-                      ? { minWidth: tileW, maxWidth: width || undefined }
-                      : undefined
-                  }
-                >
-                  <FaceView
-                    face={item}
-                    artSize={artSize}
-                    variant={pictures ? "tiny" : "bodyBold"}
-                    numberOfLines={2}
-                  />
+                <Tile state={selected === item.id ? 'selected' : 'idle'} width={tileW} height={pictures ? tileW : undefined} minHeight={pictures ? undefined : 60} padding={pictures ? 6 : spacing.sm}>
+                  <FaceView face={item} artSize={tileArt} arabicSize={pictures ? 24 : 28} variant={pictures ? 'tiny' : 'bodyBold'} numberOfLines={2} />
                 </Tile>
               </DragTile>
             </Animated.View>
@@ -195,112 +164,81 @@ export function SortBins(props: SortBinsProps) {
       </View>
 
       <InlineCaption
-        text={
-          selected
-            ? env.kt("fb.selected", {
-                label: label(items.find((i) => i.id === selected)!),
-              })
-            : core.caption?.text
-        }
-        tone={selected ? "hint" : core.caption?.tone}
+        text={selected ? env.kt('fb.selected', { label: label(items.find((i) => i.id === selected)!) }) : core.caption?.text}
+        tone={selected ? 'hint' : core.caption?.tone}
       />
 
-      <View style={styles.bins}>
-        {bins.map((bin) => {
-          const inside = items.filter((i) => placed[i.id] === bin.id);
-          return (
-            <DropZone
-              key={bin.id}
-              id={bin.id}
-              testID={`zone-${bin.id}`}
-              accessibilityLabel={`${env.kt("bins.bin", { label: label(bin), count: inside.length })}${selected ? `. ${env.kt("a11y.zone", { label: label(bin) })}` : ""}`}
-              onPress={selected ? () => place(selected, bin.id) : undefined}
-              style={[
-                styles.bin,
-                {
-                  width: binW,
-                  backgroundColor: k.slotFill,
-                  borderColor: selected ? k.gold : k.slotBorder,
-                },
-              ]}
-              hoverStyle={{
-                borderRadius: radius.lg + 3,
-                borderWidth: 3,
-                borderColor: k.gold,
-                backgroundColor: k.slotHover,
-              }}
-            >
-              <Pop trigger={pops[bin.id] ?? 0} style={styles.binInner}>
-                <View style={[styles.binLabel, { backgroundColor: k.accent }]}>
-                  <AppText
-                    variant="small"
-                    color={k.onAccent}
-                    align="center"
-                    numberOfLines={2}
-                  >
-                    {label(bin)}
-                  </AppText>
-                </View>
-                <View style={styles.binArt}>
-                  <View>
-                    <Art
-                      name={bin.art && hasArt(bin.art) ? bin.art : "kit.basket"}
-                      size={Math.min(binW - 20, 150)}
-                    />
-                    <View style={styles.peek} pointerEvents="none">
-                      {inside.slice(-3).map((i, n) => (
-                        <View
-                          key={i.id}
-                          style={{
-                            marginLeft: n ? -10 : 0,
-                            transform: [{ rotate: `${(n - 1) * 12}deg` }],
-                          }}
-                        >
-                          {i.art && hasArt(i.art) ? (
-                            <Art name={i.art} size={34} height={34} />
-                          ) : (
-                            <View
-                              style={[
-                                styles.peekDot,
-                                { backgroundColor: k.gold },
-                              ]}
-                            />
-                          )}
-                        </View>
-                      ))}
-                    </View>
-                  </View>
-                  <Burst trigger={pops[bin.id] ?? 0} distance={50} />
-                </View>
-                {inside.length > 0 ? (
-                  <View
-                    style={[
-                      styles.count,
-                      { backgroundColor: k.right, borderColor: k.tileFace },
-                    ]}
-                  >
-                    <AppText variant="tiny" color={k.tileFace}>
-                      {String(inside.length)}
+      <ScrollView style={styles.binsScroll} contentContainerStyle={styles.binsContent} showsVerticalScrollIndicator={false}>
+        <View style={styles.bins} onLayout={(e) => setBinsY(e.nativeEvent.layout.y)}>
+          {bins.map((bin) => {
+            const inside = items.filter((i) => placed[i.id] === bin.id);
+            return (
+              <DropZone
+                key={bin.id}
+                id={bin.id}
+                testID={`zone-${bin.id}`}
+                accessibilityLabel={`${env.kt('bins.bin', { label: label(bin), count: inside.length })}${selected ? `. ${env.kt('a11y.zone', { label: label(bin) })}` : ''}`}
+                onPress={selected ? () => place(selected, bin.id) : undefined}
+                style={[styles.bin, { width: binW, backgroundColor: k.slotFill, borderColor: selected ? k.gold : k.slotBorder }]}
+                hoverStyle={{ borderRadius: radius.lg + 3, borderWidth: 3, borderColor: k.gold, backgroundColor: k.slotHover }}
+              >
+                <Pop trigger={pops[bin.id] ?? 0} style={styles.binInner} amount={0.05}>
+                  <View style={[styles.binLabel, { backgroundColor: k.accent }]}>
+                    <AppText variant="small" color={k.onAccent} align="center" numberOfLines={2} style={styles.binLabelText}>
+                      {label(bin)}
                     </AppText>
                   </View>
-                ) : null}
-              </Pop>
-            </DropZone>
-          );
-        })}
-      </View>
-      <View style={styles.progressRow}>
-        <AppText variant="tiny" color={k.textMuted} align="center">
-          {env.kt("progress", { done: doneCount, total: items.length })}
-        </AppText>
-      </View>
+                  <View style={styles.basket}>
+                    <Art name={bin.art && hasArt(bin.art) ? bin.art : 'kit.basket'} size={basketSize} height={basketSize} />
+                    <Burst trigger={pops[bin.id] ?? 0} distance={40} />
+                    {inside.length > 0 ? (
+                      <View style={[styles.count, { backgroundColor: k.right, borderColor: k.tileFace }]}>
+                        <AppText variant="tiny" color={k.onRight} style={{ fontFamily: fonts.heavy }}>
+                          {String(inside.length)}
+                        </AppText>
+                      </View>
+                    ) : null}
+                  </View>
+                  <View style={styles.chips}>
+                    {inside.map((i) => (
+                      <Animated.View
+                        key={i.id}
+                        entering={reduced ? FadeIn.duration(150) : ZoomIn.duration(240)}
+                        style={[
+                          styles.chip,
+                          stackedChip ? styles.chipStacked : styles.chipRow,
+                          { width: chipW, backgroundColor: k.rightSoft, borderColor: k.right },
+                        ]}
+                        testID={`sorted-${i.id}`}
+                      >
+                        {i.art && hasArt(i.art) ? <Art name={i.art} size={stackedChip ? 34 : 30} height={stackedChip ? 34 : 30} /> : null}
+                        {i.arabic && !i.art ? (
+                          <AppText script="arabic" color={k.text} align="center" style={{ fontFamily: fonts.arabicBold, fontSize: 20, lineHeight: 30, writingDirection: 'rtl' }}>
+                            {i.arabic}
+                          </AppText>
+                        ) : null}
+                        {env.text(i.label) ? (
+                          <AppText variant="tiny" color={k.text} align={stackedChip ? 'center' : 'left'} numberOfLines={2} style={stackedChip ? undefined : styles.flex}>
+                            {env.text(i.label)}
+                          </AppText>
+                        ) : null}
+                      </Animated.View>
+                    ))}
+                    {inside.length === 0 ? <View style={[styles.emptyLine, { borderColor: k.slotBorder }]} /> : null}
+                  </View>
+                </Pop>
+              </DropZone>
+            );
+          })}
+        </View>
+      </ScrollView>
+      <AppText variant="tiny" color={k.textMuted} align="center">
+        {env.kt('progress', { done: doneCount, total: items.length })}
+      </AppText>
       {showHint && hintBinIndex >= 0 ? (
         <HintPointer
-          from={{ x: tileW / 2, y: 40 }}
-          to={{
-            x: binW * hintBinIndex + spacing.sm * hintBinIndex + binW / 2,
-            y: 260,
-          }}
+          from={{ x: Math.min(tileW / 2, width / 2), y: Math.min(tileW, 80) / 2 + 4 }}
+          to={{ x: binW * hintBinIndex + GAP * hintBinIndex + binW / 2, y: (binsY || 200) + 120 + 72 }}
         />
       ) : null}
     </View>
@@ -309,75 +247,31 @@ export function SortBins(props: SortBinsProps) {
 
 const styles = StyleSheet.create({
   root: { flex: 1, gap: spacing.sm },
-  trayArea: {
-    minHeight: 96,
-    justifyContent: "center",
-    zIndex: 10,
-    elevation: 10,
-  },
-  more: {
-    minWidth: 48,
-    minHeight: 48,
-    borderRadius: radius.md,
-    borderWidth: 1.5,
-    borderStyle: "dashed",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: spacing.sm,
-  },
-  bins: {
-    flex: 1,
-    flexDirection: "row",
-    gap: spacing.sm,
-    alignItems: "stretch",
-    minHeight: 170,
-  },
-  bin: {
-    borderRadius: radius.lg,
-    borderWidth: 2,
-    borderStyle: "dashed",
-    padding: spacing.sm,
-  },
-  binInner: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: spacing.xs,
-  },
-  binLabel: {
-    alignSelf: "stretch",
-    borderRadius: radius.sm,
-    paddingHorizontal: spacing.xs,
-    paddingVertical: 4,
-    minHeight: 32,
-    justifyContent: "center",
-  },
-  binArt: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "stretch",
-  },
-  peek: {
-    position: "absolute",
-    top: "6%",
-    left: 0,
-    right: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  peekDot: { width: 14, height: 14, borderRadius: 7 },
+  flex: { flex: 1 },
+  trayArea: { justifyContent: 'center', zIndex: 10, elevation: 10 },
+  binsScroll: { flex: 1, marginHorizontal: -4 },
+  binsContent: { paddingHorizontal: 4, paddingTop: 12, paddingBottom: spacing.sm },
+  bins: { flexDirection: 'row', gap: GAP, alignItems: 'stretch' },
+  bin: { borderRadius: radius.lg, borderWidth: 2, borderStyle: 'dashed', padding: spacing.sm, minHeight: 168 },
+  binInner: { flex: 1, alignItems: 'center', gap: 6 },
+  binLabel: { alignSelf: 'stretch', borderRadius: radius.sm, paddingHorizontal: spacing.xs, paddingVertical: 4, minHeight: 32, justifyContent: 'center' },
+  binLabelText: { fontFamily: fonts.bold },
+  basket: { alignItems: 'center', justifyContent: 'center' },
+  chips: { alignSelf: 'stretch', flexDirection: 'row', flexWrap: 'wrap', gap: 6, justifyContent: 'center' },
+  chip: { borderRadius: radius.sm, borderWidth: 1.5, paddingHorizontal: 6, paddingVertical: 4, minHeight: 36 },
+  chipRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  chipStacked: { alignItems: 'center', gap: 2 },
+  emptyLine: { width: '100%', height: 36, borderRadius: radius.sm, borderWidth: 1.5, borderStyle: 'dashed', opacity: 0.6 },
   count: {
-    position: "absolute",
-    top: -14,
+    position: 'absolute',
+    top: -4,
     right: -14,
-    minWidth: 26,
-    height: 26,
-    borderRadius: 13,
+    minWidth: 24,
+    height: 24,
+    borderRadius: 12,
     borderWidth: 2,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 4,
   },
-  progressRow: { minHeight: 16 },
 });

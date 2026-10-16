@@ -32,6 +32,8 @@ export interface KitColors {
   right: string;
   rightSoft: string;
   rightEdge: string;
+  /** Text / icons on a filled `right` badge. */
+  onRight: string;
   wrong: string;
   wrongSoft: string;
   gold: string;
@@ -81,6 +83,7 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
         right: c.success,
         rightSoft: c.successSoft,
         rightEdge: mix(c.successSoft, '#000000', 0.35),
+        onRight: c.onStatus,
         wrong: c.error,
         wrongSoft: c.errorSoft,
         gold: c.gold,
@@ -113,6 +116,7 @@ export function kitColors(c: Palette, topic: TopicId, dark: boolean, highContras
         right: c.success,
         rightSoft: c.successSoft,
         rightEdge: mix(c.success, c.successSoft, 0.45),
+        onRight: c.onStatus,
         wrong: c.error,
         wrongSoft: c.errorSoft,
         gold: c.gold,
