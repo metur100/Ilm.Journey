@@ -1,0 +1,289 @@
+{
+  "id": "dhulkifl",
+  "order": 16,
+  "prophetName": { "en": "Dhul-Kifl", "de": "Dhul-Kifl", "bs": "Zul-Kifl" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "Among the Patient", "de": "Unter den Geduldigen", "bs": "Među strpljivima" },
+  "description": {
+    "en": "A prophet the Quran names twice – and praises for patience and goodness.",
+    "de": "Ein Prophet, den der Koran zweimal nennt – und für Geduld und Güte lobt.",
+    "bs": "Poslanik kojeg Kur'an spominje dvaput – i hvali zbog strpljenja i dobrote."
+  },
+  "place": { "en": "Not named in the Quran", "de": "Im Koran nicht genannt", "bs": "U Kur'anu nije spomenuto" },
+  "symbol": "lanterns",
+  "symbolArt": "prophet.dhulkifl-lamp",
+  "cover": { "sky": "night", "elements": ["stars", "lanterns"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "story.night-horizon" },
+      { "art": "prophet.dhulkifl-lamp", "x": 200, "y": 226, "w": 120, "enter": "rise", "at": 300 }
+    ],
+    "effects": [{ "type": "stars", "intensity": 3 }, { "type": "lanternGlow", "x": 230, "y": 160, "intensity": 2, "at": 600 }]
+  },
+  "intro": {
+    "en": "Dhul-Kifl (peace be upon him) is a prophet whom the Quran names twice. It tells us only a little about his life – and we keep to what it says: he was patient, righteous and among the best.",
+    "de": "Dhul-Kifl (Friede sei mit ihm) ist ein Prophet, den der Koran zweimal nennt. Er erzählt nur wenig über sein Leben – und wir halten uns an das, was er sagt: Er war geduldig, rechtschaffen und gehörte zu den Besten.",
+    "bs": "Zul-Kifl, a.s., poslanik je kojeg Kur'an spominje dvaput. O njegovom životu govori samo malo – a mi se držimo onoga što kaže: bio je strpljiv, dobar i među najboljima."
+  },
+  "scenes": [
+    {
+      "id": "dhulkifl-s1",
+      "title": { "en": "All were of the patient", "de": "Alle gehörten zu den Geduldigen", "bs": "Svi su bili strpljivi" },
+      "text": {
+        "en": "Allah says: \"And Ismail, Idris and Dhul-Kifl – all were of the patient.\" Allah names him together with other prophets and praises them for one shared quality: patience.",
+        "de": "Allah sagt: „Und Ismail, Idris und Dhul-Kifl – alle gehörten zu den Geduldigen.“ Allah nennt ihn zusammen mit anderen Propheten und lobt sie für eine gemeinsame Eigenschaft: Geduld.",
+        "bs": "Allah kaže: „I Ismail, i Idris, i Zul-Kifl – svi su oni bili strpljivi.“ Allah ga spominje zajedno s drugim poslanicima i hvali ih zbog zajedničke osobine: strpljenja."
+      },
+      "scene": { "sky": "night", "elements": ["stars", "lanterns"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.night-horizon" },
+          { "art": "prophet.dhulkifl-lamp-lit", "x": 120, "y": 222, "w": 60, "enter": "fade", "at": 300 },
+          { "art": "prophet.dhulkifl-lamp-lit", "x": 200, "y": 222, "w": 60, "enter": "fade", "at": 900 },
+          { "art": "prophet.dhulkifl-lamp-lit", "x": 280, "y": 222, "w": 60, "enter": "fade", "at": 1500 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 2 }, { "type": "fireflies", "intensity": 1 }]
+      },
+      "interactionId": "dhulkifl-patient",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85" }]
+    },
+    {
+      "id": "dhulkifl-s2",
+      "title": { "en": "In Allah's mercy", "de": "In Allahs Barmherzigkeit", "bs": "U Allahovoj milosti" },
+      "text": {
+        "en": "Allah continues: \"We admitted them into Our mercy. They were of the righteous.\" Patience and righteousness led them into Allah's mercy.",
+        "de": "Allah fährt fort: „Wir ließen sie in Unsere Barmherzigkeit eingehen. Sie gehörten zu den Rechtschaffenen.“ Geduld und Rechtschaffenheit führten sie in Allahs Barmherzigkeit.",
+        "bs": "Allah nastavlja: „I Mi smo ih milošću Našom obasuli. Oni su bili dobri.“ Strpljenje i dobrota uveli su ih u Allahovu milost."
+      },
+      "scene": { "sky": "dawn", "elements": ["hills", "garden"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.hills" },
+          { "art": "prophet.dhulkifl-lamp", "x": 200, "y": 226, "w": 110, "enter": "rise", "at": 400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 110, "at": 800 }, { "type": "sparkle", "x": 200, "y": 150, "w": 160, "h": 80, "intensity": 1, "at": 1200 }, { "type": "birds", "intensity": 1, "at": 1600 }]
+      },
+      "interactionId": "dhulkifl-mercy",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:86" }]
+    },
+    {
+      "id": "dhulkifl-s3",
+      "title": { "en": "Among the best", "de": "Unter den Besten", "bs": "Među najboljima" },
+      "text": {
+        "en": "In another surah Allah says: \"And remember Ismail, Al-Yasa and Dhul-Kifl – all are among the best.\" Allah tells us to remember them, so that we learn from their example.",
+        "de": "In einer anderen Sure sagt Allah: „Und gedenke Ismails, Al-Yasas und Dhul-Kifls – alle gehören zu den Besten.“ Allah sagt uns, ihrer zu gedenken, damit wir von ihrem Beispiel lernen.",
+        "bs": "U drugoj suri Allah kaže: „I spomeni Ismaila, i El-Jese'a, i Zul-Kifla – svi su oni bili od najboljih.“ Allah nam kaže da ih se sjećamo, kako bismo učili iz njihovog primjera."
+      },
+      "scene": { "sky": "day", "elements": ["mountains", "book"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.mountains" },
+          { "art": "object.book", "x": 200, "y": 226, "w": 70, "enter": "rise", "at": 400 },
+          { "art": "prophet.dhulkifl-lamp-lit", "x": 290, "y": 228, "w": 56, "enter": "fade", "at": 900 }
+        ],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "sparkle", "x": 200, "y": 190, "w": 90, "h": 40, "intensity": 1, "at": 900 }]
+      },
+      "interactionId": "dhulkifl-best",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "38:45–48" }]
+    },
+    {
+      "id": "dhulkifl-s4",
+      "title": { "en": "What patience brings", "de": "Was Geduld bringt", "bs": "Šta donosi strpljenje" },
+      "text": {
+        "en": "The Quran teaches that Allah is with the patient, and that the patient will be given their reward without measure. Like Dhul-Kifl, we can be patient every day – in small and in big things.",
+        "de": "Der Koran lehrt, dass Allah mit den Geduldigen ist und dass den Geduldigen ihr Lohn ohne Maß gegeben wird. Wie Dhul-Kifl können wir jeden Tag geduldig sein – im Kleinen wie im Großen.",
+        "bs": "Kur'an uči da je Allah sa strpljivima i da će strpljivi dobiti nagradu bez računa. Kao Zul-Kifl, i mi možemo biti strpljivi svaki dan – u malim i u velikim stvarima."
+      },
+      "scene": { "sky": "sunset", "elements": ["hills", "lanterns"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.hills" },
+          { "art": "story.lanterns", "x": 200, "y": 120, "w": 260, "anchor": "center", "enter": "fade", "at": 400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 330, "y": 70 }, { "type": "fireflies", "intensity": 1, "at": 1200 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:153; 39:10" }]
+    }
+  ],
+  "miniGameId": "dhulkifl-decision",
+  "quizIds": ["dhulkifl-names", "dhulkifl-little", "dhulkifl-lesson"],
+  "lessons": [
+    {
+      "id": "dhulkifl-l1",
+      "value": "sabr",
+      "title": { "en": "Patience is praised", "de": "Geduld wird gelobt", "bs": "Strpljenje je pohvaljeno" },
+      "explanation": {
+        "en": "When Allah mentions Dhul-Kifl, He praises his patience. Patience means staying steady and good – even when something is hard or takes long.",
+        "de": "Wenn Allah Dhul-Kifl erwähnt, lobt Er seine Geduld. Geduld heißt, standhaft und gut zu bleiben – auch wenn etwas schwer ist oder lange dauert.",
+        "bs": "Kada Allah spominje Zul-Kifla, hvali njegovo strpljenje. Strpljenje znači ostati postojan i dobar – čak i kada je nešto teško ili dugo traje."
+      },
+      "example": {
+        "en": "You are learning a new surah and it is hard. You practise a little every day and do not give up.",
+        "de": "Du lernst eine neue Sure und es ist schwer. Du übst jeden Tag ein wenig und gibst nicht auf.",
+        "bs": "Učiš novu suru i teško ti je. Vježbaš malo svaki dan i ne odustaješ."
+      },
+      "reflection": {
+        "en": "What is something you are patiently working on?",
+        "de": "Woran arbeitest du gerade geduldig?",
+        "bs": "Na čemu trenutno strpljivo radiš?"
+      }
+    },
+    {
+      "id": "dhulkifl-l2",
+      "value": "honesty",
+      "title": { "en": "Say only what is true", "de": "Nur sagen, was wahr ist", "bs": "Govori samo ono što je istina" },
+      "explanation": {
+        "en": "The Quran tells us only a little about Dhul-Kifl, so we do not add stories about him. Saying only what we know for sure is part of honesty.",
+        "de": "Der Koran erzählt uns nur wenig über Dhul-Kifl, deshalb fügen wir keine Geschichten über ihn hinzu. Nur zu sagen, was wir sicher wissen, gehört zur Ehrlichkeit.",
+        "bs": "Kur'an nam o Zul-Kiflu govori samo malo, zato ne dodajemo priče o njemu. Govoriti samo ono što sigurno znamo dio je iskrenosti."
+      },
+      "example": {
+        "en": "A friend asks you something you are not sure about. You say: \"I don't know – let's find out.\"",
+        "de": "Ein Freund fragt dich etwas, bei dem du dir nicht sicher bist. Du sagst: „Ich weiß es nicht – lass es uns herausfinden.“",
+        "bs": "Prijatelj te pita nešto u šta nisi siguran. Kažeš: „Ne znam – hajde da saznamo.“"
+      },
+      "reflection": {
+        "en": "Is it easy for you to say \"I don't know\"?",
+        "de": "Fällt es dir leicht, „Ich weiß es nicht“ zu sagen?",
+        "bs": "Je li ti lahko reći „Ne znam“?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "dhulkifl-patient",
+      "type": "trueFalse",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": { "en": "The Quran says that Dhul-Kifl was one of the patient.", "de": "Der Koran sagt, dass Dhul-Kifl zu den Geduldigen gehörte.", "bs": "Kur'an kaže da je Zul-Kifl bio od strpljivih." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"all were of the patient\".",
+        "de": "Ja – „alle gehörten zu den Geduldigen“.",
+        "bs": "Da – „svi su oni bili strpljivi“."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85" }]
+    },
+    {
+      "id": "dhulkifl-mercy",
+      "type": "multipleChoice",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": { "en": "Into what did Allah admit them?", "de": "Wohinein ließ Allah sie eingehen?", "bs": "Čime ih je Allah obasuo?" },
+      "options": [
+        { "id": "a", "text": { "en": "Into His mercy", "de": "In Seine Barmherzigkeit", "bs": "Svojom milošću" } },
+        { "id": "b", "text": { "en": "Into a great army", "de": "In ein großes Heer", "bs": "Velikom vojskom" } },
+        { "id": "c", "text": { "en": "Into a palace of gold", "de": "In einen Palast aus Gold", "bs": "Zlatnim dvorcem" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"We admitted them into Our mercy. They were of the righteous.\"",
+        "de": "„Wir ließen sie in Unsere Barmherzigkeit eingehen. Sie gehörten zu den Rechtschaffenen.“",
+        "bs": "„I Mi smo ih milošću Našom obasuli. Oni su bili dobri.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:86" }]
+    },
+    {
+      "id": "dhulkifl-best",
+      "type": "memory",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": { "en": "Memory: match each ayah with what it says about Dhul-Kifl.", "de": "Memory: Ordne jedem Vers zu, was er über Dhul-Kifl sagt.", "bs": "Memorija: spoji svaki ajet s onim što kaže o Zul-Kiflu." },
+      "pairs": [
+        { "id": "p1", "left": { "en": "Quran 21:85", "de": "Koran 21:85", "bs": "Kur'an 21:85" }, "right": { "en": "Of the patient", "de": "Unter den Geduldigen", "bs": "Od strpljivih" } },
+        { "id": "p2", "left": { "en": "Quran 21:86", "de": "Koran 21:86", "bs": "Kur'an 21:86" }, "right": { "en": "Of the righteous", "de": "Unter den Rechtschaffenen", "bs": "Od dobrih" } },
+        { "id": "p3", "left": { "en": "Quran 38:48", "de": "Koran 38:48", "bs": "Kur'an 38:48" }, "right": { "en": "Among the best", "de": "Unter den Besten", "bs": "Od najboljih" } }
+      ],
+      "explanation": {
+        "en": "Patient, righteous, among the best – this is what Allah tells us about Dhul-Kifl.",
+        "de": "Geduldig, rechtschaffen, unter den Besten – das sagt uns Allah über Dhul-Kifl.",
+        "bs": "Strpljiv, dobar, među najboljima – to nam Allah govori o Zul-Kiflu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85–86; 38:48" }]
+    },
+    {
+      "id": "dhulkifl-decision",
+      "type": "scenario",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": {
+        "en": "Decision: you are waiting in a long queue and you are getting tired. What does patience look like?",
+        "de": "Entscheidung: Du wartest in einer langen Schlange und wirst müde. Wie sieht Geduld aus?",
+        "bs": "Odluka: čekaš u dugom redu i postaješ umoran. Kako izgleda strpljenje?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Wait calmly and stay kind to the people around you", "de": "Ruhig warten und freundlich zu den Menschen um dich bleiben", "bs": "Mirno čekati i ostati ljubazan prema ljudima oko sebe" }, "feedback": { "en": "Yes – that is patience in a small thing.", "de": "Ja – das ist Geduld im Kleinen.", "bs": "Da – to je strpljenje u maloj stvari." } },
+        { "id": "b", "text": { "en": "Push to the front", "de": "Nach vorne drängeln", "bs": "Progurati se naprijed" }, "feedback": { "en": "That is unfair to the others who wait too.", "de": "Das ist unfair gegenüber den anderen, die auch warten.", "bs": "To je nepravedno prema drugima koji također čekaju." } },
+        { "id": "c", "text": { "en": "Complain loudly the whole time", "de": "Die ganze Zeit laut meckern", "bs": "Sve vrijeme se glasno žaliti" }, "feedback": { "en": "Complaining makes the wait longer for everyone.", "de": "Meckern macht das Warten für alle länger.", "bs": "Žaljenje svima čini čekanje dužim." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Allah is with the patient – also in a long queue.",
+        "de": "Allah ist mit den Geduldigen – auch in einer langen Schlange.",
+        "bs": "Allah je sa strpljivima – i u dugom redu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "2:153" }]
+    },
+    {
+      "id": "dhulkifl-names",
+      "type": "multipleChoice",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": { "en": "Which prophets are named together with Dhul-Kifl as \"patient\"?", "de": "Welche Propheten werden zusammen mit Dhul-Kifl als „geduldig“ genannt?", "bs": "Koji su poslanici spomenuti zajedno sa Zul-Kiflom kao „strpljivi“?" },
+      "options": [
+        { "id": "a", "text": { "en": "Ismail and Idris", "de": "Ismail und Idris", "bs": "Ismail i Idris" } },
+        { "id": "b", "text": { "en": "Nuh and Hud", "de": "Nuh und Hud", "bs": "Nuh i Hud" } },
+        { "id": "c", "text": { "en": "Dawud and Sulayman", "de": "Dawud und Sulayman", "bs": "Davud i Sulejman" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"And Ismail, Idris and Dhul-Kifl – all were of the patient.\"",
+        "de": "„Und Ismail, Idris und Dhul-Kifl – alle gehörten zu den Geduldigen.“",
+        "bs": "„I Ismail, i Idris, i Zul-Kifl – svi su oni bili strpljivi.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85" }]
+    },
+    {
+      "id": "dhulkifl-little",
+      "type": "trueFalse",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": { "en": "The Quran tells many details about the life of Dhul-Kifl.", "de": "Der Koran erzählt viele Einzelheiten aus dem Leben Dhul-Kifls.", "bs": "Kur'an govori mnogo pojedinosti iz života Zul-Kifla." },
+      "correct": false,
+      "explanation": {
+        "en": "Not true – the Quran names him twice and praises him; we keep to what it says.",
+        "de": "Nicht richtig – der Koran nennt ihn zweimal und lobt ihn; wir halten uns an das, was er sagt.",
+        "bs": "Nije tačno – Kur'an ga spominje dvaput i hvali; mi se držimo onoga što kaže."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:85–86; 38:48" }]
+    },
+    {
+      "id": "dhulkifl-lesson",
+      "type": "lessonChoice",
+      "storyId": "dhulkifl",
+      "topic": "dhulkifl",
+      "prompt": { "en": "Which quality do we learn from Dhul-Kifl?", "de": "Welche Eigenschaft lernen wir von Dhul-Kifl?", "bs": "Koju osobinu učimo od Zul-Kifla?" },
+      "options": [
+        { "id": "a", "text": { "en": "Patience", "de": "Geduld", "bs": "Strpljenje" } },
+        { "id": "b", "text": { "en": "Hurry", "de": "Eile", "bs": "Žurbu" } },
+        { "id": "c", "text": { "en": "Pride", "de": "Hochmut", "bs": "Oholost" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Allah praised him as one of the patient and the righteous.",
+        "de": "Allah lobte ihn als einen der Geduldigen und Rechtschaffenen.",
+        "bs": "Allah ga je pohvalio kao jednog od strpljivih i dobrih."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "21:85–86" },
+    { "sourceName": "Quran", "sourceReference": "38:48" }
+  ]
+}
