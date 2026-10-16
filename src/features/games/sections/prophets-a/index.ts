@@ -1,6 +1,7 @@
 import { registerAdamNamesGame } from './adam-garden-names/register';
 import { registerArkOfNuhGame } from './ark-of-nuh/register';
 import { registerHudGame } from './hud-valley-of-ad/register';
+import { registerIbrahimGame } from './ibrahim-kaaba-walls/register';
 import { registerIdrisGame } from './idris-high-station/register';
 import { registerSalihGame } from './salih-water-days/register';
 
@@ -15,4 +16,5 @@ export function registerProphetsAGames(): void {
   registerArkOfNuhGame();
   registerHudGame();
   registerSalihGame();
+  registerIbrahimGame();
 }

@@ -704,6 +704,99 @@ const salih = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Ibrahim – the star, moon and sun (6:76–79), the fire made cool (21:69), raising the House with Ismail (2:127)
+
+const KAABA_STONE = '#9C8B78';
+const KAABA_STONE_LIGHT = '#B5A48F';
+
+const ibrahim = {
+  /** The bright star Ibrahim saw at night (6:76). */
+  'ibrahim-star': art(70, 70, (c) => (
+    <>
+      <Glow c={c} k="g" cx={35} cy={35} r={34} color={C.goldPale} opacity={0.8} />
+      <Path d={sparklePath(35, 35, 30, 0.1)} fill={C.goldLight} opacity={0.9} />
+      <Circle cx={35} cy={35} r={9} fill={C.white} />
+      <Circle cx={35} cy={35} r={6} fill={C.goldPale} />
+    </>
+  )),
+
+  /** "O fire, be coolness and safety for Ibrahim" (21:69): small, calm flames inside a cool, safe halo. */
+  'ibrahim-fire-cool': art(160, 130, (c) => (
+    <>
+      <Glow c={c} k="cool" cx={80} cy={70} r={74} color={C.tealPale} opacity={0.85} />
+      <Glow c={c} k="warm" cx={80} cy={86} r={34} color={C.goldPale} opacity={0.6} />
+      <Shadow c={c} cx={80} cy={122} rx={56} />
+      {[30, 50, 70, 90, 110, 130].map((x, i) => (
+        <Ellipse key={x} cx={x} cy={116 - (i === 0 || i === 5 ? 0 : 2)} rx={12} ry={7} fill={i % 2 ? C.stone : C.stoneLight} />
+      ))}
+      <Path d="M80 40C96 58 104 74 100 92C98 104 90 110 80 110C70 110 62 104 60 92C56 74 66 60 80 40Z" fill={C.goldLight} opacity={0.9} />
+      <Path d="M80 62C90 74 92 86 88 96C86 102 84 104 80 104C76 104 74 102 72 96C68 86 72 74 80 62Z" fill={C.white} opacity={0.85} />
+      <Path d="M58 70C66 80 68 92 64 102M102 70C94 80 92 92 96 102" stroke={C.tealLight} strokeWidth={3} strokeLinecap="round" fill="none" opacity={0.6} />
+      <Spark x={28} y={44} r={6} color={C.tealPale} />
+      <Spark x={134} y={50} r={5} color={C.tealPale} />
+      <Spark x={120} y={20} r={4} color={C.white} />
+    </>
+  )),
+
+  /** The foundations of the House (2:127) – plain stone, still low, in the valley. */
+  'ibrahim-kaaba-rising': art(200, 130, (c) => (
+    <>
+      <Shadow c={c} cx={100} cy={124} rx={92} />
+      <Rect x={14} y={112} width={172} height={12} rx={2} fill={dim(c, shade(KAABA_STONE, 0.15), 0.2)} />
+      <StoneCourse x={22} y={88} w={156} h={24} n={7} color={dim(c, KAABA_STONE, 0.2)} />
+      <StoneCourse x={22} y={64} w={156} h={24} n={7} offset={0.5} color={dim(c, KAABA_STONE_LIGHT, 0.2)} />
+      <G opacity={0.85}>
+        <StoneCourse x={22} y={40} w={92} h={24} n={4} color={dim(c, KAABA_STONE, 0.2)} />
+      </G>
+      <Rect x={130} y={48} width={28} height={16} rx={2} fill={dim(c, KAABA_STONE_LIGHT, 0.2)} transform="rotate(-6 144 56)" />
+      <Spark x={170} y={24} r={6} />
+    </>
+  )),
+
+  /** One building stone. */
+  'ibrahim-stone': art(70, 46, (c) => (
+    <>
+      <Shadow c={c} cx={35} cy={42} rx={30} />
+      <Path d="M6 12L14 4H62L66 12V36L60 42H10L6 36Z" fill={dim(c, KAABA_STONE_LIGHT, 0.2)} />
+      <Path d="M6 12H66V36L60 42H10L6 36Z" fill={dim(c, KAABA_STONE, 0.2)} />
+      <Path d="M14 22H40M30 30H56" stroke={C.stoneDark} strokeWidth={1.4} opacity={0.4} strokeLinecap="round" />
+    </>
+  )),
+
+  /** The stone Ibrahim stood on while building (Maqam Ibrahim, 2:125; Bukhari 3364) – a plain block, no figure. */
+  'ibrahim-maqam': art(40, 26, (c) => (
+    <>
+      <Rect x={3} y={3} width={34} height={22} rx={4} fill={dim(c, '#C8B79A', 0.2)} />
+      <Rect x={3} y={3} width={34} height={6} rx={3} fill={dim(c, '#DCCDB2', 0.2)} />
+      <Path d="M24 9V25" stroke={C.stoneDark} strokeWidth={1} opacity={0.3} />
+    </>
+  )),
+
+  'ibrahim-foundation': art(180, 14, (c) => <Rect x={0} y={1} width={180} height={13} rx={2} fill={dim(c, shade(KAABA_STONE, 0.15), 0.2)} />),
+  'ibrahim-course-a': art(170, 26, (c) => <StoneCourse x={0} y={0} w={170} h={26} n={7} color={dim(c, KAABA_STONE, 0.2)} />),
+  'ibrahim-course-b': art(170, 26, (c) => <StoneCourse x={0} y={0} w={170} h={26} n={7} offset={0.5} color={dim(c, KAABA_STONE_LIGHT, 0.2)} />),
+  'ibrahim-course-c': art(170, 26, (c) => <StoneCourse x={0} y={0} w={170} h={26} n={6} color={dim(c, shade(KAABA_STONE, 0.06), 0.2)} />),
+  'ibrahim-course-d': art(170, 26, (c) => <StoneCourse x={0} y={0} w={170} h={26} n={6} offset={0.5} color={dim(c, KAABA_STONE_LIGHT, 0.2)} />),
+
+  /** The valley of Makkah where the House was raised (game scene with its own sky). */
+  'ibrahim-building-site': art(400, 300, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, c.dark ? '#2B2F6E' : '#F2B98A'], [1, c.dark ? '#7A5A86' : '#FCE6C4']]} />
+      </Defs>
+      <Rect x={0} y={0} width={400} height={300} fill={c.url('sky')} />
+      <Circle cx={330} cy={70} r={26} fill={c.dark ? C.goldPale : C.goldLight} opacity={0.9} />
+      <Path d="M0 210L40 120 90 160 130 100 170 190Z" fill={dim(c, '#9E7A66')} />
+      <Path d="M400 210L370 110 320 150 280 96 240 190Z" fill={dim(c, '#94705C')} />
+      <Path d="M130 100L170 190H140L128 140Z M280 96L240 190H270L284 140Z" fill={dim(c, '#7A5A4C')} opacity={0.5} />
+      <Path d="M0 236C100 222 300 222 400 236V300H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 262C120 252 280 252 400 262V300H0Z" fill={dim(c, C.sandDeep)} />
+      <Ellipse cx={200} cy={252} rx={110} ry={6} fill={C.ink} opacity={0.1} />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
@@ -712,7 +805,8 @@ export const prophetA = {
   ...nuh,
   ...hud,
   ...salih,
+  ...ibrahim,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).
-void [Rock, Star, StoneCourse, smoothOpen];
+void [Star];
