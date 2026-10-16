@@ -34,7 +34,7 @@ const cover = (time: keyof typeof sky, position: PrayerPosition, variant: Prayer
     return (
       <>
         {sky[time].draw(c)}
-        <G transform="translate(48 52) scale(1.32)">
+        <G transform="translate(50 40) scale(1.25)">
           <PrayerFigureArt c={fc} position={position} variant={variant} cues={{ highlight: true }} />
         </G>
       </>

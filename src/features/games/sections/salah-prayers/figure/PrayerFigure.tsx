@@ -7,6 +7,7 @@ import { makeCtx } from '@/core/art/kit';
 import {
   FIG_H,
   FIG_W,
+  FIG_TRANSFORM,
   FIGURE_LAYERS,
   FigureCueLayer,
   FigureHighlight,
@@ -14,6 +15,8 @@ import {
   figureFrame,
   FigureShapes,
   layerStyle,
+  fillPass,
+  outlinePass,
   Mat,
   mixPose,
   movementPath,
@@ -32,7 +35,7 @@ export type FigureView = [number, number, number, number];
 
 export const FULL_VIEW: FigureView = [0, 0, FIG_W, FIG_H];
 /** Crop that keeps the figure and the mat but drops most of the empty sky above a sitting / bowing figure. */
-export const STAGE_VIEW: FigureView = [14, 10, 220, 186];
+export const STAGE_VIEW: FigureView = [14, 4, 220, 200];
 
 export interface PrayerFigureProps {
   position: PrayerPosition;
@@ -67,7 +70,13 @@ const AnimatedG = Animated.createAnimatedComponent(G);
 
 function LayerPath({ frame, layer, style }: { frame: SharedValue<FigureFrame>; layer: FigureLayer; style: ReturnType<typeof layerStyle> }) {
   const animatedProps = useAnimatedProps(() => ({ d: frame.value[layer] }));
-  return <AnimatedPath animatedProps={animatedProps} {...style} />;
+  const o = outlinePass(style);
+  return (
+    <>
+      {o ? <AnimatedPath animatedProps={animatedProps} {...o} /> : null}
+      <AnimatedPath animatedProps={animatedProps} {...fillPass(style)} />
+    </>
+  );
 }
 
 /**
@@ -169,9 +178,11 @@ export function PrayerFigure({ position, variant, width, view = FULL_VIEW, cues,
               <FigureHighlight c={ctx} position={position} variant={variant} />
             </AnimatedG>
           ) : null}
-          {FIGURE_LAYERS.map((layer) => (
-            <LayerPath key={layer} frame={frame} layer={layer} style={layerStyle(layer, variant, colors)} />
-          ))}
+          <G transform={FIG_TRANSFORM}>
+            {FIGURE_LAYERS.map((layer) => (
+              <LayerPath key={layer} frame={frame} layer={layer} style={layerStyle(layer, variant, colors)} />
+            ))}
+          </G>
           {showCues ? (
             <AnimatedG animatedProps={cueProps}>
               <FigureCueLayer c={ctx} position={position} variant={variant} cues={cues} />
