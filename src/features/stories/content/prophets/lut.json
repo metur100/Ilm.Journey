@@ -1,0 +1,287 @@
+{
+  "id": "lut",
+  "order": 7,
+  "prophetName": { "en": "Lut", "de": "Lut", "bs": "Lut" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Journey by Night", "de": "Die Reise in der Nacht", "bs": "Noćno putovanje" },
+  "description": {
+    "en": "A messenger who called to purity, protected his guests – and was led to safety before dawn.",
+    "de": "Ein Gesandter, der zur Reinheit aufrief, seine Gäste beschützte – und vor dem Morgen in Sicherheit geführt wurde.",
+    "bs": "Poslanik koji je pozivao čistoti, štitio svoje goste – i prije zore bio izveden na sigurno."
+  },
+  "place": { "en": "The cities near the Dead Sea", "de": "Die Städte am Toten Meer", "bs": "Gradovi kraj Mrtvog mora" },
+  "symbol": "lanterns",
+  "symbolArt": "prophet.lut-lantern",
+  "mapPlaces": ["lut"],
+  "cover": { "sky": "night", "elements": ["stars", "hills", "lanterns"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "story.moon-crescent", "x": 80, "y": 52, "w": 44, "anchor": "center", "anim": "glow" },
+      { "art": "prophet.lut-city" },
+      { "art": "prophet.lut-lantern", "x": 320, "y": 230, "w": 36, "anim": "sway", "enter": "fade", "at": 600 }
+    ],
+    "effects": ["stars", { "type": "lanternGlow", "x": 320, "y": 200, "intensity": 2, "at": 600 }]
+  },
+  "intro": {
+    "en": "Lut (peace be upon him) believed in the message of Ibrahim and was sent as a prophet to a people living in cities near the Dead Sea.",
+    "de": "Lut (Friede sei mit ihm) glaubte an die Botschaft Ibrahims und wurde als Prophet zu einem Volk gesandt, das in Städten am Toten Meer lebte.",
+    "bs": "Lut, a.s., povjerovao je u Ibrahimovu poslanicu i poslan je kao poslanik narodu koji je živio u gradovima kraj Mrtvog mora."
+  },
+  "scenes": [
+    {
+      "id": "lut-s1",
+      "title": { "en": "A trustworthy messenger", "de": "Ein vertrauenswürdiger Gesandter", "bs": "Povjerljivi poslanik" },
+      "text": {
+        "en": "Lut said to his people: \"Will you not fear Allah? I am a trustworthy messenger to you. So fear Allah and obey me. I ask no reward from you – my reward is only with the Lord of the worlds.\"",
+        "de": "Lut sagte zu seinem Volk: „Wollt ihr Allah nicht fürchten? Ich bin euch ein vertrauenswürdiger Gesandter. So fürchtet Allah und gehorcht mir. Ich verlange keinen Lohn von euch – mein Lohn ist allein beim Herrn der Welten.“",
+        "bs": "Lut je rekao svom narodu: „Zar se nećete Allaha bojati? Ja sam vam poslanik povjerljivi. Zato se Allaha bojte i mene slušajte. Ja od vas ne tražim nagradu – moja je nagrada samo kod Gospodara svjetova.“"
+      },
+      "scene": { "sky": "sunset", "elements": ["city", "sea"] },
+      "stage": {
+        "sky": "sunset",
+        "layers": [{ "art": "story.sun", "x": 320, "y": 118, "w": 70, "anchor": "center" }, { "art": "prophet.lut-city" }],
+        "effects": [{ "type": "sunrays", "x": 320, "y": 118, "intensity": 1 }, { "type": "birds", "intensity": 1 }, { "type": "ripples", "x": 200, "y": 176, "w": 60, "intensity": 1 }]
+      },
+      "interactionId": "lut-trust",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:160–164; 29:26" }]
+    },
+    {
+      "id": "lut-s2",
+      "title": { "en": "Calling to purity", "de": "Der Aufruf zur Reinheit", "bs": "Poziv čistoti" },
+      "text": {
+        "en": "His people did shameful things that no people before them had done. They robbed travellers on the road and did wrong openly in their gatherings. When Lut warned them, they mocked: \"Drive them out of your town – they are people who want to stay pure!\"",
+        "de": "Sein Volk tat schändliche Dinge, die kein Volk vor ihnen getan hatte. Sie beraubten Reisende auf der Straße und taten offen Unrecht in ihren Versammlungen. Als Lut sie warnte, spotteten sie: „Vertreibt sie aus eurer Stadt – das sind Leute, die rein bleiben wollen!“",
+        "bs": "Njegov narod činio je sramne stvari koje prije njih niko nije činio. Pljačkali su putnike na putu i javno činili zlo na svojim skupovima. Kad ih je Lut opominjao, rugali su se: „Istjerajte ih iz svoga grada – to su ljudi koji žele biti čisti!“"
+      },
+      "scene": { "sky": "dusk", "elements": ["city", "stars"] },
+      "stage": {
+        "sky": "dusk",
+        "mood": "cool",
+        "layers": [{ "art": "prophet.lut-city" }, { "art": "prophet.lut-lantern", "x": 320, "y": 232, "w": 34, "enter": "fade", "at": 900 }],
+        "effects": ["stars", { "type": "lanternGlow", "x": 320, "y": 204, "intensity": 1, "at": 900 }, { "type": "wind", "intensity": 1, "at": 1600 }]
+      },
+      "interactionId": "lut-pure",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:80–82; 29:28–29; 27:56" }]
+    },
+    {
+      "id": "lut-s3",
+      "title": { "en": "Protecting the guests", "de": "Die Gäste beschützen", "bs": "Zaštita gostiju" },
+      "text": {
+        "en": "Guests came to Lut, and he was worried for them. When the people hurried towards his house, Lut stood up for his guests: \"Fear Allah and do not disgrace me before my guests. Is there not one sensible man among you?\"",
+        "de": "Gäste kamen zu Lut, und er sorgte sich um sie. Als die Leute zu seinem Haus eilten, stellte sich Lut vor seine Gäste: „Fürchtet Allah und bringt mich vor meinen Gästen nicht in Schande. Gibt es unter euch keinen vernünftigen Mann?“",
+        "bs": "Lutu su došli gosti i on se zabrinuo za njih. Kad je narod pohrlio prema njegovoj kući, Lut je stao u zaštitu svojih gostiju: „Bojte se Allaha i ne sramotite me pred mojim gostima. Zar među vama nema nijednog razumnog čovjeka?“"
+      },
+      "scene": { "sky": "night", "elements": ["lanterns", "stars"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.night-horizon" },
+          { "art": "place.house", "x": 200, "y": 228, "w": 130 },
+          { "art": "prophet.lut-lantern", "x": 262, "y": 202, "w": 30, "anim": "sway" }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 262, "y": 178, "intensity": 2 }, { "type": "lanternGlow", "x": 200, "y": 190, "intensity": 1, "at": 900 }]
+      },
+      "interactionId": "lut-guests",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:77–78" }]
+    },
+    {
+      "id": "lut-s4",
+      "title": { "en": "Leave by night", "de": "Brich in der Nacht auf", "bs": "Kreni noću" },
+      "text": {
+        "en": "The guests said: \"O Lut, we are messengers of your Lord. They will not reach you. Leave with your family in a part of the night, and let none of you look back. Their appointed time is the morning – is the morning not near?\"",
+        "de": "Die Gäste sagten: „O Lut, wir sind Gesandte deines Herrn. Sie werden nicht zu dir gelangen. Brich mit deiner Familie in einem Teil der Nacht auf, und keiner von euch soll sich umdrehen. Ihre Frist ist der Morgen – ist der Morgen nicht nahe?“",
+        "bs": "Gosti su rekli: „O Lute, mi smo izaslanici Gospodara tvoga. Oni do tebe neće doprijeti. Kreni sa svojom porodicom u jednom dijelu noći i neka se niko od vas ne osvrće. Njima je rok jutro – a zar jutro nije blizu?“"
+      },
+      "scene": { "sky": "night", "elements": ["stars", "hills", "lanterns"] },
+      "stage": {
+        "sky": "night",
+        "camera": "panLeft",
+        "layers": [
+          { "art": "story.hills" },
+          { "art": "prophet.lut-lantern", "x": 300, "y": 214, "w": 26, "anim": "float", "enter": "fade", "at": 400, "exitAt": 2600 },
+          { "art": "prophet.lut-lantern", "x": 200, "y": 196, "w": 24, "anim": "float", "enter": "fade", "at": 2400, "exitAt": 4600 },
+          { "art": "prophet.lut-lantern", "x": 110, "y": 180, "w": 22, "anim": "float", "enter": "fade", "at": 4400 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3, "until": 5600 }, { "type": "sunrays", "x": 60, "y": 150, "intensity": 1, "at": 5600 }]
+      },
+      "interactionId": "lut-order",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:81; 15:65" }]
+    },
+    {
+      "id": "lut-s5",
+      "title": { "en": "A sign by the road", "de": "Ein Zeichen am Weg", "bs": "Znak pored puta" },
+      "text": {
+        "en": "Allah brought out the believers who were in the town. When the morning came, the town was turned upside down. Its remains lie by a road that people still travel – a sign for those who think.",
+        "de": "Allah führte die Gläubigen, die in der Stadt waren, hinaus. Als der Morgen kam, wurde die Stadt umgestürzt. Ihre Überreste liegen an einem Weg, den Menschen noch heute bereisen – ein Zeichen für die, die nachdenken.",
+        "bs": "Allah je izveo vjernike koji su bili u gradu. Kad je svanulo jutro, grad je bio prevrnut. Njegovi ostaci leže pored puta kojim ljudi i danas putuju – znak za one koji razmišljaju."
+      },
+      "scene": { "sky": "dawn", "elements": ["sea", "hills"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [{ "art": "story.dead-sea" }, { "art": "prophet.lut-ruins", "x": 260, "y": 220, "w": 180, "enter": "fade", "at": 800, "duration": 1600 }],
+        "effects": [{ "type": "sunrays", "x": 80, "y": 90, "intensity": 2 }, { "type": "mist", "y": 150, "h": 50, "intensity": 1 }, { "type": "dust", "intensity": 1, "at": 1600 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "51:35–37; 11:82; 15:76–77; 37:137–138" }]
+    }
+  ],
+  "miniGameId": "lut-memory",
+  "quizIds": ["lut-map", "lut-saved", "lut-lesson"],
+  "lessons": [
+    {
+      "id": "lut-l1",
+      "value": "courage",
+      "title": { "en": "Standing up for what is right", "de": "Für das Richtige einstehen", "bs": "Zauzeti se za ispravno" },
+      "explanation": {
+        "en": "Lut kept calling to good even when his whole town mocked him, and he protected his guests. Doing right sometimes takes courage.",
+        "de": "Lut rief weiter zum Guten auf, auch als die ganze Stadt ihn verspottete, und er beschützte seine Gäste. Das Richtige zu tun braucht manchmal Mut.",
+        "bs": "Lut je nastavio pozivati dobru iako mu se cijeli grad rugao i štitio je svoje goste. Činiti ispravno ponekad traži hrabrost."
+      },
+      "example": {
+        "en": "Others laugh at a new classmate. You sit next to him and talk to him kindly.",
+        "de": "Andere lachen über einen neuen Mitschüler. Du setzt dich neben ihn und sprichst freundlich mit ihm.",
+        "bs": "Drugi se smiju novom drugu u razredu. Ti sjedneš pored njega i lijepo razgovaraš s njim."
+      },
+      "reflection": {
+        "en": "When did you need courage to do the right thing?",
+        "de": "Wann brauchtest du Mut, um das Richtige zu tun?",
+        "bs": "Kada ti je trebala hrabrost da uradiš ispravno?"
+      }
+    },
+    {
+      "id": "lut-l2",
+      "value": "purity",
+      "title": { "en": "Staying pure and choosing good company", "de": "Rein bleiben und gute Gesellschaft wählen", "bs": "Ostati čist i birati dobro društvo" },
+      "explanation": {
+        "en": "Lut and the believers kept themselves pure, and Allah saved them. We stay away from bad deeds and choose friends who help us do good.",
+        "de": "Lut und die Gläubigen hielten sich rein, und Allah rettete sie. Wir halten uns von schlechten Taten fern und wählen Freunde, die uns zum Guten helfen.",
+        "bs": "Lut i vjernici čuvali su se čistima i Allah ih je spasio. Klonimo se loših djela i biramo prijatelje koji nam pomažu u dobru."
+      },
+      "example": {
+        "en": "Friends want to watch something that is not good. You suggest playing football instead.",
+        "de": "Freunde wollen etwas anschauen, das nicht gut ist. Du schlägst stattdessen Fußball vor.",
+        "bs": "Prijatelji žele gledati nešto što nije lijepo. Ti predložiš da radije igrate fudbal."
+      },
+      "reflection": {
+        "en": "Which friend helps you do good things?",
+        "de": "Welcher Freund hilft dir, Gutes zu tun?",
+        "bs": "Koji ti prijatelj pomaže da činiš dobro?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "lut-trust",
+      "type": "trueFalse",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Lut asked his people for payment for his message.", "de": "Lut verlangte von seinem Volk Lohn für seine Botschaft.", "bs": "Lut je od svog naroda tražio plaću za poslanicu." },
+      "correct": false,
+      "explanation": { "en": "No – he said: my reward is only with the Lord of the worlds.", "de": "Nein – er sagte: Mein Lohn ist allein beim Herrn der Welten.", "bs": "Ne – rekao je: moja je nagrada samo kod Gospodara svjetova." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:164" }]
+    },
+    {
+      "id": "lut-pure",
+      "type": "scenario",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": {
+        "en": "Decision: your group starts making fun of someone on the bus. What would be the brave and clean way?",
+        "de": "Entscheidung: Deine Gruppe fängt im Bus an, sich über jemanden lustig zu machen. Was wäre mutig und anständig?",
+        "bs": "Odluka: tvoje društvo u autobusu počne ismijavati nekoga. Šta bi bilo hrabro i čisto?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Say kindly: \"Stop, that's not nice\" – and don't join in", "de": "Freundlich sagen: „Hört auf, das ist nicht nett“ – und nicht mitmachen", "bs": "Lijepo reći: „Stanite, to nije lijepo“ – i ne pridružiti se" }, "feedback": { "en": "Like Lut: calling to good, even against the crowd.", "de": "Wie Lut: zum Guten rufen, auch gegen die Menge.", "bs": "Kao Lut: pozivati dobru i kad je većina protiv." } },
+        { "id": "b", "text": { "en": "Laugh along so they like you", "de": "Mitlachen, damit sie dich mögen", "bs": "Smijati se s njima da te vole" }, "feedback": { "en": "Joining in the wrong does not make it right.", "de": "Beim Unrecht mitzumachen macht es nicht richtig.", "bs": "Pridružiti se zlu ne čini ga dobrim." } },
+        { "id": "c", "text": { "en": "Film it and share it", "de": "Es filmen und teilen", "bs": "Snimiti i podijeliti" }, "feedback": { "en": "That spreads the harm even further.", "de": "Das verbreitet den Schaden noch weiter.", "bs": "To samo dalje širi štetu." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Lut called his people away from wrong – even when they mocked him.", "de": "Lut rief sein Volk vom Unrecht weg – auch als sie ihn verspotteten.", "bs": "Lut je pozivao svoj narod da ostavi zlo – i kad su mu se rugali." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "29:28–29" }]
+    },
+    {
+      "id": "lut-guests",
+      "type": "trueFalse",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Lut stood up to protect his guests.", "de": "Lut stellte sich schützend vor seine Gäste.", "bs": "Lut je stao u zaštitu svojih gostiju." },
+      "correct": true,
+      "explanation": { "en": "Yes – he said: \"Fear Allah and do not disgrace me before my guests.\"", "de": "Ja – er sagte: „Fürchtet Allah und bringt mich vor meinen Gästen nicht in Schande.“", "bs": "Da – rekao je: „Bojte se Allaha i ne sramotite me pred mojim gostima.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:78" }]
+    },
+    {
+      "id": "lut-order",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Put the story of Lut in order.", "de": "Bring die Geschichte Luts in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Lutu." },
+      "items": [
+        { "id": "call", "text": { "en": "Lut calls his people to fear Allah", "de": "Lut ruft sein Volk zur Gottesfurcht", "bs": "Lut poziva narod da se boji Allaha" } },
+        { "id": "mock", "text": { "en": "They mock those who stay pure", "de": "Sie verspotten die, die rein bleiben", "bs": "Rugaju se onima koji su čisti" } },
+        { "id": "guests", "text": { "en": "Lut protects his guests", "de": "Lut beschützt seine Gäste", "bs": "Lut štiti svoje goste" } },
+        { "id": "night", "text": { "en": "He leaves by night without looking back", "de": "Er bricht nachts auf, ohne sich umzudrehen", "bs": "Kreće noću ne osvrćući se" } },
+        { "id": "sign", "text": { "en": "The remains become a sign by the road", "de": "Die Überreste werden ein Zeichen am Weg", "bs": "Ostaci postaju znak pored puta" } }
+      ],
+      "explanation": { "en": "The call, the mockery, the guests, the night journey – and the sign that remains.", "de": "Der Aufruf, der Spott, die Gäste, die nächtliche Reise – und das Zeichen, das bleibt.", "bs": "Poziv, ruganje, gosti, noćno putovanje – i znak koji ostaje." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:160–175; 11:77–83" }]
+    },
+    {
+      "id": "lut-memory",
+      "type": "memory",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Memory: match the parts of the story of Lut.", "de": "Memory: Ordne die Teile der Geschichte Luts zu.", "bs": "Memorija: spoji dijelove kazivanja o Lutu." },
+      "pairs": [
+        { "id": "messenger", "left": { "en": "Lut", "de": "Lut", "bs": "Lut" }, "right": { "en": "A trustworthy messenger", "de": "Ein vertrauenswürdiger Gesandter", "bs": "Povjerljivi poslanik" } },
+        { "id": "guests", "left": { "en": "The guests", "de": "Die Gäste", "bs": "Gosti" }, "right": { "en": "Messengers of Allah", "de": "Gesandte Allahs", "bs": "Allahovi izaslanici" } },
+        { "id": "night", "left": { "en": "The night", "de": "Die Nacht", "bs": "Noć" }, "right": { "en": "Do not look back", "de": "Dreh dich nicht um", "bs": "Ne osvrći se" } },
+        { "id": "road", "left": { "en": "The remains", "de": "Die Überreste", "bs": "Ostaci" }, "right": { "en": "A sign by the road", "de": "Ein Zeichen am Weg", "bs": "Znak pored puta" } }
+      ],
+      "explanation": { "en": "Lut was a trustworthy messenger; his guests were messengers of Allah; they left by night; the remains are a sign.", "de": "Lut war ein vertrauenswürdiger Gesandter; seine Gäste waren Gesandte Allahs; sie brachen nachts auf; die Überreste sind ein Zeichen.", "bs": "Lut je bio povjerljivi poslanik; gosti su bili Allahovi izaslanici; krenuli su noću; ostaci su znak." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:162; 11:81; 15:76" }]
+    },
+    {
+      "id": "lut-map",
+      "type": "map",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Where were the cities of Lut? Tap the place near the Dead Sea.", "de": "Wo lagen die Städte Luts? Tippe auf den Ort am Toten Meer.", "bs": "Gdje su bili Lutovi gradovi? Dodirni mjesto kraj Mrtvog mora." },
+      "places": ["lut", "makkah", "egypt", "nineveh"],
+      "correctPlace": "lut",
+      "explanation": { "en": "The Quran says the remains lie by a road still travelled; scholars place the cities near the Dead Sea.", "de": "Der Koran sagt, die Überreste liegen an einem noch bereisten Weg; Gelehrte verorten die Städte am Toten Meer.", "bs": "Kur'an kaže da ostaci leže pored puta kojim se još putuje; učenjaci smještaju gradove kraj Mrtvog mora." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "15:76; 37:137–138" }]
+    },
+    {
+      "id": "lut-saved",
+      "type": "trueFalse",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Allah saved Lut and the believers with him.", "de": "Allah rettete Lut und die Gläubigen mit ihm.", "bs": "Allah je spasio Luta i vjernike s njim." },
+      "correct": true,
+      "explanation": { "en": "Yes – Allah brought out the believers before the morning came.", "de": "Ja – Allah führte die Gläubigen hinaus, bevor der Morgen kam.", "bs": "Da – Allah je izveo vjernike prije nego što je svanulo." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "51:35; 11:81" }]
+    },
+    {
+      "id": "lut-lesson",
+      "type": "lessonChoice",
+      "storyId": "lut",
+      "topic": "lut",
+      "prompt": { "en": "Which lesson do we learn from Lut?", "de": "Welche Lehre lernen wir von Lut?", "bs": "Koju pouku učimo od Luta?" },
+      "options": [
+        { "id": "a", "text": { "en": "Stay pure and stand up for what is right", "de": "Rein bleiben und für das Richtige einstehen", "bs": "Ostati čist i zauzeti se za ispravno" } },
+        { "id": "b", "text": { "en": "Do whatever the crowd does", "de": "Alles tun, was die Menge tut", "bs": "Raditi što god radi većina" } },
+        { "id": "c", "text": { "en": "Guests do not matter", "de": "Gäste sind unwichtig", "bs": "Gosti nisu važni" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Lut stayed pure, called to good and protected his guests – and Allah saved him.", "de": "Lut blieb rein, rief zum Guten auf und beschützte seine Gäste – und Allah rettete ihn.", "bs": "Lut je ostao čist, pozivao dobru i štitio goste – i Allah ga je spasio." }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "7:80–84" },
+    { "sourceName": "Quran", "sourceReference": "11:77–83" },
+    { "sourceName": "Quran", "sourceReference": "15:57–77" },
+    { "sourceName": "Quran", "sourceReference": "26:160–175" },
+    { "sourceName": "Quran", "sourceReference": "29:28–35" }
+  ]
+}

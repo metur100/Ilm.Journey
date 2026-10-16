@@ -797,6 +797,96 @@ const ibrahim = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Lut – a city near the Dead Sea, the journey by night (11:81), remains by a road still travelled (15:76)
+
+/** Small flat-roofed houses of a town (lit windows on dark skies). */
+function Town({ c, x, y, s = 1 }: { c: Ctx; x: number; y: number; s?: number }) {
+  const blocks: [number, number, number][] = [
+    [0, 30, 26],
+    [28, 22, 34],
+    [52, 34, 22],
+    [88, 26, 30],
+    [116, 30, 20],
+    [148, 24, 28],
+  ];
+  return (
+    <G transform={`translate(${x} ${y}) scale(${s})`}>
+      {blocks.map(([bx, w, h], i) => (
+        <G key={i}>
+          <Rect x={bx} y={-h} width={w} height={h} rx={2} fill={dim(c, i % 2 ? C.sandLight : '#E7CFA6')} />
+          <Rect x={bx + w * 0.62} y={-h} width={w * 0.38} height={h} fill={dim(c, C.sandDeep)} opacity={0.5} />
+          <Rect x={bx + w * 0.25} y={-h * 0.62} width={5} height={6} rx={1} fill={c.dark ? C.goldLight : C.woodDark} />
+        </G>
+      ))}
+    </G>
+  );
+}
+
+const lut = {
+  /** A town on the plain by the Dead Sea (no people). */
+  'lut-city': art(W, H, (c) => (
+    <>
+      <Path d="M0 150C60 136 120 132 200 140S330 128 400 136V170H0Z" fill={dim(c, '#BFA6A0', 0.5)} />
+      <Rect x={0} y={162} width={W} height={30} fill={dim(c, '#7CC4C2', 0.45)} />
+      <Path d="M20 172h40M120 176h30M250 170h50M330 178h40" stroke={C.white} strokeWidth={1.6} opacity={c.dark ? 0.3 : 0.6} strokeLinecap="round" />
+      <Path d="M0 192C100 184 200 186 300 192S380 188 400 190V240H0Z" fill={dim(c, '#E5D3B5')} />
+      <Town c={c} x={60} y={212} s={1.2} />
+      <Path d="M0 220C100 212 220 214 300 222S380 216 400 218V240H0Z" fill={dim(c, '#D6BE96')} />
+      <Path d="M280 240C300 228 330 222 380 220" stroke={dim(c, C.sandLight)} strokeWidth={8} strokeLinecap="round" fill="none" opacity={0.8} />
+    </>
+  )),
+
+  /** The night path out of the town towards the hills and the dawn (portrait map, 11:81). */
+  'lut-night-map': art(300, 400, (c) => (
+    <>
+      <Defs>
+        <Lin id={c.id('sky')} stops={[[0, '#F2C38E'], [0.18, '#7A5E96'], [0.5, '#262B66'], [1, '#141838']]} />
+      </Defs>
+      <Rect x={0} y={0} width={300} height={400} fill={c.url('sky')} />
+      {[[40, 140], [260, 170], [120, 200], [200, 120], [70, 240], [240, 260]].map(([x, y], i) => (
+        <Circle key={i} cx={x} cy={y} r={1.3} fill={C.white} opacity={0.7} />
+      ))}
+      <Path d="M0 120L50 70 100 96 150 54 210 92 260 64 300 90V160H0Z" fill="#5E4A78" />
+      <Path d="M0 160C60 140 140 146 200 156S280 146 300 150V400H0Z" fill="#3A3460" />
+      <Path d="M150 380C120 340 190 310 150 270S90 220 140 190 200 150 170 110" stroke="#6E6496" strokeWidth={22} strokeLinecap="round" fill="none" opacity={0.6} />
+      <Path d="M150 380C120 340 190 310 150 270S90 220 140 190 200 150 170 110" stroke="#8E84B8" strokeWidth={4} strokeDasharray="2 10" strokeLinecap="round" fill="none" opacity={0.7} />
+      <G transform="translate(70 400) scale(0.9)">
+        <Town c={{ ...c, dark: true }} x={0} y={0} />
+      </G>
+      <Path d="M0 400V376C40 370 80 372 100 380" fill="#2A2650" />
+    </>
+  )),
+
+  /** A small hand lantern for the night journey. */
+  'lut-lantern': art(60, 90, (c) => (
+    <>
+      <Glow c={c} k="g" cx={30} cy={56} r={30} color={C.goldPale} opacity={0.7} />
+      <Path d="M18 26Q30 4 42 26" stroke={C.goldDeep} strokeWidth={3} fill="none" />
+      <Path d="M16 28H44L46 34H14Z" fill={C.goldDeep} />
+      <Path d="M16 34H44L42 72H18Z" fill={C.gold} />
+      <Path d="M21 38H39L37 68H23Z" fill={C.goldPale} />
+      <Path d="M30 46C34 52 34 58 30 62C26 58 26 52 30 46Z" fill={C.orange} />
+      <Path d="M14 72H46L42 80H18Z" fill={C.goldDeep} />
+    </>
+  )),
+
+  /** Quiet remains by the road: low broken walls and pale stones near the salt shore (15:76, 37:137–138). */
+  'lut-ruins': art(220, 110, (c) => (
+    <>
+      <Shadow c={c} cx={110} cy={104} rx={100} />
+      <Path d="M10 104C60 96 160 96 210 104Z" fill={dim(c, '#E8DCC6')} />
+      <Path d="M30 104V74H44V64H56V104Z" fill={dim(c, '#CDB89A')} />
+      <Path d="M120 104V58H134V70H148V82H156V104Z" fill={dim(c, '#C4AE8E')} />
+      <Path d="M70 104V86H96V104Z" fill={dim(c, '#D8C6A8')} />
+      {[[176, 100, 16, 10], [196, 102, 10, 7], [100, 102, 12, 8], [16, 102, 10, 6]].map(([x, y, w, h], i) => (
+        <Rock key={i} c={c} x={x} y={y} w={w} h={h} color={C.stonePale} />
+      ))}
+      <Path d="M44 64L48 70M134 58L140 66" stroke={C.stoneDark} strokeWidth={1.2} opacity={0.5} />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
@@ -806,6 +896,7 @@ export const prophetA = {
   ...hud,
   ...salih,
   ...ibrahim,
+  ...lut,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).
