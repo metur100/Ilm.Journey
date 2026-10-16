@@ -1,3 +1,4 @@
+import { registerMissingWordGame } from './missing-word/register';
 import { registerSurahPuzzleGame } from './surah-puzzle/register';
 import { registerGoodDeedsGame } from './good-deeds-catch/register';
 import { registerSurahOrderGame } from './surah-order/register';
@@ -26,4 +27,5 @@ export function registerQuranGames(): void {
   registerSurahOrderGame();
   registerGoodDeedsGame();
   registerSurahPuzzleGame();
+  registerMissingWordGame();
 }
