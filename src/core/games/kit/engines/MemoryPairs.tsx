@@ -39,6 +39,12 @@ interface CardDef {
  * MemoryPairs – flip two cards; matching ones stay open (green, sparkle, optional caption), others flip back.
  * Only "forgetting" counts as a mistake: a mismatch where one of the cards had been seen before.
  */
+/** Text size on a card face: words alone get readable text; under a picture it stays small. */
+function faceVariant(face: KitFace, cardW: number): 'tiny' | 'small' | 'bodyBold' {
+  if (face.art) return cardW >= 96 ? 'small' : 'tiny';
+  return cardW >= 88 ? 'bodyBold' : 'small';
+}
+
 export function MemoryPairs(props: MemoryPairsProps) {
   const { pairs } = props;
   const core = useEngineCore(props, pairs.length);
@@ -175,7 +181,7 @@ export function MemoryPairs(props: MemoryPairsProps) {
                     testID={`card-${card.key}`}
                     accessibilityLabel={isMatched ? env.kt('memory.matched', { number: i + 1, label }) : faceUp ? env.kt('memory.open', { number: i + 1, label }) : env.kt('memory.hidden', { number: i + 1 })}
                     onPress={() => flip(card.key)}
-                    front={<FaceView face={card.face} artSize={Math.min(cardW - 16, cardH - 30, 64)} arabicSize={Math.min(34, cardW * 0.4)} variant="tiny" numberOfLines={3} />}
+                    front={<FaceView face={card.face} artSize={Math.min(cardW - 16, cardH - (card.face.label ? 34 : 16), 72)} arabicSize={Math.min(36, cardW * 0.4)} variant={faceVariant(card.face, cardW)} numberOfLines={3} />}
                   />
                   {isMatched ? <Burst trigger={1} distance={cardW * 0.6} size={12} /> : null}
                 </View>
