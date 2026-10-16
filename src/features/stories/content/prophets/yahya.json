@@ -1,0 +1,301 @@
+{
+  "id": "yahya",
+  "order": 23,
+  "prophetName": { "en": "Yahya", "de": "Yahya (Johannes)", "bs": "Jahja" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "Wisdom as a Child", "de": "Weisheit schon als Kind", "bs": "Mudrost još u djetinjstvu" },
+  "description": {
+    "en": "The answer to a quiet dua: a boy given wisdom, kind to his parents, with peace upon him.",
+    "de": "Die Antwort auf ein leises Du'a: ein Junge mit Weisheit, gut zu seinen Eltern, mit Frieden auf ihm.",
+    "bs": "Odgovor na tihu dovu: dječak kojem je data mudrost, poslušan roditeljima, s mirom na njemu."
+  },
+  "place": { "en": "The home of Zakariyya", "de": "Das Haus Zakariyyas", "bs": "Zekerijjin dom" },
+  "symbol": "book",
+  "symbolArt": "prophet.yahya-book",
+  "cover": { "sky": "dawn", "elements": ["sun", "garden", "book"] },
+  "coverStage": {
+    "sky": "dawn",
+    "layers": [
+      { "art": "story.garden" },
+      { "art": "prophet.yahya-sapling", "x": 130, "y": 226, "w": 90, "anim": "sway", "enter": "rise", "at": 400 },
+      { "art": "prophet.yahya-book", "x": 270, "y": 220, "w": 90, "enter": "rise", "at": 900 }
+    ],
+    "effects": [{ "type": "sunrays", "x": 330, "y": 50 }, { "type": "birds", "intensity": 1 }, { "type": "sparkle", "x": 270, "y": 180, "w": 80, "h": 40, "intensity": 1, "at": 1500 }]
+  },
+  "intro": {
+    "en": "Yahya (peace be upon him) was the son of the prophet Zakariyya – the answer to his father's quiet dua. Allah chose his name Himself: no one had been called Yahya before him.",
+    "de": "Yahya (Friede sei mit ihm) war der Sohn des Propheten Zakariyya – die Antwort auf das leise Du'a seines Vaters. Allah wählte seinen Namen Selbst: Niemand vor ihm hatte Yahya geheißen.",
+    "bs": "Jahja, a.s., bio je sin poslanika Zekerijje – odgovor na tihu dovu njegovog oca. Allah mu je Sam odabrao ime: prije njega niko se nije zvao Jahja."
+  },
+  "scenes": [
+    {
+      "id": "yahya-s1",
+      "title": { "en": "A gift from Allah", "de": "Ein Geschenk Allahs", "bs": "Dar od Allaha" },
+      "text": {
+        "en": "Allah gave Zakariyya the glad tidings of Yahya: he would confirm a word from Allah, be noble and chaste, and be a prophet among the righteous.",
+        "de": "Allah verkündete Zakariyya Yahya: Er würde ein Wort von Allah bestätigen, edel und keusch sein und ein Prophet unter den Rechtschaffenen.",
+        "bs": "Allah je Zekerijji javio radosnu vijest o Jahji: on će potvrditi Riječ od Allaha, bit će ugledan i čedan, i vjerovjesnik među dobrima."
+      },
+      "scene": { "sky": "dawn", "elements": ["lanterns", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.arch-frame" },
+          { "art": "prophet.zakariyya-mihrab", "x": 200, "y": 240, "w": 150 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 60, "intensity": 2, "at": 600 }, { "type": "sparkle", "x": 200, "y": 120, "w": 180, "h": 90, "intensity": 2, "at": 1200 }]
+      },
+      "interactionId": "yahya-righteous",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:39; 19:7" }]
+    },
+    {
+      "id": "yahya-s2",
+      "title": { "en": "Take the Book with strength", "de": "Nimm die Schrift mit Kraft", "bs": "Prihvati Knjigu odlučno" },
+      "text": {
+        "en": "Allah said: \"O Yahya, take the Scripture with strength.\" And Allah gave him wisdom while he was still a child.",
+        "de": "Allah sagte: „O Yahya, nimm die Schrift mit Kraft.“ Und Allah gab ihm Weisheit, als er noch ein Kind war.",
+        "bs": "Allah je rekao: „O Jahja, prihvati Knjigu odlučno!“ I Allah mu je dao mudrost još dok je bio dječak."
+      },
+      "scene": { "sky": "day", "elements": ["book", "garden"] },
+      "stage": {
+        "sky": "day",
+        "camera": "slowZoom",
+        "layers": [
+          { "art": "story.garden" },
+          { "art": "prophet.yahya-book", "x": 200, "y": 218, "w": 130, "enter": "rise", "at": 400, "duration": 1400 }
+        ],
+        "effects": [{ "type": "lightBeam", "x": 200, "intensity": 2, "at": 1000 }, { "type": "sparkle", "x": 200, "y": 170, "w": 140, "h": 60, "intensity": 2, "at": 1600 }, { "type": "leaves", "intensity": 1 }]
+      },
+      "interactionId": "yahya-child",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:12" }]
+    },
+    {
+      "id": "yahya-s3",
+      "title": { "en": "Kind and pure", "de": "Gütig und rein", "bs": "Samilostan i čist" },
+      "text": {
+        "en": "Allah gave Yahya tenderness from Him and purity, and he was mindful of Allah. He was dutiful to his parents, and he was never arrogant or disobedient.",
+        "de": "Allah gab Yahya Zärtlichkeit von Sich und Reinheit, und er war gottesfürchtig. Er war gütig zu seinen Eltern, und er war nie hochmütig oder ungehorsam.",
+        "bs": "Allah je Jahji dao samilost od Sebe i čistotu, i bio je bogobojazan. Bio je poslušan svojim roditeljima, i nikada nije bio ni nasilnik ni buntovnik."
+      },
+      "scene": { "sky": "sunset", "elements": ["garden", "tree"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "warm",
+        "layers": [
+          { "art": "story.hills" },
+          { "art": "prophet.yahya-home-heart", "x": 140, "y": 226, "w": 96, "enter": "rise", "at": 400 },
+          { "art": "prophet.yahya-sapling", "x": 280, "y": 228, "w": 96, "anim": "sway", "enter": "rise", "at": 900 }
+        ],
+        "effects": [{ "type": "fireflies", "intensity": 1, "at": 1200 }, { "type": "birds", "intensity": 1 }, { "type": "sparkle", "x": 140, "y": 170, "w": 70, "h": 40, "intensity": 1, "at": 1000 }]
+      },
+      "interactionId": "yahya-parents",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:13–14" }]
+    },
+    {
+      "id": "yahya-s4",
+      "title": { "en": "Peace be upon him", "de": "Friede sei auf ihm", "bs": "Neka je mir njemu" },
+      "text": {
+        "en": "Allah says about Yahya: \"Peace be upon him the day he was born, the day he dies, and the day he is raised alive.\"",
+        "de": "Allah sagt über Yahya: „Friede sei auf ihm am Tag, als er geboren wurde, am Tag, an dem er stirbt, und am Tag, an dem er wieder lebendig auferweckt wird.“",
+        "bs": "Allah kaže o Jahji: „Neka je mir njemu na dan kad se rodio, i na dan kad bude umro, i na dan kad bude oživljen!“"
+      },
+      "scene": { "sky": "dawn", "elements": ["sun", "hills"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 200, "y": 150, "w": 110, "anchor": "center", "enter": "rise", "at": 300, "duration": 2400 },
+          { "art": "story.hills" },
+          { "art": "prophet.yahya-peace", "x": 200, "y": 86, "w": 70, "anchor": "center", "anim": "float", "enter": "fade", "at": 1600 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 150, "intensity": 2, "at": 1200 }, { "type": "birds", "intensity": 1, "at": 2200 }, { "type": "sparkle", "x": 200, "y": 90, "w": 120, "h": 50, "intensity": 1, "at": 2000 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:15" }]
+    }
+  ],
+  "miniGameId": "yahya-memory",
+  "quizIds": ["yahya-order", "yahya-arrogant", "yahya-lesson"],
+  "lessons": [
+    {
+      "id": "yahya-l1",
+      "value": "birr",
+      "title": { "en": "Be good to your parents", "de": "Sei gut zu deinen Eltern", "bs": "Budi dobar prema roditeljima" },
+      "explanation": {
+        "en": "Allah praises Yahya for being dutiful to his parents. Kindness to parents is one of the most beloved deeds to Allah.",
+        "de": "Allah lobt Yahya dafür, dass er gütig zu seinen Eltern war. Güte zu den Eltern gehört zu den Taten, die Allah am meisten liebt.",
+        "bs": "Allah hvali Jahju jer je bio poslušan roditeljima. Dobročinstvo prema roditeljima jedno je od Allahu najdražih djela."
+      },
+      "example": {
+        "en": "Your mother is tired after work. Without being asked, you set the table and say a kind word.",
+        "de": "Deine Mutter ist müde von der Arbeit. Ohne dass sie fragt, deckst du den Tisch und sagst ein liebes Wort.",
+        "bs": "Mama je umorna poslije posla. Bez da te zamoli, postaviš sto i kažeš lijepu riječ."
+      },
+      "reflection": {
+        "en": "What can you do today to make your parents happy?",
+        "de": "Was kannst du heute tun, um deine Eltern glücklich zu machen?",
+        "bs": "Šta danas možeš učiniti da obraduješ roditelje?"
+      }
+    },
+    {
+      "id": "yahya-l2",
+      "value": "ilm",
+      "title": { "en": "Take learning seriously – even when young", "de": "Nimm das Lernen ernst – auch wenn du jung bist", "bs": "Ozbiljno shvati učenje – i kada si mlad" },
+      "explanation": {
+        "en": "\"Take the Scripture with strength\" – Yahya was given wisdom as a child. You are never too young to learn about Allah and act on it.",
+        "de": "„Nimm die Schrift mit Kraft“ – Yahya erhielt schon als Kind Weisheit. Man ist nie zu jung, um über Allah zu lernen und danach zu handeln.",
+        "bs": "„Prihvati Knjigu odlučno“ – Jahja je dobio mudrost još kao dijete. Nikad nisi premlad da učiš o Allahu i po tome postupaš."
+      },
+      "example": {
+        "en": "You learn a new short surah this week and recite it in your prayer.",
+        "de": "Du lernst diese Woche eine neue kurze Sure und rezitierst sie in deinem Gebet.",
+        "bs": "Ove sedmice naučiš novu kratku suru i učiš je u namazu."
+      },
+      "reflection": {
+        "en": "What would you like to learn next about Islam?",
+        "de": "Was möchtest du als Nächstes über den Islam lernen?",
+        "bs": "Šta bi sljedeće želio naučiti o islamu?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "yahya-righteous",
+      "type": "trueFalse",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "Yahya was a prophet among the righteous.", "de": "Yahya war ein Prophet unter den Rechtschaffenen.", "bs": "Jahja je bio vjerovjesnik među dobrima." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – noble, chaste and a prophet among the righteous (3:39).",
+        "de": "Ja – edel, keusch und ein Prophet unter den Rechtschaffenen (3:39).",
+        "bs": "Da – ugledan, čedan i vjerovjesnik među dobrima (3:39)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "3:39" }]
+    },
+    {
+      "id": "yahya-child",
+      "type": "multipleChoice",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "What did Allah give Yahya while he was still a child?", "de": "Was gab Allah Yahya, als er noch ein Kind war?", "bs": "Šta je Allah dao Jahji dok je još bio dječak?" },
+      "options": [
+        { "id": "a", "text": { "en": "Wisdom", "de": "Weisheit", "bs": "Mudrost" } },
+        { "id": "b", "text": { "en": "A kingdom", "de": "Ein Königreich", "bs": "Carstvo" } },
+        { "id": "c", "text": { "en": "Great riches", "de": "Großen Reichtum", "bs": "Veliko bogatstvo" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"And We gave him wisdom while still a child\" (19:12).",
+        "de": "„Und Wir gaben ihm schon als Kind Weisheit“ (19:12).",
+        "bs": "„I dadosmo mu mudrost još dok je dječak bio“ (19:12)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:12" }]
+    },
+    {
+      "id": "yahya-parents",
+      "type": "scenario",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "Your father asks you to help him, but you want to keep playing. What would follow the example of Yahya?", "de": "Dein Vater bittet dich um Hilfe, aber du willst weiterspielen. Was folgt dem Vorbild von Yahya?", "bs": "Otac te zamoli za pomoć, a ti se želiš i dalje igrati. Šta je po Jahjinom primjeru?" },
+      "options": [
+        {
+          "id": "a",
+          "text": { "en": "Help him kindly, then play later", "de": "Ihm freundlich helfen und später spielen", "bs": "Lijepo mu pomoći, a igrati se kasnije" },
+          "feedback": { "en": "Yes – Yahya was dutiful to his parents.", "de": "Ja – Yahya war gütig zu seinen Eltern.", "bs": "Da – Jahja je bio poslušan roditeljima." }
+        },
+        {
+          "id": "b",
+          "text": { "en": "Pretend you did not hear", "de": "So tun, als hättest du nichts gehört", "bs": "Praviti se da nisi čuo" },
+          "feedback": { "en": "Not quite – Yahya was never disobedient.", "de": "Nicht ganz – Yahya war nie ungehorsam.", "bs": "Ne baš – Jahja nikada nije bio buntovnik." }
+        },
+        {
+          "id": "c",
+          "text": { "en": "Answer rudely", "de": "Unhöflich antworten", "bs": "Grubo odgovoriti" },
+          "feedback": { "en": "No – Yahya was never arrogant.", "de": "Nein – Yahya war nie hochmütig.", "bs": "Ne – Jahja nikada nije bio nasilnik." }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"He was dutiful to his parents, and he was not arrogant or disobedient\" (19:14).",
+        "de": "„Er war gütig zu seinen Eltern und war weder hochmütig noch ungehorsam“ (19:14).",
+        "bs": "„I bio je poslušan roditeljima svojim, i nije bio nasilnik ni buntovnik“ (19:14)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:14" }]
+    },
+    {
+      "id": "yahya-memory",
+      "type": "memory",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "Memory: match what the Quran says about Yahya.", "de": "Memory: Ordne zu, was der Koran über Yahya sagt.", "bs": "Memorija: spoji šta Kur'an kaže o Jahji." },
+      "pairs": [
+        { "id": "book", "left": { "en": "The Scripture", "de": "Die Schrift", "bs": "Knjiga" }, "right": { "en": "Take it with strength", "de": "Mit Kraft nehmen", "bs": "Prihvatiti je odlučno" } },
+        { "id": "wisdom", "left": { "en": "Wisdom", "de": "Weisheit", "bs": "Mudrost" }, "right": { "en": "Already as a child", "de": "Schon als Kind", "bs": "Još kao dječak" } },
+        { "id": "parents", "left": { "en": "His parents", "de": "Seine Eltern", "bs": "Roditelji" }, "right": { "en": "He was dutiful to them", "de": "Er war gütig zu ihnen", "bs": "Bio im je poslušan" } },
+        { "id": "peace", "left": { "en": "Peace upon him", "de": "Friede auf ihm", "bs": "Mir njemu" }, "right": { "en": "Born, dying, raised", "de": "Geburt, Tod, Auferstehung", "bs": "Rođenje, smrt, proživljenje" } }
+      ],
+      "explanation": {
+        "en": "The Scripture with strength, wisdom as a child, kindness to his parents and peace upon him (19:12–15).",
+        "de": "Die Schrift mit Kraft, Weisheit als Kind, Güte zu den Eltern und Friede auf ihm (19:12–15).",
+        "bs": "Knjiga odlučno, mudrost u djetinjstvu, poslušnost roditeljima i mir njemu (19:12–15)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:12–15" }]
+    },
+    {
+      "id": "yahya-order",
+      "type": "ordering",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "Put the words about Yahya in the order of Surah Maryam.", "de": "Bring die Worte über Yahya in die Reihenfolge der Sure Maryam.", "bs": "Poredaj riječi o Jahji redom kako su u suri Merjem." },
+      "items": [
+        { "id": "book", "text": { "en": "Take the Scripture with strength", "de": "Nimm die Schrift mit Kraft", "bs": "Prihvati Knjigu odlučno" } },
+        { "id": "wisdom", "text": { "en": "Wisdom as a child", "de": "Weisheit als Kind", "bs": "Mudrost još kao dječak" } },
+        { "id": "pure", "text": { "en": "Tenderness and purity", "de": "Zärtlichkeit und Reinheit", "bs": "Samilost i čistota" } },
+        { "id": "parents", "text": { "en": "Dutiful to his parents", "de": "Gütig zu seinen Eltern", "bs": "Poslušan roditeljima" } },
+        { "id": "peace", "text": { "en": "Peace be upon him", "de": "Friede sei auf ihm", "bs": "Neka je mir njemu" } }
+      ],
+      "explanation": {
+        "en": "Surah Maryam 19:12–15 tells these in this order.",
+        "de": "Sure Maryam 19:12–15 nennt sie in dieser Reihenfolge.",
+        "bs": "Sura Merjem 19:12–15 navodi ih ovim redom."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:12–15" }]
+    },
+    {
+      "id": "yahya-arrogant",
+      "type": "trueFalse",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "Yahya was arrogant and disobedient.", "de": "Yahya war hochmütig und ungehorsam.", "bs": "Jahja je bio nasilnik i buntovnik." },
+      "correct": false,
+      "explanation": {
+        "en": "No – the Quran says he was NOT arrogant or disobedient (19:14).",
+        "de": "Nein – der Koran sagt, dass er NICHT hochmütig oder ungehorsam war (19:14).",
+        "bs": "Ne – Kur'an kaže da on NIJE bio ni nasilnik ni buntovnik (19:14)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "19:14" }]
+    },
+    {
+      "id": "yahya-lesson",
+      "type": "lessonChoice",
+      "storyId": "yahya",
+      "topic": "yahya",
+      "prompt": { "en": "Which quality of Yahya can you practise every day?", "de": "Welche Eigenschaft Yahyas kannst du jeden Tag üben?", "bs": "Koju Jahjinu osobinu možeš vježbati svaki dan?" },
+      "options": [
+        { "id": "a", "text": { "en": "Being kind and dutiful to my parents", "de": "Gütig und hilfsbereit zu meinen Eltern sein", "bs": "Biti dobar i poslušan prema roditeljima" } },
+        { "id": "b", "text": { "en": "Being proud of myself", "de": "Stolz auf mich selbst sein", "bs": "Biti ohol" } },
+        { "id": "c", "text": { "en": "Only learning when I am older", "de": "Erst lernen, wenn ich älter bin", "bs": "Učiti tek kad budem stariji" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Yahya was dutiful to his parents and not arrogant – something we can practise every day.",
+        "de": "Yahya war gütig zu seinen Eltern und nicht hochmütig – das können wir jeden Tag üben.",
+        "bs": "Jahja je bio poslušan roditeljima i nije bio ohol – to možemo vježbati svaki dan."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "3:38–41" },
+    { "sourceName": "Quran", "sourceReference": "19:7–15" },
+    { "sourceName": "Quran", "sourceReference": "6:85" }
+  ]
+}

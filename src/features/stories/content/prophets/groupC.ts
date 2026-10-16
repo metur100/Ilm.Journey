@@ -4,7 +4,8 @@ import ilyas from './ilyas.json';
 import isa from './isa.json';
 import muhammad from './muhammad.json';
 import sulayman from './sulayman.json';
+import yahya from './yahya.json';
 import yunus from './yunus.json';
 import zakariyya from './zakariyya.json';
 
-export const GROUP_C: readonly unknown[] = [sulayman, ilyas, alyasa, yunus, zakariyya, isa, muhammad];
+export const GROUP_C: readonly unknown[] = [sulayman, ilyas, alyasa, yunus, zakariyya, yahya, isa, muhammad];
