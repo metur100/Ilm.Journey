@@ -31,6 +31,7 @@ import { openConnections, openNode } from '../navigation';
 import { connectionChain } from '../services/connections';
 import { CHALLENGE_INDEX, EPISODE_STEPS } from '../services/engine';
 import { sortChronologically } from '../services/timeline';
+import { EPISODE_GAMES } from '../games';
 import { episodeStage, episodeStepStage } from '../stages';
 import { type EpisodeOutcome, useSeerahStore } from '../store/seerahStore';
 import { blockColors, SEERAH_ACCENT } from '../theme';
@@ -364,8 +365,6 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
   );
 }
 
-/** v2 mini-games that continue an episode – offered as "Play the game" when the episode is finished. */
-const EPISODE_GAMES: Readonly<Record<string, string>> = { 'episode-05': 'hijrah-path', 'episode-06': 'build-the-masjid' };
 
 function EpisodeDone({ episode, outcome, answerXp }: { episode: Episode; outcome: EpisodeOutcome; answerXp: number }) {
   const { c } = useTheme();
