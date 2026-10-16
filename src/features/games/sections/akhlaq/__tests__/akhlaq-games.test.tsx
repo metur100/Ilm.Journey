@@ -30,7 +30,7 @@ describe.each(ids)('%s', (id) => {
 
   it('reports mistakes and a missed fact', async () => {
     const g = await renderGame(game(), 2, { language: 'bs' });
-    const result = await playToEnd(g, { mistakes: 1 });
+    const result = await playToEnd(g, { mistakes: 2 });
     expect(result.mistakes).toBeGreaterThan(0);
     expect(result.stars).toBeLessThan(3);
     const factIds = game().levels[1].facts.map((f) => f.id);

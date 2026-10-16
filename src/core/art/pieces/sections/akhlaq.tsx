@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 
-import { art, Shadow, star8Path, type ArtDef, type Ctx } from '../../kit';
+import { art, Glow, Shadow, star8Path, type ArtDef, type Ctx } from '../../kit';
 import { C, mix } from '../../palette';
 
 /**
@@ -279,8 +279,45 @@ const trust = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Gratitude jar
+
+const heartPath = (x: number, y: number, s: number) =>
+  `M${x} ${y + s * 0.9}C${x - s * 1.4} ${y} ${x - s * 0.9} ${y - s * 0.9} ${x} ${y - s * 0.3}C${x + s * 0.9} ${y - s * 0.9} ${x + s * 1.4} ${y} ${x} ${y + s * 0.9}Z`;
+
+/** A folded note with a heart (centre x, y; s = scale). */
+function Note({ x, y, s = 1, rot = 0, color = C.cream, heart = C.rose }: { x: number; y: number; s?: number; rot?: number; color?: string; heart?: string }) {
+  return (
+    <G transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`}>
+      <Rect x={-12} y={-9} width={24} height={18} rx={2} fill={color} />
+      <Path d="M-12-9L0 0 12-9" stroke={C.sandDeep} strokeWidth={1} fill="none" opacity={0.6} />
+      <Path d={heartPath(0, 2, 4.2)} fill={heart} />
+    </G>
+  );
+}
+
+const gratitude = {
+  'gratitude-jar': art(100, 120, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={115} rx={38} />
+      <Path d="M26 24H74V32C88 40 92 56 92 74 92 100 78 112 50 112S8 100 8 74C8 56 12 40 26 32Z" fill={c.dark ? '#3A4A7A' : '#DDF0F6'} opacity={0.92} />
+      <Note x={30} y={96} rot={-12} />
+      <Note x={56} y={100} rot={8} color={C.goldPale} heart={C.berry} />
+      <Note x={74} y={86} rot={-6} color={C.tealPale} heart={C.teal} />
+      <Note x={44} y={78} rot={14} color={C.pinkPale} />
+      <Note x={64} y={66} rot={-16} color={C.cream} heart={C.coral} />
+      <Path d="M18 60C18 50 22 42 30 38" stroke={C.white} strokeWidth={4} strokeLinecap="round" opacity={0.65} fill="none" />
+      <Rect x={22} y={14} width={56} height={12} rx={4} fill={C.coral} />
+      <Path d="M50 14C44 4 34 6 38 12ZM50 14C56 4 66 6 62 12Z" fill={C.gold} />
+      <Glow c={c} k="jarglow" cx={50} cy={80} r={46} color={C.goldPale} opacity={c.dark ? 0.35 : 0.2} />
+    </>
+  )),
+  'note-heart': art(60, 50, () => <Note x={30} y={25} s={2} />),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
   ...tidy,
   ...trust,
+  ...gratitude,
 } satisfies Record<string, ArtDef>;
