@@ -1,0 +1,301 @@
+{
+  "id": "shuayb",
+  "order": 13,
+  "prophetName": { "en": "Shuayb", "de": "Schuaib", "bs": "Šuajb" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Fair Measure", "de": "Das gerechte Maß", "bs": "Pravedna mjera" },
+  "description": {
+    "en": "A market town, cheating scales – and a prophet who called to fairness.",
+    "de": "Eine Handelsstadt, betrügerische Waagen – und ein Prophet, der zur Gerechtigkeit aufrief.",
+    "bs": "Trgovački grad, varljive vage – i poslanik koji je pozivao pravdi."
+  },
+  "place": { "en": "Madyan", "de": "Madyan", "bs": "Medjen" },
+  "symbol": "city",
+  "symbolArt": "prophet.shuayb-scales",
+  "cover": { "sky": "sunset", "elements": ["dunes", "city"] },
+  "coverStage": {
+    "sky": "sunset",
+    "mood": "golden",
+    "layers": [
+      { "art": "story.city-ancient", "opacity": 0.85 },
+      { "art": "story.dunes", "y": 262 },
+      { "art": "prophet.shuayb-scales", "x": 200, "y": 228, "w": 150, "enter": "rise", "at": 300, "anim": { "type": "sway", "amp": 1.5, "period": 5000 } }
+    ],
+    "effects": [{ "type": "sunrays", "x": 330, "y": 70 }, { "type": "sparkle", "x": 200, "y": 160, "w": 150, "h": 60, "intensity": 1, "at": 1200 }, { "type": "sand", "intensity": 1 }]
+  },
+  "mapPlaces": ["madyan"],
+  "intro": {
+    "en": "To the people of Madyan Allah sent one of their own, their brother Shuayb (peace be upon him). Madyan was a town of traders, and many of them cheated when they measured and weighed.",
+    "de": "Zum Volk von Madyan sandte Allah einen der Ihren, ihren Bruder Schuaib (Friede sei mit ihm). Madyan war eine Stadt von Händlern, und viele von ihnen betrogen beim Messen und Wiegen.",
+    "bs": "Narodu Medjena Allah je poslao jednog od njih, njihovog brata Šuajba, a.s. Medjen je bio grad trgovaca, a mnogi od njih su varali kada su mjerili i vagali."
+  },
+  "scenes": [
+    {
+      "id": "shuayb-s1",
+      "title": { "en": "The people of Madyan", "de": "Das Volk von Madyan", "bs": "Narod Medjena" },
+      "text": {
+        "en": "Shuayb said: \"O my people, worship Allah – you have no god other than Him. Clear proof has come to you from your Lord.\" He called them to worship Allah alone and to be honest with people.",
+        "de": "Schuaib sagte: „O mein Volk, dient Allah – ihr habt keinen Gott außer Ihm. Ein klarer Beweis ist von eurem Herrn zu euch gekommen.“ Er rief sie auf, Allah allein zu dienen und ehrlich zu den Menschen zu sein.",
+        "bs": "Šuajb je rekao: „O narode moj, Allahu robujte – vi drugog boga osim Njega nemate. Došao vam je jasan dokaz od Gospodara vašeg.“ Pozivao ih je da robuju samo Allahu i da budu pošteni prema ljudima."
+      },
+      "scene": { "sky": "day", "elements": ["dunes", "city", "palms"] },
+      "stage": {
+        "sky": "day",
+        "camera": "panRight",
+        "layers": [
+          { "art": "story.city-ancient" },
+          { "art": "story.desert-flat", "y": 272 },
+          { "art": "prophet.shuayb-market", "x": 200, "y": 234, "w": 200, "enter": "rise", "at": 300 },
+          { "art": "animal.camel", "x": 340, "y": 236, "w": 62, "enter": "slideLeft", "at": 1000, "duration": 2200, "flip": true }
+        ],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "dust", "intensity": 1 }]
+      },
+      "interactionId": "shuayb-map",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:85; 11:84" }]
+    },
+    {
+      "id": "shuayb-s2",
+      "title": { "en": "Full measure, fair weight", "de": "Volles Maß, gerechtes Gewicht", "bs": "Puna mjera, pravedna težina" },
+      "text": {
+        "en": "Shuayb told them: \"Give full measure and weight with justice, and do not take away from people what is theirs. Weigh with an even balance, and do not spread corruption on the earth.\"",
+        "de": "Schuaib sagte ihnen: „Gebt volles Maß und Gewicht in Gerechtigkeit, und nehmt den Menschen nicht weg, was ihnen gehört. Wiegt mit der richtigen Waage und stiftet kein Unheil auf der Erde.“",
+        "bs": "Šuajb im je rekao: „Mjerite i vagajte pravo i ne zakidajte ljudima ono što je njihovo. Vagajte ispravnom vagom i ne činite nered na Zemlji.“"
+      },
+      "scene": { "sky": "day", "elements": ["city", "grain"] },
+      "stage": {
+        "sky": "day",
+        "mood": "warm",
+        "layers": [
+          { "art": "story.columns-hall", "opacity": 0.6 },
+          { "art": "prophet.shuayb-scales", "x": 200, "y": 226, "w": 170, "enter": "zoom", "at": 300 },
+          { "art": "prophet.shuayb-measure", "x": 72, "y": 230, "w": 64, "enter": "rise", "at": 900 },
+          { "art": "prophet.shuayb-weight", "x": 330, "y": 230, "w": 44, "enter": "rise", "at": 1200 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 60, "intensity": 1 }, { "type": "sparkle", "x": 200, "y": 150, "w": 170, "h": 60, "intensity": 1, "at": 1500 }]
+      },
+      "interactionId": "shuayb-fair",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:84–85; 26:181–183" }]
+    },
+    {
+      "id": "shuayb-s3",
+      "title": { "en": "\"I only want to set things right\"", "de": "„Ich will nur Besserung“", "bs": "„Ja želim samo popravak“" },
+      "text": {
+        "en": "His people mocked him: \"Does your prayer tell you that we must leave what our fathers worshipped, or that we cannot do with our money what we like?\" Shuayb answered: \"I only want to set things right as much as I can. My success comes only from Allah. On Him I rely, and to Him I turn.\"",
+        "de": "Sein Volk spottete: „Befiehlt dir dein Gebet, dass wir verlassen sollen, was unsere Väter anbeteten, oder dass wir mit unserem Geld nicht machen dürfen, was wir wollen?“ Schuaib antwortete: „Ich will nur Besserung, soweit ich es vermag. Mein Gelingen kommt allein von Allah. Auf Ihn verlasse ich mich, und Ihm wende ich mich zu.“",
+        "bs": "Narod mu se rugao: „Zar ti tvoj namaz naređuje da ostavimo ono čemu su se naši preci klanjali, ili da s imetkom svojim ne radimo ono što hoćemo?“ Šuajb je odgovorio: „Ja želim samo popravak koliko mogu. Moj uspjeh je samo od Allaha. Na Njega se oslanjam i Njemu se obraćam.“"
+      },
+      "scene": { "sky": "dusk", "elements": ["stars", "city", "lanterns"] },
+      "stage": {
+        "sky": "dusk",
+        "layers": [
+          { "art": "story.moon-crescent", "x": 320, "y": 56, "w": 44, "anchor": "center", "anim": "glow" },
+          { "art": "story.city-ancient" },
+          { "art": "story.lamp", "x": 200, "y": 230, "w": 54, "enter": "fade", "at": 700 }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 200, "y": 210, "intensity": 2, "at": 700 }]
+      },
+      "interactionId": "shuayb-reform",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:87–88" }]
+    },
+    {
+      "id": "shuayb-s4",
+      "title": { "en": "The end of those who refused", "de": "Das Ende derer, die ablehnten", "bs": "Kraj onih koji su odbili" },
+      "text": {
+        "en": "The proud leaders refused and threatened to drive Shuayb and the believers out of the town. Then the punishment came to those who did wrong, and their houses stood empty. By His mercy Allah saved Shuayb and those who believed with him.",
+        "de": "Die hochmütigen Anführer lehnten ab und drohten, Schuaib und die Gläubigen aus der Stadt zu vertreiben. Da kam die Strafe über die Unrechttuenden, und ihre Häuser standen leer. In Seiner Barmherzigkeit rettete Allah Schuaib und die, die mit ihm glaubten.",
+        "bs": "Oholi prvaci su odbili i prijetili da će Šuajba i vjernike protjerati iz grada. Tada je kazna stigla one koji su činili nepravdu, i njihove kuće su ostale puste. Svojom milošću Allah je spasio Šuajba i one koji su s njim vjerovali."
+      },
+      "scene": { "sky": "dusk", "elements": ["dunes", "city"] },
+      "stage": {
+        "sky": "dusk",
+        "mood": "cool",
+        "layers": [
+          { "art": "story.ruins" },
+          { "art": "story.rocks", "x": 330, "y": 240, "w": 100 }
+        ],
+        "effects": [{ "type": "wind", "intensity": 1 }, { "type": "sand", "intensity": 1 }, { "type": "lightBeam", "x": 90, "intensity": 1, "at": 2000 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:88–93; 11:94–95" }]
+    }
+  ],
+  "miniGameId": "shuayb-decision",
+  "quizIds": ["shuayb-find", "shuayb-memory", "shuayb-lesson"],
+  "lessons": [
+    {
+      "id": "shuayb-l1",
+      "value": "honesty",
+      "title": { "en": "Honest in every measure", "de": "Ehrlich bei jedem Maß", "bs": "Pošten u svakoj mjeri" },
+      "explanation": {
+        "en": "Cheating a little on the scale is still taking what belongs to someone else. Shuayb called his people to full measure and fair weight.",
+        "de": "Auch ein wenig auf der Waage zu betrügen heißt, jemandem etwas wegzunehmen. Schuaib rief sein Volk zu vollem Maß und gerechtem Gewicht auf.",
+        "bs": "I malo varanje na vagi znači uzimati ono što pripada drugome. Šuajb je pozivao svoj narod na punu mjeru i pravednu težinu."
+      },
+      "example": {
+        "en": "You share sweets with your siblings. You count fairly, even when nobody is watching.",
+        "de": "Du teilst Süßigkeiten mit deinen Geschwistern. Du zählst gerecht, auch wenn niemand zusieht.",
+        "bs": "Dijeliš slatkiše s braćom i sestrama. Brojiš pravedno, čak i kada niko ne gleda."
+      },
+      "reflection": {
+        "en": "Where could you be extra fair this week?",
+        "de": "Wo könntest du diese Woche besonders gerecht sein?",
+        "bs": "Gdje bi ove sedmice mogao biti posebno pravedan?"
+      }
+    },
+    {
+      "id": "shuayb-l2",
+      "value": "reform",
+      "title": { "en": "Set things right – and rely on Allah", "de": "Dinge verbessern – und auf Allah vertrauen", "bs": "Popravljati – i oslanjati se na Allaha" },
+      "explanation": {
+        "en": "Shuayb did what he could to set things right and said that success comes only from Allah. We do our best and rely on Him.",
+        "de": "Schuaib tat, was er konnte, um die Dinge zu verbessern, und sagte, dass Gelingen allein von Allah kommt. Wir geben unser Bestes und verlassen uns auf Ihn.",
+        "bs": "Šuajb je činio što je mogao da popravi stanje i govorio da je uspjeh samo od Allaha. Mi dajemo sve od sebe i oslanjamo se na Njega."
+      },
+      "example": {
+        "en": "Your class makes a mess. You start tidying up and invite the others – kindly.",
+        "de": "In deiner Klasse herrscht Unordnung. Du fängst an aufzuräumen und lädst die anderen freundlich dazu ein.",
+        "bs": "U razredu je nered. Počneš pospremati i ljubazno pozoveš druge da pomognu."
+      },
+      "reflection": {
+        "en": "What is one small thing you could set right today?",
+        "de": "Welche kleine Sache könntest du heute verbessern?",
+        "bs": "Koju malu stvar bi danas mogao popraviti?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "shuayb-map",
+      "type": "map",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": { "en": "To which town was Shuayb sent? Tap it on the map.", "de": "Zu welcher Stadt wurde Schuaib gesandt? Tippe sie auf der Karte an.", "bs": "U koji je grad poslan Šuajb? Dodirni ga na mapi." },
+      "places": ["madyan", "egypt", "makkah", "nineveh"],
+      "correctPlace": "madyan",
+      "explanation": {
+        "en": "Allah sent Shuayb to Madyan, his own people.",
+        "de": "Allah sandte Schuaib nach Madyan, zu seinem eigenen Volk.",
+        "bs": "Allah je Šuajba poslao u Medjen, njegovom narodu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:85" }]
+    },
+    {
+      "id": "shuayb-fair",
+      "type": "trueFalse",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": { "en": "Shuayb told his people: \"Weigh with an even balance.\"", "de": "Schuaib sagte seinem Volk: „Wiegt mit der richtigen Waage.“", "bs": "Šuajb je rekao svom narodu: „Vagajte ispravnom vagom.“" },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – full measure, fair weight and no cheating.",
+        "de": "Ja – volles Maß, gerechtes Gewicht und kein Betrug.",
+        "bs": "Da – puna mjera, pravedna težina i bez varanja."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:182" }]
+    },
+    {
+      "id": "shuayb-reform",
+      "type": "multipleChoice",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": { "en": "What did Shuayb say he wanted?", "de": "Was wollte Schuaib nach seinen eigenen Worten?", "bs": "Šta je Šuajb rekao da želi?" },
+      "options": [
+        { "id": "a", "text": { "en": "To set things right as much as he could", "de": "Besserung, soweit er es vermochte", "bs": "Popravak koliko može" } },
+        { "id": "b", "text": { "en": "To become rich", "de": "Reich werden", "bs": "Da se obogati" } },
+        { "id": "c", "text": { "en": "To rule over the town", "de": "Über die Stadt herrschen", "bs": "Da vlada gradom" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"I only want to set things right as much as I can. My success comes only from Allah.\"",
+        "de": "„Ich will nur Besserung, soweit ich es vermag. Mein Gelingen kommt allein von Allah.“",
+        "bs": "„Ja želim samo popravak koliko mogu. Moj uspjeh je samo od Allaha.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:88" }]
+    },
+    {
+      "id": "shuayb-decision",
+      "type": "scenario",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": {
+        "en": "Decision: at the school bazaar you sell cups of juice. A little child hands you money and cannot see how full the cup is. What do you do?",
+        "de": "Entscheidung: Beim Schulbasar verkaufst du Becher mit Saft. Ein kleines Kind gibt dir Geld und kann nicht sehen, wie voll der Becher ist. Was tust du?",
+        "bs": "Odluka: na školskom bazaru prodaješ čaše soka. Malo dijete ti daje novac i ne vidi koliko je čaša puna. Šta radiš?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Fill the cup fully, like for everyone", "de": "Den Becher voll füllen, wie für alle", "bs": "Napuniti čašu do kraja, kao svima" }, "feedback": { "en": "Yes – full measure, just as Shuayb taught.", "de": "Ja – volles Maß, wie Schuaib es lehrte.", "bs": "Da – puna mjera, baš kako je Šuajb učio." } },
+        { "id": "b", "text": { "en": "Fill it only halfway – nobody will notice", "de": "Nur halb füllen – niemand merkt es", "bs": "Napuniti samo do pola – niko neće primijetiti" }, "feedback": { "en": "That is taking away what belongs to someone else.", "de": "Das hieße, jemandem wegzunehmen, was ihm gehört.", "bs": "To bi bilo zakidanje onoga što pripada drugome." } },
+        { "id": "c", "text": { "en": "Ask for more money", "de": "Mehr Geld verlangen", "bs": "Tražiti više novca" }, "feedback": { "en": "Fair trade means a fair price and a full measure.", "de": "Gerechter Handel heißt gerechter Preis und volles Maß.", "bs": "Pošteno trgovanje znači pravednu cijenu i punu mjeru." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Give full measure and do not take away from people what is theirs.",
+        "de": "Gebt volles Maß und nehmt den Menschen nicht weg, was ihnen gehört.",
+        "bs": "Dajite punu mjeru i ne zakidajte ljudima ono što je njihovo."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:85" }]
+    },
+    {
+      "id": "shuayb-find",
+      "type": "find",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": { "en": "Find the three things you would see at the market of Madyan.", "de": "Finde die drei Dinge, die du auf dem Markt von Madyan sehen würdest.", "bs": "Pronađi tri stvari koje bi vidio na pijaci u Medjenu." },
+      "items": [
+        { "id": "grain", "element": "grain", "label": { "en": "Grain", "de": "Getreide", "bs": "Žito" } },
+        { "id": "dates", "element": "dates", "label": { "en": "Dates", "de": "Datteln", "bs": "Hurme" } },
+        { "id": "caravan", "element": "caravan", "label": { "en": "Caravan", "de": "Karawane", "bs": "Karavan" } },
+        { "id": "whale", "element": "whale", "label": { "en": "Whale", "de": "Wal", "bs": "Kit" } },
+        { "id": "ark", "element": "ark", "label": { "en": "Ark", "de": "Arche", "bs": "Lađa" } }
+      ],
+      "correctIds": ["grain", "dates", "caravan"],
+      "explanation": {
+        "en": "Madyan was a town of trade, where goods were measured and weighed.",
+        "de": "Madyan war eine Handelsstadt, in der Waren gemessen und gewogen wurden.",
+        "bs": "Medjen je bio trgovački grad u kojem se roba mjerila i vagala."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:85; 11:84" }]
+    },
+    {
+      "id": "shuayb-memory",
+      "type": "memory",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": { "en": "Memory: match what Shuayb taught.", "de": "Memory: Ordne zu, was Schuaib lehrte.", "bs": "Memorija: spoji ono čemu je Šuajb učio." },
+      "pairs": [
+        { "id": "p1", "left": { "en": "The measure", "de": "Das Maß", "bs": "Mjera" }, "right": { "en": "Give it in full", "de": "Voll geben", "bs": "Daj je punu" } },
+        { "id": "p2", "left": { "en": "The balance", "de": "Die Waage", "bs": "Vaga" }, "right": { "en": "Keep it even", "de": "Gerade halten", "bs": "Drži je ispravnom" } },
+        { "id": "p3", "left": { "en": "People's things", "de": "Das Gut der Menschen", "bs": "Tuđe stvari" }, "right": { "en": "Do not lessen them", "de": "Nicht schmälern", "bs": "Ne zakidaj ih" } },
+        { "id": "p4", "left": { "en": "The earth", "de": "Die Erde", "bs": "Zemlja" }, "right": { "en": "No corruption", "de": "Kein Unheil", "bs": "Bez nereda" } }
+      ],
+      "explanation": {
+        "en": "Full measure, an even balance, no cheating and no corruption on earth.",
+        "de": "Volles Maß, eine gerade Waage, kein Betrug und kein Unheil auf der Erde.",
+        "bs": "Puna mjera, ispravna vaga, bez varanja i bez nereda na Zemlji."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:84–85; 26:181–183" }]
+    },
+    {
+      "id": "shuayb-lesson",
+      "type": "lessonChoice",
+      "storyId": "shuayb",
+      "topic": "shuayb",
+      "prompt": { "en": "What is the lesson of Shuayb's scales?", "de": "Was ist die Lehre von Schuaibs Waage?", "bs": "Koja je pouka Šuajbove vage?" },
+      "options": [
+        { "id": "a", "text": { "en": "Be honest and fair with everyone", "de": "Sei ehrlich und gerecht zu allen", "bs": "Budi pošten i pravedan prema svima" } },
+        { "id": "b", "text": { "en": "Cheat a little if nobody sees", "de": "Ein wenig betrügen, wenn es keiner sieht", "bs": "Malo varaj ako niko ne vidi" } },
+        { "id": "c", "text": { "en": "Money matters most", "de": "Geld ist das Wichtigste", "bs": "Novac je najvažniji" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Fairness in small things – like a measure of grain – is part of worshipping Allah.",
+        "de": "Gerechtigkeit im Kleinen – wie bei einem Maß Getreide – gehört zum Dienst an Allah.",
+        "bs": "Pravednost u malim stvarima – kao što je mjera žita – dio je robovanja Allahu."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "7:85–93" },
+    { "sourceName": "Quran", "sourceReference": "11:84–95" },
+    { "sourceName": "Quran", "sourceReference": "26:176–191" }
+  ]
+}
