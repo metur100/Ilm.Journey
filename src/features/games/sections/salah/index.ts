@@ -1,6 +1,7 @@
 import { registerAdhanGame } from './adhan-iqamah/register';
 import { registerFindQiblaGame } from './find-qibla/register';
 import { registerGhuslGame } from './ghusl/register';
+import { registerConditionsGame } from './salah-conditions/register';
 import { registerTayammumGame } from './tayammum/register';
 import { registerPrayerSkyGame } from './prayer-sky/register';
 import { registerWuduFlowGame } from './wudu-flow/register';
@@ -15,6 +16,7 @@ export function registerSalahGames(): void {
   registerGhuslGame();
   registerTayammumGame();
   registerAdhanGame();
+  registerConditionsGame();
   registerPrayerSkyGame();
   registerFindQiblaGame();
 }
