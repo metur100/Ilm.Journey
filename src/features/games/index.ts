@@ -5,7 +5,6 @@ import { registerAyahBuilderGame } from './ayah-builder/register';
 import { registerBuildTheMasjidGame } from './build-the-masjid/register';
 import { registerGoodDeedsDayGame } from './good-deeds-day/register';
 import { registerHijrahPathGame } from './hijrah-path/register';
-import { registerLetterLanternsGame } from './letter-lanterns/register';
 import { registerRamadanJourneyGame } from './ramadan-journey/register';
 import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSalahPrayersGames } from './sections/salah-prayers';
@@ -19,7 +18,6 @@ import { registerSeerahGames } from './sections/seerah';
 import { registerAkhlaqGames } from './sections/akhlaq';
 import { registerRamadanGames } from './sections/ramadan';
 import { registerHistoryGames } from './sections/history';
-import { registerWordBuilderGame } from './word-builder/register';
 import { registerYusufStoryPathGame } from './yusuf-story-path/register';
 
 /**
@@ -36,8 +34,6 @@ export function registerGames(): void {
   registerRamadanJourneyGame();
   registerAyahBuilderGame();
   registerSurahGardenGame();
-  registerLetterLanternsGame();
-  registerWordBuilderGame();
   // Kit demo games (development fixtures, one per engine – hidden in production builds)
   registerKitDemos();
   // v3 sections (docs/GAMES-V3.md)

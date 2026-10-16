@@ -1,7 +1,6 @@
 import type { Language } from '@/core/models';
 
-import { HARAKA_NAMES, HARAKAT, LETTERS, letterInfo, lookAlikes, type Haraka } from '@/features/games/letter-lanterns/letters';
-import { syllable } from '@/features/games/letter-lanterns/logic';
+import { HARAKA_NAMES, HARAKAT, LETTERS, letterInfo, lookAlikes, syllable, type Haraka } from '@/features/games/sections/arabic/shared/letters';
 
 export const SUFARA_EXERCISES_PER_LETTER = 4;
 export const SUFARA_CHALLENGE_COUNT = LETTERS.length * SUFARA_EXERCISES_PER_LETTER;

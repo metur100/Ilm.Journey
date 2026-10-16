@@ -11,8 +11,8 @@ import { TopBar } from '@/core/components/ui/TopBar';
 import { useAppStore } from '@/core/store/appStore';
 import { XP } from '@/core/services/xp';
 import { speakArabic } from '@/core/services/speech';
-import { LETTER_POSITIONS, letterForm } from '@/features/games/letter-lanterns/script';
-import { HARAKA_NAMES, LETTERS } from '@/features/games/letter-lanterns/letters';
+import { LETTER_POSITIONS, letterForm } from '@/features/games/sections/arabic/shared/script';
+import { HARAKA_NAMES, LETTERS } from '@/features/games/sections/arabic/shared/letters';
 import { LANGUAGE_SOURCES, type Language } from '@/core/models';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 

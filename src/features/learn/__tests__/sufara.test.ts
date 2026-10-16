@@ -1,6 +1,6 @@
 import { LANGUAGES } from '@/core/models';
 
-import { HARAKA_NAMES, LETTERS } from '@/features/games/letter-lanterns/letters';
+import { HARAKA_NAMES, LETTERS } from '@/features/games/sections/arabic/shared/letters';
 import { HARAKA_VOWEL, letterChoices, SUFARA_CHALLENGE_COUNT, SUFARA_EXERCISES_PER_LETTER, vowelChoices } from '../sufara/logic';
 
 describe('Sufara practice', () => {
