@@ -2,6 +2,8 @@ import { registerHarakatSoundsGame } from './harakat-sounds/register';
 import { registerJoinLettersGame } from './join-letters/register';
 import { registerLetterTraceGame } from './letter-trace/register';
 import { registerLetterDotsGame } from './letter-dots/register';
+import { registerMarksWorkshopGame } from './marks-workshop/register';
+import { registerMaddStretchGame } from './madd-stretch/register';
 import { registerAlphabetPathGame } from './alphabet-path/register';
 import { registerLetterLanternsGame } from './letter-lanterns/register';
 import { registerLetterFormsGame } from './letter-forms/register';
@@ -23,9 +25,11 @@ export function registerArabicGames(): void {
   registerLetterFormsGame();
   registerJoinLettersGame();
   registerHarakatSoundsGame();
+  registerMarksWorkshopGame();
+  registerMaddStretchGame();
   registerWordBuilderGame();
   registerWordMemoryGame();
 }
 
 /** Game ids of the section in sufara-path order (the Sufara screen links to them). */
-export const ARABIC_GAME_IDS = ['letter-trace', 'letter-lanterns', 'alphabet-path', 'letter-dots', 'twin-letters', 'letter-forms', 'join-letters', 'harakat-sounds', 'word-builder', 'word-memory'] as const;
+export const ARABIC_GAME_IDS = ['letter-trace', 'letter-lanterns', 'alphabet-path', 'letter-dots', 'twin-letters', 'letter-forms', 'join-letters', 'harakat-sounds', 'marks-workshop', 'madd-stretch', 'word-builder', 'word-memory'] as const;
