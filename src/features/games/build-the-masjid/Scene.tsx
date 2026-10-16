@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect } from 'react';
+import { memo, type ReactNode, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
@@ -27,8 +27,11 @@ const LAYER_PART: Record<string, PartId> = Object.fromEntries(
   (Object.keys(PARTS) as PartId[]).flatMap((id) => PARTS[id].layers.map((layer) => [layer, id] as const)),
 );
 
-/** One art layer of the scene; it appears with its part's motion (settle, rise from the ground, drop from above). */
-function Layer({ name, appear, width, height, reducedMotion }: { name: string; appear: Appear; width: number; height: number; reducedMotion: boolean }) {
+/**
+ * One art layer of the scene; it appears with its part's motion (settle, rise from the ground, drop from above).
+ * Every layer of the level is mounted from the start (hidden) so the native view order never changes mid-game.
+ */
+const Layer = memo(function Layer({ name, appear, shown, width, height, reducedMotion }: { name: string; appear: Appear; shown: boolean; width: number; height: number; reducedMotion: boolean }) {
   const p = useSharedValue(0);
   const part = LAYER_PART[name];
   const box = slotBox(part);
@@ -36,8 +39,12 @@ function Layer({ name, appear, width, height, reducedMotion }: { name: string; a
   const originY = `${Math.round(((box.y + box.h) / SITE.h) * 100)}%`;
 
   useEffect(() => {
-    p.value = reducedMotion ? withTiming(1, { duration: 260 }) : withSpring(1, { damping: appear === 'rise' ? 10 : 13, stiffness: 120, mass: 0.8 });
-  }, [appear, p, reducedMotion]);
+    if (!shown) {
+      p.value = 0;
+      return;
+    }
+    p.value = reducedMotion ? withTiming(1, { duration: 260 }) : withSpring(1, { damping: appear === 'rise' ? 11 : 14, stiffness: 190, mass: 0.7 });
+  }, [appear, p, reducedMotion, shown]);
 
   const style = useAnimatedStyle(() => {
     const v = p.value;
@@ -53,7 +60,16 @@ function Layer({ name, appear, width, height, reducedMotion }: { name: string; a
       <Art name={name} size={width} height={height} />
     </Animated.View>
   );
-}
+});
+
+/** A full-size art layer that never changes while playing (memoised: the scene re-renders on every caption). */
+const StaticLayer = memo(function StaticLayer({ name, width, height }: { name: string; width: number; height: number }) {
+  return (
+    <View style={StyleSheet.absoluteFill} pointerEvents="none">
+      <Art name={name} size={width} height={height} />
+    </View>
+  );
+});
 
 /** Pulsing outline of the place where the guided part belongs (level 1). */
 function SlotGlow({ part, width, height, reducedMotion }: { part: PartId; width: number; height: number; reducedMotion: boolean }) {
@@ -117,7 +133,7 @@ export function Burst({ x, y, colors, reducedMotion, spread = 38 }: { x: number;
   useEffect(() => {
     p.value = withTiming(1, { duration: reducedMotion ? 500 : 720, easing: Easing.out(Easing.cubic) });
   }, [p, reducedMotion]);
-  const ring = useAnimatedStyle(() => ({ opacity: 0.55 * (1 - p.value), transform: [{ scale: 0.4 + p.value * 1.4 }] }));
+  const ring = useAnimatedStyle(() => ({ opacity: 0.4 * (1 - p.value), transform: [{ scale: 0.4 + p.value * 1.4 }] }));
   return (
     <View style={{ position: 'absolute', left: x, top: y }} pointerEvents="none">
       <Animated.View style={[{ position: 'absolute', left: -28, top: -28, width: 56, height: 56, borderRadius: 28, backgroundColor: colors[0] }, ring]} />
@@ -150,6 +166,8 @@ export interface SceneProps {
   width: number;
   height: number;
   time: MasjidTime;
+  /** All parts of the level (their layers are mounted, hidden until placed). */
+  parts: readonly PartId[];
   placed: readonly PartId[];
   /** The part whose place glows (guided level). */
   glow: PartId | null;
@@ -165,28 +183,26 @@ export interface SceneProps {
  * The building site: sky and Madinah by the time of day, the parts as stacked art layers in their drawing order, palms
  * in front for depth, the glowing slot, the floor arrow of the qibla and the sparks of the last placement.
  */
-export function Scene({ x, y, width, height, time, placed, glow, qibla, burst, reducedMotion, label, children }: SceneProps) {
+export function Scene({ x, y, width, height, time, parts, placed, glow, qibla, burst, reducedMotion, label, children }: SceneProps) {
   const { c } = useTheme();
   const styles = useStyles();
-  const layers = LAYER_ORDER.filter((name) => placed.includes(LAYER_PART[name]));
+  const layers = LAYER_ORDER.filter((name) => parts.includes(LAYER_PART[name]));
   const k = width / SITE.w;
   return (
     <View style={[styles.stage, { left: x, top: y, width, height }]} accessible accessibilityRole="image" accessibilityLabel={label}>
-      <Art name={`seerah.masjid-sky-${time}`} size={width} height={height} />
+      <StaticLayer name={`seerah.masjid-sky-${time}`} width={width} height={height} />
       {layers.map((name) => (
-        <Layer key={name} name={name} appear={PARTS[LAYER_PART[name]].appear} width={width} height={height} reducedMotion={reducedMotion} />
+        <Layer key={name} name={name} appear={PARTS[LAYER_PART[name]].appear} shown={placed.includes(LAYER_PART[name])} width={width} height={height} reducedMotion={reducedMotion} />
       ))}
       {qibla ? <FloorArrow key={qibla} to={qibla} width={width} height={height} reducedMotion={reducedMotion} /> : null}
-      <View style={StyleSheet.absoluteFill} pointerEvents="none">
-        <Art name="seerah.masjid-foreground" size={width} height={height} />
-      </View>
+      <StaticLayer name="seerah.masjid-foreground" width={width} height={height} />
       {glow ? <SlotGlow key={glow} part={glow} width={width} height={height} reducedMotion={reducedMotion} /> : null}
       {burst ? (
         <Burst
           key={burst.key}
           x={burst.x * k}
           y={burst.y * k}
-          colors={burst.part === 'ground' ? [c.goldSoft, c.gold, c.goldBorder] : [c.goldSoft, c.gold, c.primaryBorder, c.goldBorder]}
+          colors={[c.gold, c.goldBorder, c.primaryBorder, c.onAccent]}
           reducedMotion={reducedMotion}
         />
       ) : null}

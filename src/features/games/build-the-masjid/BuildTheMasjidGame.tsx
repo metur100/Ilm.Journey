@@ -97,7 +97,7 @@ const useStyles = makeStyles((c) => ({
     justifyContent: 'center',
   },
   reveal: { position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, backgroundColor: c.background },
-  revealScroll: { alignItems: 'center', gap: spacing.md, paddingBottom: spacing.lg },
+  revealScroll: { flexGrow: 1, justifyContent: 'center', alignItems: 'center', gap: spacing.md, paddingBottom: spacing.lg },
   revealArt: { borderRadius: radius.lg, overflow: 'hidden', borderWidth: 1, borderColor: c.goldBorder, ...shadows(c.shadow).raised },
 }));
 
@@ -265,12 +265,12 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
   // ---------- texts ----------
 
   const instruction =
-    phase === 'turn'
-      ? t('play.turn')
-      : phase === 'after'
-        ? t('play.after')
-        : phase === 'reveal'
-          ? t('play.complete')
+    phase === 'reveal' || allParts.every((p) => placed.includes(p))
+      ? t('play.complete')
+      : phase === 'turn'
+        ? t('play.turn')
+        : phase === 'after'
+          ? t('play.after')
           : guidedNext
             ? t('play.next', { part: name(guidedNext) })
             : t('play.memory');
@@ -288,6 +288,7 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
             width={stageW}
             height={stageH}
             time={config.time}
+            parts={allParts}
             placed={placed}
             glow={guidedNext}
             qibla={config.afterQibla && config.parts.every((p) => placed.includes(p)) ? (qiblaTurned ? 'south' : 'north') : null}
@@ -336,6 +337,16 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
                     </AppText>
                   </View>
                 </Animated.View>
+              ) : phase === 'build' ? (
+                <View style={styles.info}>
+                  <View style={styles.infoIcon}>{guidedNext ? <PartIcon id={guidedNext} size={38} /> : <Icon name="mosque" size={26} color={c.goldText} />}</View>
+                  <View style={styles.flex}>
+                    {guidedNext ? <AppText variant="bodyBold">{name(guidedNext)}</AppText> : null}
+                    <AppText variant="small" color={c.textMuted}>
+                      {guidedNext ? t('play.glowHint') : t('play.dragHint')}
+                    </AppText>
+                  </View>
+                </View>
               ) : null}
               {hint ? (
                 <Animated.View key={hint} entering={FadeIn.duration(200)}>
@@ -364,7 +375,9 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
                 onLift={() => haptic('selection')}
                 onDrop={(cx, cy) => {
                   const point = { x: (cx - stageX) / scale, y: cy / scale };
-                  const res = checkPlacement(id, placed, point);
+                  const onStage = point.x >= 0 && point.x <= SITE.w && point.y >= 0 && point.y <= SITE.h;
+                  // Level 1 is forgiving: anywhere on the site counts (the order still matters).
+                  const res = checkPlacement(id, placedRef.current, config.guided && onStage ? null : point);
                   if (!res.ok) {
                     explain(id, res);
                     return null;
@@ -374,7 +387,7 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
                 }}
                 onSnapped={() => place(id)}
                 onTap={() => {
-                  const res = checkPlacement(id, placed, null);
+                  const res = checkPlacement(id, placedRef.current, null);
                   if (res.ok) place(id);
                   else explain(id, res);
                 }}
@@ -416,7 +429,7 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
                     height={(w * SITE.h) / SITE.w}
                     label={t('a11y.reveal')}
                   />
-                  <Burst x={w / 2} y={(w * SITE.h) / SITE.w / 2} colors={[c.goldSoft, c.gold, c.goldBorder, c.primaryBorder]} reducedMotion={reducedMotion} spread={w * 0.4} />
+                  <Burst x={w / 2} y={(w * SITE.h) / SITE.w / 2} colors={[c.gold, c.goldBorder, c.primaryBorder, c.onAccent]} reducedMotion={reducedMotion} spread={w * 0.4} />
                 </View>
                 <View style={{ alignItems: 'center', gap: 2 }}>
                   <AppText variant="bodyBold" align="center">

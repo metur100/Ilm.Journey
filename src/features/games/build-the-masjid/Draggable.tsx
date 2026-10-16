@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Pressable, type StyleProp, type ViewStyle } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { Easing, runOnJS, useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated';
 
 /** Where a dropped item should go: the top-left corner (board coordinates) it springs to. */
 export interface DropTarget {
@@ -30,6 +30,7 @@ interface DraggableProps {
 }
 
 const SPRING = { damping: 16, stiffness: 180, mass: 0.7 };
+const SNAP = { duration: 230, easing: Easing.out(Easing.cubic) };
 
 /**
  * A card / object the learner drags with a finger: it lifts while held, springs to its target when dropped in the
@@ -74,8 +75,9 @@ export function Draggable({ x, y, width, height, reducedMotion, disabled, onDrop
         onSnapped();
         return;
       }
-      ty.value = withSpring(target.y - y, SPRING);
-      tx.value = withSpring(target.x - x, SPRING, (finished) => {
+      // A quick, decisive glide into the slot (a spring takes too long to come to rest).
+      ty.value = withTiming(target.y - y, SNAP);
+      tx.value = withTiming(target.x - x, SNAP, (finished) => {
         if (finished) runOnJS(onSnapped)();
       });
     })
