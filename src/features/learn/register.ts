@@ -184,10 +184,12 @@ export function registerLearnFeature(): void {
     order: 30,
     icon: 'letter',
     label: () => 'Sufara',
+    // The sufara path in 5 stages (features/learn/sufara/logic.ts SUFARA_PATH), with its games in the Play tab's
+    // "Arabic / Sufara" section.
     description: (lang) => ({
-      bs: 'Vježbaj svaki harf, njegove oblike i kratke vokale.',
-      de: 'Übe jeden Buchstaben, seine Formen und kurze Vokale.',
-      en: 'Practise every letter, its word forms and short vowels.',
+      bs: 'Sufara u 5 koraka: harfovi, oblici i tačke, spajanje harfova, harekati i čitanje – uz igre u odjeljku Arapski / Sufara.',
+      de: 'Die Sufara in 5 Etappen: Buchstaben, Formen und Punkte, Verbinden, Vokalzeichen und Lesen – mit den Spielen im Bereich Arabisch / Sufara.',
+      en: 'The Sufara path in 5 stages: letters, shapes and dots, joining letters, harakat and reading – with the games of the Arabic / Sufara section.',
     })[lang],
     href: '/sufara',
   });
