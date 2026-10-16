@@ -304,7 +304,7 @@ export const ramadan = {
       <Path d={archPath(250, 24, 170, 210)} fill={C.sandDark} />
       <Path d={archPath(250, 32, 154, 210)} fill={c.url('sky')} />
       <Glow c={c} k="sun" cx={300} cy={80} r={46} color={C.goldPale} opacity={0.8} />
-      <MasjidSilhouette x={250} base={196} s={0.62} color="#E9DCC6" windows={C.gold} glow={false} />
+      <MasjidSilhouette x={250} base={196} s={0.62} color="#F6EEDF" windows={C.tealMid} />
       <Path d={domePath(250, 165, 18.6, 1.35)} fill={C.domeGreen} />
       <Path d="M173 196H327V210H173Z" fill="#A6D38D" />
       {/* bunting */}
