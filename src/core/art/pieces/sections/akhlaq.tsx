@@ -494,8 +494,101 @@ const home = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// Water for the thirsty: the well, the leather shoe and drinking places
+
+/** Stone well with a wooden frame (centre x, ground y, scale s). */
+function WellShape({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <G transform={`translate(${x} ${y}) scale(${s})`}>
+      <Rect x={-34} y={-40} width={68} height={40} rx={6} fill={C.stoneLight} />
+      {[-30, -10, 10].map((dx) => (
+        <Rect key={dx} x={dx} y={-36} width={18} height={10} rx={2} fill={C.stonePale} />
+      ))}
+      {[-20, 0, 20].map((dx) => (
+        <Rect key={`b${dx}`} x={dx - 9} y={-22} width={18} height={10} rx={2} fill={C.stonePale} />
+      ))}
+      <Ellipse cx={0} cy={-40} rx={34} ry={8} fill={C.stone} />
+      <Ellipse cx={0} cy={-40} rx={26} ry={5} fill={C.waterDeep} />
+      <Rect x={-32} y={-86} width={6} height={46} fill={C.wood} />
+      <Rect x={26} y={-86} width={6} height={46} fill={C.wood} />
+      <Path d="M-40-84L0-100 40-84Z" fill={C.woodLight} />
+      <Path d="M0-86V-58" stroke={C.woodDark} strokeWidth={2} />
+      <Path d="M-8-58H8L6-46H-6Z" fill={C.wood} />
+    </G>
+  );
+}
+
+const water = {
+  'thirsty-dog': art(240, 160, (c) => (
+    <>
+      <Rect x={0} y={0} width={240} height={160} rx={18} fill={c.dark ? '#2A2E66' : '#FBE3B8'} />
+      <Glow c={c} k="dsun" cx={196} cy={36} r={48} color={C.goldPale} opacity={c.dark ? 0.25 : 0.9} />
+      <Circle cx={196} cy={36} r={14} fill={c.dark ? C.goldPale : C.goldLight} />
+      <Path d="M0 118Q60 104 120 114T240 110V160H0Z" fill={dk(c, C.sand, 0.4)} />
+      <WellShape x={70} y={130} s={0.9} />
+      <G transform="translate(118 74) scale(0.9)">
+        {/* sitting dog, tongue out */}
+        <Ellipse cx={46} cy={62} rx={34} ry={14} fill={C.ink} opacity={0.08} />
+        <Path d="M20 60Q14 30 34 22L58 20Q74 24 74 44V62H22Z" fill={C.woodPale} />
+        <Path d="M54 60V40Q62 34 70 40V62Z" fill={C.woodLight} />
+        <Circle cx={36} cy={22} r={16} fill={C.woodPale} />
+        <Path d="M22 12Q14 18 18 32Q26 28 28 16Z" fill={C.wood} />
+        <Path d="M50 10Q58 16 54 30Q46 26 46 14Z" fill={C.wood} />
+        <Ellipse cx={32} cy={32} rx={9} ry={6} fill={C.sandLight} />
+        <Circle cx={27} cy={29} r={2.4} fill={C.ink} />
+        <Circle cx={42} cy={18} r={2.2} fill={C.ink} />
+        <Path d="M28 36Q30 46 34 44Q36 40 33 36Z" fill={C.rose} />
+        <Path d="M74 52Q88 48 86 36" stroke={C.woodLight} strokeWidth={6} strokeLinecap="round" fill="none" />
+      </G>
+      <G transform="translate(176 120)">
+        <Path d="M0 18Q0 6 8 4H18Q22 10 32 12Q38 14 38 20V24H0Z" fill={C.wood} />
+        <Ellipse cx={14} cy={8} rx={10} ry={3} fill={C.water} />
+      </G>
+    </>
+  )),
+  'leather-shoe': art(100, 70, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={66} rx={42} />
+      <Path d="M8 52Q6 22 18 10H42Q46 30 66 34Q92 38 92 52V60H8Z" fill={C.wood} />
+      <Path d="M18 10H42Q44 18 46 22H16Z" fill={C.woodDark} />
+      <Ellipse cx={30} cy={12} rx={12} ry={4} fill={C.water} />
+      <Rect x={6} y={58} width={88} height={6} rx={3} fill={C.woodDark} />
+    </>
+  )),
+  'water-bowl': art(100, 60, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={56} rx={42} />
+      <Path d="M8 24Q12 52 34 54H66Q88 52 92 24Z" fill={C.coral} />
+      <Ellipse cx={50} cy={24} rx={42} ry={10} fill={C.berry} />
+      <Ellipse cx={50} cy={25} rx={36} ry={7} fill={C.water} />
+      <Path d="M32 24Q40 21 46 24" stroke={C.waterPale} strokeWidth={2} fill="none" />
+    </>
+  )),
+  'bird-dish': art(100, 70, (c) => (
+    <>
+      <Shadow c={c} cx={50} cy={66} rx={26} />
+      <Rect x={44} y={28} width={12} height={36} rx={3} fill={C.stoneLight} />
+      <Ellipse cx={50} cy={64} rx={20} ry={5} fill={C.stone} />
+      <Path d="M10 22Q20 36 50 36Q80 36 90 22Z" fill={C.stoneLight} />
+      <Ellipse cx={50} cy={22} rx={40} ry={8} fill={C.stonePale} />
+      <Ellipse cx={50} cy={23} rx={33} ry={5} fill={C.water} />
+    </>
+  )),
+  trough: art(120, 60, (c) => (
+    <>
+      <Shadow c={c} cx={60} cy={56} rx={54} />
+      <Path d="M6 16H114L104 52H16Z" fill={C.wood} />
+      <Path d="M12 18H108L100 46H20Z" fill={C.woodDark} />
+      <Rect x={14} y={20} width={92} height={8} rx={3} fill={C.water} />
+      <Rect x={4} y={12} width={112} height={7} rx={3} fill={C.woodLight} />
+    </>
+  )),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...water,
   ...home,
   ...storm,
   ...tidy,
