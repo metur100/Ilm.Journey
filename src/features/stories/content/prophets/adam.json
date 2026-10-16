@@ -1,17 +1,81 @@
 {
   "id": "adam",
   "order": 1,
-  "prophetName": { "en": "Adam", "de": "Adam", "bs": "Adem" },
+  "prophetName": {
+    "en": "Adam",
+    "de": "Adam",
+    "bs": "Adem"
+  },
   "honorific": "alayhis-salam",
-  "title": { "en": "The First Human", "de": "Der erste Mensch", "bs": "Prvi čovjek" },
+  "title": {
+    "en": "The First Human",
+    "de": "Der erste Mensch",
+    "bs": "Prvi čovjek"
+  },
   "description": {
     "en": "Created from clay, taught the names of all things – and forgiven after a mistake.",
     "de": "Aus Lehm erschaffen, die Namen aller Dinge gelehrt – und nach einem Fehler vergeben.",
     "bs": "Stvoren od ilovače, poučen imenima svih stvari – i oprošten nakon greške."
   },
-  "place": { "en": "The Garden and the earth", "de": "Der Garten und die Erde", "bs": "Džennet i Zemlja" },
+  "place": {
+    "en": "The Garden and the earth",
+    "de": "Der Garten und die Erde",
+    "bs": "Džennet i Zemlja"
+  },
   "symbol": "tree",
-  "cover": { "sky": "dawn", "elements": ["stars", "hills", "garden", "tree"] },
+  "symbolArt": "prophet.adam-tree",
+  "cover": {
+    "sky": "dawn",
+    "elements": [
+      "stars",
+      "hills",
+      "garden",
+      "tree"
+    ]
+  },
+  "coverStage": {
+    "sky": "dawn",
+    "layers": [
+      {
+        "art": "story.garden"
+      },
+      {
+        "art": "prophet.adam-tree",
+        "x": 200,
+        "y": 226,
+        "w": 150,
+        "anim": {
+          "type": "sway",
+          "amp": 1.5,
+          "period": 7000
+        },
+        "enter": "rise",
+        "at": 300,
+        "duration": 1400
+      }
+    ],
+    "effects": [
+      {
+        "type": "stars",
+        "intensity": 1,
+        "until": 3000
+      },
+      {
+        "type": "sunrays",
+        "x": 330,
+        "y": 70
+      },
+      {
+        "type": "birds",
+        "intensity": 1,
+        "at": 1200
+      },
+      {
+        "type": "leaves",
+        "intensity": 1
+      }
+    ]
+  },
   "intro": {
     "en": "Adam (peace be upon him) was the first human and the first prophet. Allah told the angels that He would place a successor on the earth.",
     "de": "Adam (Friede sei mit ihm) war der erste Mensch und der erste Prophet. Allah teilte den Engeln mit, dass Er auf der Erde einen Nachfolger einsetzen werde.",
@@ -20,47 +84,343 @@
   "scenes": [
     {
       "id": "adam-s1",
-      "title": { "en": "Created from clay", "de": "Aus Lehm erschaffen", "bs": "Stvoren od ilovače" },
-      "text": {
-        "en": "Allah created Adam from clay and gave him life. Then Allah taught Adam the names of all things – a great gift of knowledge.",
-        "de": "Allah erschuf Adam aus Lehm und gab ihm Leben. Dann lehrte Allah Adam die Namen aller Dinge – ein großes Geschenk des Wissens.",
-        "bs": "Allah je stvorio Adema od ilovače i udahnuo mu život. Zatim je Allah poučio Adema imenima svih stvari – veliki dar znanja."
+      "title": {
+        "en": "A successor on the earth",
+        "de": "Ein Nachfolger auf der Erde",
+        "bs": "Namjesnik na Zemlji"
       },
-      "scene": { "sky": "day", "elements": ["clouds", "hills", "garden"] },
-      "interactionId": "adam-next",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:30–31; 15:26–29" }]
+      "text": {
+        "en": "Allah told the angels: \"I am placing a successor on the earth.\" The angels asked about it, and Allah said: \"I know what you do not know.\" Then Allah created Adam from clay and gave him life.",
+        "de": "Allah sagte zu den Engeln: „Ich werde auf der Erde einen Nachfolger einsetzen.“ Die Engel fragten danach, und Allah sagte: „Ich weiß, was ihr nicht wisst.“ Dann erschuf Allah Adam aus Lehm und gab ihm Leben.",
+        "bs": "Allah je rekao melekima: „Ja ću na Zemlji postaviti namjesnika.“ Meleki su o tome upitali, a Allah je rekao: „Ja znam ono što vi ne znate.“ Zatim je Allah stvorio Adema od ilovače i udahnuo mu život."
+      },
+      "scene": {
+        "sky": "dawn",
+        "elements": [
+          "stars",
+          "hills"
+        ]
+      },
+      "stage": {
+        "sky": "dawn",
+        "camera": "slowZoom",
+        "layers": [
+          {
+            "art": "story.sun",
+            "x": 200,
+            "y": 176,
+            "w": 96,
+            "anchor": "center",
+            "enter": "rise",
+            "at": 600,
+            "duration": 2400
+          },
+          {
+            "art": "prophet.adam-earth"
+          }
+        ],
+        "effects": [
+          {
+            "type": "stars",
+            "intensity": 2,
+            "until": 2600
+          },
+          {
+            "type": "sunrays",
+            "x": 200,
+            "y": 170,
+            "intensity": 2,
+            "at": 2000
+          },
+          {
+            "type": "sparkle",
+            "x": 200,
+            "y": 190,
+            "w": 220,
+            "h": 60,
+            "intensity": 1,
+            "at": 2600
+          }
+        ]
+      },
+      "interactionId": "adam-successor",
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:30; 15:26–29"
+        }
+      ]
     },
     {
       "id": "adam-s2",
-      "title": { "en": "The Garden", "de": "Der Garten", "bs": "Džennet" },
-      "text": {
-        "en": "Adam and his wife (named Hawwa in the hadith) lived in the Garden. They could eat from everything except one tree. Shaytan whispered to them, and they ate from that tree.",
-        "de": "Adam und seine Frau (im Hadith Hawwa genannt) lebten im Garten. Sie durften von allem essen, außer von einem Baum. Schaitan flüsterte ihnen ein, und sie aßen von diesem Baum.",
-        "bs": "Adem i njegova žena (u hadisu nazvana Hava) živjeli su u Džennetu. Smjeli su jesti od svega osim s jednog drveta. Šejtan im je došaptavao i oni su jeli s tog drveta."
+      "title": {
+        "en": "The names of all things",
+        "de": "Die Namen aller Dinge",
+        "bs": "Imena svih stvari"
       },
-      "scene": { "sky": "sunset", "elements": ["garden", "tree", "hills"] },
-      "interactionId": "adam-sorry",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:35–36; 7:19–22" }]
+      "text": {
+        "en": "Allah taught Adam the names – all of them. Then He showed the things to the angels and asked them for their names. The angels said: \"Glory be to You! We know nothing except what You have taught us.\" Then Adam told them the names.",
+        "de": "Allah lehrte Adam die Namen – alle. Dann zeigte Er die Dinge den Engeln und fragte sie nach ihren Namen. Die Engel sagten: „Preis sei Dir! Wir wissen nur, was Du uns gelehrt hast.“ Dann nannte Adam ihnen die Namen.",
+        "bs": "Allah je poučio Adema imenima – svim. Zatim je stvari pokazao melekima i upitao ih za njihova imena. Meleki su rekli: „Hvaljen neka si! Mi znamo samo ono čemu si nas Ti poučio.“ Tada im je Adem kazao imena."
+      },
+      "scene": {
+        "sky": "day",
+        "elements": [
+          "clouds",
+          "hills",
+          "garden"
+        ]
+      },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          {
+            "art": "story.hills"
+          },
+          {
+            "art": "prophet.adam-names",
+            "x": 200,
+            "y": 112,
+            "w": 210,
+            "anchor": "center",
+            "anim": "breathe",
+            "enter": "zoom",
+            "at": 400,
+            "duration": 1400
+          }
+        ],
+        "effects": [
+          {
+            "type": "clouds",
+            "intensity": 1
+          },
+          {
+            "type": "sparkle",
+            "x": 200,
+            "y": 112,
+            "w": 240,
+            "h": 140,
+            "intensity": 2,
+            "at": 1200
+          }
+        ]
+      },
+      "interactionId": "adam-next",
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:31–33"
+        }
+      ]
     },
     {
       "id": "adam-s3",
-      "title": { "en": "Forgiveness", "de": "Vergebung", "bs": "Oprost" },
-      "text": {
-        "en": "Adam and his wife felt deep regret. They admitted that they had wronged themselves and asked Allah for forgiveness and mercy. Allah accepted their repentance – He is the Accepter of repentance, the Most Merciful. Then they lived on the earth, and Allah promised to send guidance.",
-        "de": "Adam und seine Frau bereuten zutiefst. Sie gaben zu, sich selbst Unrecht getan zu haben, und baten Allah um Vergebung und Barmherzigkeit. Allah nahm ihre Reue an – Er ist der Reue-Annehmende, der Barmherzige. Dann lebten sie auf der Erde, und Allah versprach, Rechtleitung zu senden.",
-        "bs": "Adem i njegova žena duboko su se pokajali. Priznali su da su sami sebi nepravdu učinili i zamolili Allaha za oprost i milost. Allah je primio njihovo pokajanje – On prima pokajanje i Milostiv je. Zatim su živjeli na Zemlji, a Allah je obećao da će slati uputu."
+      "title": {
+        "en": "Iblis refuses",
+        "de": "Iblis weigert sich",
+        "bs": "Iblis odbija"
       },
-      "scene": { "sky": "dawn", "elements": ["stars", "mountains", "hills"] },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:37–38; 7:23" }]
+      "text": {
+        "en": "Allah commanded the angels to prostrate to Adam, and they prostrated – except Iblis. He refused out of arrogance and said: \"I am better than him. You created me from fire and him from clay.\"",
+        "de": "Allah befahl den Engeln, sich vor Adam niederzuwerfen, und sie warfen sich nieder – außer Iblis. Er weigerte sich aus Hochmut und sagte: „Ich bin besser als er. Mich hast Du aus Feuer erschaffen und ihn aus Lehm.“",
+        "bs": "Allah je naredio melekima da se poklone Ademu i oni su se poklonili – osim Iblisa. On je iz oholosti odbio i rekao: „Ja sam bolji od njega. Mene si stvorio od vatre, a njega od ilovače.“"
+      },
+      "scene": {
+        "sky": "dusk",
+        "elements": [
+          "stars",
+          "mountains"
+        ]
+      },
+      "stage": {
+        "sky": "dusk",
+        "mood": "cool",
+        "layers": [
+          {
+            "art": "story.night-horizon"
+          },
+          {
+            "art": "story.rocks",
+            "x": 320,
+            "y": 236,
+            "w": 110
+          }
+        ],
+        "effects": [
+          "stars",
+          {
+            "type": "lightBeam",
+            "x": 150,
+            "intensity": 2,
+            "at": 600
+          },
+          {
+            "type": "mist",
+            "y": 170,
+            "h": 50,
+            "intensity": 1,
+            "at": 1800
+          }
+        ]
+      },
+      "interactionId": "adam-iblis",
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:34; 7:11–12"
+        }
+      ]
+    },
+    {
+      "id": "adam-s4",
+      "title": {
+        "en": "The Garden",
+        "de": "Der Garten",
+        "bs": "Džennet"
+      },
+      "text": {
+        "en": "Adam and his wife (named Hawwa in the hadith) lived in the Garden. They could eat freely from everything, but they were not to come near one tree. Shaytan whispered to them, and they ate from that tree.",
+        "de": "Adam und seine Frau (im Hadith Hawwa genannt) lebten im Garten. Sie durften frei von allem essen, sollten sich aber einem Baum nicht nähern. Schaitan flüsterte ihnen ein, und sie aßen von diesem Baum.",
+        "bs": "Adem i njegova žena (u hadisu nazvana Hava) živjeli su u Džennetu. Smjeli su slobodno jesti od svega, ali se nisu smjeli približiti jednom drvetu. Šejtan im je došaptavao i oni su jeli s tog drveta."
+      },
+      "scene": {
+        "sky": "sunset",
+        "elements": [
+          "garden",
+          "tree",
+          "hills"
+        ]
+      },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          {
+            "art": "story.garden"
+          },
+          {
+            "art": "prophet.adam-tree",
+            "x": 200,
+            "y": 228,
+            "w": 160,
+            "anim": "sway",
+            "enter": "rise",
+            "at": 300,
+            "duration": 1400
+          }
+        ],
+        "effects": [
+          {
+            "type": "leaves",
+            "intensity": 2
+          },
+          {
+            "type": "birds",
+            "intensity": 1
+          },
+          {
+            "type": "fireflies",
+            "intensity": 1,
+            "at": 1500
+          }
+        ]
+      },
+      "interactionId": "adam-sorry",
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:35–36; 7:19–22; 20:120–121"
+        }
+      ]
+    },
+    {
+      "id": "adam-s5",
+      "title": {
+        "en": "Forgiveness",
+        "de": "Vergebung",
+        "bs": "Oprost"
+      },
+      "text": {
+        "en": "Adam and his wife felt deep regret. They said: \"Our Lord, we have wronged ourselves. If You do not forgive us and have mercy on us, we will surely be among the losers.\" Allah accepted their repentance – He is the Accepter of repentance, the Most Merciful. Then they lived on the earth, and Allah promised to send guidance.",
+        "de": "Adam und seine Frau bereuten zutiefst. Sie sagten: „Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser nicht erbarmst, werden wir gewiss zu den Verlierern gehören.“ Allah nahm ihre Reue an – Er ist der Reue-Annehmende, der Barmherzige. Dann lebten sie auf der Erde, und Allah versprach, Rechtleitung zu senden.",
+        "bs": "Adem i njegova žena duboko su se pokajali. Rekli su: „Gospodaru naš, sami smo sebi nepravdu učinili. Ako nam ne oprostiš i ne smiluješ nam se, sigurno ćemo biti od izgubljenih.“ Allah je primio njihovo pokajanje – On prima pokajanje i Milostiv je. Zatim su živjeli na Zemlji, a Allah je obećao da će slati uputu."
+      },
+      "scene": {
+        "sky": "dawn",
+        "elements": [
+          "stars",
+          "mountains",
+          "hills"
+        ]
+      },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          {
+            "art": "story.sun",
+            "x": 120,
+            "y": 170,
+            "w": 100,
+            "anchor": "center",
+            "enter": "rise",
+            "at": 800,
+            "duration": 2600
+          },
+          {
+            "art": "prophet.adam-earth"
+          }
+        ],
+        "effects": [
+          {
+            "type": "stars",
+            "intensity": 2,
+            "until": 3000
+          },
+          {
+            "type": "sunrays",
+            "x": 120,
+            "y": 160,
+            "intensity": 3,
+            "at": 2200
+          },
+          {
+            "type": "birds",
+            "intensity": 1,
+            "at": 3000
+          },
+          {
+            "type": "ripples",
+            "x": 300,
+            "y": 182,
+            "w": 40,
+            "intensity": 1
+          }
+        ]
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:37–38; 7:23"
+        }
+      ],
+      "interactionId": "adam-words"
     }
   ],
   "miniGameId": "adam-timeline",
-  "quizIds": ["adam-names", "adam-accepted", "adam-lesson"],
+  "quizIds": [
+    "adam-names",
+    "adam-accepted",
+    "adam-lesson"
+  ],
   "lessons": [
     {
       "id": "adam-l1",
       "value": "tawbah",
-      "title": { "en": "Tawbah – turning back to Allah", "de": "Tawba – Umkehr zu Allah", "bs": "Tevba – povratak Allahu" },
+      "title": {
+        "en": "Tawbah – turning back to Allah",
+        "de": "Tawba – Umkehr zu Allah",
+        "bs": "Tevba – povratak Allahu"
+      },
       "explanation": {
         "en": "When we make a mistake, we admit it, feel sorry and ask Allah for forgiveness. Allah loves those who turn back to Him.",
         "de": "Wenn wir einen Fehler machen, geben wir ihn zu, bereuen ihn und bitten Allah um Vergebung. Allah liebt die, die zu Ihm umkehren.",
@@ -80,7 +440,11 @@
     {
       "id": "adam-l2",
       "value": "humility",
-      "title": { "en": "Humility, not arrogance", "de": "Demut statt Hochmut", "bs": "Skromnost, a ne oholost" },
+      "title": {
+        "en": "Humility, not arrogance",
+        "de": "Demut statt Hochmut",
+        "bs": "Skromnost, a ne oholost"
+      },
       "explanation": {
         "en": "Iblis refused to obey because he thought he was better. Arrogance led him astray, while humility is beloved to Allah.",
         "de": "Iblis weigerte sich zu gehorchen, weil er sich für besser hielt. Hochmut führte ihn in die Irre, Demut aber ist Allah lieb.",
@@ -96,9 +460,56 @@
         "de": "Wie kannst du in der Schule oder zu Hause Demut zeigen?",
         "bs": "Kako možeš pokazati skromnost u školi ili kod kuće?"
       }
+    },
+    {
+      "id": "adam-l3",
+      "value": "knowledge",
+      "title": {
+        "en": "Knowledge is a gift from Allah",
+        "de": "Wissen ist ein Geschenk Allahs",
+        "bs": "Znanje je Allahov dar"
+      },
+      "explanation": {
+        "en": "Allah honoured Adam by teaching him the names of things. Even the angels said: we know only what You have taught us. All knowledge comes from Allah.",
+        "de": "Allah ehrte Adam, indem Er ihn die Namen der Dinge lehrte. Selbst die Engel sagten: Wir wissen nur, was Du uns gelehrt hast. Alles Wissen kommt von Allah.",
+        "bs": "Allah je počastio Adema poučivši ga imenima stvari. Čak su i meleki rekli: znamo samo ono čemu si nas Ti poučio. Svako znanje dolazi od Allaha."
+      },
+      "example": {
+        "en": "Before you learn something new, you say \"Bismillah\". When you understand it, you say \"Alhamdulillah\".",
+        "de": "Bevor du etwas Neues lernst, sagst du „Bismillah“. Wenn du es verstanden hast, sagst du „Alhamdulillah“.",
+        "bs": "Prije nego što naučiš nešto novo, kažeš „Bismillah“. Kad to shvatiš, kažeš „Elhamdulillah“."
+      },
+      "reflection": {
+        "en": "What new thing did you learn this week?",
+        "de": "Was hast du diese Woche Neues gelernt?",
+        "bs": "Šta si novo naučio ove sedmice?"
+      }
     }
   ],
   "questions": [
+    {
+      "id": "adam-successor",
+      "type": "trueFalse",
+      "prompt": {
+        "en": "Allah told the angels that He would place a successor on the earth.",
+        "de": "Allah teilte den Engeln mit, dass Er auf der Erde einen Nachfolger einsetzen werde.",
+        "bs": "Allah je obavijestio meleke da će na Zemlji postaviti namjesnika."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – and when the angels asked, Allah said: \"I know what you do not know.\"",
+        "de": "Ja – und als die Engel fragten, sagte Allah: „Ich weiß, was ihr nicht wisst.“",
+        "bs": "Da – a kad su meleki upitali, Allah je rekao: „Ja znam ono što vi ne znate.“"
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:30"
+        }
+      ],
+      "storyId": "adam",
+      "topic": "adam"
+    },
     {
       "id": "adam-next",
       "type": "multipleChoice",
@@ -110,9 +521,30 @@
         "bs": "Allah je naredio melekima da se poklone Ademu. Šta misliš, šta se desilo?"
       },
       "options": [
-        { "id": "a", "text": { "en": "All the angels prostrated – but Iblis refused out of arrogance", "de": "Alle Engel warfen sich nieder – doch Iblis weigerte sich aus Hochmut", "bs": "Svi meleki su se poklonili – ali Iblis je odbio iz oholosti" } },
-        { "id": "b", "text": { "en": "Nobody listened", "de": "Niemand hörte zu", "bs": "Niko nije poslušao" } },
-        { "id": "c", "text": { "en": "Adam left the Garden immediately", "de": "Adam verließ sofort den Garten", "bs": "Adem je odmah napustio Džennet" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "All the angels prostrated – but Iblis refused out of arrogance",
+            "de": "Alle Engel warfen sich nieder – doch Iblis weigerte sich aus Hochmut",
+            "bs": "Svi meleki su se poklonili – ali Iblis je odbio iz oholosti"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Nobody listened",
+            "de": "Niemand hörte zu",
+            "bs": "Niko nije poslušao"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Adam left the Garden immediately",
+            "de": "Adam verließ sofort den Garten",
+            "bs": "Adem je odmah napustio Džennet"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -120,7 +552,12 @@
         "de": "Die Engel gehorchten. Iblis weigerte sich und sagte, er sei besser als Adam – sein Hochmut war sein Verderben.",
         "bs": "Meleki su poslušali. Iblis je odbio, govoreći da je bolji od Adema – oholost ga je upropastila."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:34; 7:11–12" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:34; 7:11–12"
+        }
+      ]
     },
     {
       "id": "adam-sorry",
@@ -138,7 +575,12 @@
         "de": "Sie gaben zu, sich selbst Unrecht getan zu haben, und baten Allah um Vergebung.",
         "bs": "Priznali su da su sami sebi nepravdu učinili i zamolili Allaha za oprost."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "7:23" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "7:23"
+        }
+      ]
     },
     {
       "id": "adam-timeline",
@@ -146,32 +588,108 @@
       "timeline": true,
       "storyId": "adam",
       "topic": "adam",
-      "prompt": { "en": "Timeline: put the story of Adam in order.", "de": "Zeitleiste: Bringe die Geschichte Adams in die richtige Reihenfolge.", "bs": "Vremenska linija: poredaj kazivanje o Ademu." },
+      "prompt": {
+        "en": "Timeline: put the story of Adam in order.",
+        "de": "Zeitleiste: Bringe die Geschichte Adams in die richtige Reihenfolge.",
+        "bs": "Vremenska linija: poredaj kazivanje o Ademu."
+      },
       "items": [
-        { "id": "clay", "text": { "en": "Created from clay", "de": "Aus Lehm erschaffen", "bs": "Stvoren od ilovače" } },
-        { "id": "names", "text": { "en": "Taught the names of things", "de": "Die Namen der Dinge gelehrt", "bs": "Poučen imenima stvari" } },
-        { "id": "angels", "text": { "en": "The angels prostrate, Iblis refuses", "de": "Die Engel werfen sich nieder, Iblis weigert sich", "bs": "Meleki se klanjaju, Iblis odbija" } },
-        { "id": "tree", "text": { "en": "Eating from the tree", "de": "Vom Baum essen", "bs": "Jedenje s drveta" } },
-        { "id": "forgiven", "text": { "en": "Repentance and forgiveness", "de": "Reue und Vergebung", "bs": "Pokajanje i oprost" } },
-        { "id": "earth", "text": { "en": "Life on the earth", "de": "Leben auf der Erde", "bs": "Život na Zemlji" } }
+        {
+          "id": "clay",
+          "text": {
+            "en": "Created from clay",
+            "de": "Aus Lehm erschaffen",
+            "bs": "Stvoren od ilovače"
+          }
+        },
+        {
+          "id": "names",
+          "text": {
+            "en": "Taught the names of things",
+            "de": "Die Namen der Dinge gelehrt",
+            "bs": "Poučen imenima stvari"
+          }
+        },
+        {
+          "id": "angels",
+          "text": {
+            "en": "The angels prostrate, Iblis refuses",
+            "de": "Die Engel werfen sich nieder, Iblis weigert sich",
+            "bs": "Meleki se klanjaju, Iblis odbija"
+          }
+        },
+        {
+          "id": "tree",
+          "text": {
+            "en": "Eating from the tree",
+            "de": "Vom Baum essen",
+            "bs": "Jedenje s drveta"
+          }
+        },
+        {
+          "id": "forgiven",
+          "text": {
+            "en": "Repentance and forgiveness",
+            "de": "Reue und Vergebung",
+            "bs": "Pokajanje i oprost"
+          }
+        },
+        {
+          "id": "earth",
+          "text": {
+            "en": "Life on the earth",
+            "de": "Leben auf der Erde",
+            "bs": "Život na Zemlji"
+          }
+        }
       ],
       "explanation": {
         "en": "Clay, names, the angels' prostration, the tree, forgiveness – then life on earth.",
         "de": "Lehm, die Namen, die Niederwerfung der Engel, der Baum, Vergebung – dann das Leben auf der Erde.",
         "bs": "Ilovača, imena, sedžda meleka, drvo, oprost – zatim život na Zemlji."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:30–38" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:30–38"
+        }
+      ]
     },
     {
       "id": "adam-names",
       "type": "multipleChoice",
       "storyId": "adam",
       "topic": "adam",
-      "prompt": { "en": "What did Allah teach Adam?", "de": "Was lehrte Allah Adam?", "bs": "Čemu je Allah poučio Adema?" },
+      "prompt": {
+        "en": "What did Allah teach Adam?",
+        "de": "Was lehrte Allah Adam?",
+        "bs": "Čemu je Allah poučio Adema?"
+      },
       "options": [
-        { "id": "a", "text": { "en": "The names of all things", "de": "Die Namen aller Dinge", "bs": "Imenima svih stvari" } },
-        { "id": "b", "text": { "en": "How to build ships", "de": "Wie man Schiffe baut", "bs": "Kako se grade lađe" } },
-        { "id": "c", "text": { "en": "How to ride horses", "de": "Wie man Pferde reitet", "bs": "Kako se jaše konj" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "The names of all things",
+            "de": "Die Namen aller Dinge",
+            "bs": "Imenima svih stvari"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "How to build ships",
+            "de": "Wie man Schiffe baut",
+            "bs": "Kako se grade lađe"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "How to ride horses",
+            "de": "Wie man Pferde reitet",
+            "bs": "Kako se jaše konj"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -179,21 +697,35 @@
         "de": "Allah lehrte Adam die Namen aller Dinge – Wissen ist eine Ehre von Allah.",
         "bs": "Allah je poučio Adema imenima svih stvari – znanje je počast od Allaha."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:31" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:31"
+        }
+      ]
     },
     {
       "id": "adam-accepted",
       "type": "trueFalse",
       "storyId": "adam",
       "topic": "adam",
-      "prompt": { "en": "Allah accepted Adam's repentance.", "de": "Allah nahm Adams Reue an.", "bs": "Allah je primio Ademovo pokajanje." },
+      "prompt": {
+        "en": "Allah accepted Adam's repentance.",
+        "de": "Allah nahm Adams Reue an.",
+        "bs": "Allah je primio Ademovo pokajanje."
+      },
       "correct": true,
       "explanation": {
         "en": "Yes – Allah accepted his repentance. He is the Accepter of repentance, the Most Merciful.",
         "de": "Ja – Allah nahm seine Reue an. Er ist der Reue-Annehmende, der Barmherzige.",
         "bs": "Da – Allah je primio njegovo pokajanje. On prima pokajanje i Milostiv je."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "2:37" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:37"
+        }
+      ]
     },
     {
       "id": "adam-lesson",
@@ -206,9 +738,30 @@
         "bs": "Koju pouku o greškama nosi kazivanje o Ademu?"
       },
       "options": [
-        { "id": "a", "text": { "en": "Admit it and ask Allah for forgiveness", "de": "Ihn zugeben und Allah um Vergebung bitten", "bs": "Priznati je i tražiti oprost od Allaha" } },
-        { "id": "b", "text": { "en": "Hide it so nobody knows", "de": "Ihn verstecken, damit es keiner merkt", "bs": "Sakriti je da niko ne sazna" } },
-        { "id": "c", "text": { "en": "Always blame someone else", "de": "Immer jemand anderem die Schuld geben", "bs": "Uvijek okriviti nekog drugog" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "Admit it and ask Allah for forgiveness",
+            "de": "Ihn zugeben und Allah um Vergebung bitten",
+            "bs": "Priznati je i tražiti oprost od Allaha"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Hide it so nobody knows",
+            "de": "Ihn verstecken, damit es keiner merkt",
+            "bs": "Sakriti je da niko ne sazna"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Always blame someone else",
+            "de": "Immer jemand anderem die Schuld geben",
+            "bs": "Uvijek okriviti nekog drugog"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -216,12 +769,111 @@
         "de": "Adam und seine Frau kehrten zu Allah um – und Allah vergab ihnen.",
         "bs": "Adem i njegova žena vratili su se Allahu – i Allah im je oprostio."
       }
+    },
+    {
+      "id": "adam-iblis",
+      "type": "trueFalse",
+      "prompt": {
+        "en": "Iblis refused to prostrate because he thought he was better than Adam.",
+        "de": "Iblis weigerte sich, sich niederzuwerfen, weil er sich für besser als Adam hielt.",
+        "bs": "Iblis je odbio da se pokloni jer je mislio da je bolji od Adema."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – he said: \"I am better than him.\" Arrogance made him disobey.",
+        "de": "Ja – er sagte: „Ich bin besser als er.“ Hochmut ließ ihn ungehorsam werden.",
+        "bs": "Da – rekao je: „Ja sam bolji od njega.“ Oholost ga je odvela u neposlušnost."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "7:12"
+        }
+      ],
+      "storyId": "adam",
+      "topic": "adam"
+    },
+    {
+      "id": "adam-words",
+      "type": "scenario",
+      "prompt": {
+        "en": "Decision: you broke your friend's pencil by accident and nobody saw it. What follows the example of Adam?",
+        "de": "Entscheidung: Du hast aus Versehen den Stift deines Freundes zerbrochen, und niemand hat es gesehen. Was folgt dem Beispiel Adams?",
+        "bs": "Odluka: slučajno si slomio drugu olovku i niko to nije vidio. Šta slijedi Ademov primjer?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "Admit it, say sorry and make it good",
+            "de": "Es zugeben, sich entschuldigen und es wiedergutmachen",
+            "bs": "Priznati, izviniti se i nadoknaditi"
+          },
+          "feedback": {
+            "en": "Like Adam: he admitted his mistake and turned back to Allah.",
+            "de": "Wie Adam: Er gab seinen Fehler zu und kehrte zu Allah um.",
+            "bs": "Kao Adem: priznao je grešku i vratio se Allahu."
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Hide it and say nothing",
+            "de": "Es verstecken und nichts sagen",
+            "bs": "Sakriti i ništa ne reći"
+          },
+          "feedback": {
+            "en": "Allah sees everything – and hiding does not fix the hurt.",
+            "de": "Allah sieht alles – und Verstecken macht nichts wieder gut.",
+            "bs": "Allah sve vidi – a skrivanje ne popravlja štetu."
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Say it was someone else",
+            "de": "Sagen, es war jemand anderes",
+            "bs": "Reći da je to bio neko drugi"
+          },
+          "feedback": {
+            "en": "Blaming others adds a second mistake to the first.",
+            "de": "Anderen die Schuld zu geben, fügt dem ersten Fehler einen zweiten hinzu.",
+            "bs": "Okrivljavanje drugih dodaje drugu grešku prvoj."
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Adam and his wife said: \"Our Lord, we have wronged ourselves\" – and Allah forgave them.",
+        "de": "Adam und seine Frau sagten: „Unser Herr, wir haben uns selbst Unrecht getan“ – und Allah vergab ihnen.",
+        "bs": "Adem i njegova žena rekli su: „Gospodaru naš, sami smo sebi nepravdu učinili“ – i Allah im je oprostio."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "7:23; 2:37"
+        }
+      ],
+      "storyId": "adam",
+      "topic": "adam"
     }
   ],
   "sources": [
-    { "sourceName": "Quran", "sourceReference": "2:30–38" },
-    { "sourceName": "Quran", "sourceReference": "7:11–25" },
-    { "sourceName": "Quran", "sourceReference": "15:26–31" },
-    { "sourceName": "Quran", "sourceReference": "20:115–123" }
+    {
+      "sourceName": "Quran",
+      "sourceReference": "2:30–38"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "7:11–25"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "15:26–31"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "20:115–123"
+    }
   ]
 }
