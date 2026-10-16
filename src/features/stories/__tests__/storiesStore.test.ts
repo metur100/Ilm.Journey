@@ -22,7 +22,7 @@ import { useAppStore } from '@/core/store/appStore';
 import { getStory, QUESTIONS, STORIES, storiesKey } from '@/features/stories/content';
 import { registerStoriesFeature } from '@/features/stories/register';
 import { EMPTY_STORIES } from '@/features/stories/services/progress';
-import { buildStoryFlow } from '@/features/stories/services/storyFlow';
+import { buildStoryFlow, questionCount } from '@/features/stories/services/storyFlow';
 import {
   lessonXpReason,
   sanitizeStoriesData,
@@ -33,7 +33,9 @@ import {
 } from '@/features/stories/store/storiesStore';
 
 const adam = getStory('adam')!;
-const allCorrect = () => Array(6).fill(true) as boolean[];
+/** The stories in journey order – the counts below come from the content, not from fixed numbers. */
+const [first, second, third] = [...STORIES].sort((a, b) => a.order - b.order);
+const allCorrect = () => Array(questionCount(adam)).fill(true) as boolean[];
 
 beforeEach(async () => {
   await AsyncStorage.clear();
@@ -69,20 +71,20 @@ describe('stories registration', () => {
     const keys = () => getDailyCandidates().map((c) => c.key);
     expect(keys().every((k) => k.startsWith('stories:adam-'))).toBe(true);
     expect(keys()).toHaveLength(adam.questions.length);
-    useStoriesStore.getState().completeStory('adam', allCorrect());
-    expect(keys()).toContain('stories:nuh-next');
-    expect(keys()).not.toContain('stories:ibrahim-sky');
+    useStoriesStore.getState().completeStory(first.id, allCorrect());
+    expect(keys()).toEqual(expect.arrayContaining(second.questions.map((q) => storiesKey(q.id))));
+    expect(keys().some((k) => third.questions.some((q) => storiesKey(q.id) === k))).toBe(false);
   });
 
   it('suggests the next story (or the running one) as a quest', () => {
     expect(getQuestCandidates({ day: '2026-10-06' })).toEqual([
-      expect.objectContaining({ kind: 'story', target: storyTarget('adam'), topicArea: 'prophets' }),
+      expect.objectContaining({ kind: 'story', target: storyTarget(first.id), topicArea: 'prophets' }),
     ]);
-    useStoriesStore.getState().completeStory('adam', allCorrect());
-    expect(getQuestCandidates({ day: '2026-10-06' })[0].target).toBe(storyTarget('nuh'));
-    useStoriesStore.getState().completeStory('nuh', allCorrect());
-    useStoriesStore.getState().saveStep('adam', 2, [], 0);
-    expect(getQuestCandidates({ day: '2026-10-06' })[0].target).toBe(storyTarget('ibrahim'));
+    useStoriesStore.getState().completeStory(first.id, allCorrect());
+    expect(getQuestCandidates({ day: '2026-10-06' })[0].target).toBe(storyTarget(second.id));
+    useStoriesStore.getState().completeStory(second.id, allCorrect());
+    useStoriesStore.getState().saveStep(first.id, 2, [], 0);
+    expect(getQuestCandidates({ day: '2026-10-06' })[0].target).toBe(storyTarget(third.id));
   });
 
   it('finds stories and places in search', () => {
@@ -150,7 +152,7 @@ describe('playing a story', () => {
     const state = useStoriesStore.getState();
     expect(state.run).toBeNull();
     expect(state.stories.adam).toMatchObject({ completed: true, bestStars: 3, bestScore: 100, attempts: 1 });
-    expect(state.completedScenes).toEqual(['adam-s1', 'adam-s2', 'adam-s3']);
+    expect(state.completedScenes).toEqual(adam.scenes.map((sc) => sc.id));
     expect(getContinueItem()).toBeNull();
     expect(getRecentlyCompleted().map((i) => i.key)).toContain(storyTarget('adam'));
 
@@ -190,7 +192,7 @@ describe('badges and metrics', () => {
 
     for (const story of STORIES.slice(1)) useStoriesStore.getState().completeStory(story.id, [true, false]);
     app = useAppStore.getState();
-    expect(collectFeatureMetrics()).toMatchObject({ 'stories.completed': 8, 'stories.allCompleted': 1, perfectRuns: 1 });
+    expect(collectFeatureMetrics()).toMatchObject({ 'stories.completed': STORIES.length, 'stories.allCompleted': 1, perfectRuns: 1 });
     expect(app.badges.history_learner).toBeDefined();
     expect(app.badges.prophet_explorer).toBeDefined();
   });

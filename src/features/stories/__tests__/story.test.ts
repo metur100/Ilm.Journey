@@ -5,36 +5,56 @@ import { EMPTY_STORIES, featuredStoryFor, runProgress, storiesByPlace, storiesMe
 import { buildStoryFlow, questionCount, scenesReached } from '@/features/stories/services/storyFlow';
 import { completedStories, nextStory, openStories, storyStatus, unlockingStory } from '@/features/stories/services/unlocking';
 
+/** The stories in journey order (Adam … Muhammad) – every count below is derived from the content. */
+const ORDERED = [...STORIES].sort((a, b) => a.order - b.order);
+
 const done = (...ids: string[]) => Object.fromEntries(ids.map((id) => [id, { completed: true, bestStars: 3, bestScore: 100, attempts: 1 }]));
 
 describe('story progression', () => {
   const adam = getStory('adam')!;
 
-  it('follows INTRO → STORY → INTERACTION → STORY → QUESTION → STORY → MINI GAME → LESSON → QUIZ', () => {
-    const kinds = buildStoryFlow(adam).map((s) => (s.kind === 'question' ? s.role : s.kind));
-    expect(kinds).toEqual(['intro', 'scene', 'interaction', 'scene', 'question', 'scene', 'miniGame', 'lessons', 'quiz', 'quiz', 'quiz']);
+  it('follows INTRO → (STORY → INTERACTION / QUESTION)… → MINI GAME → LESSON → QUIZ', () => {
+    for (const story of STORIES) {
+      const expected = [
+        'intro',
+        ...story.scenes.flatMap((sc, i) => (sc.interactionId ? ['scene', i === 0 ? 'interaction' : 'question'] : ['scene'])),
+        'miniGame',
+        'lessons',
+        ...story.quizIds.map(() => 'quiz'),
+      ];
+      const kinds = buildStoryFlow(story).map((s) => (s.kind === 'question' ? s.role : s.kind));
+      expect({ id: story.id, kinds }).toEqual({ id: story.id, kinds: expected });
+    }
   });
 
   it('counts the scored questions', () => {
-    expect(questionCount(adam)).toBe(6);
+    for (const story of STORIES) {
+      const interactions = story.scenes.filter((sc) => sc.interactionId).length;
+      expect(questionCount(story)).toBe(interactions + 1 + story.quizIds.length);
+    }
   });
 
   it('tracks which scenes have been reached', () => {
+    const flow = buildStoryFlow(adam);
     expect(scenesReached(adam, 0)).toEqual([]);
-    expect(scenesReached(adam, 1)).toEqual(['adam-s1']);
-    expect(scenesReached(adam, 5)).toEqual(['adam-s1', 'adam-s2', 'adam-s3']);
+    expect(scenesReached(adam, 1)).toEqual([adam.scenes[0].id]);
+    expect(scenesReached(adam, flow.length - 1)).toEqual(adam.scenes.map((sc) => sc.id));
   });
 
   it('every story uses the same interactive structure', () => {
     for (const story of STORIES) {
       const flow = buildStoryFlow(story);
       expect(flow[0].kind).toBe('intro');
-      expect(flow.filter((s) => s.kind === 'scene')).toHaveLength(3);
-      expect(flow.some((s) => s.kind === 'question' && s.role === 'miniGame')).toBe(true);
-      expect(flow.filter((s) => s.kind === 'question' && s.role === 'quiz')).toHaveLength(3);
+      const scenes = flow.filter((s) => s.kind === 'scene');
+      expect(scenes.length).toBe(story.scenes.length);
+      expect(scenes.length).toBeGreaterThanOrEqual(3);
+      expect(scenes.length).toBeLessThanOrEqual(6);
+      expect(flow.filter((s) => s.kind === 'question' && s.role === 'miniGame')).toHaveLength(1);
+      expect(flow.filter((s) => s.kind === 'question' && s.role === 'quiz').length).toBeGreaterThanOrEqual(3);
       // The child interacts regularly: never more than one story page in a row.
       for (let i = 1; i < flow.length; i++) {
-        expect(flow[i].kind === 'scene' && flow[i - 1].kind === 'scene').toBe(false);
+        const twoPages = flow[i].kind === 'scene' && flow[i - 1].kind === 'scene';
+        expect({ id: story.id, i, twoPages }).toEqual({ id: story.id, i, twoPages: false });
       }
     }
   });
@@ -48,19 +68,23 @@ describe('story progression', () => {
 
 describe('unlock system', () => {
   it('opens only the first story at the start', () => {
-    expect(STORIES.map((s) => storyStatus(s, {}, STORIES))).toEqual(['available', 'locked', 'locked', 'locked', 'locked', 'locked', 'locked', 'locked']);
+    expect(ORDERED[0].id).toBe('adam');
+    expect(ORDERED.map((s) => storyStatus(s, {}, STORIES))).toEqual(ORDERED.map((_, i) => (i === 0 ? 'available' : 'locked')));
     expect(nextStory({}, STORIES)?.id).toBe('adam');
     expect(openStories({}, STORIES).map((s) => s.id)).toEqual(['adam']);
   });
 
   it('unlocks stories in chronological order and explains why one is locked', () => {
-    const progress = done('adam');
-    expect(storyStatus(getStory('nuh')!, progress, STORIES)).toBe('available');
-    expect(storyStatus(getStory('ibrahim')!, progress, STORIES)).toBe('locked');
-    expect(unlockingStory(getStory('ibrahim')!, STORIES)?.id).toBe('nuh');
-    expect(unlockingStory(getStory('adam')!, STORIES)).toBeNull();
-    expect(completedStories(progress, STORIES).map((s) => s.id)).toEqual(['adam']);
-    expect(openStories(progress, STORIES).map((s) => s.id)).toEqual(['adam', 'nuh']);
+    const [first, second, third] = ORDERED;
+    const progress = done(first.id);
+    expect(storyStatus(second, progress, STORIES)).toBe('available');
+    expect(storyStatus(third, progress, STORIES)).toBe('locked');
+    expect(unlockingStory(third, STORIES)?.id).toBe(second.id);
+    expect(unlockingStory(first, STORIES)).toBeNull();
+    expect(completedStories(progress, STORIES).map((s) => s.id)).toEqual([first.id]);
+    expect(openStories(progress, STORIES).map((s) => s.id)).toEqual([first.id, second.id]);
+    // Every story is opened by the one before it.
+    ORDERED.slice(1).forEach((story, i) => expect(unlockingStory(story, STORIES)?.id).toBe(ORDERED[i].id));
   });
 
   it('has nothing left when every story is complete', () => {
@@ -112,9 +136,9 @@ describe('metrics and map data', () => {
     });
     const sabr = STORIES.flatMap((s) => s.lessons).filter((l) => l.value === 'sabr').map((l) => l.id);
     expect(sabr.length).toBeGreaterThan(1);
-    const all = { ...EMPTY_STORIES, stories: done(...STORIES.map((s) => s.id)), learnedLessons: sabr, perfectStories: ['adam', 'nuh'] };
+    const all = { ...EMPTY_STORIES, stories: done(...STORIES.map((s) => s.id)), learnedLessons: sabr, perfectStories: [ORDERED[0].id, ORDERED[1].id] };
     expect(storiesMetrics(all, STORIES)).toEqual({
-      'stories.completed': 8,
+      'stories.completed': STORIES.length,
       'stories.allCompleted': 1,
       'stories.sabrLessonsLearned': 1,
       perfectRuns: 2,
@@ -124,11 +148,18 @@ describe('metrics and map data', () => {
 
   it('places the stories on the map by their map places and map questions, in story order', () => {
     const byPlace = storiesByPlace(STORIES);
-    expect(byPlace.judi?.map((s) => s.id)).toEqual(['nuh']);
-    expect(byPlace.egypt?.map((s) => s.id)).toEqual(['yusuf', 'musa']);
-    expect(byPlace.makkah?.map((s) => s.id)).toEqual(['ibrahim', 'muhammad']);
-    expect(byPlace.madinah?.map((s) => s.id)).toEqual(['muhammad']);
-    expect(byPlace.nineveh?.map((s) => s.id)).toEqual(['yunus']);
+    for (const story of STORIES) {
+      const places = new Set([...(story.mapPlaces ?? []), ...story.questions.flatMap((q) => (q.type === 'map' ? [q.correctPlace] : []))]);
+      for (const place of places) {
+        const listed = !!byPlace[place as keyof typeof byPlace]?.includes(story);
+        expect({ story: story.id, place, listed }).toEqual({ story: story.id, place, listed: true });
+      }
+    }
+    for (const list of Object.values(byPlace)) {
+      const orders = (list ?? []).map((s) => s.order);
+      expect(orders).toEqual([...orders].sort((a, b) => a - b));
+    }
+    expect(byPlace.judi?.map((s) => s.id)).toContain('nuh');
   });
 
   it('rotates the featured story', () => {
