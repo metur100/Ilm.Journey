@@ -38,9 +38,10 @@ const FACTS = { heir: F.neighbourHeir(), nearest: F.nearestDoor(), near: F.goodT
 function GiftsForNeighboursGame(api: GameApi<GiftsConfig>) {
   const { houses, gifts, nearestFirst, numbers, hints, prompt, fact } = api.config;
   const doors = useMemo(() => Array.from({ length: houses }, (_, i) => `door-${i + 1}`), [houses]);
+  const t = api.t;
   const rule = useMemo(
-    () => (nearestFirst ? nearestFirstRule(gifts, doors, api.t('nearest'), api.t('full')) : everyDoorRule(gifts, doors, api.t('full'))),
-    [nearestFirst, gifts, doors, api.t],
+    () => (nearestFirst ? nearestFirstRule(gifts, doors, t('nearest'), t('full')) : everyDoorRule(gifts, doors, t('full'))),
+    [nearestFirst, gifts, doors, t],
   );
   return (
     <GameBoard api={api}>

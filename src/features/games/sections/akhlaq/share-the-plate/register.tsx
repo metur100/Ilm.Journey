@@ -37,7 +37,8 @@ const FACTS = { give: F.giveFood(), two: F.foodOfTwo(), soup: F.soupForNeighbour
 
 function ShareThePlateGame(api: GameApi<ShareConfig>) {
   const { plates, food, hints, prompt, fact } = api.config;
-  const rule = useMemo(() => shareRule(food, plates, api.t('waiting')), [food, plates, api.t]);
+  const t = api.t;
+  const rule = useMemo(() => shareRule(food, plates, t('waiting')), [food, plates, t]);
   return (
     <GameBoard api={api}>
       <SceneDrop

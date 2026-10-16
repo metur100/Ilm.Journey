@@ -52,7 +52,8 @@ function GoodWordTreeGame(api: GameApi<TreeConfig>) {
   const { words, silence, hints, prompt, fact } = api.config;
   const goodTotal = words.filter((w) => w.good).length;
   const [grown, setGrown] = useState(0);
-  const rule = useMemo(() => (silence ? goodOrSilentRule(words, api.t('toTree'), api.t('toSilent')) : treeRule(words, api.t('hurt'))), [silence, words, api.t]);
+  const t = api.t;
+  const rule = useMemo(() => (silence ? goodOrSilentRule(words, t('toTree'), t('toSilent')) : treeRule(words, t('hurt'))), [silence, words, t]);
   const tree = { id: 'tree', at: silence ? { x: 0.3, y: 0.08, w: 0.66, h: 0.82 } : { x: 0.17, y: 0.08, w: 0.66, h: 0.82 }, label: api.t('target.tree') };
   const silent = { id: 'silent', at: { x: 0.03, y: 0.04, w: 0.26, h: 0.22 }, art: 'akhlaq.quiet-bubble', label: api.t('target.silent') };
   return (

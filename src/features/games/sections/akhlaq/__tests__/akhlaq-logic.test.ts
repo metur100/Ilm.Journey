@@ -1,10 +1,14 @@
 import { honestScalesGame, roundsSolvable } from '../honest-scales/register';
 
+import { pieces, shareRule } from '../share-the-plate/logic';
+
+import { nearestFirstRule } from '../gifts-for-neighbours/logic';
+
+import { goodOrSilentRule, treeStage } from '../good-word-tree/logic';
+
 it('every market order and every change can be weighed exactly', () => {
   for (const level of honestScalesGame.levels) expect(roundsSolvable(level.config.rounds)).toBe(true);
 });
-
-import { pieces, shareRule } from '../share-the-plate/logic';
 
 describe('share the plate', () => {
   const food = [...pieces('dates', 4), ...pieces('bread', 2)];
@@ -28,8 +32,6 @@ describe('share the plate', () => {
   });
 });
 
-import { nearestFirstRule } from '../gifts-for-neighbours/logic';
-
 describe('gifts for the neighbours', () => {
   const rule = nearestFirstRule(['a', 'b', 'c'], ['d1', 'd2', 'd3'], 'nearest', 'full');
   it('serves the nearest door first', () => {
@@ -39,8 +41,6 @@ describe('gifts for the neighbours', () => {
     expect(rule.next([{ item: 'a', target: 'd1' }])).toEqual({ item: 'b', target: 'd2' });
   });
 });
-
-import { goodOrSilentRule, treeStage } from '../good-word-tree/logic';
 
 describe('the good word tree', () => {
   it('grows in five stages', () => {
