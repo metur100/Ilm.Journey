@@ -1,66 +1,438 @@
 {
   "id": "isa",
-  "order": 7,
-  "prophetName": { "en": "Isa", "de": "Isa (Jesus)", "bs": "Isa" },
-  "honorific": "alayhis-salam",
-  "title": { "en": "A Miraculous Birth", "de": "Eine wundersame Geburt", "bs": "Čudesno rođenje" },
-  "description": {
-    "en": "Maryam, a palm tree, a baby who speaks and the Injil.",
-    "de": "Maryam, eine Palme, ein sprechendes Baby und der Indschil.",
-    "bs": "Merjema, palma, beba koja govori i Indžil."
+  "order": 24,
+  "prophetName": {
+    "en": "Isa",
+    "de": "Isa (Jesus)",
+    "bs": "Isa"
   },
-  "place": { "en": "The land of Bayt al-Maqdis", "de": "Das Land von Bait al-Maqdis", "bs": "Zemlja Bejtul-Makdisa" },
+  "honorific": "alayhis-salam",
+  "title": {
+    "en": "A Miraculous Birth",
+    "de": "Eine wundersame Geburt",
+    "bs": "Čudesno rođenje"
+  },
+  "description": {
+    "en": "Maryam, a palm tree and a stream, a baby who speaks, the table spread from the sky – and the truth about how Allah raised him.",
+    "de": "Maryam, eine Palme und ein Bach, ein sprechendes Baby, der Tisch vom Himmel – und die Wahrheit, wie Allah ihn erhob.",
+    "bs": "Merjema, palma i potočić, beba koja govori, sofra s neba – i istina o tome kako ga je Allah uzdigao."
+  },
+  "place": {
+    "en": "The land of Bayt al-Maqdis",
+    "de": "Das Land von Bait al-Maqdis",
+    "bs": "Zemlja Bejtul-Makdisa"
+  },
   "symbol": "palms",
-  "cover": { "sky": "dawn", "elements": ["stars", "dunes", "palms", "dates"] },
+  "symbolArt": "prophet.isa-palm-stream",
+  "mapPlaces": ["jerusalem"],
+  "cover": {
+    "sky": "dawn",
+    "elements": ["stars", "dunes", "palms", "dates"]
+  },
+  "coverStage": {
+    "sky": "dawn",
+    "layers": [
+      {
+        "art": "story.dunes"
+      },
+      {
+        "art": "prophet.isa-palm-stream",
+        "x": 200,
+        "y": 240,
+        "w": 230,
+        "enter": "fade",
+        "at": 200
+      }
+    ],
+    "effects": [
+      {
+        "type": "stars",
+        "intensity": 1,
+        "until": 2500
+      },
+      {
+        "type": "sunrays",
+        "x": 70,
+        "y": 80,
+        "at": 1200
+      },
+      {
+        "type": "ripples",
+        "x": 200,
+        "y": 232,
+        "w": 80,
+        "intensity": 1
+      }
+    ]
+  },
   "intro": {
-    "en": "Maryam was a pious woman whom Allah chose and purified above the women of the worlds. An angel brought her the news that she would have a son – Isa (peace be upon him) – although no man had touched her. Allah creates what He wills.",
-    "de": "Maryam war eine fromme Frau, die Allah auserwählte und über die Frauen der Welten erhob. Ein Engel überbrachte ihr die Nachricht, dass sie einen Sohn bekommen werde – Isa (Friede sei mit ihm) –, obwohl kein Mann sie berührt hatte. Allah erschafft, was Er will.",
-    "bs": "Merjema je bila pobožna žena koju je Allah odabrao i odlikovao nad ženama svjetova. Melek joj je donio vijest da će dobiti sina – Isaa, a.s. – iako je nijedan muškarac nije dotakao. Allah stvara šta hoće."
+    "en": "Maryam was a pious woman whom Allah chose and purified above the women of the worlds. Allah sent her His angel with the news that she would have a pure son – Isa (peace be upon him) – although no man had touched her. Allah creates what He wills: when He decides a matter, He only says to it \"Be\", and it is.",
+    "de": "Maryam war eine fromme Frau, die Allah auserwählte und über die Frauen der Welten erhob. Allah sandte ihr Seinen Engel mit der Nachricht, dass sie einen reinen Sohn bekommen werde – Isa (Friede sei mit ihm) –, obwohl kein Mann sie berührt hatte. Allah erschafft, was Er will: Wenn Er eine Sache beschließt, sagt Er zu ihr nur „Sei!“, und sie ist.",
+    "bs": "Merjema je bila pobožna žena koju je Allah odabrao i odlikovao nad ženama svjetova. Allah joj je poslao Svog meleka s viješću da će dobiti čistog sina – Isaa, a.s. – iako je nijedan muškarac nije dotakao. Allah stvara šta hoće: kada nešto odluči, samo kaže: „Budi!“ – i ono bude."
   },
   "scenes": [
     {
       "id": "isa-s1",
-      "title": { "en": "Under the palm tree", "de": "Unter der Palme", "bs": "Ispod palme" },
+      "title": {
+        "en": "Under the palm tree",
+        "de": "Unter der Palme",
+        "bs": "Ispod palme"
+      },
       "text": {
         "en": "When the time came, Maryam went to a far place, to the trunk of a palm tree. She was told not to grieve: Allah had placed a stream beneath her, and if she shook the trunk of the palm, fresh ripe dates would fall for her.",
         "de": "Als die Zeit kam, ging Maryam an einen entfernten Ort, zum Stamm einer Palme. Ihr wurde gesagt, sie solle nicht traurig sein: Allah hatte unter ihr einen Bach fließen lassen, und wenn sie den Stamm der Palme schüttelte, würden frische reife Datteln für sie herabfallen.",
         "bs": "Kada je došlo vrijeme, Merjema je otišla na udaljeno mjesto, do stabla palme. Rečeno joj je da ne tuguje: Allah je ispod nje dao potočić, a ako protrese stablo palme, past će joj svježe zrele hurme."
       },
-      "scene": { "sky": "day", "elements": ["dunes", "palms", "river", "dates"] },
+      "scene": {
+        "sky": "day",
+        "elements": ["dunes", "palms", "river", "dates"]
+      },
       "interactionId": "isa-next",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "19:22–26" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "19:22–26"
+        }
+      ],
+      "stage": {
+        "sky": "day",
+        "layers": [
+          {
+            "art": "story.desert-flat"
+          },
+          {
+            "art": "prophet.isa-palm-stream",
+            "x": 200,
+            "y": 244,
+            "w": 260,
+            "enter": "fade",
+            "at": 300,
+            "duration": 1400
+          },
+          {
+            "art": "prophet.isa-date",
+            "x": 236,
+            "y": 120,
+            "w": 14,
+            "anchor": "center",
+            "enter": "fall",
+            "at": 1800,
+            "duration": 1200
+          },
+          {
+            "art": "prophet.isa-date",
+            "x": 252,
+            "y": 130,
+            "w": 12,
+            "anchor": "center",
+            "enter": "fall",
+            "at": 2300,
+            "duration": 1200
+          },
+          {
+            "art": "prophet.isa-date-basket",
+            "x": 300,
+            "y": 232,
+            "w": 52,
+            "enter": "rise",
+            "at": 2900
+          }
+        ],
+        "effects": [
+          {
+            "type": "ripples",
+            "x": 150,
+            "y": 234,
+            "w": 70,
+            "intensity": 1,
+            "at": 700
+          },
+          {
+            "type": "sparkle",
+            "x": 240,
+            "y": 140,
+            "w": 80,
+            "h": 60,
+            "intensity": 1,
+            "at": 1600
+          }
+        ]
+      }
     },
     {
       "id": "isa-s2",
-      "title": { "en": "The baby speaks", "de": "Das Baby spricht", "bs": "Beba progovara" },
-      "text": {
-        "en": "Maryam came back to her people carrying the baby. When they questioned her, she pointed to him. Then the baby Isa spoke from the cradle and said that he is a servant of Allah, who gave him the Scripture and made him a prophet.",
-        "de": "Maryam kam mit dem Baby zu ihrem Volk zurück. Als man sie befragte, zeigte sie auf ihn. Da sprach das Baby Isa aus der Wiege und sagte, dass er ein Diener Allahs sei, der ihm die Schrift gegeben und ihn zum Propheten gemacht habe.",
-        "bs": "Merjema se vratila svom narodu noseći dijete. Kada su je ispitivali, pokazala je na njega. Tada je beba Isa progovorio iz kolijevke i rekao da je Allahov rob, kome je On dao Knjigu i učinio ga poslanikom."
+      "title": {
+        "en": "The baby speaks",
+        "de": "Das Baby spricht",
+        "bs": "Beba progovara"
       },
-      "scene": { "sky": "sunset", "elements": ["hills", "city"] },
+      "text": {
+        "en": "Maryam came back to her people carrying the baby. When they questioned her, she pointed to him. Then the baby Isa spoke from the cradle: \"I am the servant of Allah. He has given me the Scripture and made me a prophet. Peace be upon me the day I was born, the day I die and the day I am raised alive.\"",
+        "de": "Maryam kam mit dem Baby zu ihrem Volk zurück. Als man sie befragte, zeigte sie auf ihn. Da sprach das Baby Isa aus der Wiege: „Ich bin der Diener Allahs. Er hat mir die Schrift gegeben und mich zum Propheten gemacht. Friede sei auf mir am Tag, als ich geboren wurde, am Tag, an dem ich sterbe, und am Tag, an dem ich wieder lebendig auferweckt werde.“",
+        "bs": "Merjema se vratila svom narodu noseći dijete. Kada su je ispitivali, pokazala je na njega. Tada je beba Isa progovorio iz kolijevke: „Ja sam Allahov rob; On mi je dao Knjigu i učinio me vjerovjesnikom. Neka je mir meni na dan kad sam se rodio, i na dan kad budem umro, i na dan kad budem oživljen!“"
+      },
+      "scene": {
+        "sky": "sunset",
+        "elements": ["hills", "city"]
+      },
       "interactionId": "isa-cradle",
-      "sources": [{ "sourceName": "Quran", "sourceReference": "19:27–33" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "19:27–33"
+        }
+      ],
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          {
+            "art": "story.city-ancient",
+            "opacity": 0.85
+          },
+          {
+            "art": "story.hills",
+            "y": 262
+          },
+          {
+            "art": "prophet.isa-cradle",
+            "x": 200,
+            "y": 222,
+            "w": 110,
+            "enter": "rise",
+            "at": 500
+          }
+        ],
+        "effects": [
+          {
+            "type": "birds",
+            "intensity": 1
+          },
+          {
+            "type": "sparkle",
+            "x": 200,
+            "y": 170,
+            "w": 140,
+            "h": 70,
+            "intensity": 2,
+            "at": 1400
+          },
+          {
+            "type": "lightBeam",
+            "x": 200,
+            "intensity": 1,
+            "at": 1800
+          }
+        ]
+      }
     },
     {
       "id": "isa-s3",
-      "title": { "en": "The Injil and the miracles", "de": "Der Indschil und die Wunder", "bs": "Indžil i čuda" },
-      "text": {
-        "en": "Allah gave Isa the Injil, with guidance and light. By Allah's permission he healed the blind and the sick and brought the dead to life. The Quran teaches that he was not killed or crucified, but Allah raised him up to Himself. Isa also gave good news of a messenger to come after him, named Ahmad.",
-        "de": "Allah gab Isa den Indschil, mit Rechtleitung und Licht. Mit Allahs Erlaubnis heilte er Blinde und Kranke und erweckte Tote. Der Koran lehrt, dass er weder getötet noch gekreuzigt wurde, sondern dass Allah ihn zu Sich erhob. Isa verkündete auch einen Gesandten, der nach ihm kommen werde, namens Ahmad.",
-        "bs": "Allah je Isau dao Indžil, s uputom i svjetlom. Allahovom dozvolom liječio je slijepe i bolesne i oživljavao mrtve. Kur'an uči da on nije ubijen ni razapet, nego ga je Allah uzdigao Sebi. Isa je također najavio poslanika koji će doći poslije njega, po imenu Ahmed."
+      "title": {
+        "en": "The Injil and the miracles",
+        "de": "Der Indschil und die Wunder",
+        "bs": "Indžil i čuda"
       },
-      "scene": { "sky": "dusk", "elements": ["stars", "hills", "book"] },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "5:46; 3:49; 5:110; 4:157–158; 61:6" }]
+      "text": {
+        "en": "Allah gave Isa the Injil, with guidance and light. By Allah's permission he shaped a bird from clay and breathed into it, and it became a bird. By Allah's permission he healed the blind and the sick and brought the dead to life. None of this was by his own power – all was by the permission of Allah.",
+        "de": "Allah gab Isa den Indschil, mit Rechtleitung und Licht. Mit Allahs Erlaubnis formte er aus Lehm einen Vogel und hauchte hinein, und er wurde ein Vogel. Mit Allahs Erlaubnis heilte er Blinde und Kranke und erweckte Tote. Nichts davon geschah aus eigener Kraft – alles mit Allahs Erlaubnis.",
+        "bs": "Allah je Isau dao Indžil, s uputom i svjetlom. Allahovom dozvolom napravio bi od ilovače nešto poput ptice, puhnuo u to i ono bi postalo ptica. Allahovom dozvolom liječio je slijepe i bolesne i oživljavao mrtve. Ništa od toga nije bilo njegovom snagom – sve je bilo Allahovom dozvolom."
+      },
+      "scene": {
+        "sky": "day",
+        "elements": ["hills", "book"]
+      },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          {
+            "art": "story.olive-grove"
+          },
+          {
+            "art": "object.book",
+            "x": 120,
+            "y": 222,
+            "w": 70,
+            "enter": "rise",
+            "at": 400
+          },
+          {
+            "art": "animal.dove",
+            "x": 250,
+            "y": 120,
+            "w": 46,
+            "anchor": "center",
+            "anim": "float",
+            "enter": "fade",
+            "at": 1800,
+            "duration": 1400
+          }
+        ],
+        "effects": [
+          {
+            "type": "lightBeam",
+            "x": 120,
+            "intensity": 1,
+            "at": 800
+          },
+          {
+            "type": "sparkle",
+            "x": 250,
+            "y": 120,
+            "w": 90,
+            "h": 60,
+            "intensity": 2,
+            "at": 1800
+          },
+          {
+            "type": "birds",
+            "intensity": 1,
+            "at": 2600
+          }
+        ]
+      },
+      "interactionId": "isa-permission",
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "5:46; 3:49; 5:110"
+        }
+      ]
+    },
+    {
+      "id": "isa-s4",
+      "title": {
+        "en": "The table spread",
+        "de": "Der gedeckte Tisch",
+        "bs": "Sofra s neba"
+      },
+      "text": {
+        "en": "The disciples asked Isa whether his Lord would send down a table spread from the sky. Isa made dua: \"O Allah, our Lord, send down to us a table spread from the sky, to be a festival for us and a sign from You – and provide for us, for You are the best of providers.\" Allah said: \"I will send it down to you.\"",
+        "de": "Die Jünger fragten Isa, ob sein Herr einen gedeckten Tisch vom Himmel herabsenden würde. Isa machte Du'a: „O Allah, unser Herr, sende uns einen gedeckten Tisch vom Himmel herab, der uns ein Fest und ein Zeichen von Dir sei – und versorge uns, denn Du bist der beste Versorger.“ Allah sagte: „Ich werde ihn euch herabsenden.“",
+        "bs": "Učenici su upitali Isaa hoće li njegov Gospodar spustiti sofru s neba. Isa je uputio dovu: „O Allahu, Gospodaru naš, spusti nam s neba sofru da nam bude praznik i znak od Tebe – i opskrbi nas, jer Ti si najbolji opskrbitelj.“ Allah je rekao: „Ja ću vam je spustiti.“"
+      },
+      "scene": {
+        "sky": "day",
+        "elements": ["clouds", "hills", "basket"]
+      },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          {
+            "art": "story.hills"
+          },
+          {
+            "art": "prophet.isa-table",
+            "x": 200,
+            "y": 226,
+            "w": 200,
+            "enter": "fall",
+            "at": 800,
+            "duration": 1800
+          }
+        ],
+        "effects": [
+          {
+            "type": "clouds",
+            "intensity": 1
+          },
+          {
+            "type": "lightBeam",
+            "x": 200,
+            "intensity": 2,
+            "at": 400
+          },
+          {
+            "type": "sparkle",
+            "x": 200,
+            "y": 170,
+            "w": 200,
+            "h": 80,
+            "intensity": 2,
+            "at": 2400
+          }
+        ]
+      },
+      "interactionId": "isa-table",
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "5:112–115"
+        }
+      ]
+    },
+    {
+      "id": "isa-s5",
+      "title": {
+        "en": "Raised to Allah",
+        "de": "Zu Allah erhoben",
+        "bs": "Uzdignut Allahu"
+      },
+      "text": {
+        "en": "Some wanted to kill Isa. But they did not kill him and they did not crucify him – it was only made to appear so to them. Allah raised him up to Himself. Isa had also given the good news of a messenger who would come after him, named Ahmad.",
+        "de": "Manche wollten Isa töten. Doch sie haben ihn weder getötet noch gekreuzigt – es erschien ihnen nur so. Allah hat ihn zu Sich erhoben. Isa hatte auch die frohe Botschaft eines Gesandten verkündet, der nach ihm kommen werde, namens Ahmad.",
+        "bs": "Neki su htjeli ubiti Isaa. Ali oni ga nisu ubili niti su ga razapeli, nego im se samo tako pričinilo. Allah ga je uzdigao Sebi. Isa je također najavio radosnu vijest o poslaniku koji će doći poslije njega, po imenu Ahmed."
+      },
+      "scene": {
+        "sky": "night",
+        "elements": ["stars", "hills"]
+      },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          {
+            "art": "story.moon-full",
+            "x": 300,
+            "y": 56,
+            "w": 60,
+            "anchor": "center",
+            "anim": "glow"
+          },
+          {
+            "art": "story.olive-grove"
+          }
+        ],
+        "effects": [
+          {
+            "type": "stars",
+            "intensity": 3
+          },
+          {
+            "type": "lightBeam",
+            "x": 200,
+            "intensity": 2,
+            "at": 1000
+          },
+          {
+            "type": "sparkle",
+            "x": 200,
+            "y": 80,
+            "w": 120,
+            "h": 120,
+            "intensity": 2,
+            "at": 1600
+          }
+        ]
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "4:157–158; 61:6"
+        }
+      ]
     }
   ],
   "miniGameId": "isa-memory",
-  "quizIds": ["isa-book", "isa-permission", "isa-lesson"],
+  "quizIds": ["isa-book", "isa-raised", "isa-lesson"],
   "lessons": [
     {
       "id": "isa-l1",
       "value": "tawakkul",
-      "title": { "en": "Allah takes care of us", "de": "Allah sorgt für uns", "bs": "Allah se brine o nama" },
+      "title": {
+        "en": "Allah takes care of us",
+        "de": "Allah sorgt für uns",
+        "bs": "Allah se brine o nama"
+      },
       "explanation": {
         "en": "In a difficult moment, Allah gave Maryam water, dates and comfort. When we trust Allah, He takes care of us in ways we may not expect.",
         "de": "In einem schweren Moment gab Allah Maryam Wasser, Datteln und Trost. Wenn wir Allah vertrauen, sorgt Er für uns auf Weisen, die wir vielleicht nicht erwarten.",
@@ -80,7 +452,11 @@
     {
       "id": "isa-l2",
       "value": "shukr",
-      "title": { "en": "Every gift comes from Allah", "de": "Jede Gabe kommt von Allah", "bs": "Svaki dar dolazi od Allaha" },
+      "title": {
+        "en": "Every gift comes from Allah",
+        "de": "Jede Gabe kommt von Allah",
+        "bs": "Svaki dar dolazi od Allaha"
+      },
       "explanation": {
         "en": "Isa's miracles happened \"by Allah's permission\". Every talent and success we have is a gift from Allah – so we thank Him and use it well.",
         "de": "Isas Wunder geschahen „mit Allahs Erlaubnis“. Jede Begabung und jeder Erfolg ist ein Geschenk Allahs – darum danken wir Ihm und nutzen es gut.",
@@ -104,11 +480,36 @@
       "type": "multipleChoice",
       "storyId": "isa",
       "topic": "isa",
-      "prompt": { "en": "What was Maryam told to eat under the palm tree?", "de": "Was sollte Maryam unter der Palme essen?", "bs": "Šta je Merjemi rečeno da jede ispod palme?" },
+      "prompt": {
+        "en": "What was Maryam told to eat under the palm tree?",
+        "de": "Was sollte Maryam unter der Palme essen?",
+        "bs": "Šta je Merjemi rečeno da jede ispod palme?"
+      },
       "options": [
-        { "id": "a", "text": { "en": "Fresh ripe dates", "de": "Frische reife Datteln", "bs": "Svježe zrele hurme" } },
-        { "id": "b", "text": { "en": "Bread", "de": "Brot", "bs": "Hljeb" } },
-        { "id": "c", "text": { "en": "Fish", "de": "Fisch", "bs": "Ribu" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "Fresh ripe dates",
+            "de": "Frische reife Datteln",
+            "bs": "Svježe zrele hurme"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Bread",
+            "de": "Brot",
+            "bs": "Hljeb"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Fish",
+            "de": "Fisch",
+            "bs": "Ribu"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -116,33 +517,145 @@
         "de": "Ihr wurde gesagt, den Stamm zu schütteln, damit frische reife Datteln fallen, und aus dem Bach zu trinken.",
         "bs": "Rečeno joj je da protrese stablo da padnu svježe zrele hurme i da pije iz potočića."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "19:25–26" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "19:25–26"
+        }
+      ]
     },
     {
       "id": "isa-cradle",
       "type": "trueFalse",
       "storyId": "isa",
       "topic": "isa",
-      "prompt": { "en": "Isa spoke as a baby in the cradle.", "de": "Isa sprach als Baby in der Wiege.", "bs": "Isa je progovorio kao beba u kolijevci." },
+      "prompt": {
+        "en": "Isa spoke as a baby in the cradle.",
+        "de": "Isa sprach als Baby in der Wiege.",
+        "bs": "Isa je progovorio kao beba u kolijevci."
+      },
       "correct": true,
       "explanation": {
         "en": "Yes – he said that he is a servant of Allah, given the Scripture and made a prophet.",
         "de": "Ja – er sagte, dass er ein Diener Allahs sei, dem die Schrift gegeben und der zum Propheten gemacht wurde.",
         "bs": "Da – rekao je da je Allahov rob kome je data Knjiga i koji je učinjen poslanikom."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "19:29–30" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "19:29–30"
+        }
+      ]
+    },
+    {
+      "id": "isa-permission",
+      "type": "trueFalse",
+      "storyId": "isa",
+      "topic": "isa",
+      "prompt": {
+        "en": "Isa performed his miracles by Allah's permission.",
+        "de": "Isa vollbrachte seine Wunder mit Allahs Erlaubnis.",
+        "bs": "Isa je činio čuda Allahovom dozvolom."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – the Quran repeats \"by Allah's permission\" when it mentions his miracles.",
+        "de": "Ja – der Koran wiederholt „mit Allahs Erlaubnis“, wenn er seine Wunder erwähnt.",
+        "bs": "Da – Kur'an ponavlja „Allahovom dozvolom“ kada spominje njegova čuda."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "3:49; 5:110"
+        }
+      ]
+    },
+    {
+      "id": "isa-table",
+      "type": "trueFalse",
+      "storyId": "isa",
+      "topic": "isa",
+      "prompt": {
+        "en": "Isa asked Allah to send down a table spread from the sky.",
+        "de": "Isa bat Allah, einen gedeckten Tisch vom Himmel herabzusenden.",
+        "bs": "Isa je zamolio Allaha da spusti sofru s neba."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – and he ended his dua with: \"You are the best of providers.\"",
+        "de": "Ja – und er beendete sein Du'a mit: „Du bist der beste Versorger.“",
+        "bs": "Da – i završio je dovu riječima: „Ti si najbolji opskrbitelj.“"
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "5:114"
+        }
+      ]
     },
     {
       "id": "isa-memory",
       "type": "memory",
       "storyId": "isa",
       "topic": "isa",
-      "prompt": { "en": "Memory: match each part of the story of Isa.", "de": "Memory: Ordne die Teile der Geschichte Isas zu.", "bs": "Memorija: spoji dijelove kazivanja o Isau." },
+      "prompt": {
+        "en": "Memory: match each part of the story of Isa.",
+        "de": "Memory: Ordne die Teile der Geschichte Isas zu.",
+        "bs": "Memorija: spoji dijelove kazivanja o Isau."
+      },
       "pairs": [
-        { "id": "injil", "left": { "en": "The Injil", "de": "Der Indschil", "bs": "Indžil" }, "right": { "en": "Scripture of Isa", "de": "Schrift Isas", "bs": "Isaova Knjiga" } },
-        { "id": "cradle", "left": { "en": "The cradle", "de": "Die Wiege", "bs": "Kolijevka" }, "right": { "en": "Spoke as a baby", "de": "Sprach als Baby", "bs": "Govorio kao beba" } },
-        { "id": "palm", "left": { "en": "The palm tree", "de": "Die Palme", "bs": "Palma" }, "right": { "en": "Dates for Maryam", "de": "Datteln für Maryam", "bs": "Hurme za Merjemu" } },
-        { "id": "miracles", "left": { "en": "The miracles", "de": "Die Wunder", "bs": "Čuda" }, "right": { "en": "By Allah's permission", "de": "Mit Allahs Erlaubnis", "bs": "Allahovom dozvolom" } }
+        {
+          "id": "injil",
+          "left": {
+            "en": "The Injil",
+            "de": "Der Indschil",
+            "bs": "Indžil"
+          },
+          "right": {
+            "en": "Scripture of Isa",
+            "de": "Schrift Isas",
+            "bs": "Isaova Knjiga"
+          }
+        },
+        {
+          "id": "cradle",
+          "left": {
+            "en": "The cradle",
+            "de": "Die Wiege",
+            "bs": "Kolijevka"
+          },
+          "right": {
+            "en": "Spoke as a baby",
+            "de": "Sprach als Baby",
+            "bs": "Govorio kao beba"
+          }
+        },
+        {
+          "id": "palm",
+          "left": {
+            "en": "The palm tree",
+            "de": "Die Palme",
+            "bs": "Palma"
+          },
+          "right": {
+            "en": "Dates for Maryam",
+            "de": "Datteln für Maryam",
+            "bs": "Hurme za Merjemu"
+          }
+        },
+        {
+          "id": "miracles",
+          "left": {
+            "en": "The miracles",
+            "de": "Die Wunder",
+            "bs": "Čuda"
+          },
+          "right": {
+            "en": "By Allah's permission",
+            "de": "Mit Allahs Erlaubnis",
+            "bs": "Allahovom dozvolom"
+          }
+        }
       ],
       "explanation": {
         "en": "The Injil, the cradle, the palm tree and the miracles – all signs of Allah's power.",
@@ -155,11 +668,36 @@
       "type": "multipleChoice",
       "storyId": "isa",
       "topic": "isa",
-      "prompt": { "en": "Which scripture did Allah give to Isa?", "de": "Welche Schrift gab Allah Isa?", "bs": "Koju je Knjigu Allah dao Isau?" },
+      "prompt": {
+        "en": "Which scripture did Allah give to Isa?",
+        "de": "Welche Schrift gab Allah Isa?",
+        "bs": "Koju je Knjigu Allah dao Isau?"
+      },
       "options": [
-        { "id": "a", "text": { "en": "The Tawrah", "de": "Die Thora", "bs": "Tevrat" } },
-        { "id": "b", "text": { "en": "The Injil", "de": "Den Indschil", "bs": "Indžil" } },
-        { "id": "c", "text": { "en": "The Zabur", "de": "Den Zabur", "bs": "Zebur" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "The Tawrah",
+            "de": "Die Thora",
+            "bs": "Tevrat"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "The Injil",
+            "de": "Den Indschil",
+            "bs": "Indžil"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "The Zabur",
+            "de": "Den Zabur",
+            "bs": "Zebur"
+          }
+        }
       ],
       "correctOptionId": "b",
       "explanation": {
@@ -167,32 +705,97 @@
         "de": "Allah gab Isa den Indschil, der Rechtleitung und Licht enthielt.",
         "bs": "Allah je Isau dao Indžil, u kojem je bila uputa i svjetlo."
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "5:46" }]
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "5:46"
+        }
+      ]
     },
     {
-      "id": "isa-permission",
-      "type": "trueFalse",
+      "id": "isa-raised",
+      "type": "multipleChoice",
       "storyId": "isa",
       "topic": "isa",
-      "prompt": { "en": "Isa performed his miracles by Allah's permission.", "de": "Isa vollbrachte seine Wunder mit Allahs Erlaubnis.", "bs": "Isa je činio čuda Allahovom dozvolom." },
-      "correct": true,
-      "explanation": {
-        "en": "Yes – the Quran repeats \"by Allah's permission\" when it mentions his miracles.",
-        "de": "Ja – der Koran wiederholt „mit Allahs Erlaubnis“, wenn er seine Wunder erwähnt.",
-        "bs": "Da – Kur'an ponavlja „Allahovom dozvolom“ kada spominje njegova čuda."
+      "prompt": {
+        "en": "What does the Quran say happened to Isa?",
+        "de": "Was sagt der Koran, was mit Isa geschah?",
+        "bs": "Šta Kur'an kaže da se desilo s Isaom?"
       },
-      "sources": [{ "sourceName": "Quran", "sourceReference": "3:49; 5:110" }]
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "He was not killed or crucified – Allah raised him to Himself",
+            "de": "Er wurde weder getötet noch gekreuzigt – Allah erhob ihn zu Sich",
+            "bs": "Nije ubijen ni razapet – Allah ga je uzdigao Sebi"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "He was crucified",
+            "de": "Er wurde gekreuzigt",
+            "bs": "Razapet je"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "He went to live in another land",
+            "de": "Er zog in ein anderes Land",
+            "bs": "Otišao je živjeti u drugu zemlju"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"They did not kill him, nor did they crucify him… Allah raised him up to Himself\" (4:157–158).",
+        "de": "„Sie haben ihn nicht getötet und nicht gekreuzigt … Allah hat ihn zu Sich erhoben“ (4:157–158).",
+        "bs": "„A nisu ga ubili niti su ga razapeli … nego ga je Allah uzdigao Sebi“ (4:157–158)."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "4:157–158"
+        }
+      ]
     },
     {
       "id": "isa-lesson",
       "type": "lessonChoice",
       "storyId": "isa",
       "topic": "isa",
-      "prompt": { "en": "Which lesson do we learn from the story of Isa and Maryam?", "de": "Welche Lehre lernen wir aus der Geschichte von Isa und Maryam?", "bs": "Koju pouku učimo iz kazivanja o Isau i Merjemi?" },
+      "prompt": {
+        "en": "Which lesson do we learn from the story of Isa and Maryam?",
+        "de": "Welche Lehre lernen wir aus der Geschichte von Isa und Maryam?",
+        "bs": "Koju pouku učimo iz kazivanja o Isau i Merjemi?"
+      },
       "options": [
-        { "id": "a", "text": { "en": "Allah takes care of those who trust Him, and every gift is from Him", "de": "Allah sorgt für die, die Ihm vertrauen, und jede Gabe kommt von Ihm", "bs": "Allah se brine o onima koji se na Njega oslanjaju, i svaki dar je od Njega" } },
-        { "id": "b", "text": { "en": "Miracles come from people's own power", "de": "Wunder kommen aus der eigenen Kraft der Menschen", "bs": "Čuda dolaze od vlastite snage ljudi" } },
-        { "id": "c", "text": { "en": "Hard times mean Allah has forgotten us", "de": "Schwere Zeiten bedeuten, dass Allah uns vergessen hat", "bs": "Teška vremena znače da nas je Allah zaboravio" } }
+        {
+          "id": "a",
+          "text": {
+            "en": "Allah takes care of those who trust Him, and every gift is from Him",
+            "de": "Allah sorgt für die, die Ihm vertrauen, und jede Gabe kommt von Ihm",
+            "bs": "Allah se brine o onima koji se na Njega oslanjaju, i svaki dar je od Njega"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Miracles come from people's own power",
+            "de": "Wunder kommen aus der eigenen Kraft der Menschen",
+            "bs": "Čuda dolaze od vlastite snage ljudi"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Hard times mean Allah has forgotten us",
+            "de": "Schwere Zeiten bedeuten, dass Allah uns vergessen hat",
+            "bs": "Teška vremena znače da nas je Allah zaboravio"
+          }
+        }
       ],
       "correctOptionId": "a",
       "explanation": {
@@ -203,9 +806,25 @@
     }
   ],
   "sources": [
-    { "sourceName": "Quran", "sourceReference": "3:42–51" },
-    { "sourceName": "Quran", "sourceReference": "Surah Maryam (19):16–36" },
-    { "sourceName": "Quran", "sourceReference": "5:46; 5:110" },
-    { "sourceName": "Quran", "sourceReference": "4:157–158; 61:6" }
+    {
+      "sourceName": "Quran",
+      "sourceReference": "3:42–51"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "Surah Maryam (19):16–36"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "5:46; 5:110"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "4:157–158; 61:6"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "5:112–115"
+    }
   ]
 }
