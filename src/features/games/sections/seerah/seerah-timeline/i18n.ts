@@ -1,0 +1,81 @@
+import { defineNamespace } from '@/core/i18n';
+
+/** Namespace `game.seerah-timeline`. Event titles come from the Seerah content. */
+const en = {
+  title: 'Seerah Timeline',
+  description: 'Pin the great events of the Seerah to their years – from the Year of the Elephant to the Farewell Pilgrimage.',
+  howTo: 'Slide the marker along the timeline (or tap a year), then place the event. “Earlier” or “later” helps you.',
+  'play.l1': 'Place each event in the life of the Prophet ﷺ on its year (CE).',
+  'play.l2': 'The Madinan years: place each event on its year after the Hijrah (AH).',
+  'play.l3': 'The Makkan years, step by step – many dates are approximate.',
+  'ce.570': 'c. 570',
+  'ce.610': 'c. 610',
+  'ce.613': 'c. 613',
+  'ce.615': 'c. 615',
+  'ce.619': 'c. 619',
+  'ce.621': '621',
+  'ce.622': '622',
+  'ce.630': '630',
+  'ce.632': '632',
+  'ah.1': '1 AH',
+  'ah.2': '2 AH',
+  'ah.3': '3 AH',
+  'ah.5': '5 AH',
+  'ah.6': '6 AH',
+  'ah.8': '8 AH',
+  'ah.10': '10 AH',
+} as const;
+
+type Key = keyof typeof en;
+
+const de: Record<Key, string> = {
+  title: 'Zeitleiste der Sira',
+  description: 'Hefte die großen Ereignisse der Sira an ihre Jahre – vom Jahr des Elefanten bis zur Abschiedswallfahrt.',
+  howTo: 'Schieb die Markierung entlang der Zeitleiste (oder tippe ein Jahr an) und setze das Ereignis. „Früher“ oder „später“ hilft dir.',
+  'play.l1': 'Setze jedes Ereignis im Leben des Propheten ﷺ auf sein Jahr (n. Chr.).',
+  'play.l2': 'Die Jahre in Medina: setze jedes Ereignis auf sein Jahr nach der Hidschra (n. H.).',
+  'play.l3': 'Die Jahre in Mekka, Schritt für Schritt – viele Daten sind ungefähr.',
+  'ce.570': 'um 570',
+  'ce.610': 'um 610',
+  'ce.613': 'um 613',
+  'ce.615': 'um 615',
+  'ce.619': 'um 619',
+  'ce.621': '621',
+  'ce.622': '622',
+  'ce.630': '630',
+  'ce.632': '632',
+  'ah.1': '1 n. H.',
+  'ah.2': '2 n. H.',
+  'ah.3': '3 n. H.',
+  'ah.5': '5 n. H.',
+  'ah.6': '6 n. H.',
+  'ah.8': '8 n. H.',
+  'ah.10': '10 n. H.',
+};
+
+const bs: Record<Key, string> = {
+  title: 'Vremenska linija sire',
+  description: 'Prikači velike događaje sire na njihove godine – od Godine slona do Oproštajnog hadža.',
+  howTo: 'Pomjeraj oznaku duž vremenske linije (ili dodirni godinu), pa postavi događaj. „Ranije“ ili „kasnije“ ti pomaže.',
+  'play.l1': 'Postavi svaki događaj iz života Poslanika ﷺ na njegovu godinu (po kršćanskom računanju).',
+  'play.l2': 'Medinske godine: postavi svaki događaj na njegovu godinu po Hidžri.',
+  'play.l3': 'Mekanske godine, korak po korak – mnogi datumi su približni.',
+  'ce.570': 'oko 570.',
+  'ce.610': 'oko 610.',
+  'ce.613': 'oko 613.',
+  'ce.615': 'oko 615.',
+  'ce.619': 'oko 619.',
+  'ce.621': '621.',
+  'ce.622': '622.',
+  'ce.630': '630.',
+  'ce.632': '632.',
+  'ah.1': '1. g. po H.',
+  'ah.2': '2. g. po H.',
+  'ah.3': '3. g. po H.',
+  'ah.5': '5. g. po H.',
+  'ah.6': '6. g. po H.',
+  'ah.8': '8. g. po H.',
+  'ah.10': '10. g. po H.',
+};
+
+export const timelineI18n = defineNamespace('game.seerah-timeline', { en, de, bs });

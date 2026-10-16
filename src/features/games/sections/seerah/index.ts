@@ -1,3 +1,4 @@
+import { registerSeerahTimelineGame } from './seerah-timeline/register';
 import { registerCaveHiraGame } from './cave-hira/register';
 import { registerJourneysMapGame } from './journeys-map/register';
 import { registerYearOfTheElephantGame } from './year-of-the-elephant/register';
@@ -11,4 +12,5 @@ export function registerSeerahGames(): void {
   registerYearOfTheElephantGame();
   registerCaveHiraGame();
   registerJourneysMapGame();
+  registerSeerahTimelineGame();
 }
