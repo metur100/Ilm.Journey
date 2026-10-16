@@ -10,7 +10,6 @@ import { registerLetterLanternsGame } from './letter-lanterns/register';
 import { registerPrayerSkyGame } from './prayer-sky/register';
 import { registerRamadanJourneyGame } from './ramadan-journey/register';
 import { registerSurahGardenGame } from './surah-garden/register';
-import { registerSalahGuideGame } from './salah-guide/register';
 import { registerSalahPrayersGames } from './sections/salah-prayers';
 import { registerSalahGames } from './sections/salah';
 import { registerQuranGames } from './sections/quran';
@@ -40,7 +39,6 @@ export function registerGames(): void {
   registerRamadanJourneyGame();
   registerWuduFlowGame();
   registerPrayerSkyGame();
-  registerSalahGuideGame();
   registerFindQiblaGame();
   registerAyahBuilderGame();
   registerSurahGardenGame();

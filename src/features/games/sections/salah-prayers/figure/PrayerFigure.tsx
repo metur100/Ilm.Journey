@@ -44,6 +44,8 @@ export interface PrayerFigureProps {
   reducedMotion?: boolean;
   /** Draw for a dark surface (default: the theme). */
   dark?: boolean;
+  /** Skin tone of the figure (default: the art library's figure tone). */
+  tint?: string;
   /** Milliseconds per movement (a movement to sajda passes the kneeling pose: two movements). */
   speed?: number;
   /** Called when the figure has arrived in `position` (immediately with reduced motion). */
@@ -73,12 +75,12 @@ function LayerPath({ frame, layer, style }: { frame: SharedValue<FigureFrame>; l
  * the UI thread). With reduced motion the new position fades in instead. Cues (gaze line, arrows, the 7 points of
  * sajda, the glow behind the moving part) appear once the figure has arrived.
  */
-export function PrayerFigure({ position, variant, width, view = FULL_VIEW, cues, reducedMotion = false, dark: darkProp, speed = 520, onSettled, label, style, children }: PrayerFigureProps) {
+export function PrayerFigure({ position, variant, width, view = FULL_VIEW, cues, reducedMotion = false, dark: darkProp, tint, speed = 520, onSettled, label, style, children }: PrayerFigureProps) {
   const theme = useTheme();
   const dark = darkProp ?? theme.dark;
   const uid = useId().replace(/[^a-zA-Z0-9]/g, '');
-  const ctx = useMemo(() => makeCtx(`pf${uid}`, { dark }), [uid, dark]);
-  const colors = useMemo(() => figureColors(dark), [dark]);
+  const ctx = useMemo(() => makeCtx(`pf${uid}`, { dark, tint }), [uid, dark, tint]);
+  const colors = useMemo(() => figureColors(dark, tint), [dark, tint]);
   const height = (width * view[3]) / view[2];
 
   const [settled, setSettled] = useState<PrayerPosition>(position);
