@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 
@@ -8,6 +9,9 @@ import { ProgressBar } from '@/core/components/ui/ProgressBar';
 import { Screen } from '@/core/components/ui/Screen';
 import { SourceList } from '@/core/components/ui/SourceList';
 import { TopBar } from '@/core/components/ui/TopBar';
+import { Icon } from '@/core/components/ui/Icon';
+import { getGame, useGamesStore } from '@/core/games';
+import { translateNs } from '@/core/i18n';
 import { useAppStore } from '@/core/store/appStore';
 import { XP } from '@/core/services/xp';
 import { speakArabic } from '@/core/services/speech';
@@ -16,7 +20,7 @@ import { HARAKA_NAMES, LETTERS } from '@/features/games/sections/arabic/shared/l
 import { LANGUAGE_SOURCES, type Language } from '@/core/models';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 
-import { HARAKA_VOWEL, letterChoices, vowelChoices } from '../sufara/logic';
+import { gameStars, HARAKA_VOWEL, letterChoices, SUFARA_PATH, type SufaraStage, vowelChoices } from '../sufara/logic';
 
 type Copy = {
   title: string;
@@ -36,6 +40,11 @@ type Copy = {
   allComplete: string;
   restart: string;
   source: string;
+  pathTitle: string;
+  pathIntro: string;
+  practiceTitle: string;
+  stage: Record<SufaraStage, string>;
+  stars: (n: number) => string;
 };
 
 const COPY: Record<Language, Copy> = {
@@ -57,6 +66,11 @@ const COPY: Record<Language, Copy> = {
     allComplete: 'Prešao si svih 28 harfova.',
     restart: 'Ponovi od početka',
     source: 'Izvor: standardno arapsko pismo; lekcija Arapski harfovi i hareketi.',
+    pathTitle: 'Put sufare',
+    pathIntro: 'Igre iz sekcije Arapski / Sufara, redom: harfovi, oblici, spajanje harfova, hareketi i čitanje.',
+    practiceTitle: 'Vježba harf po harf',
+    stage: { letters: '1 · Harfovi', shapes: '2 · Tačke i oblici', joining: '3 · Spajanje harfova', harakat: '4 · Hareketi', reading: '5 · Čitanje' },
+    stars: (n) => `${n} od 9 zvjezdica`,
   },
   de: {
     title: 'Sufara',
@@ -76,6 +90,11 @@ const COPY: Record<Language, Copy> = {
     allComplete: 'Du hast alle 28 Buchstaben geübt.',
     restart: 'Von vorn wiederholen',
     source: 'Quelle: standardarabische Schrift; Lektionen Arabische Buchstaben und Harakat.',
+    pathTitle: 'Der Sufara-Pfad',
+    pathIntro: 'Die Spiele des Bereichs Arabisch / Sufara der Reihe nach: Buchstaben, Formen, Verbinden, Harakat und Lesen.',
+    practiceTitle: 'Übung Buchstabe für Buchstabe',
+    stage: { letters: '1 · Buchstaben', shapes: '2 · Punkte und Formen', joining: '3 · Buchstaben verbinden', harakat: '4 · Harakat', reading: '5 · Lesen' },
+    stars: (n) => `${n} von 9 Sternen`,
   },
   en: {
     title: 'Sufara',
@@ -95,6 +114,11 @@ const COPY: Record<Language, Copy> = {
     allComplete: 'You practised all 28 letters.',
     restart: 'Review from the start',
     source: 'Source: standard Arabic script; Arabic Letters and Harakat lessons.',
+    pathTitle: 'The sufara path',
+    pathIntro: 'The games of Arabic / Sufara in order: letters, shapes, joining the letters, harakat and reading.',
+    practiceTitle: 'Letter-by-letter practice',
+    stage: { letters: '1 · Letters', shapes: '2 · Dots and shapes', joining: '3 · Joining the letters', harakat: '4 · Harakat', reading: '5 · Reading' },
+    stars: (n) => `${n} of 9 stars`,
   },
 };
 
@@ -113,6 +137,11 @@ const useStyles = makeStyles((c) => ({
   choice: { minWidth: 84, minHeight: 76, padding: spacing.sm, borderWidth: 1.5, borderColor: c.border, borderRadius: radius.md, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
   choiceArabic: { fontSize: 40, lineHeight: 56, writingDirection: 'rtl' },
   feedback: { minHeight: 24 },
+  path: { gap: spacing.sm },
+  stage: { gap: spacing.xs },
+  step: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, minHeight: 56, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, borderRadius: radius.md, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface },
+  stepText: { flex: 1, gap: 2 },
+  stepDone: { borderColor: c.success },
 }));
 
 export default function SufaraScreen() {
@@ -120,6 +149,7 @@ export default function SufaraScreen() {
   const styles = useStyles();
   const settings = useAppStore((s) => s.settings);
   const xpAwards = useAppStore((s) => s.xpAwards);
+  const games = useGamesStore((s) => s.games);
   const awardXp = useAppStore((s) => s.awardXp);
   const registerActivity = useAppStore((s) => s.registerActivity);
   const language = settings.language;
@@ -181,6 +211,39 @@ export default function SufaraScreen() {
         <ProgressBar progress={done / LETTERS.length} color={c.gold} />
       </View>
 
+      <View style={styles.path}>
+        <AppText variant="heading">{copy.pathTitle}</AppText>
+        <AppText variant="small" color={c.textMuted}>{copy.pathIntro}</AppText>
+        {SUFARA_PATH.map(({ stage, games: ids }) => (
+          <View key={stage} style={styles.stage}>
+            <AppText variant="label" color={c.goldText}>{copy.stage[stage]}</AppText>
+            {ids.map((id) => {
+              const game = getGame(id);
+              if (!game) return null;
+              const stars = gameStars(games[id]?.levels);
+              const title = translateNs(game.i18n, language, 'title');
+              return (
+                <Pressable
+                  key={id}
+                  onPress={() => router.push({ pathname: '/game/[id]', params: { id } })}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${title}, ${copy.stars(stars)}`}
+                  testID={`sufara-game-${id}`}
+                  style={[styles.step, stars >= 9 && styles.stepDone]}
+                >
+                  <View style={styles.stepText}>
+                    <AppText variant="bodyBold">{title}</AppText>
+                    <AppText variant="tiny" color={c.textMuted}>{copy.stars(stars)}</AppText>
+                  </View>
+                  <Icon name="chevron" size={20} color={c.textMuted} />
+                </Pressable>
+              );
+            })}
+          </View>
+        ))}
+      </View>
+
+      <AppText variant="heading">{copy.practiceTitle}</AppText>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.letterStrip}>
         {LETTERS.map((item) => {
           const selected = item.position === position;

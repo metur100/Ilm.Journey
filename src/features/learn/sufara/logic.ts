@@ -53,3 +53,18 @@ export function vowelChoices(letter: string, position: number): { target: Haraka
 }
 
 export const HARAKA_VOWEL = HARAKAT;
+/** The sufara path of the Play section "Arabic / Sufara": stages and their games in learning order. */
+export const SUFARA_PATH = [
+  { stage: 'letters', games: ['letter-trace', 'letter-lanterns', 'alphabet-path'] },
+  { stage: 'shapes', games: ['letter-dots', 'twin-letters', 'letter-forms'] },
+  { stage: 'joining', games: ['non-joiners', 'join-letters'] },
+  { stage: 'harakat', games: ['harakat-sounds', 'marks-workshop', 'madd-stretch'] },
+  { stage: 'reading', games: ['syllable-reading', 'word-builder', 'word-memory'] },
+] as const;
+
+export type SufaraStage = (typeof SUFARA_PATH)[number]['stage'];
+
+/** Best stars of a game over its three levels (0–9) from the persisted level progress. */
+export function gameStars(levels: Partial<Record<'1' | '2' | '3', { stars: number }>> | undefined): number {
+  return (['1', '2', '3'] as const).reduce((n, l) => n + (levels?.[l]?.stars ?? 0), 0);
+}
