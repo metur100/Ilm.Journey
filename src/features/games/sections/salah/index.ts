@@ -4,6 +4,7 @@ import { registerGhuslGame } from './ghusl/register';
 import { registerConditionsGame } from './salah-conditions/register';
 import { registerTayammumGame } from './tayammum/register';
 import { registerPrayerSkyGame } from './prayer-sky/register';
+import { registerBreakersGame } from './wudu-breakers/register';
 import { registerWuduFlowGame } from './wudu-flow/register';
 
 /**
@@ -17,6 +18,7 @@ export function registerSalahGames(): void {
   registerTayammumGame();
   registerAdhanGame();
   registerConditionsGame();
+  registerBreakersGame();
   registerPrayerSkyGame();
   registerFindQiblaGame();
 }
