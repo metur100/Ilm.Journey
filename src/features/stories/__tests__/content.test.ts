@@ -166,6 +166,19 @@ describe('story content', () => {
     for (const story of STORIES) for (const place of story.mapPlaces ?? []) expect({ story: story.id, place, ok: isMapPlace(place) }).toEqual({ story: story.id, place, ok: true });
   });
 
+  it('gives every story its own symbol, animated cover and a stage on every scene (the JSON wins)', () => {
+    for (const story of STORIES) {
+      const overlay = STORY_STAGES[story.id];
+      expect({ id: story.id, symbol: !!story.symbolArt, cover: !!story.coverStage, scenes: story.scenes.every((s) => !!s.stage) }).toEqual({
+        id: story.id,
+        symbol: true,
+        cover: true,
+        scenes: true,
+      });
+      if (overlay?.cover) expect(story.coverStage).not.toBe(overlay.cover);
+    }
+  });
+
   it('keeps the stage overlay in step with the stories', () => {
     for (const [id, overlay] of Object.entries(STORY_STAGES)) {
       const story = STORIES.find((s) => s.id === id);
