@@ -5,9 +5,9 @@
     "title": { "en": "World of Akhlaq", "de": "Welt des Charakters", "bs": "Svijet ahlaka" },
     "subtitle": { "en": "Beautiful character", "de": "Schöner Charakter", "bs": "Lijep ahlak" },
     "description": {
-      "en": "Patience, gratitude, honesty, mercy and kindness – learn how a Muslim treats others.",
-      "de": "Geduld, Dankbarkeit, Ehrlichkeit, Barmherzigkeit und Freundlichkeit – lerne, wie ein Muslim andere behandelt.",
-      "bs": "Strpljenje, zahvalnost, iskrenost, milost i ljubaznost – nauči kako se musliman odnosi prema drugima."
+      "en": "Patience, gratitude, honesty, mercy and kindness – learn how to treat others well.",
+      "de": "Geduld, Dankbarkeit, Ehrlichkeit, Barmherzigkeit und Freundlichkeit – lerne, wie man andere gut behandelt.",
+      "bs": "Strpljenje, zahvalnost, iskrenost, milost i ljubaznost – nauči kako se lijepo odnositi prema drugima."
     },
     "scene": { "sky": "day", "elements": ["sun", "clouds", "garden", "tree"] },
     "questIds": ["akhlaq-q1", "akhlaq-q2", "akhlaq-q3", "akhlaq-q4", "akhlaq-q5"],

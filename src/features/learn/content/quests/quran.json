@@ -38,9 +38,9 @@
         {
           "heading": { "en": "The word \"Quran\"", "de": "Das Wort „Koran“", "bs": "Riječ „Kur'an“" },
           "body": {
-            "en": "\"Quran\" means \"recitation\" – something that is read aloud. Muslims recite it in prayer, learn it by heart and try to live by it.",
-            "de": "„Quran“ bedeutet „Rezitation“ – etwas, das laut gelesen wird. Muslime rezitieren ihn im Gebet, lernen ihn auswendig und versuchen, nach ihm zu leben.",
-            "bs": "„Kur'an“ znači „učenje, kazivanje“ – nešto što se čita naglas. Muslimani ga uče u namazu, pamte napamet i trude se živjeti po njemu."
+            "en": "\"Quran\" means \"recitation\" – something that is read aloud. We recite it in prayer, learn it by heart and try to live by it.",
+            "de": "„Quran“ bedeutet „Rezitation“ – etwas, das laut gelesen wird. Wir rezitieren ihn im Gebet, lernen ihn auswendig und versuchen, nach ihm zu leben.",
+            "bs": "„Kur'an“ znači „učenje, kazivanje“ – nešto što se čita naglas. Učimo ga u namazu, pamtimo ga napamet i trudimo se živjeti po njemu."
           }
         }
       ],
@@ -145,9 +145,9 @@
         {
           "heading": { "en": "Madani surahs", "de": "Medinensische Suren", "bs": "Medinske sure" },
           "body": {
-            "en": "Madani surahs were revealed after the Hijra. They often explain how the Muslim community lives together: family, fairness, worship and rules.",
-            "de": "Medinensische Suren wurden nach der Hidschra offenbart. Sie erklären oft, wie die muslimische Gemeinschaft zusammenlebt: Familie, Gerechtigkeit, Gottesdienst und Regeln.",
-            "bs": "Medinske sure objavljene su nakon hidžre. Često objašnjavaju kako muslimanska zajednica živi zajedno: porodica, pravednost, ibadet i propisi."
+            "en": "Madani surahs were revealed after the Hijra. They often explain how the community of believers lives together: family, fairness, worship and rules.",
+            "de": "Medinensische Suren wurden nach der Hidschra offenbart. Sie erklären oft, wie die Gemeinschaft der Gläubigen zusammenlebt: Familie, Gerechtigkeit, Gottesdienst und Regeln.",
+            "bs": "Medinske sure objavljene su nakon hidžre. Često objašnjavaju kako zajednica vjernika živi zajedno: porodica, pravednost, ibadet i propisi."
           }
         }
       ],

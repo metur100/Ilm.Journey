@@ -164,7 +164,7 @@
         { "arabic": "اللّٰهُ أَكْبَر", "transliteration": "Allāhu akbar", "body": { "en": "Allah is the Greatest – said in prayer and in the adhan.", "de": "Allah ist größer – im Gebet und im Gebetsruf.", "bs": "Allah je najveći – u namazu i ezanu." } },
         { "arabic": "سُبْحَانَ اللّٰه", "transliteration": "subḥānallāh", "body": { "en": "Glory be to Allah – said when we see something amazing.", "de": "Gepriesen sei Allah – sagt man, wenn man etwas Wunderbares sieht.", "bs": "Slavljen neka je Allah – kada vidimo nešto zadivljujuće." } },
         { "arabic": "الْحَمْدُ لِلّٰه", "transliteration": "al-ḥamdu lillāh", "body": { "en": "All praise is for Allah – said to thank Allah.", "de": "Alles Lob gebührt Allah – um Allah zu danken.", "bs": "Hvala Allahu – da zahvalimo Allahu." } },
-        { "arabic": "السَّلَامُ عَلَيْكُم", "transliteration": "as-salāmu ʿalaykum", "body": { "en": "Peace be upon you – the Muslim greeting.", "de": "Friede sei mit euch – der muslimische Gruß.", "bs": "Mir s vama – muslimanski pozdrav." } },
+        { "arabic": "السَّلَامُ عَلَيْكُم", "transliteration": "as-salāmu ʿalaykum", "body": { "en": "Peace be upon you – the greeting of Islam.", "de": "Friede sei mit euch – der Gruß des Islam.", "bs": "Mir s vama – islamski pozdrav." } },
         { "arabic": "أَذَان", "transliteration": "adhān", "body": { "en": "The call to prayer", "de": "Der Gebetsruf", "bs": "Ezan – poziv na namaz" } },
         { "arabic": "سُجُود", "transliteration": "sujūd", "body": { "en": "Prostration", "de": "Niederwerfung", "bs": "Sedžda" } }
       ]
@@ -484,9 +484,9 @@
         { "id": "salam", "left": { "en": "As-salamu alaykum", "de": "As-salamu alaikum", "bs": "Es-selamu alejkum" }, "right": { "en": "Peace be upon you", "de": "Friede sei mit euch", "bs": "Mir s vama" } }
       ],
       "explanation": {
-        "en": "These phrases fill a Muslim's day with remembrance of Allah.",
-        "de": "Diese Ausdrücke füllen den Tag eines Muslims mit dem Gedenken an Allah.",
-        "bs": "Ovi izrazi ispunjavaju dan muslimana sjećanjem na Allaha."
+        "en": "These phrases fill our day with remembrance of Allah.",
+        "de": "Diese Ausdrücke füllen unseren Tag mit dem Gedenken an Allah.",
+        "bs": "Ovi izrazi ispunjavaju naš dan sjećanjem na Allaha."
       }
     },
     {

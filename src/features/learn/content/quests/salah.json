@@ -5,9 +5,9 @@
     "title": { "en": "World of Salah", "de": "Welt des Gebets", "bs": "Svijet namaza" },
     "subtitle": { "en": "The five daily prayers", "de": "Die fünf täglichen Gebete", "bs": "Pet dnevnih namaza" },
     "description": {
-      "en": "Discover what Salah is, why Muslims pray, how to make wudu and how to behave in the masjid.",
-      "de": "Entdecke, was das Gebet ist, warum Muslime beten, wie man die Gebetswaschung macht und wie man sich in der Moschee verhält.",
-      "bs": "Otkrij šta je namaz, zašto muslimani klanjaju, kako se uzima abdest i kako se ponašamo u džamiji."
+      "en": "Discover what Salah is, why we pray, how to make wudu and how to behave in the masjid.",
+      "de": "Entdecke, was das Gebet ist, warum wir beten, wie man die Gebetswaschung macht und wie man sich in der Moschee verhält.",
+      "bs": "Otkrij šta je namaz, zašto klanjamo, kako se uzima abdest i kako se ponašamo u džamiji."
     },
     "scene": { "sky": "dawn", "elements": ["stars", "crescent", "hills", "mosque", "lanterns"] },
     "questIds": ["salah-q1", "salah-q2", "salah-q3", "salah-q4", "salah-q5"],
@@ -20,17 +20,17 @@
       "topic": "salah-basics",
       "title": { "en": "What is Salah?", "de": "Was ist das Gebet (Salah)?", "bs": "Šta je namaz?" },
       "summary": {
-        "en": "Salah is the special prayer Muslims perform to worship Allah.",
-        "de": "Salah ist das besondere Gebet, mit dem Muslime Allah dienen.",
-        "bs": "Namaz je posebna molitva kojom muslimani ibadete Allahu."
+        "en": "Salah is the special prayer with which we worship Allah.",
+        "de": "Salah ist das besondere Gebet, mit dem wir Allah dienen.",
+        "bs": "Namaz je posebna molitva kojom ibadetimo Allahu."
       },
       "scene": { "sky": "dawn", "elements": ["hills", "mosque", "prayerMat"] },
       "sections": [
         {
           "body": {
-            "en": "Salah is the prayer that Muslims perform at set times every day. In Salah we stand, bow, prostrate and sit while remembering Allah and reciting from the Quran.",
-            "de": "Salah ist das Gebet, das Muslime jeden Tag zu festen Zeiten verrichten. Im Gebet stehen wir, verbeugen uns, werfen uns nieder und sitzen – und gedenken dabei Allahs und rezitieren aus dem Koran.",
-            "bs": "Namaz je molitva koju muslimani obavljaju svaki dan u određeno vrijeme. U namazu stojimo, činimo ruku' i sedždu i sjedimo, sjećajući se Allaha i učeći iz Kur'ana."
+            "en": "Salah is the prayer that we perform at set times every day. In Salah we stand, bow, prostrate and sit while remembering Allah and reciting from the Quran.",
+            "de": "Salah ist das Gebet, das wir jeden Tag zu festen Zeiten verrichten. Im Gebet stehen wir, verbeugen uns, werfen uns nieder und sitzen – und gedenken dabei Allahs und rezitieren aus dem Koran.",
+            "bs": "Namaz je molitva koju obavljamo svaki dan u određeno vrijeme. U namazu stojimo, činimo ruku' i sedždu i sjedimo, sjećajući se Allaha i učeći iz Kur'ana."
           },
           "arabic": "صَلَاة",
           "transliteration": "ṣalāh"
@@ -279,17 +279,17 @@
       "topic": "qibla",
       "title": { "en": "The Qibla", "de": "Die Qibla", "bs": "Kibla" },
       "summary": {
-        "en": "Muslims everywhere face the Kaaba in Makkah when they pray.",
-        "de": "Muslime auf der ganzen Welt richten sich beim Gebet zur Kaaba in Mekka aus.",
-        "bs": "Muslimi svugdje okreću se prema Kabi u Mekki kada klanjaju."
+        "en": "Wherever we are, we face the Kaaba in Makkah when we pray.",
+        "de": "Wo immer wir sind, richten wir uns beim Gebet zur Kaaba in Mekka aus.",
+        "bs": "Gdje god da smo, u namazu se okrećemo prema Kabi u Mekki."
       },
       "scene": { "sky": "sunset", "elements": ["dunes", "kaaba"] },
       "sections": [
         {
           "body": {
-            "en": "The Qibla is the direction of the Kaaba in Makkah. Allah commanded the believers to turn their faces towards it in prayer. So Muslims all over the world pray in one direction – like circles around the Kaaba.",
-            "de": "Die Qibla ist die Richtung der Kaaba in Mekka. Allah gebot den Gläubigen, sich im Gebet zu ihr zu wenden. So beten Muslime auf der ganzen Welt in eine Richtung – wie Kreise um die Kaaba.",
-            "bs": "Kibla je smjer Kabe u Mekki. Allah je naredio vjernicima da se u namazu okrenu prema njoj. Tako muslimani širom svijeta klanjaju u jednom smjeru – kao krugovi oko Kabe."
+            "en": "The Qibla is the direction of the Kaaba in Makkah. Allah commanded the believers to turn their faces towards it in prayer. So all over the world the prayer faces one direction – like circles around the Kaaba.",
+            "de": "Die Qibla ist die Richtung der Kaaba in Mekka. Allah gebot den Gläubigen, sich im Gebet zu ihr zu wenden. So richtet sich das Gebet auf der ganzen Welt in eine Richtung – wie Kreise um die Kaaba.",
+            "bs": "Kibla je smjer Kabe u Mekki. Allah je naredio vjernicima da se u namazu okrenu prema njoj. Tako je namaz širom svijeta okrenut u jednom smjeru – kao krugovi oko Kabe."
           },
           "arabic": "قِبْلَة",
           "transliteration": "qiblah"
@@ -330,9 +330,9 @@
       "sections": [
         {
           "body": {
-            "en": "A masjid is a place where Muslims pray together, learn and meet. It is a special place, so we come clean and wearing tidy clothes.",
-            "de": "Eine Moschee ist ein Ort, an dem Muslime gemeinsam beten, lernen und sich treffen. Sie ist ein besonderer Ort, deshalb kommen wir sauber und ordentlich gekleidet.",
-            "bs": "Džamija je mjesto gdje muslimani zajedno klanjaju, uče i druže se. To je posebno mjesto, pa dolazimo čisti i uredno obučeni."
+            "en": "A masjid is a place where we pray together, learn and meet. It is a special place, so we come clean and wearing tidy clothes.",
+            "de": "Eine Moschee ist ein Ort, an dem wir gemeinsam beten, lernen und uns treffen. Sie ist ein besonderer Ort, deshalb kommen wir sauber und ordentlich gekleidet.",
+            "bs": "Džamija je mjesto gdje zajedno klanjamo, učimo i družimo se. To je posebno mjesto, pa dolazimo čisti i uredno obučeni."
           },
           "arabic": "مَسْجِد",
           "transliteration": "masjid"
@@ -632,7 +632,7 @@
       "type": "multipleChoice",
       "worldId": "salah",
       "topic": "qibla",
-      "prompt": { "en": "Which direction do Muslims face in prayer?", "de": "In welche Richtung wenden sich Muslime beim Gebet?", "bs": "U kojem smjeru se muslimani okreću u namazu?" },
+      "prompt": { "en": "Which direction do we face in prayer?", "de": "In welche Richtung wenden wir uns beim Gebet?", "bs": "U kojem smjeru se okrećemo u namazu?" },
       "options": [
         { "id": "a", "text": { "en": "Towards the rising sun", "de": "Zur aufgehenden Sonne", "bs": "Prema izlasku sunca" } },
         { "id": "b", "text": { "en": "Towards the Kaaba in Makkah", "de": "Zur Kaaba in Mekka", "bs": "Prema Kabi u Mekki" } },
@@ -837,9 +837,9 @@
       "id": "salah-fact-qibla",
       "worldId": "salah",
       "text": {
-        "en": "Muslims all over the world face the same direction when they pray: the Kaaba in Makkah.",
-        "de": "Muslime auf der ganzen Welt beten in dieselbe Richtung: zur Kaaba in Mekka.",
-        "bs": "Muslimani širom svijeta klanjaju u istom smjeru: prema Kabi u Mekki."
+        "en": "All over the world the prayer faces the same direction: the Kaaba in Makkah.",
+        "de": "Auf der ganzen Welt wird in dieselbe Richtung gebetet: zur Kaaba in Mekka.",
+        "bs": "Širom svijeta namaz se klanja u istom smjeru: prema Kabi u Mekki."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "2:144" }]
     },

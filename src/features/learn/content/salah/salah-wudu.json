@@ -19,9 +19,9 @@
     {
       "heading": { "en": "The Qibla", "de": "Die Qibla", "bs": "Kibla" },
       "body": {
-        "en": "Muslims face the Kaaba in Makkah when they pray. In the early years in Madinah they faced Bayt al-Maqdis in Jerusalem, until Allah changed the Qibla to the Kaaba.",
-        "de": "Muslime richten sich beim Gebet zur Kaaba in Mekka aus. In den ersten Jahren in Medina wandten sie sich nach Bait al-Maqdis in Jerusalem, bis Allah die Qibla zur Kaaba änderte.",
-        "bs": "Muslimani se u namazu okreću prema Kabi u Mekki. U prvim godinama u Medini okretali su se prema Bejtul-Makdisu u Jerusalemu, dok Allah nije promijenio kiblu prema Kabi."
+        "en": "We face the Kaaba in Makkah when we pray. In the early years in Madinah they faced Bayt al-Maqdis in Jerusalem, until Allah changed the Qibla to the Kaaba.",
+        "de": "Wir richten uns beim Gebet zur Kaaba in Mekka aus. In den ersten Jahren in Medina wandten sie sich nach Bait al-Maqdis in Jerusalem, bis Allah die Qibla zur Kaaba änderte.",
+        "bs": "U namazu se okrećemo prema Kabi u Mekki. U prvim godinama u Medini okretali su se prema Bejtul-Makdisu u Jerusalemu, dok Allah nije promijenio kiblu prema Kabi."
       }
     }
   ],
@@ -33,9 +33,9 @@
   "practiceId": "salah-wudu-p",
   "testIds": ["salah-wudu-1", "salah-wudu-2", "salah-wudu-3", "salah-wudu-4"],
   "explanation": {
-    "en": "Wudu prepares body and heart for prayer, and the Qibla unites Muslims everywhere in one direction.",
-    "de": "Wudu bereitet Körper und Herz auf das Gebet vor, und die Qibla vereint Muslime überall in einer Richtung.",
-    "bs": "Abdest priprema tijelo i srce za namaz, a kibla ujedinjuje muslimane svugdje u jednom smjeru."
+    "en": "Wudu prepares body and heart for prayer, and the Qibla unites the believers everywhere in one direction.",
+    "de": "Wudu bereitet Körper und Herz auf das Gebet vor, und die Qibla vereint die Gläubigen überall in einer Richtung.",
+    "bs": "Abdest priprema tijelo i srce za namaz, a kibla ujedinjuje vjernike svugdje u jednom smjeru."
   },
   "sources": [
     { "sourceName": "Quran", "sourceReference": "5:6" },
@@ -94,7 +94,7 @@
       "type": "imageChoice",
       "areaId": "salah",
       "topic": "qibla",
-      "prompt": { "en": "Which building do Muslims face in prayer?", "de": "Zu welchem Bauwerk wenden sich Muslime im Gebet?", "bs": "Prema kojoj se građevini muslimani okreću u namazu?" },
+      "prompt": { "en": "Which building do we face in prayer?", "de": "Zu welchem Bauwerk wenden wir uns im Gebet?", "bs": "Prema kojoj se građevini okrećemo u namazu?" },
       "options": [
         { "id": "kaaba", "element": "kaaba", "label": { "en": "The Kaaba", "de": "Die Kaaba", "bs": "Kaba" } },
         { "id": "ark", "element": "ark", "label": { "en": "A ship", "de": "Ein Schiff", "bs": "Lađa" } },

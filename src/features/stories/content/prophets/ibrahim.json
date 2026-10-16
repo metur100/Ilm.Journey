@@ -168,9 +168,9 @@
       "places": ["makkah", "egypt", "jerusalem", "mesopotamia"],
       "correctPlace": "makkah",
       "explanation": {
-        "en": "The Kaaba stands in Makkah. Muslims all over the world face it in prayer.",
-        "de": "Die Kaaba steht in Mekka. Muslime auf der ganzen Welt richten sich beim Gebet nach ihr aus.",
-        "bs": "Kaba se nalazi u Mekki. Muslimani širom svijeta okreću se prema njoj u namazu."
+        "en": "The Kaaba stands in Makkah. All over the world the prayer faces it.",
+        "de": "Die Kaaba steht in Mekka. Auf der ganzen Welt richtet sich das Gebet nach ihr aus.",
+        "bs": "Kaba se nalazi u Mekki. Širom svijeta namaz je okrenut prema njoj."
       },
       "sources": [{ "sourceName": "Quran", "sourceReference": "2:127; 3:96" }]
     },

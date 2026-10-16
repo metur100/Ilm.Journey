@@ -13,9 +13,9 @@ export const QIBLA_FACTS = {
     id: 'qibla-kaaba',
     // quests/salah.json › lessons › salah-qibla › sections[0]
     text: {
-      en: 'The Qibla is the direction of the Kaaba in Makkah. Allah commanded the believers to turn their faces towards it in prayer. So Muslims all over the world pray in one direction – like circles around the Kaaba.',
-      de: 'Die Qibla ist die Richtung der Kaaba in Mekka. Allah gebot den Gläubigen, sich im Gebet zu ihr zu wenden. So beten Muslime auf der ganzen Welt in eine Richtung – wie Kreise um die Kaaba.',
-      bs: 'Kibla je smjer Kabe u Mekki. Allah je naredio vjernicima da se u namazu okrenu prema njoj. Tako muslimani širom svijeta klanjaju u jednom smjeru – kao krugovi oko Kabe.',
+      en: 'The Qibla is the direction of the Kaaba in Makkah. Allah commanded the believers to turn their faces towards it in prayer. So all over the world the prayer faces one direction – like circles around the Kaaba.',
+      de: 'Die Qibla ist die Richtung der Kaaba in Mekka. Allah gebot den Gläubigen, sich im Gebet zu ihr zu wenden. So richtet sich das Gebet auf der ganzen Welt in eine Richtung – wie Kreise um die Kaaba.',
+      bs: 'Kibla je smjer Kabe u Mekki. Allah je naredio vjernicima da se u namazu okrenu prema njoj. Tako je namaz širom svijeta okrenut u jednom smjeru – kao krugovi oko Kabe.',
     },
     sources: [{ sourceName: 'Quran', sourceReference: '2:144' }],
     art: 'object.kaaba-icon',
@@ -25,9 +25,9 @@ export const QIBLA_FACTS = {
     id: 'qibla-everywhere',
     // quests/salah.json › lessons › salah-qibla › summary
     text: {
-      en: 'Muslims everywhere face the Kaaba in Makkah when they pray.',
-      de: 'Muslime auf der ganzen Welt richten sich beim Gebet zur Kaaba in Mekka aus.',
-      bs: 'Muslimi svugdje okreću se prema Kabi u Mekki kada klanjaju.',
+      en: 'Wherever we are, we face the Kaaba in Makkah when we pray.',
+      de: 'Wo immer wir sind, richten wir uns beim Gebet zur Kaaba in Mekka aus.',
+      bs: 'Gdje god da smo, u namazu se okrećemo prema Kabi u Mekki.',
     },
     sources: [
       { sourceName: 'Quran', sourceReference: '2:144' },
@@ -37,7 +37,7 @@ export const QIBLA_FACTS = {
     // quests/salah.json › questions › salah-qibla-mc
     check: {
       type: 'choice',
-      prompt: { en: 'Which direction do Muslims face in prayer?', de: 'In welche Richtung wenden sich Muslime beim Gebet?', bs: 'U kojem smjeru se muslimani okreću u namazu?' },
+      prompt: { en: 'Which direction do we face in prayer?', de: 'In welche Richtung wenden wir uns beim Gebet?', bs: 'U kojem smjeru se okrećemo u namazu?' },
       options: [
         { en: 'Towards the rising sun', de: 'Zur aufgehenden Sonne', bs: 'Prema izlasku sunca' },
         { en: 'Towards the Kaaba in Makkah', de: 'Zur Kaaba in Mekka', bs: 'Prema Kabi u Mekki' },

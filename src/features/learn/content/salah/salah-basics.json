@@ -8,9 +8,9 @@
   "lesson": [
     {
       "body": {
-        "en": "Salah is the prayer Muslims perform at set times every day: standing, bowing, prostrating and sitting while remembering Allah and reciting from the Quran. The Prophet ﷺ taught that Islam is built on five pillars – Salah is the second, after the Shahada.",
-        "de": "Salah ist das Gebet, das Muslime jeden Tag zu festen Zeiten verrichten: Stehen, Verbeugen, Niederwerfen und Sitzen, während sie Allahs gedenken und aus dem Koran rezitieren. Der Prophet ﷺ lehrte, dass der Islam auf fünf Säulen gebaut ist – das Gebet ist die zweite, nach der Schahada.",
-        "bs": "Namaz je molitva koju muslimani obavljaju svaki dan u određeno vrijeme: stajanje, ruku', sedžda i sjedenje, uz sjećanje na Allaha i učenje Kur'ana. Poslanik ﷺ je poučio da je islam izgrađen na pet temelja – namaz je drugi, nakon šehadeta."
+        "en": "Salah is the prayer we perform at set times every day: standing, bowing, prostrating and sitting while remembering Allah and reciting from the Quran. The Prophet ﷺ taught that Islam is built on five pillars – Salah is the second, after the Shahada.",
+        "de": "Salah ist das Gebet, das wir jeden Tag zu festen Zeiten verrichten: Stehen, Verbeugen, Niederwerfen und Sitzen, während sie Allahs gedenken und aus dem Koran rezitieren. Der Prophet ﷺ lehrte, dass der Islam auf fünf Säulen gebaut ist – das Gebet ist die zweite, nach der Schahada.",
+        "bs": "Namaz je molitva koju obavljamo svaki dan u određeno vrijeme: stajanje, ruku', sedžda i sjedenje, uz sjećanje na Allaha i učenje Kur'ana. Poslanik ﷺ je poučio da je islam izgrađen na pet temelja – namaz je drugi, nakon šehadeta."
       },
       "arabic": "صَلَاة",
       "transliteration": "ṣalāh"
@@ -35,9 +35,9 @@
   "practiceId": "salah-basics-p",
   "testIds": ["salah-basics-1", "salah-basics-2", "salah-basics-3", "salah-basics-4"],
   "explanation": {
-    "en": "Salah connects a Muslim to Allah five times a day – it is a pillar of Islam, a command of Allah and a means of remembrance and purification.",
-    "de": "Das Gebet verbindet einen Muslim fünfmal am Tag mit Allah – es ist eine Säule des Islam, ein Gebot Allahs und ein Mittel des Gedenkens und der Reinigung.",
-    "bs": "Namaz povezuje muslimana s Allahom pet puta dnevno – on je temelj islama, Allahova naredba i način sjećanja i čišćenja."
+    "en": "Salah connects us to Allah five times a day – it is a pillar of Islam, a command of Allah and a means of remembrance and purification.",
+    "de": "Das Gebet verbindet uns fünfmal am Tag mit Allah – es ist eine Säule des Islam, ein Gebot Allahs und ein Mittel des Gedenkens und der Reinigung.",
+    "bs": "Namaz nas povezuje s Allahom pet puta dnevno – on je temelj islama, Allahova naredba i način sjećanja i čišćenja."
   },
   "sources": [
     { "sourceName": "Sahih al-Bukhari", "sourceReference": "8" },
@@ -106,7 +106,7 @@
       "type": "imageChoice",
       "areaId": "salah",
       "topic": "salah-basics",
-      "prompt": { "en": "Where do Muslims gather to pray together?", "de": "Wo versammeln sich Muslime zum gemeinsamen Gebet?", "bs": "Gdje se muslimani okupljaju da zajedno klanjaju?" },
+      "prompt": { "en": "Where do we gather to pray together?", "de": "Wo versammeln wir uns zum gemeinsamen Gebet?", "bs": "Gdje se okupljamo da zajedno klanjamo?" },
       "options": [
         { "id": "mosque", "element": "mosque", "label": { "en": "Masjid", "de": "Moschee", "bs": "Džamija" } },
         { "id": "ark", "element": "ark", "label": { "en": "Ship", "de": "Schiff", "bs": "Lađa" } },

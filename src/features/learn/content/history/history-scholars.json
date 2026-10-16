@@ -17,16 +17,16 @@
     {
       "heading": { "en": "The four imams", "de": "Die vier Imame", "bs": "Četiri imama" },
       "body": {
-        "en": "Four great scholars gave their names to the four Sunni schools of Islamic law (madhhabs): Abu Hanifa (died 150 AH), Malik (died 179 AH), al-Shafi'i (died 204 AH) and Ahmad ibn Hanbal (died 241 AH). They respected each other even where they reached different conclusions. Most Muslims in Bosnia and Herzegovina traditionally follow the Hanafi school.",
-        "de": "Vier große Gelehrte gaben den vier sunnitischen Rechtsschulen (Madhhabs) ihre Namen: Abu Hanifa (gest. 150 n. H.), Malik (gest. 179 n. H.), asch-Schafi'i (gest. 204 n. H.) und Ahmad ibn Hanbal (gest. 241 n. H.). Sie achteten einander, auch wo sie zu unterschiedlichen Ergebnissen kamen. Die meisten Muslime in Bosnien und Herzegowina folgen traditionell der hanafitischen Schule.",
-        "bs": "Četiri velika učenjaka dala su imena četirima sunnijskim pravnim školama (mezhebima): Ebu Hanifa (umro 150. h.), Malik (umro 179. h.), eš-Šafi'i (umro 204. h.) i Ahmed ibn Hanbel (umro 241. h.). Poštovali su jedni druge i tamo gdje su došli do različitih zaključaka. Većina muslimana u Bosni i Hercegovini tradicionalno slijedi hanefijski mezheb."
+        "en": "Four great scholars gave their names to the four Sunni schools of Islamic law (madhhabs): Abu Hanifa (died 150 AH), Malik (died 179 AH), al-Shafi'i (died 204 AH) and Ahmad ibn Hanbal (died 241 AH). They respected each other even where they reached different conclusions. In Bosnia and Herzegovina the Hanafi school is traditionally followed.",
+        "de": "Vier große Gelehrte gaben den vier sunnitischen Rechtsschulen (Madhhabs) ihre Namen: Abu Hanifa (gest. 150 n. H.), Malik (gest. 179 n. H.), asch-Schafi'i (gest. 204 n. H.) und Ahmad ibn Hanbal (gest. 241 n. H.). Sie achteten einander, auch wo sie zu unterschiedlichen Ergebnissen kamen. In Bosnien und Herzegowina folgt man traditionell der hanafitischen Schule.",
+        "bs": "Četiri velika učenjaka dala su imena četirima sunnijskim pravnim školama (mezhebima): Ebu Hanifa (umro 150. h.), Malik (umro 179. h.), eš-Šafi'i (umro 204. h.) i Ahmed ibn Hanbel (umro 241. h.). Poštovali su jedni druge i tamo gdje su došli do različitih zaključaka. U Bosni i Hercegovini tradicionalno se slijedi hanefijski mezheb."
       }
     }
   ],
   "differenceNote": {
-    "en": "The existence of several schools of law is why Muslims sometimes practise details differently – all four are respected Sunni traditions.",
-    "de": "Weil es mehrere Rechtsschulen gibt, praktizieren Muslime Details manchmal unterschiedlich – alle vier sind anerkannte sunnitische Traditionen.",
-    "bs": "Zbog više pravnih škola muslimani ponekad neke detalje prakticiraju različito – sve četiri su priznate sunnijske tradicije."
+    "en": "The existence of several schools of law is why some details are sometimes practised differently – all four are respected Sunni traditions.",
+    "de": "Weil es mehrere Rechtsschulen gibt, werden manche Details unterschiedlich praktiziert – alle vier sind anerkannte sunnitische Traditionen.",
+    "bs": "Zbog više pravnih škola se neki detalji ponekad prakticiraju različito – sve četiri su priznate sunnijske tradicije."
   },
   "practiceId": "history-scholars-p",
   "testIds": ["history-scholars-1", "history-scholars-2", "history-scholars-3", "history-scholars-4"],
@@ -92,7 +92,7 @@
       "type": "trueFalse",
       "areaId": "history",
       "topic": "scholars",
-      "prompt": { "en": "Most Muslims in Bosnia and Herzegovina traditionally follow the Hanafi school.", "de": "Die meisten Muslime in Bosnien und Herzegowina folgen traditionell der hanafitischen Schule.", "bs": "Većina muslimana u BiH tradicionalno slijedi hanefijski mezheb." },
+      "prompt": { "en": "In Bosnia and Herzegovina the Hanafi school is traditionally followed.", "de": "In Bosnien und Herzegowina folgt man traditionell der hanafitischen Schule.", "bs": "U BiH se tradicionalno slijedi hanefijski mezheb." },
       "correct": true,
       "explanation": { "en": "Yes – the Hanafi school came to the Balkans in the Ottoman period.", "de": "Ja – die hanafitische Schule kam in osmanischer Zeit auf den Balkan.", "bs": "Da – hanefijski mezheb došao je na Balkan u osmanskom periodu." }
     },

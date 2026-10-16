@@ -8,9 +8,9 @@
   "lesson": [
     {
       "body": {
-        "en": "The Prophet ﷺ was the most generous of people, and even more generous in Ramadan. Before the Eid prayer, Muslims give Zakat al-Fitr so that people in need can celebrate too. Eid al-Fitr is on the first day of Shawwal; fasting on that day is not allowed – it is a day of joy, prayer, takbir and visiting family.",
-        "de": "Der Prophet ﷺ war der großzügigste Mensch und im Ramadan noch großzügiger. Vor dem Eid-Gebet geben Muslime die Zakat al-Fitr, damit auch Bedürftige feiern können. Eid al-Fitr ist am ersten Tag des Schawwal; an diesem Tag zu fasten ist nicht erlaubt – es ist ein Tag der Freude, des Gebets, des Takbir und der Familienbesuche.",
-        "bs": "Poslanik ﷺ je bio najdarežljiviji čovjek, a u ramazanu još darežljiviji. Prije bajram-namaza muslimani daju sadekatul-fitr kako bi i potrebni mogli slaviti. Ramazanski bajram je prvog dana ševvala; tog dana nije dozvoljeno postiti – to je dan radosti, namaza, tekbira i posjeta porodici."
+        "en": "The Prophet ﷺ was the most generous of people, and even more generous in Ramadan. Before the Eid prayer we give Zakat al-Fitr so that people in need can celebrate too. Eid al-Fitr is on the first day of Shawwal; fasting on that day is not allowed – it is a day of joy, prayer, takbir and visiting family.",
+        "de": "Der Prophet ﷺ war der großzügigste Mensch und im Ramadan noch großzügiger. Vor dem Eid-Gebet geben wir die Zakat al-Fitr, damit auch Bedürftige feiern können. Eid al-Fitr ist am ersten Tag des Schawwal; an diesem Tag zu fasten ist nicht erlaubt – es ist ein Tag der Freude, des Gebets, des Takbir und der Familienbesuche.",
+        "bs": "Poslanik ﷺ je bio najdarežljiviji čovjek, a u ramazanu još darežljiviji. Prije bajram-namaza dajemo sadekatul-fitr kako bi i potrebni mogli slaviti. Ramazanski bajram je prvog dana ševvala; tog dana nije dozvoljeno postiti – to je dan radosti, namaza, tekbira i posjeta porodici."
       }
     }
   ],
@@ -36,7 +36,7 @@
       "type": "trueFalse",
       "areaId": "ramadan",
       "topic": "charity-eid",
-      "prompt": { "en": "Muslims fast on the day of Eid al-Fitr.", "de": "Muslime fasten am Tag des Eid al-Fitr.", "bs": "Muslimani poste na dan Ramazanskog bajrama." },
+      "prompt": { "en": "We fast on the day of Eid al-Fitr.", "de": "Wir fasten am Tag des Eid al-Fitr.", "bs": "Postimo na dan Ramazanskog bajrama." },
       "correct": false,
       "explanation": { "en": "Not quite – fasting on Eid is not allowed.", "de": "Nicht ganz – am Eid zu fasten ist nicht erlaubt.", "bs": "Nije tačno – na Bajram nije dozvoljeno postiti." },
       "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "1990" }]

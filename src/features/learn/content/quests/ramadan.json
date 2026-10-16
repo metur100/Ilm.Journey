@@ -78,9 +78,9 @@
         {
           "heading": { "en": "Who has to fast?", "de": "Wer muss fasten?", "bs": "Ko treba postiti?" },
           "body": {
-            "en": "Fasting in Ramadan is an obligation for adult Muslims who are able to fast. Children are not obliged to fast before they reach puberty. Many families let children practise little by little – for example half a day – but only with their parents' guidance. People who are ill, travelling, or for whom fasting would be harmful are excused, as the Quran explains.",
-            "de": "Das Fasten im Ramadan ist Pflicht für erwachsene Muslime, die fasten können. Kinder sind vor der Pubertät nicht zum Fasten verpflichtet. Viele Familien lassen Kinder Schritt für Schritt üben – zum Beispiel einen halben Tag –, aber nur unter Anleitung der Eltern. Kranke, Reisende und Menschen, denen das Fasten schaden würde, sind befreit, wie der Koran erklärt.",
-            "bs": "Post u ramazanu je obaveza za odrasle muslimane koji mogu postiti. Djeca nisu obavezna postiti prije puberteta. Mnoge porodice puštaju djecu da vježbaju malo po malo – npr. pola dana – ali samo uz vodstvo roditelja. Bolesni, putnici i oni kojima bi post naškodio oslobođeni su, kako Kur'an objašnjava."
+            "en": "Fasting in Ramadan is obligatory for every adult who is able to fast. Children are not obliged to fast before they reach puberty. Many families let children practise little by little – for example half a day – but only with their parents' guidance. People who are ill, travelling, or for whom fasting would be harmful are excused, as the Quran explains.",
+            "de": "Das Fasten im Ramadan ist Pflicht für jeden Erwachsenen, der fasten kann. Kinder sind vor der Pubertät nicht zum Fasten verpflichtet. Viele Familien lassen Kinder Schritt für Schritt üben – zum Beispiel einen halben Tag –, aber nur unter Anleitung der Eltern. Kranke, Reisende und Menschen, denen das Fasten schaden würde, sind befreit, wie der Koran erklärt.",
+            "bs": "Post u ramazanu je obaveza za svaku odraslu osobu koja može postiti. Djeca nisu obavezna postiti prije puberteta. Mnoge porodice puštaju djecu da vježbaju malo po malo – npr. pola dana – ali samo uz vodstvo roditelja. Bolesni, putnici i oni kojima bi post naškodio oslobođeni su, kako Kur'an objašnjava."
           }
         },
         {
@@ -165,9 +165,9 @@
         {
           "heading": { "en": "The month of the Quran", "de": "Der Monat des Korans", "bs": "Mjesec Kur'ana" },
           "body": {
-            "en": "Every Ramadan, the angel Jibril met the Prophet ﷺ and they went through the Quran together. Many Muslims try to read or listen to the whole Quran during Ramadan.",
-            "de": "In jedem Ramadan traf der Engel Dschibril den Propheten ﷺ, und sie gingen den Koran gemeinsam durch. Viele Muslime versuchen, im Ramadan den ganzen Koran zu lesen oder zu hören.",
-            "bs": "Svakog ramazana melek Džibril se sastajao s Poslanikom ﷺ i zajedno su prolazili kroz Kur'an. Mnogi muslimani nastoje tokom ramazana proučiti ili preslušati cijeli Kur'an."
+            "en": "Every Ramadan, the angel Jibril met the Prophet ﷺ and they went through the Quran together. Many of us try to read or listen to the whole Quran during Ramadan.",
+            "de": "In jedem Ramadan traf der Engel Dschibril den Propheten ﷺ, und sie gingen den Koran gemeinsam durch. Viele von uns versuchen, im Ramadan den ganzen Koran zu lesen oder zu hören.",
+            "bs": "Svakog ramazana melek Džibril se sastajao s Poslanikom ﷺ i zajedno su prolazili kroz Kur'an. Mnogi od nas nastoje tokom ramazana proučiti ili preslušati cijeli Kur'an."
           }
         },
         {
@@ -182,9 +182,9 @@
         }
       ],
       "differenceNote": {
-        "en": "The number of rak'ahs in Taraweeh differs between communities (for example 8 or 20). Both are practised by Muslims following scholarly evidence.",
-        "de": "Die Zahl der Rak'as im Tarawih unterscheidet sich zwischen Gemeinden (zum Beispiel 8 oder 20). Beides wird von Muslimen nach gelehrten Belegen praktiziert.",
-        "bs": "Broj rekata teravije razlikuje se među zajednicama (npr. 8 ili 20). Oba načina muslimani prakticiraju slijedeći učenjačke dokaze."
+        "en": "The number of rak'ahs in Taraweeh differs between communities (for example 8 or 20). Both are practised, following scholarly evidence.",
+        "de": "Die Zahl der Rak'as im Tarawih unterscheidet sich zwischen Gemeinden (zum Beispiel 8 oder 20). Beides wird nach gelehrten Belegen praktiziert.",
+        "bs": "Broj rekata teravije razlikuje se među zajednicama (npr. 8 ili 20). Oba načina se prakticiraju slijedeći učenjačke dokaze."
       },
       "sources": [
         { "sourceName": "Sahih al-Bukhari", "sourceReference": "37" },
@@ -208,25 +208,25 @@
         {
           "heading": { "en": "Generosity", "de": "Großzügigkeit", "bs": "Darežljivost" },
           "body": {
-            "en": "The Prophet ﷺ was the most generous of people, and he was even more generous in Ramadan. Muslims give sadaqah (voluntary charity) and share iftar with others.",
-            "de": "Der Prophet ﷺ war der großzügigste Mensch, und im Ramadan war er noch großzügiger. Muslime geben Sadaqa (freiwillige Spenden) und teilen den Iftar mit anderen.",
-            "bs": "Poslanik ﷺ je bio najdarežljiviji čovjek, a u ramazanu je bio još darežljiviji. Muslimani dijele sadaku i iftar s drugima."
+            "en": "The Prophet ﷺ was the most generous of people, and he was even more generous in Ramadan. We give sadaqah (voluntary charity) and share iftar with others.",
+            "de": "Der Prophet ﷺ war der großzügigste Mensch, und im Ramadan war er noch großzügiger. Wir geben Sadaqa (freiwillige Spenden) und teilen den Iftar mit anderen.",
+            "bs": "Poslanik ﷺ je bio najdarežljiviji čovjek, a u ramazanu je bio još darežljiviji. Dijelimo sadaku i iftar s drugima."
           }
         },
         {
           "heading": { "en": "Zakat al-Fitr", "de": "Zakat al-Fitr", "bs": "Sadekatul-fitr" },
           "body": {
-            "en": "Before the Eid prayer, Muslims give Zakat al-Fitr, a small charity for every family member, so that people in need can also celebrate Eid.",
-            "de": "Vor dem Eid-Gebet geben Muslime die Zakat al-Fitr, eine kleine Abgabe für jedes Familienmitglied, damit auch Bedürftige Eid feiern können.",
-            "bs": "Prije bajram-namaza muslimani daju sadekatul-fitr, malu obaveznu sadaku za svakog člana porodice, kako bi i siromašni mogli proslaviti Bajram."
+            "en": "Before the Eid prayer we give Zakat al-Fitr, a small charity for every family member, so that people in need can also celebrate Eid.",
+            "de": "Vor dem Eid-Gebet geben wir die Zakat al-Fitr, eine kleine Abgabe für jedes Familienmitglied, damit auch Bedürftige Eid feiern können.",
+            "bs": "Prije bajram-namaza dajemo sadekatul-fitr, malu obaveznu sadaku za svakog člana porodice, kako bi i siromašni mogli proslaviti Bajram."
           }
         },
         {
           "heading": { "en": "Eid al-Fitr", "de": "Eid al-Fitr", "bs": "Ramazanski bajram" },
           "body": {
-            "en": "Eid al-Fitr is the celebration on the first day of Shawwal, after Ramadan ends. Muslims pray the Eid prayer together, say takbir, wear nice clothes, visit family and give gifts. Fasting on the day of Eid is not allowed – it is a day of joy.",
-            "de": "Eid al-Fitr ist das Fest am ersten Tag des Schawwal, nach dem Ende des Ramadan. Muslime beten gemeinsam das Eid-Gebet, sprechen den Takbir, tragen schöne Kleidung, besuchen die Familie und beschenken einander. Am Tag des Eid zu fasten ist nicht erlaubt – es ist ein Tag der Freude.",
-            "bs": "Ramazanski bajram je praznik prvog dana mjeseca ševvala, nakon završetka ramazana. Muslimani zajedno klanjaju bajram-namaz, uče tekbire, oblače lijepu odjeću, posjećuju porodicu i daruju se. Postiti na dan Bajrama nije dozvoljeno – to je dan radosti."
+            "en": "Eid al-Fitr is the celebration on the first day of Shawwal, after Ramadan ends. We pray the Eid prayer together, say takbir, wear nice clothes, visit family and give gifts. Fasting on the day of Eid is not allowed – it is a day of joy.",
+            "de": "Eid al-Fitr ist das Fest am ersten Tag des Schawwal, nach dem Ende des Ramadan. Wir beten gemeinsam das Eid-Gebet, sprechen den Takbir, tragen schöne Kleidung, besuchen die Familie und beschenken einander. Am Tag des Eid zu fasten ist nicht erlaubt – es ist ein Tag der Freude.",
+            "bs": "Ramazanski bajram je praznik prvog dana mjeseca ševvala, nakon završetka ramazana. Zajedno klanjamo bajram-namaz, učimo tekbire, oblačimo lijepu odjeću, posjećujemo porodicu i darujemo se. Postiti na dan Bajrama nije dozvoljeno – to je dan radosti."
           },
           "arabic": "عِيدُ الْفِطْر",
           "transliteration": "ʿīd al-fiṭr"
@@ -305,7 +305,7 @@
       "type": "multipleChoice",
       "worldId": "ramadan",
       "topic": "fasting",
-      "prompt": { "en": "From when to when do Muslims fast?", "de": "Von wann bis wann fasten Muslime?", "bs": "Od kada do kada muslimani poste?" },
+      "prompt": { "en": "From when to when do we fast?", "de": "Von wann bis wann fasten wir?", "bs": "Od kada do kada postimo?" },
       "options": [
         { "id": "a", "text": { "en": "From dawn until sunset", "de": "Von der Morgendämmerung bis Sonnenuntergang", "bs": "Od zore do zalaska sunca" } },
         { "id": "b", "text": { "en": "From midnight to midday", "de": "Von Mitternacht bis Mittag", "bs": "Od ponoći do podne" } },
@@ -477,9 +477,9 @@
       "worldId": "ramadan",
       "topic": "ramadan-nights",
       "prompt": {
-        "en": "All Muslim communities pray exactly the same number of rak'ahs in Taraweeh.",
-        "de": "Alle muslimischen Gemeinden beten im Tarawih genau dieselbe Zahl an Rak'as.",
-        "bs": "Sve muslimanske zajednice klanjaju potpuno isti broj rekata teravije."
+        "en": "Everywhere exactly the same number of rak'ahs is prayed in Taraweeh.",
+        "de": "Überall wird im Tarawih genau dieselbe Zahl an Rak'as gebetet.",
+        "bs": "Svugdje se klanja potpuno isti broj rekata teravije."
       },
       "correct": false,
       "explanation": {
@@ -536,9 +536,9 @@
       "worldId": "ramadan",
       "topic": "charity-eid",
       "prompt": {
-        "en": "Muslims fast on the day of Eid al-Fitr.",
-        "de": "Muslime fasten am Tag des Eid al-Fitr.",
-        "bs": "Muslimani poste na dan Ramazanskog bajrama."
+        "en": "We fast on the day of Eid al-Fitr.",
+        "de": "Wir fasten am Tag des Eid al-Fitr.",
+        "bs": "Postimo na dan Ramazanskog bajrama."
       },
       "correct": false,
       "explanation": {
