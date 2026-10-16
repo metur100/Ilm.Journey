@@ -684,8 +684,56 @@ const town = {
 } satisfies Record<string, ArtDef>;
 
 // ---------------------------------------------------------------------------------------------------------------
+// The honest market stall
+
+const market = {
+  'market-stall': art(160, 130, (c) => (
+    <>
+      <Shadow c={c} cx={80} cy={126} rx={74} />
+      <Rect x={14} y={30} width={6} height={94} fill={C.woodDark} />
+      <Rect x={140} y={30} width={6} height={94} fill={C.woodDark} />
+      <Path d="M4 40L14 14H146L156 40Z" fill={C.tealMid} />
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <Path key={i} d={`M${24 + i * 22} 14H${34 + i * 22}L${32 + i * 24} 40H${20 + i * 24}Z`} fill={C.cream} />
+      ))}
+      {Array.from({ length: 8 }, (_, i) => (
+        <Circle key={i} cx={4 + i * 21.7} cy={40} r={10.8} fill={i % 2 ? C.tealMid : C.cream} />
+      ))}
+      <Rect x={8} y={86} width={144} height={38} rx={3} fill={C.woodLight} />
+      <Rect x={8} y={86} width={144} height={6} rx={3} fill={C.woodPale} />
+      {/* goods in baskets */}
+      <Ellipse cx={34} cy={84} rx={18} ry={7} fill={C.sandDark} />
+      {[26, 34, 42, 30, 38].map((x, i) => (
+        <Ellipse key={i} cx={x} cy={i < 3 ? 80 : 75} rx={4} ry={5.5} fill={i % 2 ? C.wood : C.terracotta} />
+      ))}
+      <Ellipse cx={126} cy={84} rx={18} ry={7} fill={C.sandDark} />
+      {[118, 126, 134, 122, 130].map((x, i) => (
+        <Circle key={i} cx={x} cy={i < 3 ? 80 : 74} r={4.5} fill={i % 2 ? C.oliveDark : C.olive} />
+      ))}
+      {/* the scale */}
+      <Rect x={78} y={50} width={4} height={36} fill={C.goldDeep} />
+      <Path d="M56 54H104" stroke={C.goldDeep} strokeWidth={3.5} strokeLinecap="round" />
+      <Path d="M60 54L54 70H66ZM100 54L94 70H106Z" stroke={C.goldDeep} strokeWidth={1.4} fill="none" />
+      <Path d="M50 70H70Q68 78 60 78Q52 78 50 70ZM90 70H110Q108 78 100 78Q92 78 90 70Z" fill={C.gold} />
+      <Circle cx={80} cy={50} r={4} fill={C.gold} />
+      <Path d={star8Path(80, 105, 8)} fill={C.goldLight} opacity={0.85} />
+    </>
+  )),
+  weight: art(80, 80, (c) => (
+    <>
+      <Shadow c={c} cx={40} cy={76} rx={30} />
+      <Path d="M30 12Q30 4 40 4Q50 4 50 12V20H30Z" fill="none" stroke={C.greyDark} strokeWidth={5} />
+      <Path d="M18 22H62L72 74H8Z" fill={C.greyDark} />
+      <Path d="M18 22H34L28 74H8Z" fill={C.grey} opacity={0.5} />
+      <Rect x={14} y={20} width={52} height={6} rx={3} fill={C.grey} />
+    </>
+  )),
+} satisfies Record<string, ArtDef>;
+
+// ---------------------------------------------------------------------------------------------------------------
 
 export const akhlaq = {
+  ...market,
   ...town,
   ...water,
   ...home,
