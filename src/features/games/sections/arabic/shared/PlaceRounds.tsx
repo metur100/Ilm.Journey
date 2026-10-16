@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 
@@ -63,9 +63,11 @@ export function PlaceRounds(props: PlaceRoundsProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
-  const advance = () => {
-    if (last) return;
-    setIndex((i) => i + 1);
+  const indexRef = useRef(0);
+  const advance = (from = index) => {
+    if (from >= rounds.length - 1 || indexRef.current !== from) return;
+    indexRef.current = from + 1;
+    setIndex(from + 1);
     setSolved(false);
     setSelected(null);
     setWrongZone(null);
@@ -86,7 +88,10 @@ export function PlaceRounds(props: PlaceRoundsProps) {
     core.progress(index + 1);
     core.right({ caption: round.done, tone: round.done ? 'fact' : 'right' });
     if (last) core.finish(reduced ? 500 : 1400);
-    else setTimeout(advance, reduced ? 900 : 1500);
+    else {
+      const from = index;
+      setTimeout(() => advance(from), reduced ? 900 : 1500);
+    }
     return true;
   };
 
