@@ -161,5 +161,5 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row-reverse', alignItems: 'center', gap: 6 },
   target: { width: 84, height: 110, alignItems: 'center', justifyContent: 'center' },
   zone: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 },
-  overlay: { ...StyleSheet.absoluteFillObject, alignItems: 'center', justifyContent: 'center' },
+  overlay: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' },
 });
