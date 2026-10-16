@@ -4,7 +4,6 @@ import { art, type ArtDef } from '../../kit';
 import { sky } from '../sky';
 import { FIG_H, FIG_W, PRAYER_POSITIONS, PrayerFigureArt, type FigureCues, type PrayerPosition, type PrayerVariant } from './salahFigure';
 import { basics } from './salahBasics';
-import { basics } from './salahBasics';
 
 /** Section art (see docs/GAMES-V3.md). Owned by the salah section – add pieces here only. */
 
@@ -65,8 +64,6 @@ const prayerFigure = {
 
 export const salah = {
   ...prayerFigure,
-  // Basics games (salah author): wudu, gusul, tejemmum, ezan, conditions, masjid … – drawn in ./salahBasics.tsx.
-  ...basics,
   // Basics games (salah author): wudu, gusul, tejemmum, ezan, conditions, masjid … – drawn in ./salahBasics.tsx.
   ...basics,
 } satisfies Record<string, ArtDef>;
