@@ -60,9 +60,9 @@ export function LetterDotsGame(api: GameApi<LetterDotsConfig>) {
         rounds={rounds}
         hints={api.config.hints}
         prompt={api.t(api.config.voiceOnly ? 'play.promptVoice' : 'play.prompt')}
-        onRound={(round) => say(mustLetter(api.config.letters[rounds.indexOf(round)]).letter)}
+        onRound={(round) => say(mustLetter(api.config.letters[rounds.findIndex((r) => r.id === round.id)]).letter)}
         renderStage={({ round, solved, zone }) => {
-          const letter = api.config.letters[rounds.indexOf(round)];
+          const letter = api.config.letters[rounds.findIndex((r) => r.id === round.id)];
           const info = mustLetter(letter);
           return (
             <View style={styles.stage}>
