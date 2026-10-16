@@ -1,0 +1,407 @@
+{
+  "id": "sulayman",
+  "order": 18,
+  "prophetName": { "en": "Sulayman", "de": "Sulaiman (Salomo)", "bs": "Sulejman" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The Ants, the Hoopoe and the Palace of Glass", "de": "Die Ameisen, der Wiedehopf und der Palast aus Glas", "bs": "Mravi, pupavac i dvorac od stakla" },
+  "description": {
+    "en": "A king and prophet who understood the birds, listened to an ant and thanked Allah for every gift.",
+    "de": "Ein König und Prophet, der die Vögel verstand, auf eine Ameise hörte und Allah für jede Gabe dankte.",
+    "bs": "Vladar i poslanik koji je razumio ptice, saslušao mrava i zahvaljivao Allahu na svakom daru."
+  },
+  "place": { "en": "The kingdom of Sulayman and the land of Saba'", "de": "Das Reich Sulaimans und das Land Saba'", "bs": "Sulejmanovo carstvo i zemlja Seba" },
+  "symbol": "pattern",
+  "symbolArt": "prophet.sulayman-hoopoe-letter",
+  "mapPlaces": ["saba"],
+  "cover": { "sky": "day", "elements": ["clouds", "hills", "garden"] },
+  "coverStage": {
+    "sky": "day",
+    "camera": "slowZoom",
+    "layers": [
+      { "art": "story.hills" },
+      { "art": "prophet.sulayman-ants-valley" },
+      { "art": "prophet.sulayman-hoopoe-letter", "x": 280, "y": 80, "w": 92, "anchor": "center", "anim": "float", "enter": "slideLeft", "at": 600, "duration": 1800 }
+    ],
+    "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "birds", "intensity": 2 }, { "type": "sunrays", "x": 60, "y": 40, "intensity": 1 }]
+  },
+  "intro": {
+    "en": "Sulayman (peace be upon him) was the son of the prophet Dawud. Allah made him a prophet and a king, and gave him gifts that He gave no one after him. Yet with every gift, Sulayman turned to Allah and said: \"All praise is for Allah.\"",
+    "de": "Sulaiman (Friede sei mit ihm) war der Sohn des Propheten Dawud. Allah machte ihn zum Propheten und König und gab ihm Gaben, die Er niemandem nach ihm gab. Doch bei jeder Gabe wandte sich Sulaiman an Allah und sagte: „Alles Lob gebührt Allah.“",
+    "bs": "Sulejman, a.s., bio je sin poslanika Davuda. Allah ga je učinio poslanikom i vladarom i dao mu darove kakve nije dao nikome poslije njega. Ali pri svakom daru Sulejman se obraćao Allahu i govorio: „Hvala pripada Allahu.“"
+  },
+  "scenes": [
+    {
+      "id": "sulayman-s1",
+      "title": { "en": "Knowledge from Allah", "de": "Wissen von Allah", "bs": "Znanje od Allaha" },
+      "text": {
+        "en": "Allah gave Dawud and Sulayman knowledge, and they said: \"Praise be to Allah, who has favoured us over many of His believing servants.\" Sulayman inherited from Dawud and said: \"O people, we have been taught the speech of the birds and given from everything. This is truly a clear favour.\"",
+        "de": "Allah gab Dawud und Sulaiman Wissen, und sie sagten: „Lob sei Allah, der uns vor vielen Seiner gläubigen Diener bevorzugt hat.“ Sulaiman beerbte Dawud und sagte: „Ihr Menschen, uns wurde die Sprache der Vögel gelehrt, und uns wurde von allem gegeben. Das ist wahrlich eine klare Huld.“",
+        "bs": "Allah je Davudu i Sulejmanu dao znanje, a oni su rekli: „Hvala Allahu koji nas je odlikovao nad mnogim Svojim robovima vjernicima.“ Sulejman je naslijedio Davuda i rekao: „O ljudi, naučeni smo jeziku ptica i dato nam je od svega. Ovo je, zaista, očita blagodat.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["hills", "book"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 320, "y": 80, "w": 90, "anchor": "center", "enter": "rise", "at": 300, "duration": 2000 },
+          { "art": "story.hills" },
+          { "art": "prophet.yahya-book", "x": 140, "y": 222, "w": 96, "enter": "rise", "at": 800 },
+          { "art": "animal.hoopoe", "x": 270, "y": 220, "w": 54, "enter": "fade", "at": 1600 },
+          { "art": "animal.dove", "x": 230, "y": 100, "w": 34, "anchor": "center", "anim": "float", "enter": "fade", "at": 2000 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 320, "y": 80, "intensity": 1, "at": 800 }, { "type": "birds", "intensity": 2, "at": 1200 }, { "type": "sparkle", "x": 140, "y": 170, "w": 100, "h": 60, "intensity": 1, "at": 1400 }]
+      },
+      "interactionId": "sulayman-knowledge",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:15–16" }]
+    },
+    {
+      "id": "sulayman-s2",
+      "title": { "en": "The valley of the ants", "de": "Das Tal der Ameisen", "bs": "Dolina mrava" },
+      "text": {
+        "en": "Sulayman's armies of jinn, people and birds marched in ordered ranks. When they came to the valley of the ants, an ant said: \"O ants, go into your homes, so that Sulayman and his soldiers do not crush you without noticing.\" Sulayman smiled at her words and prayed: \"My Lord, help me to be grateful for Your favour on me and on my parents, and to do good that pleases You.\"",
+        "de": "Sulaimans Heere aus Dschinn, Menschen und Vögeln zogen in geordneten Reihen. Als sie zum Tal der Ameisen kamen, sagte eine Ameise: „Ihr Ameisen, geht in eure Wohnungen, damit Sulaiman und seine Heere euch nicht zertreten, ohne es zu merken.“ Sulaiman lächelte über ihre Worte und betete: „Mein Herr, hilf mir, dankbar zu sein für Deine Gunst an mir und an meinen Eltern, und Gutes zu tun, das Dir gefällt.“",
+        "bs": "Sulejmanove vojske od džina, ljudi i ptica išle su u urednim redovima. Kada su stigli u dolinu mrava, jedan mrav je rekao: „O mravi, uđite u svoja prebivališta da vas ne izgaze Sulejman i vojske njegove, a da to i ne primijete.“ Sulejman se nasmiješio njegovim riječima i zamolio: „Gospodaru moj, pomozi mi da budem zahvalan na Tvojoj blagodati kojom si obasuo mene i roditelje moje i da činim dobro kojim ćeš Ti zadovoljan biti.“"
+      },
+      "scene": { "sky": "day", "elements": ["hills", "dunes"] },
+      "stage": {
+        "sky": "day",
+        "camera": "panRight",
+        "layers": [
+          { "art": "prophet.sulayman-ants-valley" },
+          { "art": "prophet.sulayman-anthill", "x": 230, "y": 236, "w": 120, "enter": "rise", "at": 600 },
+          { "art": "prophet.sulayman-banner", "x": 340, "y": 150, "w": 34, "enter": "slideLeft", "at": 1600, "duration": 1600 },
+          { "art": "prophet.sulayman-banner", "x": 372, "y": 146, "w": 30, "enter": "slideLeft", "at": 1900, "duration": 1600 }
+        ],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "dust", "intensity": 1 }, { "type": "sparkle", "x": 230, "y": 200, "w": 90, "h": 40, "intensity": 1, "at": 2600 }]
+      },
+      "interactionId": "sulayman-ant",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:17–19" }]
+    },
+    {
+      "id": "sulayman-s3",
+      "title": { "en": "The wind", "de": "Der Wind", "bs": "Vjetar" },
+      "text": {
+        "en": "Allah made the wind serve Sulayman. It blew by his command to the land that Allah had blessed. Its morning journey was a month's travel, and its evening journey was a month's travel.",
+        "de": "Allah machte Sulaiman den Wind dienstbar. Er wehte auf seinen Befehl zu dem Land, das Allah gesegnet hatte. Sein Morgenweg war eine Monatsreise, und sein Abendweg war eine Monatsreise.",
+        "bs": "Allah je Sulejmanu potčinio vjetar. Puhao je po njegovoj naredbi prema zemlji koju je Allah blagoslovio. Njegov jutarnji put trajao je mjesec dana, a večernji mjesec dana."
+      },
+      "scene": { "sky": "day", "elements": ["clouds", "mountains"] },
+      "stage": {
+        "sky": "day",
+        "camera": "drift",
+        "layers": [
+          { "art": "story.mountains" },
+          { "art": "story.cloud", "x": 90, "y": 70, "w": 110, "anchor": "center", "anim": "drift" },
+          { "art": "prophet.sulayman-wind", "x": 200, "y": 96, "w": 220, "anchor": "center", "anim": "drift", "enter": "slideRight", "at": 400, "duration": 1600 },
+          { "art": "story.cloud", "x": 320, "y": 54, "w": 90, "anchor": "center", "anim": "drift" },
+          { "art": "story.grass", "y": 240, "w": 400 }
+        ],
+        "effects": [{ "type": "wind", "intensity": 3 }, { "type": "leaves", "intensity": 1, "at": 800 }, { "type": "birds", "intensity": 1 }]
+      },
+      "interactionId": "sulayman-wind",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:81; 34:12" }]
+    },
+    {
+      "id": "sulayman-s4",
+      "title": { "en": "Where is the hoopoe?", "de": "Wo ist der Wiedehopf?", "bs": "Gdje je pupavac?" },
+      "text": {
+        "en": "Sulayman looked over the birds and did not see the hoopoe. Soon it came and said: \"I have learned something you do not know. I come to you from Saba' with sure news: a woman rules them, and they bow down to the sun instead of Allah.\" Sulayman said: \"We will see whether you have told the truth.\" He gave it a letter to take to them.",
+        "de": "Sulaiman sah nach den Vögeln und vermisste den Wiedehopf. Bald kam er und sagte: „Ich habe etwas erfahren, was du nicht weißt. Ich komme zu dir aus Saba' mit sicherer Nachricht: Eine Frau herrscht über sie, und sie werfen sich vor der Sonne nieder statt vor Allah.“ Sulaiman sagte: „Wir werden sehen, ob du die Wahrheit gesagt hast.“ Er gab ihm einen Brief für sie mit.",
+        "bs": "Sulejman je pregledao ptice i nije vidio pupavca. Ubrzo je on došao i rekao: „Saznao sam ono što ti ne znaš. Iz Sebe ti donosim pouzdanu vijest: njima vlada jedna žena, a oni se, umjesto Allahu, Suncu klanjaju.“ Sulejman je rekao: „Vidjet ćemo da li si istinu rekao.“ Dao mu je pismo da ga odnese njima."
+      },
+      "scene": { "sky": "day", "elements": ["dunes", "city"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.city-ancient", "opacity": 0.9 },
+          { "art": "story.dunes", "y": 268 },
+          { "art": "prophet.sulayman-hoopoe-letter", "x": 220, "y": 96, "w": 110, "anchor": "center", "anim": "float", "enter": "slideRight", "at": 500, "duration": 2200 }
+        ],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "sand", "intensity": 1 }, { "type": "sparkle", "x": 260, "y": 100, "w": 50, "h": 30, "intensity": 1, "at": 2400 }]
+      },
+      "interactionId": "sulayman-hoopoe",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:20–28" }]
+    },
+    {
+      "id": "sulayman-s5",
+      "title": { "en": "A noble letter", "de": "Ein edler Brief", "bs": "Plemenito pismo" },
+      "text": {
+        "en": "The queen of Saba' said: \"A noble letter has been delivered to me. It is from Sulayman, and it says: In the name of Allah, the Most Merciful, the Most Kind. Do not be proud against me, but come to me in submission.\" She asked her advisers, and then she sent Sulayman a gift. He answered that what Allah had given him was better.",
+        "de": "Die Königin von Saba' sagte: „Mir ist ein edler Brief überbracht worden. Er ist von Sulaiman, und er lautet: Im Namen Allahs, des Allerbarmers, des Barmherzigen. Seid nicht hochmütig gegen mich, sondern kommt zu mir als Ergebene.“ Sie fragte ihre Ratgeber und sandte Sulaiman dann ein Geschenk. Er antwortete, dass das, was Allah ihm gegeben habe, besser sei.",
+        "bs": "Kraljica Sebe je rekla: „Meni je dostavljeno plemenito pismo. Ono je od Sulejmana i glasi: U ime Allaha, Milostivog, Samilosnog! Ne uzdižite se iznad mene i dođite mi kao predani.“ Upitala je svoje savjetnike, a zatim je Sulejmanu poslala poklon. On je odgovorio da je ono što mu je Allah dao bolje."
+      },
+      "scene": { "sky": "sunset", "elements": ["city", "pattern"] },
+      "stage": {
+        "sky": "sunset",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.columns-hall" },
+          { "art": "prophet.sulayman-letter", "x": 200, "y": 150, "w": 120, "anchor": "center", "anim": "breathe", "enter": "zoom", "at": 500 }
+        ],
+        "effects": [{ "type": "dust", "intensity": 1 }, { "type": "sparkle", "x": 200, "y": 150, "w": 140, "h": 70, "intensity": 2, "at": 1300 }]
+      },
+      "interactionId": "sulayman-map",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:29–36" }]
+    },
+    {
+      "id": "sulayman-s6",
+      "title": { "en": "The throne and the palace of glass", "de": "Der Thron und der Palast aus Glas", "bs": "Prijesto i dvorac od stakla" },
+      "text": {
+        "en": "Before the queen arrived, her throne was brought to Sulayman in the blink of an eye by one who had knowledge of the Scripture. Sulayman said: \"This is from the favour of my Lord, to test me whether I am grateful.\" Then the queen was asked to enter the palace. She thought its floor was deep water – but it was a palace made smooth with glass. She said: \"My Lord, I have wronged myself, and I submit with Sulayman to Allah, the Lord of the worlds.\"",
+        "de": "Bevor die Königin ankam, wurde ihr Thron Sulaiman in einem Augenblick gebracht – von einem, der Wissen aus der Schrift hatte. Sulaiman sagte: „Das ist von der Huld meines Herrn, um mich zu prüfen, ob ich dankbar bin.“ Dann wurde die Königin gebeten, den Palast zu betreten. Sie hielt seinen Boden für tiefes Wasser – doch es war ein Palast, mit Glas geglättet. Sie sagte: „Mein Herr, ich habe mir selbst Unrecht getan, und ich ergebe mich mit Sulaiman Allah, dem Herrn der Welten.“",
+        "bs": "Prije nego što je kraljica stigla, njen prijesto je u treptaju oka donio Sulejmanu onaj koji je imao znanje iz Knjige. Sulejman je rekao: „Ovo je od dobrote Gospodara moga, da me iskuša hoću li zahvalan biti.“ Zatim je kraljici rečeno da uđe u dvorac. Pomislila je da je njegov pod duboka voda – a bio je to dvorac uglačan od stakla. Rekla je: „Gospodaru moj, ja sam se prema sebi ogriješila, i predajem se, zajedno sa Sulejmanom, Allahu, Gospodaru svjetova.“"
+      },
+      "scene": { "sky": "day", "elements": ["pattern", "river"] },
+      "stage": {
+        "sky": "day",
+        "mood": "warm",
+        "layers": [
+          { "art": "prophet.sulayman-glass-palace" },
+          { "art": "prophet.sulayman-throne", "x": 200, "y": 176, "w": 92, "enter": "zoom", "at": 700, "duration": 600 }
+        ],
+        "effects": [{ "type": "ripples", "x": 120, "y": 206, "w": 70, "intensity": 1 }, { "type": "ripples", "x": 290, "y": 216, "w": 70, "intensity": 1, "at": 900 }, { "type": "sparkle", "x": 200, "y": 120, "w": 120, "h": 80, "intensity": 2, "at": 800 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:38–44" }]
+    }
+  ],
+  "miniGameId": "sulayman-order",
+  "quizIds": ["sulayman-memory", "sulayman-queen", "sulayman-grateful"],
+  "lessons": [
+    {
+      "id": "sulayman-l1",
+      "value": "shukr",
+      "title": { "en": "Every gift is a test of thankfulness", "de": "Jede Gabe ist eine Prüfung der Dankbarkeit", "bs": "Svaki dar je ispit zahvalnosti" },
+      "explanation": {
+        "en": "Sulayman had more than any king, yet he said: \"This is from the favour of my Lord, to test me whether I am grateful.\" Whoever is grateful, is grateful for his own good.",
+        "de": "Sulaiman hatte mehr als jeder König, und doch sagte er: „Das ist von der Huld meines Herrn, um mich zu prüfen, ob ich dankbar bin.“ Wer dankbar ist, ist es zu seinem eigenen Wohl.",
+        "bs": "Sulejman je imao više od ijednog vladara, a ipak je rekao: „Ovo je od dobrote Gospodara moga, da me iskuša hoću li zahvalan biti.“ Ko je zahvalan, zahvalan je za svoje dobro."
+      },
+      "example": {
+        "en": "You win a prize at school. Before showing off, you quietly say \"Alhamdulillah\" and thank the people who helped you.",
+        "de": "Du gewinnst einen Preis in der Schule. Statt anzugeben, sagst du leise „Alhamdulillah“ und dankst denen, die dir geholfen haben.",
+        "bs": "Osvojiš nagradu u školi. Umjesto hvalisanja, tiho kažeš „Elhamdulillah“ i zahvališ onima koji su ti pomogli."
+      },
+      "reflection": {
+        "en": "What gift from Allah did you use today?",
+        "de": "Welche Gabe Allahs hast du heute genutzt?",
+        "bs": "Koji si Allahov dar danas koristio?"
+      }
+    },
+    {
+      "id": "sulayman-l2",
+      "value": "rahmah",
+      "title": { "en": "Care for the smallest creatures", "de": "Achte auf die kleinsten Geschöpfe", "bs": "Pazi i na najmanja stvorenja" },
+      "explanation": {
+        "en": "A great king stopped to listen to a tiny ant. Strong people are kind to the weak, and every creature of Allah matters.",
+        "de": "Ein großer König hielt inne, um einer winzigen Ameise zuzuhören. Starke Menschen sind gut zu den Schwachen, und jedes Geschöpf Allahs zählt.",
+        "bs": "Veliki vladar zastao je da sasluša malenog mrava. Snažni su blagi prema slabima, i svako Allahovo stvorenje je važno."
+      },
+      "example": {
+        "en": "On the path you see a line of ants. You step around them instead of stamping on them.",
+        "de": "Auf dem Weg siehst du eine Ameisenstraße. Du gehst um sie herum, statt draufzutreten.",
+        "bs": "Na putu vidiš kolonu mrava. Zaobiđeš ih umjesto da ih zgaziš."
+      },
+      "reflection": {
+        "en": "How can you be kind to animals this week?",
+        "de": "Wie kannst du diese Woche gut zu Tieren sein?",
+        "bs": "Kako ove sedmice možeš biti dobar prema životinjama?"
+      }
+    },
+    {
+      "id": "sulayman-l3",
+      "value": "honesty",
+      "title": { "en": "Check the news before you believe it", "de": "Prüfe Nachrichten, bevor du sie glaubst", "bs": "Provjeri vijest prije nego što povjeruješ" },
+      "explanation": {
+        "en": "When the hoopoe brought big news, Sulayman said: \"We will see whether you have told the truth.\" He did not judge too fast, and he did not ignore it either.",
+        "de": "Als der Wiedehopf eine große Nachricht brachte, sagte Sulaiman: „Wir werden sehen, ob du die Wahrheit gesagt hast.“ Er urteilte nicht zu schnell und überging sie auch nicht.",
+        "bs": "Kada je pupavac donio veliku vijest, Sulejman je rekao: „Vidjet ćemo da li si istinu rekao.“ Nije presudio prebrzo, a nije je ni zanemario."
+      },
+      "example": {
+        "en": "A classmate tells you a rumour about someone. You do not pass it on until you know it is true.",
+        "de": "Ein Mitschüler erzählt dir ein Gerücht über jemanden. Du gibst es nicht weiter, bevor du weißt, dass es stimmt.",
+        "bs": "Drug iz razreda ti ispriča glasinu o nekome. Ne prenosiš je dok ne saznaš da je istina."
+      },
+      "reflection": {
+        "en": "Why is it important to check what we hear?",
+        "de": "Warum ist es wichtig zu prüfen, was wir hören?",
+        "bs": "Zašto je važno provjeriti ono što čujemo?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "sulayman-knowledge",
+      "type": "multipleChoice",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "Which speech had Sulayman been taught?", "de": "Welche Sprache war Sulaiman gelehrt worden?", "bs": "Kojem je jeziku Sulejman bio naučen?" },
+      "options": [
+        { "id": "a", "text": { "en": "The speech of the birds", "de": "Die Sprache der Vögel", "bs": "Jeziku ptica" } },
+        { "id": "b", "text": { "en": "The speech of the stars", "de": "Die Sprache der Sterne", "bs": "Jeziku zvijezda" } },
+        { "id": "c", "text": { "en": "No special speech", "de": "Keine besondere Sprache", "bs": "Nikakvom posebnom jeziku" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Sulayman said: \"We have been taught the speech of the birds\" – and he praised Allah for it.",
+        "de": "Sulaiman sagte: „Uns wurde die Sprache der Vögel gelehrt“ – und er lobte Allah dafür.",
+        "bs": "Sulejman je rekao: „Naučeni smo jeziku ptica“ – i zahvalio je Allahu na tome."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:16" }]
+    },
+    {
+      "id": "sulayman-ant",
+      "type": "trueFalse",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "An ant warned the other ants to go into their homes.", "de": "Eine Ameise warnte die anderen Ameisen, in ihre Wohnungen zu gehen.", "bs": "Jedan mrav je upozorio ostale mrave da uđu u svoja prebivališta." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – and she even said that Sulayman's army would not notice them. Sulayman smiled and thanked Allah.",
+        "de": "Ja – und sie sagte sogar, dass Sulaimans Heer sie nicht bemerken würde. Sulaiman lächelte und dankte Allah.",
+        "bs": "Da – i još je rekao da ih Sulejmanova vojska ne bi ni primijetila. Sulejman se nasmiješio i zahvalio Allahu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:18–19" }]
+    },
+    {
+      "id": "sulayman-wind",
+      "type": "trueFalse",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "Allah made the wind serve Sulayman.", "de": "Allah machte Sulaiman den Wind dienstbar.", "bs": "Allah je Sulejmanu potčinio vjetar." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – the wind blew by his command, by Allah's will. Its morning journey was a month's travel.",
+        "de": "Ja – der Wind wehte auf seinen Befehl, nach Allahs Willen. Sein Morgenweg war eine Monatsreise.",
+        "bs": "Da – vjetar je puhao po njegovoj naredbi, Allahovom voljom. Njegov jutarnji put trajao je mjesec dana."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "21:81; 34:12" }]
+    },
+    {
+      "id": "sulayman-hoopoe",
+      "type": "scenario",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "The hoopoe brings surprising news. What did Sulayman do?", "de": "Der Wiedehopf bringt überraschende Nachrichten. Was tat Sulaiman?", "bs": "Pupavac donosi iznenađujuću vijest. Šta je Sulejman uradio?" },
+      "options": [
+        {
+          "id": "a",
+          "text": { "en": "He said: \"We will see whether you told the truth\"", "de": "Er sagte: „Wir werden sehen, ob du die Wahrheit gesagt hast“", "bs": "Rekao je: „Vidjet ćemo da li si istinu rekao“" },
+          "feedback": { "en": "Right – he checked the news before acting.", "de": "Richtig – er prüfte die Nachricht, bevor er handelte.", "bs": "Tačno – provjerio je vijest prije nego što je djelovao." }
+        },
+        {
+          "id": "b",
+          "text": { "en": "He believed it at once without checking", "de": "Er glaubte es sofort, ohne zu prüfen", "bs": "Odmah je povjerovao bez provjere" },
+          "feedback": { "en": "No – he wanted to know if it was true first.", "de": "Nein – er wollte zuerst wissen, ob es stimmt.", "bs": "Ne – prvo je htio znati je li istina." }
+        },
+        {
+          "id": "c",
+          "text": { "en": "He ignored the hoopoe", "de": "Er beachtete den Wiedehopf nicht", "bs": "Nije obraćao pažnju na pupavca" },
+          "feedback": { "en": "No – he listened and sent a letter with it.", "de": "Nein – er hörte zu und schickte einen Brief mit ihm.", "bs": "Ne – saslušao ga je i po njemu poslao pismo." }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Sulayman listened, then checked the news by sending the hoopoe with a letter.",
+        "de": "Sulaiman hörte zu und prüfte dann die Nachricht, indem er den Wiedehopf mit einem Brief schickte.",
+        "bs": "Sulejman je saslušao, a zatim provjerio vijest tako što je pupavca poslao s pismom."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:27–28" }]
+    },
+    {
+      "id": "sulayman-map",
+      "type": "map",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "From which land did the hoopoe bring news? Tap it on the map.", "de": "Aus welchem Land brachte der Wiedehopf Nachricht? Tippe es auf der Karte an.", "bs": "Iz koje je zemlje pupavac donio vijest? Dodirni je na mapi." },
+      "places": ["saba", "egypt", "madyan", "makkah"],
+      "correctPlace": "saba",
+      "explanation": {
+        "en": "The hoopoe came from Saba' – a land in the south of Arabia (today Yemen).",
+        "de": "Der Wiedehopf kam aus Saba' – einem Land im Süden Arabiens (heute Jemen).",
+        "bs": "Pupavac je došao iz Sebe – zemlje na jugu Arabije (danas Jemen)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:22" }]
+    },
+    {
+      "id": "sulayman-order",
+      "type": "ordering",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "Put the story of Sulayman in order.", "de": "Bring die Geschichte Sulaimans in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Sulejmanu." },
+      "items": [
+        { "id": "ants", "text": { "en": "The valley of the ants", "de": "Das Tal der Ameisen", "bs": "Dolina mrava" } },
+        { "id": "hoopoe", "text": { "en": "The hoopoe brings news from Saba'", "de": "Der Wiedehopf bringt Nachricht aus Saba'", "bs": "Pupavac donosi vijest iz Sebe" } },
+        { "id": "letter", "text": { "en": "The letter reaches the queen", "de": "Der Brief erreicht die Königin", "bs": "Pismo stiže kraljici" } },
+        { "id": "throne", "text": { "en": "Her throne is brought", "de": "Ihr Thron wird gebracht", "bs": "Njen prijesto biva donesen" } },
+        { "id": "palace", "text": { "en": "The palace of glass", "de": "Der Palast aus Glas", "bs": "Dvorac od stakla" } }
+      ],
+      "explanation": {
+        "en": "Surah An-Naml tells it in this order: the ants, the hoopoe, the letter, the throne and the palace of glass.",
+        "de": "Sure An-Naml erzählt es in dieser Reihenfolge: die Ameisen, der Wiedehopf, der Brief, der Thron und der Palast aus Glas.",
+        "bs": "Sura En-Neml kazuje ovim redom: mravi, pupavac, pismo, prijesto i dvorac od stakla."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:17–44" }]
+    },
+    {
+      "id": "sulayman-memory",
+      "type": "memory",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "Memory: match the pairs from the story of Sulayman.", "de": "Memory: Finde die Paare aus der Geschichte Sulaimans.", "bs": "Memorija: spoji parove iz kazivanja o Sulejmanu." },
+      "pairs": [
+        { "id": "ant", "left": { "en": "The ant", "de": "Die Ameise", "bs": "Mrav" }, "right": { "en": "Warned her people", "de": "Warnte ihr Volk", "bs": "Upozorio svoj narod" } },
+        { "id": "hoopoe", "left": { "en": "The hoopoe", "de": "Der Wiedehopf", "bs": "Pupavac" }, "right": { "en": "News from Saba'", "de": "Nachricht aus Saba'", "bs": "Vijest iz Sebe" } },
+        { "id": "wind", "left": { "en": "The wind", "de": "Der Wind", "bs": "Vjetar" }, "right": { "en": "Blew by his command", "de": "Wehte auf seinen Befehl", "bs": "Puhao po njegovoj naredbi" } },
+        { "id": "letter", "left": { "en": "The letter", "de": "Der Brief", "bs": "Pismo" }, "right": { "en": "Began with Allah's name", "de": "Begann mit Allahs Namen", "bs": "Počinjalo Allahovim imenom" } }
+      ],
+      "explanation": {
+        "en": "The ant, the hoopoe, the wind and the letter all appear in the story of Sulayman.",
+        "de": "Die Ameise, der Wiedehopf, der Wind und der Brief kommen alle in der Geschichte Sulaimans vor.",
+        "bs": "Mrav, pupavac, vjetar i pismo – svi se spominju u kazivanju o Sulejmanu."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:18; 27:22; 34:12; 27:30" }]
+    },
+    {
+      "id": "sulayman-queen",
+      "type": "multipleChoice",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "What did the queen of Saba' say at the end?", "de": "Was sagte die Königin von Saba' am Ende?", "bs": "Šta je kraljica Sebe rekla na kraju?" },
+      "options": [
+        { "id": "a", "text": { "en": "I submit with Sulayman to Allah, Lord of the worlds", "de": "Ich ergebe mich mit Sulaiman Allah, dem Herrn der Welten", "bs": "Predajem se, sa Sulejmanom, Allahu, Gospodaru svjetova" } },
+        { "id": "b", "text": { "en": "I will build a bigger palace", "de": "Ich baue einen größeren Palast", "bs": "Sagradit ću veći dvorac" } },
+        { "id": "c", "text": { "en": "I will go back and forget it", "de": "Ich gehe zurück und vergesse es", "bs": "Vratit ću se i zaboraviti" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "She saw the palace of glass, admitted her wrong and submitted to Allah with Sulayman.",
+        "de": "Sie sah den Palast aus Glas, gestand ihr Unrecht ein und ergab sich mit Sulaiman Allah.",
+        "bs": "Vidjela je dvorac od stakla, priznala svoj grijeh i predala se Allahu zajedno sa Sulejmanom."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:44" }]
+    },
+    {
+      "id": "sulayman-grateful",
+      "type": "lessonChoice",
+      "storyId": "sulayman",
+      "topic": "sulayman",
+      "prompt": { "en": "What did Sulayman do when he received a great gift?", "de": "Was tat Sulaiman, wenn er eine große Gabe erhielt?", "bs": "Šta je Sulejman činio kada bi primio velik dar?" },
+      "options": [
+        { "id": "a", "text": { "en": "He thanked Allah and saw it as a test of gratitude", "de": "Er dankte Allah und sah es als Prüfung der Dankbarkeit", "bs": "Zahvaljivao je Allahu i vidio ga kao ispit zahvalnosti" } },
+        { "id": "b", "text": { "en": "He boasted about his power", "de": "Er prahlte mit seiner Macht", "bs": "Hvalisao se svojom moći" } },
+        { "id": "c", "text": { "en": "He kept it secret from everyone", "de": "Er hielt es vor allen geheim", "bs": "Krio ga je od svih" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"This is from the favour of my Lord, to test me whether I am grateful\" – Sulayman's words in 27:40.",
+        "de": "„Das ist von der Huld meines Herrn, um mich zu prüfen, ob ich dankbar bin“ – Sulaimans Worte in 27:40.",
+        "bs": "„Ovo je od dobrote Gospodara moga, da me iskuša hoću li zahvalan biti“ – Sulejmanove riječi u 27:40."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "27:19; 27:40" }]
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "27:15–44" },
+    { "sourceName": "Quran", "sourceReference": "21:81; 34:12" },
+    { "sourceName": "Quran", "sourceReference": "38:35–36" }
+  ]
+}
