@@ -1,3 +1,4 @@
+import { registerAlyasaGame } from './alyasa-among-best/register';
 import { registerIlyasGame } from './ilyas-lanterns/register';
 import { registerSulaymanGame } from './sulayman-ants-valley/register';
 
@@ -9,4 +10,5 @@ import { registerSulaymanGame } from './sulayman-ants-valley/register';
 export function registerProphetsCGames(): void {
   registerSulaymanGame();
   registerIlyasGame();
+  registerAlyasaGame();
 }

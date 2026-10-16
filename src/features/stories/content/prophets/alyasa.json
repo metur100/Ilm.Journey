@@ -1,0 +1,252 @@
+{
+  "id": "alyasa",
+  "order": 20,
+  "prophetName": { "en": "Al-Yasa", "de": "Al-Yasa' (Elischa)", "bs": "El-Jesa'" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "Among the Best", "de": "Unter den Besten", "bs": "Među najboljima" },
+  "description": {
+    "en": "A prophet the Quran names twice – with an honour that says everything: he was among the best.",
+    "de": "Ein Prophet, den der Koran zweimal nennt – mit einer Ehre, die alles sagt: Er gehörte zu den Besten.",
+    "bs": "Poslanik kojeg Kur'an spominje dva puta – s počašću koja sve govori: bio je među najboljima."
+  },
+  "place": { "en": "Named in the Quran", "de": "Im Koran genannt", "bs": "Spomenut u Kur'anu" },
+  "symbol": "stars",
+  "symbolArt": "prophet.alyasa-star",
+  "cover": { "sky": "night", "elements": ["stars", "lanterns"] },
+  "coverStage": {
+    "sky": "night",
+    "layers": [
+      { "art": "prophet.alyasa-lantern-chain", "x": 200, "y": 70, "w": 400, "anchor": "center", "anim": { "type": "sway", "amp": 2, "period": 7000 } },
+      { "art": "story.night-horizon" },
+      { "art": "prophet.alyasa-star", "x": 200, "y": 160, "w": 86, "anchor": "center", "anim": "glow", "enter": "zoom", "at": 600 }
+    ],
+    "effects": ["stars", { "type": "sparkle", "x": 200, "y": 160, "w": 120, "h": 70, "intensity": 1, "at": 1200 }]
+  },
+  "intro": {
+    "en": "Al-Yasa (peace be upon him) is one of the prophets named in the Quran. The Quran tells us little about his life – it does not tell where he lived or what happened to him. But it tells us what matters most: Allah favoured him, guided him and counted him among the best.",
+    "de": "Al-Yasa' (Friede sei mit ihm) ist einer der Propheten, die im Koran genannt werden. Der Koran erzählt wenig über sein Leben – nicht, wo er lebte oder was ihm geschah. Aber er sagt das Wichtigste: Allah bevorzugte ihn, leitete ihn recht und zählte ihn zu den Besten.",
+    "bs": "El-Jesa', a.s., jedan je od poslanika spomenutih u Kur'anu. Kur'an malo govori o njegovom životu – ne kaže gdje je živio ni šta mu se desilo. Ali kaže ono najvažnije: Allah ga je odlikovao, uputio i ubrojio među najbolje."
+  },
+  "scenes": [
+    {
+      "id": "alyasa-s1",
+      "title": { "en": "Favoured above the worlds", "de": "Bevorzugt vor den Welten", "bs": "Odlikovan nad svjetovima" },
+      "text": {
+        "en": "In Surah Al-Anʿam, Allah names a long line of prophets whom He guided. Then He says: \"And Ismail, Al-Yasa, Yunus and Lut – each of them We favoured above the worlds.\"",
+        "de": "In der Sure Al-Anʿam nennt Allah eine lange Reihe von Propheten, die Er rechtgeleitet hat. Dann sagt Er: „Und Ismail, Al-Yasa', Yunus und Lut – jeden von ihnen haben Wir vor den Welten bevorzugt.“",
+        "bs": "U suri El-En'am Allah spominje dugi niz poslanika koje je uputio. Zatim kaže: „I Ismaila, i El-Jesa'a, i Junusa, i Luta – i svakog od njih smo nad svjetovima odlikovali.“"
+      },
+      "scene": { "sky": "night", "elements": ["stars", "lanterns"] },
+      "stage": {
+        "sky": "night",
+        "camera": "panRight",
+        "layers": [
+          { "art": "prophet.alyasa-lantern-chain", "x": 200, "y": 90, "w": 420, "anchor": "center", "enter": "fade", "at": 300, "duration": 1600 },
+          { "art": "story.night-horizon" }
+        ],
+        "effects": [{ "type": "stars", "intensity": 2 }, { "type": "lanternGlow", "x": 200, "y": 110, "intensity": 2, "at": 1400 }, { "type": "sparkle", "x": 200, "y": 100, "w": 320, "h": 60, "intensity": 1, "at": 1800 }]
+      },
+      "interactionId": "alyasa-favoured",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:83–86" }]
+    },
+    {
+      "id": "alyasa-s2",
+      "title": { "en": "Chosen and guided", "de": "Erwählt und rechtgeleitet", "bs": "Odabrani i upućeni" },
+      "text": {
+        "en": "About these prophets Allah says: \"We chose them and guided them to a straight path.\" And He tells us: \"Those are the ones whom Allah guided, so follow their guidance.\"",
+        "de": "Über diese Propheten sagt Allah: „Wir haben sie erwählt und zu einem geraden Weg geleitet.“ Und Er sagt uns: „Das sind diejenigen, die Allah rechtgeleitet hat; so folge ihrer Rechtleitung.“",
+        "bs": "O tim poslanicima Allah kaže: „Odabrali smo ih i na Pravi put uputili.“ I kaže nam: „To su oni kojima je Allah na Pravi put ukazao, zato ti slijedi njihov Pravi put.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 200, "y": 130, "w": 100, "anchor": "center", "enter": "rise", "at": 300, "duration": 2400 },
+          { "art": "story.valley" },
+          { "art": "prophet.alyasa-star", "x": 200, "y": 70, "w": 54, "anchor": "center", "anim": "glow", "enter": "fade", "at": 1600 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 1, "until": 2200 }, { "type": "lightBeam", "x": 200, "intensity": 1, "at": 1800 }, { "type": "birds", "intensity": 1, "at": 2400 }]
+      },
+      "interactionId": "alyasa-follow",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:87; 6:90" }]
+    },
+    {
+      "id": "alyasa-s3",
+      "title": { "en": "All among the best", "de": "Alle unter den Besten", "bs": "Svi su među najboljima" },
+      "text": {
+        "en": "In Surah Sad, Allah says to the Prophet ﷺ: \"And remember Ismail, Al-Yasa and Dhul-Kifl – all of them are among the best.\" Allah Himself praises Al-Yasa – no honour is greater.",
+        "de": "In der Sure Sad sagt Allah zum Propheten ﷺ: „Und gedenke Ismails, Al-Yasa's und Dhul-Kifls – alle gehören zu den Besten.“ Allah Selbst lobt Al-Yasa' – es gibt keine größere Ehre.",
+        "bs": "U suri Sad Allah kaže Poslaniku ﷺ: „I sjeti se Ismaila, i El-Jesa'a, i Zul-Kifla – svi su oni od najboljih.“ Sam Allah hvali El-Jesa'a – veće počasti nema."
+      },
+      "scene": { "sky": "night", "elements": ["stars", "crescent"] },
+      "stage": {
+        "sky": "night",
+        "mood": "golden",
+        "layers": [
+          { "art": "story.moon-crescent", "x": 80, "y": 52, "w": 50, "anchor": "center", "anim": "glow" },
+          { "art": "story.mountains", "opacity": 0.8 },
+          { "art": "prophet.alyasa-star", "x": 200, "y": 112, "w": 96, "anchor": "center", "anim": "breathe", "enter": "zoom", "at": 500, "duration": 1400 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "sunrays", "x": 200, "y": 112, "intensity": 1, "at": 1200 }, { "type": "sparkle", "x": 200, "y": 112, "w": 160, "h": 90, "intensity": 2, "at": 1500 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "38:45–48" }]
+    }
+  ],
+  "miniGameId": "alyasa-memory",
+  "quizIds": ["alyasa-names", "alyasa-best", "alyasa-lesson"],
+  "lessons": [
+    {
+      "id": "alyasa-l1",
+      "value": "ihsan",
+      "title": { "en": "What Allah thinks of you matters most", "de": "Was Allah über dich weiß, zählt am meisten", "bs": "Najvažnije je kako te Allah vidi" },
+      "explanation": {
+        "en": "We know few details about Al-Yasa, but Allah called him one of the best. Doing good sincerely for Allah counts – even if nobody else sees it.",
+        "de": "Wir kennen wenige Einzelheiten über Al-Yasa', aber Allah nannte ihn einen der Besten. Aufrichtig für Allah Gutes zu tun zählt – auch wenn es sonst niemand sieht.",
+        "bs": "Malo detalja znamo o El-Jesa'u, ali Allah ga je nazvao jednim od najboljih. Iskreno činiti dobro radi Allaha vrijedi – čak i kada to niko drugi ne vidi."
+      },
+      "example": {
+        "en": "You quietly tidy up the classroom when everyone has left. No one thanks you, but Allah sees it.",
+        "de": "Du räumst leise das Klassenzimmer auf, wenn alle gegangen sind. Niemand dankt dir, aber Allah sieht es.",
+        "bs": "Tiho pospremiš učionicu kada svi odu. Niko ti ne zahvali, ali Allah to vidi."
+      },
+      "reflection": {
+        "en": "Which good deed can you do today that only Allah will see?",
+        "de": "Welche gute Tat kannst du heute tun, die nur Allah sieht?",
+        "bs": "Koje dobro djelo danas možeš učiniti, a da ga vidi samo Allah?"
+      }
+    },
+    {
+      "id": "alyasa-l2",
+      "value": "guidance",
+      "title": { "en": "Follow the guidance of the prophets", "de": "Folge der Rechtleitung der Propheten", "bs": "Slijedi uputu poslanika" },
+      "explanation": {
+        "en": "Allah says about the guided prophets: \"follow their guidance.\" Their faith, patience and good character are our examples.",
+        "de": "Allah sagt über die rechtgeleiteten Propheten: „folge ihrer Rechtleitung.“ Ihr Glaube, ihre Geduld und ihr guter Charakter sind unsere Vorbilder.",
+        "bs": "Allah kaže o upućenim poslanicima: „slijedi njihov Pravi put.“ Njihovo vjerovanje, strpljivost i lijep ahlak su naš uzor."
+      },
+      "example": {
+        "en": "You learn about a prophet's patience and try to be patient with your little brother.",
+        "de": "Du lernst von der Geduld eines Propheten und versuchst, mit deinem kleinen Bruder geduldig zu sein.",
+        "bs": "Naučiš o strpljivosti jednog poslanika i trudiš se biti strpljiv sa mlađim bratom."
+      },
+      "reflection": {
+        "en": "Which good quality of the prophets would you like to have?",
+        "de": "Welche gute Eigenschaft der Propheten möchtest du haben?",
+        "bs": "Koju lijepu osobinu poslanika bi želio imati?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "alyasa-favoured",
+      "type": "trueFalse",
+      "storyId": "alyasa",
+      "topic": "alyasa",
+      "prompt": { "en": "Allah says that He favoured Al-Yasa above the worlds.", "de": "Allah sagt, dass Er Al-Yasa' vor den Welten bevorzugt hat.", "bs": "Allah kaže da je El-Jesa'a odlikovao nad svjetovima." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"each of them We favoured above the worlds\" (6:86).",
+        "de": "Ja – „jeden von ihnen haben Wir vor den Welten bevorzugt“ (6:86).",
+        "bs": "Da – „i svakog od njih smo nad svjetovima odlikovali“ (6:86)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:86" }]
+    },
+    {
+      "id": "alyasa-follow",
+      "type": "multipleChoice",
+      "storyId": "alyasa",
+      "topic": "alyasa",
+      "prompt": { "en": "What does Allah tell us about the guided prophets?", "de": "Was sagt Allah uns über die rechtgeleiteten Propheten?", "bs": "Šta nam Allah kaže o upućenim poslanicima?" },
+      "options": [
+        { "id": "a", "text": { "en": "Follow their guidance", "de": "Folge ihrer Rechtleitung", "bs": "Slijedi njihov Pravi put" } },
+        { "id": "b", "text": { "en": "Forget their stories", "de": "Vergiss ihre Geschichten", "bs": "Zaboravi njihova kazivanja" } },
+        { "id": "c", "text": { "en": "Only remember their names", "de": "Merke dir nur ihre Namen", "bs": "Zapamti samo njihova imena" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"Those are the ones whom Allah guided, so follow their guidance\" (6:90).",
+        "de": "„Das sind diejenigen, die Allah rechtgeleitet hat; so folge ihrer Rechtleitung“ (6:90).",
+        "bs": "„To su oni kojima je Allah na Pravi put ukazao, zato ti slijedi njihov Pravi put“ (6:90)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:90" }]
+    },
+    {
+      "id": "alyasa-memory",
+      "type": "memory",
+      "storyId": "alyasa",
+      "topic": "alyasa",
+      "prompt": { "en": "Memory: match what the Quran says about these prophets.", "de": "Memory: Ordne zu, was der Koran über diese Propheten sagt.", "bs": "Memorija: spoji šta Kur'an kaže o ovim poslanicima." },
+      "pairs": [
+        { "id": "favoured", "left": { "en": "Favoured", "de": "Bevorzugt", "bs": "Odlikovani" }, "right": { "en": "above the worlds", "de": "vor den Welten", "bs": "nad svjetovima" } },
+        { "id": "chosen", "left": { "en": "Chosen", "de": "Erwählt", "bs": "Odabrani" }, "right": { "en": "and guided to a straight path", "de": "und zu einem geraden Weg geleitet", "bs": "i na Pravi put upućeni" } },
+        { "id": "best", "left": { "en": "Among the best", "de": "Unter den Besten", "bs": "Među najboljima" }, "right": { "en": "with Ismail and Dhul-Kifl", "de": "mit Ismail und Dhul-Kifl", "bs": "s Ismailom i Zul-Kiflom" } }
+      ],
+      "explanation": {
+        "en": "Favoured above the worlds (6:86), chosen and guided (6:87), among the best (38:48).",
+        "de": "Bevorzugt vor den Welten (6:86), erwählt und rechtgeleitet (6:87), unter den Besten (38:48).",
+        "bs": "Odlikovani nad svjetovima (6:86), odabrani i upućeni (6:87), među najboljima (38:48)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:86–87; 38:48" }]
+    },
+    {
+      "id": "alyasa-names",
+      "type": "ordering",
+      "storyId": "alyasa",
+      "topic": "alyasa",
+      "prompt": { "en": "Put the names in the order of the ayah 6:86.", "de": "Bring die Namen in die Reihenfolge des Verses 6:86.", "bs": "Poredaj imena redom kako su u ajetu 6:86." },
+      "items": [
+        { "id": "ismail", "text": { "en": "Ismail", "de": "Ismail", "bs": "Ismail" } },
+        { "id": "alyasa", "text": { "en": "Al-Yasa", "de": "Al-Yasa'", "bs": "El-Jesa'" } },
+        { "id": "yunus", "text": { "en": "Yunus", "de": "Yunus", "bs": "Junus" } },
+        { "id": "lut", "text": { "en": "Lut", "de": "Lut", "bs": "Lut" } }
+      ],
+      "explanation": {
+        "en": "\"And Ismail, Al-Yasa, Yunus and Lut – each of them We favoured above the worlds.\"",
+        "de": "„Und Ismail, Al-Yasa', Yunus und Lut – jeden von ihnen haben Wir vor den Welten bevorzugt.“",
+        "bs": "„I Ismaila, i El-Jesa'a, i Junusa, i Luta – i svakog od njih smo nad svjetovima odlikovali.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:86" }]
+    },
+    {
+      "id": "alyasa-best",
+      "type": "multipleChoice",
+      "storyId": "alyasa",
+      "topic": "alyasa",
+      "prompt": { "en": "In Surah Sad, Al-Yasa is named together with…", "de": "In der Sure Sad wird Al-Yasa' genannt zusammen mit…", "bs": "U suri Sad El-Jesa' je spomenut zajedno s…" },
+      "options": [
+        { "id": "a", "text": { "en": "Ismail and Dhul-Kifl", "de": "Ismail und Dhul-Kifl", "bs": "Ismailom i Zul-Kiflom" } },
+        { "id": "b", "text": { "en": "Musa and Harun", "de": "Musa und Harun", "bs": "Musaom i Harunom" } },
+        { "id": "c", "text": { "en": "Nuh and Hud", "de": "Nuh und Hud", "bs": "Nuhom i Hudom" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"And remember Ismail, Al-Yasa and Dhul-Kifl – all of them are among the best\" (38:48).",
+        "de": "„Und gedenke Ismails, Al-Yasa's und Dhul-Kifls – alle gehören zu den Besten“ (38:48).",
+        "bs": "„I sjeti se Ismaila, i El-Jesa'a, i Zul-Kifla – svi su oni od najboljih“ (38:48)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "38:48" }]
+    },
+    {
+      "id": "alyasa-lesson",
+      "type": "lessonChoice",
+      "storyId": "alyasa",
+      "topic": "alyasa",
+      "prompt": { "en": "What do we learn from the honour Allah gave Al-Yasa?", "de": "Was lernen wir aus der Ehre, die Allah Al-Yasa' gab?", "bs": "Šta učimo iz počasti koju je Allah dao El-Jesa'u?" },
+      "options": [
+        { "id": "a", "text": { "en": "Being good in Allah's sight matters more than being famous", "de": "Bei Allah gut zu sein zählt mehr als berühmt zu sein", "bs": "Biti dobar kod Allaha važnije je od slave" } },
+        { "id": "b", "text": { "en": "Only famous people are important", "de": "Nur berühmte Menschen sind wichtig", "bs": "Važni su samo slavni ljudi" } },
+        { "id": "c", "text": { "en": "Good deeds only count if people see them", "de": "Gute Taten zählen nur, wenn Menschen sie sehen", "bs": "Dobra djela vrijede samo ako ih ljudi vide" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Allah counts Al-Yasa among the best – that is the greatest honour.",
+        "de": "Allah zählt Al-Yasa' zu den Besten – das ist die größte Ehre.",
+        "bs": "Allah ubraja El-Jesa'a među najbolje – to je najveća počast."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "6:83–90" },
+    { "sourceName": "Quran", "sourceReference": "38:45–48" }
+  ]
+}
