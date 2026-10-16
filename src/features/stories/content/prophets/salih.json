@@ -1,0 +1,297 @@
+{
+  "id": "salih",
+  "order": 5,
+  "prophetName": { "en": "Salih", "de": "Salih", "bs": "Salih" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "The She-Camel of Allah", "de": "Die Kamelstute Allahs", "bs": "Allahova kamila" },
+  "description": {
+    "en": "Homes carved into mountains, a she-camel as a sign – and water shared fairly, day by day.",
+    "de": "In Berge gehauene Häuser, eine Kamelstute als Zeichen – und Wasser, gerecht Tag für Tag geteilt.",
+    "bs": "Kuće isklesane u brdima, kamila kao znak – i voda pravedno dijeljena, dan po dan."
+  },
+  "place": { "en": "Al-Hijr, the land of Thamud", "de": "Al-Hidschr, das Land der Thamud", "bs": "El-Hidžr, zemlja Semuda" },
+  "symbol": "well",
+  "symbolArt": "prophet.salih-camel",
+  "mapPlaces": ["hijr"],
+  "cover": { "sky": "dusk", "elements": ["stars", "mountains", "well"] },
+  "coverStage": {
+    "sky": "dusk",
+    "layers": [
+      { "art": "story.moon-crescent", "x": 330, "y": 52, "w": 46, "anchor": "center", "anim": "glow" },
+      { "art": "prophet.salih-rock-houses" },
+      { "art": "prophet.salih-camel", "x": 200, "y": 232, "w": 120, "enter": "fade", "at": 500, "duration": 1400 }
+    ],
+    "effects": ["stars", { "type": "sparkle", "x": 200, "y": 170, "w": 140, "h": 70, "intensity": 1, "at": 1400 }, { "type": "sand", "intensity": 1 }]
+  },
+  "intro": {
+    "en": "Salih (peace be upon him) was sent to his people, Thamud. They lived after ʿAd in al-Hijr, and Allah had given them gardens, springs and great skill.",
+    "de": "Salih (Friede sei mit ihm) wurde zu seinem Volk gesandt, den Thamud. Sie lebten nach den ʿAd in al-Hidschr, und Allah hatte ihnen Gärten, Quellen und großes Geschick geschenkt.",
+    "bs": "Salih, a.s., poslan je svom narodu, Semudu. Živjeli su poslije Ada u El-Hidžru, a Allah im je dao bašče, izvore i veliku vještinu."
+  },
+  "scenes": [
+    {
+      "id": "salih-s1",
+      "title": { "en": "Homes in the mountains", "de": "Häuser in den Bergen", "bs": "Kuće u brdima" },
+      "text": {
+        "en": "Thamud built palaces on the plains and skilfully carved homes out of the mountains. They had gardens and springs, crops and palm trees with soft fruit. Salih said: \"O my people, worship Allah – you have no god other than Him.\"",
+        "de": "Die Thamud bauten Paläste in den Ebenen und hauten geschickt Häuser aus den Bergen. Sie hatten Gärten und Quellen, Felder und Palmen mit weichen Früchten. Salih sagte: „O mein Volk, dient Allah – ihr habt keinen Gott außer Ihm.“",
+        "bs": "Semud je gradio dvorce u ravnicama i vješto klesao kuće u brdima. Imali su bašče i izvore, usjeve i palme s mekanim plodovima. Salih je rekao: „O narode moj, robujte Allahu – vi nemate drugog boga osim Njega.“"
+      },
+      "scene": { "sky": "day", "elements": ["mountains", "palms"] },
+      "stage": {
+        "sky": "day",
+        "camera": "panRight",
+        "layers": [{ "art": "story.sun", "x": 340, "y": 40, "w": 60, "anchor": "center" }, { "art": "prophet.salih-rock-houses" }, { "art": "story.palms", "x": 200, "y": 236, "w": 110, "enter": "rise", "at": 800 }],
+        "effects": [{ "type": "clouds", "intensity": 1 }, { "type": "birds", "intensity": 1 }, { "type": "dust", "intensity": 1 }]
+      },
+      "interactionId": "salih-carve",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:73–74; 26:146–149; 15:82" }]
+    },
+    {
+      "id": "salih-s2",
+      "title": { "en": "A sign from Allah", "de": "Ein Zeichen Allahs", "bs": "Znak od Allaha" },
+      "text": {
+        "en": "Salih said: \"This is the she-camel of Allah, a sign for you. Let her eat on Allah's earth and do not touch her with harm.\"",
+        "de": "Salih sagte: „Dies ist die Kamelstute Allahs, ein Zeichen für euch. Lasst sie auf Allahs Erde weiden und tut ihr nichts Böses an.“",
+        "bs": "Salih je rekao: „Ovo je Allahova kamila, znak vama. Pustite je neka pase po Allahovoj zemlji i ne dirajte je zlom.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["mountains", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.mountains" },
+          { "art": "prophet.salih-camel", "x": 200, "y": 228, "w": 150, "anim": "breathe", "enter": "zoom", "at": 600, "duration": 1600 },
+          { "art": "story.grass", "y": 240, "w": 400 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 200, "y": 130, "intensity": 2, "at": 400 }, { "type": "sparkle", "x": 200, "y": 160, "w": 180, "h": 90, "intensity": 2, "at": 1600 }]
+      },
+      "interactionId": "salih-care",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:73; 11:64" }]
+    },
+    {
+      "id": "salih-s3",
+      "title": { "en": "Taking turns at the water", "de": "Abwechselnd am Wasser", "bs": "Voda na smjenu" },
+      "text": {
+        "en": "Salih told them: \"She has a turn to drink, and you have a turn to drink, each on a known day.\" The water was shared between them, and each turn was kept.",
+        "de": "Salih sagte ihnen: „Sie hat einen Tag zum Trinken, und ihr habt einen Tag zum Trinken, jeder an einem bestimmten Tag.“ Das Wasser wurde zwischen ihnen geteilt, und jede Reihe wurde eingehalten.",
+        "bs": "Salih im je rekao: „Ona ima svoj dan pojenja, a vi imate svoj dan pojenja, svako u određeni dan.“ Voda je bila podijeljena između njih i svaki se red poštivao."
+      },
+      "scene": { "sky": "day", "elements": ["well", "dunes"] },
+      "stage": {
+        "sky": "day",
+        "layers": [
+          { "art": "story.desert-flat" },
+          { "art": "prophet.salih-well", "x": 200, "y": 222, "w": 120 },
+          { "art": "prophet.salih-camel", "x": 90, "y": 230, "w": 100, "enter": "slideRight", "at": 400, "duration": 1600, "exitAt": 3400 },
+          { "art": "prophet.salih-jar", "x": 290, "y": 230, "w": 34, "enter": "rise", "at": 3800 },
+          { "art": "prophet.salih-jar", "x": 326, "y": 232, "w": 30, "enter": "rise", "at": 4200 }
+        ],
+        "effects": [{ "type": "ripples", "x": 200, "y": 178, "w": 60, "intensity": 1 }, { "type": "sunrays", "x": 60, "y": 40, "intensity": 1 }]
+      },
+      "interactionId": "salih-share",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:155–156; 54:28" }]
+    },
+    {
+      "id": "salih-s4",
+      "title": { "en": "The warning", "de": "Die Warnung", "bs": "Opomena" },
+      "text": {
+        "en": "But the proud among them harmed the she-camel against Allah's command. Salih said: \"Enjoy yourselves in your homes for three days.\" Then the punishment came, and in the morning their carved houses stood empty, as if no one had ever lived there.",
+        "de": "Doch die Hochmütigen unter ihnen taten der Kamelstute Böses an, gegen Allahs Gebot. Salih sagte: „Genießt noch drei Tage in euren Häusern.“ Dann kam die Strafe, und am Morgen standen ihre gehauenen Häuser leer, als hätte dort nie jemand gewohnt.",
+        "bs": "Ali oholi među njima naudili su kamili, protivno Allahovoj naredbi. Salih je rekao: „Uživajte u svojim kućama još tri dana.“ Zatim je došla kazna, a ujutro su njihove isklesane kuće stajale prazne, kao da u njima niko nikad nije živio."
+      },
+      "scene": { "sky": "dusk", "elements": ["mountains", "stars"] },
+      "stage": {
+        "sky": "dusk",
+        "mood": "cool",
+        "layers": [{ "art": "prophet.salih-rock-houses" }],
+        "effects": [{ "type": "stars", "intensity": 1 }, { "type": "wind", "intensity": 1, "at": 1200 }, { "type": "mist", "y": 170, "h": 60, "intensity": 2, "at": 2200 }, { "type": "dust", "intensity": 1, "at": 3200 }]
+      },
+      "interactionId": "salih-order",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:77–78; 11:65–68; 91:11–15" }]
+    },
+    {
+      "id": "salih-s5",
+      "title": { "en": "Saved by mercy", "de": "Durch Barmherzigkeit gerettet", "bs": "Spašeni milošću" },
+      "text": {
+        "en": "Allah saved Salih and those who believed with him, by His mercy. Salih turned away and said: \"O my people, I conveyed to you the message of my Lord and gave you sincere advice.\"",
+        "de": "Allah rettete Salih und die, die mit ihm glaubten, durch Seine Barmherzigkeit. Salih wandte sich ab und sagte: „O mein Volk, ich habe euch die Botschaft meines Herrn ausgerichtet und euch aufrichtig geraten.“",
+        "bs": "Allah je Svojom milošću spasio Saliha i one koji su s njim vjerovali. Salih se okrenuo i rekao: „O narode moj, prenio sam vam poslanicu Gospodara svoga i iskreno vas savjetovao.“"
+      },
+      "scene": { "sky": "dawn", "elements": ["sun", "palms"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 110, "y": 140, "w": 80, "anchor": "center", "enter": "rise", "at": 300, "duration": 2200 },
+          { "art": "story.hills" },
+          { "art": "story.palms", "x": 300, "y": 220, "w": 120 }
+        ],
+        "effects": [{ "type": "sunrays", "x": 110, "y": 140, "intensity": 2, "at": 1200 }, { "type": "birds", "intensity": 1, "at": 2000 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:66; 7:79" }]
+    }
+  ],
+  "miniGameId": "salih-memory",
+  "quizIds": ["salih-map", "salih-saved", "salih-lesson"],
+  "lessons": [
+    {
+      "id": "salih-l1",
+      "value": "fairness",
+      "title": { "en": "Sharing fairly", "de": "Gerecht teilen", "bs": "Pravedno dijeljenje" },
+      "explanation": {
+        "en": "The water was shared: a turn for the she-camel, a turn for the people. Fairness means everyone gets their right – people and animals.",
+        "de": "Das Wasser wurde geteilt: ein Tag für die Kamelstute, ein Tag für die Menschen. Gerechtigkeit heißt, dass jeder sein Recht bekommt – Menschen und Tiere.",
+        "bs": "Voda se dijelila: dan za kamilu, dan za ljude. Pravednost znači da svako dobije svoje pravo – ljudi i životinje."
+      },
+      "example": {
+        "en": "You and your brother take turns on the tablet – and you keep the turns even when no one is watching.",
+        "de": "Du und dein Bruder wechselt euch am Tablet ab – und du hältst die Reihenfolge ein, auch wenn niemand zuschaut.",
+        "bs": "Ti i brat se smjenjujete na tabletu – i poštuješ red čak i kad niko ne gleda."
+      },
+      "reflection": {
+        "en": "Where can you share more fairly at home or at school?",
+        "de": "Wo kannst du zu Hause oder in der Schule gerechter teilen?",
+        "bs": "Gdje kod kuće ili u školi možeš pravednije dijeliti?"
+      }
+    },
+    {
+      "id": "salih-l2",
+      "value": "mercy",
+      "title": { "en": "Kindness to animals", "de": "Freundlichkeit gegenüber Tieren", "bs": "Blagost prema životinjama" },
+      "explanation": {
+        "en": "Allah commanded: let her eat and do not harm her. Animals are a trust from Allah – we feed them, give them water and never hurt them.",
+        "de": "Allah befahl: Lasst sie weiden und tut ihr nichts Böses. Tiere sind ein Anvertrautes Allahs – wir füttern sie, geben ihnen Wasser und tun ihnen nie weh.",
+        "bs": "Allah je naredio: pustite je neka pase i ne dirajte je zlom. Životinje su Allahov emanet – hranimo ih, pojimo i nikad im ne nanosimo bol."
+      },
+      "example": {
+        "en": "In summer you put a bowl of water outside for birds and cats.",
+        "de": "Im Sommer stellst du eine Schale Wasser für Vögel und Katzen hinaus.",
+        "bs": "Ljeti izneseš posudu vode za ptice i mačke."
+      },
+      "reflection": {
+        "en": "How can you be kind to an animal this week?",
+        "de": "Wie kannst du diese Woche freundlich zu einem Tier sein?",
+        "bs": "Kako ove sedmice možeš biti blag prema nekoj životinji?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "salih-carve",
+      "type": "trueFalse",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "The people of Thamud carved homes out of the mountains.", "de": "Die Thamud hauten Häuser aus den Bergen.", "bs": "Narod Semud klesao je kuće u brdima." },
+      "correct": true,
+      "explanation": { "en": "Yes – they skilfully carved homes out of the mountains.", "de": "Ja – sie hauten geschickt Häuser aus den Bergen.", "bs": "Da – vješto su klesali kuće u brdima." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:74; 26:149" }]
+    },
+    {
+      "id": "salih-care",
+      "type": "scenario",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": {
+        "en": "Decision: a thirsty dog lies in the shade on a hot day. What follows the command about the she-camel?",
+        "de": "Entscheidung: An einem heißen Tag liegt ein durstiger Hund im Schatten. Was folgt dem Gebot über die Kamelstute?",
+        "bs": "Odluka: po vrućem danu žedan pas leži u hladu. Šta slijedi naredbu o kamili?"
+      },
+      "options": [
+        { "id": "a", "text": { "en": "Bring it some water and leave it in peace", "de": "Ihm Wasser bringen und ihn in Ruhe lassen", "bs": "Donijeti mu vode i ostaviti ga na miru" }, "feedback": { "en": "Kind and gentle – animals are a trust from Allah.", "de": "Freundlich und sanft – Tiere sind ein Anvertrautes Allahs.", "bs": "Blago i lijepo – životinje su Allahov emanet." } },
+        { "id": "b", "text": { "en": "Throw stones to chase it away", "de": "Steine werfen, um ihn zu verjagen", "bs": "Bacati kamenje da ga otjeraš" }, "feedback": { "en": "Allah forbids harming animals.", "de": "Allah verbietet, Tieren zu schaden.", "bs": "Allah zabranjuje nanositi zlo životinjama." } },
+        { "id": "c", "text": { "en": "Ignore it", "de": "Ihn ignorieren", "bs": "Ne obazirati se" }, "feedback": { "en": "A little water can be a great good deed.", "de": "Ein wenig Wasser kann eine große gute Tat sein.", "bs": "Malo vode može biti veliko dobro djelo." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "\"Let her eat on Allah's earth and do not touch her with harm.\"", "de": "„Lasst sie auf Allahs Erde weiden und tut ihr nichts Böses an.“", "bs": "„Pustite je neka pase po Allahovoj zemlji i ne dirajte je zlom.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:73" }]
+    },
+    {
+      "id": "salih-share",
+      "type": "multipleChoice",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "How was the water shared?", "de": "Wie wurde das Wasser geteilt?", "bs": "Kako je voda bila podijeljena?" },
+      "options": [
+        { "id": "a", "text": { "en": "In turns: one turn for the she-camel, one for the people", "de": "Abwechselnd: ein Tag für die Kamelstute, einer für die Menschen", "bs": "Na smjenu: dan za kamilu, dan za ljude" } },
+        { "id": "b", "text": { "en": "The people took all of it", "de": "Die Menschen nahmen alles", "bs": "Ljudi su uzimali svu vodu" } },
+        { "id": "c", "text": { "en": "Nobody was allowed to drink", "de": "Niemand durfte trinken", "bs": "Niko nije smio piti" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "\"She has a turn to drink, and you have a turn to drink, each on a known day.\"", "de": "„Sie hat einen Tag zum Trinken, und ihr habt einen Tag zum Trinken, jeder an einem bestimmten Tag.“", "bs": "„Ona ima svoj dan pojenja, a vi imate svoj dan pojenja, svako u određeni dan.“" },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "26:155" }]
+    },
+    {
+      "id": "salih-order",
+      "type": "ordering",
+      "timeline": true,
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "Put the story of Salih in order.", "de": "Bring die Geschichte Salihs in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Salihu." },
+      "items": [
+        { "id": "homes", "text": { "en": "Thamud carve homes in the mountains", "de": "Die Thamud hauen Häuser in die Berge", "bs": "Semud kleše kuće u brdima" } },
+        { "id": "call", "text": { "en": "Salih calls them to Allah", "de": "Salih ruft sie zu Allah", "bs": "Salih ih poziva Allahu" } },
+        { "id": "camel", "text": { "en": "The she-camel as a sign", "de": "Die Kamelstute als Zeichen", "bs": "Kamila kao znak" } },
+        { "id": "water", "text": { "en": "The water is shared in turns", "de": "Das Wasser wird abwechselnd geteilt", "bs": "Voda se dijeli na smjenu" } },
+        { "id": "harm", "text": { "en": "They harm her and ignore the warning", "de": "Sie tun ihr Böses und missachten die Warnung", "bs": "Nanose joj zlo i ne slušaju opomenu" } }
+      ],
+      "explanation": { "en": "Homes, the call, the sign, the water turns – and the warning they ignored.", "de": "Häuser, der Aufruf, das Zeichen, die Wassertage – und die Warnung, die sie missachteten.", "bs": "Kuće, poziv, znak, smjene vode – i opomena koju nisu poslušali." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:73–79; 26:141–158" }]
+    },
+    {
+      "id": "salih-memory",
+      "type": "memory",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "Memory: match the parts of the story of Salih.", "de": "Memory: Ordne die Teile der Geschichte Salihs zu.", "bs": "Memorija: spoji dijelove kazivanja o Salihu." },
+      "pairs": [
+        { "id": "camel", "left": { "en": "The she-camel", "de": "Die Kamelstute", "bs": "Kamila" }, "right": { "en": "A sign from Allah", "de": "Ein Zeichen Allahs", "bs": "Znak od Allaha" } },
+        { "id": "water", "left": { "en": "The water", "de": "Das Wasser", "bs": "Voda" }, "right": { "en": "Shared in turns", "de": "Abwechselnd geteilt", "bs": "Dijeli se na smjenu" } },
+        { "id": "homes", "left": { "en": "Their homes", "de": "Ihre Häuser", "bs": "Njihove kuće" }, "right": { "en": "Carved in mountains", "de": "In Berge gehauen", "bs": "Isklesane u brdima" } },
+        { "id": "believers", "left": { "en": "The believers", "de": "Die Gläubigen", "bs": "Vjernici" }, "right": { "en": "Saved by mercy", "de": "Durch Barmherzigkeit gerettet", "bs": "Spašeni milošću" } }
+      ],
+      "explanation": { "en": "The she-camel was a sign, the water was shared, the homes were carved – and the believers were saved.", "de": "Die Kamelstute war ein Zeichen, das Wasser wurde geteilt, die Häuser waren gehauen – und die Gläubigen wurden gerettet.", "bs": "Kamila je bila znak, voda se dijelila, kuće su bile isklesane – a vjernici su spašeni." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "7:73–74; 26:155; 11:66" }]
+    },
+    {
+      "id": "salih-map",
+      "type": "map",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "Where did Thamud live? Tap al-Hijr.", "de": "Wo lebten die Thamud? Tippe auf al-Hidschr.", "bs": "Gdje je živio Semud? Dodirni El-Hidžr." },
+      "places": ["hijr", "ahqaf", "egypt", "canaan"],
+      "correctPlace": "hijr",
+      "explanation": { "en": "The Quran calls them the people of al-Hijr, in the north-west of Arabia.", "de": "Der Koran nennt sie die Leute von al-Hidschr, im Nordwesten Arabiens.", "bs": "Kur'an ih naziva stanovnicima El-Hidžra, na sjeverozapadu Arabije." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "15:80–82" }]
+    },
+    {
+      "id": "salih-saved",
+      "type": "trueFalse",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "Allah saved Salih and the believers by His mercy.", "de": "Allah rettete Salih und die Gläubigen durch Seine Barmherzigkeit.", "bs": "Allah je Svojom milošću spasio Saliha i vjernike." },
+      "correct": true,
+      "explanation": { "en": "Yes – Allah saved Salih and those who believed with him.", "de": "Ja – Allah rettete Salih und die mit ihm glaubten.", "bs": "Da – Allah je spasio Saliha i one koji su s njim vjerovali." },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "11:66" }]
+    },
+    {
+      "id": "salih-lesson",
+      "type": "lessonChoice",
+      "storyId": "salih",
+      "topic": "salih",
+      "prompt": { "en": "Which lesson do we learn from Salih?", "de": "Welche Lehre lernen wir von Salih?", "bs": "Koju pouku učimo od Saliha?" },
+      "options": [
+        { "id": "a", "text": { "en": "Share fairly and be kind to animals", "de": "Gerecht teilen und freundlich zu Tieren sein", "bs": "Pravedno dijeliti i biti blag prema životinjama" } },
+        { "id": "b", "text": { "en": "The strongest may take everything", "de": "Der Stärkste darf alles nehmen", "bs": "Najjači smije uzeti sve" } },
+        { "id": "c", "text": { "en": "Warnings do not matter", "de": "Warnungen sind egal", "bs": "Opomene nisu važne" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Salih taught his people to keep the turns at the water and not to harm the she-camel.", "de": "Salih lehrte sein Volk, die Wassertage einzuhalten und der Kamelstute nichts anzutun.", "bs": "Salih je učio svoj narod da poštuje smjene vode i da ne nanosi zlo kamili." }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "7:73–79" },
+    { "sourceName": "Quran", "sourceReference": "11:61–68" },
+    { "sourceName": "Quran", "sourceReference": "26:141–159" },
+    { "sourceName": "Quran", "sourceReference": "54:23–31" },
+    { "sourceName": "Quran", "sourceReference": "91:11–15" }
+  ]
+}

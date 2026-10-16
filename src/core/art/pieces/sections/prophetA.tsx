@@ -608,6 +608,102 @@ const hud = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------
+// Salih – Thamud, homes carved into the mountains (7:74, 15:82), the she-camel of Allah and the water turns (26:155)
+
+/** A doorway carved into rock: a stepped crown over a dark door. */
+function CarvedDoor({ c, x, y, w, h }: { c: Ctx; x: number; y: number; w: number; h: number }) {
+  const t = y - h;
+  return (
+    <G>
+      <Path d={`M${x - w / 2} ${y}V${t + h * 0.22}H${x - w * 0.36}V${t + h * 0.1}H${x - w * 0.2}V${t}H${x + w * 0.2}V${t + h * 0.1}H${x + w * 0.36}V${t + h * 0.22}H${x + w / 2}V${y}Z`} fill={dim(c, '#E9B98E')} />
+      <Rect x={x - w * 0.42} y={t + h * 0.3} width={w * 0.84} height={h * 0.06} fill={dim(c, '#C98E62')} />
+      <Rect x={x - w * 0.18} y={t + h * 0.5} width={w * 0.36} height={h * 0.5} fill={dim(c, '#4A2E22', 0.2)} />
+    </G>
+  );
+}
+
+const salih = {
+  /** The she-camel of Allah – a sign (7:73): calm, with a soft glow and a simple saddle cloth. */
+  'salih-camel': art(140, 120, (c) => (
+    <>
+      <Glow c={c} k="g" cx={70} cy={60} r={64} color={C.goldPale} opacity={c.dark ? 0.45 : 0.55} />
+      <Shadow c={c} cx={70} cy={114} rx={50} />
+      <G fill={dim(c, '#E2BE8C', 0.2)}>
+        <Path d="M30 72C28 50 44 38 58 44C66 30 82 30 90 44C98 50 104 60 104 72L100 80H34Z" />
+        <Path d="M100 66C106 54 108 40 112 30C114 22 124 20 128 26C130 30 126 32 122 32C120 44 116 60 110 74Z" />
+        <Rect x={38} y={74} width={7} height={38} rx={3} />
+        <Rect x={52} y={74} width={7} height={38} rx={3} />
+        <Rect x={84} y={74} width={7} height={38} rx={3} />
+        <Rect x={96} y={74} width={7} height={38} rx={3} />
+      </G>
+      <Path d="M30 72C30 66 32 60 36 56" stroke={dim(c, '#C79A66', 0.2)} strokeWidth={4} strokeLinecap="round" fill="none" />
+      <Path d="M48 50C56 44 74 42 86 50L84 64H50Z" fill={C.teal} />
+      <Path d="M50 62H84" stroke={C.gold} strokeWidth={2.4} />
+      {[56, 66, 76].map((x) => (
+        <Circle key={x} cx={x} cy={66} r={1.8} fill={C.gold} />
+      ))}
+      <Circle cx={123} cy={27} r={1.5} fill={C.ink} />
+      <Path d="M118 22L120 17 123 22" fill={dim(c, '#C79A66', 0.2)} />
+      <Spark x={18} y={30} r={5} />
+      <Spark x={130} y={56} r={4} />
+    </>
+  )),
+
+  /** Homes carved into the mountains of al-Hijr, with palms in the valley (7:74, 15:82, 26:148–149). */
+  'salih-rock-houses': art(W, H, (c) => (
+    <>
+      <Path d="M-10 190C-6 120 20 70 70 62C110 56 150 80 170 120L184 190Z" fill={dim(c, '#C9845C')} />
+      <Path d="M120 70C150 80 166 100 172 124L184 190H130Z" fill={dim(c, '#A9694A')} opacity={0.6} />
+      <Path d="M210 190C214 110 250 56 310 52C360 50 404 90 410 190Z" fill={dim(c, '#C47B54')} />
+      <Path d="M360 60C390 80 404 120 410 190H350Z" fill={dim(c, '#A3633F')} opacity={0.6} />
+      <Path d="M40 100C60 92 80 92 96 100M240 90C262 80 290 80 320 90" stroke={dim(c, '#A9694A')} strokeWidth={2} fill="none" opacity={0.6} />
+      <CarvedDoor c={c} x={70} y={182} w={46} h={66} />
+      <CarvedDoor c={c} x={130} y={182} w={30} h={44} />
+      <CarvedDoor c={c} x={270} y={180} w={52} h={74} />
+      <CarvedDoor c={c} x={340} y={182} w={34} h={48} />
+      <Path d="M0 186C90 176 190 180 280 186S370 178 400 182V240H0Z" fill={dim(c, C.sand)} />
+      <Path d="M0 212C100 202 220 206 300 214S380 208 400 210V240H0Z" fill={dim(c, C.sandDeep)} />
+      <Path d="M170 196C176 170 180 150 186 136" stroke={dim(c, C.wood)} strokeWidth={4} strokeLinecap="round" fill="none" />
+      <Path d="M186 136q-22-4-30 10M186 136q22-6 30 8M186 136q-8-16-24-16M186 136q10-16 26-14" stroke={c.green(dim(c, C.leaf))} strokeWidth={6} strokeLinecap="round" fill="none" />
+    </>
+  )),
+
+  /** The well whose water was shared in turns (26:155, 54:28). */
+  'salih-well': art(140, 110, (c) => (
+    <>
+      <Shadow c={c} cx={70} cy={104} rx={60} />
+      <Path d="M18 60V96Q18 104 30 104H110Q122 104 122 96V60Z" fill={dim(c, C.stoneLight, 0.2)} />
+      <Path d="M80 60H122V96Q122 104 110 104H80Z" fill={dim(c, C.stone, 0.2)} opacity={0.6} />
+      {[72, 86].map((y) => (
+        <Path key={y} d={`M18 ${y}H122`} stroke={C.stoneDark} strokeWidth={1.2} opacity={0.5} />
+      ))}
+      {[40, 64, 92, 110, 30, 54, 80, 102].map((x, i) => (
+        <Path key={i} d={`M${x} ${i < 4 ? 60 : 72}V${i < 4 ? 72 : 86}`} stroke={C.stoneDark} strokeWidth={1.1} opacity={0.4} />
+      ))}
+      <Ellipse cx={70} cy={60} rx={52} ry={11} fill={dim(c, C.stonePale, 0.2)} />
+      <Ellipse cx={70} cy={60} rx={42} ry={7.5} fill={C.waterDeep} />
+      <Ellipse cx={62} cy={59} rx={20} ry={2.6} fill={C.waterLight} opacity={0.7} />
+      <Path d="M30 60V18M110 60V18" stroke={C.wood} strokeWidth={6} strokeLinecap="round" />
+      <Path d="M24 18H116" stroke={C.woodDark} strokeWidth={6} strokeLinecap="round" />
+      <Path d="M70 18V42" stroke={C.sandDark} strokeWidth={1.6} />
+      <Path d="M62 42H78L76 54H64Z" fill={C.woodLight} />
+    </>
+  )),
+
+  /** A clay water jar for the people's turn. */
+  'salih-jar': art(70, 100, (c) => (
+    <>
+      <Shadow c={c} cx={35} cy={96} rx={24} />
+      <Path d="M24 8H46V18C60 26 64 44 62 62C60 82 50 94 35 94C20 94 10 82 8 62C6 44 10 26 24 18Z" fill={C.terracotta} />
+      <Path d="M35 18C52 28 56 50 52 70C50 84 44 92 35 94C50 94 60 82 62 62C64 44 60 26 46 18Z" fill={shade(C.terracotta, 0.2)} opacity={0.6} />
+      <Rect x={20} y={4} width={30} height={8} rx={3} fill={shade(C.terracotta, 0.1)} />
+      <Path d="M14 46H56M12 58H58" stroke={C.sandLight} strokeWidth={2} opacity={0.6} />
+      <Path d={dropPath(35, 24, 14)} fill={C.waterLight} opacity={c.dark ? 0.9 : 0.75} />
+    </>
+  )),
+};
+
+// ---------------------------------------------------------------------------------------------------------------
 
 /** Section art (see docs/GAMES-V3.md). Owned by the prophetA section – add pieces here only. */
 export const prophetA = {
@@ -615,6 +711,7 @@ export const prophetA = {
   ...idris,
   ...nuh,
   ...hud,
+  ...salih,
 } satisfies Record<string, ArtDef>;
 
 // Kept for pieces that come later in this file (prevents unused-import churn while the file grows).
