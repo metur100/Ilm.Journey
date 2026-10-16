@@ -1,0 +1,261 @@
+{
+  "id": "ilyas",
+  "order": 19,
+  "prophetName": { "en": "Ilyas", "de": "Ilyas (Elias)", "bs": "Ilijas" },
+  "honorific": "alayhis-salam",
+  "title": { "en": "A Call to the Best of Creators", "de": "Ein Ruf zum besten Schöpfer", "bs": "Poziv Najljepšem Stvoritelju" },
+  "description": {
+    "en": "A messenger who asked his people: why call upon an idol and leave Allah, the Best of creators?",
+    "de": "Ein Gesandter, der sein Volk fragte: Warum ruft ihr einen Götzen an und lasst Allah, den besten Schöpfer?",
+    "bs": "Poslanik koji je upitao svoj narod: zašto se molite kipu, a ostavljate Allaha, Najljepšeg Stvoritelja?"
+  },
+  "place": { "en": "Among his people", "de": "Bei seinem Volk", "bs": "Među njegovim narodom" },
+  "symbol": "lanterns",
+  "symbolArt": "prophet.ilyas-lantern",
+  "cover": { "sky": "dusk", "elements": ["stars", "hills", "lanterns"] },
+  "coverStage": {
+    "sky": "dusk",
+    "layers": [
+      { "art": "story.moon-crescent", "x": 320, "y": 50, "w": 52, "anchor": "center", "anim": "glow" },
+      { "art": "prophet.ilyas-hill-lanterns" }
+    ],
+    "effects": ["stars", { "type": "lanternGlow", "x": 120, "y": 180, "intensity": 1, "at": 600 }, { "type": "fireflies", "intensity": 1, "at": 1200 }]
+  },
+  "intro": {
+    "en": "Ilyas (peace be upon him) is one of the messengers named in the Quran. His people had begun to call upon an idol named Baʿl. Ilyas called them back to Allah alone.",
+    "de": "Ilyas (Friede sei mit ihm) ist einer der Gesandten, die im Koran genannt werden. Sein Volk hatte begonnen, einen Götzen namens Baal anzurufen. Ilyas rief sie zurück zu Allah allein.",
+    "bs": "Ilijas, a.s., jedan je od poslanika spomenutih u Kur'anu. Njegov narod se počeo moliti kipu po imenu Ba'l. Ilijas ih je pozivao natrag jedino Allahu."
+  },
+  "scenes": [
+    {
+      "id": "ilyas-s1",
+      "title": { "en": "One of the messengers", "de": "Einer der Gesandten", "bs": "Jedan od poslanika" },
+      "text": {
+        "en": "Ilyas was one of the messengers. He said to his people: \"Will you not fear Allah?\"",
+        "de": "Ilyas war einer der Gesandten. Er sagte zu seinem Volk: „Wollt ihr denn nicht gottesfürchtig sein?“",
+        "bs": "Ilijas je bio jedan od poslanika. Rekao je svom narodu: „Zar se nećete Allaha bojati?“"
+      },
+      "scene": { "sky": "dusk", "elements": ["hills", "lanterns"] },
+      "stage": {
+        "sky": "dusk",
+        "camera": "slowZoom",
+        "layers": [
+          { "art": "story.mountains", "opacity": 0.9 },
+          { "art": "prophet.ilyas-lantern", "x": 200, "y": 228, "w": 58, "enter": "rise", "at": 500 },
+          { "art": "story.grass", "y": 240, "w": 400 }
+        ],
+        "effects": ["stars", { "type": "lanternGlow", "x": 216, "y": 168, "intensity": 2, "at": 900 }, { "type": "lightBeam", "x": 216, "intensity": 1, "at": 1600 }]
+      },
+      "interactionId": "ilyas-fear",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:123–124" }]
+    },
+    {
+      "id": "ilyas-s2",
+      "title": { "en": "The Best of creators", "de": "Der beste Schöpfer", "bs": "Najljepši Stvoritelj" },
+      "text": {
+        "en": "Ilyas asked them: \"Do you call upon Baʿl and leave the Best of creators – Allah, your Lord and the Lord of your forefathers?\" An idol cannot create anything. Allah created the people, the sky and the earth.",
+        "de": "Ilyas fragte sie: „Ruft ihr Baal an und lasst den besten Schöpfer – Allah, euren Herrn und den Herrn eurer Vorväter?“ Ein Götze kann nichts erschaffen. Allah erschuf die Menschen, den Himmel und die Erde.",
+        "bs": "Ilijas ih je upitao: „Zar se Ba'lu molite, a ostavljate Najljepšeg Stvoritelja – Allaha, Gospodara vašeg i Gospodara vaših davnih predaka?“ Kip ne može ništa stvoriti. Allah je stvorio ljude, nebo i Zemlju."
+      },
+      "scene": { "sky": "night", "elements": ["stars", "mountains", "crescent"] },
+      "stage": {
+        "sky": "night",
+        "layers": [
+          { "art": "story.moon-crescent", "x": 300, "y": 60, "w": 60, "anchor": "center", "anim": "glow", "enter": "fade", "at": 400 },
+          { "art": "story.night-horizon" },
+          { "art": "prophet.ilyas-hill-lanterns", "opacity": 0.95, "enter": "fade", "at": 1400, "duration": 1600 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 3 }, { "type": "sparkle", "x": 200, "y": 70, "w": 300, "h": 80, "intensity": 2, "at": 800 }]
+      },
+      "interactionId": "ilyas-creator",
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:125–126" }]
+    },
+    {
+      "id": "ilyas-s3",
+      "title": { "en": "Peace be upon Ilyas", "de": "Friede sei auf Ilyas", "bs": "Mir Ilijasu" },
+      "text": {
+        "en": "His people called him a liar – except the sincere servants of Allah. Allah kept a good mention of Ilyas among the later generations: \"Peace be upon Ilyas.\" This is how Allah rewards those who do good. Ilyas was one of Allah's believing servants, and the Quran counts him among the righteous.",
+        "de": "Sein Volk erklärte ihn zum Lügner – außer den aufrichtigen Dienern Allahs. Allah bewahrte Ilyas ein gutes Andenken bei den späteren Generationen: „Friede sei auf Ilyas.“ So belohnt Allah die Gutes Tuenden. Ilyas war einer der gläubigen Diener Allahs, und der Koran zählt ihn zu den Rechtschaffenen.",
+        "bs": "Njegov narod ga je proglasio lašcem – osim Allahovih iskrenih robova. Allah je Ilijasu ostavio lijep spomen u kasnijim pokoljenjima: „Mir Ilijasu!“ Tako Allah nagrađuje one koji dobra djela čine. Ilijas je bio jedan od Allahovih robova vjernika, a Kur'an ga ubraja među dobre."
+      },
+      "scene": { "sky": "dawn", "elements": ["hills", "sun"] },
+      "stage": {
+        "sky": "dawn",
+        "layers": [
+          { "art": "story.sun", "x": 200, "y": 150, "w": 110, "anchor": "center", "enter": "rise", "at": 400, "duration": 2400 },
+          { "art": "story.hills" },
+          { "art": "animal.dove", "x": 150, "y": 92, "w": 36, "anchor": "center", "anim": "float", "enter": "fade", "at": 1800 },
+          { "art": "animal.dove", "x": 250, "y": 80, "w": 30, "anchor": "center", "anim": "float", "flip": true, "enter": "fade", "at": 2200 }
+        ],
+        "effects": [{ "type": "stars", "intensity": 1, "until": 2500 }, { "type": "sunrays", "x": 200, "y": 150, "intensity": 2, "at": 1600 }, { "type": "birds", "intensity": 1, "at": 2400 }]
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:127–132; 6:85" }]
+    }
+  ],
+  "miniGameId": "ilyas-order",
+  "quizIds": ["ilyas-righteous", "ilyas-scenario", "ilyas-lesson"],
+  "lessons": [
+    {
+      "id": "ilyas-l1",
+      "value": "tawhid",
+      "title": { "en": "Worship Allah alone", "de": "Bete Allah allein an", "bs": "Robuj samo Allahu" },
+      "explanation": {
+        "en": "Only the Creator deserves worship. Allah is the Best of creators – no idol, person or thing can take His place.",
+        "de": "Nur der Schöpfer verdient Anbetung. Allah ist der beste Schöpfer – kein Götze, kein Mensch und kein Ding kann Seinen Platz einnehmen.",
+        "bs": "Samo Stvoritelj zaslužuje ibadet. Allah je Najljepši Stvoritelj – nijedan kip, čovjek ni stvar ne može zauzeti Njegovo mjesto."
+      },
+      "example": {
+        "en": "You look at a beautiful sunset and say \"SubhanAllah\" – you remember who created it.",
+        "de": "Du siehst einen schönen Sonnenuntergang und sagst „SubhanAllah“ – du denkst daran, wer ihn erschaffen hat.",
+        "bs": "Gledaš lijep zalazak sunca i kažeš „Subhanallah“ – sjetiš se ko ga je stvorio."
+      },
+      "reflection": {
+        "en": "What in nature reminds you of Allah, the Creator?",
+        "de": "Was in der Natur erinnert dich an Allah, den Schöpfer?",
+        "bs": "Šta te u prirodi podsjeća na Allaha, Stvoritelja?"
+      }
+    },
+    {
+      "id": "ilyas-l2",
+      "value": "courage",
+      "title": { "en": "Speak the truth kindly, even when few listen", "de": "Sag die Wahrheit freundlich, auch wenn wenige zuhören", "bs": "Govori istinu lijepo, i kada malo ko sluša" },
+      "explanation": {
+        "en": "Most of his people turned away, but Ilyas kept calling them to Allah. Allah honoured him with a good name for all times.",
+        "de": "Die meisten seines Volkes wandten sich ab, doch Ilyas rief sie weiter zu Allah. Allah ehrte ihn mit einem guten Namen für alle Zeiten.",
+        "bs": "Većina njegovog naroda okrenula se od njega, ali Ilijas ih je i dalje pozivao Allahu. Allah ga je počastio lijepim spomenom za sva vremena."
+      },
+      "example": {
+        "en": "Everyone in your group laughs at a mean joke. You calmly say that it is not kind – even if you are the only one.",
+        "de": "Alle in deiner Gruppe lachen über einen gemeinen Witz. Du sagst ruhig, dass das nicht nett ist – auch wenn du der Einzige bist.",
+        "bs": "Svi u tvom društvu se smiju ružnoj šali. Ti mirno kažeš da to nije lijepo – čak i ako si jedini."
+      },
+      "reflection": {
+        "en": "When is it hard for you to say what is right?",
+        "de": "Wann fällt es dir schwer zu sagen, was richtig ist?",
+        "bs": "Kada ti je teško reći ono što je ispravno?"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "ilyas-fear",
+      "type": "trueFalse",
+      "storyId": "ilyas",
+      "topic": "ilyas",
+      "prompt": { "en": "Ilyas asked his people: \"Will you not fear Allah?\"", "de": "Ilyas fragte sein Volk: „Wollt ihr denn nicht gottesfürchtig sein?“", "bs": "Ilijas je upitao svoj narod: „Zar se nećete Allaha bojati?“" },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – he called them to fear Allah and worship Him alone.",
+        "de": "Ja – er rief sie auf, Allah zu fürchten und Ihn allein anzubeten.",
+        "bs": "Da – pozivao ih je da se boje Allaha i da samo Njemu robuju."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:124" }]
+    },
+    {
+      "id": "ilyas-creator",
+      "type": "multipleChoice",
+      "storyId": "ilyas",
+      "topic": "ilyas",
+      "prompt": { "en": "What did Ilyas call Allah when he spoke to his people?", "de": "Wie nannte Ilyas Allah, als er zu seinem Volk sprach?", "bs": "Kako je Ilijas nazvao Allaha kada je govorio svom narodu?" },
+      "options": [
+        { "id": "a", "text": { "en": "The Best of creators", "de": "Den besten Schöpfer", "bs": "Najljepši Stvoritelj" } },
+        { "id": "b", "text": { "en": "One of many gods", "de": "Einen von vielen Göttern", "bs": "Jedan od mnogih bogova" } },
+        { "id": "c", "text": { "en": "The god of one town", "de": "Den Gott einer Stadt", "bs": "Bog jednog grada" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "\"…and leave the Best of creators – Allah, your Lord and the Lord of your forefathers.\"",
+        "de": "„…und lasst den besten Schöpfer – Allah, euren Herrn und den Herrn eurer Vorväter.“",
+        "bs": "„…a ostavljate Najljepšeg Stvoritelja – Allaha, Gospodara vašeg i Gospodara vaših davnih predaka.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:125–126" }]
+    },
+    {
+      "id": "ilyas-order",
+      "type": "ordering",
+      "storyId": "ilyas",
+      "topic": "ilyas",
+      "prompt": { "en": "Put the story of Ilyas in order.", "de": "Bring die Geschichte von Ilyas in die richtige Reihenfolge.", "bs": "Poredaj kazivanje o Ilijasu." },
+      "items": [
+        { "id": "sent", "text": { "en": "Ilyas is sent as a messenger", "de": "Ilyas wird als Gesandter geschickt", "bs": "Ilijas je poslan kao poslanik" } },
+        { "id": "fear", "text": { "en": "\"Will you not fear Allah?\"", "de": "„Wollt ihr nicht gottesfürchtig sein?“", "bs": "„Zar se nećete Allaha bojati?“" } },
+        { "id": "creator", "text": { "en": "\"…and leave the Best of creators?\"", "de": "„…und lasst den besten Schöpfer?“", "bs": "„…a ostavljate Najljepšeg Stvoritelja?“" } },
+        { "id": "denied", "text": { "en": "His people call him a liar", "de": "Sein Volk nennt ihn einen Lügner", "bs": "Narod ga proglašava lašcem" } },
+        { "id": "peace", "text": { "en": "\"Peace be upon Ilyas\"", "de": "„Friede sei auf Ilyas“", "bs": "„Mir Ilijasu!“" } }
+      ],
+      "explanation": {
+        "en": "Surah As-Saffat tells the story of Ilyas in this order (37:123–132).",
+        "de": "Sure As-Saffat erzählt die Geschichte von Ilyas in dieser Reihenfolge (37:123–132).",
+        "bs": "Sura Es-Saffat kazuje o Ilijasu ovim redom (37:123–132)."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:123–132" }]
+    },
+    {
+      "id": "ilyas-righteous",
+      "type": "trueFalse",
+      "storyId": "ilyas",
+      "topic": "ilyas",
+      "prompt": { "en": "The Quran counts Ilyas among the righteous.", "de": "Der Koran zählt Ilyas zu den Rechtschaffenen.", "bs": "Kur'an ubraja Ilijasa među dobre." },
+      "correct": true,
+      "explanation": {
+        "en": "Yes – \"and Zakariyya, Yahya, Isa and Ilyas – each was among the righteous.\"",
+        "de": "Ja – „und Zakariyya, Yahya, Isa und Ilyas – jeder gehörte zu den Rechtschaffenen.“",
+        "bs": "Da – „i Zekerijja, i Jahja, i Isa, i Ilijas – svi su oni bili dobri.“"
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "6:85" }]
+    },
+    {
+      "id": "ilyas-scenario",
+      "type": "scenario",
+      "storyId": "ilyas",
+      "topic": "ilyas",
+      "prompt": { "en": "Your friends say a lucky charm will protect you in a match. What fits the message of Ilyas?", "de": "Deine Freunde sagen, ein Glücksbringer schützt dich im Spiel. Was passt zur Botschaft von Ilyas?", "bs": "Prijatelji ti kažu da će te amajlija za sreću zaštititi na utakmici. Šta odgovara Ilijasovoj poruci?" },
+      "options": [
+        {
+          "id": "a",
+          "text": { "en": "Trust Allah, make dua and do your best", "de": "Auf Allah vertrauen, Du'a machen und sein Bestes geben", "bs": "Osloniti se na Allaha, uputiti dovu i dati sve od sebe" },
+          "feedback": { "en": "Yes – help comes only from Allah, the Creator.", "de": "Ja – Hilfe kommt nur von Allah, dem Schöpfer.", "bs": "Da – pomoć dolazi samo od Allaha, Stvoritelja." }
+        },
+        {
+          "id": "b",
+          "text": { "en": "Trust the charm instead", "de": "Stattdessen dem Glücksbringer vertrauen", "bs": "Umjesto toga se osloniti na amajliju" },
+          "feedback": { "en": "No – a thing cannot help or harm by itself; Allah is the Lord.", "de": "Nein – ein Ding kann von sich aus weder nützen noch schaden; Allah ist der Herr.", "bs": "Ne – stvar sama po sebi ne može ni koristiti ni štetiti; Allah je Gospodar." }
+        },
+        {
+          "id": "c",
+          "text": { "en": "Trust both a little", "de": "Beidem ein bisschen vertrauen", "bs": "Malo se osloniti na oboje" },
+          "feedback": { "en": "No – Ilyas called to Allah alone.", "de": "Nein – Ilyas rief zu Allah allein.", "bs": "Ne – Ilijas je pozivao samo Allahu." }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Ilyas called his people to leave Baʿl and turn to Allah, their Lord, alone.",
+        "de": "Ilyas rief sein Volk auf, Baal zu verlassen und sich allein Allah, ihrem Herrn, zuzuwenden.",
+        "bs": "Ilijas je pozivao svoj narod da ostavi Ba'la i okrene se samo Allahu, svom Gospodaru."
+      },
+      "sources": [{ "sourceName": "Quran", "sourceReference": "37:125–126" }]
+    },
+    {
+      "id": "ilyas-lesson",
+      "type": "lessonChoice",
+      "storyId": "ilyas",
+      "topic": "ilyas",
+      "prompt": { "en": "Which lesson do we learn from Ilyas?", "de": "Welche Lehre lernen wir von Ilyas?", "bs": "Koju pouku učimo od Ilijasa?" },
+      "options": [
+        { "id": "a", "text": { "en": "Worship only Allah and keep calling to good, even when few listen", "de": "Nur Allah anbeten und weiter zum Guten rufen, auch wenn wenige zuhören", "bs": "Robovati samo Allahu i pozivati dobru, i kada malo ko sluša" } },
+        { "id": "b", "text": { "en": "Do what most people do", "de": "Tun, was die meisten tun", "bs": "Raditi ono što radi većina" } },
+        { "id": "c", "text": { "en": "Give up when people say no", "de": "Aufgeben, wenn die Leute Nein sagen", "bs": "Odustati kada ljudi kažu ne" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Ilyas kept calling to Allah alone, and Allah gave him peace and a good name.",
+        "de": "Ilyas rief weiter zu Allah allein, und Allah schenkte ihm Frieden und einen guten Namen.",
+        "bs": "Ilijas je i dalje pozivao samo Allahu, a Allah mu je dao mir i lijep spomen."
+      }
+    }
+  ],
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "37:123–132" },
+    { "sourceName": "Quran", "sourceReference": "6:85" }
+  ]
+}

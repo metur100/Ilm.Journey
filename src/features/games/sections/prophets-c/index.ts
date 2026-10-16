@@ -1,4 +1,5 @@
-import { registerSulaymanGame } from './sulayman-ants-valley/register';
+import { registerIlyasGame } from "./ilyas-lanterns/register";
+import { registerSulaymanGame } from "./sulayman-ants-valley/register";
 
 /**
  * Section "prophets-c" (docs/GAMES-V3.md): every game of this section lives in this folder and is registered here.
@@ -7,4 +8,5 @@ import { registerSulaymanGame } from './sulayman-ants-valley/register';
  */
 export function registerProphetsCGames(): void {
   registerSulaymanGame();
+  registerIlyasGame();
 }
