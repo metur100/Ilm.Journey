@@ -124,7 +124,7 @@ export function SortBins(props: SortBinsProps) {
   const tileArt = Math.min(56, tileW - 26);
   const binW = width > 0 ? Math.floor((width - GAP * (bins.length - 1)) / bins.length) : 100;
   // Sorted items inside a bin: two chips per row in wide bins, one in narrow ones.
-  const chipCols = binW >= 150 ? 2 : 1;
+  const chipCols = binW >= 190 ? 2 : 1;
   const chipW = Math.floor((binW - spacing.sm * 2 - 4 - (chipCols - 1) * 6) / chipCols);
   const stackedChip = chipW < 96;
   const basketSize = Math.max(44, Math.min(72, binW * 0.42));
