@@ -38,6 +38,8 @@ export interface PathTraceProps extends EngineProps {
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const DOT = 30;
+/** Width of the box a stop label is centred in. */
+const CHIP_W = 128;
 
 /**
  * PathTrace – trace a route with the finger from stop to stop (journeys, the hijrah, a wudu order on a body map).
@@ -61,6 +63,15 @@ export function PathTrace(props: PathTraceProps) {
   const h = w / aspect;
   const pts = stops.map((s) => [s.at.x * w, s.at.y * h] as [number, number]);
   const tol = (props.tolerance ?? 0.08) * Math.min(w, h);
+  // Stops on the same spot (e.g. the runs between Safa and Marwa) are drawn once: the next open one, else the last.
+  const near = (a: number, b: number) => Math.hypot(pts[a][0] - pts[b][0], pts[a][1] - pts[b][1]) < DOT * 0.6;
+  const shown = (i: number) => {
+    const group = stops.map((_, j) => j).filter((j) => near(i, j));
+    const open = group.find((j) => j >= reached);
+    return i === (open ?? group[group.length - 1]);
+  };
+  /** Left of a stop's label box (relative to the stop), centred under the dot but kept inside the map. */
+  const chipLeft = (x: number) => Math.max(DOT / 2 - x, Math.min(DOT / 2 - CHIP_W / 2, w - x - CHIP_W + DOT / 2));
 
   const reach = (index: number) => {
     if (core.finishedRef.current || index !== reached) return;
@@ -175,6 +186,7 @@ export function PathTrace(props: PathTraceProps) {
               {stops.map((s, i) => {
                 const isReached = i < reached;
                 const isNext = i === reached;
+                if (!shown(i)) return null;
                 return (
                   <View key={s.id} style={[styles.stop, { left: pts[i][0] - DOT / 2, top: pts[i][1] - DOT / 2 }]}>
                     {isNext && core.hintsOn ? <Glow active radius={DOT / 2} spread={5} /> : null}
@@ -192,11 +204,14 @@ export function PathTrace(props: PathTraceProps) {
                       </AppText>
                     </Pressable>
                     {isReached && i > 0 ? <Burst trigger={1} distance={32} size={10} /> : null}
-                    <View pointerEvents="none" style={[styles.chip, { backgroundColor: k.tileFace, borderColor: isReached ? k.gold : k.tileBorder }, pts[i][1] > h - 50 ? { bottom: DOT + 2 } : { top: DOT + 2 }]}>
-                      {s.art && hasArt(s.art) ? <Art name={s.art} size={18} /> : null}
-                      <AppText variant="tiny" color={k.text} numberOfLines={1}>
-                        {label(s)}
-                      </AppText>
+                    {/* The label has its own wide box: inside the dot-sized stop it was cut to a few letters. */}
+                    <View pointerEvents="none" style={[styles.chipBox, { left: chipLeft(pts[i][0]) }, pts[i][1] > h - 50 ? { bottom: DOT + 2 } : { top: DOT + 2 }]}>
+                      <View style={[styles.chip, { backgroundColor: k.tileFace, borderColor: isReached ? k.gold : k.tileBorder }]}>
+                        {s.art && hasArt(s.art) ? <Art name={s.art} size={18} /> : null}
+                        <AppText variant="tiny" color={k.text} numberOfLines={1} style={styles.chipText}>
+                          {label(s)}
+                        </AppText>
+                      </View>
                     </View>
                   </View>
                 );
@@ -217,5 +232,7 @@ const styles = StyleSheet.create({
   map: { borderRadius: radius.lg, borderWidth: 2, overflow: 'hidden' },
   stop: { position: 'absolute', width: DOT, height: DOT, alignItems: 'center' },
   dot: { width: DOT, height: DOT, borderRadius: DOT / 2, borderWidth: 3, alignItems: 'center', justifyContent: 'center' },
-  chip: { position: 'absolute', flexDirection: 'row', alignItems: 'center', gap: 3, borderRadius: radius.pill, borderWidth: 1, paddingHorizontal: 6, paddingVertical: 1, maxWidth: 120 },
+  chipBox: { position: 'absolute', width: CHIP_W, alignItems: 'center' },
+  chip: { flexDirection: 'row', alignItems: 'center', gap: 3, borderRadius: radius.pill, borderWidth: 1, paddingHorizontal: 6, paddingVertical: 1, maxWidth: CHIP_W },
+  chipText: { flexShrink: 1 },
 });
