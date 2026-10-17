@@ -97,7 +97,7 @@ interface PlayProps {
   onVariant: (v: PrayerVariant) => void;
 }
 
-const stageHeight = (w: number, h: number, share: number) => Math.round(Math.max(180, Math.min(h * share, w * 0.82)));
+const stageHeight = (w: number, h: number, share: number) => Math.round(Math.max(150, Math.min(h * share, w * 0.82)));
 
 function TopRow({ api, variant, onVariant, rakat, total, counted }: { api: Api; variant: PrayerVariant; onVariant: (v: PrayerVariant) => void; rakat?: number; total?: number; counted?: number }) {
   const prayer = prayerDef(api.config.prayer);
@@ -196,7 +196,7 @@ function AlongPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
     setFeedback({ text: `${api.t(`pt.${id}`)} · ${api.t('points.count', { n: nextPoints.length })}`, tone: nextPoints.length === 7 ? 'right' : 'info' });
   };
 
-  const stageH = stageHeight(w, h, 0.46);
+  const stageH = stageHeight(w, h, 0.4);
   const lines = cur ? stepCaption(cur, api.t, api.l) : [captionLine('niyyah', { rakat: 1 }, api.t, api.l)];
   const caption = feedback ?? (finished ? { text: api.t('along.done', { part: api.t(`kind.${part.kind}`, { n: part.rakats }) }), tone: 'right' as const } : pointsActive ? { text: api.t('points.prompt'), tone: 'hint' as const } : next ? { text: api.t(`move.${next.move}`), tone: 'info' as const } : null);
   const sajdaPts = useMemo(() => sajdaPoints(variant), [variant]);
@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
   root: { flex: 1 },
   flex: { flex: 1 },
   play: { flex: 1, gap: spacing.sm },
-  cardScroll: { flex: 1, minHeight: 60 },
+  cardScroll: { flex: 1, minHeight: 36 },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, justifyContent: 'space-between' },
   gap4: { gap: 4 },
   gap8: { gap: spacing.sm },
