@@ -63,6 +63,7 @@ export function SortBins(props: SortBinsProps) {
   const label = (f: KitFace) => faceLabel(f, env.text);
   const queue = useMemo(() => (ordered ? [...items] : kitShuffle(items, `${core.seed}:sort`)), [items, ordered, core.seed]);
   const pictures = items.every((i) => !!i.art);
+  const anySub = items.some((i) => !!i.sub);
   const visibleCount = props.visible ?? (pictures ? 4 : 3);
   const [placed, setPlaced] = useState<Record<string, string>>({});
   const [selected, setSelected] = useState<string | null>(null);
@@ -154,7 +155,7 @@ export function SortBins(props: SortBinsProps) {
                 }}
                 onDrop={(zone) => (zone ? place(item.id, zone) : false)}
               >
-                <Tile state={selected === item.id ? 'selected' : 'idle'} width={tileW} height={pictures ? tileW : undefined} minHeight={pictures ? undefined : 60} padding={pictures ? 6 : spacing.sm}>
+                <Tile state={selected === item.id ? 'selected' : 'idle'} width={tileW} height={pictures ? tileW + (anySub ? 16 : 0) : undefined} minHeight={pictures ? undefined : 60} padding={pictures ? 6 : spacing.sm}>
                   <FaceView face={item} artSize={tileArt} arabicSize={pictures ? 24 : 28} variant={pictures ? 'tiny' : 'bodyBold'} numberOfLines={2} />
                 </Tile>
               </DragTile>
