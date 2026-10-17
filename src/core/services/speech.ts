@@ -19,12 +19,18 @@ export interface NarrationProvider {
   stop(): void;
 }
 
+/** Speech.stop() returns a promise: a rejection (no TTS engine yet) must not surface as an unhandled error. */
+function stopQuietly(): void {
+  const pending: Promise<void> | undefined = Speech.stop();
+  pending?.catch?.(() => undefined);
+}
+
 const LOCALES: Record<Language, string> = { bs: 'bs-BA', de: 'de-DE', en: 'en-GB' };
 
 export const deviceNarration: NarrationProvider = {
   speak(text, language) {
     try {
-      Speech.stop();
+      stopQuietly();
       Speech.speak(text, { language: LOCALES[language], rate: 0.95 });
     } catch {
       // Narration is optional.
@@ -32,7 +38,7 @@ export const deviceNarration: NarrationProvider = {
   },
   stop() {
     try {
-      Speech.stop();
+      stopQuietly();
     } catch {
       // ignore
     }
@@ -141,7 +147,7 @@ export function speakArabic(text: string, options: { onDone?: () => void } = {})
   }
   const say = () => {
     try {
-      Speech.stop();
+      stopQuietly();
       Speech.speak(text, {
         language: 'ar',
         voice: voiceId,
