@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { type LayoutChangeEvent, Pressable, StyleSheet, View } from 'react-native';
+import { type LayoutChangeEvent, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { sajdaPoints, type PrayerPosition, type PrayerVariant, type SajdaPointId } from '@/core/art/pieces/sections/salahFigure';
 import { AppText } from '@/core/components/ui/AppText';
@@ -224,7 +224,10 @@ function AlongPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
           ) : null
         }
       </Stage>
-      <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} compact={h < 600} />
+      {/* The recitation may be long (Fatiha + a surah): it scrolls, so the caption and the move button stay on screen. */}
+      <ScrollView style={styles.cardScroll} showsVerticalScrollIndicator={false}>
+        <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} compact={h < 600} />
+      </ScrollView>
       <InlineCaption text={caption?.text} tone={caption?.tone} />
       {next && !pointsActive ? (
         <ChoiceButton testID={`move-${next.move}`} label={api.t(`do.${next.move}`)} onPress={() => perform(GESTURE[next.move])} glow={idle} />
@@ -250,9 +253,10 @@ function SajdaBubbles({ points, tapped, onTap, width, view, t, color }: { points
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
       <Leader width={width} height={height} color={color} lines={items.map((it) => ({ x1: it.bx, y1: it.by, x2: it.px, y2: it.py, on: it.on }))} />
-      {items.map((it) =>
-        it.on ? <View key={`g${it.id}`} pointerEvents="none" style={[styles.glowDot, { left: it.px - 8, top: it.py - 8, backgroundColor: k.gold, borderColor: k.goldEdge }]} /> : null,
-      )}
+      {/* Every place on the body is marked from the start (a hollow ring); a tapped one fills in gold. */}
+      {items.map((it) => (
+        <View key={`g${it.id}`} pointerEvents="none" style={[styles.glowDot, { left: it.px - 8, top: it.py - 8, backgroundColor: it.on ? k.gold : 'transparent', borderColor: it.on ? k.goldEdge : k.gold }]} />
+      ))}
       {items.map((it) => (
         <Pressable
           key={it.id}
@@ -375,7 +379,11 @@ function LeadPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
     <View style={styles.play}>
       <TopRow api={api} variant={variant} onVariant={onVariant} total={part.rakats} counted={counted} />
       <Stage prayer={prayer} position={position} variant={variant} tint={tint} width={w} height={stageH} reducedMotion={api.reducedMotion} cues={{ arrows: true, highlight: true }} onSettled={onSettled} label={titleOf(position, cur, api.t)} />
-      {phase === 'move' && cur && lines.length ? <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} compact /> : null}
+      {phase === 'move' && cur && lines.length ? (
+        <ScrollView style={styles.cardScroll} showsVerticalScrollIndicator={false}>
+          <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} compact />
+        </ScrollView>
+      ) : null}
       <InlineCaption text={feedback?.text ?? prompt} tone={feedback?.tone ?? 'info'} />
       {!finished && phase === 'move' ? (
         <View style={styles.choices}>
@@ -512,6 +520,7 @@ const styles = StyleSheet.create({
   root: { flex: 1 },
   flex: { flex: 1 },
   play: { flex: 1, gap: spacing.sm },
+  cardScroll: { flex: 1, minHeight: 60 },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, justifyContent: 'space-between' },
   gap4: { gap: 4 },
   gap8: { gap: spacing.sm },
