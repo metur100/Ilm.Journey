@@ -54,7 +54,7 @@ const en = {
   'master.retry': 'Try again',
 
   'tool.stories': 'Prophet stories',
-  'tool.storiesDesc': 'Interactive stories of eight prophets in the Stories tab.',
+  'tool.storiesDesc': 'Interactive stories of all 25 prophets in the Stories tab.',
   'tool.seerah': 'The Seerah journey',
   'tool.seerahDesc': 'Episodes, timeline and map of the life of the Prophet ﷺ.',
 } as const;

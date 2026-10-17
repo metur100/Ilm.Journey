@@ -63,7 +63,7 @@ const en = {
   'onboarding.how.learn.title': 'Learn',
   'onboarding.how.learn.body': 'Eight topics with short lessons, prophet stories and the Seerah – every lesson names its sources.',
   'onboarding.how.practice.title': 'Play',
-  'onboarding.how.practice.body': 'Twelve mini-games: build, trace, sort and match – then see what you learned, with sources.',
+  'onboarding.how.practice.body': 'Over 100 games in eight sections: build, trace, sort and match – then see what you learned, with sources.',
   'onboarding.how.remember.title': 'Remember',
   'onboarding.how.remember.body': 'Tricky questions come back later so you really remember them.',
   'onboarding.how.grow.title': 'Grow',

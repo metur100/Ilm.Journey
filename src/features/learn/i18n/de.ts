@@ -55,7 +55,7 @@ const de: Record<LearnKey, string> = {
   'master.retry': 'Nochmal versuchen',
 
   'tool.stories': 'Prophetengeschichten',
-  'tool.storiesDesc': 'Interaktive Geschichten von acht Propheten im Bereich „Geschichten“.',
+  'tool.storiesDesc': 'Interaktive Geschichten aller 25 Propheten im Bereich „Geschichten“.',
   'tool.seerah': 'Die Sira-Reise',
   'tool.seerahDesc': 'Episoden, Zeitleiste und Karte zum Leben des Propheten ﷺ.',
 };

@@ -61,7 +61,7 @@ const de: CoreDictionary = {
   'onboarding.how.learn.title': 'Lernen',
   'onboarding.how.learn.body': 'Acht Themen mit kurzen Lektionen, Prophetengeschichten und der Sira – jede Lektion nennt ihre Quellen.',
   'onboarding.how.practice.title': 'Spielen',
-  'onboarding.how.practice.body': 'Zwölf Minispiele: bauen, nachzeichnen, sortieren und zuordnen – danach siehst du, was du gelernt hast, mit Quellen.',
+  'onboarding.how.practice.body': 'Über 100 Spiele in acht Bereichen: bauen, nachzeichnen, sortieren und zuordnen – danach siehst du, was du gelernt hast, mit Quellen.',
   'onboarding.how.remember.title': 'Merken',
   'onboarding.how.remember.body': 'Knifflige Fragen kommen später wieder, damit du sie dir wirklich merkst.',
   'onboarding.how.grow.title': 'Wachsen',

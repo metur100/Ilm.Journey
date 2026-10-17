@@ -61,7 +61,7 @@ const bs: CoreDictionary = {
   'onboarding.how.learn.title': 'Uči',
   'onboarding.how.learn.body': 'Osam tema s kratkim lekcijama, kazivanjima o poslanicima i sirom – svaka lekcija navodi svoje izvore.',
   'onboarding.how.practice.title': 'Igraj',
-  'onboarding.how.practice.body': 'Dvanaest mini igara: gradi, prati put, razvrstavaj i spajaj – a onda vidi šta si naučio, uz izvore.',
+  'onboarding.how.practice.body': 'Više od 100 igara u osam oblasti: gradi, prati put, razvrstavaj i spajaj – a onda vidi šta si naučio, uz izvore.',
   'onboarding.how.remember.title': 'Zapamti',
   'onboarding.how.remember.body': 'Teža pitanja vraćaju se kasnije da ih zaista zapamtiš.',
   'onboarding.how.grow.title': 'Rasti',
