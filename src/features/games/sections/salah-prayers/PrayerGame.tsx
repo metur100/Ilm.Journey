@@ -128,6 +128,14 @@ const voiceOf = (step: PrayerStep | null, variant: PrayerVariant, t: Api['t']): 
   return step.aloud ? t('aloud') : t('quiet');
 };
 
+/** Positions whose movement differs for women (the how-to text has a `.female` variant). */
+const HOW_FEMALE = new Set<PrayerPosition>(['takbir', 'folded', 'ruku', 'sajda', 'jalsa']);
+
+/** What the learner does in the position, in plain words (the tashahhud and selam sittings reuse their own text). */
+function howOf(position: PrayerPosition, variant: PrayerVariant, t: Api['t']): string {
+  return t(`how.${position}${variant === 'female' && HOW_FEMALE.has(position) ? '.female' : ''}`);
+}
+
 function titleOf(position: PrayerPosition, step: PrayerStep | null, t: Api['t']): string {
   const base = t(`pos.${position}`);
   return step?.sitting && (step.move === 'sit' || step.move === 'finger') ? `${base} · ${t(`sitting.${step.sitting}`)}` : base;
@@ -196,7 +204,8 @@ function AlongPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
     setFeedback({ text: `${api.t(`pt.${id}`)} · ${api.t('points.count', { n: nextPoints.length })}`, tone: nextPoints.length === 7 ? 'right' : 'info' });
   };
 
-  const stageH = stageHeight(w, h, 0.4);
+  // a smaller stage leaves room for the recite card; the 7 points of sajda need the bigger one
+  const stageH = stageHeight(w, h, pointsActive ? 0.42 : 0.3);
   const lines = cur ? stepCaption(cur, api.t, api.l) : [captionLine('niyyah', { rakat: 1 }, api.t, api.l)];
   const caption = feedback ?? (finished ? { text: api.t('along.done', { part: api.t(`kind.${part.kind}`, { n: part.rakats }) }), tone: 'right' as const } : pointsActive ? { text: api.t('points.prompt'), tone: 'hint' as const } : next ? { text: api.t(`move.${next.move}`), tone: 'info' as const } : null);
   const sajdaPts = useMemo(() => sajdaPoints(variant), [variant]);
@@ -225,12 +234,12 @@ function AlongPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
         }
       </Stage>
       {/* The recitation may be long (Fatiha + a surah): it scrolls, so the caption and the move button stay on screen. */}
-      <ScrollView style={styles.cardScroll} showsVerticalScrollIndicator={false}>
-        <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} compact={h < 600} />
+      <ScrollView style={styles.cardScroll} persistentScrollbar>
+        <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} how={howOf(position, variant, api.t)} howLabel={api.t('how.label')} t={api.t} />
       </ScrollView>
       <InlineCaption text={caption?.text} tone={caption?.tone} />
       {next && !pointsActive ? (
-        <ChoiceButton testID={`move-${next.move}`} label={api.t(`do.${next.move}`)} onPress={() => perform(GESTURE[next.move])} glow={idle} />
+        <ChoiceButton testID={`move-${next.move}`} width={w} label={api.t(`do.${next.move}`)} onPress={() => perform(GESTURE[next.move])} glow={idle} />
       ) : null}
     </View>
   );
@@ -370,7 +379,7 @@ function LeadPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
     setPhase('move');
   };
 
-  const stageH = stageHeight(w, h, phase === 'move' ? 0.36 : 0.4);
+  const stageH = stageHeight(w, h, phase === 'move' ? 0.3 : 0.36);
   const tileW = Math.floor((w - spacing.sm * 2) / 3);
   const lines = cur && phase === 'move' ? stepCaption(cur, api.t, api.l) : [];
   const prompt = finished ? api.t('along.done', { part: api.t(`kind.${part.kind}`, { n: part.rakats }) }) : phase === 'counter' ? api.t('lead.counter') : phase === 'recite' ? api.t('lead.recite') : api.t('lead.next');
@@ -380,8 +389,8 @@ function LeadPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
       <TopRow api={api} variant={variant} onVariant={onVariant} total={part.rakats} counted={counted} />
       <Stage prayer={prayer} position={position} variant={variant} tint={tint} width={w} height={stageH} reducedMotion={api.reducedMotion} cues={{ arrows: true, highlight: true }} onSettled={onSettled} label={titleOf(position, cur, api.t)} />
       {phase === 'move' && cur && lines.length ? (
-        <ScrollView style={styles.cardScroll} showsVerticalScrollIndicator={false}>
-          <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} compact />
+        <ScrollView style={styles.cardScroll} persistentScrollbar>
+          <ReciteCard title={titleOf(position, cur, api.t)} lines={lines} voice={voiceOf(cur, variant, api.t)} how={howOf(position, variant, api.t)} howLabel={api.t('how.label')} t={api.t} />
         </ScrollView>
       ) : null}
       <InlineCaption text={feedback?.text ?? prompt} tone={feedback?.tone ?? 'info'} />

@@ -28,6 +28,25 @@ UI sounds use one cached player per sound. Each play rewinds the player (`seekTo
 rewind does not stop the play. The "Sound" toggle in Settings (`settings.sound`, default on) only affects UI sounds.
 It does not affect pronunciation or recitation, because the learner asks for those.
 
+## Loudness
+
+Every player and every utterance plays at full volume (`volume: 1`); how loud the learner hears it is the device's
+**media** volume. Two things kept that too low, so recitation and pronunciation were barely audible:
+
+- Many devices, and the Android emulator, start at about a third of the media volume (5/15).
+- While nothing plays, Android's volume keys change the *ringer* volume, so turning "the volume" up did not help.
+
+The local Expo module `modules/audio-volume` (Android only, autolinked from `modules/`) fixes both:
+
+- The volume keys always change the media volume while the app is open (`volumeControlStream = STREAM_MUSIC`).
+- `ensureAudibleVolume()` (`src/core/services/audioSession.ts`) runs right before audio the learner asked for
+  (Quran recitation, Arabic letters, narration). It raises a media volume below `MIN_LISTEN_VOLUME` (70 %) to that
+  level and shows the system volume bar. It never lowers the volume and never unmutes a muted stream.
+
+The UI sounds are generated louder (normalised, then a gentle tanh saturation that lifts their quiet decay; peak
+0.97). After changing `scripts/generate-sounds.js` run `npm run generate:sounds`. The native module needs a new
+build (`npx expo run:android`), not only a Metro reload.
+
 ## Arabic text-to-speech and the fallback
 
 Android TTS engines ship only the system language by default. When Arabic voice data is missing,

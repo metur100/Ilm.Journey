@@ -3,6 +3,8 @@ import { Linking, Platform } from 'react-native';
 
 import type { Language } from '../models';
 
+import { ensureAudibleVolume } from './audioSession';
+
 /**
  * Optional audio layer. Everything here uses the device's own text-to-speech engine, so no audio files are bundled.
  * See docs/AUDIO.md.
@@ -31,7 +33,8 @@ export const deviceNarration: NarrationProvider = {
   speak(text, language) {
     try {
       stopQuietly();
-      Speech.speak(text, { language: LOCALES[language], rate: 0.95 });
+      ensureAudibleVolume();
+      Speech.speak(text, { language: LOCALES[language], rate: 0.95, volume: 1 });
     } catch {
       // Narration is optional.
     }
@@ -148,10 +151,12 @@ export function speakArabic(text: string, options: { onDone?: () => void } = {})
   const say = () => {
     try {
       stopQuietly();
+      ensureAudibleVolume();
       Speech.speak(text, {
         language: 'ar',
         voice: voiceId,
         rate: 0.75,
+        volume: 1,
         onDone: options.onDone,
         // Typically: the voice data is not installed and the device is offline (Google TTS streams missing voices).
         onError: () => {

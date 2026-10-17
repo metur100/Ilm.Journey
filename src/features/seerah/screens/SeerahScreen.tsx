@@ -35,8 +35,8 @@ const ENTRIES: readonly { key: string; icon: IconName; label: SeerahKey; href: H
   { key: 'review', icon: 'refresh', label: 'review.title', href: '/seerah/review' },
 ];
 
-const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+const useStyles = makeStyles(() => ({
+  root: { flex: 1 },
   scroll: { paddingBottom: spacing.xxl },
   body: { padding: spacing.lg, gap: spacing.xl },
   section: { gap: spacing.md },

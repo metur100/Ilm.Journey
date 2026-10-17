@@ -33,7 +33,7 @@ const bs: CoreDictionary = {
   'topic.akhlaq': 'Ahlak',
   'topic.ramadan': 'Ramazan',
   'topic.history': 'Islamska historija',
-  'topic.arabic': 'Arapski',
+  'topic.arabic': 'Arapski/Sufara',
 
   // ---------- tabs ----------
   'tabs.home': 'Početna',

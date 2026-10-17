@@ -1,0 +1,7 @@
+{
+  "name": "audio-volume",
+  "version": "1.0.0",
+  "description": "Local Expo module: media volume keys and a minimum media volume for learner-requested audio (Android).",
+  "main": "index.ts",
+  "private": true
+}

@@ -46,6 +46,8 @@ interface GardenSceneProps {
   rounded?: boolean;
   /** Height covered by overlay controls at the top (e.g. the Home header) – sun and moon stay below it. */
   topInset?: number;
+  /** Stop the idle loop while the scene is not visible (screen in the background, scrolled out of view). */
+  paused?: boolean;
   children?: React.ReactNode;
 }
 
@@ -74,6 +76,7 @@ export function GardenScene({
   style,
   rounded = true,
   topInset = 0,
+  paused = false,
   children,
 }: GardenSceneProps) {
   const reduced = useReducedMotion();
@@ -84,11 +87,13 @@ export function GardenScene({
   const clock = useState(() => new Animated.Value(0))[0];
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced || paused) return;
+    // A native loop repeats from the value it started at, so a resumed loop starts the cycle at 0 again.
+    clock.setValue(0);
     const loop = Animated.loop(Animated.timing(clock, { toValue: 1, duration: 4000, easing: Easing.linear, useNativeDriver: true }));
     loop.start();
     return () => loop.stop();
-  }, [clock, reduced]);
+  }, [clock, reduced, paused]);
 
   const sorted = useMemo(() => [...placed].sort((a, b) => GARDEN_SPOTS[a.spot].y - GARDEN_SPOTS[b.spot].y || a.spot - b.spot), [placed]);
   const onLayout = (e: LayoutChangeEvent) => setWidth(Math.round(e.nativeEvent.layout.width));

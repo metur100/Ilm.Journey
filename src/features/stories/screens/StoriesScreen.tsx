@@ -23,7 +23,7 @@ import { useStoriesStore } from '../store/storiesStore';
 const theme = topicThemes.prophets;
 
 const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+  root: { flex: 1 },
   scroll: { paddingBottom: spacing.xxl },
   body: { padding: spacing.lg, gap: spacing.lg },
   flex: { flex: 1, gap: 2 },
@@ -153,7 +153,7 @@ export default function StoriesScreen() {
             {t('journey.subtitle')} {t('journey.count', { done: completed.length, total: STORIES.length })}
           </AppText>
         </View>
-        <JourneyPath onOpen={openStory} />
+        <JourneyPath onOpen={openStory} paused={!focused} />
         {STORIES.length < 25 ? (
           <AppText variant="small" color={c.textMuted} align="center">
             {t('journey.more')}

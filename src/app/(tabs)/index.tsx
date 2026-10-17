@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { type Href, router } from 'expo-router';
-import React from 'react';
+import { type Href, router, useIsFocused } from 'expo-router';
+import React, { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -28,7 +28,7 @@ import { useAppStore } from '@/core/store/appStore';
 import { makeStyles, radius, spacing, TOUCH_TARGET, topicThemes, useTheme } from '@/core/theme';
 
 const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+  root: { flex: 1 },
   scroll: { paddingBottom: spacing.xxl },
   hero: { borderBottomLeftRadius: 28, borderBottomRightRadius: 28, overflow: 'hidden' },
   overlayTop: { position: 'absolute', left: spacing.lg, right: spacing.lg, flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
@@ -80,6 +80,9 @@ export default function Home() {
   const games = useGamesStore((s) => s.games);
   const sky = skyForDate(new Date());
   useStatusBar(sky === 'night' || sky === 'sunset');
+  const focused = useIsFocused();
+  // The garden's idle loop redraws the whole screen every frame; it only runs while the garden can be seen.
+  const [gardenHidden, setGardenHidden] = useState(false);
 
   const next = summary.continueItem;
   const heroHeight = 300 + insets.top;
@@ -200,9 +203,26 @@ export default function Home() {
   const sections = [...coreSections, ...featureSections].sort((a, b) => a.order - b.order);
 
   return (
-    <ScrollView style={styles.root} contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={styles.root}
+      contentContainerStyle={styles.scroll}
+      showsVerticalScrollIndicator={false}
+      scrollEventThrottle={100}
+      onScroll={(e) => {
+        const hidden = e.nativeEvent.contentOffset.y > heroHeight;
+        if (hidden !== gardenHidden) setGardenHidden(hidden);
+      }}
+    >
       <View style={styles.hero}>
-        <GardenScene placed={garden.garden.placed} thirst={garden.thirst} height={heroHeight} rounded={false} topInset={insets.top + 92} accessibilityLabel={garden.a11y}>
+        <GardenScene
+          placed={garden.garden.placed}
+          thirst={garden.thirst}
+          height={heroHeight}
+          rounded={false}
+          topInset={insets.top + 92}
+          accessibilityLabel={garden.a11y}
+          paused={!focused || gardenHidden}
+        >
           <View style={[styles.overlayTop, { top: insets.top + spacing.sm }]}>
             <View style={styles.panel}>
               <View style={styles.avatar}>

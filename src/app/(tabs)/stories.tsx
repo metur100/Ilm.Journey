@@ -15,7 +15,7 @@ type Segment = 'prophets' | 'seerah';
 const SEGMENTS: readonly Segment[] = ['prophets', 'seerah'];
 
 const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+  root: { flex: 1 },
   bar: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xs },
   track: { flexDirection: 'row', backgroundColor: 'rgba(0,0,0,0.22)', borderRadius: radius.pill, padding: 4 },
   option: { flex: 1, minHeight: TOUCH_TARGET - 4, borderRadius: radius.pill, alignItems: 'center', justifyContent: 'center' },

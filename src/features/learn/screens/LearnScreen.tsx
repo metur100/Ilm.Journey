@@ -17,8 +17,8 @@ import { pathProgress } from '../path';
 import { isMasterPassed } from '../services/progression';
 import { useLearnStore } from '../store/learnStore';
 
-const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+const useStyles = makeStyles(() => ({
+  root: { flex: 1 },
   scroll: { paddingBottom: spacing.xxl },
   body: { padding: spacing.lg, gap: spacing.md },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },

@@ -5,17 +5,21 @@ import { Glow, Shadow, smoothOpen, star8Path, type Ctx } from '../../kit';
 import { C, mix, shade } from '../../palette';
 
 /**
- * The prayer figure (docs/GAMES-V3.md §3.1) – a faceless, friendly person on a prayer mat, drawn from a small 2D
+ * The prayer figure (docs/GAMES-V3.md §3.1) – a faceless, friendly person on a prayer mat, drawn from a small 3D
  * skeleton so that every prayer position uses the same proportions and the figure can move smoothly between them.
  *
- * - Side view, facing right (the qibla is to the right). The near limbs are the right arm and the right leg.
+ * - The qibla is to the right. Every pose has its own view (`yaw`): the standing positions are seen almost from the
+ *   front, so both hands are clearly visible (hands raised beside the ears for the takbir, the right hand over the left
+ *   for the folded hands); ruku', sajda and the kneeling pose are seen from the side (a level back, the 7 parts on the
+ *   ground); the sittings three-quarters, so both hands on the thighs, the raised finger and the selam turn of the head
+ *   read at a glance. Between two positions the figure turns smoothly.
  * - `male` wears a kufi, a long shirt and trousers; `female` a hijab that covers the hair, neck and chest and a long
  *   dress. Only the face, the hands and the feet show.
- * - Positions follow the Hanafi school as taught in the Bosnian ilmihal: takbir with the thumbs at the earlobes (men) /
- *   the hands at the shoulders (women), hands folded below the navel (men) / on the chest (women), ruku' with a level
- *   back and the hands holding the knees (women bow a little less), sajda on the 7 parts, sitting on the left foot with
- *   the right foot upright (men) / on the floor with both feet out to the right (women), the raised index finger in
- *   the tashahhud, selam to the right and to the left.
+ * - Positions follow the Hanafi school as taught in the Bosnian ilmihal: takbir with the thumbs at the earlobes and the
+ *   palms towards the qibla (men) / the hands at the shoulders (women), the right hand over the left below the navel
+ *   (men) / on the chest (women), ruku' with a level back and the hands holding the knees (women bow a little less),
+ *   sajda on the 7 parts, sitting on the left foot with the right foot upright (men) / on the floor with both feet out
+ *   to the right (women), the raised index finger in the tashahhud, selam to the right and to the left.
  * - `figureFrame` and its helpers are pure functions marked as worklets: the animated component of the salah-prayers
  *   games rebuilds the paths on the UI thread for every frame of a transition. The same code draws the static
  *   `salah.prayer-*` art pieces.
@@ -44,44 +48,56 @@ export const FIG_W = 240;
 export const FIG_H = 206;
 /** Top of the mat where the figure stands. */
 export const FIG_GROUND = 188;
-/** x of the ball of the near foot (the feet keep their place on the mat). */
-const ANCHOR_X = 62;
+/** x of the feet on the mat (the feet keep their place in every position). */
+const ANCHOR_X = 66;
 /** The figure is drawn this much larger than its skeleton units, around the anchor on the mat. */
 export const FIG_SCALE = 1.17;
 export const FIG_TRANSFORM = `translate(${ANCHOR_X * (1 - FIG_SCALE)} ${FIG_GROUND * (1 - FIG_SCALE)}) scale(${FIG_SCALE})`;
 /** Skeleton point → viewBox point (the figure transform). */
 export const toView = (x: number, y: number): [number, number] => [ANCHOR_X + (x - ANCHOR_X) * FIG_SCALE, FIG_GROUND + (y - FIG_GROUND) * FIG_SCALE];
 
-// Segment lengths (viewBox units) – a friendly figure with a slightly large head.
+// Segment lengths (skeleton units) – a friendly figure with a slightly large head.
 const SPINE = 43;
-const NECK = 18.5;
-const HEAD_R = 15.5;
-const UA = 24;
-const FA = 21.5;
+const NECK = 17;
+const HEAD_R = 14;
+const UA = 23;
+const FA = 21;
 const HAND = 10.5;
 const TH = 34;
 const SH = 33;
 const FT = 12.5;
 const TOE = 5.5;
+/** Half the distance between the shoulders / the hip joints. */
+const SW = 12;
+const HW = 7;
 
-/** Parameters of one pose (degrees; dir(a) = (sin a, cos a): 0 = down, 90 = forward, 180 = up, -90 = back). */
-const KEYS = [
+/*
+ * Body space: x = forward (towards the qibla), y = down, z = the figure's right side. The view turns the body by `yaw`
+ * degrees: 0 = seen from the side (the right side towards the viewer), 90 = seen from the front.
+ * Screen x = x·cos(yaw) − z·sin(yaw); depth (towards the viewer) = x·sin(yaw) + z·cos(yaw).
+ */
+
+/** Scalars of a pose. */
+const SCALARS = ['yaw', 'shiftX', 'finger', 'hem'] as const;
+/** Directions of a pose (unit vectors in body space; `n` = right / near side, `f` = left / far side). */
+const DIRS = [
   'spine',
-  /** direction of the neck (shoulder → head centre) */
-  'head',
-  /** where the top of the head points (the face looks 90° below it) */
-  'tilt',
-  'turn',
+  'neck',
+  /** where the top of the head points */
+  'up',
+  /** where the face looks */
+  'face',
   'nUA',
   'nFA',
   'nHA',
-  'nUAs',
-  'nFAs',
+  /** the side the palm faces */
+  'nPalm',
+  'nThumb',
   'fUA',
   'fFA',
   'fHA',
-  'fUAs',
-  'fFAs',
+  'fPalm',
+  'fThumb',
   'nTh',
   'nSh',
   'nFt',
@@ -90,23 +106,22 @@ const KEYS = [
   'fSh',
   'fFt',
   'fToe',
-  'shiftX',
-  'finger',
-  'thumb',
-  'depth',
-  /** 0 = side view, 1 = body turned three-quarters towards the viewer (both arms and hands visible) */
-  'open',
-  /** length of the long shirt over the thigh (0..1) */
-  'hem',
 ] as const;
-type Key = (typeof KEYS)[number];
-export type PoseParams = Record<Key, number>;
-/** A pose as a flat number array in KEYS order (what the animation interpolates). */
+type Scalar = (typeof SCALARS)[number];
+type Dir = (typeof DIRS)[number];
+type V3 = [number, number, number];
+export type PoseParams = Record<Scalar, number> & Record<Dir, V3>;
+/** A pose as a flat number array (what the animation interpolates): the scalars, then x/y/z of every direction. */
 export type PoseVec = number[];
 
-const I = Object.fromEntries(KEYS.map((k, i) => [k, i])) as Record<Key, number>;
+const S = Object.fromEntries(SCALARS.map((k, i) => [k, i])) as Record<Scalar, number>;
+const D = Object.fromEntries(DIRS.map((k, i) => [k, SCALARS.length + i * 3])) as Record<Dir, number>;
 
-const poseToVec = (p: PoseParams): PoseVec => KEYS.map((k) => p[k]);
+function poseToVec(p: PoseParams): PoseVec {
+  const out: number[] = SCALARS.map((k) => p[k]);
+  for (const k of DIRS) out.push(p[k][0], p[k][1], p[k][2]);
+  return out;
+}
 
 // ---------------------------------------------------------------------------------------------------------------
 // Geometry helpers (worklets)
@@ -133,6 +148,20 @@ function r1(n: number): number {
 function pt(p: V): string {
   'worklet';
   return `${r1(p[0])} ${r1(p[1])}`;
+}
+
+function add3(a: V3, b: V3, k = 1): V3 {
+  'worklet';
+  return [a[0] + b[0] * k, a[1] + b[1] * k, a[2] + b[2] * k];
+}
+function norm3(v: V3): V3 {
+  'worklet';
+  const l = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+  return l < 1e-6 ? [0, 1, 0] : [v[0] / l, v[1] / l, v[2] / l];
+}
+function lerp3(a: V3, b: V3, t: number): V3 {
+  'worklet';
+  return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
 }
 
 /** Capsule from a (radius ra) to b (radius rb), as a closed path. */
@@ -189,10 +218,10 @@ function segment(c: V, r: number, a0: number, a1: number): string {
   return `${d}Z`;
 }
 
-/** Direction angle (dir convention) from b to a. */
-function angleOfW(a: V, b: V): number {
+/** Direction angle (dir convention) of a screen vector. */
+function angleOfV(v: V): number {
   'worklet';
-  return (Math.atan2(a[0] - b[0], a[1] - b[1]) * 180) / Math.PI;
+  return (Math.atan2(v[0], v[1]) * 180) / Math.PI;
 }
 
 function cross(o: V, a: V, b: V): number {
@@ -234,11 +263,104 @@ export const EMPTY_PATH = 'M0 0';
 // ---------------------------------------------------------------------------------------------------------------
 // Skeleton
 
+/** 3D joints in body space (hip centre at the origin). */
+interface Body {
+  hip: V3;
+  nHip: V3;
+  fHip: V3;
+  belly: V3;
+  chest: V3;
+  back: V3;
+  shoulder: V3;
+  nShoulder: V3;
+  fShoulder: V3;
+  head: V3;
+  nElbow: V3;
+  nWrist: V3;
+  nTip: V3;
+  fElbow: V3;
+  fWrist: V3;
+  fTip: V3;
+  nKnee: V3;
+  nAnkle: V3;
+  nBall: V3;
+  nToe: V3;
+  fKnee: V3;
+  fAnkle: V3;
+  fBall: V3;
+  fToe: V3;
+}
+
+function dirOf(p: PoseVec, k: number): V3 {
+  'worklet';
+  return norm3([p[k], p[k + 1], p[k + 2]]);
+}
+
+function solveBody(p: PoseVec): Body {
+  'worklet';
+  const hip: V3 = [0, 0, 0];
+  const spine = dirOf(p, D.spine);
+  // the belly side of the spine (perpendicular to it, in the body's middle plane)
+  const fwd: V3 = norm3([-spine[1], spine[0], 0]);
+  const side: V3 = [0, 0, 1];
+  const nHip = add3(hip, side, HW);
+  const fHip = add3(hip, side, -HW);
+  const shoulder = add3(hip, spine, SPINE);
+  const nShoulder = add3(add3(shoulder, side, SW), spine, -2);
+  const fShoulder = add3(add3(shoulder, side, -SW), spine, -2);
+  const belly = add3(add3(hip, spine, 10), fwd, 3);
+  const chest = add3(add3(hip, spine, 27), fwd, 2.5);
+  const back = add3(add3(hip, spine, 21), fwd, -2.5);
+  const head = add3(shoulder, dirOf(p, D.neck), NECK);
+  const nElbow = add3(nShoulder, dirOf(p, D.nUA), UA);
+  const nWrist = add3(nElbow, dirOf(p, D.nFA), FA);
+  const nTip = add3(nWrist, dirOf(p, D.nHA), HAND);
+  const fElbow = add3(fShoulder, dirOf(p, D.fUA), UA);
+  const fWrist = add3(fElbow, dirOf(p, D.fFA), FA);
+  const fTip = add3(fWrist, dirOf(p, D.fHA), HAND);
+  const nKnee = add3(nHip, dirOf(p, D.nTh), TH);
+  const nAnkle = add3(nKnee, dirOf(p, D.nSh), SH);
+  const nBall = add3(nAnkle, dirOf(p, D.nFt), FT);
+  const nToe = add3(nBall, dirOf(p, D.nToe), TOE);
+  const fKnee = add3(fHip, dirOf(p, D.fTh), TH);
+  const fAnkle = add3(fKnee, dirOf(p, D.fSh), SH);
+  const fBall = add3(fAnkle, dirOf(p, D.fFt), FT);
+  const fToe = add3(fBall, dirOf(p, D.fToe), TOE);
+  return { hip, nHip, fHip, belly, chest, back, shoulder, nShoulder, fShoulder, head, nElbow, nWrist, nTip, fElbow, fWrist, fTip, nKnee, nAnkle, nBall, nToe, fKnee, fAnkle, fBall, fToe };
+}
+
+const SIT_R = 11;
+
+/** Lowest point (y + radius) of the body parts that can rest on the mat; `arms` adds the hands and elbows. */
+function lowest(b: Body, arms: boolean): number {
+  'worklet';
+  const cands: [V3, number][] = [
+    [b.nHip, SIT_R],
+    [b.fHip, SIT_R],
+    [b.head, HEAD_R],
+    [b.nKnee, 7.5],
+    [b.fKnee, 7.5],
+    [b.nAnkle, 5.5],
+    [b.fAnkle, 5.5],
+    [b.nBall, 4.2],
+    [b.fBall, 4.2],
+    [b.nToe, 3.2],
+    [b.fToe, 3.2],
+  ];
+  if (arms) {
+    cands.push([b.nWrist, 4.4], [b.fWrist, 4.4], [b.nTip, 3.8], [b.fTip, 3.8], [b.nElbow, 5.6], [b.fElbow, 5.6]);
+  }
+  let m = -1e9;
+  for (let i = 0; i < cands.length; i++) m = Math.max(m, cands[i][0][1] + cands[i][1]);
+  return m;
+}
+
+/** Joints of one pose on screen (viewBox coordinates before the figure transform). */
 export interface FigureJoints {
   hip: V;
   shoulder: V;
   head: V;
-  /** Unit vector the face looks to (in profile). */
+  /** Unit vector the face looks to, on screen. */
   face: V;
   nElbow: V;
   nWrist: V;
@@ -258,90 +380,81 @@ export interface FigureJoints {
   fToe: V;
 }
 
-const JOINT_KEYS: (keyof FigureJoints)[] = ['hip', 'shoulder', 'head', 'face', 'nElbow', 'nWrist', 'nTip', 'fShoulder', 'fElbow', 'fWrist', 'fTip', 'nKnee', 'nAnkle', 'nBall', 'nToe', 'fHip', 'fKnee', 'fAnkle', 'fBall', 'fToe'];
-
-function solveLocal(p: PoseVec): FigureJoints {
-  'worklet';
-  const hip: V = [0, 0];
-  const depth = p[I.depth];
-  const open = p[I.open];
-  const far: V = [-depth + open * 16, -depth * 0.45 + open * 0.5];
-  const farHip: V = [-depth + open * 8, -depth * 0.45];
-  const shoulder = add(hip, dirv(p[I.spine], SPINE));
-  // turned towards the viewer, the head sits between both shoulders
-  const head = add(add(shoulder, dirv(p[I.head], NECK)), [open * 7, 0]);
-  const face = dirv(p[I.tilt] - 90, 1);
-  const nElbow = add(shoulder, dirv(p[I.nUA], UA * p[I.nUAs]));
-  const nWrist = add(nElbow, dirv(p[I.nFA], FA * p[I.nFAs]));
-  const nTip = add(nWrist, dirv(p[I.nHA], HAND));
-  const fShoulder = add(shoulder, far);
-  const fElbow = add(fShoulder, dirv(p[I.fUA], UA * p[I.fUAs]));
-  const fWrist = add(fElbow, dirv(p[I.fFA], FA * p[I.fFAs]));
-  const fTip = add(fWrist, dirv(p[I.fHA], HAND));
-  const nKnee = add(hip, dirv(p[I.nTh], TH));
-  const nAnkle = add(nKnee, dirv(p[I.nSh], SH));
-  const nBall = add(nAnkle, dirv(p[I.nFt], FT));
-  const nToe = add(nBall, dirv(p[I.nToe], TOE));
-  const fHip = add(hip, farHip);
-  const fKnee = add(fHip, dirv(p[I.fTh], TH));
-  const fAnkle = add(fKnee, dirv(p[I.fSh], SH));
-  const fBall = add(fAnkle, dirv(p[I.fFt], FT));
-  const fToe = add(fBall, dirv(p[I.fToe], TOE));
-  return { hip, shoulder, head, face, nElbow, nWrist, nTip, fShoulder, fElbow, fWrist, fTip, nKnee, nAnkle, nBall, nToe, fHip, fKnee, fAnkle, fBall, fToe };
+interface Projector {
+  /** Body point → screen point. */
+  at: (v: V3) => V;
+  /** Body direction → screen vector (not normalised). */
+  dir: (v: V3) => V;
+  /** How far a body point / direction comes towards the viewer. */
+  depth: (v: V3) => number;
 }
 
-const SIT_R = 14;
-
-/** Lowest point (y + radius) of the body parts that can rest on the mat; `arms` adds the hands and elbows. */
-function lowest(j: FigureJoints, arms: boolean): number {
+function projector(p: PoseVec, b: Body): Projector {
   'worklet';
-  const cands: [V, number][] = [
-    [j.hip, SIT_R],
-    [j.head, HEAD_R],
-    [j.nKnee, 8],
-    [j.fKnee, 8],
-    [j.nAnkle, 5.5],
-    [j.fAnkle, 5.5],
-    [j.nBall, 4.4],
-    [j.fBall, 4.4],
-    [j.nToe, 3.3],
-    [j.fToe, 3.3],
-  ];
-  if (arms) {
-    cands.push([j.nWrist, 4.6], [j.fWrist, 4.6], [j.nTip, 3.9], [j.fTip, 3.9], [j.nElbow, 5.8], [j.fElbow, 5.8]);
-  }
-  let m = -1e9;
-  for (let i = 0; i < cands.length; i++) m = Math.max(m, cands[i][0][1] + cands[i][1]);
-  return m;
+  const yaw = (p[S.yaw] * Math.PI) / 180;
+  const cs = Math.cos(yaw);
+  const sn = Math.sin(yaw);
+  const ty = FIG_GROUND - lowest(b, true);
+  const bx = (b.nBall[0] + b.fBall[0]) / 2;
+  const bz = (b.nBall[2] + b.fBall[2]) / 2;
+  const tx = ANCHOR_X - (bx * cs - bz * sn) + p[S.shiftX];
+  return {
+    at: (v) => [v[0] * cs - v[2] * sn + tx, v[1] + ty],
+    dir: (v) => [v[0] * cs - v[2] * sn, v[1]],
+    depth: (v) => v[0] * sn + v[2] * cs,
+  };
 }
 
-/** Joints in viewBox coordinates: the lowest part rests on the mat and the near foot keeps its place. */
+/** Joints in viewBox coordinates: the lowest part rests on the mat and the feet keep their place. */
 export function solvePose(p: PoseVec): FigureJoints {
   'worklet';
-  const j = solveLocal(p);
-  const ty = FIG_GROUND - lowest(j, true);
-  const tx = ANCHOR_X - j.nBall[0] + p[I.shiftX];
-  const out = {} as Record<keyof FigureJoints, V>;
-  for (let i = 0; i < JOINT_KEYS.length; i++) {
-    const k = JOINT_KEYS[i];
-    const v = j[k];
-    out[k] = k === 'face' ? v : [v[0] + tx, v[1] + ty];
-  }
-  return out;
+  const b = solveBody(p);
+  const P = projector(p, b);
+  const f = P.dir(dirOf(p, D.face));
+  const fl = Math.sqrt(f[0] * f[0] + f[1] * f[1]) || 1;
+  return {
+    hip: P.at(b.hip),
+    shoulder: P.at(b.nShoulder),
+    head: P.at(b.head),
+    face: [f[0] / fl, f[1] / fl],
+    nElbow: P.at(b.nElbow),
+    nWrist: P.at(b.nWrist),
+    nTip: P.at(b.nTip),
+    fShoulder: P.at(b.fShoulder),
+    fElbow: P.at(b.fElbow),
+    fWrist: P.at(b.fWrist),
+    fTip: P.at(b.fTip),
+    nKnee: P.at(b.nKnee),
+    nAnkle: P.at(b.nAnkle),
+    nBall: P.at(b.nBall),
+    nToe: P.at(b.nToe),
+    fHip: P.at(b.fHip),
+    fKnee: P.at(b.fKnee),
+    fAnkle: P.at(b.fAnkle),
+    fBall: P.at(b.fBall),
+    fToe: P.at(b.fToe),
+  };
 }
 
 // ---------------------------------------------------------------------------------------------------------------
 // Frame: all paths of one pose
 
-/** Paint order of the figure (back to front). Every layer always has a path (EMPTY_PATH when unused). */
+/**
+ * Paint order of the figure (back to front). Every layer always has a path (EMPTY_PATH when unused). Arms and legs go
+ * into the "behind" or "front" slots by how far they come towards the viewer in the current view.
+ */
 export const FIGURE_LAYERS = [
   'shadow',
-  'farFoot',
-  'farLeg',
-  'farArm',
-  'farHand',
-  'nearFoot',
-  'nearLeg',
+  'footB',
+  'legB',
+  'footF',
+  'legF',
+  'armB1',
+  'thumbB1',
+  'handB1',
+  'armB2',
+  'thumbB2',
+  'handB2',
   'skirt',
   'skirtShade',
   'hem',
@@ -349,182 +462,226 @@ export const FIGURE_LAYERS = [
   'torso',
   'torsoShade',
   'collar',
-  'nearUpper',
-  'head',
-  'faceArea',
-  'nose',
-  'hair',
-  'ear',
-  'kufi',
-  'kufiBand',
   'hijab',
+  'head',
   'hijabFold',
   'face',
-  'farArmFront',
-  'farHandFront',
-  'nearArm',
-  'cuff',
-  'thumb',
-  'nearHand',
+  'faceArea',
+  'hair',
+  'earA',
+  'earB',
+  'kufi',
+  'kufiBand',
+  'arm1',
+  'cuff1',
+  'thumb1',
+  'hand1',
+  'arm2',
+  'cuff2',
+  'thumb2',
+  'hand2',
   'finger',
 ] as const;
 export type FigureLayer = (typeof FIGURE_LAYERS)[number];
 export type FigureFrame = Record<FigureLayer, string>;
 
+interface ArmPaths {
+  arm: string;
+  cuff: string;
+  hand: string;
+  thumb: string;
+  /** depth of the forearm (sorting) */
+  d: number;
+  /** depth of the wrist relative to the torso */
+  rel: number;
+}
+
 export function figureFrame(p: PoseVec, variant: PrayerVariant): FigureFrame {
   'worklet';
-  const j = solvePose(p);
+  const b = solveBody(p);
+  const P = projector(p, b);
   const female = variant === 'female';
-  // the spine direction turned towards the belly side: for an upright spine → (1, 0)
-  const fwd = dirv(p[I.spine] - 90, 1);
-  const up = dirv(p[I.spine], 1);
-  const headUp = p[I.tilt];
-  const turn = p[I.turn];
-  const off = (a: V, v: V, k: number): V => [a[0] + v[0] * k, a[1] + v[1] * k];
+  const at = P.at;
+  const spine = dirOf(p, D.spine);
+  const fwd3: V3 = norm3([-spine[1], spine[0], 0]);
 
-  // Legs (trousers / dress) over the bare feet
-  const leg = (h: V, k: V, a: V) => `${taper(h, k, 10.5, 8.2)}${taper(k, a, 8, 6.2)}`;
-  const foot = (a: V, b: V, t: V, ft: number) => {
-    const heel = add(a, dirv(ft + 180, 3));
-    return `${taper(heel, b, 5.2, 4.4)}${taper(b, t, 4.2, 3.3)}`;
+  // ---- legs (trousers / dress) over the bare feet, the nearer leg in front
+  const leg = (h: V, k: V, a: V) => `${taper(h, k, 9.6, 7.8)}${taper(k, a, 7.6, 5.9)}`;
+  const foot = (a3: V3, b3: V3, t3: V3) => {
+    const a = at(a3);
+    const ball = at(b3);
+    const heel = lerpV(a, ball, -0.22);
+    return `${taper(heel, ball, 4.8, 4.1)}${taper(ball, at(t3), 3.9, 3.1)}`;
   };
-  const farLeg = leg(j.fHip, j.fKnee, j.fAnkle);
-  const nearLeg = leg(j.hip, j.nKnee, j.nAnkle);
-  const farFoot = foot(j.fAnkle, j.fBall, j.fToe, p[I.fFt]);
-  const nearFoot = foot(j.nAnkle, j.nBall, j.nToe, p[I.nFt]);
+  const nLeg = leg(at(b.nHip), at(b.nKnee), at(b.nAnkle));
+  const fLeg = leg(at(b.fHip), at(b.fKnee), at(b.fAnkle));
+  const nFoot = foot(b.nAnkle, b.nBall, b.nToe);
+  const fFoot = foot(b.fAnkle, b.fBall, b.fToe);
+  const nLegD = P.depth(b.nKnee) + P.depth(b.nAnkle);
+  const fLegD = P.depth(b.fKnee) + P.depth(b.fAnkle);
+  const nearFront = nLegD >= fLegD;
 
-  // Arms (sleeves) and hands
-  const arm = (s: V, e: V, w: V) => `${taper(s, e, 7, 6.1)}${taper(e, w, 6.1, 5.1)}`;
-  const hand = (w: V, t: V) => taper(w, t, 5.1, 4.4);
-  // turned towards the viewer, the far arm comes in front of the body
-  const farInFront = p[I.open] > 0.5;
-  const farArmPath = arm(j.fShoulder, j.fElbow, j.fWrist);
-  const farHandPath = hand(j.fWrist, j.fTip);
-  const farArm = farInFront ? EMPTY_PATH : farArmPath;
-  const farArmFront = farInFront ? farArmPath : EMPTY_PATH;
-  const farHandFront = farInFront ? farHandPath : EMPTY_PATH;
-  // the near upper arm sits under the head / hijab, the forearm and hand in front of it
-  const nearUpper = taper(j.shoulder, j.nElbow, 7.2, 6.2);
-  const nearArm = `${circle(j.nElbow, 6.2)}${taper(j.nElbow, j.nWrist, 6.2, 5.2)}`;
-  const farHand = farInFront ? EMPTY_PATH : farHandPath;
-  const nearHand = hand(j.nWrist, j.nTip);
-  const cuffDir = dirv(p[I.nFA], 1);
-  const cuff = taper(off(j.nWrist, cuffDir, -3.2), off(j.nWrist, cuffDir, -0.6), 5.6, 5.6);
-  const thumbBase = lerpV(j.nWrist, j.nTip, 0.12);
-  const thumb = taper(thumbBase, add(thumbBase, dirv(p[I.nHA] + p[I.thumb], 6.2)), 2.2, 1.9);
-  const fingerLen = p[I.finger];
-  const knuckle = lerpV(j.nWrist, j.nTip, 0.6);
-  const finger = fingerLen > 0.05 ? taper(knuckle, add(knuckle, dirv(p[I.nHA] + 70, 11 * fingerLen)), 2.4, 2) : EMPTY_PATH;
+  // ---- arms (sleeves) and hands
+  const torsoD = P.depth(b.chest);
+  const arm = (sh: V3, el: V3, wr: V3, tip: V3, palmK: number, thumbK: number): ArmPaths => {
+    const s = at(sh);
+    const e = at(el);
+    const w = at(wr);
+    const t = at(tip);
+    const palm = dirOf(p, palmK);
+    // a palm turned towards the viewer looks wider than a hand seen from its edge
+    const open = Math.abs(P.depth(palm));
+    const hw = 3.9 + 1.5 * open;
+    const hand = taper(w, t, hw, hw * 0.86);
+    const tb = lerpV(w, t, 0.18);
+    const th = P.dir(dirOf(p, thumbK));
+    const tl = Math.sqrt(th[0] * th[0] + th[1] * th[1]);
+    const thumb = tl > 0.15 ? taper(tb, add(tb, [(th[0] / tl) * 6.4 * Math.min(1, tl * 1.4), (th[1] / tl) * 6.4 * Math.min(1, tl * 1.4)]), 2.3, 2) : EMPTY_PATH;
+    const fd = [w[0] - e[0], w[1] - e[1]];
+    const fl = Math.sqrt(fd[0] * fd[0] + fd[1] * fd[1]) || 1;
+    const c0: V = [w[0] - (fd[0] / fl) * 3.4, w[1] - (fd[1] / fl) * 3.4];
+    const c1: V = [w[0] - (fd[0] / fl) * 0.6, w[1] - (fd[1] / fl) * 0.6];
+    return {
+      arm: `${taper(s, e, 6.6, 5.9)}${circle(e, 5.9)}${taper(e, w, 5.9, 4.9)}`,
+      cuff: taper(c0, c1, 5.4, 5.4),
+      hand,
+      thumb,
+      d: P.depth(el) + P.depth(wr) * 2,
+      rel: (P.depth(el) + P.depth(wr)) / 2 - torsoD,
+    };
+  };
+  const nArm = arm(b.nShoulder, b.nElbow, b.nWrist, b.nTip, D.nPalm, D.nThumb);
+  const fArm = arm(b.fShoulder, b.fElbow, b.fWrist, b.fTip, D.fPalm, D.fThumb);
+  const behind: ArmPaths[] = [];
+  const front: ArmPaths[] = [];
+  // seen from the front an arm at the side of the body stays visible; seen from the side the far arm is behind it
+  const behindAt = -4 - 9 * Math.abs(Math.sin((p[S.yaw] * Math.PI) / 180));
+  for (const a of fArm.d <= nArm.d ? [fArm, nArm] : [nArm, fArm]) (a.rel < behindAt ? behind : front).push(a);
+  const E: ArmPaths = { arm: EMPTY_PATH, cuff: EMPTY_PATH, hand: EMPTY_PATH, thumb: EMPTY_PATH, d: 0, rel: 0 };
+  const b1 = behind[0] ?? E;
+  const b2 = behind[1] ?? E;
+  const a1 = front[0] ?? E;
+  const a2 = front[1] ?? E;
+  // the raised index finger of the right hand (tashahhud)
+  const fingerLen = p[S.finger];
+  let finger = EMPTY_PATH;
+  if (fingerLen > 0.05) {
+    const w = at(b.nWrist);
+    const t = at(b.nTip);
+    const knuckle = lerpV(w, t, 0.62);
+    const hd = dirOf(p, D.nHA);
+    const fd = P.dir(norm3([hd[0], hd[1] - 2.4, hd[2]]));
+    const fl = Math.sqrt(fd[0] * fd[0] + fd[1] * fd[1]) || 1;
+    finger = taper(knuckle, add(knuckle, [(fd[0] / fl) * 10.5 * fingerLen, (fd[1] / fl) * 10.5 * fingerLen]), 2.4, 2);
+  }
 
-  // Torso
-  const chest = off(lerpV(j.hip, j.shoulder, 0.6), fwd, 3.2);
-  const belly = off(lerpV(j.hip, j.shoulder, 0.18), fwd, 2.6);
-  const back = off(lerpV(j.hip, j.shoulder, 0.5), fwd, -1.6);
-  const torso = hull([
-    [j.hip[0], j.hip[1], 15],
-    [belly[0], belly[1], 14.5],
-    [chest[0], chest[1], 14.5],
-    [back[0], back[1], 14],
-    [j.shoulder[0], j.shoulder[1], 11.5],
-    [j.fShoulder[0], j.fShoulder[1], 11.5],
-    [j.fHip[0], j.fHip[1], 14],
-  ]);
-  // a darker band along the back gives the body some volume
-  const sb = (a: V, k: number): number[] => { const q = off(a, fwd, -k); return [q[0], q[1]]; };
-  const hipB = sb(j.hip, 6);
-  const backB = sb(back, 6.5);
-  const shB = sb(j.shoulder, 4.5);
-  const torsoShade = hull([
-    [hipB[0], hipB[1], 9],
-    [backB[0], backB[1], 7.5],
-    [shB[0], shB[1], 7],
-  ]);
-  // Long shirt over the thighs (male) / the dress over the legs (female)
+  // ---- torso
+  const tc = (v: V3, r: number): number[] => {
+    const q = at(v);
+    return [q[0], q[1], r];
+  };
+  const torso = hull([tc(b.nHip, 11), tc(b.fHip, 11), tc(b.belly, 12.5), tc(b.chest, 12.5), tc(b.back, 12), tc(b.nShoulder, 8.6), tc(b.fShoulder, 8.6)]);
+  // a darker band along the back gives the body some volume (only where the back can be seen)
+  const backSeen = 1 - Math.min(1, Math.max(0, P.depth(fwd3)) * 1.25);
+  const torsoShade =
+    backSeen > 0.2
+      ? hull([tc(add3(b.hip, fwd3, -6), 8.5 * backSeen), tc(add3(b.back, fwd3, -5.5), 7.5 * backSeen), tc(add3(b.shoulder, fwd3, -4.5), 6.5 * backSeen)])
+      : EMPTY_PATH;
+  // long shirt over the thighs (male) / the dress over the legs (female)
   let hem = EMPTY_PATH;
   let skirt = EMPTY_PATH;
   let skirtShade = EMPTY_PATH;
   let collar = EMPTY_PATH;
   if (female) {
-    const flare = (a: V, k: V) => off(a, dirv(Math.atan2(a[0] - k[0], a[1] - k[1]) * (180 / Math.PI), 1), 1.5);
-    const na = flare(j.nAnkle, j.nKnee);
-    const fa = flare(j.fAnkle, j.fKnee);
-    const legBack = dirv(angleOfW(j.nKnee, j.hip) - 90, 1);
-    const kb = off(j.nKnee, legBack, 3.5);
-    const ab = off(j.nAnkle, legBack, 2.5);
-    skirtShade = hull([
-      [j.hip[0] - fwd[0] * 4, j.hip[1] - fwd[1] * 4, 11],
-      [kb[0], kb[1], 8],
-      [ab[0], ab[1], 6.5],
-    ]);
-    skirt = hull([
-      [j.hip[0], j.hip[1], 15.5],
-      [j.nKnee[0], j.nKnee[1], 12],
-      [na[0], na[1], 9.5],
-      [j.fKnee[0], j.fKnee[1], 12],
-      [fa[0], fa[1], 9.5],
-    ]);
+    const flare = (ankle: V3, knee: V3) => add3(ankle, norm3([ankle[0] - knee[0], ankle[1] - knee[1], ankle[2] - knee[2]]), 1.5);
+    skirt = hull([tc(b.nHip, 12.5), tc(b.fHip, 12.5), tc(b.nKnee, 11), tc(b.fKnee, 11), tc(flare(b.nAnkle, b.nKnee), 8.8), tc(flare(b.fAnkle, b.fKnee), 8.8)]);
+    skirtShade = backSeen > 0.2 ? hull([tc(add3(b.hip, fwd3, -5), 9 * backSeen), tc(add3(lerp3(b.nKnee, b.fKnee, 0.5), fwd3, -4), 7 * backSeen)]) : EMPTY_PATH;
   } else {
-    const nh = lerpV(j.hip, j.nKnee, p[I.hem]);
-    const fh = lerpV(j.fHip, j.fKnee, p[I.hem]);
-    hem = `${taper(j.hip, nh, 15, 12.6)}${taper(j.fHip, fh, 15, 12.6)}`;
-    const c0 = off(off(j.shoulder, up, 1.5), fwd, 4.5);
-    collar = taper(off(c0, up, -5), c0, 2, 2);
+    const k = p[S.hem];
+    hem = `${taper(at(b.nHip), at(lerp3(b.nHip, b.nKnee, k)), 12, 10.4)}${taper(at(b.fHip), at(lerp3(b.fHip, b.fKnee, k)), 12, 10.4)}`;
+    // the placket of the shirt on the chest
+    const c0 = add3(add3(b.shoulder, spine, -1), fwd3, 9.5);
+    const c1 = add3(add3(b.shoulder, spine, -12), fwd3, 10.5);
+    if (P.depth(fwd3) > -0.2) collar = taper(at(c0), at(c1), 1.6, 1.6);
   }
 
-  // Head
-  const neck = taper(lerpV(j.shoulder, j.fShoulder, Math.max(0, p[I.open]) * 0.5), j.head, 5.6, 5.6);
-  const head = circle(j.head, HEAD_R);
+  // ---- head
+  const headC = at(b.head);
+  const up3 = dirOf(p, D.up);
+  const face3 = dirOf(p, D.face);
+  const upS = P.dir(up3);
+  const aUp = angleOfV(upS);
+  const faceS = P.dir(face3);
+  // how much the face is turned towards the viewer (1 = from the front, 0 = in profile, < 0 = away)
+  const fd = P.depth(face3);
+  const fdPos = Math.max(0, fd);
+  const fOff: V = [faceS[0] * HEAD_R * 0.42, faceS[1] * HEAD_R * 0.42];
+  const neck = taper(at(lerp3(b.shoulder, b.head, 0.05)), headC, 5.2, 5.2);
+  let head = EMPTY_PATH;
   let hair = EMPTY_PATH;
-  let ear = EMPTY_PATH;
+  let earA = EMPTY_PATH;
+  let earB = EMPTY_PATH;
   let kufi = EMPTY_PATH;
   let kufiBand = EMPTY_PATH;
   let hijab = EMPTY_PATH;
   let hijabFold = EMPTY_PATH;
   let face = EMPTY_PATH;
   let faceArea = EMPTY_PATH;
-  let nose = EMPTY_PATH;
-  const faceA = headUp - 90;
-  const backA = headUp + 90;
+  const faceC = add(headC, fOff);
+  const across = HEAD_R * (0.3 + 0.33 * fdPos);
   if (female) {
-    const chestFront = off(lerpV(j.hip, j.shoulder, 0.74), fwd, 6.5);
-    const nape = add(j.head, dirv(headUp + 150, 8));
-    const sh = off(j.shoulder, up, -1);
-    hijab = hull([
-      [j.head[0], j.head[1], HEAD_R + 2.8],
-      [nape[0], nape[1], 12],
-      [sh[0], sh[1], 12.5],
-      [chestFront[0], chestFront[1], 10.5],
-    ]);
-    // the edge of the scarf around the face
-    const fo = 5.6 - turn * 3.6;
-    const rx = 10 + turn * 2 - Math.max(0, -turn) * 7.5;
-    const fc = add(add(j.head, dirv(faceA, fo)), dirv(headUp, 0.8));
-    face = rx > 2.5 ? ellipse(fc, rx, 11.4, faceA) : EMPTY_PATH;
-    hijabFold = rx > 2.5 ? ellipse(fc, rx + 2.2, 13.4, faceA) : EMPTY_PATH;
+    const chin = add3(add3(b.head, face3, HEAD_R * 0.3), up3, -HEAD_R * 0.8);
+    const chestFront = add3(add3(b.shoulder, fwd3, 6), spine, -9);
+    hijab = hull([tc(b.head, HEAD_R + 2.8), tc(chin, HEAD_R * 0.66), tc(b.nShoulder, 9.5), tc(b.fShoulder, 9.5), tc(chestFront, 11)]);
+    if (fd > -0.35) {
+      const sc = Math.min(1, (fd + 0.35) * 2.5);
+      face = ellipse(add(faceC, [upS[0] * 0.8, upS[1] * 0.8]), HEAD_R * 0.74 * sc, across * sc, aUp);
+      hijabFold = ellipse(add(faceC, [upS[0] * 0.8, upS[1] * 0.8]), HEAD_R * 0.74 * sc + 2.2, across * sc + 2.2, aUp);
+    }
   } else {
-    // hair at the back, a kufi on top, the ear in the middle – together they show where the head is facing
-    const away = Math.max(0, -turn);
-    const toward = Math.max(0, turn);
-    hair = segment(j.head, HEAD_R + 0.2, backA + 8 + toward * 14 - away * 10, backA + 58 + away * 6);
-    // the face: a lighter area on the side the head looks to, with a soft nose silhouette in profile (no features)
-    const fcx = add(add(j.head, dirv(faceA, 6.2 - turn * 5.2 + away * 4)), dirv(headUp + 180, 1.2));
-    const frx = 8.2 + toward * 3.2 - away * 5.4;
-    faceArea = frx > 2 ? ellipse(fcx, frx, 10.4, faceA) : EMPTY_PATH;
-    const nr = 2.7 * (1 - Math.min(1, Math.abs(turn) * 1.6));
-    nose = nr > 0.6 ? circle(add(add(j.head, dirv(faceA, HEAD_R - 0.6)), dirv(headUp + 180, 2.2)), nr) : EMPTY_PATH;
-    const earOff = 2 + turn * 7.5;
-    const ec = add(add(j.head, dirv(backA, earOff)), dirv(headUp + 180, 1.6));
-    ear = Math.abs(turn) < 0.97 ? ellipse(ec, 3 - Math.abs(turn) * 1.4, 4, headUp) : EMPTY_PATH;
-    kufi = segment(j.head, HEAD_R + 1, headUp - 68, headUp + 84);
-    const b0 = add(j.head, dirv(headUp - 68, HEAD_R + 1));
-    const b1 = add(j.head, dirv(headUp + 84, HEAD_R + 1));
-    const b0i = lerpV(b0, j.head, 0.2);
-    const b1i = lerpV(b1, j.head, 0.2);
-    kufiBand = `M${pt(b0)}L${pt(b1)}L${pt(b1i)}L${pt(b0i)}Z`;
+    head = circle(headC, HEAD_R);
+    // the face: a lighter area on the side the head looks to, a soft nose bump in profile (no features)
+    if (fd > -0.35) {
+      const sc = Math.min(1, (fd + 0.35) * 2.5);
+      faceArea = ellipse(add(faceC, [-upS[0] * 1.2, -upS[1] * 1.2]), HEAD_R * 0.68 * sc, across * 0.95 * sc, aUp);
+      const side = Math.sqrt(faceS[0] * faceS[0] + faceS[1] * faceS[1]);
+      const nr = 2.6 * Math.min(1, Math.max(0, side - 0.45) * 2);
+      if (nr > 0.4) {
+        const nc = add(add(headC, [faceS[0] / side * (HEAD_R - 0.6), faceS[1] / side * (HEAD_R - 0.6)]), [-upS[0] * 2.4, -upS[1] * 2.4]);
+        head = `${head}${circle(nc, nr)}`;
+      }
+    }
+    // the ears on both sides of the head; only the ones turned towards the viewer show
+    const ear3 = norm3([up3[1] * face3[2] - up3[2] * face3[1], up3[2] * face3[0] - up3[0] * face3[2], up3[0] * face3[1] - up3[1] * face3[0]]);
+    const ears: string[] = [];
+    for (const s of [1, -1]) {
+      const e3: V3 = [ear3[0] * s, ear3[1] * s, ear3[2] * s];
+      const dd = P.depth(e3);
+      if (dd > -0.3) {
+        const eS = P.dir(e3);
+        const ec = add(add(headC, [eS[0] * HEAD_R * 0.98, eS[1] * HEAD_R * 0.98]), [-upS[0] * 1.2, -upS[1] * 1.2]);
+        ears.push(ellipse(ec, 3.8, 2 + Math.min(1.2, (dd + 0.3) * 1.6), aUp));
+      }
+    }
+    earA = ears[0] ?? EMPTY_PATH;
+    earB = ears[1] ?? EMPTY_PATH;
+    // short hair under the kufi: at the back of the head, at the temples when seen from the front
+    const faceSide = faceS[0] * upS[1] - faceS[1] * upS[0] > 0 ? -1 : 1;
+    const backLen = 52 * (1 - fdPos);
+    let h = backLen > 6 ? segment(headC, HEAD_R + 0.2, aUp + faceSide * 76, aUp + faceSide * (76 + backLen)) : '';
+    if (fdPos > 0.35) {
+      const k = 22 * fdPos;
+      h += `${segment(headC, HEAD_R + 0.2, aUp + 76, aUp + 76 + k)}${segment(headC, HEAD_R + 0.2, aUp - 76, aUp - 76 - k)}`;
+    }
+    hair = h || EMPTY_PATH;
+    kufi = segment(headC, HEAD_R + 1, aUp - 80, aUp + 80);
+    const k0 = add(headC, dirv(aUp - 80, HEAD_R + 1));
+    const k1 = add(headC, dirv(aUp + 80, HEAD_R + 1));
+    kufiBand = `M${pt(k0)}L${pt(k1)}L${pt(lerpV(k1, headC, 0.2))}L${pt(lerpV(k0, headC, 0.2))}Z`;
   }
 
-  // Ground shadow under the body
-  const xs = [j.hip[0], j.head[0], j.nToe[0], j.fToe[0], j.nKnee[0], j.nAnkle[0], j.nTip[0], j.shoulder[0], j.nBall[0]];
+  // ---- ground shadow under the body
+  const xs = [at(b.hip)[0], headC[0], at(b.nToe)[0], at(b.fToe)[0], at(b.nKnee)[0], at(b.fKnee)[0], at(b.nTip)[0], at(b.fTip)[0], at(b.nBall)[0], at(b.fBall)[0]];
   let minX = 1e9;
   let maxX = -1e9;
   for (let i = 0; i < xs.length; i++) {
@@ -533,9 +690,45 @@ export function figureFrame(p: PoseVec, variant: PrayerVariant): FigureFrame {
   }
   const shadow = ellipse([(minX + maxX) / 2, FIG_GROUND + 1.5], (maxX - minX) / 2 + 12, 3.4, 90);
 
-  // the nose is part of the head silhouette (one outline)
-  const headPath = nose === EMPTY_PATH ? head : `${head}${nose}`;
-  return { shadow, farFoot, farLeg, farArm, farHand, nearFoot, nearLeg, skirt, skirtShade, hem, neck, torso, torsoShade, collar, head: headPath, hair, ear, kufi, kufiBand, hijab, hijabFold, face, faceArea, nose: EMPTY_PATH, farArmFront, farHandFront, nearUpper, nearArm, cuff, thumb, nearHand, finger };
+  return {
+    shadow,
+    footB: nearFront ? fFoot : nFoot,
+    legB: nearFront ? fLeg : nLeg,
+    footF: nearFront ? nFoot : fFoot,
+    legF: nearFront ? nLeg : fLeg,
+    armB1: b1.arm,
+    thumbB1: b1.thumb,
+    handB1: b1.hand,
+    armB2: b2.arm,
+    thumbB2: b2.thumb,
+    handB2: b2.hand,
+    skirt,
+    skirtShade,
+    hem,
+    neck,
+    torso,
+    torsoShade,
+    collar,
+    hijab,
+    head,
+    hijabFold,
+    face,
+    faceArea,
+    hair,
+    earA,
+    earB,
+    kufi,
+    kufiBand,
+    arm1: a1.arm,
+    cuff1: a1.cuff,
+    thumb1: a1.thumb,
+    hand1: a1.hand,
+    arm2: a2.arm,
+    cuff2: a2.cuff,
+    thumb2: a2.thumb,
+    hand2: a2.hand,
+    finger,
+  };
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -569,7 +762,7 @@ export interface FigureColors {
 export function figureColors(dark: boolean, tint: string = C.figure): FigureColors {
   return {
     skin: tint,
-    skinShade: shade(tint, 0.15),
+    skinShade: shade(tint, 0.12),
     shirt: dark ? '#43B3A3' : '#2A9D8F',
     shirtShade: dark ? '#2F8C80' : '#1E7A6F',
     shirtTrim: dark ? '#2F8C80' : '#1E7A6F',
@@ -586,7 +779,7 @@ export function figureColors(dark: boolean, tint: string = C.figure): FigureColo
     shadowOpacity: dark ? 0.4 : 0.12,
     sleeve: dark ? '#36A090' : '#23887B',
     sleeveF: dark ? '#7A5DBC' : '#5E3F93',
-    faceLight: mix(tint, '#FFFFFF', 0.2),
+    faceLight: mix(tint, '#FFFFFF', 0.22),
     dark,
   };
 }
@@ -596,31 +789,35 @@ export function layerFill(layer: FigureLayer, variant: PrayerVariant, k: FigureC
   switch (layer) {
     case 'shadow':
       return k.shadow;
-    case 'farLeg':
+    case 'legB':
       return female ? k.dressShade : k.trousersShade;
-    case 'nearLeg':
+    case 'legF':
       return female ? k.dress : k.trousers;
-    case 'farFoot':
-    case 'farHand':
-    case 'farHandFront':
-    case 'ear':
+    case 'footB':
+    case 'handB1':
+    case 'handB2':
+    case 'thumbB1':
+    case 'thumbB2':
+    case 'earA':
+    case 'earB':
       return k.skinShade;
-    case 'nearFoot':
-    case 'nearHand':
+    case 'footF':
+    case 'hand1':
+    case 'hand2':
+    case 'thumb1':
+    case 'thumb2':
     case 'finger':
-    case 'thumb':
     case 'head':
     case 'neck':
     case 'face':
-    case 'nose':
       return k.skin;
     case 'faceArea':
       return k.faceLight;
-    case 'farArm':
-    case 'farArmFront':
+    case 'armB1':
+    case 'armB2':
       return female ? k.dressShade : k.shirtShade;
-    case 'nearArm':
-    case 'nearUpper':
+    case 'arm1':
+    case 'arm2':
       return female ? k.sleeveF : k.sleeve;
     case 'torso':
     case 'hem':
@@ -630,7 +827,8 @@ export function layerFill(layer: FigureLayer, variant: PrayerVariant, k: FigureC
     case 'skirtShade':
       return female ? k.dressShade : k.shirtShade;
     case 'collar':
-    case 'cuff':
+    case 'cuff1':
+    case 'cuff2':
       return female ? k.dressShade : k.shirtTrim;
     case 'hair':
       return k.hair;
@@ -645,7 +843,7 @@ export function layerFill(layer: FigureLayer, variant: PrayerVariant, k: FigureC
   }
 }
 
-const NO_OUTLINE = new Set<FigureLayer>(['kufiBand', 'hijabFold', 'faceArea', 'ear', 'hair', 'collar', 'cuff']);
+const NO_OUTLINE = new Set<FigureLayer>(['kufiBand', 'hijabFold', 'faceArea', 'hair', 'collar', 'cuff1', 'cuff2']);
 
 /**
  * Fill, outline and opacity of one layer. A layer with a stroke is drawn twice: first the path filled and stroked in
@@ -661,169 +859,192 @@ export const fillPass = (style: ReturnType<typeof layerStyle>) => ({ fill: style
 export function layerStyle(layer: FigureLayer, variant: PrayerVariant, k: FigureColors): { fill: string; stroke?: string; strokeWidth?: number; opacity?: number; strokeLinejoin?: 'round' } {
   const fill = layerFill(layer, variant, k);
   if (layer === 'shadow') return { fill, opacity: k.shadowOpacity };
-  if (layer === 'torsoShade' || layer === 'skirtShade') return { fill, opacity: 0.45 };
+  if (layer === 'torsoShade' || layer === 'skirtShade') return { fill, opacity: 0.4 };
   if (NO_OUTLINE.has(layer)) return { fill };
   // a clean silhouette: a darker outline in light mode, a soft light rim on dark surfaces
   const stroke = k.dark ? mix(fill, '#FFFFFF', 0.45) : shade(fill, layer === 'kufi' ? 0.25 : 0.42);
-  return { fill, stroke, strokeWidth: k.dark ? 1.8 : 2.2, strokeLinejoin: 'round' };
+  const thin = layer === 'thumb1' || layer === 'thumb2' || layer === 'thumbB1' || layer === 'thumbB2' || layer === 'finger' || layer === 'earA' || layer === 'earB';
+  return { fill, stroke, strokeWidth: (k.dark ? 1.8 : 2.2) * (thin ? 0.8 : 1), strokeLinejoin: 'round' };
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// Poses (built once; hands are placed with a two-bone IK so they really hold the knees, touch the ears, …)
+// Poses (built once; hands are placed with a two-bone IK so they really hold the knees, touch the earlobes, …)
+
+const rad = (a: number) => (a * Math.PI) / 180;
+/** Direction in the body's middle plane (0 = down, 90 = forward, 180 = up, -90 = back), optionally to the side. */
+const sag = (a: number, side = 0): V3 => norm3([Math.sin(rad(a)), Math.cos(rad(a)), side]);
+const v3 = (x: number, y: number, z: number): V3 => norm3([x, y, z]);
+const sub3 = (a: V3, b: V3): V3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const dot3 = (a: V3, b: V3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const len3 = (a: V3) => Math.sqrt(dot3(a, a));
+
+/** Head looking `look` degrees below the horizon (0 = straight ahead), turned `turn` towards the right side (selam). */
+function headDirs(neckA: number, look: number, turn = 0): Pick<PoseParams, 'neck' | 'up' | 'face'> {
+  const fwd = sag(90 - look);
+  const up = sag(180 - look);
+  const t = rad(turn);
+  const face = norm3([fwd[0] * Math.cos(t), fwd[1] * Math.cos(t), Math.sin(t)]);
+  return { neck: sag(neckA), up, face };
+}
+
+const HANG = { nUA: v3(0.04, 1, 0.12), nFA: v3(0.08, 1, 0.04), nHA: v3(0.06, 1, 0), nPalm: v3(0, 0, -1), nThumb: v3(1, 0.2, 0), fUA: v3(0.04, 1, -0.12), fFA: v3(0.08, 1, -0.04), fHA: v3(0.06, 1, 0), fPalm: v3(0, 0, 1), fThumb: v3(1, 0.2, 0) };
+const STAND_LEGS = { nTh: sag(0), nSh: sag(0), nFt: sag(78, 0.25), nToe: sag(90, 0.25), fTh: sag(0), fSh: sag(0), fFt: sag(78, -0.25), fToe: sag(90, -0.25) };
 
 const BASE: PoseParams = {
-  spine: 180,
-  head: 174,
-  tilt: 174,
-  turn: 0,
-  nUA: 3,
-  nFA: 2,
-  nHA: 0,
-  nUAs: 1,
-  nFAs: 1,
-  fUA: 3,
-  fFA: 2,
-  fHA: 0,
-  fUAs: 1,
-  fFAs: 1,
-  nTh: 0,
-  nSh: 0,
-  nFt: 74,
-  nToe: 90,
-  fTh: 0,
-  fSh: 0,
-  fFt: 74,
-  fToe: 90,
+  yaw: 70,
   shiftX: 0,
   finger: 0,
-  thumb: 90,
-  depth: 4.5,
-  open: 0,
-  hem: 0.52,
+  hem: 0.5,
+  spine: sag(180),
+  ...headDirs(178, 18),
+  ...HANG,
+  ...STAND_LEGS,
 };
 
-const deg = (rad: number) => (rad * 180) / Math.PI;
-const angleOf = (v: V) => deg(Math.atan2(v[0], v[1]));
-const near = (a: number, hint: number) => {
-  let x = a;
-  while (x - hint > 180) x -= 360;
-  while (hint - x > 180) x += 360;
-  return x;
-};
+const pose = (over: Partial<PoseParams>): PoseParams => ({ ...BASE, ...over });
 
 type Side = 'n' | 'f';
-type Target = (j: FigureJoints, ground: number) => V;
+type Target = (b: Body) => V3;
 
-/** Places the wrist of one arm on a target (local coordinates) by bending the elbow to the `bend` side. */
-function reach(p: PoseParams, side: Side, target: Target, bend: 1 | -1, hand?: number | ((j: FigureJoints) => number)): PoseParams {
-  const j = solveLocal(poseToVec(p));
-  const ground = lowest(j, false);
-  const S = side === 'n' ? j.shoulder : j.fShoulder;
-  const T = target(j, ground);
-  const a = UA * p[`${side}UAs`];
-  const b = FA * p[`${side}FAs`];
-  const v: V = [T[0] - S[0], T[1] - S[1]];
-  const d = Math.hypot(v[0], v[1]);
-  const base = angleOf(v);
-  let ua = base;
-  let fa = base;
-  if (d < a + b - 0.01) {
-    const alpha = deg(Math.acos(Math.max(-1, Math.min(1, (a * a + d * d - b * b) / (2 * a * d)))));
-    ua = base + bend * alpha;
-    const e = add(S, dirv(ua, a));
-    fa = angleOf([T[0] - e[0], T[1] - e[1]]);
+/** Places the wrist of one arm on a target (body space) with the elbow bent towards `pole`; sets the hand. */
+function reach(p: PoseParams, side: Side, target: Target, pole: V3, hand: { dir: V3; palm: V3; thumb: V3 }): PoseParams {
+  const b = solveBody(poseToVec(p));
+  const Sh = side === 'n' ? b.nShoulder : b.fShoulder;
+  const T = target(b);
+  const d = sub3(T, Sh);
+  const L = len3(d);
+  const u: V3 = [d[0] / L, d[1] / L, d[2] / L];
+  let ua = u;
+  let fa = u;
+  if (L < UA + FA - 0.01) {
+    const cosA = (UA * UA + L * L - FA * FA) / (2 * UA * L);
+    const sinA = Math.sqrt(Math.max(0, 1 - cosA * cosA));
+    const pr = dot3(pole, u);
+    const v = norm3([pole[0] - u[0] * pr, pole[1] - u[1] * pr, pole[2] - u[2] * pr]);
+    const e: V3 = [Sh[0] + u[0] * UA * cosA + v[0] * UA * sinA, Sh[1] + u[1] * UA * cosA + v[1] * UA * sinA, Sh[2] + u[2] * UA * cosA + v[2] * UA * sinA];
+    ua = norm3(sub3(e, Sh));
+    fa = norm3(sub3(T, e));
   }
-  const out = { ...p, [`${side}UA`]: near(ua, p[`${side}UA`]), [`${side}FA`]: near(fa, p[`${side}FA`]) };
-  if (hand !== undefined) {
-    const h = typeof hand === 'number' ? hand : hand(solveLocal(poseToVec(out)));
-    out[`${side}HA`] = near(h, out[`${side}FA`]);
-  }
-  return out;
+  return { ...p, [`${side}UA`]: ua, [`${side}FA`]: fa, [`${side}HA`]: norm3(hand.dir), [`${side}Palm`]: norm3(hand.palm), [`${side}Thumb`]: norm3(hand.thumb) };
+}
+
+const mirror = (v: V3): V3 => [v[0], v[1], -v[2]];
+/** Both arms, the left one mirrored from the right one. */
+function bothArms(p: PoseParams, target: (b: Body, s: 1 | -1) => V3, pole: V3, hand: { dir: V3; palm: V3; thumb: V3 }): PoseParams {
+  const right = reach(p, 'n', (b) => target(b, 1), pole, hand);
+  return reach(right, 'f', (b) => target(b, -1), mirror(pole), { dir: mirror(hand.dir), palm: mirror(hand.palm), thumb: mirror(hand.thumb) });
 }
 
 /** Turns the neck until the forehead rests on the ground (sajda). */
-function headDown(p: PoseParams): PoseParams {
+function headDown(p: PoseParams, look: number): PoseParams {
   let lo = 0;
-  let hi = 120;
-  const gap = (h: number) => {
-    const j = solveLocal(poseToVec({ ...p, head: h }));
-    const ground = Math.max(j.nKnee[1] + 8, j.nToe[1] + 3.3);
-    return j.head[1] + HEAD_R - ground;
+  let hi = 130;
+  const gap = (a: number) => {
+    const b = solveBody(poseToVec({ ...p, neck: sag(a) }));
+    const ground = Math.max(b.nKnee[1] + 7.5, b.nToe[1] + 3.2);
+    return b.head[1] + HEAD_R - ground;
   };
-  // gap decreases with h (the head lifts towards the front)
+  // the gap shrinks as the angle grows (the head lifts towards the front)
   for (let i = 0; i < 40; i++) {
     const m = (lo + hi) / 2;
     if (gap(m) > 0) lo = m;
     else hi = m;
   }
-  return { ...p, head: (lo + hi) / 2 };
+  const a = (lo + hi) / 2;
+  return { ...p, neck: sag(a), up: sag(a + look), face: sag(a + look - 90) };
 }
 
-const pose = (over: Partial<PoseParams>): PoseParams => ({ ...BASE, ...over, tilt: over.tilt ?? over.head ?? BASE.tilt });
-const both = (p: PoseParams, target: (side: Side) => Target, bend: 1 | -1, hand?: number | ((j: FigureJoints) => number)) =>
-  reach(reach(p, 'n', target('n'), bend, hand), 'f', target('f'), bend, hand);
-const sideOf = (j: FigureJoints, side: Side) => (side === 'n' ? { knee: j.nKnee, hip: j.hip } : { knee: j.fKnee, hip: j.fHip });
-
-// Shared leg settings
-const KNEEL_LEGS: Partial<PoseParams> = { nTh: 34, nSh: -88, nFt: 8, nToe: 90, fTh: 34, fSh: -88, fFt: 8, fToe: 90 };
-const SAJDA_LEGS_M: Partial<PoseParams> = { nTh: 20, nSh: -89, nFt: 6, nToe: 90, fTh: 20, fSh: -89, fFt: 6, fToe: 90 };
-const SAJDA_LEGS_F: Partial<PoseParams> = { nTh: 46, nSh: -90, nFt: 4, nToe: 90, fTh: 46, fSh: -90, fFt: 4, fToe: 90 };
-// men: left foot laid under the body, right foot upright with the toes bent towards the qibla
-const SIT_M: Partial<PoseParams> = { spine: 178, head: 170, nTh: 70, nSh: -92, nFt: 4, nToe: 90, fTh: 70, fSh: -92, fFt: -98, fToe: -94 };
+// Leg settings
+const KNEEL_LEGS: Partial<PoseParams> = { nTh: sag(30), nSh: sag(-90), nFt: sag(10), nToe: sag(90), fTh: sag(30), fSh: sag(-90), fFt: sag(10), fToe: sag(90) };
+const SAJDA_LEGS_M: Partial<PoseParams> = { nTh: sag(18), nSh: sag(-89), nFt: sag(8), nToe: sag(90), fTh: sag(18), fSh: sag(-89), fFt: sag(8), fToe: sag(90) };
+const SAJDA_LEGS_F: Partial<PoseParams> = { nTh: sag(36), nSh: sag(-90), nFt: sag(4), nToe: sag(90), fTh: sag(36), fSh: sag(-90), fFt: sag(4), fToe: sag(90) };
+// men: sitting on the left foot laid under the body, the right foot upright with the toes bent towards the qibla
+const SIT_M: Partial<PoseParams> = { nTh: sag(76, 0.06), nSh: sag(-92, 0.02), nFt: sag(4), nToe: sag(90), fTh: sag(76, -0.06), fSh: sag(-94, 0.1), fFt: v3(-0.1, 0.35, 1), fToe: v3(0, 0.3, 1) };
 // women: sitting on the floor, both feet out to the right side
-const SIT_F: Partial<PoseParams> = { spine: 176, head: 170, nTh: 84, nSh: -104, nFt: -104, nToe: -100, fTh: 86, fSh: -100, fFt: -106, fToe: -102, shiftX: 8 };
+const SIT_F: Partial<PoseParams> = { nTh: sag(84, 0.1), nSh: v3(-0.55, 0.06, 0.85), nFt: v3(-0.1, 0.25, 1), nToe: v3(0, 0.2, 1), fTh: sag(84, -0.05), fSh: v3(-0.45, 0.08, 0.9), fFt: v3(-0.1, 0.25, 1), fToe: v3(0, 0.2, 1) };
 
-const onThighs = (side: Side): Target => (j) => {
-  const { knee, hip } = sideOf(j, side);
-  return add(lerpV(hip, knee, 0.42), [0, -10]);
-};
-const thighAngle = (j: FigureJoints) => angleOf([j.nKnee[0] - j.hip[0], j.nKnee[1] - j.hip[1]]) + 2;
-
-function sitting(legs: Partial<PoseParams>, extra: Partial<PoseParams> = {}): PoseParams {
-  return both(pose({ ...legs, ...extra }), onThighs, -1, thighAngle);
-}
-
-const OPEN = { open: 1 };
-const SIT_M3: Partial<PoseParams> = { ...SIT_M, ...OPEN, fFt: 92, fToe: 92 };
-const SIT_F3: Partial<PoseParams> = { ...SIT_F, ...OPEN };
-const sideBy = (p: PoseParams, near: Target, far: Target, nBend: 1 | -1, fBend: 1 | -1, nHand: number, fHand: number) => reach(reach(p, 'n', near, nBend, nHand), 'f', far, fBend, fHand);
+/** Hands resting on the thighs near the knees, the fingers towards the knees. */
+const onThighs = (p: PoseParams) =>
+  bothArms(p, (b, s) => {
+    const knee = s === 1 ? b.nKnee : b.fKnee;
+    const hip = s === 1 ? b.nHip : b.fHip;
+    const q = lerp3(hip, knee, 0.5);
+    return [q[0], q[1] - 9.5, q[2]];
+  }, v3(-0.6, 0.2, 1), { dir: v3(1, 0.32, 0), palm: v3(0, 1, 0), thumb: v3(0.4, 0, -1) });
 
 function buildMale(): Record<PrayerPosition, PoseParams> {
-  // three-quarter view for standing and sitting, so both arms and hands show
-  const qiyam = pose({ head: 166, ...OPEN, nUA: 7, nFA: 4, nHA: 2, fUA: -2, fFA: -3, fHA: -2 });
-  // open palms beside the head, the thumbs at the earlobes, the palms towards the qibla
-  const takbir = sideBy(pose({ head: 174, ...OPEN, nUAs: 0.85, fUAs: 0.85 }), (j) => add(j.head, [-19, 9]), (j) => add(j.head, [19, 9]), 1, -1, 180, 180);
-  // right hand over the left, below the navel
-  const folded = sideBy(pose({ head: 166, ...OPEN }), (j) => add(j.hip, [5, -13]), (j) => add(j.hip, [19, -14]), -1, 1, 84, -96);
-  const ruku = both(pose({ spine: 90, head: 90, tilt: 90, nTh: -3, nSh: -3, fTh: -3, fSh: -3, nFt: 80, fFt: 80, hem: 0.3 }), (side) => (j) => add(sideOf(j, side).knee, [1, -7]), 1, 2);
-  const itidal = pose({ head: 172, ...OPEN, nUA: 7, nFA: 4, nHA: 2, fUA: -2, fFA: -3, fHA: -2 });
-  const kneel = both(pose({ spine: 166, head: 160, hem: 0.4, ...KNEEL_LEGS }), onThighs, -1, thighAngle);
-  const sajdaBody = headDown(pose({ spine: 62, tilt: 96, nUAs: 0.62, fUAs: 0.62, nFAs: 0.95, fFAs: 0.95, thumb: 0, hem: 0.3, ...SAJDA_LEGS_M }));
-  // palms flat beside the head at the level of the ears, elbows raised and away from the body
-  const sajda = both(sajdaBody, (side) => (j, ground) => [j.head[0] + (side === 'n' ? -17 : -20), ground - 4.9], 1, 92);
-  const jalsa = sitting(SIT_M3);
-  const tashahhud = sitting(SIT_M3, { finger: 1 });
-  const selamRight = sitting(SIT_M3, { turn: 1, head: 172 });
-  const selamLeft = sitting(SIT_M3, { turn: -1, head: 172 });
-  const dua = sideBy(pose({ ...SIT_M3, nFAs: 0.85, fFAs: 0.85 }), (j) => add(j.shoulder, [6, 12]), (j) => add(j.fShoulder, [6, 12]), -1, 1, 120, 120);
+  const qiyam = pose({ ...headDirs(178, 26) });
+  // hands raised beside the head: the thumbs at the earlobes, the open palms towards the qibla, the fingers up
+  const takbir = bothArms(pose({ yaw: 76, ...headDirs(178, 10) }), (b, s) => [b.head[0] + 4, b.head[1] + HEAD_R * 0.72, s * (HEAD_R + 7.5)], v3(0.45, 1, 0.45), {
+    dir: v3(0.08, -1, 0.1),
+    palm: v3(1, 0, 0),
+    thumb: v3(0, -0.15, -1),
+  });
+  // the right hand over the left below the navel; the right thumb and little finger hold the left wrist
+  const foldedBase = pose({ yaw: 78, ...headDirs(178, 26) });
+  const folded = reach(
+    reach(foldedBase, 'f', (b) => [b.belly[0] + 15, b.hip[1] - 10, -7], v3(-0.6, 0.7, -1), { dir: v3(0.12, 0.3, 1), palm: v3(-1, 0, 0), thumb: v3(0, -1, 0.3) }),
+    'n',
+    (b) => [b.belly[0] + 17.5, b.hip[1] - 8, 6],
+    v3(-0.5, 0.8, 1),
+    { dir: v3(0.12, -0.2, -1), palm: v3(-1, 0, 0), thumb: v3(0.1, 1, -0.2) },
+  );
+  // a level back, straight legs, the hands holding the knees
+  const rukuBase = pose({ yaw: 10, spine: sag(92), ...headDirs(92, 82), nTh: sag(8), nSh: sag(-5), fTh: sag(8), fSh: sag(-5), nFt: sag(82), fFt: sag(82), nToe: sag(90), fToe: sag(90), hem: 0.32 });
+  const ruku = bothArms(rukuBase, (b, s) => {
+    const k = s === 1 ? b.nKnee : b.fKnee;
+    return [k[0] + 3, k[1] - 8, k[2] + s * 1.5];
+  }, v3(-1, 0, 0.4), { dir: v3(0.25, 1, 0), palm: v3(-1, 0, 0), thumb: v3(0, 0.3, -1) });
+  const itidal = pose({ ...headDirs(178, 14) });
+  const kneel = onThighs(pose({ yaw: 32, spine: sag(170), ...headDirs(172, 30), hem: 0.4, ...KNEEL_LEGS }));
+  const sajdaBody = headDown(pose({ yaw: 14, spine: sag(62), hem: 0.3, ...SAJDA_LEGS_M }), 6);
+  // palms flat beside the head at the level of the ears, the fingers towards the qibla, the elbows raised
+  const sajda = bothArms(sajdaBody, (b, s) => [b.head[0] - 4, lowest(b, false) - 4.4, s * (HEAD_R + 4)], v3(-0.4, -1, 0.6), {
+    dir: v3(1, 0.02, 0),
+    palm: v3(0, 1, 0),
+    thumb: v3(0, 0, -1),
+  });
+  const sit = (extra: Partial<PoseParams> = {}) => onThighs(pose({ yaw: 46, spine: sag(178), ...headDirs(176, 20), hem: 0.55, ...SIT_M, ...extra }));
+  const jalsa = sit();
+  const tashahhud = sit({ finger: 1 });
+  const selamRight = sit({ ...headDirs(176, 4, 82) });
+  const selamLeft = sit({ ...headDirs(176, 4, -82) });
+  // the hands raised in front of the chest, the palms up
+  const dua = bothArms(sit({ ...headDirs(176, 24) }), (b, s) => [b.chest[0] + 17, b.chest[1] + 4, s * 9], v3(-0.3, 1, 1), { dir: v3(1, -0.3, 0.3), palm: v3(0, -1, 0), thumb: v3(0, -0.2, -1) });
   return { qiyam, takbir, folded, ruku, itidal, kneel, sajda, jalsa, tashahhud, 'selam-right': selamRight, 'selam-left': selamLeft, dua };
 }
 
 function buildFemale(male: Record<PrayerPosition, PoseParams>): Record<PrayerPosition, PoseParams> {
-  // the hands raised to the shoulders
-  const takbir = sideBy(pose({ head: 174, ...OPEN, nUAs: 0.8, fUAs: 0.8 }), (j) => add(j.shoulder, [-9, 9]), (j) => add(j.fShoulder, [9, 9]), 1, -1, 180, 180);
-  // right hand over the left, on the chest
-  const folded = sideBy(pose({ head: 166, ...OPEN }), (j) => add(lerpV(j.hip, j.shoulder, 0.56), [5, 0]), (j) => add(lerpV(j.hip, j.shoulder, 0.56), [19, -1]), -1, 1, 84, -96);
-  const ruku = both(pose({ spine: 112, head: 112, nTh: -12, nSh: 10, fTh: -12, fSh: 10, nFt: 80, fFt: 80 }), (side) => (j) => add(sideOf(j, side).knee, [3, -7]), 1, 18);
-  const sajdaBody = headDown(pose({ spine: 80, tilt: 96, thumb: 0, ...SAJDA_LEGS_F }));
-  // compact: forearms on the ground, arms close to the body
-  const sajda = both(sajdaBody, (side) => (j, ground) => [j.head[0] + (side === 'n' ? -24 : -27), ground - 4.9], -1, 92);
-  const jalsa = sitting(SIT_F3);
-  const tashahhud = sitting(SIT_F3, { finger: 1 });
-  const selamRight = sitting(SIT_F3, { turn: 1, head: 172 });
-  const selamLeft = sitting(SIT_F3, { turn: -1, head: 172 });
-  const dua = sideBy(pose({ ...SIT_F3, nFAs: 0.85, fFAs: 0.85 }), (j) => add(j.shoulder, [6, 12]), (j) => add(j.fShoulder, [6, 12]), -1, 1, 120, 120);
-  const kneel = both(pose({ spine: 166, head: 160, ...KNEEL_LEGS }), onThighs, -1, thighAngle);
+  // the hands raised to the shoulders, the palms towards the qibla
+  const takbir = bothArms(pose({ yaw: 76, ...headDirs(178, 10) }), (b, s) => [b.nShoulder[0] + 7, b.nShoulder[1] + 9, s * (SW + 2)], v3(0.2, 1, 0.8), {
+    dir: v3(0.1, -1, 0.05),
+    palm: v3(1, 0, 0),
+    thumb: v3(0, -0.15, -1),
+  });
+  // the right hand over the left, on the chest
+  const foldedBase = pose({ yaw: 78, ...headDirs(178, 26) });
+  const folded = reach(
+    reach(foldedBase, 'f', (b) => [b.chest[0] + 15.5, b.chest[1] + 2, -7], v3(-0.6, 0.9, -1), { dir: v3(0.12, 0.3, 1), palm: v3(-1, 0, 0), thumb: v3(0, -1, 0.3) }),
+    'n',
+    (b) => [b.chest[0] + 18, b.chest[1] + 4, 6],
+    v3(-0.5, 1, 1),
+    { dir: v3(0.12, 0.05, -1), palm: v3(-1, 0, 0), thumb: v3(0, -1, 0) },
+  );
+  const rukuBase = pose({ yaw: 10, spine: sag(112), ...headDirs(112, 72), nTh: sag(-6), nSh: sag(8), fTh: sag(-6), fSh: sag(8), nFt: sag(80), fFt: sag(80), nToe: sag(90), fToe: sag(90) });
+  const ruku = bothArms(rukuBase, (b, s) => {
+    const k = s === 1 ? b.nKnee : b.fKnee;
+    return [k[0] + 4, k[1] - 7, k[2] + s * 1.5];
+  }, v3(-1, 0, 0.4), { dir: v3(0.3, 1, 0), palm: v3(-1, 0, 0), thumb: v3(0, 0.3, -1) });
+  const sajdaBody = headDown(pose({ yaw: 14, spine: sag(70), ...SAJDA_LEGS_F }), 6);
+  // compact: the forearms on the ground, the arms close to the body
+  const sajda = bothArms(sajdaBody, (b, s) => [b.head[0] - 8, lowest(b, false) - 4.4, s * (HEAD_R + 1)], v3(-0.6, 0.6, 0.2), { dir: v3(1, 0.02, 0), palm: v3(0, 1, 0), thumb: v3(0, 0, -1) });
+  const sit = (extra: Partial<PoseParams> = {}) => onThighs(pose({ yaw: 46, spine: sag(176), ...headDirs(176, 20), shiftX: 4, ...SIT_F, ...extra }));
+  const jalsa = sit();
+  const tashahhud = sit({ finger: 1 });
+  const selamRight = sit({ ...headDirs(176, 4, 82) });
+  const selamLeft = sit({ ...headDirs(176, 4, -82) });
+  const dua = bothArms(sit({ ...headDirs(176, 24) }), (b, s) => [b.chest[0] + 17, b.chest[1] + 4, s * 9], v3(-0.3, 1, 1), { dir: v3(1, -0.3, 0.3), palm: v3(0, -1, 0), thumb: v3(0, -0.2, -1) });
+  const kneel = onThighs(pose({ yaw: 32, spine: sag(170), ...headDirs(172, 30), ...KNEEL_LEGS }));
   return { ...male, takbir, folded, ruku, kneel, sajda, jalsa, tashahhud, 'selam-right': selamRight, 'selam-left': selamLeft, dua };
 }
 
@@ -834,7 +1055,7 @@ export function prayerPose(position: PrayerPosition, variant: PrayerVariant): Po
   return poseToVec((variant === 'female' ? FEMALE : MALE)[position]);
 }
 
-/** Linear interpolation between two poses (worklet). */
+/** Linear interpolation between two poses (worklet; the directions are normalised when the pose is drawn). */
 export function mixPose(a: PoseVec, b: PoseVec, t: number): PoseVec {
   'worklet';
   const out: number[] = [];
@@ -924,17 +1145,18 @@ export function sajdaPoints(variant: PrayerVariant): { id: SajdaPointId; x: numb
 function sajdaPointsLocal(variant: PrayerVariant): { id: SajdaPointId; x: number; y: number }[] {
   const j = solvePose(prayerPose('sajda', variant));
   const forehead = add(j.head, [j.face[0] * HEAD_R * 0.86, j.face[1] * HEAD_R * 0.86]);
-  const palm = (w: V, t: V) => lerpV(w, t, 0.4);
+  const palm = (w: V, t: V) => lerpV(w, t, 0.45);
   const nh = palm(j.nWrist, j.nTip);
   const fh = palm(j.fWrist, j.fTip);
+  // the far side is drawn a little up and back so the two points of a pair never sit on top of each other
   return [
     { id: 'forehead', x: forehead[0], y: forehead[1] },
     { id: 'hand-right', x: nh[0], y: nh[1] + 1 },
-    { id: 'hand-left', x: fh[0] - 3, y: fh[1] - 8 },
+    { id: 'hand-left', x: fh[0] + 2, y: fh[1] - 7 },
     { id: 'knee-right', x: j.nKnee[0] + 2, y: j.nKnee[1] + 4 },
-    { id: 'knee-left', x: j.fKnee[0] - 6, y: j.fKnee[1] - 7 },
+    { id: 'knee-left', x: j.fKnee[0] - 5, y: j.fKnee[1] - 7 },
     { id: 'toes-right', x: j.nToe[0], y: j.nToe[1] + 0.5 },
-    { id: 'toes-left', x: j.fToe[0] - 7, y: j.fToe[1] - 7 },
+    { id: 'toes-left', x: j.fToe[0] - 6, y: j.fToe[1] - 7 },
   ];
 }
 
@@ -979,11 +1201,14 @@ const arc = (c: V, r: number, a0: number, a1: number, n = 6): V[] => Array.from(
 export function FigureHighlight({ c, position, variant }: { c: Ctx; position: PrayerPosition; variant: PrayerVariant }) {
   const j = solvePose(prayerPose(position, variant));
   const spots: [V, number][] = [];
+  const hand = (w: V, t: V) => lerpV(w, t, 0.4);
   switch (position) {
     case 'takbir':
+      spots.push([hand(j.nWrist, j.nTip), 14], [hand(j.fWrist, j.fTip), 14]);
+      break;
     case 'folded':
     case 'dua':
-      spots.push([lerpV(j.nWrist, j.nTip, 0.4), 15]);
+      spots.push([lerpV(hand(j.nWrist, j.nTip), hand(j.fWrist, j.fTip), 0.5), 17]);
       break;
     case 'ruku':
       spots.push([lerpV(j.hip, j.shoulder, 0.55), 30], [j.nWrist, 14]);
@@ -1024,7 +1249,7 @@ export function FigureCueLayer({ c, position, variant, cues }: { c: Ctx; positio
   const gold = c.dark ? C.goldLight : C.goldDeep;
   const out: React.ReactNode[] = [];
   if (cues.gaze && (position === 'qiyam' || position === 'folded' || position === 'itidal' || position === 'takbir')) {
-    const eye = add(j.head, [j.face[0] * HEAD_R * 0.75, j.face[1] * HEAD_R * 0.75 + 1.5]);
+    const eye = add(j.head, [j.face[0] * HEAD_R * 0.6, j.face[1] * HEAD_R * 0.6 + 2]);
     const spot = sajdaSpotLocal(variant);
     out.push(<Path key="gaze" d={`M${pt(eye)}L${spot[0]} ${spot[1] - 1}`} stroke={gold} strokeWidth={1.5} strokeDasharray="1.5 4.5" strokeLinecap="round" opacity={0.85} />);
     out.push(<Circle key="gazeSpot" cx={spot[0]} cy={spot[1] - 1} r={3.2} fill={gold} opacity={0.7} />);
@@ -1033,20 +1258,22 @@ export function FigureCueLayer({ c, position, variant, cues }: { c: Ctx; positio
     const k = `a-${position}`;
     switch (position) {
       case 'takbir': {
-        const w = j.nTip;
-        out.push(<Arrow key={k} pts={[[w[0] + 14, w[1] + 26], [w[0] + 14, w[1] + 4]]} color={gold} />);
+        // both hands go up beside the head
+        for (const [w, s] of [[j.nWrist, -1], [j.fWrist, 1]] as [V, number][]) {
+          out.push(<Arrow key={`${k}${s}`} pts={[[w[0] + s * 11, w[1] + 22], [w[0] + s * 11, w[1] + 2]]} color={gold} />);
+        }
         break;
       }
       case 'folded': {
-        const w = j.nWrist;
-        out.push(<Arrow key={k} pts={[[w[0] + 18, w[1] + 12], [w[0] + 15, w[1] + 2], [w[0] + 9, w[1] - 3]]} color={gold} />);
+        const m = lerpV(j.nWrist, j.fWrist, 0.5);
+        out.push(<Arrow key={k} pts={[[m[0] - 26, m[1] - 4], [m[0] - 20, m[1] + 4], [m[0] - 12, m[1] + 4]]} color={gold} />);
         break;
       }
       case 'ruku':
         out.push(<Arrow key={k} pts={arc(j.hip, SPINE + 18, 160, 112)} color={gold} />);
         break;
       case 'itidal':
-        out.push(<Arrow key={k} pts={arc(j.hip, SPINE + 30, 112, 162)} color={gold} />);
+        out.push(<Arrow key={k} pts={[[j.head[0] + 24, j.head[1] + 40], [j.head[0] + 24, j.head[1] + 4]]} color={gold} />);
         break;
       case 'kneel':
         out.push(<Arrow key={k} pts={[[j.nKnee[0] + 16, j.nKnee[1] - 24], [j.nKnee[0] + 16, j.nKnee[1] - 4]]} color={gold} />);
@@ -1055,18 +1282,19 @@ export function FigureCueLayer({ c, position, variant, cues }: { c: Ctx; positio
         out.push(<Arrow key={k} pts={[[j.head[0] + 14, j.head[1] - 34], [j.head[0] + 14, j.head[1] - 14]]} color={gold} />);
         break;
       case 'jalsa':
-        out.push(<Arrow key={k} pts={arc(j.hip, SPINE + 34, 120, 166)} color={gold} />);
+        out.push(<Arrow key={k} pts={[[j.head[0] + 26, j.head[1] + 30], [j.head[0] + 26, j.head[1] + 2]]} color={gold} />);
         break;
       case 'tashahhud': {
-        const t = add(lerpV(j.nWrist, j.nTip, 0.6), dirv(j.nTip[0] > 0 ? 145 : 145, 13));
+        const t = add(lerpV(j.nWrist, j.nTip, 0.6), [0, -13]);
         out.push(<Path key={k} d={`M${pt(add(t, [2, -4]))}l2.5-4M${pt(add(t, [5, 0]))}l4.5-1M${pt(add(t, [-2, -5]))}l0-4.5`} stroke={gold} strokeWidth={2} strokeLinecap="round" />);
         break;
       }
       case 'selam-right':
-        out.push(<Arrow key={k} pts={arc(j.head, HEAD_R + 9, 105, 30, 5)} color={gold} />);
+        // the head turns to the right shoulder (towards the viewer's left)
+        out.push(<Arrow key={k} pts={arc(j.head, HEAD_R + 9, 150, 225, 5)} color={gold} />);
         break;
       case 'selam-left':
-        out.push(<Arrow key={k} pts={arc(j.head, HEAD_R + 9, 105, 200, 5)} color={gold} />);
+        out.push(<Arrow key={k} pts={arc(j.head, HEAD_R + 9, 210, 135, 5)} color={gold} />);
         break;
       default:
         break;

@@ -1,5 +1,7 @@
 import { type AudioMode, setAudioModeAsync } from 'expo-audio';
 
+import { bindVolumeKeys, ensureMinMediaVolume } from '../../../modules/audio-volume';
+
 /**
  * The one audio mode for the whole app (UI sounds, Quran recitation, game recitation). See docs/AUDIO.md.
  *
@@ -23,6 +25,7 @@ let audioSession: Promise<void> | null = null;
  */
 export function configureAudioSession(): Promise<void> {
   if (!audioSession) {
+    bindVolumeKeys();
     audioSession = setAudioModeAsync(APP_AUDIO_MODE).catch((error: unknown) => {
       audioSession = null;
       if (__DEV__) console.warn('[audio] setAudioModeAsync failed', error);
@@ -35,6 +38,20 @@ export function configureAudioSession(): Promise<void> {
 /** Waits for the audio mode but never rejects – for "configure, then play anyway". */
 export function audioSessionReady(): Promise<void> {
   return configureAudioSession().catch(() => undefined);
+}
+
+/**
+ * The media volume that learner-requested audio (Quran recitation, Arabic letters, narration) needs at least. Android
+ * starts many devices – and the emulator – at a third of the media volume, where a recitation is barely audible.
+ */
+export const MIN_LISTEN_VOLUME = 0.7;
+
+/**
+ * Call right before audio the learner asked for: raises a too-low media volume to {@link MIN_LISTEN_VOLUME} (never
+ * lowers it, never unmutes). Android only; a no-op elsewhere.
+ */
+export function ensureAudibleVolume(): void {
+  ensureMinMediaVolume(MIN_LISTEN_VOLUME);
 }
 
 /** Tests: forget the configured session. */

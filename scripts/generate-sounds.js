@@ -19,8 +19,21 @@ function normalize(samples, peak) {
   return samples;
 }
 
+/**
+ * Makes a short UI sound louder without making it harsh: normalise, then a gentle tanh saturation lifts the quiet
+ * decay (more average loudness at the same peak). Phones play these through a small speaker, often at a low media
+ * volume, where the old pure-sine peaks at 0.9 were hard to hear.
+ */
+function loudness(samples, drive) {
+  normalize(samples, 1);
+  const k = Math.tanh(drive);
+  for (let i = 0; i < samples.length; i++) samples[i] = Math.tanh(samples[i] * drive) / k;
+  return samples;
+}
+
 function writeWav(name, samples) {
-  normalize(samples, name === 'ambient.wav' ? 0.7 : 0.9);
+  if (name !== 'ambient.wav') loudness(samples, 2);
+  normalize(samples, name === 'ambient.wav' ? 0.7 : 0.97);
   const dataSize = samples.length * 2;
   const buffer = Buffer.alloc(44 + dataSize);
   buffer.write('RIFF', 0);

@@ -5,7 +5,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { AppText } from '@/core/components/ui/AppText';
 import { Icon } from '@/core/components/ui/Icon';
 import { useKitColors } from '@/core/games/kit';
-import { configureAudioSession } from '@/core/services/audioSession';
+import { configureAudioSession, ensureAudibleVolume } from '@/core/services/audioSession';
 import { radius, spacing } from '@/core/theme';
 import { audioUrlForAyah } from '@/features/quran';
 
@@ -61,6 +61,7 @@ export function useRecitation() {
     }
     try {
       const next = createAudioPlayer({ uri: audioUrlForAyah(global) });
+      next.volume = 1;
       player.current = next;
       setState('loading');
       timer.current = setTimeout(() => {
@@ -98,6 +99,7 @@ export function useRecitation() {
         return;
       }
       queue.current = [...globals];
+      ensureAudibleVolume();
       playNext();
     },
     [state, stop, playNext],

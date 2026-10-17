@@ -1,6 +1,7 @@
 import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 
 import type { Language } from '@/core/models';
+import { ensureAudibleVolume } from '@/core/services/audioSession';
 
 import { narrationFor } from './narrationRegistry';
 
@@ -22,7 +23,10 @@ export function createNarration(episodeId: string, language: Language): Narratio
     return null;
   }
   return {
-    play: () => player?.play(),
+    play: () => {
+      ensureAudibleVolume();
+      player?.play();
+    },
     pause: () => player?.pause(),
     stop: () => {
       player?.pause();

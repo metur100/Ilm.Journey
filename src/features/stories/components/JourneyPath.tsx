@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import Animated, { cancelAnimation, Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
-import Svg, { Path } from 'react-native-svg';
 
 import { Art, hasArt } from '@/core/art';
 import { SceneView } from '@/core/components/scene/SceneView';
@@ -102,8 +101,9 @@ const useStyles = makeStyles((c) => ({
 /**
  * The Stories tab's journey: a winding path from Adam to Muhammad ﷺ through every registered story, in parts, with
  * each story's symbol in a medallion (never a person), its state (done / you are here / locked) and progress.
+ * `paused` stops the halo loop while the screen is hidden.
  */
-export function JourneyPath({ onOpen }: { onOpen: (story: Story) => void }) {
+export function JourneyPath({ onOpen, paused = false }: { onOpen: (story: Story) => void; paused?: boolean }) {
   const { t, l } = useStoriesI18n();
   const { c } = useTheme();
   const styles = useStyles();
@@ -130,7 +130,7 @@ export function JourneyPath({ onOpen }: { onOpen: (story: Story) => void }) {
           <View>
             {width > 0 ? <PartPath stories={stories} width={width} /> : null}
             {stories.map((story) => (
-              <Stop key={story.id} story={story} width={width} onPress={() => onOpen(story)} />
+              <Stop key={story.id} story={story} width={width} paused={paused} onPress={() => onOpen(story)} />
             ))}
           </View>
         </View>
@@ -139,38 +139,113 @@ export function JourneyPath({ onOpen }: { onOpen: (story: Story) => void }) {
   );
 }
 
+/** Stroke of the path (dp) and the distance between its dots. */
+const STROKE = 5;
+const DOT_STEP = 12;
+const LINE_STEP = 16;
+
+type PathPoint = { x: number; y: number; angle: number };
+
+/**
+ * Points every `step` dp along a gentle S-curve between two medallions (cubic Bézier with vertical tangents), with the
+ * direction of the curve at each point.
+ */
+export function curvePoints(from: [number, number], to: [number, number], step: number): PathPoint[] {
+  const [x0, y0] = from;
+  const [x1, y1] = to;
+  const my = (y0 + y1) / 2;
+  const at = (t: number) => {
+    const u = 1 - t;
+    return [u * u * u * x0 + 3 * u * u * t * x0 + 3 * u * t * t * x1 + t * t * t * x1, u * u * u * y0 + 3 * u * u * t * my + 3 * u * t * t * my + t * t * t * y1];
+  };
+  const fine = Array.from({ length: 65 }, (_, i) => at(i / 64));
+  const points: PathPoint[] = [];
+  let walked = 0;
+  let next = 0;
+  for (let i = 1; i < fine.length; i++) {
+    const [ax, ay] = fine[i - 1];
+    const [bx, by] = fine[i];
+    const len = Math.hypot(bx - ax, by - ay);
+    const angle = Math.atan2(by - ay, bx - ax);
+    while (next <= walked + len) {
+      const k = len > 0 ? (next - walked) / len : 0;
+      points.push({ x: ax + (bx - ax) * k, y: ay + (by - ay) * k, angle });
+      next += step;
+    }
+    walked += len;
+  }
+  return points;
+}
+
+/**
+ * The winding path between the medallions: a dotted line, gold where the stories are done. Drawn with plain views, not
+ * an SVG: react-native-svg rasterises every canvas into a bitmap (again each time the tab is shown), and a canvas as
+ * tall as the whole journey cost hundreds of milliseconds per visit of the Stories tab.
+ */
 function PartPath({ stories, width }: { stories: Story[]; width: number }) {
   const { c } = useTheme();
   const progress = useStoriesStore((s) => s.stories);
-  const top = 0;
-  const pts = stories.map((s, i) => [sideOf(s) * width, top + i * ROW + ROW / 2] as [number, number]);
-  if (pts.length < 2) return null;
-  // Gentle S-curves between the medallions.
-  const curve = (from: number, to: number) => {
-    const list = pts.slice(from, to + 1);
-    let d = `M${list[0][0]} ${list[0][1]}`;
-    for (let i = 1; i < list.length; i++) {
-      const [x0, y0] = list[i - 1];
-      const [x1, y1] = list[i];
-      const my = (y0 + y1) / 2;
-      d += `C${x0} ${my} ${x1} ${my} ${x1} ${y1}`;
-    }
-    return d;
-  };
   let done = -1;
   stories.forEach((s, i) => {
     if (progress[s.id]?.completed && done === i - 1) done = i;
   });
-  const height = top + stories.length * ROW;
+
+  const { dots, line } = useMemo(() => {
+    const pts = stories.map((s, i) => [sideOf(s) * width, i * ROW + ROW / 2] as [number, number]);
+    const segments = pts.slice(1).map((to, i) => [pts[i], to] as const);
+    return {
+      dots: segments.flatMap(([from, to]) => curvePoints(from, to, DOT_STEP)),
+      // Short straight pieces along the done part; their round ends join into one smooth line.
+      line: segments.slice(0, Math.max(0, done)).flatMap(([from, to]) => {
+        const p = curvePoints(from, to, LINE_STEP);
+        const last = p[p.length - 1];
+        if (Math.hypot(to[0] - last.x, to[1] - last.y) > 0.5) p.push({ x: to[0], y: to[1], angle: last.angle });
+        return p.slice(1).map((b, i) => ({ a: p[i], b }));
+      }),
+    };
+  }, [stories, width, done]);
+
+  if (stories.length < 2) return null;
   return (
-    <Svg pointerEvents="none" width={width} height={height} style={{ position: 'absolute', left: 0, top: 0 }}>
-      <Path d={curve(0, pts.length - 1)} stroke={c.border} strokeWidth={5} strokeDasharray="2 10" strokeLinecap="round" fill="none" />
-      {done >= 1 ? <Path d={curve(0, done)} stroke={c.gold} strokeWidth={5} strokeLinecap="round" fill="none" /> : null}
-    </Svg>
+    <View pointerEvents="none" style={{ position: 'absolute', left: 0, top: 0, width, height: stories.length * ROW }}>
+      {dots.map((p, i) => (
+        <View
+          key={`d${i}`}
+          style={{
+            position: 'absolute',
+            left: p.x - (STROKE + 2) / 2,
+            top: p.y - STROKE / 2,
+            width: STROKE + 2,
+            height: STROKE,
+            borderRadius: STROKE / 2,
+            backgroundColor: c.border,
+            transform: [{ rotate: `${p.angle}rad` }],
+          }}
+        />
+      ))}
+      {line.map(({ a, b }, i) => {
+        const len = Math.hypot(b.x - a.x, b.y - a.y) + STROKE;
+        return (
+          <View
+            key={`l${i}`}
+            style={{
+              position: 'absolute',
+              left: (a.x + b.x) / 2 - len / 2,
+              top: (a.y + b.y) / 2 - STROKE / 2,
+              width: len,
+              height: STROKE,
+              borderRadius: STROKE / 2,
+              backgroundColor: c.gold,
+              transform: [{ rotate: `${Math.atan2(b.y - a.y, b.x - a.x)}rad` }],
+            }}
+          />
+        );
+      })}
+    </View>
   );
 }
 
-function Stop({ story, width, onPress }: { story: Story; width: number; onPress: () => void }) {
+function Stop({ story, width, paused, onPress }: { story: Story; width: number; paused: boolean; onPress: () => void }) {
   const { t, l } = useStoriesI18n();
   const { c } = useTheme();
   const styles = useStyles();
@@ -200,7 +275,7 @@ function Stop({ story, width, onPress }: { story: Story; width: number; onPress:
     >
       {width > 0 ? (
         <>
-          {current ? <Halo left={cx} /> : null}
+          {current ? <Halo left={cx} paused={paused} /> : null}
           <View style={[styles.medal, { left: cx }, done && styles.medalDone, current && styles.medalCurrent, locked && styles.medalLocked]}>
             <Symbol story={story} dim={locked} />
           </View>
@@ -255,19 +330,19 @@ function Symbol({ story, dim }: { story: Story; dim: boolean }) {
   );
 }
 
-/** Soft breathing halo behind the story you are at (still under reduced motion). */
-function Halo({ left }: { left: number }) {
+/** Soft breathing halo behind the story you are at (still under reduced motion and while paused). */
+function Halo({ left, paused }: { left: number; paused: boolean }) {
   const styles = useStyles();
   const reduced = useReducedMotion();
   const v = useSharedValue(0.5);
   useEffect(() => {
-    if (reduced) {
+    if (reduced || paused) {
       v.value = 0.5;
       return undefined;
     }
     v.value = withRepeat(withTiming(1, { duration: 1600, easing: Easing.inOut(Easing.quad) }), -1, true);
     return () => cancelAnimation(v);
-  }, [reduced, v]);
+  }, [reduced, paused, v]);
   const style = useAnimatedStyle(() => ({ opacity: 0.12 + 0.18 * v.value, transform: [{ scale: 0.9 + 0.12 * v.value }] }));
   return <Animated.View pointerEvents="none" style={[styles.halo, { left }, style]} />;
 }

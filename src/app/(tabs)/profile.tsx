@@ -23,7 +23,7 @@ import { useAppStore } from '@/core/store/appStore';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 
 const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+  root: { flex: 1 },
   scroll: { paddingBottom: spacing.xxl },
   body: { padding: spacing.lg, gap: spacing.lg },
   note: { marginTop: spacing.sm },

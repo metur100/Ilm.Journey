@@ -27,7 +27,7 @@ import { translateNs, useI18n } from '@/core/i18n';
 import { makeStyles, radius, shadows, spacing, topicThemes, useTheme } from '@/core/theme';
 
 const useStyles = makeStyles((c) => ({
-  root: { flex: 1, backgroundColor: c.background },
+  root: { flex: 1 },
   scroll: { paddingBottom: spacing.xxl },
   body: { padding: spacing.lg, gap: spacing.lg },
   hero: { borderRadius: radius.xl, overflow: 'hidden', ...shadows(c.shadow).raised },

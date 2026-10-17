@@ -8,7 +8,9 @@ import { Art } from '@/core/art';
 import type { PrayerPosition, PrayerVariant } from '@/core/art/pieces/sections/salahFigure';
 import { SKIN_TONES } from '@/core/components/character/Avatar';
 import { AppText } from '@/core/components/ui/AppText';
+import { Icon } from '@/core/components/ui/Icon';
 import { HintPointer, Tile, useKitColors, type TileState } from '@/core/games/kit';
+import { speakArabic } from '@/core/services/speech';
 import { useAppStore } from '@/core/store/appStore';
 import { radius, spacing } from '@/core/theme';
 
@@ -155,10 +157,13 @@ export function VariantToggle({ variant, onChange, t }: { variant: PrayerVariant
   );
 }
 
-/** What is said in the position: name, Arabic (from data), transliteration and meaning; loud / quiet badge. */
-export function ReciteCard({ title, lines, voice, compact = false }: { title: string; lines: CaptionLine[]; voice?: string; compact?: boolean }) {
+/**
+ * What to do and what to say in the position: the movement in plain words, then every recitation with its Arabic,
+ * transliteration and meaning (all lines, in full – the card scrolls); loud / quiet badge, "3×" for the tasbihs and a
+ * speaker to hear the Arabic formulas (device voice; Quran text is not read by the speech engine).
+ */
+export function ReciteCard({ title, lines, voice, how, howLabel, t }: { title: string; lines: CaptionLine[]; voice?: string; how?: string; howLabel?: string; t?: T }) {
   const k = useKitColors();
-  const shown = compact ? lines.slice(-2) : lines;
   return (
     <Animated.View key={title + lines.map((l) => l.key).join()} entering={FadeIn.duration(220)} style={[styles.card, { backgroundColor: k.tileFace, borderColor: k.tileBorder }]} accessibilityLiveRegion="polite" testID="recite-card">
       <View style={styles.cardHead}>
@@ -173,24 +178,44 @@ export function ReciteCard({ title, lines, voice, compact = false }: { title: st
           </View>
         ) : null}
       </View>
-      {shown.map((line) => (
-        <View key={line.key} style={styles.line}>
-          <AppText variant="small" color={k.accentText}>
-            {line.name}
-            {line.ref ? `  (${line.ref})` : ''}
+      {how ? (
+        <View style={[styles.how, { backgroundColor: k.accentSoft }]} testID="recite-how">
+          {howLabel ? (
+            <AppText variant="tiny" color={k.accentText}>
+              {howLabel}
+            </AppText>
+          ) : null}
+          <AppText variant="small" color={k.text}>
+            {how}
           </AppText>
+        </View>
+      ) : null}
+      {lines.map((line) => (
+        <View key={line.key} style={styles.line}>
+          <View style={styles.lineHead}>
+            <AppText variant="small" color={k.accentText} style={styles.flex}>
+              {line.name}
+              {line.times && t ? `  ·  ${t('times', { n: line.times })}` : ''}
+              {line.ref ? `  (${line.ref})` : ''}
+            </AppText>
+            {line.arabic && line.script === 'arabic' ? (
+              <Pressable onPress={() => speakArabic(line.arabic ?? '')} accessibilityRole="button" accessibilityLabel={line.translit ?? line.name} hitSlop={6} testID={`listen-${line.key}`} style={({ pressed }) => [styles.listen, { borderColor: k.tileBorder, opacity: pressed ? 0.7 : 1 }]}>
+                <Icon name="speaker" size={18} color={k.accent} />
+              </Pressable>
+            ) : null}
+          </View>
           {line.arabic ? (
-            <AppText variant="body" script={line.script ?? 'arabic'} align="right" color={k.text} numberOfLines={2}>
+            <AppText variant="heading" script={line.script ?? 'arabic'} align="right" color={k.text}>
               {line.arabic}
             </AppText>
           ) : null}
           {line.translit ? (
-            <AppText variant="tiny" color={k.textMuted} numberOfLines={2} style={styles.italic}>
+            <AppText variant="small" color={k.text} style={styles.italic}>
               {line.translit}
             </AppText>
           ) : null}
           {line.meaning ? (
-            <AppText variant="tiny" color={k.textMuted} numberOfLines={3}>
+            <AppText variant="tiny" color={k.textMuted}>
               {line.meaning}
             </AppText>
           ) : null}
@@ -245,7 +270,10 @@ const styles = StyleSheet.create({
   card: { borderRadius: radius.md, borderWidth: 1, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, gap: 4 },
   cardHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   badge: { borderRadius: radius.pill, borderWidth: 1, paddingHorizontal: 8, paddingVertical: 2 },
-  line: { gap: 1 },
+  line: { gap: 2, paddingTop: 4 },
+  lineHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
+  how: { borderRadius: radius.sm, paddingHorizontal: spacing.sm, paddingVertical: 6, gap: 2 },
+  listen: { width: 34, height: 34, borderRadius: 17, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
   italic: { fontStyle: 'italic' },
   choice: { alignItems: 'center', gap: 2 },
 });
