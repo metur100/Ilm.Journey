@@ -70,13 +70,23 @@
     "unlock": { "areaId": "ramadan", "unitsCompleted": 2 }
   },
   {
-    "id": "arabic",
+    "id": "sufara",
     "order": 8,
+    "name": { "en": "Sufara School", "de": "Sufara-Schule", "bs": "Mekteb sufare" },
+    "statName": { "en": "Sufara", "de": "Sufara", "bs": "Sufara" },
+    "description": { "en": "The Arabic letters lesson by lesson, from alif onwards: harakat, sukun, tanwin, madd, shadda and reading.", "de": "Die arabischen Buchstaben Lektion für Lektion, ab Alif: Harakat, Sukun, Tanwin, Madd, Schadda und Lesen.", "bs": "Arapski harfovi lekciju po lekciju, od elifa: harekati, sukun, tenvin, medd, šedda i čitanje." },
+    "scene": { "sky": "sunset", "elements": ["sun", "book", "pattern"] },
+    "map": { "x": 56, "y": 12 },
+    "unlock": { "areaId": "history", "unitsCompleted": 2 }
+  },
+  {
+    "id": "arabic",
+    "order": 9,
     "name": { "en": "Arabic Academy", "de": "Arabisch-Akademie", "bs": "Akademija arapskog" },
     "statName": { "en": "Arabic", "de": "Arabisch", "bs": "Arapski" },
-    "description": { "en": "Letters, harakat and words for Islamic learning.", "de": "Buchstaben, Harakat und Wörter für das islamische Lernen.", "bs": "Harfovi, harekati i riječi za islamsko učenje." },
+    "description": { "en": "Arabic words and expressions of Islamic life and what they mean.", "de": "Arabische Wörter und Ausdrücke des islamischen Lebens und ihre Bedeutung.", "bs": "Arapske riječi i izrazi iz islamskog života i njihovo značenje." },
     "scene": { "sky": "sunset", "elements": ["sun", "city", "book"] },
     "map": { "x": 70, "y": 16 },
-    "unlock": { "areaId": "history", "unitsCompleted": 2 }
+    "unlock": { "areaId": "sufara", "unitsCompleted": 2 }
   }
 ]

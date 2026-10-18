@@ -11,6 +11,7 @@ import { AppText } from '@/core/components/ui/AppText';
 import { Icon } from '@/core/components/ui/Icon';
 import { HintPointer, Tile, useKitColors, type TileState } from '@/core/games/kit';
 import { speakArabic } from '@/core/services/speech';
+import { useRecitation } from '@/features/games/sections/quran/shared/recitation';
 import { useAppStore } from '@/core/store/appStore';
 import { radius, spacing } from '@/core/theme';
 
@@ -198,7 +199,9 @@ export function ReciteCard({ title, lines, voice, how, howLabel, t }: { title: s
               {line.times && t ? `  ·  ${t('times', { n: line.times })}` : ''}
               {line.ref ? `  (${line.ref})` : ''}
             </AppText>
-            {line.arabic && line.script === 'arabic' ? (
+            {line.ayahs?.length ? (
+              <ReciterButton ayahs={line.ayahs} label={line.name} testID={`listen-${line.key}`} />
+            ) : line.arabic && line.script === 'arabic' ? (
               <Pressable onPress={() => speakArabic(line.arabic ?? '')} accessibilityRole="button" accessibilityLabel={line.translit ?? line.name} hitSlop={6} testID={`listen-${line.key}`} style={({ pressed }) => [styles.listen, { borderColor: k.tileBorder, opacity: pressed ? 0.7 : 1 }]}>
                 <Icon name="speaker" size={18} color={k.accent} />
               </Pressable>
@@ -222,6 +225,19 @@ export function ReciteCard({ title, lines, voice, how, howLabel, t }: { title: s
         </View>
       ))}
     </Animated.View>
+  );
+}
+
+/** Quran parts are recited by a reciter (streamed, Mishary Alafasy) – not by the device voice. Tap again to stop. */
+function ReciterButton({ ayahs, label, testID }: { ayahs: number[]; label: string; testID: string }) {
+  const k = useKitColors();
+  const { state, toggle } = useRecitation();
+  const busy = state === 'loading' || state === 'playing';
+  if (state === 'unavailable') return <Icon name="speaker" size={18} color={k.textMuted} />;
+  return (
+    <Pressable onPress={() => toggle(ayahs)} accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ busy }} hitSlop={6} testID={testID} style={({ pressed }) => [styles.listen, { borderColor: busy ? k.gold : k.tileBorder, backgroundColor: busy ? k.goldSoft : 'transparent', opacity: pressed ? 0.7 : 1 }]}>
+      <Icon name={busy ? 'stop' : 'speaker'} size={18} color={k.accent} />
+    </Pressable>
   );
 }
 

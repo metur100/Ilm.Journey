@@ -14,8 +14,9 @@ import { registerWordBuilderGame } from './word-builder/register';
 import { registerWordMemoryGame } from './word-memory/register';
 
 /**
- * Section "arabic" – Arabic / Sufara (docs/GAMES-V3.md §3.3): every game of this section lives in this folder and is
- * registered here, in the order of the sufara path (letters → forms → harakat → joining → reading).
+ * Sections "sufara" and "arabic" (docs/GAMES-V3.md §3.3): every game of these sections lives in this folder and is
+ * registered here, in sufara order (letters → forms → joining → harakat → reading, then the word games of "arabic").
+ * Which section a game belongs to is set in shared/define.ts (SUFARA_GAME_IDS).
  * Owned by one author – do not register this section's games anywhere else.
  */
 export function registerArabicGames(): void {
@@ -35,5 +36,5 @@ export function registerArabicGames(): void {
   registerWordMemoryGame();
 }
 
-/** Game ids of the section in sufara-path order (the Sufara screen links to them). */
+/** Game ids of this folder in sufara order. */
 export const ARABIC_GAME_IDS = ['letter-trace', 'letter-lanterns', 'alphabet-path', 'letter-dots', 'twin-letters', 'letter-forms', 'non-joiners', 'join-letters', 'harakat-sounds', 'marks-workshop', 'madd-stretch', 'syllable-reading', 'word-builder', 'word-memory'] as const;

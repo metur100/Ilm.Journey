@@ -1,0 +1,348 @@
+{
+  "id": "arabic-prayer-words",
+  "areaId": "arabic",
+  "order": 5,
+  "difficulty": 1,
+  "title": {
+    "en": "Words of the Prayer",
+    "de": "Wörter des Gebets",
+    "bs": "Riječi namaza"
+  },
+  "description": {
+    "en": "Adhan, wudu, qibla, takbir, ruku' and sujud – what they mean.",
+    "de": "Adhan, Wudu, Qibla, Takbir, Ruku' und Sudschud – was sie bedeuten.",
+    "bs": "Ezan, abdest, kibla, tekbir, ruku' i sedžda – šta znače."
+  },
+  "lesson": [
+    {
+      "heading": {
+        "en": "Before the prayer",
+        "de": "Vor dem Gebet",
+        "bs": "Prije namaza"
+      },
+      "body": {
+        "en": "أَذَان adhān – the call to prayer. وُضُوء wuḍūʾ – the washing before the prayer. قِبْلَة qiblah – the direction of the Kaaba, which we face in prayer.",
+        "de": "أَذَان Adhān – der Gebetsruf. وُضُوء Wuḍūʾ – die Waschung vor dem Gebet. قِبْلَة Qibla – die Richtung der Kaaba, der wir uns im Gebet zuwenden.",
+        "bs": "أَذَان ezan – poziv na namaz. وُضُوء abdest – pranje prije namaza. قِبْلَة kibla – pravac Kabe, prema kojem se okrećemo u namazu."
+      },
+      "arabic": "قِبْلَة",
+      "transliteration": "qiblah"
+    },
+    {
+      "heading": {
+        "en": "In the prayer",
+        "de": "Im Gebet",
+        "bs": "U namazu"
+      },
+      "body": {
+        "en": "تَكْبِير takbīr – saying \"Allahu akbar\". رُكُوع rukūʿ – bowing. سُجُود sujūd – prostration, with the forehead on the ground.",
+        "de": "تَكْبِير Takbīr – „Allahu akbar“ sagen. رُكُوع Rukūʿ – die Verbeugung. سُجُود Sudschūd – die Niederwerfung, mit der Stirn auf dem Boden.",
+        "bs": "تَكْبِير tekbir – izgovaranje „Allahu ekber“. رُكُوع ruku' – pregibanje. سُجُود sedžda – spuštanje čela na tlo."
+      },
+      "arabic": "سُجُود",
+      "transliteration": "sujūd"
+    }
+  ],
+  "practiceId": "arabic-prayer-words-p",
+  "testIds": [
+    "arabic-prayer-words-1",
+    "arabic-prayer-words-2",
+    "arabic-prayer-words-3",
+    "arabic-prayer-words-4"
+  ],
+  "explanation": {
+    "en": "These Arabic words are used for the prayer everywhere in the world – knowing them helps you follow every step.",
+    "de": "Diese arabischen Wörter werden überall auf der Welt für das Gebet benutzt – wenn du sie kennst, kannst du jedem Schritt folgen.",
+    "bs": "Ove arapske riječi koriste se za namaz u cijelom svijetu – kada ih znaš, lakše pratiš svaki korak."
+  },
+  "sources": [
+    {
+      "sourceName": "Quran",
+      "sourceReference": "5:6"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "2:144"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "22:77"
+    },
+    {
+      "sourceName": "Sahih al-Bukhari",
+      "sourceReference": "631"
+    }
+  ],
+  "questions": [
+    {
+      "id": "arabic-prayer-words-p",
+      "type": "matching",
+      "areaId": "arabic",
+      "topic": "prayer-words",
+      "prompt": {
+        "en": "Match each word with its meaning.",
+        "de": "Ordne jedem Wort seine Bedeutung zu.",
+        "bs": "Spoji svaku riječ s njenim značenjem."
+      },
+      "pairs": [
+        {
+          "id": "adhan",
+          "left": {
+            "en": "أَذَان",
+            "de": "أَذَان",
+            "bs": "أَذَان"
+          },
+          "right": {
+            "en": "Call to prayer",
+            "de": "Gebetsruf",
+            "bs": "Poziv na namaz"
+          }
+        },
+        {
+          "id": "ruku",
+          "left": {
+            "en": "رُكُوع",
+            "de": "رُكُوع",
+            "bs": "رُكُوع"
+          },
+          "right": {
+            "en": "Bowing",
+            "de": "Verbeugung",
+            "bs": "Pregibanje"
+          }
+        },
+        {
+          "id": "sujud",
+          "left": {
+            "en": "سُجُود",
+            "de": "سُجُود",
+            "bs": "سُجُود"
+          },
+          "right": {
+            "en": "Prostration",
+            "de": "Niederwerfung",
+            "bs": "Sedžda"
+          }
+        }
+      ],
+      "explanation": {
+        "en": "Adhan – call to prayer, ruku' – bowing, sujud – prostration.",
+        "de": "Adhan – Gebetsruf, Ruku' – Verbeugung, Sudschud – Niederwerfung.",
+        "bs": "Ezan – poziv na namaz, ruku' – pregibanje, sedžda – spuštanje čela na tlo."
+      }
+    },
+    {
+      "id": "arabic-prayer-words-1",
+      "type": "multipleChoice",
+      "areaId": "arabic",
+      "topic": "prayer-words",
+      "prompt": {
+        "en": "What is the qibla?",
+        "de": "Was ist die Qibla?",
+        "bs": "Šta je kibla?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "The direction of the Kaaba",
+            "de": "Die Richtung der Kaaba",
+            "bs": "Pravac Kabe"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "The call to prayer",
+            "de": "Der Gebetsruf",
+            "bs": "Poziv na namaz"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "The bowing",
+            "de": "Die Verbeugung",
+            "bs": "Pregibanje"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "In prayer we face the Kaaba in Makkah – that direction is the qibla.",
+        "de": "Im Gebet wenden wir uns der Kaaba in Mekka zu – diese Richtung ist die Qibla.",
+        "bs": "U namazu se okrećemo prema Kabi u Mekki – taj pravac je kibla."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "2:144"
+        }
+      ]
+    },
+    {
+      "id": "arabic-prayer-words-2",
+      "type": "matching",
+      "areaId": "arabic",
+      "topic": "prayer-words",
+      "prompt": {
+        "en": "Match each word with its meaning.",
+        "de": "Ordne jedem Wort seine Bedeutung zu.",
+        "bs": "Spoji svaku riječ s njenim značenjem."
+      },
+      "pairs": [
+        {
+          "id": "wudu",
+          "left": {
+            "en": "Wudu",
+            "de": "Wudu",
+            "bs": "Abdest"
+          },
+          "right": {
+            "en": "Washing before the prayer",
+            "de": "Waschung vor dem Gebet",
+            "bs": "Pranje prije namaza"
+          }
+        },
+        {
+          "id": "takbir",
+          "left": {
+            "en": "Takbir",
+            "de": "Takbir",
+            "bs": "Tekbir"
+          },
+          "right": {
+            "en": "Saying \"Allahu akbar\"",
+            "de": "„Allahu akbar“ sagen",
+            "bs": "Izgovaranje „Allahu ekber“"
+          }
+        },
+        {
+          "id": "qibla",
+          "left": {
+            "en": "Qibla",
+            "de": "Qibla",
+            "bs": "Kibla"
+          },
+          "right": {
+            "en": "Direction of the Kaaba",
+            "de": "Richtung der Kaaba",
+            "bs": "Pravac Kabe"
+          }
+        }
+      ],
+      "explanation": {
+        "en": "Wudu – washing, takbir – \"Allahu akbar\", qibla – the direction of the Kaaba.",
+        "de": "Wudu – Waschung, Takbir – „Allahu akbar“, Qibla – die Richtung der Kaaba.",
+        "bs": "Abdest – pranje, tekbir – „Allahu ekber“, kibla – pravac Kabe."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "5:6"
+        }
+      ]
+    },
+    {
+      "id": "arabic-prayer-words-3",
+      "type": "trueFalse",
+      "areaId": "arabic",
+      "topic": "prayer-words",
+      "prompt": {
+        "en": "Sujud means bowing.",
+        "de": "Sudschud bedeutet Verbeugung.",
+        "bs": "Sedžda znači pregibanje."
+      },
+      "correct": false,
+      "explanation": {
+        "en": "Sujud is the prostration with the forehead on the ground; the bowing is ruku'.",
+        "de": "Sudschud ist die Niederwerfung mit der Stirn auf dem Boden; die Verbeugung ist Ruku'.",
+        "bs": "Sedžda je spuštanje čela na tlo; pregibanje je ruku'."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "22:77"
+        }
+      ]
+    },
+    {
+      "id": "arabic-prayer-words-4",
+      "type": "categorize",
+      "areaId": "arabic",
+      "topic": "prayer-words",
+      "prompt": {
+        "en": "Before or in the prayer?",
+        "de": "Vor oder im Gebet?",
+        "bs": "Prije ili u namazu?"
+      },
+      "categories": [
+        {
+          "id": "before",
+          "label": {
+            "en": "Before the prayer",
+            "de": "Vor dem Gebet",
+            "bs": "Prije namaza"
+          }
+        },
+        {
+          "id": "in",
+          "label": {
+            "en": "In the prayer",
+            "de": "Im Gebet",
+            "bs": "U namazu"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "adhan",
+          "text": {
+            "en": "Adhan",
+            "de": "Adhan",
+            "bs": "Ezan"
+          },
+          "categoryId": "before"
+        },
+        {
+          "id": "wudu",
+          "text": {
+            "en": "Wudu",
+            "de": "Wudu",
+            "bs": "Abdest"
+          },
+          "categoryId": "before"
+        },
+        {
+          "id": "ruku",
+          "text": {
+            "en": "Ruku'",
+            "de": "Ruku'",
+            "bs": "Ruku'"
+          },
+          "categoryId": "in"
+        },
+        {
+          "id": "sujud",
+          "text": {
+            "en": "Sujud",
+            "de": "Sudschud",
+            "bs": "Sedžda"
+          },
+          "categoryId": "in"
+        }
+      ],
+      "explanation": {
+        "en": "Adhan and wudu come before the prayer; ruku' and sujud are in the prayer.",
+        "de": "Adhan und Wudu kommen vor dem Gebet; Ruku' und Sudschud sind im Gebet.",
+        "bs": "Ezan i abdest su prije namaza; ruku' i sedžda su u namazu."
+      },
+      "sources": [
+        {
+          "sourceName": "Sahih al-Bukhari",
+          "sourceReference": "631"
+        }
+      ]
+    }
+  ]
+}

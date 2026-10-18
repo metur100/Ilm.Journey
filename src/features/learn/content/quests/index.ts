@@ -23,8 +23,29 @@ export interface WorldPack {
   goodDeeds?: GoodDeed[];
 }
 
+/**
+ * The letter and harakat quests of the islam-quest "arabic" world belong to the Learn topic Sufara (the topic Arabic keeps
+ * the words): these quests, their lessons and their questions get the world / area `sufara` when loaded – the JSON stays as
+ * in the source app.
+ */
+export const SUFARA_QUEST_IDS: readonly string[] = ['arabic-q1', 'arabic-q2', 'arabic-q3', 'arabic-q4', 'arabic-q5'];
+
+function withSufara(pack: WorldPack): WorldPack {
+  const quests = pack.quests.filter((q) => SUFARA_QUEST_IDS.includes(q.id));
+  if (quests.length === 0) return pack;
+  const steps = quests.flatMap((q) => q.steps);
+  const lessonIds = new Set(steps.flatMap((s) => (s.kind === 'lesson' ? [s.lessonId] : [])));
+  const questionIds = new Set(steps.flatMap((s) => (s.kind === 'question' ? [s.questionId] : [])));
+  return {
+    ...pack,
+    quests: pack.quests.map((q) => (SUFARA_QUEST_IDS.includes(q.id) ? { ...q, worldId: 'sufara' } : q)),
+    lessons: pack.lessons.map((l) => (lessonIds.has(l.id) ? { ...l, worldId: 'sufara' } : l)),
+    questions: pack.questions.map((q) => (questionIds.has(q.id) ? { ...q, worldId: 'sufara' } : q)),
+  };
+}
+
 // JSON imports are widened by TypeScript (e.g. `type: string`); the content test verifies the shape.
-export const PACKS: readonly WorldPack[] = [salah, quran, akhlaq, ramadan, arabic].map((pack) => pack as unknown as WorldPack);
+export const PACKS: readonly WorldPack[] = [salah, quran, akhlaq, ramadan, arabic].map((pack) => withSufara(pack as unknown as WorldPack));
 
 export const QUEST_WORLD_LIST: readonly QuestWorld[] = PACKS.map((p) => p.world).sort((a, b) => a.order - b.order);
 export const QUESTS: readonly BeginnerQuest[] = PACKS.flatMap((p) => p.quests);
@@ -60,7 +81,7 @@ for (const quest of QUESTS) {
 export const QUEST_QUESTIONS: readonly QuestQuestion[] = PACKS.flatMap((p) =>
   p.questions.map((q): QuestQuestion => {
     const fallback = q.sources?.length ? undefined : lessonSourcesOfQuestion.get(q.id);
-    return { ...q, areaId: p.world.id as TopicId, ...(fallback ? { sources: fallback } : {}) };
+    return { ...q, areaId: (q.worldId ?? p.world.id) as TopicId, ...(fallback ? { sources: fallback } : {}) };
   }),
 );
 const questionMap = byId(QUEST_QUESTIONS);

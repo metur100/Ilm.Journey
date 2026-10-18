@@ -25,7 +25,7 @@ const useStyles = makeStyles((c) => ({
   flex: { flex: 1, gap: 2 },
 }));
 
-/** A Play section: header (topic gradient, stars), the Sufara path link in Arabic, and a grid of game cards. */
+/** A Play section: header (topic gradient, stars), the link to the Sufara course in Sufara, and a grid of game cards. */
 export function SectionScreen({ section }: { section: string }) {
   const { language, t } = useI18n();
   const { c } = useTheme();
@@ -55,8 +55,8 @@ export function SectionScreen({ section }: { section: string }) {
         progressLabel={pt('stars', { count: stats.stars, total: stats.maxStars })}
       />
       <ScrollView contentContainerStyle={styles.body}>
-        {id === 'arabic' ? (
-          <Card tone="gold" onPress={() => router.push('/sufara')} accessibilityLabel={`${pt('sufaraTitle')}. ${pt('sufaraBody')}`}>
+        {id === 'sufara' ? (
+          <Card tone="gold" onPress={() => router.push({ pathname: '/topic/[id]', params: { id: 'sufara' } })} accessibilityLabel={`${pt('sufaraTitle')}. ${pt('sufaraBody')}`}>
             <View style={styles.row}>
               <Art name="object.book" size={56} />
               <View style={styles.flex}>

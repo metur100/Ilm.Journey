@@ -1,0 +1,387 @@
+{
+  "id": "arabic-phrases",
+  "areaId": "arabic",
+  "order": 4,
+  "difficulty": 2,
+  "title": {
+    "en": "Phrases for Every Day",
+    "de": "Ausdrücke für jeden Tag",
+    "bs": "Izrazi za svaki dan"
+  },
+  "description": {
+    "en": "In sha Allah, ma sha Allah, thanking and answering the greeting.",
+    "de": "In scha Allah, ma scha Allah, danken und den Gruß erwidern.",
+    "bs": "Inša Allah, maša Allah, zahvala i odgovor na selam."
+  },
+  "lesson": [
+    {
+      "heading": {
+        "en": "In sha Allah",
+        "de": "In scha Allah",
+        "bs": "Inša Allah"
+      },
+      "body": {
+        "en": "If Allah wills. We say it when we speak about something we want to do later.",
+        "de": "Wenn Allah will. Wir sagen es, wenn wir von etwas sprechen, das wir später tun wollen.",
+        "bs": "Ako Allah da. Kažemo to kada govorimo o nečemu što želimo uraditi kasnije."
+      },
+      "arabic": "إِنْ شَاءَ اللّٰه",
+      "transliteration": "in shāʾa llāh"
+    },
+    {
+      "heading": {
+        "en": "Ma sha Allah",
+        "de": "Ma scha Allah",
+        "bs": "Maša Allah"
+      },
+      "body": {
+        "en": "What Allah has willed. We say it when we see something good or beautiful.",
+        "de": "Was Allah gewollt hat. Wir sagen es, wenn wir etwas Gutes oder Schönes sehen.",
+        "bs": "Ono što Allah hoće. Kažemo to kada vidimo nešto dobro ili lijepo."
+      },
+      "arabic": "مَا شَاءَ اللّٰه",
+      "transliteration": "mā shāʾa llāh"
+    },
+    {
+      "heading": {
+        "en": "Jazakallahu khayran",
+        "de": "Dschazakallahu khairan",
+        "bs": "Džezakellahu hajren"
+      },
+      "body": {
+        "en": "May Allah reward you with good. A beautiful way to thank someone.",
+        "de": "Möge Allah dich mit Gutem belohnen. Eine schöne Art, jemandem zu danken.",
+        "bs": "Neka te Allah nagradi dobrom. Lijep način da se nekome zahvalimo."
+      },
+      "arabic": "جَزَاكَ اللّٰهُ خَيْرًا",
+      "transliteration": "jazāka llāhu khayran"
+    },
+    {
+      "heading": {
+        "en": "Wa alaykumu s-salam",
+        "de": "Wa alaikumu s-salam",
+        "bs": "Ve alejkumu-s-selam"
+      },
+      "body": {
+        "en": "And upon you be peace. This is how we answer \"as-salamu alaykum\".",
+        "de": "Und auch mit euch sei Friede. So erwidern wir „as-salamu alaikum“.",
+        "bs": "I s vama neka je mir. Tako odgovaramo na „es-selamu alejkum“."
+      },
+      "arabic": "وَعَلَيْكُمُ السَّلَام",
+      "transliteration": "wa ʿalaykumu s-salām"
+    }
+  ],
+  "practiceId": "arabic-phrases-p",
+  "testIds": [
+    "arabic-phrases-1",
+    "arabic-phrases-2",
+    "arabic-phrases-3",
+    "arabic-phrases-4"
+  ],
+  "explanation": {
+    "en": "These short phrases remember Allah in everyday moments: when we plan, admire, thank and greet.",
+    "de": "Diese kurzen Ausdrücke gedenken Allahs in alltäglichen Momenten: wenn wir planen, staunen, danken und grüßen.",
+    "bs": "Ovi kratki izrazi spominju Allaha u svakodnevnim trenucima: kada planiramo, divimo se, zahvaljujemo i pozdravljamo."
+  },
+  "sources": [
+    {
+      "sourceName": "Quran",
+      "sourceReference": "18:23-24"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "18:39"
+    },
+    {
+      "sourceName": "Jami' at-Tirmidhi",
+      "sourceReference": "2035"
+    },
+    {
+      "sourceName": "Quran",
+      "sourceReference": "4:86"
+    }
+  ],
+  "questions": [
+    {
+      "id": "arabic-phrases-p",
+      "type": "matching",
+      "areaId": "arabic",
+      "topic": "phrases",
+      "prompt": {
+        "en": "Match each phrase with its meaning.",
+        "de": "Ordne jedem Ausdruck seine Bedeutung zu.",
+        "bs": "Spoji svaki izraz s njegovim značenjem."
+      },
+      "pairs": [
+        {
+          "id": "insha",
+          "left": {
+            "en": "In sha Allah",
+            "de": "In scha Allah",
+            "bs": "Inša Allah"
+          },
+          "right": {
+            "en": "If Allah wills",
+            "de": "Wenn Allah will",
+            "bs": "Ako Allah da"
+          }
+        },
+        {
+          "id": "masha",
+          "left": {
+            "en": "Ma sha Allah",
+            "de": "Ma scha Allah",
+            "bs": "Maša Allah"
+          },
+          "right": {
+            "en": "What Allah has willed",
+            "de": "Was Allah gewollt hat",
+            "bs": "Ono što Allah hoće"
+          }
+        },
+        {
+          "id": "jazak",
+          "left": {
+            "en": "Jazakallahu khayran",
+            "de": "Dschazakallahu khairan",
+            "bs": "Džezakellahu hajren"
+          },
+          "right": {
+            "en": "May Allah reward you with good",
+            "de": "Möge Allah dich mit Gutem belohnen",
+            "bs": "Neka te Allah nagradi dobrom"
+          }
+        }
+      ],
+      "explanation": {
+        "en": "In sha Allah – if Allah wills; ma sha Allah – what Allah has willed; jazakallahu khayran – may Allah reward you with good.",
+        "de": "In scha Allah – wenn Allah will; ma scha Allah – was Allah gewollt hat; Dschazakallahu khairan – möge Allah dich mit Gutem belohnen.",
+        "bs": "Inša Allah – ako Allah da; maša Allah – ono što Allah hoće; džezakellahu hajren – neka te Allah nagradi dobrom."
+      }
+    },
+    {
+      "id": "arabic-phrases-1",
+      "type": "multipleChoice",
+      "areaId": "arabic",
+      "topic": "phrases",
+      "prompt": {
+        "en": "\"I will visit you tomorrow, …\" – what do we add?",
+        "de": "„Ich besuche dich morgen, …“ – was fügen wir hinzu?",
+        "bs": "„Posjetit ću te sutra, …“ – šta dodajemo?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "In sha Allah",
+            "de": "In scha Allah",
+            "bs": "Inša Allah"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Ma sha Allah",
+            "de": "Ma scha Allah",
+            "bs": "Maša Allah"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Wa alaykumu s-salam",
+            "de": "Wa alaikumu s-salam",
+            "bs": "Ve alejkumu-s-selam"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "For plans we say in sha Allah – if Allah wills.",
+        "de": "Bei Plänen sagen wir in scha Allah – wenn Allah will.",
+        "bs": "Za planove kažemo inša Allah – ako Allah da."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "18:23-24"
+        }
+      ]
+    },
+    {
+      "id": "arabic-phrases-2",
+      "type": "multipleChoice",
+      "areaId": "arabic",
+      "topic": "phrases",
+      "prompt": {
+        "en": "A friend helped you. How can you thank them?",
+        "de": "Ein Freund hat dir geholfen. Wie kannst du ihm danken?",
+        "bs": "Prijatelj ti je pomogao. Kako mu možeš zahvaliti?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "Jazakallahu khayran",
+            "de": "Dschazakallahu khairan",
+            "bs": "Džezakellahu hajren"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "In sha Allah",
+            "de": "In scha Allah",
+            "bs": "Inša Allah"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Allahu akbar",
+            "de": "Allahu akbar",
+            "bs": "Allahu ekber"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Jazakallahu khayran – may Allah reward you with good.",
+        "de": "Dschazakallahu khairan – möge Allah dich mit Gutem belohnen.",
+        "bs": "Džezakellahu hajren – neka te Allah nagradi dobrom."
+      },
+      "sources": [
+        {
+          "sourceName": "Jami' at-Tirmidhi",
+          "sourceReference": "2035"
+        }
+      ]
+    },
+    {
+      "id": "arabic-phrases-3",
+      "type": "multipleChoice",
+      "areaId": "arabic",
+      "topic": "phrases",
+      "prompt": {
+        "en": "Someone says \"as-salamu alaykum\". What do you answer?",
+        "de": "Jemand sagt „as-salamu alaikum“. Was antwortest du?",
+        "bs": "Neko ti kaže „es-selamu alejkum“. Šta odgovaraš?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "Wa alaykumu s-salam",
+            "de": "Wa alaikumu s-salam",
+            "bs": "Ve alejkumu-s-selam"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Bismillah",
+            "de": "Bismillah",
+            "bs": "Bismillah"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Ma sha Allah",
+            "de": "Ma scha Allah",
+            "bs": "Maša Allah"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "We answer the greeting with an equal or a better one: wa alaykumu s-salam.",
+        "de": "Wir erwidern den Gruß gleich oder schöner: wa alaikumu s-salam.",
+        "bs": "Na selam odgovaramo jednakim ili ljepšim: ve alejkumu-s-selam."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "4:86"
+        }
+      ]
+    },
+    {
+      "id": "arabic-phrases-4",
+      "type": "categorize",
+      "areaId": "arabic",
+      "topic": "phrases",
+      "prompt": {
+        "en": "When do we say it?",
+        "de": "Wann sagen wir es?",
+        "bs": "Kada to kažemo?"
+      },
+      "categories": [
+        {
+          "id": "plan",
+          "label": {
+            "en": "When we plan something",
+            "de": "Wenn wir etwas planen",
+            "bs": "Kada nešto planiramo"
+          }
+        },
+        {
+          "id": "admire",
+          "label": {
+            "en": "When we see something beautiful",
+            "de": "Wenn wir etwas Schönes sehen",
+            "bs": "Kada vidimo nešto lijepo"
+          }
+        },
+        {
+          "id": "thank",
+          "label": {
+            "en": "When we thank someone",
+            "de": "Wenn wir jemandem danken",
+            "bs": "Kada nekome zahvaljujemo"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "insha",
+          "text": {
+            "en": "In sha Allah",
+            "de": "In scha Allah",
+            "bs": "Inša Allah"
+          },
+          "categoryId": "plan"
+        },
+        {
+          "id": "masha",
+          "text": {
+            "en": "Ma sha Allah",
+            "de": "Ma scha Allah",
+            "bs": "Maša Allah"
+          },
+          "categoryId": "admire"
+        },
+        {
+          "id": "jazak",
+          "text": {
+            "en": "Jazakallahu khayran",
+            "de": "Dschazakallahu khairan",
+            "bs": "Džezakellahu hajren"
+          },
+          "categoryId": "thank"
+        }
+      ],
+      "explanation": {
+        "en": "In sha Allah for plans, ma sha Allah for something beautiful, jazakallahu khayran to thank.",
+        "de": "In scha Allah für Pläne, ma scha Allah für etwas Schönes, Dschazakallahu khairan zum Danken.",
+        "bs": "Inša Allah za planove, maša Allah za nešto lijepo, džezakellahu hajren za zahvalu."
+      },
+      "sources": [
+        {
+          "sourceName": "Quran",
+          "sourceReference": "18:39"
+        }
+      ]
+    }
+  ]
+}

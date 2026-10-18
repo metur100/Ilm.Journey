@@ -24,6 +24,8 @@ export interface CaptionLine {
   times?: number;
   /** Quran / hadith reference, e.g. "1:1-7" or "Muslim 772". */
   ref?: string;
+  /** Quran text: the global ayah numbers, for the recitation by a reciter. */
+  ayahs?: number[];
 }
 
 type T = (key: string, params?: Record<string, string | number>) => string;
@@ -46,6 +48,7 @@ function surahLine(key: CaptionKey, n: number, name: string, l: L): CaptionLine 
     translit: s.ayahs.map((a) => a.transliteration).join(' · '),
     meaning: s.ayahs.map((a) => l(a.translation)).join(' '),
     ref: `${n}:1-${s.ayahs.length}`,
+    ayahs: s.ayahs.map((a) => a.globalNumber),
   };
 }
 
@@ -90,7 +93,7 @@ export function captionLine(key: CaptionKey, step: Pick<PrayerStep, 'rakat'>, t:
       const words = ayahWords(d.ayahs[0].arabic);
       const bare = (w: string) => w.replace(/[ً-ٰٟۖ-ۭ]/g, '');
       const start = Math.max(0, words.findIndex((w) => bare(w).startsWith('ربن')));
-      return { key, name, arabic: words.slice(start).join(' '), script: 'quran', translit: l(RABBENA.translit), meaning: l(RABBENA.meaning), ref: d.ref };
+      return { key, name, arabic: words.slice(start).join(' '), script: 'quran', translit: l(RABBENA.translit), meaning: l(RABBENA.meaning), ref: d.ref, ayahs: d.ayahs.map((a) => a.globalNumber) };
     }
     case 'niyyah':
     case 'dua':

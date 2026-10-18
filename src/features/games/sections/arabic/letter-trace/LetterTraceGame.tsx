@@ -8,6 +8,7 @@ import { spacing } from '@/core/theme';
 import { missedFacts } from '../shared/define';
 import { LETTER_LESSON } from '../shared/lessonText';
 import { mustLetter } from '../shared/letters';
+import { letterStrokes } from '../shared/strokes';
 import { TargetBar } from '../shared/ui';
 import { useArabicVoice } from '../shared/voice';
 
@@ -20,8 +21,9 @@ export interface LetterTraceConfig {
 }
 
 /**
- * Letter Tracing: meet each letter – hear it, read its lesson line – and trace the big guide letter with the finger.
- * The three levels walk through all 28 letters in sufara order.
+ * Letter Tracing: meet each letter – hear it, read its lesson line – and write it with the finger, stroke by stroke along
+ * its real shape (shared/strokes.ts; each dot is a short stroke). The three levels walk through all 28 letters in sufara
+ * order.
  */
 export function LetterTraceGame(api: GameApi<LetterTraceConfig>) {
   const { letters, hints, tolerance } = api.config;
@@ -29,7 +31,7 @@ export function LetterTraceGame(api: GameApi<LetterTraceConfig>) {
   const [current, setCurrent] = useState(0);
   const letter = letters[Math.min(current, letters.length - 1)];
   const info = mustLetter(letter);
-  const shapes = useMemo(() => letters.map((l) => ({ id: `l${mustLetter(l).position}`, glyph: l, label: mustLetter(l).name })), [letters]);
+  const shapes = useMemo(() => letters.map((l) => ({ id: `l${mustLetter(l).position}`, glyph: l, label: mustLetter(l).name, strokes: traceStrokes(l) })), [letters]);
 
   useEffect(() => {
     say(letter);
@@ -50,6 +52,13 @@ export function LetterTraceGame(api: GameApi<LetterTraceConfig>) {
       />
     </GameBoard>
   );
+}
+
+/** The letter's strokes for TraceShape; its dots become short strokes (TraceShape follows strokes only). */
+function traceStrokes(letter: string): string[] | undefined {
+  const data = letterStrokes(letter);
+  if (!data) return undefined;
+  return [...data.strokes, ...(data.dots ?? []).map(([x, y]) => `M${x + 3} ${y} L${x - 3} ${y}`)];
 }
 
 const styles = StyleSheet.create({

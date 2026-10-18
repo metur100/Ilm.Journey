@@ -1,325 +1,405 @@
-import { router } from 'expo-router';
-import { useState } from 'react';
+import { Redirect, router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppText } from '@/core/components/ui/AppText';
 import { Button } from '@/core/components/ui/Button';
 import { Card } from '@/core/components/ui/Card';
+import { LockedContent } from '@/core/components/ui/LockedContent';
 import { ProgressBar } from '@/core/components/ui/ProgressBar';
-import { Screen } from '@/core/components/ui/Screen';
 import { SourceList } from '@/core/components/ui/SourceList';
+import { EmptyState } from '@/core/components/ui/States';
 import { TopBar } from '@/core/components/ui/TopBar';
-import { Icon } from '@/core/components/ui/Icon';
-import { getGame, useGamesStore } from '@/core/games';
-import { translateNs } from '@/core/i18n';
+import { useFeedback } from '@/core/hooks/useFeedback';
+import { useStatusBar } from '@/core/hooks/useStatusBar';
+import { LANGUAGE_SOURCES } from '@/core/models';
+import { speakArabic, stopSpeaking } from '@/core/services/speech';
 import { useAppStore } from '@/core/store/appStore';
-import { XP } from '@/core/services/xp';
-import { speakArabic } from '@/core/services/speech';
+import { makeStyles, radius, spacing, topicThemes, useTheme } from '@/core/theme';
 import { LETTER_POSITIONS, letterForm } from '@/features/games/sections/arabic/shared/script';
-import { HARAKA_NAMES, LETTERS } from '@/features/games/sections/arabic/shared/letters';
-import { LANGUAGE_SOURCES, type Language } from '@/core/models';
-import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 
-import { gameStars, HARAKA_VOWEL, letterChoices, SUFARA_PATH, type SufaraStage, vowelChoices } from '../sufara/logic';
+import { buildTopicPath, pathItemHref } from '../path';
+import { TracingPad, useScreenReader } from '../quests/components/TracingPad';
+import { useQuestStore } from '../quests/store/questStore';
+import { useLearnStore } from '../store/learnStore';
+import { COURSE_LETTERS, courseLetter, FORM_LETTERS, getSufaraLesson, LAM_ELIF, lessonExercises, markExamples, SUFARA_LESSONS, type SufaraExercise, type SufaraLesson } from '../sufara/course';
+import { lessonExplanation, lessonTitle, SUFARA_COPY } from '../sufara/copy';
+import { sufaraTarget } from '../sufara/register';
 
-type Copy = {
-  title: string;
-  intro: string;
-  progress: (done: number) => string;
-  exercise: (number: number) => string;
-  identify: (name: string) => string;
-  vowel: (name: string, sound: string) => string;
-  form: Record<(typeof LETTER_POSITIONS)[number], string>;
-  haraka: Record<(typeof HARAKA_NAMES)[number], string>;
-  listenLetter: string;
-  listenSyllable: string;
-  correct: string;
-  tryAgain: string;
-  next: string;
-  complete: string;
-  allComplete: string;
-  restart: string;
-  source: string;
-  pathTitle: string;
-  pathIntro: string;
-  practiceTitle: string;
-  stage: Record<SufaraStage, string>;
-  stars: (n: number) => string;
-};
-
-const COPY: Record<Language, Copy> = {
-  bs: {
-    title: 'Sufara',
-    intro: '28 harfova, njihovi oblici u riječi i kratke vježbe s fethom, kesrom i dammom. Za pravilan izgovor uči i s kvalifikovanim učiteljem.',
-    progress: (done) => `${done} od 28 harfova završeno`,
-    exercise: (number) => `Vježba ${number} od 4`,
-    identify: (name) => `Pronađi harf: ${name}`,
-    vowel: (name, sound) => `Izaberi slog s ${name}: ${sound}`,
-    form: { isolated: 'Samostalno', initial: 'Na početku', medial: 'U sredini', final: 'Na kraju' },
-    haraka: { fatha: 'fetha', kasra: 'kesra', damma: 'damma' },
-    listenLetter: 'Poslušaj harf',
-    listenSyllable: 'Poslušaj slog',
-    correct: 'Tačno',
-    tryAgain: 'Pokušaj ponovo',
-    next: 'Sljedeći harf',
-    complete: 'Završio si vježbe za ovaj harf.',
-    allComplete: 'Prešao si svih 28 harfova.',
-    restart: 'Ponovi od početka',
-    source: 'Izvor: standardno arapsko pismo; lekcija Arapski harfovi i hareketi.',
-    pathTitle: 'Put sufare',
-    pathIntro: 'Igre iz sekcije Arapski / Sufara, redom: harfovi, oblici, spajanje harfova, hareketi i čitanje.',
-    practiceTitle: 'Vježba harf po harf',
-    stage: { letters: '1 · Harfovi', shapes: '2 · Tačke i oblici', joining: '3 · Spajanje harfova', harakat: '4 · Hareketi', reading: '5 · Čitanje' },
-    stars: (n) => `${n} od 9 zvjezdica`,
-  },
-  de: {
-    title: 'Sufara',
-    intro: '28 Buchstaben, ihre Wortformen und kurze Übungen zu Fatha, Kasra und Damma. Für die richtige Aussprache übe auch mit einer qualifizierten Lehrkraft.',
-    progress: (done) => `${done} von 28 Buchstaben abgeschlossen`,
-    exercise: (number) => `Übung ${number} von 4`,
-    identify: (name) => `Finde den Buchstaben: ${name}`,
-    vowel: (name, sound) => `Wähle die Silbe mit ${name}: ${sound}`,
-    form: { isolated: 'Einzeln', initial: 'Am Anfang', medial: 'In der Mitte', final: 'Am Ende' },
-    haraka: { fatha: 'Fatha', kasra: 'Kasra', damma: 'Damma' },
-    listenLetter: 'Buchstaben anhören',
-    listenSyllable: 'Silbe anhören',
-    correct: 'Richtig',
-    tryAgain: 'Versuche es noch einmal',
-    next: 'Nächster Buchstabe',
-    complete: 'Du hast die Übungen für diesen Buchstaben abgeschlossen.',
-    allComplete: 'Du hast alle 28 Buchstaben geübt.',
-    restart: 'Von vorn wiederholen',
-    source: 'Quelle: standardarabische Schrift; Lektionen Arabische Buchstaben und Harakat.',
-    pathTitle: 'Der Sufara-Pfad',
-    pathIntro: 'Die Spiele des Bereichs Arabisch / Sufara der Reihe nach: Buchstaben, Formen, Verbinden, Harakat und Lesen.',
-    practiceTitle: 'Übung Buchstabe für Buchstabe',
-    stage: { letters: '1 · Buchstaben', shapes: '2 · Punkte und Formen', joining: '3 · Buchstaben verbinden', harakat: '4 · Harakat', reading: '5 · Lesen' },
-    stars: (n) => `${n} von 9 Sternen`,
-  },
-  en: {
-    title: 'Sufara',
-    intro: 'Learn all 28 letters, their word forms, and short exercises with fatha, kasra and damma. Practise pronunciation with a qualified teacher too.',
-    progress: (done) => `${done} of 28 letters completed`,
-    exercise: (number) => `Exercise ${number} of 4`,
-    identify: (name) => `Find the letter: ${name}`,
-    vowel: (name, sound) => `Choose the syllable with ${name}: ${sound}`,
-    form: { isolated: 'Alone', initial: 'At the start', medial: 'In the middle', final: 'At the end' },
-    haraka: { fatha: 'fatha', kasra: 'kasra', damma: 'damma' },
-    listenLetter: 'Listen to letter',
-    listenSyllable: 'Listen to syllable',
-    correct: 'Correct',
-    tryAgain: 'Try again',
-    next: 'Next letter',
-    complete: 'You finished the exercises for this letter.',
-    allComplete: 'You practised all 28 letters.',
-    restart: 'Review from the start',
-    source: 'Source: standard Arabic script; Arabic Letters and Harakat lessons.',
-    pathTitle: 'The sufara path',
-    pathIntro: 'The games of Arabic / Sufara in order: letters, shapes, joining the letters, harakat and reading.',
-    practiceTitle: 'Letter-by-letter practice',
-    stage: { letters: '1 · Letters', shapes: '2 · Dots and shapes', joining: '3 · Joining the letters', harakat: '4 · Harakat', reading: '5 · Reading' },
-    stars: (n) => `${n} of 9 stars`,
-  },
-};
+type Step = { kind: 'letter'; letter: string } | { kind: 'trace'; letter: string } | { kind: 'explain' } | { kind: 'exercise'; exercise: SufaraExercise } | { kind: 'done' };
 
 const useStyles = makeStyles((c) => ({
-  body: { gap: spacing.md },
-  summary: { gap: spacing.sm },
-  letterStrip: { gap: spacing.xs, paddingRight: spacing.lg },
-  letterChip: { minWidth: 48, minHeight: 48, paddingHorizontal: spacing.sm, borderRadius: radius.md, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
-  selected: { borderColor: c.primary, backgroundColor: c.primarySoft },
-  complete: { borderColor: c.success, backgroundColor: c.successSoft },
-  letter: { alignItems: 'center', gap: spacing.xs },
-  arabic: { fontSize: 72, lineHeight: 104, textAlign: 'center', writingDirection: 'rtl' },
+  root: { flex: 1, backgroundColor: c.background },
+  header: { paddingBottom: spacing.sm },
+  progressRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingHorizontal: spacing.lg },
+  flex: { flex: 1, width: undefined },
+  content: { padding: spacing.lg, paddingBottom: spacing.xxl * 2, gap: spacing.lg },
+  center: { alignItems: 'center', gap: spacing.xs },
+  big: { fontSize: 88, lineHeight: 150, textAlign: 'center', writingDirection: 'rtl' },
+  show: { fontSize: 64, lineHeight: 120, textAlign: 'center', writingDirection: 'rtl' },
   forms: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: spacing.sm },
-  form: { minWidth: 64, alignItems: 'center', gap: 2 },
+  form: { minWidth: 70, alignItems: 'center', gap: 2, paddingVertical: spacing.xs, borderRadius: radius.md, backgroundColor: c.surfaceAlt },
+  formText: { fontSize: 34, lineHeight: 60 },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: spacing.sm },
+  example: { minWidth: 76, minHeight: 76, padding: spacing.xs, borderRadius: radius.md, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
+  exampleText: { fontSize: 32, lineHeight: 58 },
   choices: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: spacing.sm },
-  choice: { minWidth: 84, minHeight: 76, padding: spacing.sm, borderWidth: 1.5, borderColor: c.border, borderRadius: radius.md, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
-  choiceArabic: { fontSize: 40, lineHeight: 56, writingDirection: 'rtl' },
+  choice: { minWidth: 92, minHeight: 76, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, borderWidth: 2, borderColor: c.border, borderRadius: radius.md, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
+  choiceRight: { borderColor: c.success, backgroundColor: c.successSoft },
+  choiceWrong: { borderColor: c.error, backgroundColor: c.errorSoft, opacity: 0.7 },
+  choiceArabic: { fontSize: 38, lineHeight: 70 },
   feedback: { minHeight: 24 },
-  path: { gap: spacing.sm },
-  stage: { gap: spacing.xs },
-  step: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, minHeight: 56, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, borderRadius: radius.md, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface },
-  stepText: { flex: 1, gap: 2 },
-  stepDone: { borderColor: c.success },
 }));
 
+/** Route `/sufara?lesson=…`: one lesson of the Sufara course. Without a lesson it opens the Sufara topic. */
 export default function SufaraScreen() {
+  const { lesson: param } = useLocalSearchParams<{ lesson?: string }>();
+  if (!param) return <Redirect href={{ pathname: '/topic/[id]', params: { id: 'sufara' } }} />;
+  // Keyed by id so "next lesson" starts with fresh state.
+  return <LessonGate key={param} id={param} />;
+}
+
+function useCopy() {
+  const language = useAppStore((s) => s.settings.language);
+  return { language, copy: SUFARA_COPY[language] };
+}
+
+function LessonGate({ id }: { id: string }) {
+  const { copy, language } = useCopy();
+  const styles = useStyles();
+  useStatusBar(false);
+  const lesson = getSufaraLesson(id);
+  const [status] = useState(() => (lesson ? (buildTopicPath('sufara', useLearnStore.getState()).find((e) => e.item.id === lesson.id)?.status ?? 'locked') : 'locked'));
+
+  if (!lesson) {
+    return (
+      <SafeAreaView style={styles.root}>
+        <TopBar />
+        <EmptyState icon="letter" title={copy.notFound} />
+      </SafeAreaView>
+    );
+  }
+  if (status === 'locked') {
+    return (
+      <SafeAreaView style={styles.root}>
+        <TopBar title={lessonTitle(lesson)[language]} />
+        <View style={styles.content}>
+          <LockedContent message={copy.locked} />
+          <Button label={copy.backToTopic} onPress={() => router.back()} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+  return <LessonPlayer lesson={lesson} />;
+}
+
+/** Steps of a lesson: each new letter (meet it, write it) or the explanation, then the practice, then the end. */
+function lessonSteps(lesson: SufaraLesson, exercises: SufaraExercise[]): Step[] {
+  const intro: Step[] = lesson.kind === 'letters' ? lesson.letters.flatMap((letter): Step[] => [{ kind: 'letter', letter }, { kind: 'trace', letter }]) : [{ kind: 'explain' }];
+  return [...intro, ...exercises.map((exercise): Step => ({ kind: 'exercise', exercise })), { kind: 'done' }];
+}
+
+function LessonPlayer({ lesson }: { lesson: SufaraLesson }) {
+  const { copy, language } = useCopy();
   const { c } = useTheme();
   const styles = useStyles();
-  const settings = useAppStore((s) => s.settings);
-  const xpAwards = useAppStore((s) => s.xpAwards);
-  const games = useGamesStore((s) => s.games);
-  const awardXp = useAppStore((s) => s.awardXp);
-  const registerActivity = useAppStore((s) => s.registerActivity);
-  const language = settings.language;
-  const copy = COPY[language];
-  const [position, setPosition] = useState(1);
-  const [stage, setStage] = useState<'identify' | 'vowel' | 'complete'>('identify');
-  const [vowelIndex, setVowelIndex] = useState(0);
-  const [feedback, setFeedback] = useState('');
-  const current = LETTERS[position - 1];
-  const done = LETTERS.filter((item) => !!xpAwards[`sufara:letter:${item.position}`]).length;
-  const letterOptions = letterChoices(position, language);
-  const vowels = vowelChoices(current.letter, vowelIndex + 1);
-  const challengeNumber = stage === 'identify' ? 1 : stage === 'vowel' ? vowelIndex + 2 : 4;
+  const visit = useLearnStore((s) => s.visit);
+  const steps = useMemo(() => lessonSteps(lesson, lessonExercises(lesson, language)), [lesson, language]);
+  const [index, setIndex] = useState(0);
+  const scrollRef = useRef<ScrollView>(null);
+  const step = steps[Math.min(index, steps.length - 1)];
+  const theme = topicThemes.sufara;
 
-  const finishLetter = () => {
-    const earned = awardXp(`sufara:letter:${position}`, XP.reviewCorrect);
-    if (earned > 0) registerActivity();
-    setStage('complete');
-    setFeedback(copy.complete);
+  useEffect(() => {
+    visit('sufara', lesson.id);
+  }, [lesson.id, visit]);
+  useEffect(() => () => stopSpeaking(), []);
+
+  const next = () => {
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
+    setIndex((i) => Math.min(i + 1, steps.length - 1));
   };
 
-  const chooseLetter = (letter: string) => {
-    if (letter !== current.letter) {
-      setFeedback(copy.tryAgain);
-      return;
-    }
-    setFeedback(copy.correct);
-    setStage('vowel');
-    setVowelIndex(0);
-  };
+  const close = () => (router.canGoBack() ? router.back() : router.replace({ pathname: '/topic/[id]', params: { id: 'sufara' } }));
+  const total = steps.length - 1;
 
-  const chooseVowel = (haraka: string) => {
-    if (haraka !== vowels.target) {
-      setFeedback(copy.tryAgain);
-      return;
-    }
-    setFeedback(copy.correct);
-    if (vowelIndex + 1 >= HARAKA_NAMES.length) finishLetter();
-    else setVowelIndex((index) => index + 1);
-  };
+  return (
+    <SafeAreaView style={styles.root}>
+      <View style={styles.header}>
+        <TopBar backIcon="close" onBack={close} title={copy.lesson(lesson.number)} />
+        <View style={styles.progressRow}>
+          <ProgressBar progress={Math.min(index, total) / total} color={theme.accent} style={styles.flex} accessibilityLabel={copy.step(Math.min(index + 1, total), total)} />
+          <AppText variant="tiny" color={c.textMuted}>
+            {Math.min(index + 1, total)}/{total}
+          </AppText>
+        </View>
+      </View>
+      <ScrollView ref={scrollRef} contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+        {step.kind === 'letter' ? <LetterStep key={`l-${index}`} letter={step.letter} onNext={next} /> : null}
+        {step.kind === 'trace' ? <TraceStep key={`t-${index}`} letter={step.letter} onNext={next} /> : null}
+        {step.kind === 'explain' ? <ExplainStep lesson={lesson} onNext={next} /> : null}
+        {step.kind === 'exercise' ? <ExerciseStep key={`e-${index}`} exercise={step.exercise} onNext={next} /> : null}
+        {step.kind === 'done' ? <DoneStep lesson={lesson} /> : null}
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
 
-  const nextLetter = () => {
-    setFeedback('');
-    setVowelIndex(0);
-    if (position === LETTERS.length) {
-      setPosition(1);
-      setStage('identify');
-      return;
+/** The forms of a letter in a word (lam-elif: alone and at the end, the only places it can stand). */
+function LetterForms({ letter }: { letter: string }) {
+  const { copy } = useCopy();
+  const { c } = useTheme();
+  const styles = useStyles();
+  const positions = letter === LAM_ELIF ? (['isolated', 'final'] as const) : LETTER_POSITIONS;
+  return (
+    <View style={styles.forms}>
+      {positions.map((position) => (
+        <View key={position} style={styles.form}>
+          <AppText script="arabic" style={styles.formText}>
+            {letterForm(letter, position)}
+          </AppText>
+          <AppText variant="tiny" color={c.textMuted}>
+            {copy.position[position]}
+          </AppText>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function LetterStep({ letter, onNext }: { letter: string; onNext: () => void }) {
+  const { copy, language } = useCopy();
+  const { c } = useTheme();
+  const styles = useStyles();
+  const info = courseLetter(letter);
+
+  useEffect(() => {
+    speakArabic(letter);
+  }, [letter]);
+
+  return (
+    <>
+      <View style={styles.center}>
+        <AppText variant="label" color={c.goldText}>
+          {copy.meet.toUpperCase()}
+        </AppText>
+        <AppText script="arabic" style={styles.big} accessibilityLabel={info.name[language]}>
+          {letter}
+        </AppText>
+        <AppText variant="title" accessibilityRole="header">
+          {info.name[language]}
+        </AppText>
+      </View>
+      <Card tone="gold">
+        <AppText variant="body">{info.line[language]}</AppText>
+      </Card>
+      <Button label={copy.listen} icon="speaker" variant="secondary" onPress={() => speakArabic(letter)} />
+      <AppText variant="heading">{copy.forms}</AppText>
+      <LetterForms letter={letter} />
+      <AppText variant="tiny" color={c.textMuted}>
+        {copy.teacher}
+      </AppText>
+      <Button label={copy.next} iconRight="chevron" onPress={onNext} />
+    </>
+  );
+}
+
+function TraceStep({ letter, onNext }: { letter: string; onNext: () => void }) {
+  const { copy } = useCopy();
+  const { c } = useTheme();
+  const feedback = useFeedback();
+  const screenReader = useScreenReader();
+  const markLetterTraced = useQuestStore((s) => s.markLetterTraced);
+  const [traced, setTraced] = useState(false);
+
+  return (
+    <>
+      <AppText variant="title" accessibilityRole="header">
+        {copy.traceTitle}
+      </AppText>
+      <AppText variant="body" color={c.textMuted}>
+        {copy.traceHint}
+      </AppText>
+      <TracingPad
+        letter={letter}
+        onChange={setTraced}
+        onTraced={() => {
+          feedback.success();
+          markLetterTraced(letter);
+        }}
+      />
+      <Button label={copy.next} iconRight="chevron" onPress={onNext} disabled={!traced && !screenReader} />
+    </>
+  );
+}
+
+function ExplainStep({ lesson, onNext }: { lesson: SufaraLesson; onNext: () => void }) {
+  const { copy, language } = useCopy();
+  const { c } = useTheme();
+  const styles = useStyles();
+  const explanation = lessonExplanation(lesson, language);
+  const examples = markExamples(lesson.kind, language);
+
+  return (
+    <>
+      <AppText variant="title" accessibilityRole="header">
+        {lessonTitle(lesson)[language]}
+      </AppText>
+      {explanation?.mark ? (
+        <AppText script="arabic" style={styles.show}>
+          {explanation.mark}
+        </AppText>
+      ) : null}
+      {explanation ? (
+        <Card tone="gold">
+          <AppText variant="body">{explanation.text}</AppText>
+        </Card>
+      ) : null}
+      {lesson.kind === 'review' ? (
+        <View style={styles.grid}>
+          {COURSE_LETTERS.map((letter) => (
+            <Pressable key={letter} onPress={() => speakArabic(letter)} accessibilityRole="button" accessibilityLabel={courseLetter(letter).name[language]} style={styles.example}>
+              <AppText script="arabic" style={styles.exampleText}>
+                {letter}
+              </AppText>
+              <AppText variant="tiny" color={c.textMuted}>
+                {courseLetter(letter).name[language]}
+              </AppText>
+            </Pressable>
+          ))}
+        </View>
+      ) : null}
+      {lesson.kind === 'forms'
+        ? FORM_LETTERS.slice(0, 3).map((letter) => (
+            <View key={letter} style={styles.center}>
+              <AppText variant="bodyBold">{courseLetter(letter).name[language]}</AppText>
+              <LetterForms letter={letter} />
+            </View>
+          ))
+        : null}
+      {examples.length > 0 ? (
+        <>
+          <AppText variant="heading">{copy.examples}</AppText>
+          <View style={styles.grid}>
+            {examples.map((example) => (
+              <Pressable key={example.text} onPress={() => speakArabic(example.text)} accessibilityRole="button" accessibilityLabel={example.reading} style={styles.example}>
+                <AppText script="arabic" style={styles.exampleText}>
+                  {example.text}
+                </AppText>
+                <AppText variant="small" color={c.textMuted}>
+                  {example.reading}
+                </AppText>
+              </Pressable>
+            ))}
+          </View>
+        </>
+      ) : null}
+      <Button label={copy.start} iconRight="chevron" onPress={onNext} />
+    </>
+  );
+}
+
+function ExerciseStep({ exercise, onNext }: { exercise: SufaraExercise; onNext: () => void }) {
+  const { copy } = useCopy();
+  const { c } = useTheme();
+  const styles = useStyles();
+  const feedback = useFeedback();
+  const [wrong, setWrong] = useState<number[]>([]);
+  const [solved, setSolved] = useState(false);
+  const params = exercise.kind === 'findForm' ? { ...exercise.params, position: copy.positionIn[exercise.params.position as keyof typeof copy.positionIn] } : exercise.params;
+
+  const choose = (i: number) => {
+    if (solved) return;
+    if (i === exercise.answer) {
+      feedback.success();
+      setSolved(true);
+      // Hearing the right answer once more connects the shape with the sound.
+      speakArabic(exercise.say);
+    } else {
+      feedback.failure();
+      setWrong((w) => (w.includes(i) ? w : [...w, i]));
     }
-    setPosition((index) => index + 1);
-    setStage('identify');
   };
 
   return (
-    <Screen header={<TopBar title={copy.title} />} contentStyle={styles.body}>
-      <View style={styles.summary}>
-        <AppText variant="small" color={c.textMuted}>{copy.intro}</AppText>
-        <AppText variant="label" color={c.goldText}>{copy.progress(done)}</AppText>
-        <ProgressBar progress={done / LETTERS.length} color={c.gold} />
-      </View>
-
-      <View style={styles.path}>
-        <AppText variant="heading">{copy.pathTitle}</AppText>
-        <AppText variant="small" color={c.textMuted}>{copy.pathIntro}</AppText>
-        {SUFARA_PATH.map(({ stage, games: ids }) => (
-          <View key={stage} style={styles.stage}>
-            <AppText variant="label" color={c.goldText}>{copy.stage[stage]}</AppText>
-            {ids.map((id) => {
-              const game = getGame(id);
-              if (!game) return null;
-              const stars = gameStars(games[id]?.levels);
-              const title = translateNs(game.i18n, language, 'title');
-              return (
-                <Pressable
-                  key={id}
-                  onPress={() => router.push({ pathname: '/game/[id]', params: { id } })}
-                  accessibilityRole="button"
-                  accessibilityLabel={`${title}, ${copy.stars(stars)}`}
-                  testID={`sufara-game-${id}`}
-                  style={[styles.step, stars >= 9 && styles.stepDone]}
-                >
-                  <View style={styles.stepText}>
-                    <AppText variant="bodyBold">{title}</AppText>
-                    <AppText variant="tiny" color={c.textMuted}>{copy.stars(stars)}</AppText>
-                  </View>
-                  <Icon name="chevron" size={20} color={c.textMuted} />
-                </Pressable>
-              );
-            })}
-          </View>
-        ))}
-      </View>
-
-      <AppText variant="heading">{copy.practiceTitle}</AppText>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.letterStrip}>
-        {LETTERS.map((item) => {
-          const selected = item.position === position;
-          const finished = !!xpAwards[`sufara:letter:${item.position}`];
+    <>
+      {exercise.review ? (
+        <AppText variant="label" color={c.goldText}>
+          {copy.review.toUpperCase()}
+        </AppText>
+      ) : null}
+      <AppText variant="title" accessibilityRole="header">
+        {copy.prompt[exercise.kind](params)}
+      </AppText>
+      {exercise.show ? (
+        <AppText script="arabic" style={styles.show}>
+          {exercise.show}
+        </AppText>
+      ) : null}
+      <Button label={copy.listen} icon="speaker" variant="secondary" size="md" onPress={() => speakArabic(exercise.say)} />
+      <View style={styles.choices}>
+        {exercise.choices.map((choice, i) => {
+          const isWrong = wrong.includes(i);
+          const isRight = solved && i === exercise.answer;
           return (
             <Pressable
-              key={item.letter}
-              onPress={() => { setPosition(item.position); setStage(finished ? 'complete' : 'identify'); setVowelIndex(0); setFeedback(''); }}
+              key={`${i}-${choice.text}`}
+              onPress={() => choose(i)}
+              disabled={solved || isWrong}
               accessibilityRole="button"
-              accessibilityLabel={`${item.name[language]} ${copy.progress(finished ? 1 : 0)}`}
-              style={[styles.letterChip, selected && styles.selected, finished && styles.complete]}
+              accessibilityState={{ disabled: solved || isWrong, selected: isRight }}
+              style={[styles.choice, isRight && styles.choiceRight, isWrong && styles.choiceWrong]}
             >
-              <AppText variant="bodyBold">{item.letter}</AppText>
+              {choice.arabic ? (
+                <AppText script="arabic" style={styles.choiceArabic}>
+                  {choice.text}
+                </AppText>
+              ) : (
+                <AppText variant="heading">{choice.text}</AppText>
+              )}
             </Pressable>
           );
         })}
-      </ScrollView>
+      </View>
+      <AppText variant="bodyBold" align="center" color={solved ? c.success : c.goldText} style={styles.feedback} accessibilityLiveRegion="polite">
+        {solved ? copy.correct : wrong.length > 0 ? copy.tryAgain : ''}
+      </AppText>
+      {solved ? <Button label={copy.next} iconRight="chevron" onPress={onNext} /> : null}
+    </>
+  );
+}
 
-      <Card>
-        <View style={styles.letter}>
-          <AppText variant="tiny" color={c.textMuted}>{copy.exercise(challengeNumber)}</AppText>
-          {stage === 'identify' ? (
-            <>
-              <AppText variant="heading" align="center">{copy.identify(current.name[language])}</AppText>
-              <Button label={copy.listenLetter} variant="secondary" icon="speaker" onPress={() => speakArabic(current.letter)} size="md" />
-              <View style={styles.choices}>
-                {letterOptions.map((option) => (
-                  <Pressable key={option.letter} onPress={() => chooseLetter(option.letter)} accessibilityRole="button" accessibilityLabel={option.name} style={styles.choice}>
-                    <AppText style={styles.choiceArabic}>{option.letter}</AppText>
-                  </Pressable>
-                ))}
-              </View>
-            </>
-          ) : stage === 'vowel' ? (
-            <>
-              <AppText style={styles.arabic}>{current.letter}</AppText>
-              <AppText variant="heading" align="center">{copy.vowel(copy.haraka[vowels.target], HARAKA_VOWEL[vowels.target].vowel[language])}</AppText>
-              <Button label={copy.listenSyllable} variant="secondary" icon="speaker" onPress={() => speakArabic(vowels.choices.find((choice) => choice.correct)!.text)} size="md" />
-              <View style={styles.choices}>
-                {vowels.choices.map((choice) => (
-                  <Pressable key={choice.haraka} onPress={() => chooseVowel(choice.haraka)} accessibilityRole="button" accessibilityLabel={copy.haraka[choice.haraka]} style={styles.choice}>
-                    <AppText style={styles.choiceArabic}>{choice.text}</AppText>
-                  </Pressable>
-                ))}
-              </View>
-              <View style={styles.forms}>
-                {LETTER_POSITIONS.map((form) => (
-                  <View key={form} style={styles.form}>
-                    <AppText variant="tiny" color={c.textMuted}>{copy.form[form]}</AppText>
-                    <AppText variant="bodyBold">{letterForm(current.letter, form)}</AppText>
-                  </View>
-                ))}
-              </View>
-            </>
-          ) : (
-            <>
-              <AppText style={styles.arabic}>{current.letter}</AppText>
-              <AppText variant="heading" align="center">{current.name[language]}</AppText>
-              <AppText variant="body" align="center">{copy.complete}</AppText>
-              <View style={styles.forms}>
-                {LETTER_POSITIONS.map((form) => (
-                  <View key={form} style={styles.form}>
-                    <AppText variant="tiny" color={c.textMuted}>{copy.form[form]}</AppText>
-                    <AppText variant="bodyBold">{letterForm(current.letter, form)}</AppText>
-                  </View>
-                ))}
-              </View>
-              <Button label={position === LETTERS.length ? copy.restart : copy.next} iconRight="chevron" onPress={nextLetter} />
-            </>
-          )}
-          <AppText variant="small" color={feedback === copy.correct ? c.success : c.goldText} style={styles.feedback} accessibilityLiveRegion="polite">
-            {feedback}
-          </AppText>
-        </View>
+function DoneStep({ lesson }: { lesson: SufaraLesson }) {
+  const { copy } = useCopy();
+  const styles = useStyles();
+  const completeLesson = useQuestStore((s) => s.completeLesson);
+  const finished = useRef(false);
+  const [nextHref, setNextHref] = useState<ReturnType<typeof pathItemHref> | null>(null);
+
+  useEffect(() => {
+    if (finished.current) return;
+    finished.current = true;
+    completeLesson(lesson.id);
+    useAppStore.getState().reportQuestEvent({ type: 'complete', target: sufaraTarget(lesson.id) });
+    const next = buildTopicPath('sufara', useLearnStore.getState()).find((e) => e.status === 'available');
+    setNextHref(next ? pathItemHref('sufara', next.item) : null);
+  }, [completeLesson, lesson.id]);
+
+  const last = lesson.number === SUFARA_LESSONS.length;
+  return (
+    <>
+      <View style={styles.center}>
+        <AppText variant="display" align="center" accessibilityRole="header">
+          {copy.doneTitle}
+        </AppText>
+      </View>
+      <Card tone="gold">
+        <AppText variant="body">{last ? copy.courseDone : copy.doneBody}</AppText>
       </Card>
+      {nextHref ? <Button label={copy.nextLesson} iconRight="chevron" onPress={() => router.replace(nextHref)} /> : null}
+      <Button label={copy.backToTopic} variant={nextHref ? 'ghost' : 'primary'} onPress={() => router.dismissTo({ pathname: '/topic/[id]', params: { id: 'sufara' } })} />
       <SourceList sources={[LANGUAGE_SOURCES.alphabet]} />
-    </Screen>
+    </>
   );
 }

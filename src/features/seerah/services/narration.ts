@@ -1,7 +1,7 @@
 import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 
 import type { Language } from '@/core/models';
-import { ensureAudibleVolume } from '@/core/services/audioSession';
+import { boostLearnerAudio, LOUDNESS_GAIN } from '@/core/services/audioSession';
 
 import { narrationFor } from './narrationRegistry';
 
@@ -19,14 +19,12 @@ export function createNarration(episodeId: string, language: Language): Narratio
   let player: AudioPlayer | null = null;
   try {
     player = createAudioPlayer(source);
+    boostLearnerAudio(player, LOUDNESS_GAIN.speech);
   } catch {
     return null;
   }
   return {
-    play: () => {
-      ensureAudibleVolume();
-      player?.play();
-    },
+    play: () => player?.play(),
     pause: () => player?.pause(),
     stop: () => {
       player?.pause();

@@ -3,7 +3,6 @@ import { evaluateAnswer, scoreQuiz } from '@/core/services/quiz';
 import { getQuestQuestion } from '@/features/learn/content/quests';
 import { addRepetition, allRepeated, applyMemorizationTest, EMPTY_MEMORIZATION, memorizationSummary, missingWordPuzzle, REPEATS, setAyahsLearned } from '@/features/learn/quests/services/memorization';
 import { applyQuestComplete, EMPTY_QUEST_DATA, sanitizeQuestData, toggleRamadanDeed, totalRamadanDeeds } from '@/features/learn/quests/services/progress';
-import { EMPTY_TRACE, endStroke, extendStroke, isTraced, REQUIRED_LENGTH, startStroke, traceProgress } from '@/features/learn/quests/services/tracing';
 import { getSurah } from '@/features/quran';
 
 const text = (s: string) => ({ en: s, de: s, bs: s });
@@ -41,25 +40,6 @@ describe('quiz (ported from islam-quest)', () => {
     expect(scoreQuiz([true, true, true, false]).stars).toBe(2);
     expect(scoreQuiz([true, false, false]).stars).toBe(1);
     expect(scoreQuiz([])).toEqual({ correct: 0, total: 0, percent: 100, stars: 3 });
-  });
-});
-
-describe('tracing helpers', () => {
-  it('sums the drawn length over strokes and ignores jitter', () => {
-    let s = startStroke(EMPTY_TRACE, { x: 0, y: 0 });
-    s = extendStroke(s, { x: 1, y: 0 }); // jitter (< 2 pt)
-    expect(s.length).toBe(0);
-    s = extendStroke(s, { x: 100, y: 0 });
-    expect(s.length).toBe(100);
-    expect(s.paths).toEqual(['M0.0 0.0 L100.0 0.0']);
-    s = endStroke(s);
-    s = extendStroke(s, { x: 0, y: 50 }); // a move after release starts a new stroke
-    expect(s.paths).toHaveLength(2);
-    expect(isTraced(s)).toBe(false);
-    s = extendStroke(s, { x: 0, y: 50 + REQUIRED_LENGTH });
-    expect(isTraced(s)).toBe(true);
-    expect(traceProgress(s)).toBe(1);
-    expect(traceProgress(EMPTY_TRACE)).toBe(0);
   });
 });
 

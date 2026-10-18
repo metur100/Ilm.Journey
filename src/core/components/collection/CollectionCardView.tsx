@@ -15,7 +15,7 @@ import { SourceList } from '../ui/SourceList';
 
 /** Each category borrows the accent of the learning topic it belongs to (white text/icons on top). */
 const CATEGORY_TOPIC: Record<CollectionCategory, TopicId> = {
-  letters: 'arabic',
+  letters: 'sufara',
   places: 'seerah',
   surahs: 'quran',
   duas: 'ramadan',

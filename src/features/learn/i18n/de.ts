@@ -4,7 +4,7 @@ const de: Record<LearnKey, string> = {
   'tab.title': 'Lernen',
   'tab.subtitle': 'Acht Themen, alle offen. In einem Thema öffnet jeder Schritt den nächsten.',
   'tab.recommended': 'Vorschlag für dich',
-  'tab.recommended.child': 'Beginne mit dem Gebet – kurze Lektionen, Spiele und Geschichten.',
+  'tab.recommended.child': 'Beginne mit dem Gebet – kurze Lektionen, Übungen und Geschichten.',
   'tab.recommended.teen': 'Wähle ein beliebiges Thema – die Einheiten enden mit einer Meister-Herausforderung.',
   'tab.recommended.adult': 'Geh mit Einheiten, der Sira und den Quellen in die Tiefe.',
   'tab.steps': '{completed} von {total} Schritten',

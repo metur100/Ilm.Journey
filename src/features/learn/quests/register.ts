@@ -21,6 +21,7 @@ import { topicThemes } from '@/core/theme';
 import { listDuas, listSurahs } from '@/features/quran';
 
 import { getQuest, LESSONS, QUESTS, questionsOfTopic, questOfQuestionId } from '../content/quests';
+import { getSufaraLesson } from '../sufara/course';
 import { registerPathSource, registerTopicTool } from '../extensions';
 import { LazyAyahOrderQuestion, LazyMissingWordQuestion } from './components/lazyRenderers';
 import { questI18n } from './i18n';
@@ -140,7 +141,7 @@ export function registerLearnQuests(): void {
     metrics: () => {
       const s = useQuestStore.getState();
       return {
-        lessonsCompleted: s.completedLessons.filter((id) => LESSONS.some((l) => l.id === id)).length,
+        lessonsCompleted: s.completedLessons.filter((id) => LESSONS.some((l) => l.id === id) || getSufaraLesson(id) !== undefined).length,
         'learn.questsCompleted': QUESTS.filter((q) => s.quests[q.id]?.completed).length,
         perfectRuns: s.perfectQuests.filter((id) => getQuest(id) !== undefined).length,
       };
@@ -187,7 +188,7 @@ export function registerLearnQuests(): void {
   });
   registerTopicTool({
     id: 'arabic-alphabet',
-    topic: 'arabic',
+    topic: 'sufara',
     order: 20,
     icon: 'letter',
     label: (lang) => translateNs(questI18n, lang, 'tool.arabic'),

@@ -35,6 +35,7 @@ const en = {
   'topic.akhlaq': 'Akhlaq',
   'topic.ramadan': 'Ramadan',
   'topic.history': 'Islamic History',
+  'topic.sufara': 'Sufara (Arabic alphabet)',
   'topic.arabic': 'Arabic',
 
   // ---------- tabs ----------
@@ -63,13 +64,13 @@ const en = {
   'onboarding.how.learn.title': 'Learn',
   'onboarding.how.learn.body': 'Eight topics with short lessons, prophet stories and the Seerah – every lesson names its sources.',
   'onboarding.how.practice.title': 'Play',
-  'onboarding.how.practice.body': 'Over 100 games in eight sections: build, trace, sort and match – then see what you learned, with sources.',
+  'onboarding.how.practice.body': 'Over 100 games in nine sections: build, trace, sort and match – then see what you learned, with sources.',
   'onboarding.how.remember.title': 'Remember',
   'onboarding.how.remember.body': 'Tricky questions come back later so you really remember them.',
   'onboarding.how.grow.title': 'Grow',
   'onboarding.how.grow.body': 'Learning grows your Ilm Garden and fills your card collection. Level up, collect badges – no ads, no pressure.',
   'onboarding.start.title': 'Your journey begins',
-  'onboarding.start.body': 'All eight topics are open. Start wherever you like – your hero grows with every lesson.',
+  'onboarding.start.body': 'All nine topics are open. Start wherever you like – your hero grows with every lesson.',
   'onboarding.start.cta': 'Start learning',
 
   // ---------- learner groups ----------
@@ -280,9 +281,9 @@ const en = {
   'badge.arabic_beginner.name': 'Arabic Beginner',
   'badge.arabic_beginner.desc': 'Pass the Master Challenge of the Arabic topic.',
   'badge.topic_explorer.name': 'Topic Explorer',
-  'badge.topic_explorer.desc': 'Complete a lesson in all eight topics.',
+  'badge.topic_explorer.desc': 'Complete a lesson in all nine topics.',
   'badge.knowledge_master.name': 'Knowledge Master',
-  'badge.knowledge_master.desc': 'Pass the Master Challenge of all eight topics.',
+  'badge.knowledge_master.desc': 'Pass the Master Challenge of all nine topics.',
   'badge.story_explorer.name': 'Story Explorer',
   'badge.story_explorer.desc': 'Complete your first prophet story.',
   'badge.history_learner.name': 'History Learner',

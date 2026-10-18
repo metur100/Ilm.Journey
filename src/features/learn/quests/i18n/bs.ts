@@ -60,11 +60,12 @@ const bs: Record<QuestKey, string> = {
   'recite.ayahLabel': 'Ajet {number}',
 
   'tracing.title': 'Obrubi harf',
-  'tracing.hint': 'Prstom prati oblik harfa.',
+  'tracing.hint': 'Kreni od zelene tačke i prstom prati sivu liniju, pa dodirni tačke harfa.',
   'tracing.clear': 'Obriši',
   'tracing.next': 'Sljedeći harf',
   'tracing.listen': 'Slušaj',
   'tracing.keepGoing': 'Nastavi pratiti…',
+  'tracing.offTrack': 'Ostani na sivoj liniji. Obriši i pokušaj ponovo.',
   'tracing.great': 'Odlično!',
   'tracing.progress': 'Harf {current} od {total}',
   'tracing.canvas': 'Polje za pisanje harfa {letter}. Jednim prstom prati harf.',

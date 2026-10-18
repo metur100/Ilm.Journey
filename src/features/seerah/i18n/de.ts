@@ -121,6 +121,8 @@ const de: Record<SeerahKey, string> = {
   'episode.mainEvent': "Hauptereignis",
   'narration.play': "Erzählung anhören",
   'narration.pause': "Erzählung pausieren",
+  'narration.stop': "Stopp",
+  'narration.preparing': "Wird vorbereitet…",
   'reflection.title': "Denk darüber nach",
   'reflection.note': "Deine Gedanken bleiben auf diesem Gerät und werden nie bewertet.",
   'reflection.write': "Gedanken aufschreiben",

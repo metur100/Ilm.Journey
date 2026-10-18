@@ -45,7 +45,7 @@ function checkQuestionShape(q: Question) {
 }
 
 describe('learn content (knowledge-rpg units)', () => {
-  it('covers exactly the eight topics', () => {
+  it('covers exactly the nine topics', () => {
     expect([...AREAS.map((a) => a.id)].sort()).toEqual([...TOPIC_IDS].sort());
     for (const topic of TOPIC_IDS) expect(UNITS.some((u) => u.areaId === topic)).toBe(true);
   });

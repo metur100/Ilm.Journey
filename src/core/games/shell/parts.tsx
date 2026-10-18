@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Animated, Easing, View } from 'react-native';
+import { Animated, View } from 'react-native';
 
 import { Art, hasArt } from '../../art';
 import { AppText } from '../../components/ui/AppText';
@@ -15,9 +15,6 @@ const useStyles = makeStyles((c) => ({
   factArt: { width: 64, height: 64, borderRadius: 32, backgroundColor: c.goldSoft, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   factText: { flex: 1 },
   starsRow: { flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end', gap: spacing.md },
-  hintStage: { height: 180, borderRadius: radius.lg, backgroundColor: c.surfaceAlt, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
-  finger: { position: 'absolute', width: 44, height: 44, borderRadius: 22, backgroundColor: c.gold, opacity: 0.9, alignItems: 'center', justifyContent: 'center' },
-  ripple: { position: 'absolute', width: 44, height: 44, borderRadius: 22, borderWidth: 3, borderColor: c.gold },
 }));
 
 /** "You learned" card: illustration, the fact and its sources. */
@@ -64,48 +61,6 @@ export function StarsBurst({ stars, reduced, size = 56 }: { stars: number; reduc
           </Animated.View>
         );
       })}
-    </View>
-  );
-}
-
-/**
- * The one animated "how to play" hint: the game's art with a glowing finger that taps (and moves between two points).
- * Under reduced motion the finger rests on the art without moving.
- */
-export function HowToHint({ art, reduced }: { art: string; reduced: boolean }) {
-  const styles = useStyles();
-  const { c } = useTheme();
-  const move = useState(() => new Animated.Value(0))[0];
-  const tap = useState(() => new Animated.Value(0))[0];
-
-  useEffect(() => {
-    if (reduced) return;
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.timing(move, { toValue: 1, duration: 900, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-        Animated.timing(tap, { toValue: 1, duration: 450, useNativeDriver: true }),
-        Animated.timing(tap, { toValue: 0, duration: 0, useNativeDriver: true }),
-        Animated.timing(move, { toValue: 0, duration: 900, easing: Easing.inOut(Easing.quad), useNativeDriver: true }),
-        Animated.timing(tap, { toValue: 1, duration: 450, useNativeDriver: true }),
-        Animated.timing(tap, { toValue: 0, duration: 0, useNativeDriver: true }),
-      ]),
-    );
-    loop.start();
-    return () => loop.stop();
-  }, [move, reduced, tap]);
-
-  const translateX = move.interpolate({ inputRange: [0, 1], outputRange: [-70, 70] });
-  const translateY = move.interpolate({ inputRange: [0, 0.5, 1], outputRange: [30, 0, 30] });
-  const rippleScale = tap.interpolate({ inputRange: [0, 1], outputRange: [1, 2.4] });
-  const rippleOpacity = tap.interpolate({ inputRange: [0, 1], outputRange: [0.8, 0] });
-
-  return (
-    <View style={styles.hintStage} importantForAccessibility="no-hide-descendants">
-      <Art name={art} size={150} />
-      <Animated.View style={[styles.ripple, { transform: [{ translateX }, { translateY }, { scale: rippleScale }], opacity: reduced ? 0 : rippleOpacity }]} />
-      <Animated.View style={[styles.finger, { transform: [{ translateX: reduced ? 0 : translateX }, { translateY: reduced ? 30 : translateY }] }]}>
-        <Icon name="pointer" size={22} color={c.onGold} />
-      </Animated.View>
     </View>
   );
 }

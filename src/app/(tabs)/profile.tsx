@@ -38,8 +38,8 @@ const useStyles = makeStyles((c) => ({
 }));
 
 /**
- * Me (v2 profile): hero with the level wardrobe, level, streak, Ilm Garden and collection album, knowledge radar,
- * badges, statistics, review centre, feature links (bookmarks, reflections), settings.
+ * Me (v2 profile): hero with the character (level wardrobe, level, XP) first, right below it "More" (settings, review
+ * centre, feature links, about), then streak, Ilm Garden and collection album, knowledge radar, badges, statistics.
  */
 export default function Profile() {
   const { t, language } = useI18n();
@@ -82,6 +82,24 @@ export default function Profile() {
       </HeroHeader>
 
       <View style={styles.body}>
+        {/* The hero (character) comes first, "More" (settings and links) right below it. */}
+        <SectionHeader title={t('profile.more')} />
+        <Card style={styles.links}>
+          <LinkRow icon="settings" label={t('profile.settings')} onPress={() => router.push('/settings')} />
+          <LinkRow
+            icon="refresh"
+            label={t('profile.review')}
+            value={summary.dueCount > 0 ? String(summary.dueCount) : undefined}
+            onPress={() => router.push('/review')}
+          />
+          {getProfileLinks().map((link) => (
+            <LinkRow key={link.id} icon={link.icon} label={link.label(language)} onPress={() => router.push(link.href)} />
+          ))}
+          <LinkRow icon="info" label={t('settings.about')} onPress={() => router.push({ pathname: '/info/[page]', params: { page: 'about' } })} />
+          <LinkRow icon="shield" label={t('settings.privacy')} onPress={() => router.push({ pathname: '/info/[page]', params: { page: 'privacy' } })} />
+          <LinkRow icon="book" label={t('settings.sources')} onPress={() => router.push({ pathname: '/info/[page]', params: { page: 'sources' } })} />
+        </Card>
+
         <Card>
           <StreakDisplay days={summary.streak} activeToday={summary.activeToday} />
           <AppText variant="tiny" color={c.textMuted} style={styles.note}>
@@ -144,22 +162,6 @@ export default function Profile() {
           ))}
         </View>
 
-        <SectionHeader title={t('profile.more')} />
-        <Card style={styles.links}>
-          <LinkRow
-            icon="refresh"
-            label={t('profile.review')}
-            value={summary.dueCount > 0 ? String(summary.dueCount) : undefined}
-            onPress={() => router.push('/review')}
-          />
-          {getProfileLinks().map((link) => (
-            <LinkRow key={link.id} icon={link.icon} label={link.label(language)} onPress={() => router.push(link.href)} />
-          ))}
-          <LinkRow icon="settings" label={t('profile.settings')} onPress={() => router.push('/settings')} />
-          <LinkRow icon="info" label={t('settings.about')} onPress={() => router.push({ pathname: '/info/[page]', params: { page: 'about' } })} />
-          <LinkRow icon="shield" label={t('settings.privacy')} onPress={() => router.push({ pathname: '/info/[page]', params: { page: 'privacy' } })} />
-          <LinkRow icon="book" label={t('settings.sources')} onPress={() => router.push({ pathname: '/info/[page]', params: { page: 'sources' } })} />
-        </Card>
       </View>
     </ScrollView>
   );

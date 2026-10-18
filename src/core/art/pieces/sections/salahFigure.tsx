@@ -523,16 +523,17 @@ export function figureFrame(p: PoseVec, variant: PrayerVariant): FigureFrame {
 
   // ---- arms (sleeves) and hands
   const torsoD = P.depth(b.chest);
-  const arm = (sh: V3, el: V3, wr: V3, tip: V3, palmK: number, thumbK: number): ArmPaths => {
+  const arm = (sh: V3, el: V3, wr: V3, tip: V3, palmK: number, thumbK: number, fist = 0): ArmPaths => {
     const s = at(sh);
     const e = at(el);
     const w = at(wr);
-    const t = at(tip);
+    // a fist (tashahhud) is shorter: the fingers are curled under, only the index finger is stretched out
+    const t = lerpV(w, at(tip), 1 - 0.38 * fist);
     const palm = dirOf(p, palmK);
     // a palm turned towards the viewer looks wider than a hand seen from its edge
     const open = Math.abs(P.depth(palm));
     const hw = 3.9 + 1.5 * open;
-    const hand = taper(w, t, hw, hw * 0.86);
+    const hand = taper(w, t, hw + 0.5 * fist, hw * (0.86 + 0.14 * fist));
     const tb = lerpV(w, t, 0.18);
     const th = P.dir(dirOf(p, thumbK));
     const tl = Math.sqrt(th[0] * th[0] + th[1] * th[1]);
@@ -550,7 +551,8 @@ export function figureFrame(p: PoseVec, variant: PrayerVariant): FigureFrame {
       rel: (P.depth(el) + P.depth(wr)) / 2 - torsoD,
     };
   };
-  const nArm = arm(b.nShoulder, b.nElbow, b.nWrist, b.nTip, D.nPalm, D.nThumb);
+  const fingerLen = p[S.finger];
+  const nArm = arm(b.nShoulder, b.nElbow, b.nWrist, b.nTip, D.nPalm, D.nThumb, Math.min(1, fingerLen));
   const fArm = arm(b.fShoulder, b.fElbow, b.fWrist, b.fTip, D.fPalm, D.fThumb);
   const behind: ArmPaths[] = [];
   const front: ArmPaths[] = [];
@@ -562,17 +564,17 @@ export function figureFrame(p: PoseVec, variant: PrayerVariant): FigureFrame {
   const b2 = behind[1] ?? E;
   const a1 = front[0] ?? E;
   const a2 = front[1] ?? E;
-  // the raised index finger of the right hand (tashahhud)
-  const fingerLen = p[S.finger];
+  // the raised index finger of the right hand (tashahhud): out of the fist, pointing forward and a little up
   let finger = EMPTY_PATH;
   if (fingerLen > 0.05) {
     const w = at(b.nWrist);
-    const t = at(b.nTip);
-    const knuckle = lerpV(w, t, 0.62);
+    const t = lerpV(w, at(b.nTip), 1 - 0.38 * Math.min(1, fingerLen));
     const hd = dirOf(p, D.nHA);
-    const fd = P.dir(norm3([hd[0], hd[1] - 2.4, hd[2]]));
+    const fd = P.dir(norm3([hd[0], hd[1] - 1.1 * fingerLen, hd[2]]));
     const fl = Math.sqrt(fd[0] * fd[0] + fd[1] * fd[1]) || 1;
-    finger = taper(knuckle, add(knuckle, [(fd[0] / fl) * 10.5 * fingerLen, (fd[1] / fl) * 10.5 * fingerLen]), 2.4, 2);
+    // from the upper edge of the fist, where the index knuckle is
+    const knuckle = add(lerpV(w, t, 0.8), [(fd[1] / fl) * 1.6, -(fd[0] / fl) * 1.6 * Math.sign(fd[0] || 1)]);
+    finger = taper(knuckle, add(knuckle, [(fd[0] / fl) * 12 * fingerLen, (fd[1] / fl) * 12 * fingerLen]), 1.8, 1.5);
   }
 
   // ---- torso
@@ -955,11 +957,14 @@ function headDown(p: PoseParams, look: number): PoseParams {
 }
 
 // Leg settings
-const KNEEL_LEGS: Partial<PoseParams> = { nTh: sag(30), nSh: sag(-90), nFt: sag(10), nToe: sag(90), fTh: sag(30), fSh: sag(-90), fFt: sag(10), fToe: sag(90) };
-const SAJDA_LEGS_M: Partial<PoseParams> = { nTh: sag(18), nSh: sag(-89), nFt: sag(8), nToe: sag(90), fTh: sag(18), fSh: sag(-89), fFt: sag(8), fToe: sag(90) };
-const SAJDA_LEGS_F: Partial<PoseParams> = { nTh: sag(36), nSh: sag(-90), nFt: sag(4), nToe: sag(90), fTh: sag(36), fSh: sag(-90), fFt: sag(4), fToe: sag(90) };
+// Kneeling with the toes on the ground: the shin rises from the knee to the raised heel, so the knee and the toes both
+// rest on the mat (a shin lying flat would lift the knees by the length of the upright foot).
+const KNEE_SHIN = -105;
+const KNEEL_LEGS: Partial<PoseParams> = { nTh: sag(30), nSh: sag(KNEE_SHIN), nFt: sag(10), nToe: sag(90), fTh: sag(30), fSh: sag(KNEE_SHIN), fFt: sag(10), fToe: sag(90) };
+const SAJDA_LEGS_M: Partial<PoseParams> = { nTh: sag(18), nSh: sag(KNEE_SHIN), nFt: sag(8), nToe: sag(90), fTh: sag(18), fSh: sag(KNEE_SHIN), fFt: sag(8), fToe: sag(90) };
+const SAJDA_LEGS_F: Partial<PoseParams> = { nTh: sag(36), nSh: sag(KNEE_SHIN), nFt: sag(4), nToe: sag(90), fTh: sag(36), fSh: sag(KNEE_SHIN), fFt: sag(4), fToe: sag(90) };
 // men: sitting on the left foot laid under the body, the right foot upright with the toes bent towards the qibla
-const SIT_M: Partial<PoseParams> = { nTh: sag(76, 0.06), nSh: sag(-92, 0.02), nFt: sag(4), nToe: sag(90), fTh: sag(76, -0.06), fSh: sag(-94, 0.1), fFt: v3(-0.1, 0.35, 1), fToe: v3(0, 0.3, 1) };
+const SIT_M: Partial<PoseParams> = { nTh: sag(76, 0.06), nSh: sag(KNEE_SHIN, 0.02), nFt: sag(4), nToe: sag(90), fTh: sag(76, -0.06), fSh: sag(-94, 0.1), fFt: v3(-0.1, 0.35, 1), fToe: v3(0, 0.3, 1) };
 // women: sitting on the floor, both feet out to the right side
 const SIT_F: Partial<PoseParams> = { nTh: sag(84, 0.1), nSh: v3(-0.55, 0.06, 0.85), nFt: v3(-0.1, 0.25, 1), nToe: v3(0, 0.2, 1), fTh: sag(84, -0.05), fSh: v3(-0.45, 0.08, 0.9), fFt: v3(-0.1, 0.25, 1), fToe: v3(0, 0.2, 1) };
 
@@ -1006,7 +1011,8 @@ function buildMale(): Record<PrayerPosition, PoseParams> {
   });
   const sit = (extra: Partial<PoseParams> = {}) => onThighs(pose({ yaw: 46, spine: sag(178), ...headDirs(176, 20), hem: 0.55, ...SIT_M, ...extra }));
   const jalsa = sit();
-  const tashahhud = sit({ finger: 1 });
+  // seen more from the side, so the right hand with the stretched index finger stands out on the knee
+  const tashahhud = sit({ finger: 1, yaw: 18 });
   const selamRight = sit({ ...headDirs(176, 4, 82) });
   const selamLeft = sit({ ...headDirs(176, 4, -82) });
   // the hands raised in front of the chest, the palms up
@@ -1040,7 +1046,8 @@ function buildFemale(male: Record<PrayerPosition, PoseParams>): Record<PrayerPos
   const sajda = bothArms(sajdaBody, (b, s) => [b.head[0] - 8, lowest(b, false) - 4.4, s * (HEAD_R + 1)], v3(-0.6, 0.6, 0.2), { dir: v3(1, 0.02, 0), palm: v3(0, 1, 0), thumb: v3(0, 0, -1) });
   const sit = (extra: Partial<PoseParams> = {}) => onThighs(pose({ yaw: 46, spine: sag(176), ...headDirs(176, 20), shiftX: 4, ...SIT_F, ...extra }));
   const jalsa = sit();
-  const tashahhud = sit({ finger: 1 });
+  // seen more from the side, so the right hand with the stretched index finger stands out on the knee
+  const tashahhud = sit({ finger: 1, yaw: 18 });
   const selamRight = sit({ ...headDirs(176, 4, 82) });
   const selamLeft = sit({ ...headDirs(176, 4, -82) });
   const dua = bothArms(sit({ ...headDirs(176, 24) }), (b, s) => [b.chest[0] + 17, b.chest[1] + 4, s * 9], v3(-0.3, 1, 1), { dir: v3(1, -0.3, 0.3), palm: v3(0, -1, 0), thumb: v3(0, -0.2, -1) });
@@ -1285,7 +1292,11 @@ export function FigureCueLayer({ c, position, variant, cues }: { c: Ctx; positio
         out.push(<Arrow key={k} pts={[[j.head[0] + 26, j.head[1] + 30], [j.head[0] + 26, j.head[1] + 2]]} color={gold} />);
         break;
       case 'tashahhud': {
-        const t = add(lerpV(j.nWrist, j.nTip, 0.6), [0, -13]);
+        // small rays around the tip of the raised index finger
+        const h = lerpV(j.nWrist, j.nTip, 0.62);
+        const d = [j.nTip[0] - j.nWrist[0], j.nTip[1] - j.nWrist[1]];
+        const dl = Math.hypot(d[0], d[1]) || 1;
+        const t = add(h, [(d[0] / dl) * 9 + 2, (d[1] / dl) * 9 - 12]);
         out.push(<Path key={k} d={`M${pt(add(t, [2, -4]))}l2.5-4M${pt(add(t, [5, 0]))}l4.5-1M${pt(add(t, [-2, -5]))}l0-4.5`} stroke={gold} strokeWidth={2} strokeLinecap="round" />);
         break;
       }

@@ -1,5 +1,5 @@
 /**
- * Generates the app's subtle UI sounds as 16-bit mono WAV files.
+ * Generates the app's calm UI sounds (prayer-bead taps, a water drop, a soft bell – no music) as 16-bit mono WAV files.
  * Sounds are synthesized (soft sine tones and filtered noise) so the app ships
  * without third-party audio assets and without music.
  *
@@ -20,20 +20,13 @@ function normalize(samples, peak) {
 }
 
 /**
- * Makes a short UI sound louder without making it harsh: normalise, then a gentle tanh saturation lifts the quiet
- * decay (more average loudness at the same peak). Phones play these through a small speaker, often at a low media
- * volume, where the old pure-sine peaks at 0.9 were hard to hear.
+ * Peak level of each sound. Calm and clearly audible, never startling: the feedback sounds stay well below the learning
+ * audio (recitation, pronunciation), which the learner asked for.
  */
-function loudness(samples, drive) {
-  normalize(samples, 1);
-  const k = Math.tanh(drive);
-  for (let i = 0; i < samples.length; i++) samples[i] = Math.tanh(samples[i] * drive) / k;
-  return samples;
-}
+const PEAK = { 'click.wav': 0.5, 'success.wav': 0.42, 'failure.wav': 0.36, 'reward.wav': 0.42, 'ambient.wav': 0.7 };
 
 function writeWav(name, samples) {
-  if (name !== 'ambient.wav') loudness(samples, 2);
-  normalize(samples, name === 'ambient.wav' ? 0.7 : 0.97);
+  normalize(samples, PEAK[name] ?? 0.5);
   const dataSize = samples.length * 2;
   const buffer = Buffer.alloc(44 + dataSize);
   buffer.write('RIFF', 0);
@@ -55,21 +48,6 @@ function writeWav(name, samples) {
   });
   fs.writeFileSync(path.join(OUT_DIR, name), buffer);
   console.log(`wrote ${name} (${(buffer.length / 1024).toFixed(1)} KB)`);
-}
-
-/** Soft bell-like tone: sine + quiet octave, exponential decay, short attack. */
-function tone(freq, duration, { volume = 0.4, decay = 6, attack = 0.005 } = {}) {
-  const n = Math.floor(SAMPLE_RATE * duration);
-  const out = new Float32Array(n);
-  for (let i = 0; i < n; i++) {
-    const t = i / SAMPLE_RATE;
-    const env = Math.min(1, t / attack) * Math.exp(-decay * t);
-    out[i] =
-      volume *
-      env *
-      (Math.sin(2 * Math.PI * freq * t) + 0.25 * Math.sin(2 * Math.PI * freq * 2 * t));
-  }
-  return out;
 }
 
 function mix(length, parts) {
@@ -95,36 +73,74 @@ function fadeEdges(samples, seconds) {
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
-// UI click: very short, soft tick.
-writeWav('click.wav', tone(1200, 0.06, { volume: 0.25, decay: 70 }));
+/**
+ * A soft wooden "tok" like a prayer bead (tasbih) touching the next one: a short burst of band-limited noise over a
+ * low, quickly damped body tone.
+ */
+function bead(freq, duration, seed = 3) {
+  const n = Math.floor(SAMPLE_RATE * duration);
+  const out = new Float32Array(n);
+  let r = seed;
+  let lp = 0;
+  let bp = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / SAMPLE_RATE;
+    r = (r * 16807) % 2147483647;
+    const noise = (r / 2147483647) * 2 - 1;
+    lp += 0.35 * (noise - lp);
+    bp = lp - bp * 0.2;
+    const env = Math.min(1, t / 0.0015) * Math.exp(-90 * t);
+    out[i] = env * (0.5 * bp + Math.sin(2 * Math.PI * freq * t) * 0.8);
+  }
+  return out;
+}
 
-// Success: two rising notes (perfect fifth).
-writeWav(
-  'success.wav',
-  mix(0.5, [
-    { offset: 0, samples: tone(660, 0.35, { volume: 0.3, decay: 9 }) },
-    { offset: 0.1, samples: tone(990, 0.4, { volume: 0.3, decay: 8 }) },
-  ]),
-);
+/** A water drop: a sine whose pitch glides up quickly, with a soft round decay. */
+function drop(freq, duration, { glide = 1.6, decay = 18 } = {}) {
+  const n = Math.floor(SAMPLE_RATE * duration);
+  const out = new Float32Array(n);
+  let phase = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / SAMPLE_RATE;
+    const f = freq * (1 + (glide - 1) * (1 - Math.exp(-t * 40)));
+    phase += (2 * Math.PI * f) / SAMPLE_RATE;
+    const env = Math.min(1, t / 0.004) * Math.exp(-decay * t);
+    out[i] = env * Math.sin(phase);
+  }
+  return out;
+}
 
-// Failure: gentle, low and short — never harsh.
-writeWav(
-  'failure.wav',
-  mix(0.45, [
-    { offset: 0, samples: tone(392, 0.25, { volume: 0.25, decay: 10 }) },
-    { offset: 0.12, samples: tone(330, 0.3, { volume: 0.22, decay: 9 }) },
-  ]),
-);
+/** A small, warm bell (fundamental with a quiet inharmonic partial), soft attack, long gentle fade. */
+function bell(freq, duration, { decay = 3.2, attack = 0.012 } = {}) {
+  const n = Math.floor(SAMPLE_RATE * duration);
+  const out = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const t = i / SAMPLE_RATE;
+    const env = Math.min(1, t / attack) * Math.exp(-decay * t);
+    out[i] = env * (Math.sin(2 * Math.PI * freq * t) + 0.18 * Math.sin(2 * Math.PI * freq * 2.76 * t) * Math.exp(-6 * t) + 0.08 * Math.sin(2 * Math.PI * freq * 2 * t));
+  }
+  return out;
+}
 
-// Reward: soft ascending chime.
+// UI click: one prayer bead.
+writeWav('click.wav', bead(520, 0.07));
+
+// Right answer: a single soft water drop.
+writeWav('success.wav', fadeEdges(drop(620, 0.32), 0.004));
+
+// Not yet: a low, muted bead – never a buzzer.
+writeWav('failure.wav', bead(260, 0.12, 11));
+
+// Level complete: a calm two-tone bell (no melody, no fanfare) that fades out gently.
 writeWav(
   'reward.wav',
-  mix(1.2, [
-    { offset: 0, samples: tone(523, 0.8, { volume: 0.22, decay: 5 }) },
-    { offset: 0.12, samples: tone(659, 0.8, { volume: 0.22, decay: 5 }) },
-    { offset: 0.24, samples: tone(784, 0.8, { volume: 0.22, decay: 5 }) },
-    { offset: 0.36, samples: tone(1047, 0.8, { volume: 0.2, decay: 4 }) },
-  ]),
+  fadeEdges(
+    mix(1.6, [
+      { offset: 0, samples: bell(587, 1.5) },
+      { offset: 0.28, samples: bell(880, 1.3, { decay: 3.6 }) },
+    ]),
+    0.01,
+  ),
 );
 
 // Ambient: slowly swelling, low-passed noise like a soft desert wind (no melody).

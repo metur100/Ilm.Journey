@@ -1,6 +1,6 @@
 {
   "id": "arabic-letters",
-  "areaId": "arabic",
+  "areaId": "sufara",
   "order": 1,
   "difficulty": 1,
   "title": { "en": "The Arabic Letters", "de": "Die arabischen Buchstaben", "bs": "Arapski harfovi" },
@@ -36,7 +36,7 @@
     {
       "id": "arabic-letters-p",
       "type": "trueFalse",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "alphabet",
       "prompt": { "en": "Arabic is written from right to left.", "de": "Arabisch wird von rechts nach links geschrieben.", "bs": "Arapski se piše zdesna nalijevo." },
       "correct": true,
@@ -45,7 +45,7 @@
     {
       "id": "arabic-letters-1",
       "type": "multipleChoice",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "alphabet",
       "prompt": { "en": "How many letters does the Arabic alphabet have?", "de": "Wie viele Buchstaben hat das arabische Alphabet?", "bs": "Koliko harfova ima arapsko pismo?" },
       "options": [
@@ -59,7 +59,7 @@
     {
       "id": "arabic-letters-2",
       "type": "matching",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "alphabet",
       "prompt": { "en": "Match each letter with its name.", "de": "Ordne jedem Buchstaben seinen Namen zu.", "bs": "Spoji svaki harf s njegovim imenom." },
       "pairs": [
@@ -73,7 +73,7 @@
     {
       "id": "arabic-letters-3",
       "type": "multipleChoice",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "alphabet",
       "prompt": { "en": "Which letter has one dot below?", "de": "Welcher Buchstabe hat einen Punkt unten?", "bs": "Koji harf ima jednu tačku ispod?" },
       "options": [
@@ -87,7 +87,7 @@
     {
       "id": "arabic-letters-4",
       "type": "ordering",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "alphabet",
       "prompt": { "en": "Put the first letters of the alphabet in order.", "de": "Bringe die ersten Buchstaben des Alphabets in Reihenfolge.", "bs": "Poredaj prve harfove pisma." },
       "items": [

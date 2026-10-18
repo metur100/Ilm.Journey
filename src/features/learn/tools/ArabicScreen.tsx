@@ -17,8 +17,8 @@ const useStyles = makeStyles((c) => ({
   scroll: { paddingBottom: spacing.xxl },
   body: { padding: spacing.lg, gap: spacing.md },
   heroText: { gap: spacing.xs },
-  // Right-to-left grid: the alphabet starts at the top right, as Arabic is read.
-  grid: { flexDirection: 'row-reverse', flexWrap: 'wrap', gap: spacing.sm, justifyContent: 'flex-start' },
+  // Grids read left to right, top to bottom, like every list in the app (elif first, top left).
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, justifyContent: 'flex-start' },
   tile: {
     width: '22%',
     flexGrow: 1,
@@ -45,7 +45,7 @@ export default function ArabicScreen() {
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={styles.scroll}>
-      <HeroHeader gradient={topicThemes.arabic.gradient}>
+      <HeroHeader gradient={topicThemes.sufara.gradient}>
         <TopBar dark />
         <View style={styles.heroText}>
           <AppText variant="display" color={c.onNight} accessibilityRole="header">

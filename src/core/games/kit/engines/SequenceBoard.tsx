@@ -26,7 +26,7 @@ export interface SequenceBoardProps extends EngineProps {
   items: KitItem[];
   /**
    * `list` (default): a vertical list the learner reorders by dragging (or with ↑ ↓), then checks.
-   * `path`: numbered stones along a winding path; drag each tile onto its stone (checked on drop).
+   * `path`: numbered stones in reading order (left to right, row by row) joined by a path; drag each tile onto its stone (checked on drop).
    */
   variant?: 'list' | 'path';
   /** path: stones per row (default 3 with pictures, 2 with words). */
@@ -359,16 +359,17 @@ function SequencePath(props: SequenceBoardProps) {
     done: () => done,
   });
 
-  // Snake layout of the stones.
+  // Stones in reading order: left to right, then the next row (1 2 / 3 4 – never a snake that reads 1 2 / 4 3).
   const rows = Math.ceil(items.length / cols);
   const gapX = spacing.md;
-  const gapY = spacing.lg;
   const stoneW = size.w > 0 ? Math.floor((size.w - gapX * (cols - 1)) / cols) : 90;
-  const stoneH = Math.max(56, Math.min(pictures ? stoneW : 72, size.h > 0 ? Math.floor((size.h - gapY * (rows - 1) - 12) / rows) : 72));
+  // A short board (long word tiles in the tray) packs the rows tighter, so the last stones never hide under the caption.
+  const tight = size.h > 0 && size.h < rows * 72 + (rows - 1) * spacing.lg + 12;
+  const gapY = tight ? spacing.sm : spacing.lg;
+  const stoneH = Math.max(40, Math.min(pictures ? stoneW : 72, size.h > 0 ? Math.floor((size.h - gapY * (rows - 1) - 12) / rows) : 72));
   const pos = items.map((_, i) => {
     const r = Math.floor(i / cols);
-    const cInRow = i % cols;
-    const c = r % 2 === 0 ? cInRow : cols - 1 - cInRow;
+    const c = i % cols;
     return { x: c * (stoneW + gapX), y: r * (stoneH + gapY) + 12 };
   });
   const centers = pos.map((p) => [p.x + stoneW / 2, p.y + stoneH / 2] as [number, number]);

@@ -183,30 +183,15 @@ export function PathTrace(props: PathTraceProps) {
                 {walkedD ? <Path d={walkedD} stroke={k.gold} strokeWidth={7} strokeLinecap="round" fill="none" /> : null}
                 <AnimatedPath animatedProps={trailProps} stroke={k.accent} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" fill="none" />
               </Svg>
+              {/* Labels first, all dots above them: a later stop's label never hides an earlier stop (e.g. Makkah under the
+                  guide's label on the Hijrah map), and the next stop is drawn last so it is always on top. */}
               {stops.map((s, i) => {
-                const isReached = i < reached;
-                const isNext = i === reached;
                 if (!shown(i)) return null;
                 return (
-                  <View key={s.id} style={[styles.stop, { left: pts[i][0] - DOT / 2, top: pts[i][1] - DOT / 2 }]}>
-                    {isNext && core.hintsOn ? <Glow active radius={DOT / 2} spread={5} /> : null}
-                    <Pressable
-                      onPress={() => tapStop(i)}
-                      accessibilityRole="button"
-                      accessibilityLabel={i === 0 ? env.kt('path.start', { label: label(s) }) : env.kt('path.point', { number: i + 1, label: label(s) })}
-                      accessibilityState={{ selected: isReached }}
-                      testID={`stop-${s.id}`}
-                      hitSlop={10}
-                      style={[styles.dot, { backgroundColor: isReached ? k.gold : k.tileFace, borderColor: isReached ? k.goldEdge : k.accent }]}
-                    >
-                      <AppText variant="tiny" color={isReached ? k.onGold : k.accentText} style={{ fontFamily: fonts.heavy }}>
-                        {String(i + 1)}
-                      </AppText>
-                    </Pressable>
-                    {isReached && i > 0 ? <Burst trigger={1} distance={32} size={10} /> : null}
+                  <View key={`${s.id}-label`} pointerEvents="none" style={[styles.stop, { left: pts[i][0] - DOT / 2, top: pts[i][1] - DOT / 2 }]}>
                     {/* The label has its own wide box: inside the dot-sized stop it was cut to a few letters. */}
-                    <View pointerEvents="none" style={[styles.chipBox, { left: chipLeft(pts[i][0]) }, pts[i][1] > h - 50 ? { bottom: DOT + 2 } : { top: DOT + 2 }]}>
-                      <View style={[styles.chip, { backgroundColor: k.tileFace, borderColor: isReached ? k.gold : k.tileBorder }]}>
+                    <View style={[styles.chipBox, { left: chipLeft(pts[i][0]) }, pts[i][1] > h - 50 ? { bottom: DOT + 2 } : { top: DOT + 2 }]}>
+                      <View style={[styles.chip, { backgroundColor: k.tileFace, borderColor: i < reached ? k.gold : k.tileBorder }]}>
                         {s.art && hasArt(s.art) ? <Art name={s.art} size={18} /> : null}
                         <AppText variant="tiny" color={k.text} numberOfLines={1} style={styles.chipText}>
                           {label(s)}
@@ -216,6 +201,33 @@ export function PathTrace(props: PathTraceProps) {
                   </View>
                 );
               })}
+              {stops
+                .map((s, i) => ({ s, i }))
+                .sort((a, b) => Number(a.i === reached) - Number(b.i === reached))
+                .map(({ s, i }) => {
+                  const isReached = i < reached;
+                  const isNext = i === reached;
+                  if (!shown(i)) return null;
+                  return (
+                    <View key={s.id} style={[styles.stop, { left: pts[i][0] - DOT / 2, top: pts[i][1] - DOT / 2 }]}>
+                      {isNext && core.hintsOn ? <Glow active radius={DOT / 2} spread={5} /> : null}
+                      <Pressable
+                        onPress={() => tapStop(i)}
+                        accessibilityRole="button"
+                        accessibilityLabel={i === 0 ? env.kt('path.start', { label: label(s) }) : env.kt('path.point', { number: i + 1, label: label(s) })}
+                        accessibilityState={{ selected: isReached }}
+                        testID={`stop-${s.id}`}
+                        hitSlop={10}
+                        style={[styles.dot, { backgroundColor: isReached ? k.gold : k.tileFace, borderColor: isReached ? k.goldEdge : k.accent }]}
+                      >
+                        <AppText variant="tiny" color={isReached ? k.onGold : k.accentText} style={{ fontFamily: fonts.heavy }}>
+                          {String(i + 1)}
+                        </AppText>
+                      </Pressable>
+                      {isReached && i > 0 ? <Burst trigger={1} distance={32} size={10} /> : null}
+                    </View>
+                  );
+                })}
               {core.hintsOn && core.idle && !done ? <HintPointer from={{ x: pts[reached - 1][0], y: pts[reached - 1][1] }} to={{ x: pts[reached][0], y: pts[reached][1] }} /> : null}
             </View>
           </GestureDetector>

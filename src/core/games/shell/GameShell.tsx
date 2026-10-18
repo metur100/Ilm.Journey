@@ -28,9 +28,8 @@ import { type LevelSummary, useGamesStore } from '../store';
 import { type GameApi, type GameLevel, type GameResultInput, type HapticKind } from '../types';
 import { GameHeader } from './GameHeader';
 import { GameResult } from './GameResult';
-import { HowToHint } from './parts';
 
-type Phase = 'intro' | 'howto' | 'levels' | 'play' | 'result';
+type Phase = 'intro' | 'levels' | 'play' | 'result';
 
 /** Plays that already reported a result. */
 const finishedPlays = new WeakSet<object>();
@@ -55,7 +54,7 @@ const useStyles = makeStyles((c) => ({
 }));
 
 /**
- * GameShell – the frame around every mini-game: illustrated intro → animated "how to play" hint → level select →
+ * GameShell – the frame around every mini-game: illustrated intro (first visit only) → level select →
  * play (renders the game component with a typed `GameApi`) → result (stars, best, XP once per level, seeds/water,
  * "You learned" facts with sources, collection cards, review items) → replay / next level / back.
  * Every phase has the same header (GameHeader: back, game title, subtitle, progress) – games never draw a title.
@@ -93,11 +92,10 @@ export function GameShell({ gameId }: { gameId: string }) {
   }, [phase, setPaused]);
   useEffect(() => () => setPaused(false), [setPaused]);
 
-  // Android back steps back inside the game (play / result → levels, how to play → intro) instead of leaving it.
+  // Android back steps back inside the game (play / result → levels) instead of leaving it.
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       if (phase === 'play' || phase === 'result') setPhase('levels');
-      else if (phase === 'howto') setPhase('intro');
       else return false;
       return true;
     });
@@ -215,46 +213,33 @@ export function GameShell({ gameId }: { gameId: string }) {
     );
   }
 
-  if (phase === 'intro' || phase === 'howto') {
+  if (phase === 'intro') {
     return (
       <View style={styles.root}>
-        <GameHeader title={title} subtitle={topicLabel} topic={def.topicId} backLabel={t('a11y.back')} onBack={phase === 'howto' ? () => setPhase('intro') : leave} />
+        <GameHeader title={title} subtitle={topicLabel} topic={def.topicId} backLabel={t('a11y.back')} onBack={leave} />
         <ScrollView contentContainerStyle={styles.body}>
-          {phase === 'intro' ? (
-            <>
-              <LinearGradient colors={k.board} style={[styles.cover, { borderColor: k.boardBorder }]}>
-                <View style={[styles.coverCircle, { backgroundColor: k.accentSoft }]}>
-                  <Art name={def.coverArt} size={170} />
-                </View>
-                <View style={[styles.pill, { backgroundColor: theme.accent }]}>
-                  <AppText variant="label" color={c.onAccent}>
-                    {topicLabel.toUpperCase()}
-                  </AppText>
-                </View>
-                <AppText variant="body" align="center">
-                  {gt('description')}
-                </AppText>
-              </LinearGradient>
-              <Button label={t('games.letsPlay')} icon="play" variant="gold" onPress={() => setPhase('howto')} />
-              {progress.progress.introSeen ? <Button label={t('games.chooseLevel')} variant="secondary" onPress={() => setPhase('levels')} /> : null}
-            </>
-          ) : (
-            <>
-              <AppText variant="heading" accessibilityRole="header">
-                {t('games.howToTitle')}
+          <LinearGradient colors={k.board} style={[styles.cover, { borderColor: k.boardBorder }]}>
+            <View style={[styles.coverCircle, { backgroundColor: k.accentSoft }]}>
+              <Art name={def.coverArt} size={170} />
+            </View>
+            <View style={[styles.pill, { backgroundColor: theme.accent }]}>
+              <AppText variant="label" color={c.onAccent}>
+                {topicLabel.toUpperCase()}
               </AppText>
-              <HowToHint art={def.hintArt ?? def.coverArt} reduced={reduced} />
-              <AppText variant="body">{gt('howTo')}</AppText>
-              <Button
-                label={t('games.gotIt')}
-                iconRight="chevron"
-                onPress={() => {
-                  markIntroSeen(def.id);
-                  setPhase('levels');
-                }}
-              />
-            </>
-          )}
+            </View>
+            <AppText variant="body" align="center">
+              {gt('description')}
+            </AppText>
+          </LinearGradient>
+          <Button
+            label={t('games.letsPlay')}
+            icon="play"
+            variant="gold"
+            onPress={() => {
+              markIntroSeen(def.id);
+              setPhase('levels');
+            }}
+          />
         </ScrollView>
       </View>
     );
@@ -265,14 +250,11 @@ export function GameShell({ gameId }: { gameId: string }) {
     <View style={styles.root}>
       <GameHeader title={title} subtitle={starsLabel} topic={def.topicId} backLabel={t('a11y.back')} onBack={leave} />
       <ScrollView contentContainerStyle={styles.body}>
-        <Card tone="alt" onPress={() => setPhase('intro')} accessibilityLabel={`${gt('description')}. ${t('games.howToTitle')}`}>
+        <Card tone="alt">
           <View style={styles.levelCard}>
             <Art name={def.coverArt} size={72} />
             <View style={styles.flex}>
               <AppText variant="body">{gt('description')}</AppText>
-              <AppText variant="small" color={c.primaryText}>
-                {t('games.howToTitle')}
-              </AppText>
             </View>
           </View>
         </Card>

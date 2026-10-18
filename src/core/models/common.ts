@@ -50,13 +50,13 @@ export function factSourceProblem(kind: FactKind | undefined, sources: readonly 
 export type DayKey = string;
 
 /**
- * The eight learning topics of the app (Learn tab, knowledge radar, topic badges).
+ * The nine learning topics of the app (Learn tab, knowledge radar, topic badges).
  * Every feature tags its content with one of these where it fits.
  */
-export type TopicId = 'salah' | 'quran' | 'prophets' | 'seerah' | 'akhlaq' | 'ramadan' | 'history' | 'arabic';
+export type TopicId = 'salah' | 'quran' | 'prophets' | 'seerah' | 'akhlaq' | 'ramadan' | 'history' | 'sufara' | 'arabic';
 
 /** Display order of the topics (Learn tab, radar). */
-export const TOPIC_IDS: readonly TopicId[] = ['salah', 'quran', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history', 'arabic'];
+export const TOPIC_IDS: readonly TopicId[] = ['salah', 'quran', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history', 'sufara', 'arabic'];
 
 export function isTopicId(value: unknown): value is TopicId {
   return typeof value === 'string' && (TOPIC_IDS as readonly string[]).includes(value);

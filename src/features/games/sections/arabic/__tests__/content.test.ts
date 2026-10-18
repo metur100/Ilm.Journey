@@ -1,11 +1,11 @@
 import quests from '@/features/learn/content/quests/arabic.json';
 import { getGame } from '@/core/games';
-import { SUFARA_PATH } from '@/features/learn/sufara/logic';
 
 import { gapsOf } from '../non-joiners/NonJoinersGame';
 import { maddRounds } from '../madd-stretch/MaddStretchGame';
 import { markRounds } from '../marks-workshop/MarksWorkshopGame';
 import { ARABIC_GAME_IDS, registerArabicGames } from '../index';
+import { SUFARA_GAME_IDS } from '../shared/define';
 import { FACTS, MARK_FACTS } from '../shared/facts';
 import { HARAKAT_LESSON, LETTER_LESSON } from '../shared/lessonText';
 import { LETTERS, NON_JOINERS, SUFARA_LETTER_ORDER } from '../shared/letters';
@@ -100,11 +100,9 @@ describe('Arabic / Sufara content', () => {
     expect(marks[0].letters.join('')).toBe('جَنَة');
   });
 
-  it('the Sufara path links every game of the section exactly once', () => {
-    const path = SUFARA_PATH.flatMap((s) => [...s.games]);
-    expect([...path].sort()).toEqual([...ARABIC_GAME_IDS].sort());
-    expect(path).toEqual([...ARABIC_GAME_IDS]);
-    for (const id of path) expect(getGame(id)).toBeDefined();
+  it('puts the letter games in the Sufara section and keeps the sufara order', () => {
+    expect(ARABIC_GAME_IDS.slice(0, SUFARA_GAME_IDS.length)).toEqual([...SUFARA_GAME_IDS]);
+    for (const id of ARABIC_GAME_IDS) expect(getGame(id)).toBeDefined();
     expect(ARABIC_GAME_IDS.length).toBeGreaterThanOrEqual(12);
   });
 });

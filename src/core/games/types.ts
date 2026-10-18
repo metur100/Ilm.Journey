@@ -103,7 +103,7 @@ export interface GameDef<C = unknown> {
   i18n: Namespace<string>;
   /** Art library name of the cover illustration (shelf card + intro). */
   coverArt: string;
-  /** Art shown in the animated "how to play" hint (defaults to the cover). */
+  /** Optional secondary art of the game (unused by the shell since the "how to play" step was removed). */
   hintArt?: string;
   /** Exactly the levels 1..n (n ≤ 3), in order. */
   levels: GameLevelDef<C>[];

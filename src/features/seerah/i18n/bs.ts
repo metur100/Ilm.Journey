@@ -121,6 +121,8 @@ const bs: Record<SeerahKey, string> = {
   'episode.mainEvent': "Glavni događaj",
   'narration.play': "Slušaj naraciju",
   'narration.pause': "Pauziraj naraciju",
+  'narration.stop': "Zaustavi",
+  'narration.preparing': "Pripremam…",
   'reflection.title': "Razmisli o tome",
   'reflection.note': "Tvoja razmišljanja ostaju na ovom uređaju i nikada se ne ocjenjuju.",
   'reflection.write': "Zapiši razmišljanje",

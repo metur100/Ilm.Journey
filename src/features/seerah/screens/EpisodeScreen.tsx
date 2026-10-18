@@ -171,7 +171,7 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
           <>
             <StoryStage key="cover" stage={episodeStepStage(episode, 'introduction') ?? episodeStage(episode)} scene={toSceneSpec(episode.scene)} height={210} paused={!focused} />
             <ChapterHeader label={`${t('episode.label', { number: episode.order })} · ${l(episode.period)}`} title={l(episode.title)} subtitle={l(episode.subtitle)} />
-            <NarrationButton episodeId={episode.id} />
+            <NarrationButton key="intro" episodeId={episode.id} text={[l(episode.title), l(episode.subtitle), l(episode.introduction)].join('. ')} />
             <AppText variant="reading" style={styles.intro}>
               {l(episode.introduction)}
             </AppText>
@@ -196,6 +196,7 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
         {step === 'context' ? (
           <>
             <ChapterHeader title={stepName} />
+            <NarrationButton key="context" text={episode.context.map((b) => l(b.text)).join(' ')} />
             {episode.context.map((b, i) => (
               <BlockView key={i} block={b} />
             ))}
@@ -216,6 +217,7 @@ function EpisodeJourney({ episode }: { episode: Episode }) {
         {step === 'mainEvent' ? (
           <>
             <ChapterHeader title={stepName} />
+            <NarrationButton key="mainEvent" text={episode.mainEvent.map((b) => l(b.text)).join(' ')} />
             {episode.mainEvent.map((b, i) => (
               <BlockView key={i} block={b} />
             ))}

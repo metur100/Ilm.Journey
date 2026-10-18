@@ -59,11 +59,12 @@ const de: Record<QuestKey, string> = {
   'recite.ayahLabel': 'Vers {number}',
 
   'tracing.title': 'Fahre den Buchstaben nach',
-  'tracing.hint': 'Folge der Form des Buchstabens mit deinem Finger.',
+  'tracing.hint': 'Beginne am grünen Punkt, fahr die graue Linie mit dem Finger nach und tippe dann die Punkte an.',
   'tracing.clear': 'Löschen',
   'tracing.next': 'Nächster Buchstabe',
   'tracing.listen': 'Anhören',
   'tracing.keepGoing': 'Weiter nachfahren…',
+  'tracing.offTrack': 'Bleib auf der grauen Linie. Lösche und versuch es noch einmal.',
   'tracing.great': 'Toll nachgefahren!',
   'tracing.progress': 'Buchstabe {current} von {total}',
   'tracing.canvas': 'Zeichenfläche für den Buchstaben {letter}. Fahre den Buchstaben mit einem Finger nach.',

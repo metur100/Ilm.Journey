@@ -26,8 +26,8 @@ export const BADGES: readonly BadgeDefinition[] = [
   { id: 'akhlaq_champion', group: 'topics', icon: 'heart', color: '#E0607E', metric: 'learn.mastered.akhlaq', min: 1 },
   { id: 'ramadan_learner', group: 'topics', icon: 'moon', color: '#6E43AE', metric: 'learn.mastered.ramadan', min: 1 },
   { id: 'arabic_beginner', group: 'topics', icon: 'letter', color: '#D9534F', metric: 'learn.mastered.arabic', min: 1 },
-  { id: 'topic_explorer', group: 'topics', icon: 'map', color: '#3F8F6B', metric: 'learn.topicsStarted', min: 8 },
-  { id: 'knowledge_master', group: 'topics', icon: 'trophy', color: '#B8860B', metric: 'learn.topicsMastered', min: 8 },
+  { id: 'topic_explorer', group: 'topics', icon: 'map', color: '#3F8F6B', metric: 'learn.topicsStarted', min: 9 },
+  { id: 'knowledge_master', group: 'topics', icon: 'trophy', color: '#B8860B', metric: 'learn.topicsMastered', min: 9 },
   // prophet stories
   { id: 'story_explorer', group: 'stories', icon: 'scroll', color: '#C8743A', metric: 'stories.completed', min: 1 },
   { id: 'history_learner', group: 'stories', icon: 'map', color: '#2F8A5A', metric: 'stories.completed', min: HISTORY_LEARNER_STORIES },

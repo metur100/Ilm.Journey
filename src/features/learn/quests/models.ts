@@ -3,12 +3,13 @@ import type { LocalizedText, Question, SceneSpec, SourceRef, TopicId } from '@/c
 /**
  * islam-quest content model (copied JSON in `features/learn/content/quests/`).
  *
- * islam-quest's worlds map 1:1 to Learn topics. Its "prophets" world is not ported as quests – the Stories
- * tab covers those stories – only its general facts are kept (daily pool / tips).
+ * islam-quest's worlds map 1:1 to Learn topics, except that the letter and harakat quests of its "arabic" world belong
+ * to the topic Sufara (content/quests/index.ts SUFARA_QUEST_IDS). Its "prophets" world is not ported as quests – the
+ * Stories tab covers those stories – only its general facts are kept (daily pool / tips).
  */
-export type QuestWorldId = 'salah' | 'quran' | 'akhlaq' | 'ramadan' | 'arabic';
+export type QuestWorldId = 'salah' | 'quran' | 'akhlaq' | 'ramadan' | 'sufara' | 'arabic';
 
-export const QUEST_WORLDS: readonly QuestWorldId[] = ['salah', 'quran', 'akhlaq', 'ramadan', 'arabic'];
+export const QUEST_WORLDS: readonly QuestWorldId[] = ['salah', 'quran', 'akhlaq', 'ramadan', 'sufara', 'arabic'];
 
 export function isQuestWorld(value: unknown): value is QuestWorldId {
   return typeof value === 'string' && (QUEST_WORLDS as readonly string[]).includes(value);

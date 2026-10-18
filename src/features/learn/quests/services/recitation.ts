@@ -1,7 +1,7 @@
 import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 import { useCallback, useEffect, useState } from 'react';
 
-import { audioSessionReady, ensureAudibleVolume } from '@/core/services/audioSession';
+import { audioSessionReady, boostLearnerAudio } from '@/core/services/audioSession';
 import { audioUrlForAyah } from '@/features/quran';
 
 /**
@@ -44,7 +44,7 @@ export function playRecitation(globalAyah: number, onEnd: (error: boolean) => vo
   try {
     const next = createAudioPlayer({ uri: audioUrlForAyah(globalAyah) });
     next.volume = 1;
-    ensureAudibleVolume();
+    boostLearnerAudio(next);
     player = next;
     currentAyah = globalAyah;
     streamTimeout = setTimeout(() => {

@@ -7,8 +7,7 @@ import { Button } from '@/core/components/ui/Button';
 import { Icon } from '@/core/components/ui/Icon';
 import { SourceList } from '@/core/components/ui/SourceList';
 import type { LocalizedText, SceneSpec, SourceRef } from '@/core/models';
-import { deviceNarration } from '@/core/services/speech';
-import { useAppStore } from '@/core/store/appStore';
+import { useReadAloud } from '@/core/hooks/useReadAloud';
 import { makeStyles, radius, spacing, topicThemes, useTheme } from '@/core/theme';
 
 import { useStoriesI18n } from '../i18n';
@@ -36,12 +35,13 @@ interface StoryPageProps {
   large?: boolean;
 }
 
-/** A story page: animated illustration (never a depiction of a prophet) and narration text. */
+/** A story page: animated illustration (never a depiction of a prophet), narration text and Listen (device voice). */
 export function StoryPage({ label, title, body, scene, stage, sources, large }: StoryPageProps) {
   const { t, l, language } = useStoriesI18n();
   const { c } = useTheme();
   const styles = useStyles();
-  const narration = useAppStore((s) => s.settings.narration);
+  const listen = useReadAloud(language);
+  const text = [title ? l(title) : '', l(body)].filter(Boolean).join('. ');
   return (
     <View style={styles.root}>
       <StoryStage stage={stage} scene={scene} height={large ? 250 : 220} />
@@ -54,15 +54,13 @@ export function StoryPage({ label, title, body, scene, stage, sources, large }: 
             {l(title)}
           </AppText>
         ) : null}
+        <Button
+          label={t(listen.state === 'preparing' ? 'player.listenPreparing' : listen.state === 'speaking' ? 'player.listenStop' : 'player.listen')}
+          icon={listen.speaking ? 'stop' : 'speaker'}
+          variant={listen.speaking ? 'secondary' : 'ghost'}
+          onPress={() => listen.toggle(text)}
+        />
         <AppText variant="reading">{l(body)}</AppText>
-        {narration ? (
-          <Button
-            label={t('player.readAloud')}
-            icon="speaker"
-            variant="ghost"
-            onPress={() => deviceNarration.speak([title ? l(title) : '', l(body)].filter(Boolean).join('. '), language)}
-          />
-        ) : null}
       </View>
       <SourceList sources={sources} />
     </View>

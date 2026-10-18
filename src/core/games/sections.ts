@@ -5,10 +5,11 @@ import type { GameDef } from './types';
 import { GAME_LEVELS } from './types';
 
 /**
- * Play tab sections (GAMES-V3 §3): the order of the sections and their cover art. Arabic and Sufara are one section
- * ("Arabic / Sufara"); the Sufara screen is linked from it.
+ * Play tab sections (GAMES-V3 §3): the order of the sections and their cover art. Sufara (letters, harakat, joining and
+ * reading syllables) and Arabic (words and their meanings) are separate sections, like the Learn topics; the Sufara
+ * section links to the Sufara course of the Learn tab.
  */
-export const PLAY_SECTIONS: readonly TopicId[] = ['salah', 'quran', 'arabic', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history'];
+export const PLAY_SECTIONS: readonly TopicId[] = ['salah', 'quran', 'sufara', 'arabic', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history'];
 
 /** Pseudo-section of the development fixtures (kit demos, Star Path) – shown only in development builds. */
 export const DEV_SECTION = 'dev';
@@ -17,7 +18,8 @@ export type PlaySectionId = TopicId | typeof DEV_SECTION;
 export const SECTION_ART: Record<PlaySectionId, string> = {
   salah: 'object.prayer-mat',
   quran: 'object.quran-stand',
-  arabic: 'object.inkwell',
+  sufara: 'object.inkwell',
+  arabic: 'object.book',
   prophets: 'object.ark',
   seerah: 'place.masjid-nabawi-early',
   akhlaq: 'garden.flower-rose',
@@ -30,7 +32,8 @@ const en = {
   sections: 'Sections',
   'section.salah': 'Salah',
   'section.quran': 'Quran',
-  'section.arabic': 'Arabic / Sufara',
+  'section.sufara': 'Sufara',
+  'section.arabic': 'Arabic',
   'section.prophets': 'Prophets',
   'section.seerah': 'Seerah',
   'section.akhlaq': 'Akhlaq',
@@ -43,8 +46,8 @@ const en = {
   levels: '{count}/{total} levels',
   new: 'New',
   soon: 'New games for this section are on their way.',
-  sufaraTitle: 'Sufara path',
-  sufaraBody: 'Learn the letters step by step, then join them.',
+  sufaraTitle: 'Sufara course',
+  sufaraBody: 'Learn the letters lesson by lesson in the Learn tab – these games are for extra practice.',
   open: 'Open {section}',
 } as const;
 type Key = keyof typeof en;
@@ -52,7 +55,8 @@ const de: Record<Key, string> = {
   sections: 'Bereiche',
   'section.salah': 'Gebet',
   'section.quran': 'Koran',
-  'section.arabic': 'Arabisch / Sufara',
+  'section.sufara': 'Sufara',
+  'section.arabic': 'Arabisch',
   'section.prophets': 'Propheten',
   'section.seerah': 'Sira',
   'section.akhlaq': 'Charakter',
@@ -65,15 +69,16 @@ const de: Record<Key, string> = {
   levels: '{count}/{total} Level',
   new: 'Neu',
   soon: 'Neue Spiele für diesen Bereich sind unterwegs.',
-  sufaraTitle: 'Sufara-Pfad',
-  sufaraBody: 'Lerne die Buchstaben Schritt für Schritt und verbinde sie dann.',
+  sufaraTitle: 'Sufara-Kurs',
+  sufaraBody: 'Lerne die Buchstaben Lektion für Lektion im Bereich Lernen – diese Spiele sind zum zusätzlichen Üben.',
   open: '{section} öffnen',
 };
 const bs: Record<Key, string> = {
   sections: 'Oblasti',
   'section.salah': 'Namaz',
   'section.quran': 'Kur’an',
-  'section.arabic': 'Arapski / Sufara',
+  'section.sufara': 'Sufara',
+  'section.arabic': 'Arapski',
   'section.prophets': 'Poslanici',
   'section.seerah': 'Sira',
   'section.akhlaq': 'Ahlak',
@@ -86,8 +91,8 @@ const bs: Record<Key, string> = {
   levels: '{count}/{total} nivoa',
   new: 'Novo',
   soon: 'Nove igre za ovu oblast su na putu.',
-  sufaraTitle: 'Put sufare',
-  sufaraBody: 'Uči harfove korak po korak, a zatim ih spajaj.',
+  sufaraTitle: 'Sufara – lekcije',
+  sufaraBody: 'Harfove uči lekciju po lekciju u dijelu „Uči“ – ove igre su za dodatnu vježbu.',
   open: 'Otvori: {section}',
 };
 

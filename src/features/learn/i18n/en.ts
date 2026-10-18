@@ -3,7 +3,7 @@ const en = {
   'tab.title': 'Learn',
   'tab.subtitle': 'Eight topics, all open. Inside a topic, every step opens the next one.',
   'tab.recommended': 'Suggested for you',
-  'tab.recommended.child': 'Start with Salah – short lessons, games and stories.',
+  'tab.recommended.child': 'Start with Salah – short lessons, practice and stories.',
   'tab.recommended.teen': 'Pick any topic – units end with a Master Challenge.',
   'tab.recommended.adult': 'Go deeper with units, the Seerah and the sources.',
   'tab.steps': '{completed} of {total} steps',

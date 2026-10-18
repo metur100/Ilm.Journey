@@ -16,7 +16,7 @@ function point(index: number, count: number, value: number) {
   return { x: CENTER + Math.cos(angle) * RADIUS * value, y: CENTER + Math.sin(angle) * RADIUS * value };
 }
 
-/** Radar chart of the eight topics (0–100 %). Decorative; the list below carries the values for screen readers. */
+/** Radar chart of the topics (0–100 %). Decorative; the list below carries the values for screen readers. */
 export function KnowledgeRadar({ topics }: { topics: TopicKnowledge[] }) {
   const { t } = useI18n();
   const { c } = useTheme();

@@ -1,9 +1,11 @@
+import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
 import * as Speech from 'expo-speech';
 import { Linking, Platform } from 'react-native';
 
+import { canSynthesize, synthesizeSpeech } from '../../../modules/audio-volume';
 import type { Language } from '../models';
 
-import { ensureAudibleVolume } from './audioSession';
+import { audioSessionReady, boostLearnerAudio, LOUDNESS_GAIN } from './audioSession';
 
 /**
  * Optional audio layer. Everything here uses the device's own text-to-speech engine, so no audio files are bundled.
@@ -14,10 +16,21 @@ import { ensureAudibleVolume } from './audioSession';
  * nothing at all – the learner hears silence. So we pick an Arabic voice explicitly and tell the learner (once,
  * inline) how to install one when the device has none.
  *
+ * Loudness: TTS engines play much more quietly than music and their playback cannot be boosted. On Android the
+ * utterance is therefore rendered to a (cached) file by the native module and played through an expo-audio player with
+ * the learner-audio boost; the engine's own playback is the fallback (iOS, or when rendering fails).
+ *
  * A future version can swap `NarrationProvider` for recorded narration by human readers.
  */
+export interface SpeakOptions {
+  /** The audio started (rendering the utterance may take a moment). */
+  onStart?: () => void;
+  /** Finished, stopped or failed – called exactly once per utterance. */
+  onDone?: () => void;
+}
+
 export interface NarrationProvider {
-  speak(text: string, language: Language): void;
+  speak(text: string, language: Language, options?: SpeakOptions): void;
   stop(): void;
 }
 
@@ -27,24 +40,120 @@ function stopQuietly(): void {
   pending?.catch?.(() => undefined);
 }
 
-const LOCALES: Record<Language, string> = { bs: 'bs-BA', de: 'de-DE', en: 'en-GB' };
+// ---------- one utterance at a time ----------
 
-export const deviceNarration: NarrationProvider = {
-  speak(text, language) {
+/** Increases with every new utterance / stop, so a late result of an older one is ignored. */
+let session = 0;
+let player: AudioPlayer | null = null;
+let finish: (() => void) | null = null;
+
+function done(): void {
+  const f = finish;
+  finish = null;
+  f?.();
+}
+
+/** Stops whatever is speaking (boosted player or the engine) and reports the old utterance as done. */
+function endCurrent(): void {
+  session += 1;
+  const p = player;
+  player = null;
+  if (p) {
     try {
-      stopQuietly();
-      ensureAudibleVolume();
-      Speech.speak(text, { language: LOCALES[language], rate: 0.95, volume: 1 });
-    } catch {
-      // Narration is optional.
-    }
-  },
-  stop() {
-    try {
-      stopQuietly();
+      p.pause();
+      p.remove();
     } catch {
       // ignore
     }
+  }
+  stopQuietly();
+  done();
+}
+
+interface Utterance {
+  text: string;
+  /** BCP-47 tag for the engine. */
+  language: string;
+  voice?: string;
+  rate: number;
+  options?: SpeakOptions;
+  onError?: () => void;
+}
+
+/** The engine's own playback (iOS, or when the boosted path is not available). */
+function speakDirect(u: Utterance, my: number): void {
+  const end = () => {
+    if (my === session) done();
+  };
+  try {
+    Speech.speak(u.text, {
+      language: u.language,
+      voice: u.voice,
+      rate: u.rate,
+      volume: 1,
+      onStart: u.options?.onStart,
+      onDone: end,
+      onStopped: end,
+      onError: () => {
+        end();
+        u.onError?.();
+      },
+    });
+  } catch {
+    end();
+    u.onError?.();
+  }
+}
+
+function say(u: Utterance): void {
+  endCurrent();
+  const my = session;
+  finish = u.options?.onDone ?? null;
+  if (!canSynthesize) {
+    speakDirect(u, my);
+    return;
+  }
+  void synthesizeSpeech(u.text, u.language, u.voice, u.rate).then(async (path) => {
+    if (my !== session) return;
+    if (!path) {
+      speakDirect(u, my);
+      return;
+    }
+    await audioSessionReady();
+    if (my !== session) return;
+    try {
+      const next = createAudioPlayer({ uri: path.startsWith('file://') ? path : `file://${path}` });
+      player = next;
+      boostLearnerAudio(next, LOUDNESS_GAIN.speech);
+      next.addListener('playbackStatusUpdate', (s) => {
+        if (player !== next) return;
+        if (s.didJustFinish || s.error) {
+          player = null;
+          try {
+            next.remove();
+          } catch {
+            // ignore
+          }
+          done();
+        }
+      });
+      next.play();
+      u.options?.onStart?.();
+    } catch {
+      player = null;
+      speakDirect(u, my);
+    }
+  });
+}
+
+const LOCALES: Record<Language, string> = { bs: 'bs-BA', de: 'de-DE', en: 'en-GB' };
+
+export const deviceNarration: NarrationProvider = {
+  speak(text, language, options) {
+    say({ text, language: LOCALES[language], rate: 0.95, options });
+  },
+  stop() {
+    endCurrent();
   },
 };
 
@@ -148,34 +257,27 @@ export function speakArabic(text: string, options: { onDone?: () => void } = {})
     reportMissing();
     return false;
   }
-  const say = () => {
-    try {
-      stopQuietly();
-      ensureAudibleVolume();
-      Speech.speak(text, {
-        language: 'ar',
-        voice: voiceId,
-        rate: 0.75,
-        volume: 1,
-        onDone: options.onDone,
-        // Typically: the voice data is not installed and the device is offline (Google TTS streams missing voices).
-        onError: () => {
-          if (__DEV__) console.warn('[speech] Arabic utterance failed');
-          reportMissing();
-        },
-      });
-    } catch {
-      reportMissing();
-    }
-  };
+  const speak = () =>
+    say({
+      text,
+      language: 'ar',
+      voice: voiceId,
+      rate: 0.75,
+      options: { onDone: options.onDone },
+      // Typically: the voice data is not installed and the device is offline (Google TTS streams missing voices).
+      onError: () => {
+        if (__DEV__) console.warn('[speech] Arabic utterance failed');
+        reportMissing();
+      },
+    });
   if (status === 'unknown') {
     void detectArabicVoice().then((s) => {
-      if (s === 'available') say();
+      if (s === 'available') speak();
       else reportMissing();
     });
     return true;
   }
-  say();
+  speak();
   return true;
 }
 

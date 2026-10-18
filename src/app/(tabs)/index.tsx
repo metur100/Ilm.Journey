@@ -224,7 +224,12 @@ export default function Home() {
           paused={!focused || gardenHidden}
         >
           <View style={[styles.overlayTop, { top: insets.top + spacing.sm }]}>
-            <View style={styles.panel}>
+            <Pressable
+              onPress={() => router.navigate('/(tabs)/profile')}
+              accessibilityRole="button"
+              accessibilityLabel={`${t('tabs.me')}: ${profile.name}, ${t('common.level', { level: summary.level.level })}`}
+              style={styles.panel}
+            >
               <View style={styles.avatar}>
                 <Avatar character={profile.character} size={46} />
               </View>
@@ -237,7 +242,7 @@ export default function Home() {
                 </AppText>
                 <ProgressBar progress={summary.level.progress} height={5} color={c.gold} trackColor="rgba(255,255,255,0.25)" accessibilityLabel={t('a11y.xpBar', { xp: summary.level.xpIntoLevel, total: summary.level.xpForNextLevel })} />
               </View>
-            </View>
+            </Pressable>
             <View style={styles.streak} accessible accessibilityLabel={`${t('streak.label')}: ${t(summary.streak === 1 ? 'streak.day' : 'streak.days', { count: summary.streak })}`}>
               <Icon name="flame" size={22} color={summary.activeToday ? c.gold : c.onNightMuted} />
               <AppText variant="bodyBold" color={c.onNight}>

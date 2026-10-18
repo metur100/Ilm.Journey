@@ -36,7 +36,7 @@ export interface LanternTrailProps extends EngineProps {
 const LW = 30;
 const LH = 47;
 
-/** Positions (fractions) of n lanterns: a winding path up the hill, or a calm scatter over the night. */
+/** Positions (fractions) of n lanterns: rows in reading order (left to right, top to bottom – 1 2 / 3 4), or a calm scatter over the night. */
 export function trailPoints(n: number, layout: 'path' | 'scatter'): KitPoint[] {
   const cols = 5;
   const rows = Math.ceil(n / cols);
@@ -50,9 +50,8 @@ export function trailPoints(n: number, layout: 'path' | 'scatter'): KitPoint[] {
   }
   return Array.from({ length: n }, (_, i) => {
     const row = Math.floor(i / cols);
-    const k = i % cols;
-    const col = row % 2 === 0 ? k : cols - 1 - k;
-    return { x: 0.1 + col * 0.2, y: 0.84 - (row / Math.max(1, rows - 1)) * 0.56 - Math.sin((col / (cols - 1)) * Math.PI) * 0.05 };
+    const col = i % cols;
+    return { x: 0.1 + col * 0.2, y: 0.28 + (row / Math.max(1, rows - 1)) * 0.56 - Math.sin((col / (cols - 1)) * Math.PI) * 0.05 };
   });
 }
 

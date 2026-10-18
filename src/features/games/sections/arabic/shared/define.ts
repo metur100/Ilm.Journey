@@ -3,7 +3,13 @@ import { type ComponentType, createElement } from 'react';
 import type { GameApi, GameDef, GameFact } from '@/core/games';
 
 /**
- * Builds a game of the Arabic / Sufara section (topic `arabic`). The component is loaded on first render, so
+ * Games of the Play section "Sufara" (topic `sufara`): letters, their forms, harakat, joining and reading syllables.
+ * The other games of this folder (words and their meanings) belong to the section "Arabic" (topic `arabic`).
+ */
+export const SUFARA_GAME_IDS: readonly string[] = ['letter-trace', 'letter-lanterns', 'alphabet-path', 'letter-dots', 'twin-letters', 'letter-forms', 'non-joiners', 'join-letters', 'harakat-sounds', 'marks-workshop', 'madd-stretch', 'syllable-reading'];
+
+/**
+ * Builds a game of the Sufara or Arabic section (see {@link SUFARA_GAME_IDS}). The component is loaded on first render, so
  * registering the games (also in tests that call `registerFeatures()`) keeps UI modules out of the import graph.
  */
 export function arabicGame<C>(def: Omit<GameDef<C>, 'topicId' | 'component' | 'levels'> & { load: () => ComponentType<GameApi<C>>; levels: [LevelSpec<C>, LevelSpec<C>, LevelSpec<C>] }): GameDef<C> {
@@ -11,7 +17,7 @@ export function arabicGame<C>(def: Omit<GameDef<C>, 'topicId' | 'component' | 'l
   const Lazy: ComponentType<GameApi<C>> = (props) => createElement(load(), props);
   return {
     ...rest,
-    topicId: 'arabic',
+    topicId: SUFARA_GAME_IDS.includes(rest.id) ? 'sufara' : 'arabic',
     component: Lazy,
     levels: levels.map((l, i) => ({ level: (i + 1) as 1 | 2 | 3, config: l.config, facts: l.facts })),
   };

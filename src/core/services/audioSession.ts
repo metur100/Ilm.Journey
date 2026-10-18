@@ -1,6 +1,6 @@
 import { type AudioMode, setAudioModeAsync } from 'expo-audio';
 
-import { bindVolumeKeys, ensureMinMediaVolume } from '../../../modules/audio-volume';
+import { boostPlayer, bindVolumeKeys } from '../../../modules/audio-volume';
 
 /**
  * The one audio mode for the whole app (UI sounds, Quran recitation, game recitation). See docs/AUDIO.md.
@@ -41,17 +41,19 @@ export function audioSessionReady(): Promise<void> {
 }
 
 /**
- * The media volume that learner-requested audio (Quran recitation, Arabic letters, narration) needs at least. Android
- * starts many devices – and the emulator – at a third of the media volume, where a recitation is barely audible.
+ * Extra loudness (millibels, 100 = 1 dB) for audio the learner asked for. Android's LoudnessEnhancer has a limiter, so
+ * the boost lifts quiet passages without clipping. The device volume is never changed. See docs/AUDIO.md.
  */
-export const MIN_LISTEN_VOLUME = 0.7;
+export const LOUDNESS_GAIN = {
+  /** Quran recitation streams (mastered fairly quietly). */
+  recitation: 700,
+  /** The device voice (letters, prayer formulas, stories) – TTS engines speak much more quietly than music. */
+  speech: 1100,
+} as const;
 
-/**
- * Call right before audio the learner asked for: raises a too-low media volume to {@link MIN_LISTEN_VOLUME} (never
- * lowers it, never unmutes). Android only; a no-op elsewhere.
- */
-export function ensureAudibleVolume(): void {
-  ensureMinMediaVolume(MIN_LISTEN_VOLUME);
+/** Applies the learner-audio boost to an expo-audio player (Android; a no-op elsewhere). Never throws. */
+export function boostLearnerAudio(player: object, gainMb: number = LOUDNESS_GAIN.recitation): void {
+  void boostPlayer(player, gainMb);
 }
 
 /** Tests: forget the configured session. */

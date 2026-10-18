@@ -67,11 +67,12 @@ const en = {
 
   // ---------- tracing ----------
   'tracing.title': 'Trace the letter',
-  'tracing.hint': 'Follow the shape of the letter with your finger.',
+  'tracing.hint': 'Start at the green dot and follow the grey line with your finger, then tap the dots.',
   'tracing.clear': 'Clear',
   'tracing.next': 'Next letter',
   'tracing.listen': 'Listen',
   'tracing.keepGoing': 'Keep tracing…',
+  'tracing.offTrack': 'Stay on the grey line. Clear and try again.',
   'tracing.great': 'Great tracing!',
   'tracing.progress': 'Letter {current} of {total}',
   'tracing.canvas': 'Tracing area for the letter {letter}. Draw over the letter with one finger.',

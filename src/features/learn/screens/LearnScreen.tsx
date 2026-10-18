@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
   flex: { flex: 1, gap: 2 },
 }));
 
-/** Learn tab: the eight topics, all open from the start. */
+/** Learn tab: the nine topics, all open from the start. */
 export default function LearnScreen() {
   const { t } = useLearnI18n();
   const { c } = useTheme();

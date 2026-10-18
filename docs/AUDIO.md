@@ -30,22 +30,23 @@ It does not affect pronunciation or recitation, because the learner asks for tho
 
 ## Loudness
 
-Every player and every utterance plays at full volume (`volume: 1`); how loud the learner hears it is the device's
-**media** volume. Two things kept that too low, so recitation and pronunciation were barely audible:
+The device volume is never changed by the app. Audio the learner asked for is made louder instead:
 
-- Many devices, and the Android emulator, start at about a third of the media volume (5/15).
-- While nothing plays, Android's volume keys change the *ringer* volume, so turning "the volume" up did not help.
+- **Boost:** `boostLearnerAudio(player, gain)` (`src/core/services/audioSession.ts`) attaches Android's
+  `LoudnessEnhancer` (gain with a built-in limiter, so nothing clips) to the audio session of an expo-audio player –
+  Quran recitation +7 dB (`LOUDNESS_GAIN.recitation`), speech +11 dB (`LOUDNESS_GAIN.speech`).
+- **Device voice:** TTS engines play much more quietly than music, and their own playback cannot be boosted. On Android
+  `speech.ts` therefore lets the native module render each utterance to a cached WAV file
+  (`TextToSpeech.synthesizeToFile`) and plays that file through a boosted player. If rendering fails (or on iOS) the
+  engine's own playback is used.
+- **Volume keys:** while the app is open they change the media volume (`volumeControlStream = STREAM_MUSIC`);
+  otherwise Android changes the ringer volume whenever nothing is playing.
 
-The local Expo module `modules/audio-volume` (Android only, autolinked from `modules/`) fixes both:
+All of this lives in the local Expo module `modules/audio-volume` (Android only, autolinked from `modules/`); it
+needs a new native build (`npx expo run:android`), not only a Metro reload.
 
-- The volume keys always change the media volume while the app is open (`volumeControlStream = STREAM_MUSIC`).
-- `ensureAudibleVolume()` (`src/core/services/audioSession.ts`) runs right before audio the learner asked for
-  (Quran recitation, Arabic letters, narration). It raises a media volume below `MIN_LISTEN_VOLUME` (70 %) to that
-  level and shows the system volume bar. It never lowers the volume and never unmutes a muted stream.
-
-The UI sounds are generated louder (normalised, then a gentle tanh saturation that lifts their quiet decay; peak
-0.97). After changing `scripts/generate-sounds.js` run `npm run generate:sounds`. The native module needs a new
-build (`npx expo run:android`), not only a Metro reload.
+The UI sounds are deliberately calm (a prayer-bead tap, a water drop, a soft two-tone bell – no music) and quieter than
+the learning audio. After changing `scripts/generate-sounds.js` run `npm run generate:sounds`.
 
 ## Arabic text-to-speech and the fallback
 

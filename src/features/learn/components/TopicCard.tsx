@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
 }));
 
-/** One of the eight topics on the Learn tab. */
+/** One of the nine topics on the Learn tab. */
 export function TopicCard({ topic, completed, total, knowledge, mastered, onPress }: TopicCardProps) {
   const { t, l } = useLearnI18n();
   const { c } = useTheme();

@@ -62,7 +62,9 @@ const de: Record<StoriesKey, string> = {
   'player.example': 'Zum Beispiel',
   'player.reflection': 'Denk darüber nach',
   'player.lessonsDone': 'Ich habe darüber nachgedacht',
-  'player.readAloud': 'Vorlesen',
+  'player.listen': 'Anhören',
+  'player.listenStop': 'Stopp',
+  'player.listenPreparing': 'Wird vorbereitet…',
 
   'place.makkah': 'Mekka',
   'place.madinah': 'Medina',

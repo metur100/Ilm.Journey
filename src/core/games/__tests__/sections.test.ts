@@ -8,11 +8,12 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerFeatures();
 
 describe('Play sections', () => {
-  it('follows the GAMES-V3 order with one Arabic / Sufara section', () => {
-    expect(PLAY_SECTIONS).toEqual(['salah', 'quran', 'arabic', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history']);
-    expect(translateNs(playI18n, 'en', 'section.arabic')).toBe('Arabic / Sufara');
-    expect(translateNs(playI18n, 'bs', 'section.arabic')).toBe('Arapski / Sufara');
-    expect(translateNs(playI18n, 'de', 'section.arabic')).toBe('Arabisch / Sufara');
+  it('follows the GAMES-V3 order with separate Sufara and Arabic sections', () => {
+    expect(PLAY_SECTIONS).toEqual(['salah', 'quran', 'sufara', 'arabic', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history']);
+    expect(translateNs(playI18n, 'en', 'section.arabic')).toBe('Arabic');
+    expect(translateNs(playI18n, 'bs', 'section.arabic')).toBe('Arapski');
+    expect(translateNs(playI18n, 'de', 'section.arabic')).toBe('Arabisch');
+    expect(translateNs(playI18n, 'bs', 'section.sufara')).toBe('Sufara');
     for (const id of [...PLAY_SECTIONS, DEV_SECTION] as (keyof typeof SECTION_ART)[]) expect(hasArt(SECTION_ART[id])).toBe(true);
   });
 

@@ -33,7 +33,8 @@ const bs: CoreDictionary = {
   'topic.akhlaq': 'Ahlak',
   'topic.ramadan': 'Ramazan',
   'topic.history': 'Islamska historija',
-  'topic.arabic': 'Arapski/Sufara',
+  'topic.sufara': 'Sufara',
+  'topic.arabic': 'Arapski',
 
   // ---------- tabs ----------
   'tabs.home': 'Početna',
@@ -61,13 +62,13 @@ const bs: CoreDictionary = {
   'onboarding.how.learn.title': 'Uči',
   'onboarding.how.learn.body': 'Osam tema s kratkim lekcijama, kazivanjima o poslanicima i sirom – svaka lekcija navodi svoje izvore.',
   'onboarding.how.practice.title': 'Igraj',
-  'onboarding.how.practice.body': 'Više od 100 igara u osam oblasti: gradi, prati put, razvrstavaj i spajaj – a onda vidi šta si naučio, uz izvore.',
+  'onboarding.how.practice.body': 'Više od 100 igara u devet oblasti: gradi, prati put, razvrstavaj i spajaj – a onda vidi šta si naučio, uz izvore.',
   'onboarding.how.remember.title': 'Zapamti',
   'onboarding.how.remember.body': 'Teža pitanja vraćaju se kasnije da ih zaista zapamtiš.',
   'onboarding.how.grow.title': 'Rasti',
   'onboarding.how.grow.body': 'Učenje uzgaja tvoju Bašču znanja i puni kolekciju kartica. Napreduj, skupljaj značke – bez reklama, bez pritiska.',
   'onboarding.start.title': 'Tvoje putovanje počinje',
-  'onboarding.start.body': 'Svih osam tema je otvoreno. Počni gdje želiš – tvoj junak raste sa svakom lekcijom.',
+  'onboarding.start.body': 'Svih devet tema je otvoreno. Počni gdje želiš – tvoj junak raste sa svakom lekcijom.',
   'onboarding.start.cta': 'Počni učiti',
 
   // ---------- learner groups ----------
@@ -278,9 +279,9 @@ const bs: CoreDictionary = {
   'badge.arabic_beginner.name': 'Početnik arapskog',
   'badge.arabic_beginner.desc': 'Položi majstorski izazov teme Arapski.',
   'badge.topic_explorer.name': 'Istraživač tema',
-  'badge.topic_explorer.desc': 'Završi po jednu lekciju u svih osam tema.',
+  'badge.topic_explorer.desc': 'Završi po jednu lekciju u svih devet tema.',
   'badge.knowledge_master.name': 'Majstor znanja',
-  'badge.knowledge_master.desc': 'Položi majstorski izazov svih osam tema.',
+  'badge.knowledge_master.desc': 'Položi majstorski izazov svih devet tema.',
   'badge.story_explorer.name': 'Istraživač kazivanja',
   'badge.story_explorer.desc': 'Završi svoje prvo kazivanje o poslaniku.',
   'badge.history_learner.name': 'Poznavalac historije',

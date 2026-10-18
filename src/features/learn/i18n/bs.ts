@@ -4,7 +4,7 @@ const bs: Record<LearnKey, string> = {
   'tab.title': 'Uči',
   'tab.subtitle': 'Osam tema, sve otvorene. Unutar teme svaki korak otvara sljedeći.',
   'tab.recommended': 'Prijedlog za tebe',
-  'tab.recommended.child': 'Počni s namazom – kratke lekcije, igre i kazivanja.',
+  'tab.recommended.child': 'Počni s namazom – kratke lekcije, vježbe i kazivanja.',
   'tab.recommended.teen': 'Izaberi bilo koju temu – jedinice se završavaju majstorskim izazovom.',
   'tab.recommended.adult': 'Idi u dubinu uz jedinice, siru i izvore.',
   'tab.steps': '{completed} od {total} koraka',

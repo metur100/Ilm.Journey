@@ -38,7 +38,7 @@ const useStyles = makeStyles((c) => ({
   pressed: { opacity: 0.92, transform: [{ scale: 0.98 }] },
 }));
 
-/** Play tab: game of the day + the sections (Salah, Quran, Arabic / Sufara, …) as cards → section screen. */
+/** Play tab: game of the day + the sections (Salah, Quran, Sufara, Arabic, …) as cards → section screen. */
 export default function PlayScreen() {
   const { t, language } = useI18n();
   const { c } = useTheme();

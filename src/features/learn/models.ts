@@ -2,7 +2,7 @@ import type { LocalizedText, Question, SceneSpec, SourceRef, TopicId } from '@/c
 
 /**
  * knowledge-rpg "area" metadata (areas.json, copied as is). In Ilm Journey every area is one of the
- * eight topics and all are open from the start – the `map` and `unlock` fields are kept only so the
+ * nine topics and all are open from the start – the `map` and `unlock` fields are kept only so the
  * content file stays identical to the source app.
  */
 export interface Area {

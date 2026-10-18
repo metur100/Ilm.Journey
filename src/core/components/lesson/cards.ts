@@ -78,7 +78,8 @@ export const TOPIC_FALLBACK_ART: Record<TopicId, string> = {
   akhlaq: 'ui.heart',
   ramadan: 'object.lantern-ramadan',
   history: 'object.scroll',
-  arabic: 'object.pen',
+  sufara: 'object.pen',
+  arabic: 'object.book',
 };
 
 // ---------------------------------------------------------------------------------------------------------------

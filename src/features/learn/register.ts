@@ -1,5 +1,5 @@
 import { localize, localizedFrom, topicName, translate, translateNs } from '@/core/i18n';
-import { type Language, TOPIC_IDS, type LocalizedText, type TopicId } from '@/core/models';
+import { TOPIC_IDS, type LocalizedText, type TopicId } from '@/core/models';
 import {
   type CompletedItem,
   type ContinueItem,
@@ -11,7 +11,6 @@ import {
   registerSearch,
   type SearchResult,
 } from '@/core/registry';
-import { getGame } from '@/core/games';
 import type { QuestCandidate } from '@/core/services/quests';
 import { topicThemes } from '@/core/theme';
 
@@ -20,6 +19,7 @@ import { getQuestion, getUnit, LEARN_PREFIX, learnKey, testQuestionsOfArea, unit
 import { registerTopicTool, type TopicPathItem } from './extensions';
 import { learnI18n } from './i18n';
 import { registerLearnQuests } from './quests/register';
+import { registerSufaraCourse } from './sufara/register';
 import { buildTopicPath, nextPathEntry, pathItemHref, startedTopics } from './path';
 import { isMasterPassed } from './services/progression';
 import { masterTarget, startLearnAutoSave, unitTarget, useLearnStore } from './store/learnStore';
@@ -178,55 +178,10 @@ export function registerLearnFeature(): void {
     description: (lang) => translateNs(learnI18n, lang, 'tool.seerahDesc'),
     href: { pathname: '/(tabs)/stories', params: { segment: 'seerah' } },
   });
-  registerTopicTool({
-    id: 'arabic-sufara',
-    topic: 'arabic',
-    order: 30,
-    icon: 'letter',
-    label: () => 'Sufara',
-    // The sufara path in 5 stages (features/learn/sufara/logic.ts SUFARA_PATH), with its games in the Play tab's
-    // "Arabic / Sufara" section.
-    description: (lang) => ({
-      bs: 'Sufara u 5 koraka: harfovi, oblici i tačke, spajanje harfova, harekati i čitanje – uz igre u odjeljku Arapski / Sufara.',
-      de: 'Die Sufara in 5 Etappen: Buchstaben, Formen und Punkte, Verbinden, Vokalzeichen und Lesen – mit den Spielen im Bereich Arabisch / Sufara.',
-      en: 'The Sufara path in 5 stages: letters, shapes and dots, joining letters, harakat and reading – with the games of the Arabic / Sufara section.',
-    })[lang],
-    href: '/sufara',
-  });
+  // The Learn tab is for learning: games are not linked from the topic pages – they live in the Play tab.
 
-  // v2 game linked from topic pages ("A Day of Good Deeds" – its level 3 is a Ramadan day). Texts come from the game.
-  const gameText = (id: string, lang: Language, key: 'title' | 'description') => {
-    const game = getGame(id);
-    // Until the game registers (games register after the features), the label falls back to the core "Play".
-    return game ? translateNs(game.i18n, lang, key) : key === 'title' ? translate(lang, 'play.title') : '';
-  };
-  registerTopicTool({
-    id: 'game-good-deeds-day-akhlaq',
-    topic: 'akhlaq',
-    order: 40,
-    icon: 'play',
-    label: (lang) => gameText('good-deeds-day', lang, 'title'),
-    description: (lang) => gameText('good-deeds-day', lang, 'description'),
-    href: { pathname: '/game/[id]', params: { id: 'good-deeds-day' } },
-  });
-  registerTopicTool({
-    id: 'game-salah-guide',
-    topic: 'salah',
-    order: 40,
-    icon: 'play',
-    label: (lang) => gameText('salah-guide', lang, 'title'),
-    description: (lang) => gameText('salah-guide', lang, 'description'),
-    href: { pathname: '/game/[id]', params: { id: 'salah-guide' } },
-  });
-  registerTopicTool({
-    id: 'game-ramadan-journey',
-    topic: 'ramadan',
-    order: 40,
-    icon: 'play',
-    label: (lang) => gameText('ramadan-journey', lang, 'title'),
-    description: (lang) => gameText('ramadan-journey', lang, 'description'),
-    href: { pathname: '/game/[id]', params: { id: 'ramadan-journey' } },
-  });
+  // The Sufara course (lesson by lesson) at the start of the Sufara topic path.
+  registerSufaraCourse();
 
   // islam-quest beginner quests and topic tools (owned by the islam-quest port).
   registerLearnQuests();

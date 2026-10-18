@@ -33,6 +33,7 @@ const de: CoreDictionary = {
   'topic.akhlaq': 'Charakter',
   'topic.ramadan': 'Ramadan',
   'topic.history': 'Islamische Geschichte',
+  'topic.sufara': 'Sufara',
   'topic.arabic': 'Arabisch',
 
   // ---------- tabs ----------
@@ -61,13 +62,13 @@ const de: CoreDictionary = {
   'onboarding.how.learn.title': 'Lernen',
   'onboarding.how.learn.body': 'Acht Themen mit kurzen Lektionen, Prophetengeschichten und der Sira – jede Lektion nennt ihre Quellen.',
   'onboarding.how.practice.title': 'Spielen',
-  'onboarding.how.practice.body': 'Über 100 Spiele in acht Bereichen: bauen, nachzeichnen, sortieren und zuordnen – danach siehst du, was du gelernt hast, mit Quellen.',
+  'onboarding.how.practice.body': 'Über 100 Spiele in neun Bereichen: bauen, nachzeichnen, sortieren und zuordnen – danach siehst du, was du gelernt hast, mit Quellen.',
   'onboarding.how.remember.title': 'Merken',
   'onboarding.how.remember.body': 'Knifflige Fragen kommen später wieder, damit du sie dir wirklich merkst.',
   'onboarding.how.grow.title': 'Wachsen',
   'onboarding.how.grow.body': 'Lernen lässt deinen Ilm-Garten wachsen und füllt deine Kartensammlung. Steig auf, sammle Abzeichen – keine Werbung, kein Druck.',
   'onboarding.start.title': 'Deine Reise beginnt',
-  'onboarding.start.body': 'Alle acht Themen sind offen. Fang an, wo du möchtest – dein Held wächst mit jeder Lektion.',
+  'onboarding.start.body': 'Alle neun Themen sind offen. Fang an, wo du möchtest – dein Held wächst mit jeder Lektion.',
   'onboarding.start.cta': 'Loslernen',
 
   // ---------- learner groups ----------
@@ -278,9 +279,9 @@ const de: CoreDictionary = {
   'badge.arabic_beginner.name': 'Arabisch-Anfänger',
   'badge.arabic_beginner.desc': 'Bestehe die Meister-Herausforderung des Themas Arabisch.',
   'badge.topic_explorer.name': 'Themen-Entdecker',
-  'badge.topic_explorer.desc': 'Schließe in allen acht Themen eine Lektion ab.',
+  'badge.topic_explorer.desc': 'Schließe in allen neun Themen eine Lektion ab.',
   'badge.knowledge_master.name': 'Wissensmeister',
-  'badge.knowledge_master.desc': 'Bestehe die Meister-Herausforderung aller acht Themen.',
+  'badge.knowledge_master.desc': 'Bestehe die Meister-Herausforderung aller neun Themen.',
   'badge.story_explorer.name': 'Geschichten-Entdecker',
   'badge.story_explorer.desc': 'Schließe deine erste Prophetengeschichte ab.',
   'badge.history_learner.name': 'Geschichtskenner',

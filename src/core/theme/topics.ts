@@ -19,5 +19,6 @@ export const topicThemes: Record<TopicId, TopicTheme> = {
   akhlaq: { gradient: ['#1F6B4C', '#3E8F5A'], accent: '#2F8A5A', icon: 'heart', scene: { sky: 'day', elements: ['sun', 'garden', 'tree', 'river'] } },
   ramadan: { gradient: ['#33195F', '#6E43AE'], accent: '#5E36A0', icon: 'moon', scene: { sky: 'dusk', elements: ['stars', 'crescent', 'dunes', 'lanterns'] } },
   history: { gradient: ['#5B4A1E', '#8C7230'], accent: '#7D6320', icon: 'shield', scene: { sky: 'day', elements: ['clouds', 'city', 'pattern'] } },
-  arabic: { gradient: ['#7D2A44', '#B44A47'], accent: '#B0434F', icon: 'letter', scene: { sky: 'sunset', elements: ['sun', 'city', 'book'] } },
+  sufara: { gradient: ['#6B3A12', '#A8642A'], accent: '#9A5A22', icon: 'letter', scene: { sky: 'sunset', elements: ['sun', 'book', 'pattern'] } },
+  arabic: { gradient: ['#7D2A44', '#B44A47'], accent: '#B0434F', icon: 'quote', scene: { sky: 'sunset', elements: ['sun', 'city', 'book'] } },
 };

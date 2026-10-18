@@ -57,7 +57,7 @@ describe('GameShell', () => {
     useGardenStore.setState({ ...createGarden(), seeds: 0, water: 0 });
   });
 
-  it('runs intro → how to play → levels → play → result and rewards once', async () => {
+  it('runs intro → levels → play → result and rewards once (no how-to-play step)', async () => {
     let tree!: ReactTestRenderer;
     await act(async () => {
       tree = create(<GameShell gameId={DEMO_GAME_ID} />);
@@ -66,8 +66,7 @@ describe('GameShell', () => {
     expect(texts(root)).toContain('Star Path');
 
     await press(byLabel(root, 'Let’s play'));
-    expect(texts(root)).toContain('How to play');
-    await press(byLabel(root, 'Got it'));
+    expect(texts(root)).not.toContain('How to play');
     expect(useGamesStore.getState().games[DEMO_GAME_ID].introSeen).toBe(true);
 
     // Level 2 is locked until level 1 is done.

@@ -70,7 +70,7 @@ describe('islam-quest content in Ilm Journey', () => {
 
   it('lists the right quests in every world in order', () => {
     for (const world of QUEST_WORLD_LIST) {
-      const quests = QUESTS.filter((q) => q.worldId === world.id).sort((a, b) => a.order - b.order);
+      const quests = PACKS.find((p) => p.world.id === world.id)!.quests.slice().sort((a, b) => a.order - b.order);
       expect(world.questIds).toEqual(quests.map((q) => q.id));
       expect(quests.map((q) => q.order)).toEqual(quests.map((_, i) => i + 1));
     }
@@ -133,7 +133,7 @@ describe('islam-quest content in Ilm Journey', () => {
   });
 
   it('attaches sources to every lesson about religious rulings or stories', () => {
-    for (const lesson of LESSONS.filter((l) => l.worldId !== 'arabic' && l.id !== 'quran-structure' && l.id !== 'quran-makki-madani')) {
+    for (const lesson of LESSONS.filter((l) => l.worldId !== 'arabic' && l.worldId !== 'sufara' && l.id !== 'quran-structure' && l.id !== 'quran-makki-madani')) {
       expect({ id: lesson.id, hasSources: (lesson.sources?.length ?? 0) > 0 }).toEqual({ id: lesson.id, hasSources: true });
     }
   });

@@ -1,0 +1,311 @@
+{
+  "id": "arabic-marks",
+  "areaId": "sufara",
+  "order": 3,
+  "difficulty": 2,
+  "title": {
+    "en": "Sukun, Shadda, Tanwin and Madd",
+    "de": "Sukun, Schadda, Tanwin und Madd",
+    "bs": "Sukun, šedda, tenvin i medd"
+  },
+  "description": {
+    "en": "The marks that come after the short vowels.",
+    "de": "Die Zeichen nach den kurzen Vokalen.",
+    "bs": "Znakovi koji dolaze poslije kratkih samoglasnika."
+  },
+  "lesson": [
+    {
+      "heading": {
+        "en": "Sukun and shadda",
+        "de": "Sukun und Schadda",
+        "bs": "Sukun i šedda"
+      },
+      "body": {
+        "en": "Sukun (a small circle above the letter) means the letter has no vowel: بَلْ bal. Shadda (a small \"w\" above the letter) means the letter is doubled: in جَنَّة (jannah) the nun is doubled.",
+        "de": "Sukun (ein kleiner Kreis über dem Buchstaben) bedeutet: Der Buchstabe hat keinen Vokal – بَلْ bal. Schadda (ein kleines „w“ über dem Buchstaben) bedeutet: Der Buchstabe wird verdoppelt – in جَنَّة (Dschanna) wird das Nun verdoppelt.",
+        "bs": "Sukun (kružić iznad harfa) znači da harf nema samoglasnika: بَلْ bel. Šedda (malo „w“ iznad harfa) znači da se harf udvostručuje: u جَنَّة (džennet) nun je udvostručen."
+      },
+      "arabic": "بْ بّ"
+    },
+    {
+      "heading": {
+        "en": "Tanwin",
+        "de": "Tanwin",
+        "bs": "Tenvin"
+      },
+      "body": {
+        "en": "Tanwin is a doubled vowel mark at the end of a word. It adds an \"n\": بً ban, بٍ bin, بٌ bun.",
+        "de": "Tanwin ist ein doppeltes Vokalzeichen am Wortende. Es fügt ein „n“ hinzu: بً ban, بٍ bin, بٌ bun.",
+        "bs": "Tenvin je dvostruki harekat na kraju riječi. Dodaje „n“: بً ben, بٍ bin, بٌ bun."
+      },
+      "arabic": "بً بٍ بٌ",
+      "transliteration": "ban, bin, bun"
+    },
+    {
+      "heading": {
+        "en": "Madd – the long sound",
+        "de": "Madd – der lange Laut",
+        "bs": "Medd – dugi glas"
+      },
+      "body": {
+        "en": "Madd makes a vowel long: alif after fatha (بَا bā), ya after kasra (بِي bī) and waw after damma (بُو bū).",
+        "de": "Madd macht einen Vokal lang: Alif nach Fatha (بَا bā), Ya nach Kasra (بِي bī) und Waw nach Damma (بُو bū).",
+        "bs": "Medd produžuje samoglasnik: elif poslije fethe (بَا bā), je poslije kesre (بِي bī) i vav poslije damme (بُو bū)."
+      },
+      "arabic": "بَا بِي بُو",
+      "transliteration": "bā, bī, bū"
+    }
+  ],
+  "practiceId": "arabic-marks-p",
+  "testIds": [
+    "arabic-marks-1",
+    "arabic-marks-2",
+    "arabic-marks-3",
+    "arabic-marks-4"
+  ],
+  "explanation": {
+    "en": "With these marks you can read every vowelled word: no vowel, a doubled letter, an \"n\" at the end and the long sounds.",
+    "de": "Mit diesen Zeichen kannst du jedes Wort mit Vokalzeichen lesen: kein Vokal, ein doppelter Buchstabe, ein „n“ am Ende und die langen Laute.",
+    "bs": "S ovim znakovima možeš čitati svaku riječ s harekatima: bez samoglasnika, udvojen harf, „n“ na kraju i dugi glasovi."
+  },
+  "sources": [
+    {
+      "sourceName": "Quran",
+      "sourceReference": "12:2"
+    }
+  ],
+  "questions": [
+    {
+      "id": "arabic-marks-p",
+      "type": "matching",
+      "areaId": "sufara",
+      "topic": "marks",
+      "prompt": {
+        "en": "Match each mark with its name.",
+        "de": "Ordne jedem Zeichen seinen Namen zu.",
+        "bs": "Spoji svaki znak s njegovim imenom."
+      },
+      "pairs": [
+        {
+          "id": "sukun",
+          "left": {
+            "en": "بْ",
+            "de": "بْ",
+            "bs": "بْ"
+          },
+          "right": {
+            "en": "Sukun",
+            "de": "Sukun",
+            "bs": "Sukun"
+          }
+        },
+        {
+          "id": "shadda",
+          "left": {
+            "en": "بّ",
+            "de": "بّ",
+            "bs": "بّ"
+          },
+          "right": {
+            "en": "Shadda",
+            "de": "Schadda",
+            "bs": "Šedda"
+          }
+        },
+        {
+          "id": "tanwin",
+          "left": {
+            "en": "بٌ",
+            "de": "بٌ",
+            "bs": "بٌ"
+          },
+          "right": {
+            "en": "Tanwin",
+            "de": "Tanwin",
+            "bs": "Tenvin"
+          }
+        }
+      ],
+      "explanation": {
+        "en": "Sukun – no vowel, shadda – doubled, tanwin – an \"n\" at the end.",
+        "de": "Sukun – kein Vokal, Schadda – verdoppelt, Tanwin – ein „n“ am Ende.",
+        "bs": "Sukun – bez samoglasnika, šedda – udvojen harf, tenvin – „n“ na kraju."
+      }
+    },
+    {
+      "id": "arabic-marks-1",
+      "type": "multipleChoice",
+      "areaId": "sufara",
+      "topic": "marks",
+      "prompt": {
+        "en": "Which mark means the letter has no vowel?",
+        "de": "Welches Zeichen bedeutet, dass der Buchstabe keinen Vokal hat?",
+        "bs": "Koji znak znači da harf nema samoglasnika?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "Sukun",
+            "de": "Sukun",
+            "bs": "Sukun"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "Shadda",
+            "de": "Schadda",
+            "bs": "Šedda"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "Damma",
+            "de": "Damma",
+            "bs": "Damma"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "The sukun – a small circle – means \"no vowel\": بْ.",
+        "de": "Das Sukun – ein kleiner Kreis – bedeutet „kein Vokal“: بْ.",
+        "bs": "Sukun – kružić – znači „bez samoglasnika“: بْ."
+      }
+    },
+    {
+      "id": "arabic-marks-2",
+      "type": "multipleChoice",
+      "areaId": "sufara",
+      "topic": "marks",
+      "prompt": {
+        "en": "How do you read بٍ ?",
+        "de": "Wie liest man بٍ ?",
+        "bs": "Kako se čita بٍ ?"
+      },
+      "options": [
+        {
+          "id": "a",
+          "text": {
+            "en": "bin",
+            "de": "bin",
+            "bs": "bin"
+          }
+        },
+        {
+          "id": "b",
+          "text": {
+            "en": "bi",
+            "de": "bi",
+            "bs": "bi"
+          }
+        },
+        {
+          "id": "c",
+          "text": {
+            "en": "bun",
+            "de": "bun",
+            "bs": "bun"
+          }
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": {
+        "en": "Two kasras are a tanwin: \"i\" with an \"n\" – bin.",
+        "de": "Zwei Kasras sind ein Tanwin: „i“ mit „n“ – bin.",
+        "bs": "Dvije kesre su tenvin: „i“ s „n“ – bin."
+      }
+    },
+    {
+      "id": "arabic-marks-3",
+      "type": "trueFalse",
+      "areaId": "sufara",
+      "topic": "marks",
+      "prompt": {
+        "en": "In بَا the alif makes the \"a\" long.",
+        "de": "In بَا macht das Alif das „a“ lang.",
+        "bs": "U بَا elif produžuje glas „a“."
+      },
+      "correct": true,
+      "explanation": {
+        "en": "Alif after fatha is a madd: بَا is read bā.",
+        "de": "Alif nach Fatha ist ein Madd: بَا liest man bā.",
+        "bs": "Elif poslije fethe je medd: بَا se čita bā."
+      }
+    },
+    {
+      "id": "arabic-marks-4",
+      "type": "categorize",
+      "areaId": "sufara",
+      "topic": "marks",
+      "prompt": {
+        "en": "Short or long?",
+        "de": "Kurz oder lang?",
+        "bs": "Kratko ili dugo?"
+      },
+      "categories": [
+        {
+          "id": "short",
+          "label": {
+            "en": "Short vowel",
+            "de": "Kurzer Vokal",
+            "bs": "Kratak samoglasnik"
+          }
+        },
+        {
+          "id": "long",
+          "label": {
+            "en": "Long vowel (madd)",
+            "de": "Langer Vokal (Madd)",
+            "bs": "Dug samoglasnik (medd)"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "ba",
+          "text": {
+            "en": "بَ",
+            "de": "بَ",
+            "bs": "بَ"
+          },
+          "categoryId": "short"
+        },
+        {
+          "id": "bi",
+          "text": {
+            "en": "بِ",
+            "de": "بِ",
+            "bs": "بِ"
+          },
+          "categoryId": "short"
+        },
+        {
+          "id": "baa",
+          "text": {
+            "en": "بَا",
+            "de": "بَا",
+            "bs": "بَا"
+          },
+          "categoryId": "long"
+        },
+        {
+          "id": "buu",
+          "text": {
+            "en": "بُو",
+            "de": "بُو",
+            "bs": "بُو"
+          },
+          "categoryId": "long"
+        }
+      ],
+      "explanation": {
+        "en": "A madd letter (alif, ya, waw) after the vowel makes it long.",
+        "de": "Ein Madd-Buchstabe (Alif, Ya, Waw) nach dem Vokal macht ihn lang.",
+        "bs": "Harf medda (elif, je, vav) poslije harekata produžuje glas."
+      }
+    }
+  ]
+}

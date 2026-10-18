@@ -119,6 +119,8 @@ const en = {
   'episode.mainEvent': "Main event",
   'narration.play': "Listen to narration",
   'narration.pause': "Pause narration",
+  'narration.stop': "Stop",
+  'narration.preparing': "Getting ready…",
   'reflection.title': "Think about it",
   'reflection.note': "Your reflections stay on this device and are never judged.",
   'reflection.write': "Write a reflection",

@@ -5,9 +5,9 @@ import type { Area, Unit } from '../models';
 import akhlaq1 from './akhlaq/akhlaq-sabr-shukr.json';
 import akhlaq2 from './akhlaq/akhlaq-honesty-trust.json';
 import akhlaq3 from './akhlaq/akhlaq-mercy-family.json';
-import arabic1 from './arabic/arabic-letters.json';
-import arabic2 from './arabic/arabic-harakat.json';
-import arabic3 from './arabic/arabic-words.json';
+import arabic1 from './arabic/arabic-words.json';
+import arabic2 from './arabic/arabic-phrases.json';
+import arabic3 from './arabic/arabic-prayer-words.json';
 import areas from './areas.json';
 import history1 from './history/history-caliphs.json';
 import history2 from './history/history-scholars.json';
@@ -27,6 +27,9 @@ import salah3 from './salah/salah-wudu.json';
 import seerah1 from './seerah/seerah-early.json';
 import seerah2 from './seerah/seerah-makkah.json';
 import seerah3 from './seerah/seerah-madinah.json';
+import sufara1 from './sufara/arabic-letters.json';
+import sufara2 from './sufara/arabic-harakat.json';
+import sufara3 from './sufara/arabic-marks.json';
 
 // JSON imports are widened by TypeScript; the content test suite verifies the shape.
 export const AREAS: readonly Area[] = (areas as unknown as Area[]).slice().sort((a, b) => a.order - b.order);
@@ -39,6 +42,7 @@ export const UNITS: readonly Unit[] = [
   akhlaq1, akhlaq2, akhlaq3,
   ramadan1, ramadan2, ramadan3,
   history1, history2, history3,
+  sufara1, sufara2, sufara3,
   arabic1, arabic2, arabic3,
 ].map((u) => u as unknown as Unit);
 

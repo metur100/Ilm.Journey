@@ -62,7 +62,9 @@ const bs: Record<StoriesKey, string> = {
   'player.example': 'Na primjer',
   'player.reflection': 'Razmisli',
   'player.lessonsDone': 'Razmislio sam',
-  'player.readAloud': 'Čitaj naglas',
+  'player.listen': 'Slušaj',
+  'player.listenStop': 'Zaustavi',
+  'player.listenPreparing': 'Pripremam…',
 
   'place.makkah': 'Mekka',
   'place.madinah': 'Medina',

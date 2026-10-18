@@ -16,7 +16,7 @@ afterEach(() => clearLearnExtensionsForTests());
 
 describe('topic paths', () => {
   it('opens every topic from the start', () => {
-    for (const topic of ['salah', 'quran', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history', 'arabic'] as const) {
+    for (const topic of ['salah', 'quran', 'prophets', 'seerah', 'akhlaq', 'ramadan', 'history', 'sufara', 'arabic'] as const) {
       expect(nextPathEntry(topic, { units: {}, masters: {} })?.status).toBe('available');
     }
   });

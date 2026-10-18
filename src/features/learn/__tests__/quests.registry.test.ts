@@ -11,6 +11,7 @@ import {
   getRecentlyCompleted,
   searchAll,
 } from '@/core/registry';
+import { TOPIC_IDS } from '@/core/models';
 import { createInitialData } from '@/core/services/engine';
 import { XP } from '@/core/services/xp';
 import { savePersisted } from '@/core/storage';
@@ -115,12 +116,13 @@ describe('topic path', () => {
     expect(useAppStore.getState().quests.find((q) => q.kind === 'learning')?.completed).toBe(true);
   });
 
-  it('registers the topic tools for quran, arabic and ramadan', () => {
+  it('registers the topic tools for quran, sufara and ramadan – and no games (they are in the Play tab)', () => {
     expect(getTopicTools('quran').map((t) => t.href)).toEqual(['/tools/quran', '/tools/duas']);
-    expect(getTopicTools('arabic').map((t) => t.href)).toEqual(['/tools/arabic', '/sufara']);
-    // The Ramadan page also links the game "A Day of Good Deeds" (its level 3 is a Ramadan day).
-    expect(getTopicTools('ramadan').map((t) => t.href)).toEqual(['/tools/ramadan', { pathname: '/game/[id]', params: { id: 'ramadan-journey' } }]);
-    for (const tool of [...getTopicTools('quran'), ...getTopicTools('arabic'), ...getTopicTools('ramadan')]) {
+    expect(getTopicTools('sufara').map((t) => t.href)).toEqual(['/tools/arabic']);
+    expect(getTopicTools('arabic')).toEqual([]);
+    expect(getTopicTools('ramadan').map((t) => t.href)).toEqual(['/tools/ramadan']);
+    for (const topic of TOPIC_IDS) for (const tool of getTopicTools(topic)) expect(JSON.stringify(tool.href)).not.toContain('/game/');
+    for (const tool of [...getTopicTools('quran'), ...getTopicTools('sufara'), ...getTopicTools('ramadan')]) {
       for (const lang of ['en', 'de', 'bs'] as const) expect(tool.label(lang).length).toBeGreaterThan(0);
     }
   });

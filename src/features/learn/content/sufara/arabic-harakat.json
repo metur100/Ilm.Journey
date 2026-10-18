@@ -1,6 +1,6 @@
 {
   "id": "arabic-harakat",
-  "areaId": "arabic",
+  "areaId": "sufara",
   "order": 2,
   "difficulty": 2,
   "title": { "en": "Harakat – Short Vowels", "de": "Harakat – kurze Vokale", "bs": "Harekati – kratki samoglasnici" },
@@ -28,7 +28,7 @@
     {
       "id": "arabic-harakat-p",
       "type": "multipleChoice",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "harakat",
       "prompt": { "en": "How do you read بَ ?", "de": "Wie liest man بَ ?", "bs": "Kako se čita بَ ?" },
       "options": [
@@ -42,7 +42,7 @@
     {
       "id": "arabic-harakat-1",
       "type": "matching",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "harakat",
       "prompt": { "en": "Match each syllable with its sound.", "de": "Ordne jeder Silbe ihren Laut zu.", "bs": "Spoji svaki slog s njegovim glasom." },
       "pairs": [
@@ -55,7 +55,7 @@
     {
       "id": "arabic-harakat-2",
       "type": "trueFalse",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "harakat",
       "prompt": { "en": "A shadda means the letter is doubled.", "de": "Eine Schadda bedeutet, dass der Buchstabe verdoppelt wird.", "bs": "Šedda znači da se harf udvostručuje." },
       "correct": true,
@@ -64,7 +64,7 @@
     {
       "id": "arabic-harakat-3",
       "type": "categorize",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "harakat",
       "prompt": { "en": "Where is the mark written?", "de": "Wo steht das Zeichen?", "bs": "Gdje se piše znak?" },
       "categories": [
@@ -81,7 +81,7 @@
     {
       "id": "arabic-harakat-4",
       "type": "fillBlank",
-      "areaId": "arabic",
+      "areaId": "sufara",
       "topic": "harakat",
       "prompt": { "en": "Fill in the blank.", "de": "Fülle die Lücke.", "bs": "Popuni prazninu." },
       "sentence": { "en": "A small circle above a letter (sukun) means ___.", "de": "Ein kleiner Kreis über einem Buchstaben (Sukun) bedeutet ___.", "bs": "Kružić iznad harfa (sukun) znači ___." },

@@ -3,6 +3,7 @@ import { getGame, validateGame, type GameDef, type GameLevel } from '@/core/game
 import { namespaceProblems, playToEnd, renderGame, type RenderedGame } from '@/core/games/kit/testing';
 
 import { ARABIC_GAME_IDS, registerArabicGames } from '../index';
+import { SUFARA_GAME_IDS } from '../shared/define';
 
 jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 jest.mock('@/core/services/speech', () => ({
@@ -32,7 +33,8 @@ describe('Arabic / Sufara games', () => {
   it('registers at least the planned games in sufara order', () => {
     const orders = games().map((g) => g.order ?? 0);
     expect([...orders].sort((a, b) => a - b)).toEqual(orders);
-    for (const game of games()) expect(game.topicId).toBe('arabic');
+    for (const game of games()) expect(game.topicId).toBe(SUFARA_GAME_IDS.includes(game.id) ? 'sufara' : 'arabic');
+    expect(games().filter((g) => g.topicId === 'arabic').map((g) => g.id)).toEqual(['word-builder', 'word-memory']);
   });
 
   it.each(ARABIC_GAME_IDS)('%s is valid, complete in en / de / bs and its art exists', (id) => {

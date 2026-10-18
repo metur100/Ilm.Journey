@@ -61,7 +61,9 @@ const en = {
   'player.example': 'For example',
   'player.reflection': 'Think about it',
   'player.lessonsDone': 'I have thought about it',
-  'player.readAloud': 'Read aloud',
+  'player.listen': 'Listen',
+  'player.listenStop': 'Stop',
+  'player.listenPreparing': 'Getting ready…',
 
   'place.makkah': 'Makkah',
   'place.madinah': 'Madinah',

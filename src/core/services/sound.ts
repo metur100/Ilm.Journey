@@ -11,7 +11,7 @@ const SOURCES: Record<SoundName, number> = {
   reward: require('../../../assets/sounds/reward.wav'),
 };
 
-const VOLUME: Record<SoundName, number> = { click: 1, success: 1, failure: 1, reward: 1 };
+const VOLUME: Record<SoundName, number> = { click: 0.8, success: 0.8, failure: 0.7, reward: 0.75 };
 
 const players = new Map<SoundName, AudioPlayer>();
 
