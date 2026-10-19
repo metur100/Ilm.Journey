@@ -34,7 +34,7 @@ describe('Arabic / Sufara games', () => {
     const orders = games().map((g) => g.order ?? 0);
     expect([...orders].sort((a, b) => a - b)).toEqual(orders);
     for (const game of games()) expect(game.topicId).toBe(SUFARA_GAME_IDS.includes(game.id) ? 'sufara' : 'arabic');
-    expect(games().filter((g) => g.topicId === 'arabic').map((g) => g.id)).toEqual(['word-builder', 'word-memory']);
+    expect(games().filter((g) => g.topicId === 'arabic').map((g) => g.id)).toEqual(ARABIC_GAME_IDS.filter((id) => !SUFARA_GAME_IDS.includes(id)));
   });
 
   it.each(ARABIC_GAME_IDS)('%s is valid, complete in en / de / bs and its art exists', (id) => {

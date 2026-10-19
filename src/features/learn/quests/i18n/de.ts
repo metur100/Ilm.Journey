@@ -73,8 +73,8 @@ const de: Record<QuestKey, string> = {
   'fact.prompt': 'Wusstest du? „{fact}“ – Stimmt das?',
   'fact.explanation': 'Ja, das stimmt: {fact}',
 
-  'tool.quran': 'Koran auswendig lernen',
-  'tool.quranDesc': 'Al-Fatiha und der ganze Juz ʿAmma: Vers für Vers lernen, anhören und dich selbst prüfen.',
+  'tool.quran': 'Dschuz ʿAmma – alle Suren',
+  'tool.quranDesc': 'Al-Fatiha und alle 37 Suren des Dschuz ʿAmma: jeden Vers lernen, anhören und dich selbst prüfen.',
   'tool.duas': 'Bittgebete aus dem Koran',
   'tool.duasDesc': 'Bittgebete aus dem Koran nach Themen – mit Übersetzung und Zusammenhang.',
   'tool.arabic': 'Alphabet & Nachfahren',
@@ -82,7 +82,7 @@ const de: Record<QuestKey, string> = {
   'tool.ramadan': 'Ramadan-Reise',
   'tool.ramadanDesc': 'Kalender und Gute-Taten-Tracker',
 
-  'mem.title': 'Koran auswendig lernen',
+  'mem.title': 'Dschuz ʿAmma – alle Suren',
   'mem.intro': 'Al-Fatiha und der vollständige Juz ʿAmma (Suren 78–114). Lerne Vers für Vers, wiederhole oft und prüfe dich selbst – am besten gemeinsam mit einer Lehrerin oder einem Lehrer.',
   'mem.order': 'Reihenfolge',
   'mem.order.memorization': 'Lernreihenfolge',

@@ -57,6 +57,9 @@ const en = {
   'tool.storiesDesc': 'Interactive stories of all 25 prophets in the Stories tab.',
   'tool.seerah': 'The Seerah journey',
   'tool.seerahDesc': 'Episodes, timeline and map of the life of the Prophet ﷺ.',
+  'tool.salah': 'Salah – the complete guide',
+  'tool.salahDesc': 'All five prayers, the conditions, wudu and how a rakat is performed.',
+  'salahGuide.teacher': 'Learn the pronunciation and the details with a qualified teacher as well.',
 } as const;
 
 export type LearnKey = keyof typeof en;

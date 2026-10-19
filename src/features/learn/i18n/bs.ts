@@ -58,6 +58,9 @@ const bs: Record<LearnKey, string> = {
   'tool.storiesDesc': 'Interaktivna kazivanja o svih 25 poslanika u dijelu „Kazivanja“.',
   'tool.seerah': 'Putovanje kroz siru',
   'tool.seerahDesc': 'Epizode, hronologija i mapa života Poslanika ﷺ.',
+  'tool.salah': 'Namaz – potpuni vodič',
+  'tool.salahDesc': 'Svih pet namaza, šarti, abdest i kako se klanja rekat.',
+  'salahGuide.teacher': 'Izgovor i pojedinosti uči i kod kvalifikovanog učitelja.',
 };
 
 export default bs;

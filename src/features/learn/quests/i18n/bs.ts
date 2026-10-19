@@ -74,8 +74,8 @@ const bs: Record<QuestKey, string> = {
   'fact.prompt': 'Da li si znao? „{fact}“ – Je li to tačno?',
   'fact.explanation': 'Da, to je tačno: {fact}',
 
-  'tool.quran': 'Učenje Kur\'ana napamet',
-  'tool.quranDesc': 'El-Fatiha i cijeli Džuz Amme: uči ajet po ajet, slušaj i provjeri se.',
+  'tool.quran': 'Džuz Amma – sve sure',
+  'tool.quranDesc': 'El-Fatiha i svih 37 sura Džuz Amme: uči svaki ajet, slušaj i provjeri se.',
   'tool.duas': 'Dove iz Kur\'ana',
   'tool.duasDesc': 'Dove iz Kur\'ana po temama – s prijevodom i kontekstom.',
   'tool.arabic': 'Harfovi i pisanje',
@@ -83,7 +83,7 @@ const bs: Record<QuestKey, string> = {
   'tool.ramadan': 'Ramazansko putovanje',
   'tool.ramadanDesc': 'Kalendar i praćenje dobrih djela',
 
-  'mem.title': 'Učenje Kur\'ana napamet',
+  'mem.title': 'Džuz Amma – sve sure',
   'mem.intro': 'El-Fatiha i cijeli Džuz Amme (sure 78–114). Uči ajet po ajet, često ponavljaj i provjeri se – najbolje zajedno s muallimom ili muallimkom.',
   'mem.order': 'Redoslijed',
   'mem.order.memorization': 'Redoslijed učenja',

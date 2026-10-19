@@ -1,0 +1,108 @@
+{
+  "id": "history-bosnia",
+  "areaId": "history",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "Islam in Bosnia", "de": "Der Islam in Bosnien", "bs": "Islam u Bosni" },
+  "description": {
+    "en": "How Islam reached Bosnia and what it built there.",
+    "de": "Wie der Islam nach Bosnien kam und was er dort aufbaute.",
+    "bs": "Kako je islam došao u Bosnu i šta je tamo izgradio."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Arrival", "de": "Ankunft", "bs": "Dolazak" },
+      "body": {
+        "en": "Islam reached Bosnia with the Ottoman state in the 15th century. Over time a large part of the population accepted Islam, while Catholic and Orthodox Christians and Jews continued to live there. Bosnia became a frontier province with its own culture, architecture and religious institutions.",
+        "de": "Der Islam kam im 15. Jahrhundert mit dem osmanischen Staat nach Bosnien. Im Laufe der Zeit nahm ein großer Teil der Bevölkerung den Islam an, während katholische und orthodoxe Christen sowie Juden weiter dort lebten. Bosnien wurde eine Grenzprovinz mit eigener Kultur, Architektur und religiösen Einrichtungen.",
+        "bs": "Islam je došao u Bosnu s osmanskim carstvom u 15. stoljeću. Vremenom je veliki dio stanovništva prihvatio islam, dok su katolici, pravoslavci i Jevreji i dalje živjeli tamo. Bosna je postala pogranična pokrajina s vlastitom kulturom, arhitekturom i vjerskim ustanovama."
+      }
+    },
+    {
+      "heading": { "en": "What it built", "de": "Was er aufbaute", "bs": "Šta je izgradio" },
+      "body": {
+        "en": "Mosques, madrasas, tekkes, libraries, bridges and clock towers shaped Bosnian towns. Sarajevo became known for its many mosques, churches and synagogues close together. The Islamic Community of Bosnia and Herzegovina continues the tradition of the ilmihal, the mekteb and the madrasa, and Bosnian Muslims have kept a distinct European Islamic culture.",
+        "de": "Moscheen, Medresen, Tekkes, Bibliotheken, Brücken und Uhrtürme prägten die bosnischen Städte. Sarajevo wurde für seine vielen Moscheen, Kirchen und Synagogen nahe beieinander bekannt. Die Islamische Gemeinschaft in Bosnien und Herzegowina führt die Tradition von Ilmihal, Mekteb und Medresa fort, und die bosnischen Muslime haben eine eigenständige europäische islamische Kultur bewahrt.",
+        "bs": "Džamije, medrese, tekije, biblioteke, mostovi i sahat-kule oblikovali su bosanske gradove. Sarajevo je postalo poznato po mnogim džamijama, crkvama i sinagogama na blizinu. Islamska zajednica u Bosni i Hercegovini nastavlja tradiciju ilmihala, mekteba i medrese, a bosanski muslimani sačuvali su posebnu evropsku islamsku kulturu."
+      }
+    }
+  ],
+  "practiceId": "history-bosnia-p",
+  "testIds": ["history-bosnia-1", "history-bosnia-2", "history-bosnia-3", "history-bosnia-4"],
+  "explanation": {
+    "en": "Islam in Bosnia is part of European Islamic history – local, learned and connected to the wider Muslim world.",
+    "de": "Der Islam in Bosnien ist Teil der europäischen islamischen Geschichte – lokal, gelehrt und mit der weiteren muslimischen Welt verbunden.",
+    "bs": "Islam u Bosni dio je evropske islamske historije – domaći, učen i povezan sa širim muslimanskim svijetom."
+  },
+  "sources": [
+    { "sourceName": "Islamska zajednica u BiH", "sourceReference": "Historija islama u Bosni" },
+    { "sourceName": "Encyclopaedia of Islam", "sourceReference": "Bosnia" }
+  ],
+  "questions": [
+    {
+      "id": "history-bosnia-p",
+      "type": "multipleChoice",
+      "areaId": "history",
+      "topic": "history-bosnia",
+      "prompt": { "en": "With which state did Islam reach Bosnia?", "de": "Mit welchem Staat kam der Islam nach Bosnien?", "bs": "S kojom državom je islam došao u Bosnu?" },
+      "options": [
+        { "id": "a", "text": { "en": "The Ottoman state", "de": "Dem osmanischen Staat", "bs": "Osmanskim carstvom" } },
+        { "id": "b", "text": { "en": "The Roman Empire", "de": "Dem Römischen Reich", "bs": "Rimskim carstvom" } },
+        { "id": "c", "text": { "en": "The Abbasid caliphate", "de": "Dem Abbasiden-Kalifat", "bs": "Abasidskim halifatom" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Islam arrived with the Ottoman state in the 15th century.", "de": "Der Islam kam im 15. Jahrhundert mit dem osmanischen Staat.", "bs": "Islam je došao s osmanskim carstvom u 15. stoljeću." }
+    },
+    {
+      "id": "history-bosnia-1",
+      "type": "trueFalse",
+      "areaId": "history",
+      "topic": "history-bosnia",
+      "prompt": { "en": "Sarajevo became known for mosques, churches and synagogues close together.", "de": "Sarajevo wurde für Moscheen, Kirchen und Synagogen nahe beieinander bekannt.", "bs": "Sarajevo je postalo poznato po džamijama, crkvama i sinagogama na blizinu." },
+      "correct": true,
+      "explanation": { "en": "Yes – the city is known for its religious diversity.", "de": "Ja – die Stadt ist für ihre religiöse Vielfalt bekannt.", "bs": "Da – grad je poznat po vjerskoj raznolikosti." }
+    },
+    {
+      "id": "history-bosnia-2",
+      "type": "matching",
+      "areaId": "history",
+      "topic": "history-bosnia",
+      "prompt": { "en": "Match each institution with its role.", "de": "Ordne jeder Einrichtung ihre Rolle zu.", "bs": "Spoji svaku ustanovu s njenom ulogom." },
+      "pairs": [
+        { "id": "mekteb", "left": { "en": "Mekteb", "de": "Mekteb", "bs": "Mekteb" }, "right": { "en": "Basic religious school for children", "de": "Grundschule für Religion für Kinder", "bs": "Osnovna vjerska škola za djecu" } },
+        { "id": "madrasa", "left": { "en": "Madrasa", "de": "Medresa", "bs": "Medresa" }, "right": { "en": "Higher Islamic school", "de": "Höhere islamische Schule", "bs": "Viša islamska škola" } },
+        { "id": "dzamija", "left": { "en": "Džamija", "de": "Moschee", "bs": "Džamija" }, "right": { "en": "Place of prayer and community", "de": "Ort des Gebets und der Gemeinschaft", "bs": "Mjesto namaza i zajednice" } }
+      ],
+      "explanation": { "en": "Mekteb, madrasa and mosque form the traditional learning network.", "de": "Mekteb, Medresa und Moschee bilden das traditionelle Lernnetz.", "bs": "Mekteb, medresa i džamija čine tradicionalnu mrežu učenja." }
+    },
+    {
+      "id": "history-bosnia-3",
+      "type": "fillBlank",
+      "areaId": "history",
+      "topic": "history-bosnia",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Islam reached Bosnia in the ___ century.", "de": "Der Islam erreichte Bosnien im ___ Jahrhundert.", "bs": "Islam je došao u Bosnu u ___ stoljeću." },
+      "options": [
+        { "id": "a", "text": { "en": "15th", "de": "15.", "bs": "15." } },
+        { "id": "b", "text": { "en": "7th", "de": "7.", "bs": "7." } },
+        { "id": "c", "text": { "en": "20th", "de": "20.", "bs": "20." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The Ottoman period began in the 15th century.", "de": "Die osmanische Zeit begann im 15. Jahrhundert.", "bs": "Osmanski period počeo je u 15. stoljeću." }
+    },
+    {
+      "id": "history-bosnia-4",
+      "type": "multipleChoice",
+      "areaId": "history",
+      "topic": "history-bosnia",
+      "prompt": { "en": "Which institution continues the ilmihal and mekteb tradition?", "de": "Welche Institution führt die Ilmihal- und Mekteb-Tradition fort?", "bs": "Koja ustanova nastavlja tradiciju ilmihala i mekteba?" },
+      "options": [
+        { "id": "a", "text": { "en": "The Islamic Community in Bosnia and Herzegovina", "de": "Die Islamische Gemeinschaft in Bosnien und Herzegowina", "bs": "Islamska zajednica u Bosni i Hercegovini" } },
+        { "id": "b", "text": { "en": "A museum", "de": "Ein Museum", "bs": "Muzej" } },
+        { "id": "c", "text": { "en": "A private company", "de": "Ein privates Unternehmen", "bs": "Privatna firma" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The Islamic Community organises mekteb, madrasa and ilmihal teaching.", "de": "Die Islamische Gemeinschaft organisiert Mekteb-, Medresa- und Ilmihal-Unterricht.", "bs": "Islamska zajednica organizuje mektebsku, medresansku i ilmihalsku nastavu." }
+    }
+  ]
+}

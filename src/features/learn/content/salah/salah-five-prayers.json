@@ -1,0 +1,119 @@
+{
+  "id": "salah-five-prayers",
+  "areaId": "salah",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "The Five Prayers, Step by Step", "de": "Die fünf Gebete Schritt für Schritt", "bs": "Pet namaza, korak po korak" },
+  "description": {
+    "en": "How each of the five daily prayers is performed, with its time and its rakats.",
+    "de": "Wie jedes der fünf täglichen Gebete verrichtet wird, mit seiner Zeit und seinen Rak‘as.",
+    "bs": "Kako se klanja svaki od pet dnevnih namaza, s vremenom i rekatima."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Sabah – at dawn", "de": "Fadschr – in der Morgendämmerung", "bs": "Sabah – u zoru" },
+      "body": {
+        "en": "Sabah is prayed from dawn until sunrise. First 2 rakats of sunnah, then 2 rakats of fard. In the fard the imam recites aloud. After the fard the prayer ends with selam; there is no sunnah after Sabah.",
+        "de": "Fadschr wird von der Morgendämmerung bis zum Sonnenaufgang gebetet. Zuerst 2 Rak‘as Sunna, dann 2 Rak‘as Fard. Im Fard rezitiert der Imam laut. Nach dem Fard endet das Gebet mit dem Selam; es gibt keine Sunna nach Fadschr.",
+        "bs": "Sabah se klanja od zore do izlaska sunca. Prvo 2 rekata sunneta, zatim 2 rekata farza. U farzu imam uči naglas. Poslije farza namaz završava selamom; nema sunneta poslije sabaha."
+      }
+    },
+    {
+      "heading": { "en": "Podne and Ikindija", "de": "Dhuhr und Asr", "bs": "Podne i ikindija" },
+      "body": {
+        "en": "Podne begins after the sun passes its highest point: 4 sunnah, 4 fard and 2 sunnah. Ikindija is prayed in the afternoon: 4 sunnah and 4 fard. In both prayers the recitation is quiet. Ikindija is the “middle prayer” the Quran especially reminds us to guard.",
+        "de": "Dhuhr beginnt, nachdem die Sonne ihren höchsten Punkt überschritten hat: 4 Sunna, 4 Fard und 2 Sunna. Asr wird am Nachmittag gebetet: 4 Sunna und 4 Fard. In beiden Gebeten wird leise rezitiert. Asr ist das „mittlere Gebet“, das der Koran besonders zu bewahren mahnt.",
+        "bs": "Podne počinje nakon što sunce prođe najvišu tačku: 4 sunneta, 4 farza i 2 sunneta. Ikindija se klanja poslijepodne: 4 sunneta i 4 farza. U oba namaza uči se tiho. Ikindija je „srednji namaz“ na koji Kur’an posebno podsjeća da ga čuvamo."
+      }
+    },
+    {
+      "heading": { "en": "Akšam and Jacija", "de": "Maghrib und Ischa", "bs": "Akšam i jacija" },
+      "body": {
+        "en": "Akšam is prayed just after sunset: 3 fard, then 2 sunnah. Jacija is prayed at night: 4 sunnah, 4 fard, 2 sunnah and then 3 rakats of vitr. In the fard of Akšam and Jacija the first two rakats are recited aloud. Vitr is the last prayer of the day and is vadžib in the Hanafi school.",
+        "de": "Maghrib wird kurz nach Sonnenuntergang gebetet: 3 Fard, dann 2 Sunna. Ischa wird in der Nacht gebetet: 4 Sunna, 4 Fard, 2 Sunna und danach 3 Rak‘as Witr. Im Fard von Maghrib und Ischa werden die ersten zwei Rak‘as laut rezitiert. Witr ist das letzte Gebet des Tages und in der hanafitischen Schule wadschib.",
+        "bs": "Akšam se klanja odmah poslije zalaska sunca: 3 farza, zatim 2 sunneta. Jacija se klanja noću: 4 sunneta, 4 farza, 2 sunneta i zatim 3 rekata vitra. U farzu akšama i jacije prva dva rekata uče se naglas. Vitr je posljednji namaz dana i vadžib je u hanefijskom mezhebu."
+      }
+    }
+  ],
+  "practiceId": "salah-five-prayers-p",
+  "testIds": ["salah-five-prayers-1", "salah-five-prayers-2", "salah-five-prayers-3", "salah-five-prayers-4"],
+  "explanation": {
+    "en": "Every prayer has its own time and its own number of sunnah and fard rakats; knowing them keeps the prayer complete.",
+    "de": "Jedes Gebet hat seine Zeit und seine eigene Zahl von Sunna- und Fard-Rak‘as; wer sie kennt, betet vollständig.",
+    "bs": "Svaki namaz ima svoje vrijeme i svoj broj sunneta i farzova; ko ih zna, klanja potpuno."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "4:103" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "8" }
+  ],
+  "questions": [
+    {
+      "id": "salah-five-prayers-p",
+      "type": "matching",
+      "areaId": "salah",
+      "topic": "salah-five-prayers",
+      "prompt": { "en": "Match each prayer with its time.", "de": "Ordne jedem Gebet seine Zeit zu.", "bs": "Spoji svaki namaz s njegovim vremenom." },
+      "pairs": [
+        { "id": "sabah", "left": { "en": "Sabah", "de": "Fadschr", "bs": "Sabah" }, "right": { "en": "Dawn", "de": "Morgendämmerung", "bs": "Zora" } },
+        { "id": "podne", "left": { "en": "Podne", "de": "Dhuhr", "bs": "Podne" }, "right": { "en": "Midday", "de": "Mittag", "bs": "Podne" } },
+        { "id": "ikindija", "left": { "en": "Ikindija", "de": "Asr", "bs": "Ikindija" }, "right": { "en": "Afternoon", "de": "Nachmittag", "bs": "Poslijepodne" } },
+        { "id": "aksam", "left": { "en": "Akšam", "de": "Maghrib", "bs": "Akšam" }, "right": { "en": "Sunset", "de": "Sonnenuntergang", "bs": "Zalazak sunca" } },
+        { "id": "jacija", "left": { "en": "Jacija", "de": "Ischa", "bs": "Jacija" }, "right": { "en": "Night", "de": "Nacht", "bs": "Noć" } }
+      ],
+      "explanation": { "en": "Each prayer belongs to a fixed time of day.", "de": "Jedes Gebet gehört zu einer festen Tageszeit.", "bs": "Svaki namaz pripada određenom dijelu dana." }
+    },
+    {
+      "id": "salah-five-prayers-1",
+      "type": "fillBlank",
+      "areaId": "salah",
+      "topic": "salah-five-prayers",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Akšam has ___ fard rakats.", "de": "Maghrib hat ___ Fard-Rak‘as.", "bs": "Akšam ima ___ farz rekata." },
+      "options": [
+        { "id": "a", "text": { "en": "2", "de": "2", "bs": "2" } },
+        { "id": "b", "text": { "en": "3", "de": "3", "bs": "3" } },
+        { "id": "c", "text": { "en": "4", "de": "4", "bs": "4" } }
+      ],
+      "correctOptionId": "b",
+      "explanation": { "en": "Akšam has 3 fard rakats and 2 sunnah after them.", "de": "Maghrib hat 3 Fard-Rak‘as und danach 2 Sunna.", "bs": "Akšam ima 3 farz rekata i 2 sunneta poslije njih." }
+    },
+    {
+      "id": "salah-five-prayers-2",
+      "type": "ordering",
+      "areaId": "salah",
+      "topic": "salah-five-prayers",
+      "prompt": { "en": "Put the prayers of the day in order.", "de": "Bringe die Gebete des Tages in die richtige Reihenfolge.", "bs": "Poredaj namaze po redu tokom dana." },
+      "items": [
+        { "id": "sabah", "text": { "en": "Sabah", "de": "Fadschr", "bs": "Sabah" } },
+        { "id": "podne", "text": { "en": "Podne", "de": "Dhuhr", "bs": "Podne" } },
+        { "id": "ikindija", "text": { "en": "Ikindija", "de": "Asr", "bs": "Ikindija" } },
+        { "id": "aksam", "text": { "en": "Akšam", "de": "Maghrib", "bs": "Akšam" } },
+        { "id": "jacija", "text": { "en": "Jacija", "de": "Ischa", "bs": "Jacija" } }
+      ],
+      "explanation": { "en": "The five prayers follow the sun: dawn, midday, afternoon, sunset, night.", "de": "Die fünf Gebete folgen der Sonne: Morgendämmerung, Mittag, Nachmittag, Sonnenuntergang, Nacht.", "bs": "Pet namaza prate sunce: zora, podne, poslijepodne, zalazak, noć." }
+    },
+    {
+      "id": "salah-five-prayers-3",
+      "type": "trueFalse",
+      "areaId": "salah",
+      "topic": "salah-five-prayers",
+      "prompt": { "en": "Vitr is prayed after Jacija.", "de": "Witr wird nach Ischa gebetet.", "bs": "Vitr se klanja poslije jacije." },
+      "correct": true,
+      "explanation": { "en": "Yes – vitr is the last prayer of the day.", "de": "Ja – Witr ist das letzte Gebet des Tages.", "bs": "Da – vitr je posljednji namaz dana." }
+    },
+    {
+      "id": "salah-five-prayers-4",
+      "type": "multipleChoice",
+      "areaId": "salah",
+      "topic": "salah-five-prayers",
+      "prompt": { "en": "In which prayer is the fard recited aloud?", "de": "In welchem Gebet wird das Fard laut rezitiert?", "bs": "U kojem se namazu farz uči naglas?" },
+      "options": [
+        { "id": "a", "text": { "en": "Sabah, Akšam and Jacija", "de": "Fadschr, Maghrib und Ischa", "bs": "Sabah, akšam i jacija" } },
+        { "id": "b", "text": { "en": "Podne and Ikindija", "de": "Dhuhr und Asr", "bs": "Podne i ikindija" } },
+        { "id": "c", "text": { "en": "Every prayer", "de": "Jedes Gebet", "bs": "Svaki namaz" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The fard is aloud in Sabah, Akšam and Jacija; quiet in Podne and Ikindija.", "de": "Das Fard ist in Fadschr, Maghrib und Ischa laut; in Dhuhr und Asr leise.", "bs": "Farz se uči naglas u sabahu, akšamu i jaciji; tiho u podne i ikindiji." }
+    }
+  ]
+}

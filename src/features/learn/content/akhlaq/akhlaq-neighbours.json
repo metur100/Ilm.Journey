@@ -1,0 +1,114 @@
+{
+  "id": "akhlaq-neighbours",
+  "areaId": "akhlaq",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "Neighbours and Guests", "de": "Nachbarn und Gäste", "bs": "Komšije i gosti" },
+  "description": {
+    "en": "The rights of neighbours and the manners of hosting a guest.",
+    "de": "Die Rechte der Nachbarn und der Umgang mit Gästen.",
+    "bs": "Prava komšija i adab primanja gostiju."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "The neighbour", "de": "Der Nachbar", "bs": "Komšija" },
+      "body": {
+        "en": "The Prophet ﷺ taught that the angel Jibril kept advising him about the neighbour until he thought the neighbour might inherit. A good neighbour shares food, greets kindly, visits in illness, helps in need and does not harm with noise or gossip. This applies to Muslim and non-Muslim neighbours alike.",
+        "de": "Der Prophet ﷺ lehrte, dass der Engel Dschibril ihn so oft über den Nachbarn ermahnte, dass er dachte, der Nachbar könne erben. Ein guter Nachbar teilt Essen, grüßt freundlich, besucht bei Krankheit, hilft in Not und schadet nicht durch Lärm oder Klatsch. Das gilt für muslimische und nichtmuslimische Nachbarn gleichermaßen.",
+        "bs": "Poslanik ﷺ je poučio da mu je melek Džibril toliko preporučivao komšiju da je pomislio da će komšija naslijediti. Dobar komšija dijeli hranu, lijepo naziva selam, obilazi u bolesti, pomaže u nevolji i ne šteti bukom ni ogovaranjem. To vrijedi za muslimanske i nemuslimanske komšije jednako."
+      }
+    },
+    {
+      "heading": { "en": "The guest", "de": "Der Gast", "bs": "Gost" },
+      "body": {
+        "en": "Hosting a guest is a sign of faith. The host greets the guest, offers a seat, food and drink, and makes him feel welcome. The guest does not stay so long that he burdens the household, and thanks the host. The Prophet ﷺ said: whoever believes in Allah and the Last Day, let him honour his guest.",
+        "de": "Einen Gast zu bewirten ist ein Zeichen des Glaubens. Der Gastgeber begrüßt den Gast, bietet einen Platz, Essen und Getränk und lässt ihn willkommen fühlen. Der Gast bleibt nicht so lange, dass er den Haushalt belastet, und dankt dem Gastgeber. Der Prophet ﷺ sagte: Wer an Allah und den Jüngsten Tag glaubt, soll seinen Gast ehren.",
+        "bs": "Ugostiti gosta znak je imana. Domaćin pozdravi gosta, ponudi mjesto, hranu i piće i učini da se osjeća dobrodošlo. Gost ne ostaje tako dugo da optereti kuću i zahvali domaćinu. Poslanik ﷺ je rekao: ko vjeruje u Allaha i Sudnji dan, neka počasti svoga gosta."
+      }
+    }
+  ],
+  "practiceId": "akhlaq-neighbours-p",
+  "testIds": ["akhlaq-neighbours-1", "akhlaq-neighbours-2", "akhlaq-neighbours-3", "akhlaq-neighbours-4"],
+  "explanation": {
+    "en": "Good manners begin with the people closest to us – the neighbour next door and the guest at our table.",
+    "de": "Gute Manieren beginnen bei den Menschen, die uns am nächsten sind – dem Nachbarn nebenan und dem Gast an unserem Tisch.",
+    "bs": "Lijep ahlak počinje s ljudima koji su nam najbliži – komšijom preko puta i gostom za našom sofrom."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "4:36" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "6014" },
+    { "sourceName": "Sahih Muslim", "sourceReference": "2625" }
+  ],
+  "questions": [
+    {
+      "id": "akhlaq-neighbours-p",
+      "type": "trueFalse",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-neighbours",
+      "prompt": { "en": "Honouring the guest is part of faith.", "de": "Den Gast zu ehren gehört zum Glauben.", "bs": "Počastiti gosta dio je imana." },
+      "correct": true,
+      "explanation": { "en": "The Prophet ﷺ linked honouring the guest with belief in Allah and the Last Day.", "de": "Der Prophet ﷺ verband die Ehre des Gastes mit dem Glauben an Allah und den Jüngsten Tag.", "bs": "Poslanik ﷺ je počast gosta povezao s vjerovanjem u Allaha i Sudnji dan." }
+    },
+    {
+      "id": "akhlaq-neighbours-1",
+      "type": "multipleChoice",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-neighbours",
+      "prompt": { "en": "Who is a neighbour in Islam?", "de": "Wer ist im Islam ein Nachbar?", "bs": "Ko je u islamu komšija?" },
+      "options": [
+        { "id": "a", "text": { "en": "Anyone living next to you, Muslim or not", "de": "Jeder, der neben dir wohnt, Muslim oder nicht", "bs": "Svako ko živi pored tebe, musliman ili ne" } },
+        { "id": "b", "text": { "en": "Only a Muslim", "de": "Nur ein Muslim", "bs": "Samo musliman" } },
+        { "id": "c", "text": { "en": "Only a relative", "de": "Nur ein Verwandter", "bs": "Samo rođak" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The rights of the neighbour apply to every neighbour.", "de": "Die Rechte des Nachbarn gelten für jeden Nachbarn.", "bs": "Prava komšije vrijede za svakog komšiju." }
+    },
+    {
+      "id": "akhlaq-neighbours-2",
+      "type": "categorize",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-neighbours",
+      "prompt": { "en": "Sort the actions: good neighbour or harmful?", "de": "Ordne die Handlungen: guter Nachbar oder schädlich?", "bs": "Razvrstaj postupke: dobar komšija ili štetan?" },
+      "categories": [
+        { "id": "good", "label": { "en": "Good neighbour", "de": "Guter Nachbar", "bs": "Dobar komšija" } },
+        { "id": "bad", "label": { "en": "Harmful", "de": "Schädlich", "bs": "Štetno" } }
+      ],
+      "items": [
+        { "id": "food", "text": { "en": "Sharing food", "de": "Essen teilen", "bs": "Dijeliti hranu" }, "categoryId": "good" },
+        { "id": "visit", "text": { "en": "Visiting when he is ill", "de": "Bei Krankheit besuchen", "bs": "Posjetiti u bolesti" }, "categoryId": "good" },
+        { "id": "noise", "text": { "en": "Loud noise at night", "de": "Lärm in der Nacht", "bs": "Glasna buka noću" }, "categoryId": "bad" },
+        { "id": "gossip", "text": { "en": "Spreading gossip about him", "de": "Klatsch über ihn verbreiten", "bs": "Širiti ogovaranje o njemu" }, "categoryId": "bad" }
+      ],
+      "explanation": { "en": "A neighbour is honoured by small good deeds and harmed by small bad ones.", "de": "Ein Nachbar wird durch kleine gute Taten geehrt und durch kleine schlechte verletzt.", "bs": "Komšija se časti malim dobrim djelima, a vrijeđa malim lošim." }
+    },
+    {
+      "id": "akhlaq-neighbours-3",
+      "type": "fillBlank",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-neighbours",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Whoever believes in Allah and the Last Day, let him honour his ___.", "de": "Wer an Allah und den Jüngsten Tag glaubt, soll seinen ___ ehren.", "bs": "Ko vjeruje u Allaha i Sudnji dan, neka počasti svoga ___." },
+      "options": [
+        { "id": "a", "text": { "en": "guest", "de": "Gast", "bs": "gosta" } },
+        { "id": "b", "text": { "en": "car", "de": "Wagen", "bs": "auto" } },
+        { "id": "c", "text": { "en": "garden", "de": "Garten", "bs": "bašču" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The hadith speaks of honouring the guest.", "de": "Der Hadith spricht von der Ehre des Gastes.", "bs": "Hadis govori o počašćenju gosta." }
+    },
+    {
+      "id": "akhlaq-neighbours-4",
+      "type": "scenario",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-neighbours",
+      "prompt": { "en": "Your neighbour is ill. What is the best action?", "de": "Dein Nachbar ist krank. Was ist die beste Handlung?", "bs": "Tvoj komšija je bolestan. Šta je najbolje učiniti?" },
+      "options": [
+        { "id": "a", "text": { "en": "Visit him and offer help", "de": "Ihn besuchen und Hilfe anbieten", "bs": "Posjetiti ga i ponuditi pomoć" } },
+        { "id": "b", "text": { "en": "Wait until he asks", "de": "Warten, bis er fragt", "bs": "Čekati da on zamoli" } },
+        { "id": "c", "text": { "en": "Ignore it", "de": "Es ignorieren", "bs": "Ignorisati" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Visiting the sick is a right of the neighbour and a mercy.", "de": "Krankenbesuch ist ein Recht des Nachbarn und eine Barmherzigkeit.", "bs": "Posjeta bolesniku pravo je komšije i milost." }
+    }
+  ]
+}

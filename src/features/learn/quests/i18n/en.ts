@@ -83,8 +83,8 @@ const en = {
   'fact.explanation': 'Yes, this is true: {fact}',
 
   // ---------- tools on topic pages ----------
-  'tool.quran': 'Quran memorisation',
-  'tool.quranDesc': 'Al-Fatiha and all of Juz ʿAmma: learn ayah by ayah, listen and test yourself.',
+  'tool.quran': 'Juz ʿAmma – all surahs',
+  'tool.quranDesc': 'Al-Fatiha and all 37 surahs of Juz ʿAmma: learn every ayah, listen and test yourself.',
   'tool.duas': 'Duas from the Quran',
   'tool.duasDesc': 'Supplications from the Quran by theme – with translation and context.',
   'tool.arabic': 'Alphabet & tracing',
@@ -93,7 +93,7 @@ const en = {
   'tool.ramadanDesc': 'Calendar and good-deed tracker',
 
   // ---------- Quran memorisation ----------
-  'mem.title': 'Quran memorisation',
+  'mem.title': 'Juz ʿAmma – all surahs',
   'mem.intro': 'Al-Fatiha and the complete Juz ʿAmma (surahs 78–114). Learn ayah by ayah, repeat often and test yourself – ideally together with a teacher.',
   'mem.order': 'Order',
   'mem.order.memorization': 'Learning order',

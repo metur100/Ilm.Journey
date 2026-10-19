@@ -10,6 +10,7 @@ import { registerAyahBuilderGame } from './ayah-builder/register';
 import { registerListenAndOrderGame } from './listen-and-order/register';
 import { registerSurahGardenGame } from './surah-garden/register';
 import { registerSurahMessagesGame } from './surah-messages/register';
+import { registerSurahJourneyGame } from './surah-journey/register';
 
 /**
  * Section "quran" (docs/GAMES-V3.md): every game of this section lives in this folder and is registered here.
@@ -28,4 +29,5 @@ export function registerQuranGames(): void {
   registerGoodDeedsGame();
   registerSurahPuzzleGame();
   registerMissingWordGame();
+  registerSurahJourneyGame();
 }

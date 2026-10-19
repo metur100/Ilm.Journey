@@ -1,0 +1,118 @@
+{
+  "id": "prophets-all-25",
+  "areaId": "prophets",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "All 25 Prophets of the Quran", "de": "Alle 25 Propheten des Korans", "bs": "Svih 25 poslanika Kur’ana" },
+  "description": {
+    "en": "The twenty-five prophets named in the Quran, from Adam to Muhammad ﷺ, and the one message they all brought.",
+    "de": "Die fünfundzwanzig im Koran genannten Propheten, von Adam bis Muhammad ﷺ, und die eine Botschaft, die alle brachten.",
+    "bs": "Dvadeset pet poslanika imenovanih u Kur’anu, od Adema do Muhammeda ﷺ, i jedna poruka koju su svi donijeli."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Twenty-five names", "de": "Fünfundzwanzig Namen", "bs": "Dvadeset pet imena" },
+      "body": {
+        "en": "The Quran names twenty-five prophets: Adam, Idris, Nuh, Hud, Salih, Ibrahim, Lut, Isma‘il, Ishaq, Ya‘qub, Yusuf, Ayyub, Shu‘ayb, Musa, Harun, Dhul-Kifl, Dawud, Sulayman, Ilyas, Al-Yasa‘, Yunus, Zakariyya, Yahya, ‘Isa and Muhammad ﷺ. Allah sent many more prophets, but these are the ones named in the Quran.",
+        "de": "Der Koran nennt fünfundzwanzig Propheten: Adam, Idris, Nuh, Hud, Salih, Ibrahim, Lut, Isma‘il, Ishaq, Ya‘qub, Yusuf, Ayyub, Schu‘aib, Musa, Harun, Dhul-Kifl, Dawud, Sulayman, Ilyas, Al-Yasa‘, Yunus, Zakariyya, Yahya, ‘Isa und Muhammad ﷺ. Allah sandte noch viele weitere Propheten, aber diese sind die im Koran genannten.",
+        "bs": "Kur’an imenuje dvadeset pet poslanika: Adem, Idris, Nuh, Hud, Salih, Ibrahim, Lut, Ismail, Ishak, Jakub, Jusuf, Ejjub, Šuajb, Musa, Harun, Zul-Kifl, Davud, Sulejman, Iljas, El-Jesa, Junus, Zekerijja, Jahja, Isa i Muhammed ﷺ. Allah je poslao i mnoge druge poslanike, ali ovo su oni koji su imenovani u Kur’anu."
+      }
+    },
+    {
+      "heading": { "en": "One message", "de": "Eine Botschaft", "bs": "Jedna poruka" },
+      "body": {
+        "en": "Every prophet called his people to worship Allah alone, to avoid false gods and to live with justice and good character. Some brought a book or a law: Musa the Tawrat, Dawud the Zabur, ‘Isa the Injil and Muhammad ﷺ the Quran. The Quran confirms the earlier messages and is the final revelation.",
+        "de": "Jeder Prophet rief sein Volk dazu auf, allein Allah zu dienen, falsche Götter zu meiden und in Gerechtigkeit und gutem Charakter zu leben. Manche brachten ein Buch oder ein Gesetz: Musa die Tawrat, Dawud die Zabur, ‘Isa das Injil und Muhammad ﷺ den Koran. Der Koran bestätigt die früheren Botschaften und ist die letzte Offenbarung.",
+        "bs": "Svaki poslanik pozivao je svoj narod da obožava samo Allaha, da se kloni lažnih bogova i da živi u pravdi i lijepom ahlaku. Neki su donijeli knjigu ili zakon: Musa Tevrat, Davud Zebur, Isa Indžil i Muhammed ﷺ Kur’an. Kur’an potvrđuje ranije poruke i posljednja je objava."
+      }
+    },
+    {
+      "heading": { "en": "What their stories teach", "de": "Was ihre Geschichten lehren", "bs": "Čemu njihove priče uče" },
+      "body": {
+        "en": "The prophets’ stories teach patience in hardship (Ayyub), trust in Allah (Ibrahim), courage before power (Musa), honesty (Yusuf), repentance (Yunus) and mercy (Muhammad ﷺ). They are not only old stories: they show how a believer behaves when tested, forgiven and given responsibility.",
+        "de": "Die Geschichten der Propheten lehren Geduld in Not (Ayyub), Vertrauen auf Allah (Ibrahim), Mut vor der Macht (Musa), Ehrlichkeit (Yusuf), Reue (Yunus) und Barmherzigkeit (Muhammad ﷺ). Sie sind nicht nur alte Geschichten: Sie zeigen, wie ein Gläubiger sich verhält, wenn er geprüft, vergeben und mit Verantwortung betraut wird.",
+        "bs": "Priče poslanika uče strpljenju u nevolji (Ejjub), pouzdanju u Allaha (Ibrahim), hrabrosti pred vlašću (Musa), iskrenosti (Jusuf), pokajanju (Junus) i milosti (Muhammed ﷺ). One nisu samo stare priče: pokazuju kako vjernik postupa kada je iskušan, kada mu se oprosti i kada dobije odgovornost."
+      }
+    }
+  ],
+  "practiceId": "prophets-all-25-p",
+  "testIds": ["prophets-all-25-1", "prophets-all-25-2", "prophets-all-25-3", "prophets-all-25-4"],
+  "explanation": {
+    "en": "The 25 prophets form one chain of guidance that ends with the final Prophet ﷺ.",
+    "de": "Die 25 Propheten bilden eine Kette der Rechtleitung, die mit dem letzten Propheten ﷺ endet.",
+    "bs": "Dvadeset pet poslanika čine jedan lanac upute koji završava s posljednjim Poslanikom ﷺ."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "4:164; 6:83–86; 21:48–91" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "3398" }
+  ],
+  "questions": [
+    {
+      "id": "prophets-all-25-p",
+      "type": "multipleChoice",
+      "areaId": "prophets",
+      "topic": "prophets-all-25",
+      "prompt": { "en": "How many prophets are named in the Quran?", "de": "Wie viele Propheten werden im Koran genannt?", "bs": "Koliko je poslanika imenovano u Kur’anu?" },
+      "options": [
+        { "id": "a", "text": { "en": "25", "de": "25", "bs": "25" } },
+        { "id": "b", "text": { "en": "12", "de": "12", "bs": "12" } },
+        { "id": "c", "text": { "en": "40", "de": "40", "bs": "40" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The Quran names twenty-five prophets.", "de": "Der Koran nennt fünfundzwanzig Propheten.", "bs": "Kur’an imenuje dvadeset pet poslanika." }
+    },
+    {
+      "id": "prophets-all-25-1",
+      "type": "matching",
+      "areaId": "prophets",
+      "topic": "prophets-all-25",
+      "prompt": { "en": "Match each prophet with what he is known for.", "de": "Ordne jedem Propheten zu, wofür er bekannt ist.", "bs": "Spoji svakog poslanika s onim po čemu je poznat." },
+      "pairs": [
+        { "id": "nuh", "left": { "en": "Nuh", "de": "Nuh", "bs": "Nuh" }, "right": { "en": "The ark", "de": "Die Arche", "bs": "Lađa" } },
+        { "id": "ibrahim", "left": { "en": "Ibrahim", "de": "Ibrahim", "bs": "Ibrahim" }, "right": { "en": "The Kaaba", "de": "Die Kaaba", "bs": "Kaba" } },
+        { "id": "musa", "left": { "en": "Musa", "de": "Musa", "bs": "Musa" }, "right": { "en": "The staff and the sea", "de": "Der Stab und das Meer", "bs": "Štap i more" } },
+        { "id": "yunus", "left": { "en": "Yunus", "de": "Yunus", "bs": "Junus" }, "right": { "en": "The whale", "de": "Der Wal", "bs": "Kit" } },
+        { "id": "muhammad", "left": { "en": "Muhammad ﷺ", "de": "Muhammad ﷺ", "bs": "Muhammed ﷺ" }, "right": { "en": "The final message", "de": "Die letzte Botschaft", "bs": "Posljednja poruka" } }
+      ],
+      "explanation": { "en": "Each prophet has a sign and a story the Quran tells.", "de": "Jeder Prophet hat ein Zeichen und eine Geschichte, die der Koran erzählt.", "bs": "Svaki poslanik ima znak i priču koju Kur’an kazuje." }
+    },
+    {
+      "id": "prophets-all-25-2",
+      "type": "trueFalse",
+      "areaId": "prophets",
+      "topic": "prophets-all-25",
+      "prompt": { "en": "All prophets called people to worship Allah alone.", "de": "Alle Propheten riefen die Menschen dazu auf, allein Allah zu dienen.", "bs": "Svi poslanici su pozivali ljude da obožavaju samo Allaha." },
+      "correct": true,
+      "explanation": { "en": "Yes – the one message of every prophet was tawhid.", "de": "Ja – die eine Botschaft jedes Propheten war der Tawhid.", "bs": "Da – jedna poruka svakog poslanika bio je tevhid." }
+    },
+    {
+      "id": "prophets-all-25-3",
+      "type": "fillBlank",
+      "areaId": "prophets",
+      "topic": "prophets-all-25",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "The last prophet is ___.", "de": "Der letzte Prophet ist ___.", "bs": "Posljednji poslanik je ___." },
+      "options": [
+        { "id": "a", "text": { "en": "Muhammad ﷺ", "de": "Muhammad ﷺ", "bs": "Muhammed ﷺ" } },
+        { "id": "b", "text": { "en": "Isa", "de": "Isa", "bs": "Isa" } },
+        { "id": "c", "text": { "en": "Musa", "de": "Musa", "bs": "Musa" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Muhammad ﷺ is the final prophet.", "de": "Muhammad ﷺ ist der letzte Prophet.", "bs": "Muhammed ﷺ je posljednji poslanik." }
+    },
+    {
+      "id": "prophets-all-25-4",
+      "type": "multipleChoice",
+      "areaId": "prophets",
+      "topic": "prophets-all-25",
+      "prompt": { "en": "Which book was given to Musa?", "de": "Welches Buch erhielt Musa?", "bs": "Koja je knjiga data Musau?" },
+      "options": [
+        { "id": "a", "text": { "en": "The Tawrat", "de": "Die Tawrat", "bs": "Tevrat" } },
+        { "id": "b", "text": { "en": "The Zabur", "de": "Die Zabur", "bs": "Zebur" } },
+        { "id": "c", "text": { "en": "The Injil", "de": "Das Injil", "bs": "Indžil" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Musa brought the Tawrat; Dawud the Zabur and Isa the Injil.", "de": "Musa brachte die Tawrat, Dawud die Zabur und Isa das Injil.", "bs": "Musa je donio Tevrat, Davud Zebur, a Isa Indžil." }
+    }
+  ]
+}

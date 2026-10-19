@@ -1,0 +1,105 @@
+{
+  "id": "arabic-verbs",
+  "areaId": "arabic",
+  "order": 7,
+  "difficulty": 2,
+  "title": { "en": "Everyday Verbs", "de": "Alltagsverben", "bs": "Svakodnevni glagoli" },
+  "description": {
+    "en": "Six verbs for daily actions and how to use them in a simple sentence.",
+    "de": "Sechs Verben für tägliche Handlungen und wie man sie in einem einfachen Satz verwendet.",
+    "bs": "Šest glagola za svakodnevne radnje i kako ih upotrijebiti u jednostavnoj rečenici."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Six verbs", "de": "Sechs Verben", "bs": "Šest glagola" },
+      "body": {
+        "en": "يَكْتُبُ (yaktubu) – he writes; يَقْرَأُ (yaqraʾu) – he reads; يَذْهَبُ (yadhhabu) – he goes; يَأْكُلُ (yaʾkulu) – he eats; يَشْرَبُ (yashrabu) – he drinks; يَتَكَلَّمُ (yatakallamu) – he speaks. The first form usually ends in -u in the present: yaktubu, yaqraʾu.",
+        "de": "يَكْتُبُ (yaktubu) – er schreibt; يَقْرَأُ (yaqraʾu) – er liest; يَذْهَبُ (yadhhabu) – er geht; يَأْكُلُ (yaʾkulu) – er isst; يَشْرَبُ (yashrabu) – er trinkt; يَتَكَلَّمُ (yatakallamu) – er spricht. Die erste Form endet im Präsens meist auf -u: yaktubu, yaqraʾu.",
+        "bs": "يَكْتُبُ (yaktubu) – piše; يَقْرَأُ (yaqraʾu) – čita; يَذْهَبُ (yadhhabu) – ide; يَأْكُلُ (yaʾkulu) – jede; يَشْرَبُ (yashrabu) – pije; يَتَكَلَّمُ (yatakallamu) – govori. Prvi oblik u sadašnjem vremenu obično završava na -u: yaktubu, yaqraʾu."
+      }
+    },
+    {
+      "heading": { "en": "A simple sentence", "de": "Ein einfacher Satz", "bs": "Jednostavna rečenica" },
+      "body": {
+        "en": "Arabic often begins with the verb: يَقْرَأُ الطَّالِبُ الْكِتَابَ (yaqraʾu aṭ-ṭālibu al-kitāba) – the student reads the book. The verb comes first, then the doer, then the object. Practise with your own words: يَكْتُبُ الْوَلَدُ (the boy writes), تَشْرَبُ الْبِنْتُ الْمَاءَ (the girl drinks the water).",
+        "de": "Arabisch beginnt oft mit dem Verb: يَقْرَأُ الطَّالِبُ الْكِتَابَ (yaqraʾu aṭ-ṭālibu al-kitāba) – der Student liest das Buch. Zuerst das Verb, dann der Täter, dann das Objekt. Übe mit eigenen Wörtern: يَكْتُبُ الْوَلَدُ (der Junge schreibt), تَشْرَبُ الْبِنْتُ الْمَاءَ (das Mädchen trinkt das Wasser).",
+        "bs": "Arapski često počinje glagolom: يَقْرَأُ الطَّالِبُ الْكِتَابَ (yaqraʾu aṭ-ṭālibu al-kitāba) – učenik čita knjigu. Prvo glagol, pa vršilac, pa objekt. Vježbaj svojim riječima: يَكْتُبُ الْوَلَدُ (dječak piše), تَشْرَبُ الْبِنْتُ الْمَاءَ (djevojčica pije vodu)."
+      }
+    }
+  ],
+  "practiceId": "arabic-verbs-p",
+  "testIds": ["arabic-verbs-1", "arabic-verbs-2", "arabic-verbs-3", "arabic-verbs-4"],
+  "explanation": {
+    "en": "A small set of verbs opens the door to making your own Arabic sentences.",
+    "de": "Ein kleiner Satz von Verben öffnet die Tür zu eigenen arabischen Sätzen.",
+    "bs": "Mali skup glagola otvara vrata vlastitim arapskim rečenicama."
+  },
+  "sources": [{ "sourceName": "Arabic grammar", "sourceReference": "present-tense verb forms" }],
+  "questions": [
+    {
+      "id": "arabic-verbs-p",
+      "type": "matching",
+      "areaId": "arabic",
+      "topic": "arabic-verbs",
+      "prompt": { "en": "Match each verb with its meaning.", "de": "Ordne jedem Verb seine Bedeutung zu.", "bs": "Spoji svaki glagol s njegovim značenjem." },
+      "pairs": [
+        { "id": "yaktubu", "left": { "en": "يَكْتُبُ", "de": "يَكْتُبُ", "bs": "يَكْتُبُ" }, "right": { "en": "writes", "de": "schreibt", "bs": "piše" } },
+        { "id": "yaqrau", "left": { "en": "يَقْرَأُ", "de": "يَقْرَأُ", "bs": "يَقْرَأُ" }, "right": { "en": "reads", "de": "liest", "bs": "čita" } },
+        { "id": "yadhhabu", "left": { "en": "يَذْهَبُ", "de": "يَذْهَبُ", "bs": "يَذْهَبُ" }, "right": { "en": "goes", "de": "geht", "bs": "ide" } },
+        { "id": "yakulu", "left": { "en": "يَأْكُلُ", "de": "يَأْكُلُ", "bs": "يَأْكُلُ" }, "right": { "en": "eats", "de": "isst", "bs": "jede" } }
+      ],
+      "explanation": { "en": "These are present-tense forms for “he”.", "de": "Das sind Präsensformen für „er“.", "bs": "Ovo su oblici sadašnjeg vremena za „on“." }
+    },
+    {
+      "id": "arabic-verbs-1",
+      "type": "multipleChoice",
+      "areaId": "arabic",
+      "topic": "arabic-verbs",
+      "prompt": { "en": "What does يَشْرَبُ mean?", "de": "Was bedeutet يَشْرَبُ?", "bs": "Šta znači يَشْرَبُ?" },
+      "options": [
+        { "id": "a", "text": { "en": "drinks", "de": "trinkt", "bs": "pije" } },
+        { "id": "b", "text": { "en": "eats", "de": "isst", "bs": "jede" } },
+        { "id": "c", "text": { "en": "writes", "de": "schreibt", "bs": "piše" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Yashrabu is “he drinks”.", "de": "Yashrabu ist „er trinkt“.", "bs": "Yashrabu je „on pije“." }
+    },
+    {
+      "id": "arabic-verbs-2",
+      "type": "ordering",
+      "areaId": "arabic",
+      "topic": "arabic-verbs",
+      "prompt": { "en": "Put the sentence in the Arabic word order: “The student reads the book.”", "de": "Bringe den Satz in die arabische Wortstellung: „Der Student liest das Buch.“", "bs": "Poredaj rečenicu arapskim redom: „Učenik čita knjigu.“" },
+      "items": [
+        { "id": "verb", "text": { "en": "يَقْرَأُ", "de": "يَقْرَأُ", "bs": "يَقْرَأُ" } },
+        { "id": "doer", "text": { "en": "الطَّالِبُ", "de": "الطَّالِبُ", "bs": "الطَّالِبُ" } },
+        { "id": "object", "text": { "en": "الْكِتَابَ", "de": "الْكِتَابَ", "bs": "الْكِتَابَ" } }
+      ],
+      "explanation": { "en": "Verb – doer – object.", "de": "Verb – Täter – Objekt.", "bs": "Glagol – vršilac – objekt." }
+    },
+    {
+      "id": "arabic-verbs-3",
+      "type": "trueFalse",
+      "areaId": "arabic",
+      "topic": "arabic-verbs",
+      "prompt": { "en": "The present-tense verb often ends in -u.", "de": "Das Präsensverb endet oft auf -u.", "bs": "Glagol u sadašnjem vremenu često završava na -u." },
+      "correct": true,
+      "explanation": { "en": "Yes – yaktubu, yaqraʾu, yadhhabu.", "de": "Ja – yaktubu, yaqraʾu, yadhhabu.", "bs": "Da – yaktubu, yaqraʾu, yadhhabu." }
+    },
+    {
+      "id": "arabic-verbs-4",
+      "type": "fillBlank",
+      "areaId": "arabic",
+      "topic": "arabic-verbs",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "الْوَلَدُ ___ (the boy writes).", "de": "الْوَلَدُ ___ (der Junge schreibt).", "bs": "الْوَلَدُ ___ (dječak piše)." },
+      "options": [
+        { "id": "a", "text": { "en": "يَكْتُبُ", "de": "يَكْتُبُ", "bs": "يَكْتُبُ" } },
+        { "id": "b", "text": { "en": "يَأْكُلُ", "de": "يَأْكُلُ", "bs": "يَأْكُلُ" } },
+        { "id": "c", "text": { "en": "يَشْرَبُ", "de": "يَشْرَبُ", "bs": "يَشْرَبُ" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Yaktubu means “writes”.", "de": "Yaktubu bedeutet „schreibt“.", "bs": "Yaktubu znači „piše“." }
+    }
+  ]
+}

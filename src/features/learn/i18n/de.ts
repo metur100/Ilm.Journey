@@ -58,6 +58,9 @@ const de: Record<LearnKey, string> = {
   'tool.storiesDesc': 'Interaktive Geschichten aller 25 Propheten im Bereich „Geschichten“.',
   'tool.seerah': 'Die Sira-Reise',
   'tool.seerahDesc': 'Episoden, Zeitleiste und Karte zum Leben des Propheten ﷺ.',
+  'tool.salah': 'Das Gebet – der vollständige Leitfaden',
+  'tool.salahDesc': 'Alle fünf Gebete, die Bedingungen, Wudu und wie eine Rak‘a verrichtet wird.',
+  'salahGuide.teacher': 'Lerne Aussprache und Einzelheiten zusätzlich bei einer qualifizierten Lehrkraft.',
 };
 
 export default de;

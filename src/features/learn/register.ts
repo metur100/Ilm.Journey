@@ -20,6 +20,7 @@ import { registerTopicTool, type TopicPathItem } from './extensions';
 import { learnI18n } from './i18n';
 import { registerLearnQuests } from './quests/register';
 import { registerSufaraCourse } from './sufara/register';
+import { registerLearnContentPaths } from './tools/paths';
 import { buildTopicPath, nextPathEntry, pathItemHref, startedTopics } from './path';
 import { isMasterPassed } from './services/progression';
 import { masterTarget, startLearnAutoSave, unitTarget, useLearnStore } from './store/learnStore';
@@ -167,7 +168,16 @@ export function registerLearnFeature(): void {
     icon: 'scroll',
     label: (lang) => translateNs(learnI18n, lang, 'tool.stories'),
     description: (lang) => translateNs(learnI18n, lang, 'tool.storiesDesc'),
-    href: '/(tabs)/stories',
+    href: '/tools/prophets',
+  });
+  registerTopicTool({
+    id: 'salah-guide',
+    topic: 'salah',
+    order: 10,
+    icon: 'mosque',
+    label: (lang) => translateNs(learnI18n, lang, 'tool.salah'),
+    description: (lang) => translateNs(learnI18n, lang, 'tool.salahDesc'),
+    href: '/tools/salah',
   });
   registerTopicTool({
     id: 'seerah-journey',
@@ -182,6 +192,9 @@ export function registerLearnFeature(): void {
 
   // The Sufara course (lesson by lesson) at the start of the Sufara topic path.
   registerSufaraCourse();
+
+  // All Juz ʿAmma surahs and all 25 prophet stories as learning steps.
+  registerLearnContentPaths();
 
   // islam-quest beginner quests and topic tools (owned by the islam-quest port).
   registerLearnQuests();

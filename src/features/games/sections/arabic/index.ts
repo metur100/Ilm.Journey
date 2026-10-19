@@ -1,3 +1,4 @@
+import { registerArabicBasicsGames } from './basics/register';
 import { registerHarakatSoundsGame } from './harakat-sounds/register';
 import { registerJoinLettersGame } from './join-letters/register';
 import { registerLetterTraceGame } from './letter-trace/register';
@@ -10,13 +11,14 @@ import { registerAlphabetPathGame } from './alphabet-path/register';
 import { registerLetterLanternsGame } from './letter-lanterns/register';
 import { registerLetterFormsGame } from './letter-forms/register';
 import { registerTwinLettersGame } from './twin-letters/register';
+import { registerSufaraReviewGame } from './sufara-review/register';
 import { registerWordBuilderGame } from './word-builder/register';
 import { registerWordMemoryGame } from './word-memory/register';
 
 /**
  * Sections "sufara" and "arabic" (docs/GAMES-V3.md §3.3): every game of these sections lives in this folder and is
- * registered here, in sufara order (letters → forms → joining → harakat → reading, then the word games of "arabic").
- * Which section a game belongs to is set in shared/define.ts (SUFARA_GAME_IDS).
+ * registered here, in sufara order (letters → forms → joining → harakat → reading, then the word games and the
+ * Arabic basics of "arabic"). Which section a game belongs to is set in shared/define.ts (SUFARA_GAME_IDS).
  * Owned by one author – do not register this section's games anywhere else.
  */
 export function registerArabicGames(): void {
@@ -32,9 +34,37 @@ export function registerArabicGames(): void {
   registerMarksWorkshopGame();
   registerMaddStretchGame();
   registerSyllableReadingGame();
+  registerSufaraReviewGame();
   registerWordBuilderGame();
   registerWordMemoryGame();
+  registerArabicBasicsGames();
 }
 
-/** Game ids of this folder in sufara order. */
-export const ARABIC_GAME_IDS = ['letter-trace', 'letter-lanterns', 'alphabet-path', 'letter-dots', 'twin-letters', 'letter-forms', 'non-joiners', 'join-letters', 'harakat-sounds', 'marks-workshop', 'madd-stretch', 'syllable-reading', 'word-builder', 'word-memory'] as const;
+/** Game ids of this folder: sufara order, then the "arabic" word games and the Arabic basics. */
+export const ARABIC_GAME_IDS = [
+  'letter-trace',
+  'letter-lanterns',
+  'alphabet-path',
+  'letter-dots',
+  'twin-letters',
+  'letter-forms',
+  'non-joiners',
+  'join-letters',
+  'harakat-sounds',
+  'marks-workshop',
+  'madd-stretch',
+  'syllable-reading',
+  'sufara-review',
+  'word-builder',
+  'word-memory',
+  'arabic-greetings',
+  'arabic-numbers',
+  'arabic-colors',
+  'arabic-family',
+  'arabic-body',
+  'arabic-food',
+  'arabic-times',
+  'arabic-opposites',
+  'arabic-prayer-words',
+  'arabic-phrases',
+] as const;

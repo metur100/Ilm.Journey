@@ -10,13 +10,13 @@ import { translateNs, useI18n } from '../../i18n';
 import type { TopicId } from '../../models';
 import { radius, shadows, spacing, topicThemes, useTheme } from '../../theme';
 import { kitColors } from '../kit/theme';
-import { isNewGame, levelProgress, totalStars, type GamesData } from '../progress';
+import { levelProgress, totalStars, type GamesData } from '../progress';
 import { playI18n, SECTION_ART, type PlaySectionId, type SectionStats } from '../sections';
 import { GAME_LEVELS, type GameDef } from '../types';
 
 const topicOf = (section: PlaySectionId): TopicId => (section === 'dev' ? 'salah' : section);
 
-/** Section card of the Play tab: topic gradient, cover art, games count, stars progress, "new" pill. */
+/** Section card of the Play tab: topic gradient, cover art, games count and stars progress. */
 export function SectionCard({ section, stats, onPress, width }: { section: PlaySectionId; stats: SectionStats; onPress: () => void; width: number }) {
   const { language } = useI18n();
   const { c } = useTheme();
@@ -41,11 +41,7 @@ export function SectionCard({ section, stats, onPress, width }: { section: PlayS
           <View style={styles.sectionArt}>
             <Art name={SECTION_ART[section]} size={58} height={58} />
           </View>
-          {stats.newGames > 0 ? (
-            <View style={[styles.newPill, { backgroundColor: c.gold }]}>
-              <AppText variant="tiny" color={c.onGold}>{`${stats.newGames} ${pt('new')}`}</AppText>
-            </View>
-          ) : null}
+
         </View>
         <AppText variant="heading" color={c.onAccent} numberOfLines={2} accessibilityRole="header">
           {title}
@@ -65,7 +61,7 @@ export function SectionCard({ section, stats, onPress, width }: { section: PlayS
   );
 }
 
-/** Game card of a section grid: cover art on the topic board colours, title, level dots, stars, "new". */
+/** Game card of a section grid: cover art on the topic board colours, title, level dots and stars. */
 export function GameCard({ game, data, onPress, width }: { game: GameDef<unknown>; data: GamesData; onPress: () => void; width: number }) {
   const { language, t } = useI18n();
   const { c, dark, highContrast } = useTheme();
@@ -73,25 +69,17 @@ export function GameCard({ game, data, onPress, width }: { game: GameDef<unknown
   const title = translateNs(game.i18n, language, 'title');
   const stars = totalStars(data, game.id);
   const max = game.levels.length * 3;
-  const fresh = isNewGame(data, game.id);
   const done = GAME_LEVELS.filter((l) => l <= game.levels.length && !!levelProgress(data, game.id, l)).length;
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
-      accessibilityLabel={`${title}. ${t('games.totalStars', { count: stars, total: max })}${fresh ? `. ${translateNs(playI18n, language, 'new')}` : ''}`}
+      accessibilityLabel={`${title}. ${t('games.totalStars', { count: stars, total: max })}`}
       testID={`game-card-${game.id}`}
       style={({ pressed }) => [styles.gameCard, { width, backgroundColor: c.surface, borderColor: c.border, shadowColor: c.shadow }, pressed && styles.pressed]}
     >
       <LinearGradient colors={k.board} style={styles.gameArt}>
         <Art name={game.coverArt} size={Math.min(104, width - 40)} />
-        {fresh ? (
-          <View style={[styles.newTag, { backgroundColor: c.gold }]}>
-            <AppText variant="label" color={c.onGold}>
-              {translateNs(playI18n, language, 'new').toUpperCase()}
-            </AppText>
-          </View>
-        ) : null}
       </LinearGradient>
       <View style={styles.gameBody}>
         <AppText variant="bodyBold" numberOfLines={2} style={styles.gameTitle}>
@@ -120,14 +108,12 @@ const styles = StyleSheet.create({
   sectionDeco: { position: 'absolute', right: -30, bottom: -34 },
   sectionTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: spacing.xs },
   sectionArt: { width: 74, height: 74, borderRadius: 37, backgroundColor: 'rgba(255,255,255,0.16)', alignItems: 'center', justifyContent: 'center' },
-  newPill: { borderRadius: radius.pill, paddingHorizontal: spacing.sm, paddingVertical: 2 },
   dim: { opacity: 0.88 },
   track: { height: 6, borderRadius: 3, backgroundColor: 'rgba(255,255,255,0.22)', overflow: 'hidden', marginTop: spacing.xs },
   fill: { height: 6, borderRadius: 3 },
   starsRow: { flexDirection: 'row', alignItems: 'center', gap: 3 },
   gameCard: { borderRadius: radius.lg, borderWidth: 1, overflow: 'hidden', ...shadows('#000').card },
   gameArt: { height: 124, alignItems: 'center', justifyContent: 'center' },
-  newTag: { position: 'absolute', top: spacing.sm, left: spacing.sm, borderRadius: radius.pill, paddingHorizontal: spacing.sm, paddingVertical: 2 },
   gameBody: { padding: spacing.sm, gap: spacing.xs, flex: 1, justifyContent: 'space-between' },
   gameTitle: { minHeight: 44 },
   gameMeta: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },

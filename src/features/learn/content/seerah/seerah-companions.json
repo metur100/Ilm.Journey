@@ -1,0 +1,110 @@
+{
+  "id": "seerah-companions",
+  "areaId": "seerah",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "The Companions", "de": "Die Gefährten", "bs": "Ashabi" },
+  "description": {
+    "en": "The first community around the Prophet ﷺ and what we learn from the Companions.",
+    "de": "Die erste Gemeinschaft um den Propheten ﷺ und was wir von den Gefährten lernen.",
+    "bs": "Prva zajednica oko Poslanika ﷺ i šta učimo od ashaba."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "The first believers", "de": "Die ersten Gläubigen", "bs": "Prvi vjernici" },
+      "body": {
+        "en": "The first people to believe in the Prophet ﷺ included his wife Khadija, his friend Abu Bakr, his cousin Ali and his freed servant Zayd. They supported him when the message was new and the community small. Their trust shows how a few sincere people can carry a message through hardship.",
+        "de": "Zu den ersten, die an den Propheten ﷺ glaubten, gehörten seine Frau Chadidscha, sein Freund Abu Bakr, sein Cousin Ali und sein freigelassener Diener Zaid. Sie unterstützten ihn, als die Botschaft neu und die Gemeinschaft klein war. Ihr Vertrauen zeigt, wie wenige aufrichtige Menschen eine Botschaft durch Not tragen können.",
+        "bs": "Prvi koji su povjerovali Poslaniku ﷺ bili su njegova žena Hatidža, prijatelj Ebu Bekr, rođak Alija i oslobođeni sluga Zejd. Podržavali su ga kad je poruka bila nova, a zajednica mala. Njihovo povjerenje pokazuje kako nekolicina iskrenih ljudi može nositi poruku kroz nevolje."
+      }
+    },
+    {
+      "heading": { "en": "What they teach us", "de": "Was sie uns lehren", "bs": "Čemu nas uče" },
+      "body": {
+        "en": "The Companions were not perfect, but they were sincere. They asked the Prophet ﷺ when they did not understand, corrected each other gently and put the community before their own comfort. Abu Bakr was known for truthfulness, Umar for justice, Uthman for generosity and Ali for courage and knowledge. Their example is a practical model for faith in daily life.",
+        "de": "Die Gefährten waren nicht vollkommen, aber aufrichtig. Sie fragten den Propheten ﷺ, wenn sie etwas nicht verstanden, korrigierten einander sanft und stellten die Gemeinschaft über ihren eigenen Komfort. Abu Bakr war für Wahrhaftigkeit bekannt, Umar für Gerechtigkeit, Uthman für Großzügigkeit und Ali für Mut und Wissen. Ihr Beispiel ist ein praktisches Modell für den Glauben im Alltag.",
+        "bs": "Ashabi nisu bili savršeni, ali su bili iskreni. Pitali su Poslanika ﷺ kada nisu razumjeli, blago su ispravljali jedni druge i stavljali zajednicu ispred vlastite udobnosti. Ebu Bekr je bio poznat po istinitosti, Omer po pravdi, Osman po darežljivosti, a Alija po hrabrosti i znanju. Njihov primjer praktičan je model imana u svakodnevnom životu."
+      }
+    }
+  ],
+  "practiceId": "seerah-companions-p",
+  "testIds": ["seerah-companions-1", "seerah-companions-2", "seerah-companions-3", "seerah-companions-4"],
+  "explanation": {
+    "en": "The Companions show that faith is lived in community: sincerely, patiently and with concern for others.",
+    "de": "Die Gefährten zeigen, dass Glaube in Gemeinschaft gelebt wird: aufrichtig, geduldig und mit Sorge für andere.",
+    "bs": "Ashabi pokazuju da se iman živi u zajednici: iskreno, strpljivo i s brigom za druge."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "9:100" },
+    { "sourceName": "Ibn Hisham", "sourceReference": "Sirah" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "3651" }
+  ],
+  "questions": [
+    {
+      "id": "seerah-companions-p",
+      "type": "multipleChoice",
+      "areaId": "seerah",
+      "topic": "seerah-companions",
+      "prompt": { "en": "Who was the first caliph after the Prophet ﷺ?", "de": "Wer war der erste Kalif nach dem Propheten ﷺ?", "bs": "Ko je bio prvi halifa poslije Poslanika ﷺ?" },
+      "options": [
+        { "id": "a", "text": { "en": "Abu Bakr", "de": "Abu Bakr", "bs": "Ebu Bekr" } },
+        { "id": "b", "text": { "en": "Umar", "de": "Umar", "bs": "Omer" } },
+        { "id": "c", "text": { "en": "Uthman", "de": "Uthman", "bs": "Osman" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Abu Bakr became the first caliph.", "de": "Abu Bakr wurde der erste Kalif.", "bs": "Ebu Bekr je postao prvi halifa." }
+    },
+    {
+      "id": "seerah-companions-1",
+      "type": "matching",
+      "areaId": "seerah",
+      "topic": "seerah-companions",
+      "prompt": { "en": "Match each Companion with a quality he is known for.", "de": "Ordne jedem Gefährten eine Eigenschaft zu, für die er bekannt ist.", "bs": "Spoji svakog ashaba s osobinom po kojoj je poznat." },
+      "pairs": [
+        { "id": "abubakr", "left": { "en": "Abu Bakr", "de": "Abu Bakr", "bs": "Ebu Bekr" }, "right": { "en": "Truthfulness", "de": "Wahrhaftigkeit", "bs": "Istinitost" } },
+        { "id": "umar", "left": { "en": "Umar", "de": "Umar", "bs": "Omer" }, "right": { "en": "Justice", "de": "Gerechtigkeit", "bs": "Pravda" } },
+        { "id": "uthman", "left": { "en": "Uthman", "de": "Uthman", "bs": "Osman" }, "right": { "en": "Generosity", "de": "Großzügigkeit", "bs": "Darežljivost" } },
+        { "id": "ali", "left": { "en": "Ali", "de": "Ali", "bs": "Alija" }, "right": { "en": "Courage and knowledge", "de": "Mut und Wissen", "bs": "Hrabrost i znanje" } }
+      ],
+      "explanation": { "en": "Their qualities complement each other in one community.", "de": "Ihre Eigenschaften ergänzen sich in einer Gemeinschaft.", "bs": "Njihove osobine se dopunjuju u jednoj zajednici." }
+    },
+    {
+      "id": "seerah-companions-2",
+      "type": "trueFalse",
+      "areaId": "seerah",
+      "topic": "seerah-companions",
+      "prompt": { "en": "The Companions never made mistakes.", "de": "Die Gefährten machten nie Fehler.", "bs": "Ashabi nikad nisu griješili." },
+      "correct": false,
+      "explanation": { "en": "They were human; their example is sincerity and correction, not perfection.", "de": "Sie waren Menschen; ihr Beispiel ist Aufrichtigkeit und Korrektur, nicht Perfektion.", "bs": "Bili su ljudi; njihov primjer je iskrenost i ispravljanje, a ne savršenstvo." }
+    },
+    {
+      "id": "seerah-companions-3",
+      "type": "fillBlank",
+      "areaId": "seerah",
+      "topic": "seerah-companions",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "The first caliph after the Prophet ﷺ was ___.", "de": "Der erste Kalif nach dem Propheten ﷺ war ___.", "bs": "Prvi halifa poslije Poslanika ﷺ bio je ___." },
+      "options": [
+        { "id": "a", "text": { "en": "Abu Bakr", "de": "Abu Bakr", "bs": "Ebu Bekr" } },
+        { "id": "b", "text": { "en": "Ali", "de": "Ali", "bs": "Alija" } },
+        { "id": "c", "text": { "en": "Uthman", "de": "Uthman", "bs": "Osman" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Abu Bakr was the first caliph.", "de": "Abu Bakr war der erste Kalif.", "bs": "Ebu Bekr je bio prvi halifa." }
+    },
+    {
+      "id": "seerah-companions-4",
+      "type": "multipleChoice",
+      "areaId": "seerah",
+      "topic": "seerah-companions",
+      "prompt": { "en": "What did the Companions do when they did not understand something?", "de": "Was taten die Gefährten, wenn sie etwas nicht verstanden?", "bs": "Šta su ashabi radili kada nešto nisu razumjeli?" },
+      "options": [
+        { "id": "a", "text": { "en": "They asked the Prophet ﷺ", "de": "Sie fragten den Propheten ﷺ", "bs": "Pitali su Poslanika ﷺ" } },
+        { "id": "b", "text": { "en": "They stayed silent", "de": "Sie schwiegen", "bs": "Šutjeli su" } },
+        { "id": "c", "text": { "en": "They left the community", "de": "Sie verließen die Gemeinschaft", "bs": "Napustili su zajednicu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "They asked and learned – a model for every learner.", "de": "Sie fragten und lernten – ein Vorbild für jeden Lernenden.", "bs": "Pitali su i učili – primjer za svakog učenika." }
+    }
+  ]
+}

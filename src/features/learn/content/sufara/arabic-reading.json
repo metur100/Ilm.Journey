@@ -1,0 +1,106 @@
+{
+  "id": "arabic-reading",
+  "areaId": "sufara",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "Reading Words", "de": "Wörter lesen", "bs": "Čitanje riječi" },
+  "description": {
+    "en": "From letters to syllables and from syllables to whole words.",
+    "de": "Von Buchstaben zu Silben und von Silben zu ganzen Wörtern.",
+    "bs": "Od harfova do slogova i od slogova do cijelih riječi."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Read syllable by syllable", "de": "Silbe für Silbe lesen", "bs": "Čitaj slog po slog" },
+      "body": {
+        "en": "Arabic is read from right to left. A syllable is a letter with its short vowel: بَ (be), بِ (bi), بُ (bu). A long vowel adds alif, ya or waw: بَا (bā), بِي (bī), بُو (bū). A sukun closes the syllable: بَتْ (bet). Read each syllable aloud, then join them.",
+        "de": "Arabisch wird von rechts nach links gelesen. Eine Silbe ist ein Buchstabe mit seinem kurzen Vokal: بَ (be), بِ (bi), بُ (bu). Ein langer Vokal fügt Alif, Ya oder Waw hinzu: بَا (bā), بِي (bī), بُو (bū). Ein Sukun schließt die Silbe: بَتْ (bet). Lies jede Silbe laut und verbinde sie dann.",
+        "bs": "Arapski se čita zdesna nalijevo. Slog je harf s kratkim samoglasnikom: بَ (be), بِ (bi), بُ (bu). Dugi samoglasnik dodaje elif, je ili vav: بَا (bā), بِي (bī), بُو (bū). Sukun zatvara slog: بَتْ (bet). Čitaj svaki slog naglas, pa ih spoji."
+      }
+    },
+    {
+      "heading": { "en": "First words", "de": "Erste Wörter", "bs": "Prve riječi" },
+      "body": {
+        "en": "Words are read letter by letter, then as a whole. Start with short words: بَاب (bāb, door), مَاء (māʾ, water), كِتَاب (kitāb, book), مَسْجِد (masjid, mosque), سَلَام (salām, peace). Look at the letters, say each sound, and only then say the full word. Repeat daily; reading grows with practice.",
+        "de": "Wörter werden Buchstabe für Buchstabe und dann als Ganzes gelesen. Beginne mit kurzen Wörtern: بَاب (bāb, Tür), مَاء (māʾ, Wasser), كِتَاب (kitāb, Buch), مَسْجِد (masjid, Moschee), سَلَام (salām, Frieden). Schau auf die Buchstaben, sprich jeden Laut und dann das ganze Wort. Wiederhole täglich; Lesen wächst mit Übung.",
+        "bs": "Riječi se čitaju harf po harf, a zatim kao cjelina. Počni kratkim riječima: بَاب (bāb, vrata), مَاء (māʾ, voda), كِتَاب (kitāb, knjiga), مَسْجِد (masjid, džamija), سَلَام (salām, mir). Gledaj harfove, izgovori svaki glas, pa tek onda cijelu riječ. Ponavljaj svaki dan; čitanje raste s vježbom."
+      }
+    }
+  ],
+  "practiceId": "arabic-reading-p",
+  "testIds": ["arabic-reading-1", "arabic-reading-2", "arabic-reading-3", "arabic-reading-4"],
+  "explanation": {
+    "en": "Reading is a skill built by daily repetition: letters, syllables, then words and sentences.",
+    "de": "Lesen ist eine Fähigkeit, die durch tägliche Wiederholung wächst: Buchstaben, Silben, dann Wörter und Sätze.",
+    "bs": "Čitanje je vještina koja se gradi svakodnevnim ponavljanjem: harfovi, slogovi, pa riječi i rečenice."
+  },
+  "sources": [{ "sourceName": "Arabic alphabet", "sourceReference": "reading syllables and words" }],
+  "questions": [
+    {
+      "id": "arabic-reading-p",
+      "type": "multipleChoice",
+      "areaId": "sufara",
+      "topic": "arabic-reading",
+      "prompt": { "en": "How is بَا read?", "de": "Wie wird بَا gelesen?", "bs": "Kako se čita بَا?" },
+      "options": [
+        { "id": "a", "text": { "en": "bā", "de": "bā", "bs": "bā" } },
+        { "id": "b", "text": { "en": "bi", "de": "bi", "bs": "bi" } },
+        { "id": "c", "text": { "en": "bu", "de": "bu", "bs": "bu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Alif after fatha makes the long ā.", "de": "Alif nach Fatha macht das lange ā.", "bs": "Elif poslije fethe daje dugo ā." }
+    },
+    {
+      "id": "arabic-reading-1",
+      "type": "matching",
+      "areaId": "sufara",
+      "topic": "arabic-reading",
+      "prompt": { "en": "Match each word with its reading.", "de": "Ordne jedem Wort seine Lesung zu.", "bs": "Spoji svaku riječ s njenim čitanjem." },
+      "pairs": [
+        { "id": "bab", "left": { "en": "بَاب", "de": "بَاب", "bs": "بَاب" }, "right": { "en": "bāb", "de": "bāb", "bs": "bāb" } },
+        { "id": "kitab", "left": { "en": "كِتَاب", "de": "كِتَاب", "bs": "كِتَاب" }, "right": { "en": "kitāb", "de": "kitāb", "bs": "kitāb" } },
+        { "id": "masjid", "left": { "en": "مَسْجِد", "de": "مَسْجِد", "bs": "مَسْجِد" }, "right": { "en": "masjid", "de": "masjid", "bs": "masjid" } },
+        { "id": "salam", "left": { "en": "سَلَام", "de": "سَلَام", "bs": "سَلَام" }, "right": { "en": "salām", "de": "salām", "bs": "salām" } }
+      ],
+      "explanation": { "en": "Read each letter, then join the sounds.", "de": "Lies jeden Buchstaben und verbinde dann die Laute.", "bs": "Pročitaj svaki harf, pa spoji glasove." }
+    },
+    {
+      "id": "arabic-reading-2",
+      "type": "trueFalse",
+      "areaId": "sufara",
+      "topic": "arabic-reading",
+      "prompt": { "en": "Arabic is read from right to left.", "de": "Arabisch wird von rechts nach links gelesen.", "bs": "Arapski se čita zdesna nalijevo." },
+      "correct": true,
+      "explanation": { "en": "Yes – reading starts on the right.", "de": "Ja – man beginnt rechts.", "bs": "Da – čitanje počinje s desne strane." }
+    },
+    {
+      "id": "arabic-reading-3",
+      "type": "fillBlank",
+      "areaId": "sufara",
+      "topic": "arabic-reading",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "The word كِتَاب means ___.", "de": "Das Wort كِتَاب bedeutet ___.", "bs": "Riječ كِتَاب znači ___." },
+      "options": [
+        { "id": "a", "text": { "en": "book", "de": "Buch", "bs": "knjiga" } },
+        { "id": "b", "text": { "en": "water", "de": "Wasser", "bs": "voda" } },
+        { "id": "c", "text": { "en": "door", "de": "Tür", "bs": "vrata" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Kitāb is a book.", "de": "Kitāb ist ein Buch.", "bs": "Kitāb je knjiga." }
+    },
+    {
+      "id": "arabic-reading-4",
+      "type": "multipleChoice",
+      "areaId": "sufara",
+      "topic": "arabic-reading",
+      "prompt": { "en": "Which word means “peace”?", "de": "Welches Wort bedeutet „Frieden“?", "bs": "Koja riječ znači „mir“?" },
+      "options": [
+        { "id": "a", "text": { "en": "سَلَام", "de": "سَلَام", "bs": "سَلَام" } },
+        { "id": "b", "text": { "en": "بَاب", "de": "بَاب", "bs": "بَاب" } },
+        { "id": "c", "text": { "en": "مَاء", "de": "مَاء", "bs": "مَاء" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Salām means peace.", "de": "Salām bedeutet Frieden.", "bs": "Selam znači mir." }
+    }
+  ]
+}

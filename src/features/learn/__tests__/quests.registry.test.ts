@@ -103,9 +103,10 @@ describe('topic path', () => {
     expect(nextPathEntry('salah', learn())?.item.id).toBe(unitsOfArea('salah')[0].id);
   });
 
-  it('has no quests in topics without islam-quest content', () => {
+  it('adds all 25 prophet stories and all 38 surahs as steps', () => {
     expect(buildTopicPath('history', learn()).some((e) => e.item.kind === 'quest')).toBe(false);
-    expect(buildTopicPath('prophets', learn()).some((e) => e.item.kind === 'quest')).toBe(false);
+    expect(buildTopicPath('prophets', learn()).filter((e) => e.item.kind === 'quest')).toHaveLength(25);
+    expect(buildTopicPath('quran', learn()).filter((e) => e.item.kind === 'quest' && e.item.id.startsWith('surah-'))).toHaveLength(38);
   });
 
   it('suggests the next quest as today’s learning quest and completes it', () => {
@@ -116,14 +117,18 @@ describe('topic path', () => {
     expect(useAppStore.getState().quests.find((q) => q.kind === 'learning')?.completed).toBe(true);
   });
 
-  it('registers the topic tools for quran, sufara and ramadan – and no games (they are in the Play tab)', () => {
+  it('registers the topic tools for quran, sufara, ramadan, salah and prophets – and no games', () => {
     expect(getTopicTools('quran').map((t) => t.href)).toEqual(['/tools/quran', '/tools/duas']);
     expect(getTopicTools('sufara').map((t) => t.href)).toEqual(['/tools/arabic']);
     expect(getTopicTools('arabic')).toEqual([]);
     expect(getTopicTools('ramadan').map((t) => t.href)).toEqual(['/tools/ramadan']);
+    expect(getTopicTools('salah').map((t) => t.href)).toEqual(['/tools/salah']);
+    expect(getTopicTools('prophets').map((t) => t.href)).toEqual(['/tools/prophets']);
     for (const topic of TOPIC_IDS) for (const tool of getTopicTools(topic)) expect(JSON.stringify(tool.href)).not.toContain('/game/');
-    for (const tool of [...getTopicTools('quran'), ...getTopicTools('sufara'), ...getTopicTools('ramadan')]) {
-      for (const lang of ['en', 'de', 'bs'] as const) expect(tool.label(lang).length).toBeGreaterThan(0);
+    for (const topic of TOPIC_IDS) {
+      for (const tool of getTopicTools(topic)) {
+        for (const lang of ['en', 'de', 'bs'] as const) expect(tool.label(lang).length).toBeGreaterThan(0);
+      }
     }
   });
 });

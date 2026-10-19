@@ -1,0 +1,114 @@
+{
+  "id": "ramadan-fasting-rules",
+  "areaId": "ramadan",
+  "order": 5,
+  "difficulty": 2,
+  "title": { "en": "The Rules of Fasting", "de": "Die Regeln des Fastens", "bs": "Pravila posta" },
+  "description": {
+    "en": "Who fasts, what breaks the fast and who is excused.",
+    "de": "Wer fastet, was das Fasten bricht und wer entschuldigt ist.",
+    "bs": "Ko posti, šta kvari post i ko je opravdan."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Who must fast", "de": "Wer fasten muss", "bs": "Ko mora postiti" },
+      "body": {
+        "en": "Fasting Ramadan is obligatory for every adult Muslim who is sane, healthy and able, and not travelling. Children are not obliged, but they are encouraged to practise. A sick person, a traveller, a pregnant or nursing woman and a woman in menstruation are excused; some make up the missed days later, others give a fidya according to the case.",
+        "de": "Das Fasten im Ramadan ist für jeden erwachsenen Muslim Pflicht, der bei Verstand, gesund und fähig und nicht auf Reisen ist. Kinder sind nicht verpflichtet, werden aber zum Üben ermutigt. Kranke, Reisende, schwangere und stillende Frauen sowie Frauen in der Menstruation sind entschuldigt; manche holen die Tage später nach, andere geben je nach Fall eine Fidya.",
+        "bs": "Post u ramazanu obavezan je za svakog odraslog muslimana koji je pri svijesti, zdrav, sposoban i nije na putu. Djeca nisu obavezna, ali se podstiču da vježbaju. Bolesnik, putnik, trudnica i dojilja te žena u hajzu su opravdani; neki propuštene dane naknade kasnije, a neki daju fidju prema slučaju."
+      }
+    },
+    {
+      "heading": { "en": "What breaks the fast", "de": "Was das Fasten bricht", "bs": "Šta kvari post" },
+      "body": {
+        "en": "The fast is from dawn (fajr) to sunset (maghrib). Eating, drinking, smoking and deliberate vomiting break it. Intimacy during the day breaks it and requires expiation. Forgetfully eating or drinking does not break the fast; the person continues. Illness, travel and menstruation are reasons to break the fast and make up the day later.",
+        "de": "Das Fasten dauert von der Morgendämmerung (Fadschr) bis zum Sonnenuntergang (Maghrib). Essen, Trinken, Rauchen und absichtliches Erbrechen brechen es. Intimität am Tag bricht es und erfordert eine Sühne. Vergessenes Essen oder Trinken bricht das Fasten nicht; die Person fastet weiter. Krankheit, Reise und Menstruation sind Gründe, das Fasten zu brechen und den Tag später nachzuholen.",
+        "bs": "Post traje od zore (sabah) do zalaska sunca (akšam). Jelo, piće, pušenje i namjerno povraćanje kvare ga. Intimni odnos danju kvari post i traži kefaret. Zaboravljeno jelo ili piće ne kvari post; osoba nastavlja. Bolest, put i hajz razlozi su za prekid posta i naknadu dana kasnije."
+      }
+    }
+  ],
+  "practiceId": "ramadan-fasting-rules-p",
+  "testIds": ["ramadan-fasting-rules-1", "ramadan-fasting-rules-2", "ramadan-fasting-rules-3", "ramadan-fasting-rules-4"],
+  "explanation": {
+    "en": "Fasting is a mercy with clear rules: those who cannot fast are excused and make up the days when they can.",
+    "de": "Fasten ist eine Barmherzigkeit mit klaren Regeln: Wer nicht fasten kann, ist entschuldigt und holt die Tage nach, wenn er kann.",
+    "bs": "Post je milost s jasnim pravilima: ko ne može postiti, opravdan je i naknadit će dane kada bude mogao."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "2:183–185" },
+    { "sourceName": "Quran", "sourceReference": "2:187" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "1936" }
+  ],
+  "questions": [
+    {
+      "id": "ramadan-fasting-rules-p",
+      "type": "trueFalse",
+      "areaId": "ramadan",
+      "topic": "ramadan-fasting-rules",
+      "prompt": { "en": "The fast lasts from dawn to sunset.", "de": "Das Fasten dauert von der Morgendämmerung bis zum Sonnenuntergang.", "bs": "Post traje od zore do zalaska sunca." },
+      "correct": true,
+      "explanation": { "en": "Yes – from fajr to maghrib.", "de": "Ja – von Fadschr bis Maghrib.", "bs": "Da – od sabaha do akšama." }
+    },
+    {
+      "id": "ramadan-fasting-rules-1",
+      "type": "multipleChoice",
+      "areaId": "ramadan",
+      "topic": "ramadan-fasting-rules",
+      "prompt": { "en": "Who is excused from fasting?", "de": "Wer ist vom Fasten entschuldigt?", "bs": "Ko je opravdan od posta?" },
+      "options": [
+        { "id": "a", "text": { "en": "The sick, the traveller and the pregnant woman", "de": "Kranke, Reisende und schwangere Frauen", "bs": "Bolesnik, putnik i trudnica" } },
+        { "id": "b", "text": { "en": "Every adult", "de": "Jeder Erwachsene", "bs": "Svaki odrasli" } },
+        { "id": "c", "text": { "en": "No one", "de": "Niemand", "bs": "Niko" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The Quran and Sunnah excuse those who are unable.", "de": "Koran und Sunna entschuldigen die, die nicht können.", "bs": "Kur’an i sunna opravdavaju one koji ne mogu." }
+    },
+    {
+      "id": "ramadan-fasting-rules-2",
+      "type": "categorize",
+      "areaId": "ramadan",
+      "topic": "ramadan-fasting-rules",
+      "prompt": { "en": "Sort the actions: breaks the fast or does not?", "de": "Ordne die Handlungen: bricht das Fasten oder nicht?", "bs": "Razvrstaj postupke: kvari post ili ne?" },
+      "categories": [
+        { "id": "breaks", "label": { "en": "Breaks the fast", "de": "Bricht das Fasten", "bs": "Kvari post" } },
+        { "id": "safe", "label": { "en": "Does not break", "de": "Bricht nicht", "bs": "Ne kvari" } }
+      ],
+      "items": [
+        { "id": "eat", "text": { "en": "Eating on purpose", "de": "Absichtlich essen", "bs": "Namjerno jesti" }, "categoryId": "breaks" },
+        { "id": "drink", "text": { "en": "Drinking on purpose", "de": "Absichtlich trinken", "bs": "Namjerno piti" }, "categoryId": "breaks" },
+        { "id": "forget", "text": { "en": "Eating forgetfully", "de": "Vergesslich essen", "bs": "Zaboraviti i pojesti" }, "categoryId": "safe" },
+        { "id": "sleep", "text": { "en": "Sleeping during the day", "de": "Tagsüber schlafen", "bs": "Spavati danju" }, "categoryId": "safe" }
+      ],
+      "explanation": { "en": "Deliberate eating and drinking break the fast; forgetfulness does not.", "de": "Absichtliches Essen und Trinken brechen das Fasten; Vergesslichkeit nicht.", "bs": "Namjerno jelo i piće kvare post; zaborav ne." }
+    },
+    {
+      "id": "ramadan-fasting-rules-3",
+      "type": "fillBlank",
+      "areaId": "ramadan",
+      "topic": "ramadan-fasting-rules",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Fasting Ramadan is ___ for every able adult Muslim.", "de": "Das Fasten im Ramadan ist ___ für jeden fähigen erwachsenen Muslim.", "bs": "Post u ramazanu je ___ za svakog sposobnog odraslog muslimana." },
+      "options": [
+        { "id": "a", "text": { "en": "obligatory", "de": "Pflicht", "bs": "obavezan" } },
+        { "id": "b", "text": { "en": "optional", "de": "freiwillig", "bs": "dobrovoljan" } },
+        { "id": "c", "text": { "en": "forbidden", "de": "verboten", "bs": "zabranjen" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "It is one of the pillars of Islam.", "de": "Es ist eine der Säulen des Islam.", "bs": "To je jedan od temelja islama." }
+    },
+    {
+      "id": "ramadan-fasting-rules-4",
+      "type": "multipleChoice",
+      "areaId": "ramadan",
+      "topic": "ramadan-fasting-rules",
+      "prompt": { "en": "What should a traveller do who breaks the fast?", "de": "Was soll ein Reisender tun, der das Fasten bricht?", "bs": "Šta treba učiniti putnik koji prekine post?" },
+      "options": [
+        { "id": "a", "text": { "en": "Make up the day later", "de": "Den Tag später nachholen", "bs": "Naknaditi dan kasnije" } },
+        { "id": "b", "text": { "en": "Never fast again", "de": "Nie wieder fasten", "bs": "Nikad više ne postiti" } },
+        { "id": "c", "text": { "en": "Pay a penalty only", "de": "Nur eine Strafe zahlen", "bs": "Samo platiti kaznu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The traveller makes up the missed days after Ramadan.", "de": "Der Reisende holt die versäumten Tage nach dem Ramadan nach.", "bs": "Putnik naknađuje propuštene dane poslije ramazana." }
+    }
+  ]
+}
