@@ -1,28 +1,32 @@
 import { StyleSheet, View } from 'react-native';
 
 import type { GameApi } from '@/core/games';
-import { GameBoard, JigsawReveal } from '@/core/games/kit';
+import { GameBoard, SequenceBoard, type KitItem } from '@/core/games/kit';
 import { spacing } from '@/core/theme';
 
-import { AyahCard } from '../shared/AyahCard';
 import { finishWith } from '../shared/game';
+import { ayahMeaning, ayahRef, surah, surahName } from '../shared/quran';
 import type { SurahPuzzleConfig } from './register';
 
+/** Every level is one complete surah: all its ayahs, in order, with nothing skipped. */
 export function SurahPuzzleGame(api: GameApi<SurahPuzzleConfig>) {
-  const { art, surah, ayah, rows, cols, mode, hints, reveal } = api.config;
+  const { surah: n, mode, hints } = api.config;
+  const items: KitItem[] = surah(n).ayahs.map((a) => {
+    const meaning = ayahMeaning(n, a.numberInSurah);
+    return mode === 'arabic'
+      ? { id: `a${a.numberInSurah}`, arabic: a.arabic, quran: true, sub: meaning }
+      : { id: `a${a.numberInSurah}`, label: api.l(meaning), sub: ayahRef(n, a.numberInSurah) };
+  });
   return (
     <GameBoard api={api}>
       <View style={styles.root}>
-        <AyahCard surah={surah} ayah={ayah} language={api.language} arabic meaning={false} />
-        <JigsawReveal
-          art={art}
-          rows={rows}
-          cols={cols}
-          mode={mode}
+        <SequenceBoard
+          items={items}
           hints={hints}
-          reveal={reveal}
-          prompt={api.t(mode === 'swap' ? 'play.promptSwap' : 'play.promptPlace')}
-          onDone={finishWith(api, rows * cols)}
+          prompt={api.t('play.prompt', { name: surahName(n) })}
+          onDone={finishWith(api, items.length)}
+          seed={`${api.gameId}:${api.level}`}
+          testID="surah-puzzle"
         />
       </View>
     </GameBoard>

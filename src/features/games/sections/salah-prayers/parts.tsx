@@ -102,23 +102,42 @@ export function Stage({ prayer, position, variant, tint, width, height, reducedM
   return onGesture ? <GestureDetector gesture={gesture}>{body}</GestureDetector> : body;
 }
 
-/** Chips of the prayer's parts (e.g. 4 sunnah · 4 fard · 2 sunnah) with the current one highlighted. */
-export function PartsRow({ prayer, current, t }: { prayer: PrayerDef; current: number; t: T }) {
+/**
+ * Chips of the prayer's parts (e.g. 4 sunnah · 4 fard · 2 sunnah) with the current one highlighted. When
+ * `onSelect` is given every part is a button, so the learner can pray exactly the sunnah or the fard they choose.
+ */
+export function PartsRow({ prayer, current, t, onSelect }: { prayer: PrayerDef; current: number; t: T; onSelect?: (index: number) => void }) {
   const k = useKitColors();
-  const items: { key: string; label: string; active: boolean }[] = [];
+  const items: { key: string; label: string; active: boolean; index?: number }[] = [];
   prayer.parts.forEach((p, i) => {
     if (prayer.khutbahBefore === i) items.push({ key: 'khutbah', label: t('khutbah'), active: false });
-    items.push({ key: p.id, label: t(`kind.${p.kind}`, { n: p.rakats }), active: i === current });
+    items.push({ key: p.id, label: t(`kind.${p.kind}`, { n: p.rakats }), active: i === current, index: i });
   });
   return (
-    <View style={styles.parts} accessibilityRole="summary">
-      {items.map((it) => (
-        <View key={it.key} style={[styles.part, { backgroundColor: it.active ? k.accent : k.tileFace, borderColor: it.active ? k.accent : k.tileBorder }]}>
-          <AppText variant="tiny" color={it.active ? k.onAccent : k.textMuted}>
-            {it.label}
-          </AppText>
-        </View>
-      ))}
+    <View style={styles.parts}>
+      {items.map((it) =>
+        onSelect && it.index !== undefined ? (
+          <Pressable
+            key={it.key}
+            onPress={() => onSelect(it.index!)}
+            accessibilityRole="radio"
+            accessibilityState={{ selected: it.active }}
+            accessibilityLabel={it.label}
+            testID={`part-${it.index}`}
+            style={[styles.part, { backgroundColor: it.active ? k.accent : k.tileFace, borderColor: it.active ? k.accent : k.tileBorder }]}
+          >
+            <AppText variant="tiny" color={it.active ? k.onAccent : k.textMuted}>
+              {it.label}
+            </AppText>
+          </Pressable>
+        ) : (
+          <View key={it.key} style={[styles.part, { backgroundColor: it.active ? k.accent : k.tileFace, borderColor: it.active ? k.accent : k.tileBorder }]}>
+            <AppText variant="tiny" color={it.active ? k.onAccent : k.textMuted}>
+              {it.label}
+            </AppText>
+          </View>
+        ),
+      )}
     </View>
   );
 }

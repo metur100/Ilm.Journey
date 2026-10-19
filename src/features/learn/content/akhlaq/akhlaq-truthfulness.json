@@ -1,0 +1,124 @@
+{
+  "id": "akhlaq-truthfulness",
+  "areaId": "akhlaq",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "Truthfulness and Trust", "de": "Wahrhaftigkeit und Vertrauen", "bs": "Iskrenost i povjerenje" },
+  "description": {
+    "en": "Why telling the truth and keeping promises are part of good character.",
+    "de": "Warum Wahrhaftigkeit und das Einhalten von Versprechen zum guten Charakter gehören.",
+    "bs": "Zašto su istinitost i držanje obećanja dio lijepog ahlaka."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Truth leads to good", "de": "Wahrheit führt zum Guten", "bs": "Istina vodi dobrom" },
+      "body": {
+        "en": "The Prophet ﷺ taught that truthfulness leads to righteousness and righteousness leads to Paradise, while lying leads to wickedness and wickedness leads to the Fire. A truthful person is known and trusted; a liar loses the trust of family, friends and the community. Even a small lie can grow into a habit, so the believer trains himself to speak the truth even when it is difficult.",
+        "de": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit und Rechtschaffenheit zum Paradies führt, während Lügen zur Schlechtigkeit und Schlechtigkeit zum Feuer führen. Ein wahrhaftiger Mensch ist bekannt und vertrauenswürdig; ein Lügner verliert das Vertrauen von Familie, Freunden und Gemeinschaft. Auch eine kleine Lüge kann zur Gewohnheit werden, deshalb übt sich der Gläubige in der Wahrheit, auch wenn sie schwer ist.",
+        "bs": "Poslanik ﷺ je poučio da istinitost vodi dobroti, a dobrota u Džennet, dok laž vodi rđavom, a rđavo u Vatru. Istinit čovjek je poznat i pouzdan; lažljivac gubi povjerenje porodice, prijatelja i zajednice. I mala laž može prerasti u naviku, pa vjernik sebe uvježbava da govori istinu i kad je teško."
+      }
+    },
+    {
+      "heading": { "en": "Keeping promises", "de": "Versprechen halten", "bs": "Držanje obećanja" },
+      "body": {
+        "en": "The Quran commands the believer to fulfil promises and agreements. Keeping a promise is a sign of honesty: it shows that your word can be trusted. If you cannot keep a promise, explain honestly and ask forgiveness instead of hiding the truth. The Prophet ﷺ was known as al-Amin, the trustworthy, even before he became a prophet.",
+        "de": "Der Koran gebietet dem Gläubigen, Versprechen und Verträge zu erfüllen. Ein Versprechen zu halten ist ein Zeichen von Ehrlichkeit: Es zeigt, dass man sich auf dein Wort verlassen kann. Wenn du ein Versprechen nicht halten kannst, erkläre es ehrlich und bitte um Verzeihung, statt die Wahrheit zu verbergen. Der Prophet ﷺ war schon vor seiner Prophetenschaft als al-Amin, der Vertrauenswürdige, bekannt.",
+        "bs": "Kur’an naređuje vjerniku da ispuni obećanja i ugovore. Držati obećanje znak je iskrenosti: pokazuje da se na tvoju riječ može osloniti. Ako obećanje ne možeš ispuniti, objasni iskreno i zamoli oprost umjesto da sakriješ istinu. Poslanik ﷺ je bio poznat kao el-Emin, pouzdani, i prije nego što je postao poslanik."
+      }
+    },
+    {
+      "heading": { "en": "A trust in every word", "de": "Ein Vertrauen in jedem Wort", "bs": "Povjerenje u svakoj riječi" },
+      "body": {
+        "en": "Good character is not only about big decisions. It shows in small things: returning what you borrow, speaking fairly about someone who is absent, admitting a mistake, and not passing on a rumour. The believer’s tongue is a trust, and every word will be accounted for.",
+        "de": "Guter Charakter zeigt sich nicht nur bei großen Entscheidungen. Er zeigt sich im Kleinen: Geliehenes zurückgeben, fair über Abwesende sprechen, einen Fehler zugeben und kein Gerücht weitergeben. Die Zunge des Gläubigen ist ein Vertrauen, und jedes Wort wird zur Rechenschaft gezogen.",
+        "bs": "Lijep ahlak nije samo u velikim odlukama. Vidi se u malim stvarima: vratiti pozajmljeno, pravedno govoriti o odsutnima, priznati grešku i ne prenositi glasine. Vjernikov jezik je emanet, i za svaku riječ će se polagati račun."
+      }
+    }
+  ],
+  "practiceId": "akhlaq-truthfulness-p",
+  "testIds": ["akhlaq-truthfulness-1", "akhlaq-truthfulness-2", "akhlaq-truthfulness-3", "akhlaq-truthfulness-4"],
+  "explanation": {
+    "en": "Truthfulness and keeping promises are the foundation of trust between people and a sign of sincere faith.",
+    "de": "Wahrhaftigkeit und das Einhalten von Versprechen sind die Grundlage des Vertrauens zwischen Menschen und ein Zeichen aufrichtigen Glaubens.",
+    "bs": "Istinitost i držanje obećanja temelj su povjerenja među ljudima i znak iskrenog imana."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "9:119" },
+    { "sourceName": "Quran", "sourceReference": "17:34" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "6094" },
+    { "sourceName": "Sahih Muslim", "sourceReference": "2607" }
+  ],
+  "questions": [
+    {
+      "id": "akhlaq-truthfulness-p",
+      "type": "trueFalse",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-truthfulness",
+      "prompt": { "en": "Truthfulness leads to righteousness.", "de": "Wahrhaftigkeit führt zur Rechtschaffenheit.", "bs": "Istinitost vodi dobroti." },
+      "correct": true,
+      "explanation": { "en": "Yes – the Prophet ﷺ said truth leads to righteousness and righteousness to Paradise.", "de": "Ja – der Prophet ﷺ sagte, Wahrheit führt zur Rechtschaffenheit und diese zum Paradies.", "bs": "Da – Poslanik ﷺ je rekao da istina vodi dobroti, a dobrota u Džennet." }
+    },
+    {
+      "id": "akhlaq-truthfulness-1",
+      "type": "multipleChoice",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-truthfulness",
+      "prompt": { "en": "What did the Prophet ﷺ say about lying?", "de": "Was sagte der Prophet ﷺ über das Lügen?", "bs": "Šta je Poslanik ﷺ rekao o laži?" },
+      "options": [
+        { "id": "a", "text": { "en": "It leads to wickedness and the Fire", "de": "Sie führt zur Schlechtigkeit und zum Feuer", "bs": "Vodi rđavom i Vatri" } },
+        { "id": "b", "text": { "en": "It is allowed in a joke", "de": "Sie ist im Scherz erlaubt", "bs": "Dozvoljena je u šali" } },
+        { "id": "c", "text": { "en": "It is a small thing", "de": "Sie ist eine Kleinigkeit", "bs": "To je sitnica" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Lying leads to wickedness, and wickedness leads to the Fire.", "de": "Lügen führt zur Schlechtigkeit, und Schlechtigkeit zum Feuer.", "bs": "Laž vodi rđavom, a rđavo u Vatru." },
+      "sources": [{ "sourceName": "Sahih al-Bukhari", "sourceReference": "6094" }]
+    },
+    {
+      "id": "akhlaq-truthfulness-2",
+      "type": "categorize",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-truthfulness",
+      "prompt": { "en": "Sort the actions: trustworthy or dishonest?", "de": "Ordne die Handlungen: vertrauenswürdig oder unehrlich?", "bs": "Razvrstaj postupke: pouzdano ili neiskreno?" },
+      "categories": [
+        { "id": "trust", "label": { "en": "Trustworthy", "de": "Vertrauenswürdig", "bs": "Pouzdano" } },
+        { "id": "dishonest", "label": { "en": "Dishonest", "de": "Unehrlich", "bs": "Neiskreno" } }
+      ],
+      "items": [
+        { "id": "return", "text": { "en": "Returning what you borrowed", "de": "Geliehenes zurückgeben", "bs": "Vratiti pozajmljeno" }, "categoryId": "trust" },
+        { "id": "promise", "text": { "en": "Keeping a promise", "de": "Ein Versprechen halten", "bs": "Ispuniti obećanje" }, "categoryId": "trust" },
+        { "id": "rumour", "text": { "en": "Passing on a rumour", "de": "Ein Gerücht weitergeben", "bs": "Prenositi glasinu" }, "categoryId": "dishonest" },
+        { "id": "hide", "text": { "en": "Hiding a mistake", "de": "Einen Fehler verbergen", "bs": "Sakriti grešku" }, "categoryId": "dishonest" }
+      ],
+      "explanation": { "en": "Trust is built by small honest actions and broken by small dishonest ones.", "de": "Vertrauen entsteht durch kleine ehrliche Taten und zerbricht durch kleine unehrliche.", "bs": "Povjerenje se gradi malim iskrenim djelima, a ruši malim neiskrenim." }
+    },
+    {
+      "id": "akhlaq-truthfulness-3",
+      "type": "fillBlank",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-truthfulness",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "The Quran commands the believer to fulfil ___.", "de": "Der Koran gebietet dem Gläubigen, ___ zu erfüllen.", "bs": "Kur’an naređuje vjerniku da ispuni ___." },
+      "options": [
+        { "id": "a", "text": { "en": "promises and agreements", "de": "Versprechen und Verträge", "bs": "obećanja i ugovore" } },
+        { "id": "b", "text": { "en": "only big promises", "de": "nur große Versprechen", "bs": "samo velika obećanja" } },
+        { "id": "c", "text": { "en": "nothing", "de": "nichts", "bs": "ništa" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Quran 17:34 commands fulfilling promises and agreements.", "de": "Koran 17:34 gebietet, Versprechen und Verträge zu erfüllen.", "bs": "Kur’an 17:34 naređuje ispunjavanje obećanja i ugovora." }
+    },
+    {
+      "id": "akhlaq-truthfulness-4",
+      "type": "scenario",
+      "areaId": "akhlaq",
+      "topic": "akhlaq-truthfulness",
+      "prompt": { "en": "You promised a friend to help, but something else came up. What is the honest response?", "de": "Du hast einem Freund Hilfe versprochen, aber etwas anderes kam dazwischen. Was ist die ehrliche Antwort?", "bs": "Obećao si prijatelju pomoći, ali je iskrslo nešto drugo. Šta je iskren odgovor?" },
+      "options": [
+        { "id": "a", "text": { "en": "Tell him honestly and arrange another time", "de": "Sag es ihm ehrlich und vereinbare einen anderen Termin", "bs": "Reci mu iskreno i dogovori drugi termin" } },
+        { "id": "b", "text": { "en": "Ignore him and hope he forgets", "de": "Ignoriere ihn und hoffe, dass er es vergisst", "bs": "Ignoriši ga i nadaj se da će zaboraviti" } },
+        { "id": "c", "text": { "en": "Make up an excuse", "de": "Denk dir eine Ausrede aus", "bs": "Izmisliti izgovor" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Honesty keeps trust even when you cannot keep the original promise.", "de": "Ehrlichkeit bewahrt Vertrauen, auch wenn du das ursprüngliche Versprechen nicht halten kannst.", "bs": "Iskrenost čuva povjerenje i kad ne možeš ispuniti prvobitno obećanje." }
+    }
+  ]
+}

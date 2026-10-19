@@ -1,0 +1,118 @@
+{
+  "id": "seerah-farewell",
+  "areaId": "seerah",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "The Farewell Pilgrimage", "de": "Die Abschiedswallfahrt", "bs": "Oproštajni hadž" },
+  "description": {
+    "en": "The last pilgrimage of the Prophet ﷺ, the sermon at Arafah and the completion of the message.",
+    "de": "Die letzte Wallfahrt des Propheten ﷺ, die Predigt bei Arafah und die Vollendung der Botschaft.",
+    "bs": "Posljednji hadž Poslanika ﷺ, hutba na Arefatu i upotpunjenje poruke."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "The journey to Makkah", "de": "Die Reise nach Mekka", "bs": "Putovanje u Mekku" },
+      "body": {
+        "en": "In the tenth year after the Hijra the Prophet ﷺ performed the pilgrimage with a large number of Muslims. He taught them the rites of the hajj by doing them himself: the ihram, the tawaf of the Kaaba, the standing at Arafah, the sacrifice and the farewell tawaf. The Muslims followed him and learned the pilgrimage from his example.",
+        "de": "Im zehnten Jahr nach der Hidschra verrichtete der Prophet ﷺ mit einer großen Zahl von Muslimen die Wallfahrt. Er lehrte sie die Riten des Hadsch, indem er sie selbst ausführte: den Ihram, den Tawaf um die Kaaba, das Stehen bei Arafah, das Opfer und den Abschieds-Tawaf. Die Muslime folgten ihm und lernten die Wallfahrt an seinem Beispiel.",
+        "bs": "U desetoj godini poslije hidžre Poslanik ﷺ je s velikim brojem muslimana obavio hadž. Poučio ih je obredima hadža tako što ih je sam činio: ihram, tavaf oko Kabe, stajanje na Arefatu, kurban i oproštajni tavaf. Muslimani su ga slijedili i učili hadž na njegovom primjeru."
+      }
+    },
+    {
+      "heading": { "en": "The sermon at Arafah", "de": "Die Predigt bei Arafah", "bs": "Hutba na Arefatu" },
+      "body": {
+        "en": "At Arafah the Prophet ﷺ addressed the people. He reminded them of the sanctity of their lives, their property and their honour, and he taught that no Arab is better than a non-Arab and no non-Arab better than an Arab except by piety. He left them with the Quran and his Sunnah and asked them to bear witness that he had delivered the message.",
+        "de": "Bei Arafah sprach der Prophet ﷺ zu den Menschen. Er erinnerte sie an die Heiligkeit ihres Lebens, ihres Eigentums und ihrer Ehre und lehrte, dass kein Araber besser ist als ein Nicht-Araber und kein Nicht-Araber besser als ein Araber – außer durch Frömmigkeit. Er hinterließ ihnen den Koran und seine Sunna und ließ sie bezeugen, dass er die Botschaft ausgerichtet hatte.",
+        "bs": "Na Arefatu se Poslanik ﷺ obratio ljudima. Podsjetio ih je na svetost njihovih života, imetka i časti i poučio da nijedan Arapin nije bolji od nearapina ni nearapin od Arapina osim po bogobojaznosti. Ostavio im je Kur’an i svoju sunnu i zamolio ih da posvjedoče da je prenio poruku."
+      }
+    },
+    {
+      "heading": { "en": "The completion and the end", "de": "Vollendung und Ende", "bs": "Upotpunjenje i kraj" },
+      "body": {
+        "en": "During this pilgrimage the verse was revealed: “This day I have perfected for you your religion and completed My favour upon you.” Soon after, in Madinah, the Prophet ﷺ became ill and passed away in the year 11 after the Hijra (632 CE). The Companions continued the community he had built and preserved the Quran and his teachings.",
+        "de": "Während dieser Wallfahrt wurde der Vers offenbart: „Heute habe Ich euch eure Religion vollendet und Meine Gnade an euch erfüllt.“ Bald darauf erkrankte der Prophet ﷺ in Medina und starb im Jahr 11 nach der Hidschra (632 n. Chr.). Die Gefährten führten die Gemeinschaft fort, die er aufgebaut hatte, und bewahrten den Koran und seine Lehren.",
+        "bs": "Tokom ovog hadža objavljen je ajet: „Danas sam vam upotpunio vašu vjeru i upotpunio Svoju blagodat prema vama.“ Ubrzo poslije toga Poslanik ﷺ se razbolio u Medini i preselio u 11. godini poslije hidžre (632. g.). Ashabi su nastavili zajednicu koju je izgradio i sačuvali Kur’an i njegove pouke."
+      }
+    }
+  ],
+  "practiceId": "seerah-farewell-p",
+  "testIds": ["seerah-farewell-1", "seerah-farewell-2", "seerah-farewell-3", "seerah-farewell-4"],
+  "explanation": {
+    "en": "The Farewell Pilgrimage shows how the Prophet ﷺ completed the teaching of Islam and entrusted it to his community.",
+    "de": "Die Abschiedswallfahrt zeigt, wie der Prophet ﷺ die Lehre des Islam vollendete und sie seiner Gemeinschaft anvertraute.",
+    "bs": "Oproštajni hadž pokazuje kako je Poslanik ﷺ upotpunio učenje islama i povjerio ga svojoj zajednici."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "5:3" },
+    { "sourceName": "Ibn Hisham", "sourceReference": "Sirah – the farewell pilgrimage" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "4406" }
+  ],
+  "questions": [
+    {
+      "id": "seerah-farewell-p",
+      "type": "multipleChoice",
+      "areaId": "seerah",
+      "topic": "seerah-farewell",
+      "prompt": { "en": "Where did the Prophet ﷺ give the important sermon during his farewell pilgrimage?", "de": "Wo hielt der Prophet ﷺ während seiner Abschiedswallfahrt die wichtige Predigt?", "bs": "Gdje je Poslanik ﷺ održao važnu hutbu tokom oproštajnog hadža?" },
+      "options": [
+        { "id": "a", "text": { "en": "At Arafah", "de": "Bei Arafah", "bs": "Na Arefatu" } },
+        { "id": "b", "text": { "en": "In Madinah", "de": "In Medina", "bs": "U Medini" } },
+        { "id": "c", "text": { "en": "In Ta’if", "de": "In Ta’if", "bs": "U Taifu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The sermon was given at Arafah during the hajj.", "de": "Die Predigt wurde bei Arafah während des Hadsch gehalten.", "bs": "Hutba je održana na Arefatu tokom hadža." }
+    },
+    {
+      "id": "seerah-farewell-1",
+      "type": "trueFalse",
+      "areaId": "seerah",
+      "topic": "seerah-farewell",
+      "prompt": { "en": "The Prophet ﷺ performed the hajj in the tenth year after the Hijra.", "de": "Der Prophet ﷺ verrichtete den Hadsch im zehnten Jahr nach der Hidschra.", "bs": "Poslanik ﷺ je obavio hadž u desetoj godini poslije hidžre." },
+      "correct": true,
+      "explanation": { "en": "Yes – this is known as the Farewell Pilgrimage.", "de": "Ja – sie ist als Abschiedswallfahrt bekannt.", "bs": "Da – poznat je kao oproštajni hadž." }
+    },
+    {
+      "id": "seerah-farewell-2",
+      "type": "fillBlank",
+      "areaId": "seerah",
+      "topic": "seerah-farewell",
+      "prompt": { "en": "Complete the verse.", "de": "Vervollständige den Vers.", "bs": "Dopuni ajet." },
+      "sentence": { "en": "This day I have perfected for you your ___.", "de": "Heute habe Ich euch eure ___ vollendet.", "bs": "Danas sam vam upotpunio vašu ___." },
+      "options": [
+        { "id": "a", "text": { "en": "religion", "de": "Religion", "bs": "vjeru" } },
+        { "id": "b", "text": { "en": "journey", "de": "Reise", "bs": "put" } },
+        { "id": "c", "text": { "en": "poetry", "de": "Dichtung", "bs": "poeziju" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Quran 5:3 – the religion was completed.", "de": "Koran 5:3 – die Religion wurde vollendet.", "bs": "Kur’an 5:3 – vjera je upotpunjena." }
+    },
+    {
+      "id": "seerah-farewell-3",
+      "type": "ordering",
+      "areaId": "seerah",
+      "topic": "seerah-farewell",
+      "prompt": { "en": "Put the events in order.", "de": "Bringe die Ereignisse in die richtige Reihenfolge.", "bs": "Poredaj događaje." },
+      "items": [
+        { "id": "ihram", "text": { "en": "The Prophet ﷺ enters ihram", "de": "Der Prophet ﷺ tritt in den Ihram", "bs": "Poslanik ﷺ ulazi u ihram" } },
+        { "id": "arafah", "text": { "en": "The standing at Arafah and the sermon", "de": "Das Stehen bei Arafah und die Predigt", "bs": "Stajanje na Arefatu i hutba" } },
+        { "id": "sacrifice", "text": { "en": "The sacrifice and the farewell tawaf", "de": "Das Opfer und der Abschieds-Tawaf", "bs": "Kurban i oproštajni tavaf" } },
+        { "id": "return", "text": { "en": "The return to Madinah", "de": "Die Rückkehr nach Medina", "bs": "Povratak u Medinu" } }
+      ],
+      "explanation": { "en": "The pilgrimage moves from ihram to Arafah, then the sacrifice and the return.", "de": "Die Wallfahrt führt vom Ihram nach Arafah, dann zum Opfer und zur Rückkehr.", "bs": "Hadž ide od ihrama do Arefata, pa kurbana i povratka." }
+    },
+    {
+      "id": "seerah-farewell-4",
+      "type": "multipleChoice",
+      "areaId": "seerah",
+      "topic": "seerah-farewell",
+      "prompt": { "en": "What did the Prophet ﷺ leave with his community, according to the sermon?", "de": "Was hinterließ der Prophet ﷺ seiner Gemeinschaft nach der Predigt?", "bs": "Šta je Poslanik ﷺ ostavio svojoj zajednici, prema hutbi?" },
+      "options": [
+        { "id": "a", "text": { "en": "The Quran and his Sunnah", "de": "Den Koran und seine Sunna", "bs": "Kur’an i svoju sunnu" } },
+        { "id": "b", "text": { "en": "A written constitution only", "de": "Nur eine geschriebene Verfassung", "bs": "Samo pisani ustav" } },
+        { "id": "c", "text": { "en": "A list of kings", "de": "Eine Liste von Königen", "bs": "Spisak kraljeva" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "He entrusted the Quran and his Sunnah to the Muslims.", "de": "Er vertraute den Muslimen den Koran und seine Sunna an.", "bs": "Povjerio je muslimanima Kur’an i svoju sunnu." }
+    }
+  ]
+}

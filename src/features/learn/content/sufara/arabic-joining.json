@@ -1,0 +1,117 @@
+{
+  "id": "arabic-joining",
+  "areaId": "sufara",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "Joining Letters", "de": "Buchstaben verbinden", "bs": "Spajanje harfova" },
+  "description": {
+    "en": "How letters change shape and join into syllables and words.",
+    "de": "Wie Buchstaben ihre Form ändern und sich zu Silben und Wörtern verbinden.",
+    "bs": "Kako harfovi mijenjaju oblik i spajaju se u slogove i riječi."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Four forms", "de": "Vier Formen", "bs": "Četiri oblika" },
+      "body": {
+        "en": "A letter can stand alone, at the start of a word, in the middle or at the end. In a word it usually joins the letter before or after it, so its shape changes: ب is بـ at the start, ـبـ in the middle and ـب at the end. The letter keeps its dots and its sound; only the shape is different.",
+        "de": "Ein Buchstabe kann allein stehen, am Wortanfang, in der Mitte oder am Wortende. Im Wort verbindet er sich meist mit dem Buchstaben davor oder danach, deshalb ändert sich seine Form: ب ist بـ am Anfang, ـبـ in der Mitte und ـب am Ende. Punkte und Laut bleiben gleich; nur die Form ist anders.",
+        "bs": "Harf može stajati samostalno, na početku riječi, u sredini ili na kraju. U riječi se obično spaja s harfom prije ili poslije sebe, pa mu se oblik mijenja: ب je بـ na početku, ـبـ u sredini i ـب na kraju. Tačke i glas ostaju isti; mijenja se samo oblik."
+      }
+    },
+    {
+      "heading": { "en": "Six letters never join", "de": "Sechs Buchstaben verbinden sich nie", "bs": "Šest harfova se nikad ne spaja" },
+      "body": {
+        "en": "Most letters join the next letter, but six do not: ا, د, ذ, ر, ز and و. After one of these the next letter starts a new piece. For example, in بَاب the alif does not join the ba after it, so the word has two joined pieces: با and ب.",
+        "de": "Die meisten Buchstaben verbinden sich mit dem nächsten, sechs aber nicht: ا, د, ذ, ر, ز und و. Nach einem von ihnen beginnt der nächste Buchstabe ein neues Stück. In بَاب verbindet sich das Alif nicht mit dem folgenden Ba, deshalb besteht das Wort aus zwei Stücken: با und ب.",
+        "bs": "Većina harfova se spaja sa sljedećim, ali šest ne: ا, د, ذ, ر, ز i و. Poslije jednog od njih sljedeći harf počinje novi dio. U بَاب elif se ne spaja s beom poslije njega, pa riječ ima dva spojena dijela: با i ب."
+      }
+    },
+    {
+      "heading": { "en": "Joining with the vowels", "de": "Verbinden mit den Vokalen", "bs": "Spajanje s harekatima" },
+      "body": {
+        "en": "A letter with fatha is read with e/a, with kasra i, and with damma u. When two letters join, read the first with its vowel and then the second: بَتَ is bete (bs) / bata (en), بِتِ is biti, بُتُ is butu. Practise every new letter together with the letters you already know – that is how the sufara builds reading step by step.",
+        "de": "Ein Buchstabe mit Fatha wird mit e/a gelesen, mit Kasra i und mit Damma u. Wenn zwei Buchstaben verbunden sind, lies den ersten mit seinem Vokal und dann den zweiten: بَتَ ist bete (bs) / bata (en), بِتِ ist biti, بُتُ ist butu. Übe jeden neuen Buchstaben zusammen mit den schon bekannten – so baut die Sufara das Lesen Schritt für Schritt auf.",
+        "bs": "Harf s fethom čita se s e/a, s kesrom i, a s dammom u. Kad se dva harfa spoje, prvi čitaj sa njegovim hareketom, pa drugi: بَتَ je bete, بِتِ je biti, بُتُ je butu. Svaki novi harf vježbaj zajedno s harfovima koje već znaš – tako sufara gradi čitanje korak po korak."
+      }
+    }
+  ],
+  "practiceId": "arabic-joining-p",
+  "testIds": ["arabic-joining-1", "arabic-joining-2", "arabic-joining-3", "arabic-joining-4"],
+  "explanation": {
+    "en": "Once you know the forms and the six non-joiners, you can read every joined syllable and build words.",
+    "de": "Wer die Formen und die sechs Nicht-Verbinder kennt, kann jede verbundene Silbe lesen und Wörter bauen.",
+    "bs": "Kad znaš oblike i šest harfova koji se ne spajaju, možeš pročitati svaki spojeni slog i graditi riječi."
+  },
+  "sources": [{ "sourceName": "Arabic alphabet", "sourceReference": "letters, forms and joining" }],
+  "questions": [
+    {
+      "id": "arabic-joining-p",
+      "type": "matching",
+      "areaId": "sufara",
+      "topic": "arabic-joining",
+      "prompt": { "en": "Match the form with its position in the word.", "de": "Ordne die Form ihrer Position im Wort zu.", "bs": "Spoji oblik s njegovim mjestom u riječi." },
+      "pairs": [
+        { "id": "initial", "left": { "en": "بـ", "de": "بـ", "bs": "بـ" }, "right": { "en": "At the start", "de": "Am Anfang", "bs": "Na početku" } },
+        { "id": "medial", "left": { "en": "ـبـ", "de": "ـبـ", "bs": "ـبـ" }, "right": { "en": "In the middle", "de": "In der Mitte", "bs": "U sredini" } },
+        { "id": "final", "left": { "en": "ـب", "de": "ـب", "bs": "ـب" }, "right": { "en": "At the end", "de": "Am Ende", "bs": "Na kraju" } }
+      ],
+      "explanation": { "en": "The same letter ba takes a different shape at each position.", "de": "Derselbe Buchstabe Ba hat an jeder Position eine andere Form.", "bs": "Isti harf be ima drugi oblik na svakom mjestu." }
+    },
+    {
+      "id": "arabic-joining-1",
+      "type": "categorize",
+      "areaId": "sufara",
+      "topic": "arabic-joining",
+      "prompt": { "en": "Sort the letters: joins the next letter or never joins?", "de": "Ordne die Buchstaben: verbindet sich mit dem nächsten oder nie?", "bs": "Razvrstaj harfove: spaja se sa sljedećim ili se nikad ne spaja?" },
+      "categories": [
+        { "id": "joins", "label": { "en": "Joins", "de": "Verbinder", "bs": "Spaja se" } },
+        { "id": "never", "label": { "en": "Never joins", "de": "Verbinder nie", "bs": "Nikad se ne spaja" } }
+      ],
+      "items": [
+        { "id": "ba", "text": { "en": "ب", "de": "ب", "bs": "ب" }, "categoryId": "joins" },
+        { "id": "alif", "text": { "en": "ا", "de": "ا", "bs": "ا" }, "categoryId": "never" },
+        { "id": "dal", "text": { "en": "د", "de": "د", "bs": "د" }, "categoryId": "never" },
+        { "id": "mim", "text": { "en": "م", "de": "م", "bs": "م" }, "categoryId": "joins" }
+      ],
+      "explanation": { "en": "Alif and dal are two of the six letters that never join the next letter.", "de": "Alif und Dal sind zwei der sechs Buchstaben, die sich nie mit dem nächsten verbinden.", "bs": "Elif i dal su dva od šest harfova koji se nikad ne spajaju sa sljedećim." }
+    },
+    {
+      "id": "arabic-joining-2",
+      "type": "multipleChoice",
+      "areaId": "sufara",
+      "topic": "arabic-joining",
+      "prompt": { "en": "Which of these letters never joins the next letter?", "de": "Welcher dieser Buchstaben verbindet sich nie mit dem nächsten?", "bs": "Koji se od ovih harfova nikad ne spaja sa sljedećim?" },
+      "options": [
+        { "id": "a", "text": { "en": "م", "de": "م", "bs": "م" } },
+        { "id": "b", "text": { "en": "ر", "de": "ر", "bs": "ر" } },
+        { "id": "c", "text": { "en": "س", "de": "س", "bs": "س" } }
+      ],
+      "correctOptionId": "b",
+      "explanation": { "en": "Ra (ر) is one of the six non-joiners: ا د ذ ر ز و.", "de": "Ra (ر) ist einer der sechs Nicht-Verbinder: ا د ذ ر ز و.", "bs": "Ra (ر) je jedan od šest harfova koji se ne spajaju: ا د ذ ر ز و." }
+    },
+    {
+      "id": "arabic-joining-3",
+      "type": "fillBlank",
+      "areaId": "sufara",
+      "topic": "arabic-joining",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "The letter ب at the start of a word is written ___.", "de": "Der Buchstabe ب am Wortanfang wird ___ geschrieben.", "bs": "Harf ب na početku riječi piše se ___." },
+      "options": [
+        { "id": "a", "text": { "en": "بـ", "de": "بـ", "bs": "بـ" } },
+        { "id": "b", "text": { "en": "ـبـ", "de": "ـبـ", "bs": "ـبـ" } },
+        { "id": "c", "text": { "en": "ـب", "de": "ـب", "bs": "ـب" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "At the start it joins the next letter, so it takes the initial form بـ.", "de": "Am Anfang verbindet es sich mit dem nächsten Buchstaben und nimmt die Anfangsform بـ an.", "bs": "Na početku se spaja sa sljedećim harfom i uzima početni oblik بـ." }
+    },
+    {
+      "id": "arabic-joining-4",
+      "type": "trueFalse",
+      "areaId": "sufara",
+      "topic": "arabic-joining",
+      "prompt": { "en": "The six non-joining letters are ا د ذ ر ز و.", "de": "Die sechs nicht verbindenden Buchstaben sind ا د ذ ر ز و.", "bs": "Šest harfova koji se ne spajaju su ا د ذ ر ز و." },
+      "correct": true,
+      "explanation": { "en": "Yes – after one of them the next letter starts a new piece.", "de": "Ja – nach einem von ihnen beginnt der nächste Buchstabe ein neues Stück.", "bs": "Da – poslije jednog od njih sljedeći harf počinje novi dio." }
+    }
+  ]
+}

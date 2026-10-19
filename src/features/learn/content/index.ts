@@ -5,45 +5,54 @@ import type { Area, Unit } from '../models';
 import akhlaq1 from './akhlaq/akhlaq-sabr-shukr.json';
 import akhlaq2 from './akhlaq/akhlaq-honesty-trust.json';
 import akhlaq3 from './akhlaq/akhlaq-mercy-family.json';
+import akhlaq4 from './akhlaq/akhlaq-truthfulness.json';
 import arabic1 from './arabic/arabic-words.json';
 import arabic2 from './arabic/arabic-phrases.json';
 import arabic3 from './arabic/arabic-prayer-words.json';
+import arabic4 from './arabic/arabic-numbers-time.json';
 import areas from './areas.json';
 import history1 from './history/history-caliphs.json';
 import history2 from './history/history-scholars.json';
 import history3 from './history/history-golden-age.json';
+import history4 from './history/history-andalus.json';
 import prophets1 from './prophets/prophets-adam-nuh.json';
 import prophets2 from './prophets/prophets-ibrahim-musa.json';
 import prophets3 from './prophets/prophets-yusuf-yunus-isa.json';
+import prophets4 from './prophets/prophets-musa-firaun.json';
 import quran1 from './quran/quran-revelation.json';
 import quran2 from './quran/quran-structure.json';
 import quran3 from './quran/quran-etiquette.json';
+import quran4 from './quran/quran-juz-amma.json';
 import ramadan1 from './ramadan/ramadan-month.json';
 import ramadan2 from './ramadan/ramadan-days-nights.json';
 import ramadan3 from './ramadan/ramadan-charity-eid.json';
+import ramadan4 from './ramadan/ramadan-laylatul-qadr.json';
 import salah1 from './salah/salah-basics.json';
 import salah2 from './salah/salah-times.json';
 import salah3 from './salah/salah-wudu.json';
+import salah4 from './salah/salah-sunnah-fard.json';
 import seerah1 from './seerah/seerah-early.json';
 import seerah2 from './seerah/seerah-makkah.json';
 import seerah3 from './seerah/seerah-madinah.json';
+import seerah4 from './seerah/seerah-farewell.json';
 import sufara1 from './sufara/arabic-letters.json';
 import sufara2 from './sufara/arabic-harakat.json';
 import sufara3 from './sufara/arabic-marks.json';
+import sufara4 from './sufara/arabic-joining.json';
 
 // JSON imports are widened by TypeScript; the content test suite verifies the shape.
 export const AREAS: readonly Area[] = (areas as unknown as Area[]).slice().sort((a, b) => a.order - b.order);
 
 export const UNITS: readonly Unit[] = [
-  salah1, salah2, salah3,
-  quran1, quran2, quran3,
-  seerah1, seerah2, seerah3,
-  prophets1, prophets2, prophets3,
-  akhlaq1, akhlaq2, akhlaq3,
-  ramadan1, ramadan2, ramadan3,
-  history1, history2, history3,
-  sufara1, sufara2, sufara3,
-  arabic1, arabic2, arabic3,
+  salah1, salah2, salah3, salah4,
+  quran1, quran2, quran3, quran4,
+  seerah1, seerah2, seerah3, seerah4,
+  prophets1, prophets2, prophets3, prophets4,
+  akhlaq1, akhlaq2, akhlaq3, akhlaq4,
+  ramadan1, ramadan2, ramadan3, ramadan4,
+  history1, history2, history3, history4,
+  sufara1, sufara2, sufara3, sufara4,
+  arabic1, arabic2, arabic3, arabic4,
 ].map((u) => u as unknown as Unit);
 
 export const QUESTIONS: readonly Question[] = UNITS.flatMap((u) => u.questions);

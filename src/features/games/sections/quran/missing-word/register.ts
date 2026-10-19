@@ -7,9 +7,9 @@ import { ayahTiles, ayah, wordItems } from '../shared/quran';
 import { missingWordI18n } from './i18n';
 
 /*
- * Missing Word (local engine GapLine, built from kit primitives). One ayah after another with words missing.
- * L1: Al-Ikhlas, one gap, the meaning shown, hints. L2: An-Nas, two gaps, look-alike words from Al-Falaq.
- * L3 twist: Al-Asr from memory – no meaning, no hints, more gaps.
+ * Missing Word (local engine GapLine, built from kit primitives). One ayah after another with words missing –
+ * every level is a complete surah. L1: Al-Ikhlas, one gap, the meaning shown, hints. L2: An-Nas, two gaps,
+ * look-alike words from Al-Falaq. L3 twist: Al-Masad from memory – no meaning, no hints, more gaps.
  */
 
 export interface GapRound {
@@ -43,7 +43,7 @@ function round(s: number, a: number, gaps: number[], from: [number, number], cou
 const FACTS = {
   ikhlas: quoteFact({ id: 'ikhlas-words', surah: 112, from: 1, to: 4, art: 'quran.one-star' }),
   nas: quoteFact({ id: 'nas-words', surah: 114, from: 1, to: 6, art: 'object.lantern' }),
-  asr: quoteFact({ id: 'asr-words', surah: 103, from: 1, to: 3, art: 'object.hourglass' }),
+  masad: quoteFact({ id: 'masad-words', surah: 111, from: 1, to: 5, art: 'quran.puzzle-fil' }),
 };
 
 export const missingWordGame: GameDef<MissingWordConfig> = {
@@ -55,9 +55,34 @@ export const missingWordGame: GameDef<MissingWordConfig> = {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   component: lazyComponent(() => (require('./MissingWordGame') as typeof import('./MissingWordGame')).MissingWordGame),
   levels: [
-    { level: 1, config: { mode: 'one', hints: true, rounds: [round(112, 1, [2], [113, 1], 2), round(112, 2, [1], [114, 2], 2), round(112, 4, [3], [114, 3], 2)] }, facts: [FACTS.ikhlas] },
-    { level: 2, config: { mode: 'two', hints: false, rounds: [round(114, 1, [1, 3], [113, 1], 2), round(114, 4, [1, 2], [113, 2], 2), round(114, 6, [1, 3], [113, 3], 2)] }, facts: [FACTS.nas] },
-    { level: 3, config: { mode: 'memory', hints: false, rounds: [round(103, 1, [0], [104, 1], 2), round(103, 2, [0, 2], [104, 2], 2), round(103, 3, [1, 3, 5, 8], [104, 3], 3)] }, facts: [FACTS.asr] },
+    // Every level is a complete surah: all ayahs, from the first to the last.
+    {
+      level: 1,
+      config: {
+        mode: 'one',
+        hints: true,
+        rounds: [1, 2, 3, 4].map((a) => round(112, a, [a % 2], [113, ((a + 1) % 5) + 1], 2)),
+      },
+      facts: [FACTS.ikhlas],
+    },
+    {
+      level: 2,
+      config: {
+        mode: 'two',
+        hints: false,
+        rounds: [1, 2, 3, 4, 5, 6].map((a) => round(114, a, a % 2 ? [0, 2] : [1, 3], [113, ((a + 1) % 5) + 1], 2)),
+      },
+      facts: [FACTS.nas],
+    },
+    {
+      level: 3,
+      config: {
+        mode: 'memory',
+        hints: false,
+        rounds: [1, 2, 3, 4, 5].map((a) => round(111, a, a % 2 ? [0, 2] : [1, 3], [112, ((a + 1) % 4) + 1], 2)),
+      },
+      facts: [FACTS.masad],
+    },
   ],
   order: 40,
 };

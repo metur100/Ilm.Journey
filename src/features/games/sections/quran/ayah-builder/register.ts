@@ -8,9 +8,10 @@ import { ayahTiles, ayah, juzAmma, wordItems } from '../shared/quran';
 import { ayahBuilderI18n } from './i18n';
 
 /*
- * Ayah Builder (WordTiles, right-to-left; rework of the v2 game – same id). One ayah after another.
- * L1: Al-Ikhlas with the growing preview, the translation and hints. L2: Al-Kawthar with extra words that do not
- * belong. L3: Al-Falaq from memory – only the meaning is shown, no preview line, extra words, no hints.
+ * Ayah Builder (WordTiles, right-to-left; rework of the v2 game – same id). One ayah after another, always a
+ * complete surah per level. L1: Al-Ikhlas with the growing preview, the translation and hints. L2: An-Nas with
+ * extra words that do not belong. L3: Al-Masad from memory – only the meaning is shown, no preview line, extra
+ * words, no hints.
  */
 
 export interface AyahRoundDef {
@@ -58,7 +59,8 @@ export const AYAH_FACTS = {
     sources: [{ sourceName: 'Sahih al-Bukhari', sourceReference: '5013' }],
     art: 'quran.one-star',
   },
-  kawthar: quoteFact({ id: 'kawthar-gift', surah: 108, from: 1, to: 3, art: 'object.prayer-mat' }),
+  nas: quoteFact({ id: 'nas-full-ayahs', surah: 114, from: 1, to: 6, art: 'object.lantern' }),
+  masad: quoteFact({ id: 'masad-full-ayahs', surah: 111, from: 1, to: 5, art: 'quran.puzzle-fil' }),
   // Composed from the data (`juz` field).
   juzAmma: {
     id: 'juz-amma',
@@ -95,13 +97,23 @@ export const ayahBuilderGame: GameDef<AyahBuilderConfig> = {
     { level: 1, config: { mode: 'guided', hints: true, preview: true, rounds: [1, 2, 3, 4].map((a) => round(112, a)) }, facts: [AYAH_FACTS.ikhlas] },
     {
       level: 2,
-      config: { mode: 'extra', hints: false, preview: true, rounds: [round(108, 1, [103, 2], 2), round(108, 2, [112, 3], 2), round(108, 3, [103, 1], 1)] },
-      facts: [AYAH_FACTS.kawthar, AYAH_FACTS.juzAmma],
+      config: {
+        mode: 'extra',
+        hints: false,
+        preview: true,
+        rounds: [1, 2, 3, 4, 5, 6].map((a) => round(114, a, [113, ((a + 1) % 5) + 1], 2)),
+      },
+      facts: [AYAH_FACTS.nas, AYAH_FACTS.juzAmma],
     },
     {
       level: 3,
-      config: { mode: 'memory', hints: false, preview: false, rounds: [round(113, 1, [114, 1], 2), round(113, 2, [114, 4], 2), round(113, 3, [114, 2], 1), round(113, 4, [114, 5], 2), round(113, 5, [114, 3], 1)] },
-      facts: [AYAH_FACTS.falaqNas],
+      config: {
+        mode: 'memory',
+        hints: false,
+        preview: false,
+        rounds: [1, 2, 3, 4, 5].map((a) => round(111, a, [112, ((a + 1) % 4) + 1], 1)),
+      },
+      facts: [AYAH_FACTS.masad],
     },
   ],
   teaches: { questionKeys: ['learn:quran-etiquette-4'] },

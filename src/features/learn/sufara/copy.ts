@@ -13,7 +13,7 @@ export interface SufaraCopy {
   withReview: string;
   kindTitle: Record<Exclude<SufaraLessonKind, 'letters'>, string>;
   kindDescription: Record<Exclude<SufaraLessonKind, 'letters'>, string>;
-  explain: Partial<Record<SufaraLessonKind, string>>;
+  explain: Partial<Record<Exclude<SufaraLessonKind, 'letters'>, string>>;
   prompt: Record<ExerciseKind, (params: Record<string, string>) => string>;
   position: Record<LetterPosition, string>;
   positionIn: Record<Exclude<LetterPosition, 'isolated'>, string>;
@@ -44,7 +44,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `${n}. lekcija`,
     and: ' i ',
     newLetters: (letters) => `Novi harfovi: ${letters}`,
-    withReview: 'uz ponavljanje ranijih harfova',
+    withReview: 'uz ponavljanje i spajanje ranijih harfova',
     kindTitle: {
       review: 'Ponavljanje: svi harfovi',
       fatha: 'Fetha',
@@ -88,6 +88,8 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
       findLong: (p) => `Koji slog je dug: ${p.reading}?`,
       findForm: (p) => `Kako izgleda ${p.name} ${p.position}?`,
       nonJoiner: () => 'Koji se harf ne spaja sa sljedećim harfom?',
+      join: (p) => `Kako se čita spoj: ${p.reading}?`,
+      findJoin: (p) => `Pronađi spoj: ${p.reading}`,
     },
     position: { isolated: 'Samostalno', initial: 'Na početku', medial: 'U sredini', final: 'Na kraju' },
     positionIn: { initial: 'na početku riječi', medial: 'u sredini riječi', final: 'na kraju riječi' },
@@ -116,7 +118,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lektion ${n}`,
     and: ' und ',
     newLetters: (letters) => `Neue Buchstaben: ${letters}`,
-    withReview: 'mit Wiederholung der früheren Buchstaben',
+    withReview: 'mit Wiederholung und Verbindung der früheren Buchstaben',
     kindTitle: {
       review: 'Wiederholung: alle Buchstaben',
       fatha: 'Fatha',
@@ -160,6 +162,8 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
       findLong: (p) => `Welche Silbe ist lang: ${p.reading}?`,
       findForm: (p) => `Wie sieht ${p.name} ${p.position} aus?`,
       nonJoiner: () => 'Welcher Buchstabe verbindet sich nicht mit dem nächsten?',
+      join: (p) => `Wie liest man diese Verbindung: ${p.reading}?`,
+      findJoin: (p) => `Finde die Verbindung: ${p.reading}`,
     },
     position: { isolated: 'Einzeln', initial: 'Am Anfang', medial: 'In der Mitte', final: 'Am Ende' },
     positionIn: { initial: 'am Wortanfang', medial: 'in der Wortmitte', final: 'am Wortende' },
@@ -188,7 +192,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lesson ${n}`,
     and: ' and ',
     newLetters: (letters) => `New letters: ${letters}`,
-    withReview: 'with a review of the earlier letters',
+    withReview: 'with a review and joining of the earlier letters',
     kindTitle: {
       review: 'Review: all letters',
       fatha: 'Fatha',
@@ -232,6 +236,8 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
       findLong: (p) => `Which syllable is long: ${p.reading}?`,
       findForm: (p) => `What does ${p.name} look like ${p.position}?`,
       nonJoiner: () => 'Which letter does not join the next letter?',
+      join: (p) => `How is this joined pair read: ${p.reading}?`,
+      findJoin: (p) => `Find the joined pair: ${p.reading}`,
     },
     position: { isolated: 'Alone', initial: 'At the start', medial: 'In the middle', final: 'At the end' },
     positionIn: { initial: 'at the start of a word', medial: 'in the middle of a word', final: 'at the end of a word' },
@@ -258,12 +264,15 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
   },
 };
 
-const MARK_EXAMPLE: Partial<Record<SufaraLessonKind, string>> = { fatha: 'بَ', kasra: 'بِ', damma: 'بُ', sukun: 'بْ', shadda: 'بّ', tanwin: 'بٌ بٍ بً' };
+const MARK_EXAMPLE: Partial<Record<SufaraLessonKind, string>> = { fatha: 'اَ', kasra: 'اِ', damma: 'اُ', sukun: 'بْ', shadda: 'بّ', tanwin: 'بٌ بٍ بً' };
+/** The generated harakat lines are keyed by the ba examples; the course starts with the same marks on elif. */
+const HARAKAT_LINE: Record<string, string> = { 'اَ': 'بَ', 'اِ': 'بِ', 'اُ': 'بُ' };
 
 /** Explanation of a lesson (letter lessons have none – each letter is shown on its own). */
 export function lessonExplanation(lesson: SufaraLesson, language: Language): { mark?: string; text: string } | null {
   const example = MARK_EXAMPLE[lesson.kind];
-  if (example) return { mark: example, text: HARAKAT_LESSON[example].body[language] };
+  if (example) return { mark: example, text: HARAKAT_LESSON[HARAKAT_LINE[example] ?? example].body[language] };
+  if (lesson.kind === 'letters') return null;
   const text = SUFARA_COPY[language].explain[lesson.kind];
   return text ? { text } : null;
 }

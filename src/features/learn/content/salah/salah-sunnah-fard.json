@@ -1,0 +1,123 @@
+{
+  "id": "salah-sunnah-fard",
+  "areaId": "salah",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "Sunnah and Fard Rakats", "de": "Sunna- und Fard-Rak‘as", "bs": "Sunnet i farz rekati" },
+  "description": {
+    "en": "How many rakats each prayer has – and which of them are fard or sunnah.",
+    "de": "Wie viele Rak‘as jedes Gebet hat – und welche davon Fard oder Sunna sind.",
+    "bs": "Koliko rekata ima svaki namaz – i koji su farz, a koji sunnet."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Fard and sunnah", "de": "Fard und Sunna", "bs": "Farz i sunnet" },
+      "body": {
+        "en": "Every daily prayer is made of parts. The fard is the obligatory part: it must be prayed and missing it is a sin. The sunnah is the part the Prophet ﷺ prayed regularly; it is not obligatory, but it brings great reward and completes the prayer. In the Hanafi school the sunnah before Sabah, the sunnah before and after Podne, the sunnah after Akšam, the sunnah after Jacija and the sunnah after Džuma are emphasised sunnah (sunnet muekkede).",
+        "de": "Jedes tägliche Gebet besteht aus Teilen. Das Fard ist der Pflichtteil: Es muss gebetet werden, und es zu versäumen ist eine Sünde. Die Sunna ist der Teil, den der Prophet ﷺ regelmäßig betete; sie ist nicht Pflicht, bringt aber großen Lohn und vervollständigt das Gebet. In der hanafitischen Schule sind die Sunna vor Fadschr, die Sunna vor und nach Dhuhr, die Sunna nach Maghrib, die Sunna nach Ischa und die Sunna nach Dschum‘a betonte Sunna (Sunnet muekkede).",
+        "bs": "Svaki dnevni namaz sastoji se od dijelova. Farz je obavezni dio: mora se klanjati i propuštanje je grijeh. Sunnet je dio koji je Poslanik ﷺ redovno klanjao; nije obavezan, ali nosi veliku nagradu i upotpunjuje namaz. U hanefijskom mezhebu sunnet prije sabaha, sunnet prije i poslije podne, sunnet poslije akšama, sunnet poslije jacije i sunnet poslije džume su potvrđeni sunnet (sunnet muekkede)."
+      }
+    },
+    {
+      "heading": { "en": "The rakats of each prayer", "de": "Die Rak‘as jedes Gebets", "bs": "Rekati svakog namaza" },
+      "body": {
+        "en": "Sabah has 2 sunnah and 2 fard. Podne has 4 sunnah before, 4 fard and 2 sunnah after. Ikindija has 4 sunnah before and 4 fard. Akšam has 3 fard and 2 sunnah after. Jacija has 4 sunnah before, 4 fard, 2 sunnah after and then 3 rakats of vitr. Vitr is 3 rakats and is vadžib (necessary) in the Hanafi school. Džuma has 4 sunnah before, 2 fard with the khutbah and 4 sunnah after.",
+        "de": "Fadschr hat 2 Sunna und 2 Fard. Dhuhr hat 4 Sunna vor, 4 Fard und 2 Sunna nach dem Fard. Asr hat 4 Sunna vor und 4 Fard. Maghrib hat 3 Fard und 2 Sunna nach dem Fard. Ischa hat 4 Sunna vor, 4 Fard, 2 Sunna nach dem Fard und danach 3 Rak‘as Witr. Witr hat 3 Rak‘as und ist in der hanafitischen Schule wadschib (notwendig). Dschum‘a hat 4 Sunna vor, 2 Fard mit der Chutba und 4 Sunna nach dem Fard.",
+        "bs": "Sabah ima 2 sunneta i 2 farza. Podne ima 4 sunneta prije, 4 farza i 2 sunneta poslije farza. Ikindija ima 4 sunneta prije i 4 farza. Akšam ima 3 farza i 2 sunneta poslije farza. Jacija ima 4 sunneta prije, 4 farza, 2 sunneta poslije farza i zatim 3 rekata vitra. Vitr ima 3 rekata i u hanefijskom mezhebu je vadžib (neophodan). Džuma ima 4 sunneta prije, 2 farza s hutbom i 4 sunneta poslije farza."
+      }
+    },
+    {
+      "heading": { "en": "What you choose in the app", "de": "Was du in der App wählst", "bs": "Šta biraš u aplikaciji" },
+      "body": {
+        "en": "In the prayer games you can tap the part you want to pray: the sunnah before, the fard or the sunnah after. The game then plays exactly that part with its own number of rakats. The fard is what every Muslim must pray; the sunnah is an additional path to reward. If you are learning, begin with the fard and add the sunnah step by step.",
+        "de": "In den Gebetsspielen kannst du den Teil antippen, den du beten möchtest: die Sunna davor, das Fard oder die Sunna danach. Das Spiel spielt dann genau diesen Teil mit seiner eigenen Anzahl an Rak‘as. Das Fard ist das, was jeder Muslim beten muss; die Sunna ist ein zusätzlicher Weg zum Lohn. Wenn du lernst, beginne mit dem Fard und ergänze die Sunna Schritt für Schritt.",
+        "bs": "U igrama namaza možeš dodirnuti dio koji želiš klanjati: sunnet prije, farz ili sunnet poslije. Igra tada klanja tačno taj dio s njegovim brojem rekata. Farz je ono što svaki musliman mora klanjati; sunnet je dodatni put do nagrade. Ako učiš, počni s farzom i postepeno dodaj sunnet."
+      }
+    }
+  ],
+  "practiceId": "salah-sunnah-fard-p",
+  "testIds": ["salah-sunnah-fard-1", "salah-sunnah-fard-2", "salah-sunnah-fard-3", "salah-sunnah-fard-4"],
+  "explanation": {
+    "en": "Knowing the parts and the rakat count of each prayer lets you pray the fard correctly and add the sunnah with understanding.",
+    "de": "Die Teile und die Rak‘a-Zahl jedes Gebets zu kennen, hilft, das Fard richtig zu beten und die Sunna bewusst zu ergänzen.",
+    "bs": "Poznavanje dijelova i broja rekata svakog namaza pomaže da farz klanjaš ispravno i da sunnet dodaš s razumijevanjem."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "4:103" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "8" },
+    { "sourceName": "Ilmihal – Islamska zajednica u BiH", "sourceReference": "Namaz" }
+  ],
+  "questions": [
+    {
+      "id": "salah-sunnah-fard-p",
+      "type": "matching",
+      "areaId": "salah",
+      "topic": "salah-sunnah-fard",
+      "prompt": { "en": "Match each prayer with its parts.", "de": "Ordne jedem Gebet seine Teile zu.", "bs": "Spoji svaki namaz s njegovim dijelovima." },
+      "pairs": [
+        { "id": "sabah", "left": { "en": "Sabah", "de": "Fadschr", "bs": "Sabah" }, "right": { "en": "2 sunnah + 2 fard", "de": "2 Sunna + 2 Fard", "bs": "2 sunneta + 2 farza" } },
+        { "id": "podne", "left": { "en": "Podne", "de": "Dhuhr", "bs": "Podne" }, "right": { "en": "4 sunnah + 4 fard + 2 sunnah", "de": "4 Sunna + 4 Fard + 2 Sunna", "bs": "4 sunneta + 4 farza + 2 sunneta" } },
+        { "id": "ikindija", "left": { "en": "Ikindija", "de": "Asr", "bs": "Ikindija" }, "right": { "en": "4 sunnah + 4 fard", "de": "4 Sunna + 4 Fard", "bs": "4 sunneta + 4 farza" } },
+        { "id": "aksam", "left": { "en": "Akšam", "de": "Maghrib", "bs": "Akšam" }, "right": { "en": "3 fard + 2 sunnah", "de": "3 Fard + 2 Sunna", "bs": "3 farza + 2 sunneta" } },
+        { "id": "jacija", "left": { "en": "Jacija", "de": "Ischa", "bs": "Jacija" }, "right": { "en": "4 sunnah + 4 fard + 2 sunnah + 3 vitr", "de": "4 Sunna + 4 Fard + 2 Sunna + 3 Witr", "bs": "4 sunneta + 4 farza + 2 sunneta + 3 vitra" } }
+      ],
+      "explanation": { "en": "These are the parts of the five daily prayers in the Hanafi school.", "de": "Das sind die Teile der fünf täglichen Gebete in der hanafitischen Schule.", "bs": "To su dijelovi pet dnevnih namaza u hanefijskom mezhebu." }
+    },
+    {
+      "id": "salah-sunnah-fard-1",
+      "type": "multipleChoice",
+      "areaId": "salah",
+      "topic": "salah-sunnah-fard",
+      "prompt": { "en": "Which part of the prayer is obligatory?", "de": "Welcher Teil des Gebets ist Pflicht?", "bs": "Koji je dio namaza obavezan?" },
+      "options": [
+        { "id": "a", "text": { "en": "The fard", "de": "Das Fard", "bs": "Farz" } },
+        { "id": "b", "text": { "en": "The sunnah before", "de": "Die Sunna davor", "bs": "Sunnet prije" } },
+        { "id": "c", "text": { "en": "The sunnah after", "de": "Die Sunna danach", "bs": "Sunnet poslije" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The fard is obligatory; the sunnah is a strongly rewarded additional prayer.", "de": "Das Fard ist Pflicht; die Sunna ist ein zusätzliches Gebet mit großem Lohn.", "bs": "Farz je obavezan; sunnet je dodatni namaz s velikom nagradom." }
+    },
+    {
+      "id": "salah-sunnah-fard-2",
+      "type": "categorize",
+      "areaId": "salah",
+      "topic": "salah-sunnah-fard",
+      "prompt": { "en": "Sort the parts: sunnah or fard?", "de": "Ordne die Teile zu: Sunna oder Fard?", "bs": "Razvrstaj dijelove: sunnet ili farz?" },
+      "categories": [
+        { "id": "sunnah", "label": { "en": "Sunnah", "de": "Sunna", "bs": "Sunnet" } },
+        { "id": "fard", "label": { "en": "Fard", "de": "Fard", "bs": "Farz" } }
+      ],
+      "items": [
+        { "id": "sabah-sunnah", "text": { "en": "2 rakats before Sabah", "de": "2 Rak‘as vor Fadschr", "bs": "2 rekata prije sabaha" }, "categoryId": "sunnah" },
+        { "id": "sabah-fard", "text": { "en": "2 rakats of Sabah", "de": "2 Rak‘as von Fadschr", "bs": "2 rekata sabaha" }, "categoryId": "fard" },
+        { "id": "aksam-fard", "text": { "en": "3 rakats of Akšam", "de": "3 Rak‘as von Maghrib", "bs": "3 rekata akšama" }, "categoryId": "fard" },
+        { "id": "aksam-sunnah", "text": { "en": "2 rakats after Akšam", "de": "2 Rak‘as nach Maghrib", "bs": "2 rekata poslije akšama" }, "categoryId": "sunnah" }
+      ],
+      "explanation": { "en": "The fard is the obligatory core; the sunnah comes before or after it.", "de": "Das Fard ist der Pflichtkern; die Sunna kommt davor oder danach.", "bs": "Farz je obavezno jezgro; sunnet dolazi prije ili poslije njega." }
+    },
+    {
+      "id": "salah-sunnah-fard-3",
+      "type": "fillBlank",
+      "areaId": "salah",
+      "topic": "salah-sunnah-fard",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Sabah has ___ rakats of fard.", "de": "Fadschr hat ___ Rak‘as Fard.", "bs": "Sabah ima ___ rekata farza." },
+      "options": [
+        { "id": "a", "text": { "en": "2", "de": "2", "bs": "2" } },
+        { "id": "b", "text": { "en": "3", "de": "3", "bs": "3" } },
+        { "id": "c", "text": { "en": "4", "de": "4", "bs": "4" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Sabah has 2 fard rakats, prayed aloud.", "de": "Fadschr hat 2 Fard-Rak‘as, die laut gebetet werden.", "bs": "Sabah ima 2 farz rekata, koji se uče naglas." }
+    },
+    {
+      "id": "salah-sunnah-fard-4",
+      "type": "trueFalse",
+      "areaId": "salah",
+      "topic": "salah-sunnah-fard",
+      "prompt": { "en": "Podne has 4 fard rakats.", "de": "Dhuhr hat 4 Fard-Rak‘as.", "bs": "Podne ima 4 farz rekata." },
+      "correct": true,
+      "explanation": { "en": "Yes – 4 sunnah, 4 fard and 2 sunnah.", "de": "Ja – 4 Sunna, 4 Fard und 2 Sunna.", "bs": "Da – 4 sunneta, 4 farza i 2 sunneta." }
+    }
+  ]
+}

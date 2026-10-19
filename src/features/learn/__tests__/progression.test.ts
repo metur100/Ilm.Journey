@@ -22,17 +22,13 @@ describe('topic paths', () => {
   });
 
   it('unlocks units one after another and the master challenge last', () => {
-    const [u1, u2, u3] = unitsOfArea('salah');
-    const status = (units: Record<string, UnitProgress>) => buildTopicPath('salah', { units, masters: {} }).map((e) => [e.item.id, e.status]);
-    expect(status({})).toEqual([
-      [u1.id, 'available'],
-      [u2.id, 'locked'],
-      [u3.id, 'locked'],
-      [masterItemId('salah'), 'locked'],
-    ]);
+    const units = unitsOfArea('salah');
+    const [u1, u2] = units;
+    const status = (done: Record<string, UnitProgress>) => buildTopicPath('salah', { units: done, masters: {} }).map((e) => [e.item.id, e.status]);
+    expect(status({})).toEqual([...units.map((u, i) => [u.id, i === 0 ? 'available' : 'locked']), [masterItemId('salah'), 'locked']]);
     expect(status(complete(u1.id))[1]).toEqual([u2.id, 'available']);
-    expect(status(complete(u1.id, u2.id, u3.id))[3]).toEqual([masterItemId('salah'), 'available']);
-    expect(pathProgress('salah', { units: complete(u1.id), masters: {} })).toEqual({ completed: 1, total: 4 });
+    expect(status(complete(...units.map((u) => u.id))).at(-1)).toEqual([masterItemId('salah'), 'available']);
+    expect(pathProgress('salah', { units: complete(u1.id), masters: {} })).toEqual({ completed: 1, total: units.length + 1 });
     expect(startedTopics({ units: complete(u1.id), masters: {} })).toEqual(['salah']);
   });
 

@@ -143,6 +143,19 @@ describe.each(SALAH_PRAYER_GAMES.map((g) => [g.id, g] as const))('%s', (_id, def
   });
 });
 
+it('lets the learner choose the sunnah or the fard part and shows that part’s rakats', async () => {
+  const def = SALAH_PRAYER_GAMES.find((g) => g.id === 'salah-podne')!;
+  const game = await renderGame(def, 1);
+  // Podne = 4 sunnah, 4 fard, 2 sunnah.
+  await game.press('part-0');
+  expect(game.texts()).toContain('4 sunnah');
+  expect(game.texts()).toContain('Rakat 1 of 4');
+  await game.press('part-2');
+  expect(game.texts()).toContain('2 sunnah');
+  expect(game.texts()).toContain('Rakat 1 of 2');
+  await game.unmount();
+});
+
 it('lead: a wrong choice is a gentle mistake with a missed fact', async () => {
   const def = SALAH_PRAYER_GAMES.find((g) => g.id === 'salah-aksam')!;
   const game = await renderGame(def, 3);

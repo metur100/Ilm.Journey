@@ -8,8 +8,9 @@ import { listenAndOrderI18n } from './i18n';
 
 /*
  * Listen and Order (SequenceBoard + the streamed recitation). L1: Al-Ikhlas, each ayah with its meaning and
- * hints. L2: An-Nas, Arabic only, six ayahs. L3 twist: Al-Fil on a path – each ayah is laid on the next stone and
- * checked at once, without hints. Offline the recitation is simply not available; the game stays playable.
+ * hints. L2: An-Nas, Arabic only, six ayahs. L3 twist: Al-Falaq on a path – each ayah is laid on the next stone and
+ * checked at once, without hints. Every level is the complete surah. Offline the recitation is simply not available;
+ * the game stays playable.
  */
 
 export interface ListenOrderConfig {
@@ -26,7 +27,7 @@ function items(n: number, meaning: boolean): KitItem[] {
 const FACTS = {
   ikhlas: quoteFact({ id: 'ikhlas-order', surah: 112, from: 1, to: 4, art: 'quran.one-star' }),
   nas: quoteFact({ id: 'nas-order', surah: 114, from: 1, to: 6, art: 'object.lantern' }),
-  fil: quoteFact({ id: 'fil-order', surah: 105, from: 1, to: 5, art: 'quran.puzzle-fil' }),
+  falaq: quoteFact({ id: 'falaq-order', surah: 113, from: 1, to: 5, art: 'quran.puzzle-duha' }),
 };
 
 export const listenAndOrderGame: GameDef<ListenOrderConfig> = {
@@ -40,7 +41,7 @@ export const listenAndOrderGame: GameDef<ListenOrderConfig> = {
   levels: [
     { level: 1, config: { surah: 112, items: items(112, true), variant: 'list', hints: true }, facts: [FACTS.ikhlas] },
     { level: 2, config: { surah: 114, items: items(114, false), variant: 'list', hints: false }, facts: [FACTS.nas] },
-    { level: 3, config: { surah: 105, items: items(105, false), variant: 'path', hints: false }, facts: [FACTS.fil] },
+    { level: 3, config: { surah: 113, items: items(113, false), variant: 'path', hints: false }, facts: [FACTS.falaq] },
   ],
   order: 60,
 };

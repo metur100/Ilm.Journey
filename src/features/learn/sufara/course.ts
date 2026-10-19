@@ -68,14 +68,34 @@ const LETTER_GROUPS: readonly (readonly string[])[] = [
   [LAM_ELIF, 'ي'],
 ];
 
-const LATER_KINDS: readonly SufaraLessonKind[] = ['review', 'fatha', 'kasra', 'damma', 'sukun', 'tanwin', 'madd', 'shadda', 'forms', 'syllables', 'words'];
+/**
+ * After elif the course teaches the three short vowels on elif – e, i, u – exactly as the Bosnian sufara does,
+ * and only then the rest of the letters. Every later letter lesson repeats the earlier letters and joins them.
+ */
+const LATER_KINDS: readonly SufaraLessonKind[] = ['review', 'sukun', 'tanwin', 'madd', 'shadda', 'forms', 'syllables', 'words'];
 
 const lessonId = (number: number) => `sufara-${String(number).padStart(2, '0')}`;
 
-export const SUFARA_LESSONS: readonly SufaraLesson[] = [
-  ...LETTER_GROUPS.map((letters, i): SufaraLesson => ({ id: lessonId(i + 1), number: i + 1, kind: 'letters', letters: [...letters] })),
-  ...LATER_KINDS.map((kind, i): SufaraLesson => ({ id: lessonId(LETTER_GROUPS.length + i + 1), number: LETTER_GROUPS.length + i + 1, kind, letters: [] })),
+interface LessonSeed {
+  kind: SufaraLessonKind;
+  letters: string[];
+}
+
+const LESSON_SEEDS: readonly LessonSeed[] = [
+  { kind: 'letters', letters: [...LETTER_GROUPS[0]] },
+  { kind: 'fatha', letters: [] },
+  { kind: 'kasra', letters: [] },
+  { kind: 'damma', letters: [] },
+  ...LETTER_GROUPS.slice(1).map((letters): LessonSeed => ({ kind: 'letters', letters: [...letters] })),
+  ...LATER_KINDS.map((kind): LessonSeed => ({ kind, letters: [] })),
 ];
+
+export const SUFARA_LESSONS: readonly SufaraLesson[] = LESSON_SEEDS.map((seed, i) => ({
+  id: lessonId(i + 1),
+  number: i + 1,
+  kind: seed.kind,
+  letters: seed.letters,
+}));
 
 /** All letters of the course in sufara order (the 28 letters with lam-elif before je). */
 export const COURSE_LETTERS: readonly string[] = LETTER_GROUPS.flat();
@@ -137,7 +157,11 @@ export type ExerciseKind =
   /** Find a letter's form at a place in the word (choices: Arabic forms). */
   | 'findForm'
   /** Find the letter that never joins the next letter (choices: letters). */
-  | 'nonJoiner';
+  | 'nonJoiner'
+  /** Join a new letter with a letter from an earlier lesson and read the result (choices: readings). */
+  | 'join'
+  /** Find the joined pair for a reading (choices: Arabic). */
+  | 'findJoin';
 
 export interface SufaraChoice {
   text: string;
@@ -178,7 +202,10 @@ function exercise(base: Omit<SufaraExercise, 'choices' | 'answer'>, right: Sufar
 
 /** Two other letters for a letter exercise: look-alikes the learner already knows first, then other known letters. */
 function letterDistractors(target: string, known: readonly string[], random: Random): string[] {
-  const pool = [...new Set([...lookAlikes(target).filter((l) => known.includes(l)), ...shuffle(known, random), ...COURSE_LETTERS])];
+  const learned = [...new Set([...lookAlikes(target).filter((l) => known.includes(l)), ...shuffle(known, random)])];
+  // The first lesson has only elif: there the alphabet supplies the two wrong letters.
+  const enough = learned.filter((l) => l !== target).length >= 2;
+  const pool = enough ? learned : [...new Set([...learned, ...COURSE_LETTERS])];
   const picked: string[] = [];
   for (const letter of pool) {
     if (letter === target || confusable(letter, target) || picked.some((p) => confusable(p, letter))) continue;
@@ -197,7 +224,75 @@ function letterExercise(kind: 'findLetter' | 'nameLetter', target: string, known
   return exercise({ kind, show: target, say: target, params: {}, review }, { text: name(target), arabic: false }, others.map((l) => ({ text: name(l), arabic: false })), random);
 }
 
-/** Exercises of a letter lesson: every new letter twice (find it, name it), then a growing review of earlier letters. */
+/** Plain consonant of every letter, for the joining exercises (the transliteration of the letter lesson, shortened). */
+const JOIN_CONSONANT: Record<string, string> = {
+  ا: '',
+  ب: 'b',
+  ت: 't',
+  ث: 'th',
+  ج: 'j',
+  ح: 'ḥ',
+  خ: 'kh',
+  د: 'd',
+  ذ: 'dh',
+  ر: 'r',
+  ز: 'z',
+  س: 's',
+  ش: 'sh',
+  ص: 'ṣ',
+  ض: 'ḍ',
+  ط: 'ṭ',
+  ظ: 'ẓ',
+  ع: 'ʿ',
+  غ: 'gh',
+  ف: 'f',
+  ق: 'q',
+  ك: 'k',
+  ل: 'l',
+  م: 'm',
+  ن: 'n',
+  ه: 'h',
+  و: 'w',
+  ي: 'y',
+};
+
+const joinable = (letter: string) => letter !== LAM_ELIF && !NON_JOINERS.includes(letter) && JOIN_CONSONANT[letter] !== undefined;
+const canJoin = (first: string, second: string) => joinable(first) && second !== LAM_ELIF && JOIN_CONSONANT[second] !== undefined;
+
+/** Reading of a joined pair with the same short vowel on both letters: بَتَ → "bete" (bs) / "bata" (en). */
+const joinedReading = (first: string, second: string, haraka: Haraka, language: Language) =>
+  `${JOIN_CONSONANT[first]}${HARAKAT[haraka].vowel[language]}${JOIN_CONSONANT[second]}${HARAKAT[haraka].vowel[language]}`;
+
+/**
+ * Joining practice of a letter lesson: the new letter joined with a letter from an earlier lesson, both in the
+ * reading and in the Arabic form. Starts with the second letter lesson (before that there is only elif).
+ */
+function joinLessonExercises(lesson: SufaraLesson, earlier: readonly string[], language: Language, random: Random): SufaraExercise[] {
+  const partners = earlier.filter(joinable);
+  if (!partners.length) return [];
+  const out: SufaraExercise[] = [];
+  lesson.letters.forEach((letter, i) => {
+    if (!JOIN_CONSONANT[letter] || letter === LAM_ELIF) return;
+    const partner = partners[(lesson.number + i) % partners.length];
+    const first = canJoin(letter, partner) ? letter : partner;
+    const second = first === letter ? partner : letter;
+    if (!canJoin(first, second)) return;
+    const haraka = HARAKA_NAMES[(lesson.number + i) % 3];
+    const otherHaraka = HARAKA_NAMES[(HARAKA_NAMES.indexOf(haraka) + 1) % 3];
+    const text = syllable(first, haraka) + syllable(second, haraka);
+    const reading = joinedReading(first, second, haraka, language);
+    const wrong = [
+      joinedReading(first, second, otherHaraka, language),
+      `${JOIN_CONSONANT[first]}${HARAKAT[haraka].vowel[language]}${JOIN_CONSONANT[second]}${HARAKAT[otherHaraka].vowel[language]}`,
+    ];
+    out.push(exercise({ kind: 'join', show: text, say: text, params: { reading }, review: true }, { text: reading, arabic: false }, wrong.map((w) => ({ text: w, arabic: false })), random));
+    const wrongArabic = [syllable(first, otherHaraka) + syllable(second, haraka), syllable(first, haraka) + syllable(second, otherHaraka)];
+    out.push(exercise({ kind: 'findJoin', say: text, params: { reading }, review: true }, { text, arabic: true }, wrongArabic.map((w) => ({ text: w, arabic: true })), random));
+  });
+  return out;
+}
+
+/** Exercises of a letter lesson: every new letter twice (find it, name it), joining with earlier letters, then a growing review. */
 function letterLessonExercises(lesson: SufaraLesson, language: Language, random: Random): SufaraExercise[] {
   const earlier = lettersBefore(lesson);
   const known = [...earlier, ...lesson.letters];
@@ -208,7 +303,10 @@ function letterLessonExercises(lesson: SufaraLesson, language: Language, random:
   const older = earlier.filter((l) => !previous.includes(l));
   const reviewed = [...previous, ...rotate(older, reviewCount, lesson.number * 5)].slice(0, reviewCount);
   const review = reviewed.map((l, i) => letterExercise(i % 2 === 0 ? 'findLetter' : 'nameLetter', l, known, language, true, random));
-  return [...fresh, ...review];
+  const joining = joinLessonExercises(lesson, earlier, language, random);
+  // Before the second letter there is nothing to join yet: keep the vowels on elif alive instead.
+  const earlyVowels = earlier.length === 1 ? HARAKA_NAMES.slice(1).map((h) => readSyllable(earlier[0], h, HARAKA_NAMES, language, true, random, earlier)) : [];
+  return [...fresh, ...earlyVowels, ...joining, ...review];
 }
 
 /** The review lesson: twelve letters from the whole alphabet, half found by name, half named. */
@@ -226,36 +324,57 @@ function harakatUpTo(haraka: Haraka): Haraka[] {
 }
 
 /** Read a short syllable: the same letter with the other learned harakat, or another letter with the same haraka. */
-function readSyllable(letter: string, haraka: Haraka, known: readonly Haraka[], language: Language, review: boolean, random: Random): SufaraExercise {
+function readSyllable(
+  letter: string,
+  haraka: Haraka,
+  known: readonly Haraka[],
+  language: Language,
+  review: boolean,
+  random: Random,
+  pool: readonly string[] = READING_LETTERS,
+): SufaraExercise {
   const text = syllable(letter, haraka);
-  const other = READING_LETTERS.find((l) => l !== letter && consonantOf(l) !== consonantOf(letter)) ?? 'ب';
+  const other = pool.find((l) => l !== letter && consonantOf(l) !== consonantOf(letter));
   const wrong = [
-    ...known.filter((h) => h !== haraka).map((h) => syllableReading(letter, h, language)),
-    syllableReading(other, haraka, language),
-    syllableReading(READING_LETTERS[(READING_LETTERS.indexOf(letter) + 3) % READING_LETTERS.length], haraka, language),
+    ...HARAKA_NAMES.filter((h) => h !== haraka).map((h) => syllableReading(letter, h, language)),
+    ...(other ? [syllableReading(other, haraka, language)] : []),
+    ...(known.length > 1 ? [] : [syllableReading(letter, HARAKA_NAMES[(HARAKA_NAMES.indexOf(haraka) + 1) % HARAKA_NAMES.length], language)]),
   ];
   return exercise({ kind: 'read', show: text, say: text, params: {}, review }, { text: syllableReading(letter, haraka, language), arabic: false }, wrong.map((w) => ({ text: w, arabic: false })), random);
 }
 
 /** Find the syllable for a reading among the same letter with other harakat (or other letters). */
-function findSyllable(letter: string, haraka: Haraka, known: readonly Haraka[], language: Language, review: boolean, random: Random): SufaraExercise {
+function findSyllable(
+  letter: string,
+  haraka: Haraka,
+  language: Language,
+  review: boolean,
+  random: Random,
+  pool: readonly string[] = READING_LETTERS,
+): SufaraExercise {
   const text = syllable(letter, haraka);
   const wrong = [
-    ...known.filter((h) => h !== haraka).map((h) => syllable(letter, h)),
-    ...rotate(READING_LETTERS.filter((l) => l !== letter), 2, READING_LETTERS.indexOf(letter)).map((l) => syllable(l, haraka)),
+    ...HARAKA_NAMES.filter((h) => h !== haraka).map((h) => syllable(letter, h)),
+    ...rotate(pool.filter((l) => l !== letter), 2, pool.indexOf(letter)).map((l) => syllable(l, haraka)),
   ];
   return exercise({ kind: 'findReading', say: text, params: { reading: syllableReading(letter, haraka, language) }, review }, { text, arabic: true }, wrong.map((w) => ({ text: w, arabic: true })), random);
 }
 
+/** Letters available in a haraka lesson: only elif before the first other letter, then all learned letters. */
+function harakaPool(lesson: SufaraLesson): string[] {
+  const learned = lettersBefore(lesson).filter((l) => l !== LAM_ELIF);
+  return learned.length ? learned : ['ا'];
+}
+
 function harakaLessonExercises(lesson: SufaraLesson & { kind: Haraka }, language: Language, random: Random): SufaraExercise[] {
   const known = harakatUpTo(lesson.kind);
-  const letters = rotate(READING_LETTERS, 6, lesson.number);
-  const fresh = [
-    ...letters.slice(0, 4).map((l) => readSyllable(l, lesson.kind, known, language, false, random)),
-    ...letters.slice(4, 6).map((l) => findSyllable(l, lesson.kind, known, language, false, random)),
-  ];
+  const pool = harakaPool(lesson);
+  const fresh = pool.flatMap((letter) => [
+    readSyllable(letter, lesson.kind, known, language, false, random, pool),
+    findSyllable(letter, lesson.kind, language, false, random, pool),
+  ]);
   const earlier = known.filter((h) => h !== lesson.kind);
-  const review = earlier.flatMap((h, i) => rotate(READING_LETTERS, 2, lesson.number * 3 + i).map((l) => readSyllable(l, h, known, language, true, random)));
+  const review = earlier.flatMap((h) => pool.flatMap((letter) => [readSyllable(letter, h, known, language, true, random, pool), findSyllable(letter, h, language, true, random, pool)]));
   return [...fresh, ...review];
 }
 
@@ -464,7 +583,8 @@ export function markExamples(kind: SufaraLessonKind, language: Language): { text
     case 'fatha':
     case 'kasra':
     case 'damma':
-      return letters.map((l) => ({ text: syllable(l, kind), reading: syllableReading(l, kind, language) }));
+      // These three lessons come directly after elif, before any other letter is taught.
+      return [{ text: syllable('ا', kind), reading: syllableReading('ا', kind, language) }];
     case 'sukun':
       return SUKUN_SYLLABLES.slice(0, 4).map((item) => closedSyllable(item, language));
     case 'tanwin':

@@ -21,8 +21,11 @@ describe('Sufara course', () => {
     for (const letter of LETTERS) expect(COURSE_LETTERS).toContain(letter.letter);
   });
 
-  it('continues with the marks, the forms, syllables and words after the letters', () => {
-    expect(SUFARA_LESSONS.slice(letterLessons.length).map((l) => l.kind)).toEqual(['review', 'fatha', 'kasra', 'damma', 'sukun', 'tanwin', 'madd', 'shadda', 'forms', 'syllables', 'words']);
+  it('starts with elif and the vowels e / i / u, then the other letters and the marks', () => {
+    const kinds = SUFARA_LESSONS.map((l) => l.kind);
+    expect(kinds.slice(0, 4)).toEqual(['letters', 'fatha', 'kasra', 'damma']);
+    expect(kinds.slice(4, 4 + letterLessons.length - 1)).toEqual(Array(letterLessons.length - 1).fill('letters'));
+    expect(kinds.slice(4 + letterLessons.length - 1)).toEqual(['review', 'sukun', 'tanwin', 'madd', 'shadda', 'forms', 'syllables', 'words']);
     expect(SUFARA_LESSONS.map((l) => l.number)).toEqual(SUFARA_LESSONS.map((_, i) => i + 1));
     expect(new Set(SUFARA_LESSONS.map((l) => l.id)).size).toBe(SUFARA_LESSONS.length);
     expect(getSufaraLesson('sufara-01')?.letters).toEqual(['ا']);
@@ -40,7 +43,7 @@ describe('Sufara course', () => {
       expect(lessonDescription(lesson)[language].length).toBeGreaterThan(0);
       if (lesson.kind !== 'letters') expect(lessonExplanation(lesson, language)?.text.length).toBeGreaterThan(0);
     }
-    expect(lessonTitle(letterLessons[2]).bs).toBe('3. lekcija: Te i Se');
+    expect(lessonTitle(letterLessons[2]).bs).toBe('6. lekcija: Te i Se');
   });
 
   it.each(LANGUAGES)('builds valid, deterministic practice for every lesson in %s', (language) => {
@@ -77,13 +80,14 @@ describe('Sufara course', () => {
       for (const e of fresh) expect(lesson.letters).toContain(e.say);
       // Review questions ask only about letters of earlier lessons – and always about the previous lesson.
       const earlier = lettersBefore(lesson);
-      for (const e of review) expect(earlier).toContain(e.say);
+      const letterReview = review.filter((e) => e.kind === 'findLetter' || e.kind === 'nameLetter');
+      for (const e of letterReview) expect(earlier).toContain(e.say);
       const previous = SUFARA_LESSONS[lesson.number - 2]?.letters ?? [];
-      for (const letter of previous) expect(review.map((e) => e.say)).toContain(letter);
-      expect(review.length).toBeGreaterThanOrEqual(lastReview);
-      lastReview = review.length;
-      // Choices of the later lessons come from the letters learned so far.
-      if (lesson.number >= 3) for (const e of exercises.filter((x) => x.kind === 'findLetter')) for (const c of e.choices) expect([...earlier, ...lesson.letters]).toContain(c.text);
+      for (const letter of previous) expect(letterReview.map((e) => e.say)).toContain(letter);
+      if (earlier.length) expect(review.length).toBeGreaterThan(0);
+      lastReview = Math.max(lastReview, review.length);
+      // Choices of the later lessons come from the letters learned so far (the first lesson falls back to the alphabet).
+      if (earlier.length >= 2) for (const e of exercises.filter((x) => x.kind === 'findLetter')) for (const c of e.choices) expect([...earlier, ...lesson.letters]).toContain(c.text);
     }
     expect(lessonExercises(letterLessons[0], 'bs').some((e) => e.review)).toBe(false);
     expect(lastReview).toBeGreaterThanOrEqual(5);
@@ -97,13 +101,26 @@ describe('Sufara course', () => {
       expect(e.show!.endsWith(HARAKAT.fatha.mark)).toBe(true);
       expect(e.choices[e.answer].text.endsWith('e')).toBe(true);
     }
-    expect(markExamples('fatha', 'en')[0]).toEqual({ text: 'بَ', reading: 'ba' });
-    expect(markExamples('kasra', 'bs')[0]).toEqual({ text: 'بِ', reading: 'bi' });
+    expect(markExamples('fatha', 'en')[0]).toEqual({ text: 'اَ', reading: 'a' });
+    expect(markExamples('kasra', 'bs')[0]).toEqual({ text: 'اِ', reading: 'i' });
     expect(markExamples('sukun', 'bs')[0]).toEqual({ text: `بَل${SUKUN}`, reading: 'bel' });
     expect(markExamples('shadda', 'en')[0].reading).toBe('barra');
     // Later mark lessons repeat the earlier ones.
     const damma = SUFARA_LESSONS.find((l) => l.kind === 'damma')!;
     expect(lessonExercises(damma, 'en').some((e) => e.review && e.show?.endsWith(HARAKAT.fatha.mark))).toBe(true);
+  });
+
+  it('joins every new letter with the letters learned before it', () => {
+    const te = letterLessons.find((l) => l.letters.includes('ت'))!;
+    const joins = lessonExercises(te, 'bs').filter((e) => e.kind === 'join' || e.kind === 'findJoin');
+    expect(joins.length).toBeGreaterThan(0);
+    for (const e of joins) {
+      expect(e.review).toBe(true);
+      expect(e.choices[e.answer]).toBeDefined();
+      expect(e.choices.length).toBeGreaterThanOrEqual(2);
+    }
+    // The very first letter has no earlier letter to join with.
+    expect(lessonExercises(letterLessons[0], 'bs').some((e) => e.kind === 'join' || e.kind === 'findJoin')).toBe(false);
   });
 
   it('reads only words written with the letters of the course', () => {

@@ -1,0 +1,122 @@
+{
+  "id": "ramadan-laylatul-qadr",
+  "areaId": "ramadan",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "The Last Ten Nights", "de": "Die letzten zehn Nächte", "bs": "Posljednjih deset noći" },
+  "description": {
+    "en": "Laylat al-Qadr, the odd nights and the good deeds of the last ten nights.",
+    "de": "Laylat al-Qadr, die ungeraden Nächte und die guten Taten der letzten zehn Nächte.",
+    "bs": "Lejletul-kadr, neparne noći i dobra djela posljednjih deset noći."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "The last ten nights", "de": "Die letzten zehn Nächte", "bs": "Posljednjih deset noći" },
+      "body": {
+        "en": "The last ten nights of Ramadan are the most blessed nights of the year. The Prophet ﷺ used to worship more in them than at any other time, and he woke his family to pray. Many Muslims stay in the masjid for i’tikaf during these nights, dedicate themselves to prayer and recitation, and give charity.",
+        "de": "Die letzten zehn Nächte des Ramadan sind die gesegnetsten Nächte des Jahres. Der Prophet ﷺ betete in ihnen mehr als zu jeder anderen Zeit und weckte seine Familie zum Gebet. Viele Muslime bleiben in diesen Nächten zum I’tikaf in der Moschee, widmen sich Gebet und Rezitation und geben Sadaqa.",
+        "bs": "Posljednjih deset noći ramazana najblagoslovljenije su noći u godini. Poslanik ﷺ je u njima više ibadetio nego u bilo koje drugo vrijeme i budio je svoju porodicu na namaz. Mnogi muslimani u tim noćima ostaju u džamiji na i’tikafu, posvećuju se namazu i učenju Kur’ana i daju sadaku."
+      }
+    },
+    {
+      "heading": { "en": "Laylat al-Qadr", "de": "Laylat al-Qadr", "bs": "Lejletul-kadr" },
+      "body": {
+        "en": "In these nights is Laylat al-Qadr, the Night of Decree, which the Quran calls better than a thousand months. The Prophet ﷺ told us to look for it in the odd nights of the last ten: the 21st, 23rd, 25th, 27th and 29th. Its exact night is not fixed for us; we seek it by worshipping throughout the ten nights.",
+        "de": "In diesen Nächten liegt Laylat al-Qadr, die Nacht der Bestimmung, die der Koran besser als tausend Monate nennt. Der Prophet ﷺ sagte, wir sollen sie in den ungeraden Nächten der letzten zehn suchen: der 21., 23., 25., 27. und 29. Ihre genaue Nacht ist für uns nicht festgelegt; wir suchen sie, indem wir die zehn Nächte hindurch beten.",
+        "bs": "U tim noćima je Lejletul-kadr, Noć odredbe, koju Kur’an naziva boljom od hiljadu mjeseci. Poslanik ﷺ nam je rekao da je tražimo u neparnim noćima posljednjih deset: 21., 23., 25., 27. i 29. Njena tačna noć nama nije određena; tražimo je ibadetom kroz svih deset noći."
+      }
+    },
+    {
+      "heading": { "en": "What to do", "de": "Was zu tun ist", "bs": "Šta činiti" },
+      "body": {
+        "en": "The best deeds of these nights are prayer, Quran recitation, dua, istighfar and charity. Aisha asked the Prophet ﷺ what to say if she finds Laylat al-Qadr, and he taught her: “Allahumma innaka ‘afuwwun tuhibbul-‘afwa fa‘fu ‘anni” – O Allah, You are Forgiving and love forgiveness, so forgive me.",
+        "de": "Die besten Taten dieser Nächte sind Gebet, Koranrezitation, Dua, Istighfar und Sadaqa. Aischa fragte den Propheten ﷺ, was sie sagen solle, wenn sie Laylat al-Qadr erlebt, und er lehrte sie: „Allahumma innaka ‘afuwwun tuhibbul-‘afwa fa‘fu ‘anni“ – O Allah, Du bist Vergebend und liebst die Vergebung, so vergib mir.",
+        "bs": "Najbolja djela ovih noći su namaz, učenje Kur’ana, dova, istigfar i sadaka. Aiša je pitala Poslanika ﷺ šta da kaže ako doživi Lejletul-kadr, a on je pouči: „Allahumme inneke afuvvun tuhibbul-afve fa’fu anni“ – Allahu, Ti si Onaj koji prašta i voli praštanje, pa mi oprosti."
+      }
+    }
+  ],
+  "practiceId": "ramadan-laylatul-qadr-p",
+  "testIds": ["ramadan-laylatul-qadr-1", "ramadan-laylatul-qadr-2", "ramadan-laylatul-qadr-3", "ramadan-laylatul-qadr-4"],
+  "explanation": {
+    "en": "The last ten nights are a chance to seek Laylat al-Qadr with prayer, Quran, dua and charity.",
+    "de": "Die letzten zehn Nächte sind eine Gelegenheit, Laylat al-Qadr mit Gebet, Koran, Dua und Sadaqa zu suchen.",
+    "bs": "Posljednjih deset noći prilika je da Lejletul-kadr tražimo namazom, Kur’anom, dovom i sadakom."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "97:1–5" },
+    { "sourceName": "Sahih al-Bukhari", "sourceReference": "2017" },
+    { "sourceName": "Sahih Muslim", "sourceReference": "1165" }
+  ],
+  "questions": [
+    {
+      "id": "ramadan-laylatul-qadr-p",
+      "type": "multipleChoice",
+      "areaId": "ramadan",
+      "topic": "ramadan-laylatul-qadr",
+      "prompt": { "en": "In which nights do we seek Laylat al-Qadr?", "de": "In welchen Nächten suchen wir Laylat al-Qadr?", "bs": "U kojim noćima tražimo Lejletul-kadr?" },
+      "options": [
+        { "id": "a", "text": { "en": "The odd nights of the last ten", "de": "In den ungeraden Nächten der letzten zehn", "bs": "U neparnim noćima posljednjih deset" } },
+        { "id": "b", "text": { "en": "The first night of Ramadan", "de": "In der ersten Nacht des Ramadan", "bs": "U prvoj noći ramazana" } },
+        { "id": "c", "text": { "en": "Every Friday", "de": "Jeden Freitag", "bs": "Svakog petka" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "The Prophet ﷺ told us to seek it in the odd nights of the last ten.", "de": "Der Prophet ﷺ sagte, wir sollen sie in den ungeraden Nächten der letzten zehn suchen.", "bs": "Poslanik ﷺ je rekao da je tražimo u neparnim noćima posljednjih deset." }
+    },
+    {
+      "id": "ramadan-laylatul-qadr-1",
+      "type": "multipleChoice",
+      "areaId": "ramadan",
+      "topic": "ramadan-laylatul-qadr",
+      "prompt": { "en": "How does the Quran describe Laylat al-Qadr?", "de": "Wie beschreibt der Koran Laylat al-Qadr?", "bs": "Kako Kur’an opisuje Lejletul-kadr?" },
+      "options": [
+        { "id": "a", "text": { "en": "Better than a thousand months", "de": "Besser als tausend Monate", "bs": "Bolja od hiljadu mjeseci" } },
+        { "id": "b", "text": { "en": "A night of sleep", "de": "Eine Nacht des Schlafs", "bs": "Noć spavanja" } },
+        { "id": "c", "text": { "en": "A night of trade", "de": "Eine Nacht des Handels", "bs": "Noć trgovine" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Quran 97:3 – the Night of Decree is better than a thousand months.", "de": "Koran 97:3 – die Nacht der Bestimmung ist besser als tausend Monate.", "bs": "Kur’an 97:3 – Noć odredbe bolja je od hiljadu mjeseci." }
+    },
+    {
+      "id": "ramadan-laylatul-qadr-2",
+      "type": "trueFalse",
+      "areaId": "ramadan",
+      "topic": "ramadan-laylatul-qadr",
+      "prompt": { "en": "Laylat al-Qadr is one of the last ten nights.", "de": "Laylat al-Qadr ist eine der letzten zehn Nächte.", "bs": "Lejletul-kadr je jedna od posljednjih deset noći." },
+      "correct": true,
+      "explanation": { "en": "Yes – it is among the last ten nights of Ramadan.", "de": "Ja – sie liegt unter den letzten zehn Nächten des Ramadan.", "bs": "Da – ona je među posljednjih deset noći ramazana." }
+    },
+    {
+      "id": "ramadan-laylatul-qadr-3",
+      "type": "fillBlank",
+      "areaId": "ramadan",
+      "topic": "ramadan-laylatul-qadr",
+      "prompt": { "en": "Complete the dua.", "de": "Vervollständige die Dua.", "bs": "Dopuni dovu." },
+      "sentence": { "en": "Allahumma innaka ‘afuwwun tuhibbul-___ fa‘fu ‘anni.", "de": "Allahumma innaka ‘afuwwun tuhibbul-___ fa‘fu ‘anni.", "bs": "Allahumme inneke afuvvun tuhibbul-___ fa’fu anni." },
+      "options": [
+        { "id": "a", "text": { "en": "‘afwa", "de": "‘afwa", "bs": "afve" } },
+        { "id": "b", "text": { "en": "sabr", "de": "sabr", "bs": "sabr" } },
+        { "id": "c", "text": { "en": "ilm", "de": "ilm", "bs": "ilm" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "“… You love forgiveness (‘afw), so forgive me.”", "de": "„… Du liebst die Vergebung (‘afw), so vergib mir.“", "bs": "„… voliš praštanje (afv), pa mi oprosti.“" }
+    },
+    {
+      "id": "ramadan-laylatul-qadr-4",
+      "type": "categorize",
+      "areaId": "ramadan",
+      "topic": "ramadan-laylatul-qadr",
+      "prompt": { "en": "Sort the deeds of the last ten nights: prayer and charity.", "de": "Ordne die Taten der letzten zehn Nächte: Gebet und Sadaqa.", "bs": "Razvrstaj djela posljednjih deset noći: namaz i sadaka." },
+      "categories": [
+        { "id": "prayer", "label": { "en": "Prayer", "de": "Gebet", "bs": "Namaz" } },
+        { "id": "charity", "label": { "en": "Charity", "de": "Sadaqa", "bs": "Sadaka" } }
+      ],
+      "items": [
+        { "id": "tahajjud", "text": { "en": "Night prayer", "de": "Nachtgebet", "bs": "Noćni namaz" } , "categoryId": "prayer" },
+        { "id": "quran", "text": { "en": "Reciting the Quran", "de": "Koran rezitieren", "bs": "Učenje Kur’ana" }, "categoryId": "prayer" },
+        { "id": "food", "text": { "en": "Giving food to the needy", "de": "Bedürftigen Essen geben", "bs": "Davanje hrane potrebnima" }, "categoryId": "charity" },
+        { "id": "money", "text": { "en": "Giving sadaqa", "de": "Sadaqa geben", "bs": "Davanje sadake" }, "categoryId": "charity" }
+      ],
+      "explanation": { "en": "The last ten nights combine prayer, Quran and generosity.", "de": "Die letzten zehn Nächte verbinden Gebet, Koran und Großzügigkeit.", "bs": "Posljednjih deset noći spaja namaz, Kur’an i darežljivost." }
+    }
+  ]
+}

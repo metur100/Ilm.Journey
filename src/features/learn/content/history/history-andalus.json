@@ -1,0 +1,116 @@
+{
+  "id": "history-andalus",
+  "areaId": "history",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "Al-Andalus and the Spread of Knowledge", "de": "Al-Andalus und die Verbreitung des Wissens", "bs": "El-Andalus i širenje znanja" },
+  "description": {
+    "en": "Muslim Spain, its cities of learning and the translation of knowledge.",
+    "de": "Das muslimische Spanien, seine Städte des Wissens und die Übersetzung von Wissen.",
+    "bs": "Muslimska Španija, njeni gradovi znanja i prevođenje znanja."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "Muslims in Iberia", "de": "Muslime auf der Iberischen Halbinsel", "bs": "Muslimani na Iberijskom poluotoku" },
+      "body": {
+        "en": "In 711 Muslim forces crossed from North Africa into the Iberian Peninsula. For almost eight centuries, until 1492, Muslim states ruled parts of the peninsula, which they called al-Andalus. The period was not uniform: it included times of peace and cooperation as well as conflicts and changing borders.",
+        "de": "Im Jahr 711 überquerten muslimische Truppen von Nordafrika aus die Meerenge nach Iberien. Fast acht Jahrhunderte lang, bis 1492, regierten muslimische Staaten Teile der Halbinsel, die sie al-Andalus nannten. Die Zeit war nicht einheitlich: Sie umfasste Zeiten des Friedens und der Zusammenarbeit ebenso wie Konflikte und wechselnde Grenzen.",
+        "bs": "Godine 711. muslimanske snage prešle su iz Sjeverne Afrike na Iberijski poluotok. Skoro osam stoljeća, do 1492., muslimanske države vladale su dijelovima poluotoka koji su nazivali el-Andalus. To razdoblje nije bilo jednoobrazno: obuhvatalo je i vremena mira i saradnje, ali i sukobe i promjene granica."
+      }
+    },
+    {
+      "heading": { "en": "Cordoba and the cities of learning", "de": "Córdoba und die Städte des Wissens", "bs": "Kordoba i gradovi znanja" },
+      "body": {
+        "en": "Cordoba became one of the largest and most learned cities in Europe. Its library, schools and scholars attracted students from many lands. Toledo, Zaragoza, Seville and Granada were also centres of science, medicine, philosophy, poetry and law. Muslim, Jewish and Christian scholars lived and worked in the same cities and often read each other’s books.",
+        "de": "Córdoba wurde eine der größten und gelehrtesten Städte Europas. Ihre Bibliothek, Schulen und Gelehrten zogen Studierende aus vielen Ländern an. Auch Toledo, Saragossa, Sevilla und Granada waren Zentren von Wissenschaft, Medizin, Philosophie, Dichtung und Recht. Muslimische, jüdische und christliche Gelehrte lebten und arbeiteten in denselben Städten und lasen oft die Bücher des anderen.",
+        "bs": "Kordoba je postala jedan od najvećih i najučenijih gradova Evrope. Njena biblioteka, škole i učenjaci privlačili su studente iz mnogih zemalja. Toledo, Zaragoza, Sevilla i Granada također su bili središta nauke, medicine, filozofije, poezije i prava. Muslimanski, jevrejski i kršćanski učenjaci živjeli su i radili u istim gradovima i često čitali knjige jedni drugih."
+      }
+    },
+    {
+      "heading": { "en": "Knowledge crosses borders", "de": "Wissen überschreitet Grenzen", "bs": "Znanje prelazi granice" },
+      "body": {
+        "en": "Through al-Andalus and Sicily, works of mathematics, astronomy, medicine and philosophy reached Latin Europe. Translators in Toledo rendered Arabic texts into Latin, and European scholars studied the works of Ibn Rushd, Ibn Sina and al-Khwarizmi. This exchange helped shape the universities and sciences of medieval Europe.",
+        "de": "Über al-Andalus und Sizilien gelangten Werke der Mathematik, Astronomie, Medizin und Philosophie ins lateinische Europa. Übersetzer in Toledo übertrugen arabische Texte ins Lateinische, und europäische Gelehrte studierten die Werke von Ibn Ruschd, Ibn Sina und al-Chwarizmi. Dieser Austausch prägte die Universitäten und Wissenschaften des mittelalterlichen Europa.",
+        "bs": "Preko el-Andalusa i Sicilije djela iz matematike, astronomije, medicine i filozofije stigla su u latinsku Evropu. Prevoditelji u Toledu preveli su arapske tekstove na latinski, a evropski učenjaci proučavali su djela Ibn Rušda, Ibn Sine i el-Hvarizmija. Ta razmjena oblikovala je univerzitete i nauke srednjovjekovne Evrope."
+      }
+    }
+  ],
+  "practiceId": "history-andalus-p",
+  "testIds": ["history-andalus-1", "history-andalus-2", "history-andalus-3", "history-andalus-4"],
+  "explanation": {
+    "en": "Al-Andalus shows how Muslim scholars helped preserve and spread knowledge across Europe.",
+    "de": "Al-Andalus zeigt, wie muslimische Gelehrte halfen, Wissen zu bewahren und in Europa zu verbreiten.",
+    "bs": "El-Andalus pokazuje kako su muslimanski učenjaci pomogli sačuvati i proširiti znanje po Evropi."
+  },
+  "sources": [
+    { "sourceName": "Ibn Khaldun", "sourceReference": "Muqaddimah" },
+    { "sourceName": "Encyclopaedia of Islam", "sourceReference": "Al-Andalus" }
+  ],
+  "questions": [
+    {
+      "id": "history-andalus-p",
+      "type": "multipleChoice",
+      "areaId": "history",
+      "topic": "history-andalus",
+      "prompt": { "en": "In which year did Muslim forces enter the Iberian Peninsula?", "de": "In welchem Jahr kamen muslimische Truppen auf die Iberische Halbinsel?", "bs": "Koje godine su muslimanske snage ušle na Iberijski poluotok?" },
+      "options": [
+        { "id": "a", "text": { "en": "711", "de": "711", "bs": "711." } },
+        { "id": "b", "text": { "en": "632", "de": "632", "bs": "632." } },
+        { "id": "c", "text": { "en": "1492", "de": "1492", "bs": "1492." } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Muslim forces crossed in 711; 1492 marks the end of Muslim rule in Granada.", "de": "Muslimische Truppen kamen 711; 1492 markiert das Ende der muslimischen Herrschaft in Granada.", "bs": "Muslimanske snage prešle su 711.; 1492. označava kraj muslimanske vlasti u Granadi." }
+    },
+    {
+      "id": "history-andalus-1",
+      "type": "matching",
+      "areaId": "history",
+      "topic": "history-andalus",
+      "prompt": { "en": "Match each city with what it is known for.", "de": "Ordne jeder Stadt zu, wofür sie bekannt ist.", "bs": "Spoji svaki grad s onim po čemu je poznat." },
+      "pairs": [
+        { "id": "cordoba", "left": { "en": "Cordoba", "de": "Córdoba", "bs": "Kordoba" }, "right": { "en": "A great library and centre of learning", "de": "Eine große Bibliothek und ein Zentrum des Wissens", "bs": "Velika biblioteka i središte znanja" } },
+        { "id": "toledo", "left": { "en": "Toledo", "de": "Toledo", "bs": "Toledo" }, "right": { "en": "Translation of Arabic works into Latin", "de": "Übersetzung arabischer Werke ins Lateinische", "bs": "Prevođenje arapskih djela na latinski" } },
+        { "id": "granada", "left": { "en": "Granada", "de": "Granada", "bs": "Granada" }, "right": { "en": "The last Muslim kingdom in Iberia", "de": "Das letzte muslimische Königreich in Iberien", "bs": "Posljednje muslimansko kraljevstvo na Iberiji" } }
+      ],
+      "explanation": { "en": "Cordoba was a centre of learning, Toledo a translation hub, and Granada the last Muslim kingdom.", "de": "Córdoba war ein Zentrum des Wissens, Toledo ein Übersetzungszentrum und Granada das letzte muslimische Königreich.", "bs": "Kordoba je bila središte znanja, Toledo središte prevođenja, a Granada posljednje muslimansko kraljevstvo." }
+    },
+    {
+      "id": "history-andalus-2",
+      "type": "trueFalse",
+      "areaId": "history",
+      "topic": "history-andalus",
+      "prompt": { "en": "Muslim rule in parts of Iberia lasted almost eight centuries.", "de": "Die muslimische Herrschaft über Teile Iberiens dauerte fast acht Jahrhunderte.", "bs": "Muslimska vlast nad dijelovima Iberije trajala je skoro osam stoljeća." },
+      "correct": true,
+      "explanation": { "en": "From 711 to 1492 is almost eight centuries.", "de": "Von 711 bis 1492 sind es fast acht Jahrhunderte.", "bs": "Od 711. do 1492. je skoro osam stoljeća." }
+    },
+    {
+      "id": "history-andalus-3",
+      "type": "fillBlank",
+      "areaId": "history",
+      "topic": "history-andalus",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Translators in ___ rendered Arabic texts into Latin.", "de": "Übersetzer in ___ übertrugen arabische Texte ins Lateinische.", "bs": "Prevoditelji u ___ preveli su arapske tekstove na latinski." },
+      "options": [
+        { "id": "a", "text": { "en": "Toledo", "de": "Toledo", "bs": "Toledu" } },
+        { "id": "b", "text": { "en": "Makkah", "de": "Mekka", "bs": "Mekki" } },
+        { "id": "c", "text": { "en": "Madinah", "de": "Medina", "bs": "Medini" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Toledo became famous for its translators.", "de": "Toledo wurde für seine Übersetzer berühmt.", "bs": "Toledo je postalo poznato po svojim prevoditeljima." }
+    },
+    {
+      "id": "history-andalus-4",
+      "type": "multipleChoice",
+      "areaId": "history",
+      "topic": "history-andalus",
+      "prompt": { "en": "Which scholar is associated with mathematics and the word algorithm?", "de": "Welcher Gelehrte ist mit Mathematik und dem Wort Algorithmus verbunden?", "bs": "Koji se učenjak povezuje s matematikom i riječju algoritam?" },
+      "options": [
+        { "id": "a", "text": { "en": "Al-Khwarizmi", "de": "Al-Chwarizmi", "bs": "El-Hvarizmi" } },
+        { "id": "b", "text": { "en": "Ibn Battuta", "de": "Ibn Battuta", "bs": "Ibn Battuta" } },
+        { "id": "c", "text": { "en": "Al-Bukhari", "de": "Al-Buchari", "bs": "El-Buhari" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Al-Khwarizmi’s name is the root of the word algorithm.", "de": "Al-Chwarizmis Name ist die Wurzel des Wortes Algorithmus.", "bs": "Ime el-Hvarizmija korijen je riječi algoritam." }
+    }
+  ]
+}

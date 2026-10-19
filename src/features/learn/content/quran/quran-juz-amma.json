@@ -1,0 +1,118 @@
+{
+  "id": "quran-juz-amma",
+  "areaId": "quran",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "Juz ʿAmma – the Surahs We Learn First", "de": "Dschuz ʿAmma – die Suren, die wir zuerst lernen", "bs": "Džuz ʿAmma – sure koje prve učimo" },
+  "description": {
+    "en": "The last juz of the Quran and the first short surahs: Al-Ikhlas, Al-Falaq, An-Nas and Al-Masad.",
+    "de": "Der letzte Dschuz des Korans und die ersten kurzen Suren: Al-Ichlas, Al-Falaq, An-Nas und Al-Masad.",
+    "bs": "Posljednji džuz Kur’ana i prve kratke sure: El-Ihlas, El-Felek, En-Nas i El-Mesed."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "What is Juz ʿAmma?", "de": "Was ist Dschuz ʿAmma?", "bs": "Šta je Džuz ʿAmma?" },
+      "body": {
+        "en": "The Quran is divided into 30 juz’ for reading and memorising. Juz ʿAmma is the thirtieth and last juz: it begins with Surah An-Naba (78) and ends with Surah An-Nas (114). Because its surahs are short, it is the part most children and new learners memorise first.",
+        "de": "Der Koran ist zum Lesen und Auswendiglernen in 30 Dschuz’ geteilt. Dschuz ʿAmma ist der dreißigste und letzte Dschuz: Er beginnt mit Sure An-Naba (78) und endet mit Sure An-Nas (114). Weil seine Suren kurz sind, lernen Kinder und Anfänger ihn zuerst auswendig.",
+        "bs": "Kur’an je radi čitanja i učenja napamet podijeljen na 30 džuzova. Džuz ʿAmma je trideseti i posljednji džuz: počinje surom En-Nebe (78), a završava surom En-Nas (114). Zbog kratkih sura djeca i početnici ga prvi uče napamet."
+      }
+    },
+    {
+      "heading": { "en": "The first short surahs", "de": "Die ersten kurzen Suren", "bs": "Prve kratke sure" },
+      "body": {
+        "en": "At the end of the mushaf stand Al-Masad (111, 5 ayahs), Al-Ikhlas (112, 4 ayahs), Al-Falaq (113, 5 ayahs) and An-Nas (114, 6 ayahs). Al-Ikhlas describes Allah as One; Al-Falaq and An-Nas are the two surahs of refuge; Al-Masad warns those who harm the Prophet ﷺ. Al-Fatiha (1, 7 ayahs) is the first surah of the Quran and is recited in every rakat of the prayer.",
+        "de": "Am Ende des Mushafs stehen Al-Masad (111, 5 Verse), Al-Ichlas (112, 4 Verse), Al-Falaq (113, 5 Verse) und An-Nas (114, 6 Verse). Al-Ichlas beschreibt Allah als den Einen; Al-Falaq und An-Nas sind die beiden Suren der Zuflucht; Al-Masad warnt die, die dem Propheten ﷺ schaden. Al-Fatiha (1, 7 Verse) ist die erste Sure des Korans und wird in jeder Rak‘a des Gebets rezitiert.",
+        "bs": "Na kraju mushafa stoje El-Mesed (111, 5 ajeta), El-Ihlas (112, 4 ajeta), El-Felek (113, 5 ajeta) i En-Nas (114, 6 ajeta). El-Ihlas opisuje Allaha kao Jednog; El-Felek i En-Nas su dvije sure utočišta; El-Mesed upozorava one koji nanose zlo Poslaniku ﷺ. El-Fatiha (1, 7 ajeta) prva je sura Kur’ana i uči se u svakom rekatu namaza."
+      }
+    },
+    {
+      "heading": { "en": "Learn the whole surah", "de": "Lerne die ganze Sure", "bs": "Uči cijelu suru" },
+      "body": {
+        "en": "A surah is learned completely, ayah by ayah, in the order of the mushaf – never with an ayah skipped. Read or listen to the whole surah, then repeat it until you can say every ayah without looking. The games in the Quran section always use a complete surah in one level, so you practise the text as it stands in the mushaf.",
+        "de": "Eine Sure wird vollständig gelernt, Vers für Vers, in der Reihenfolge des Mushafs – niemals mit einem ausgelassenen Vers. Lies oder höre die ganze Sure und wiederhole sie, bis du jeden Vers ohne Hinsehen sagen kannst. Die Spiele im Koran-Bereich verwenden in einer Stufe immer eine vollständige Sure, damit du den Text so übst, wie er im Mushaf steht.",
+        "bs": "Sura se uči cijela, ajet po ajet, redoslijedom mushafa – nikad s izostavljenim ajetom. Pročitaj ili poslušaj cijelu suru, pa je ponavljaj dok svaki ajet ne možeš izgovoriti bez gledanja. Igre u odjeljku Kur’an uvijek koriste cijelu suru u jednom nivou, pa tekst vježbaš onako kako stoji u mushafu."
+      }
+    }
+  ],
+  "practiceId": "quran-juz-amma-p",
+  "testIds": ["quran-juz-amma-1", "quran-juz-amma-2", "quran-juz-amma-3", "quran-juz-amma-4"],
+  "explanation": {
+    "en": "Juz ʿAmma is the gateway to the Quran: short surahs, complete and in order, that you can use in prayer every day.",
+    "de": "Dschuz ʿAmma ist der Zugang zum Koran: kurze Suren, vollständig und in der richtigen Reihenfolge, die du täglich im Gebet verwenden kannst.",
+    "bs": "Džuz ʿAmma je ulaz u Kur’an: kratke sure, cijele i po redu, koje možeš koristiti u namazu svaki dan."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "78–114" },
+    { "sourceName": "Quran", "sourceReference": "1; 111–114" }
+  ],
+  "questions": [
+    {
+      "id": "quran-juz-amma-p",
+      "type": "matching",
+      "areaId": "quran",
+      "topic": "quran-juz-amma",
+      "prompt": { "en": "Match each surah with its number of ayahs.", "de": "Ordne jeder Sure ihre Zahl an Versen zu.", "bs": "Spoji svaku suru s brojem njenih ajeta." },
+      "pairs": [
+        { "id": "ikhlas", "left": { "en": "Al-Ikhlas", "de": "Al-Ichlas", "bs": "El-Ihlas" }, "right": { "en": "4 ayahs", "de": "4 Verse", "bs": "4 ajeta" } },
+        { "id": "falaq", "left": { "en": "Al-Falaq", "de": "Al-Falaq", "bs": "El-Felek" }, "right": { "en": "5 ayahs", "de": "5 Verse", "bs": "5 ajeta" } },
+        { "id": "nas", "left": { "en": "An-Nas", "de": "An-Nas", "bs": "En-Nas" }, "right": { "en": "6 ayahs", "de": "6 Verse", "bs": "6 ajeta" } },
+        { "id": "masad", "left": { "en": "Al-Masad", "de": "Al-Masad", "bs": "El-Mesed" }, "right": { "en": "5 ayahs", "de": "5 Verse", "bs": "5 ajeta" } },
+        { "id": "kawthar", "left": { "en": "Al-Kawthar", "de": "Al-Kauthar", "bs": "El-Kevser" }, "right": { "en": "3 ayahs", "de": "3 Verse", "bs": "3 ajeta" } }
+      ],
+      "explanation": { "en": "These are the ayah counts of the short surahs at the end of the Quran.", "de": "Das sind die Verszahlen der kurzen Suren am Ende des Korans.", "bs": "To su brojevi ajeta kratkih sura na kraju Kur’ana." }
+    },
+    {
+      "id": "quran-juz-amma-1",
+      "type": "multipleChoice",
+      "areaId": "quran",
+      "topic": "quran-juz-amma",
+      "prompt": { "en": "Which surah is the last one in the Quran?", "de": "Welche Sure ist die letzte im Koran?", "bs": "Koja sura je posljednja u Kur’anu?" },
+      "options": [
+        { "id": "a", "text": { "en": "An-Nas", "de": "An-Nas", "bs": "En-Nas" } },
+        { "id": "b", "text": { "en": "Al-Falaq", "de": "Al-Falaq", "bs": "El-Felek" } },
+        { "id": "c", "text": { "en": "Al-Ikhlas", "de": "Al-Ichlas", "bs": "El-Ihlas" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "An-Nas (114) is the last surah of the mushaf.", "de": "An-Nas (114) ist die letzte Sure des Mushafs.", "bs": "En-Nas (114) je posljednja sura mushafa." }
+    },
+    {
+      "id": "quran-juz-amma-2",
+      "type": "ordering",
+      "areaId": "quran",
+      "topic": "quran-juz-amma",
+      "prompt": { "en": "Put these surahs in the order of the mushaf.", "de": "Bringe diese Suren in die Reihenfolge des Mushafs.", "bs": "Poredaj ove sure redoslijedom mushafa." },
+      "items": [
+        { "id": "masad", "text": { "en": "Al-Masad (111)", "de": "Al-Masad (111)", "bs": "El-Mesed (111)" } },
+        { "id": "ikhlas", "text": { "en": "Al-Ikhlas (112)", "de": "Al-Ichlas (112)", "bs": "El-Ihlas (112)" } },
+        { "id": "falaq", "text": { "en": "Al-Falaq (113)", "de": "Al-Falaq (113)", "bs": "El-Felek (113)" } },
+        { "id": "nas", "text": { "en": "An-Nas (114)", "de": "An-Nas (114)", "bs": "En-Nas (114)" } }
+      ],
+      "explanation": { "en": "The order is Al-Masad, Al-Ikhlas, Al-Falaq, An-Nas.", "de": "Die Reihenfolge ist Al-Masad, Al-Ichlas, Al-Falaq, An-Nas.", "bs": "Redoslijed je El-Mesed, El-Ihlas, El-Felek, En-Nas." }
+    },
+    {
+      "id": "quran-juz-amma-3",
+      "type": "trueFalse",
+      "areaId": "quran",
+      "topic": "quran-juz-amma",
+      "prompt": { "en": "Al-Ikhlas has four ayahs.", "de": "Al-Ichlas hat vier Verse.", "bs": "El-Ihlas ima četiri ajeta." },
+      "correct": true,
+      "explanation": { "en": "Yes – four ayahs, and the Prophet ﷺ said it equals a third of the Quran.", "de": "Ja – vier Verse; der Prophet ﷺ sagte, sie gleiche einem Drittel des Korans.", "bs": "Da – četiri ajeta; Poslanik ﷺ je rekao da je ravna trećini Kur’ana." }
+    },
+    {
+      "id": "quran-juz-amma-4",
+      "type": "fillBlank",
+      "areaId": "quran",
+      "topic": "quran-juz-amma",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Al-Falaq has ___ ayahs.", "de": "Al-Falaq hat ___ Verse.", "bs": "El-Felek ima ___ ajeta." },
+      "options": [
+        { "id": "a", "text": { "en": "3", "de": "3", "bs": "3" } },
+        { "id": "b", "text": { "en": "5", "de": "5", "bs": "5" } },
+        { "id": "c", "text": { "en": "6", "de": "6", "bs": "6" } }
+      ],
+      "correctOptionId": "b",
+      "explanation": { "en": "Al-Falaq has five ayahs; An-Nas has six.", "de": "Al-Falaq hat fünf Verse; An-Nas hat sechs.", "bs": "El-Felek ima pet ajeta; En-Nas ima šest." }
+    }
+  ]
+}

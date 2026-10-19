@@ -1,0 +1,118 @@
+{
+  "id": "prophets-musa-firaun",
+  "areaId": "prophets",
+  "order": 4,
+  "difficulty": 2,
+  "title": { "en": "Musa and Firaun", "de": "Musa und Firaun", "bs": "Musa i faraon" },
+  "description": {
+    "en": "How Allah sent Musa to Firaun and saved the believers.",
+    "de": "Wie Allah Musa zu Firaun sandte und die Gläubigen rettete.",
+    "bs": "Kako je Allah poslao Musu faraonu i spasio vjernike."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "The call", "de": "Der Ruf", "bs": "Poziv" },
+      "body": {
+        "en": "Allah spoke to Musa in the valley of Tuwa and sent him to Firaun, who had become arrogant and oppressed the Children of Israel. Musa asked Allah to strengthen him with his brother Harun and to make his task easy. He went to Firaun with clear signs, but Firaun rejected the truth and claimed to be a god.",
+        "de": "Allah sprach zu Musa im Tal Tuwa und sandte ihn zu Firaun, der hochmütig geworden war und die Kinder Israels unterdrückte. Musa bat Allah, ihn mit seinem Bruder Harun zu stärken und ihm die Aufgabe zu erleichtern. Er ging mit klaren Zeichen zu Firaun, doch Firaun verwarf die Wahrheit und behauptete, ein Gott zu sein.",
+        "bs": "Allah je govorio Musau u dolini Tuva i poslao ga faraonu, koji je postao ohol i tlačio sinove Israilove. Musa je molio Allaha da ga ojača njegovim bratom Harunom i olakša mu zadatak. Otišao je faraonu s jasnim znacima, ali faraon je odbio istinu i tvrdio da je bog."
+      }
+    },
+    {
+      "heading": { "en": "The signs", "de": "Die Zeichen", "bs": "Znaci" },
+      "body": {
+        "en": "Musa threw his staff and it became a snake; he drew his hand out of his garment and it shone white. Firaun gathered his sorcerers, but when they saw the truth they prostrated and believed in the Lord of Musa and Harun, even though Firaun threatened them.",
+        "de": "Musa warf seinen Stab, und er wurde zu einer Schlange; er zog seine Hand aus dem Gewand, und sie leuchtete weiß. Firaun versammelte seine Zauberer, aber als sie die Wahrheit sahen, warfen sie sich nieder und glaubten an den Herrn von Musa und Harun – obwohl Firaun sie bedrohte.",
+        "bs": "Musa je bacio svoj štap i on je postao zmija; izvukao je ruku iz odjeće i ona je zasjala bijelo. Faraon je okupio svoje čarobnjake, ali kad su vidjeli istinu, pali su na sedždu i povjerovali u Gospodara Musau i Harunu, iako im je faraon prijetio."
+      }
+    },
+    {
+      "heading": { "en": "The sea and the lesson", "de": "Das Meer und die Lehre", "bs": "More i pouka" },
+      "body": {
+        "en": "Musa led the believers out of Egypt. At the sea Allah commanded him to strike the water with his staff, and the sea opened into dry paths. Firaun and his army followed and were drowned. The Quran tells this story as a lesson that Allah helps those who trust Him and that arrogance leads to ruin.",
+        "de": "Musa führte die Gläubigen aus Ägypten. Am Meer befahl Allah ihm, das Wasser mit seinem Stab zu schlagen, und das Meer öffnete sich zu trockenen Wegen. Firaun und sein Heer folgten und ertranken. Der Koran erzählt diese Geschichte als Lehre, dass Allah denen hilft, die auf Ihn vertrauen, und dass Hochmut ins Verderben führt.",
+        "bs": "Musa je izveo vjernike iz Egipta. Na moru mu je Allah naredio da udari štapom po vodi, i more se otvorilo u suhe staze. Faraon i njegova vojska su krenuli za njima i utopili se. Kur’an kazuje ovu priču kao pouku da Allah pomaže onima koji se u Njega uzdaju i da oholost vodi propasti."
+      }
+    }
+  ],
+  "practiceId": "prophets-musa-firaun-p",
+  "testIds": ["prophets-musa-firaun-1", "prophets-musa-firaun-2", "prophets-musa-firaun-3", "prophets-musa-firaun-4"],
+  "explanation": {
+    "en": "Musa’s story teaches trust in Allah, courage before power and the truth of Allah’s promise.",
+    "de": "Musas Geschichte lehrt Vertrauen auf Allah, Mut vor Macht und die Wahrheit von Allahs Versprechen.",
+    "bs": "Musina priča uči pouzdanju u Allaha, hrabrosti pred vlašću i istinitosti Allahovog obećanja."
+  },
+  "sources": [
+    { "sourceName": "Quran", "sourceReference": "20:9–98" },
+    { "sourceName": "Quran", "sourceReference": "26:10–68" },
+    { "sourceName": "Quran", "sourceReference": "28:3–43" }
+  ],
+  "questions": [
+    {
+      "id": "prophets-musa-firaun-p",
+      "type": "multipleChoice",
+      "areaId": "prophets",
+      "topic": "prophets-musa-firaun",
+      "prompt": { "en": "To whom was Musa sent?", "de": "Zu wem wurde Musa gesandt?", "bs": "Kome je Musa poslan?" },
+      "options": [
+        { "id": "a", "text": { "en": "Firaun", "de": "Firaun", "bs": "Faraonu" } },
+        { "id": "b", "text": { "en": "Nuh", "de": "Nuh", "bs": "Nuhu" } },
+        { "id": "c", "text": { "en": "Ibrahim", "de": "Ibrahim", "bs": "Ibrahimu" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Allah sent Musa and Harun to Firaun with His signs.", "de": "Allah sandte Musa und Harun mit Seinen Zeichen zu Firaun.", "bs": "Allah je poslao Musu i Haruna faraonu sa Svojim znacima." }
+    },
+    {
+      "id": "prophets-musa-firaun-1",
+      "type": "ordering",
+      "areaId": "prophets",
+      "topic": "prophets-musa-firaun",
+      "prompt": { "en": "Put the events in the order of the story.", "de": "Bringe die Ereignisse in die Reihenfolge der Geschichte.", "bs": "Poredaj događaje redoslijedom priče." },
+      "items": [
+        { "id": "call", "text": { "en": "Allah speaks to Musa at Tuwa", "de": "Allah spricht zu Musa bei Tuwa", "bs": "Allah govori Musau kod Tuve" } },
+        { "id": "staff", "text": { "en": "The staff becomes a snake", "de": "Der Stab wird zur Schlange", "bs": "Štap postaje zmija" } },
+        { "id": "sea", "text": { "en": "The sea opens for the believers", "de": "Das Meer öffnet sich für die Gläubigen", "bs": "More se otvara vjernicima" } },
+        { "id": "drowned", "text": { "en": "Firaun and his army drown", "de": "Firaun und sein Heer ertrinken", "bs": "Faraon i njegova vojska se utapaju" } }
+      ],
+      "explanation": { "en": "The call comes first, then the signs, then the escape through the sea.", "de": "Zuerst der Ruf, dann die Zeichen, dann der Auszug durch das Meer.", "bs": "Prvo poziv, zatim znaci, pa izlazak kroz more." }
+    },
+    {
+      "id": "prophets-musa-firaun-2",
+      "type": "trueFalse",
+      "areaId": "prophets",
+      "topic": "prophets-musa-firaun",
+      "prompt": { "en": "Musa’s brother Harun helped him in his mission.", "de": "Musas Bruder Harun half ihm bei seiner Aufgabe.", "bs": "Musin brat Harun mu je pomagao u poslanstvu." },
+      "correct": true,
+      "explanation": { "en": "Musa asked Allah to strengthen him with Harun, and Allah answered.", "de": "Musa bat Allah, ihn mit Harun zu stärken, und Allah erhörte ihn.", "bs": "Musa je molio Allaha da ga ojača Harunom, i Allah mu je odgovorio." }
+    },
+    {
+      "id": "prophets-musa-firaun-3",
+      "type": "fillBlank",
+      "areaId": "prophets",
+      "topic": "prophets-musa-firaun",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "Allah commanded Musa to strike the sea with his ___.", "de": "Allah befahl Musa, das Meer mit seinem ___ zu schlagen.", "bs": "Allah je naredio Musi da udari more svojim ___." },
+      "options": [
+        { "id": "a", "text": { "en": "staff", "de": "Stab", "bs": "štapom" } },
+        { "id": "b", "text": { "en": "hand", "de": "Hand", "bs": "rukom" } },
+        { "id": "c", "text": { "en": "cloak", "de": "Mantel", "bs": "ogrtačem" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "He struck the sea with his staff, and it opened.", "de": "Er schlug das Meer mit seinem Stab, und es öffnete sich.", "bs": "Udario je more svojim štapom, i ono se otvorilo." }
+    },
+    {
+      "id": "prophets-musa-firaun-4",
+      "type": "multipleChoice",
+      "areaId": "prophets",
+      "topic": "prophets-musa-firaun",
+      "prompt": { "en": "What did the sorcerers do when they saw Musa’s sign?", "de": "Was taten die Zauberer, als sie Musas Zeichen sahen?", "bs": "Šta su čarobnjaci učinili kad su vidjeli Musin znak?" },
+      "options": [
+        { "id": "a", "text": { "en": "They prostrated and believed", "de": "Sie warfen sich nieder und glaubten", "bs": "Pali su na sedždu i povjerovali" } },
+        { "id": "b", "text": { "en": "They joined Firaun’s army", "de": "Sie schlossen sich Firauns Heer an", "bs": "Pridružili su se faraonovoj vojsci" } },
+        { "id": "c", "text": { "en": "They left Egypt", "de": "Sie verließen Ägypten", "bs": "Napustili su Egipat" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "They recognised the truth and believed, despite Firaun’s threat.", "de": "Sie erkannten die Wahrheit und glaubten – trotz Firauns Drohung.", "bs": "Prepoznali su istinu i povjerovali – uprkos faraonovoj prijetnji." }
+    }
+  ]
+}

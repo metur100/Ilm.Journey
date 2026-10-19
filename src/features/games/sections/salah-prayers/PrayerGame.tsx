@@ -8,7 +8,7 @@ import { GameBoard, InlineCaption, kitResult, SequenceBoard, useIdleHint, useKit
 import { spacing } from '@/core/theme';
 
 import { captionLine, stepCaption } from './captions';
-import { mainPart, partOutline, type PrayerId, prayerDef, type PrayerStep, partSteps, RAKAT_ORDER, type Move } from './data/prayers';
+import { partOutline, type PrayerId, type PrayerPart, prayerDef, type PrayerStep, partSteps, RAKAT_ORDER, type Move } from './data/prayers';
 import { figurePoint } from './figure/PrayerFigure';
 import { expectedReading, GESTURE, leadOptions, leadSteps, MOVE_POSITION, readsFatiha, type Gesture } from './logic';
 import { ChoiceButton, Leader, PartsRow, RakatBeads, ReciteCard, Stage, useHeroFigure, VariantToggle } from './parts';
@@ -64,7 +64,9 @@ function useMissed(api: Api) {
  */
 export function PrayerGame(api: Api) {
   const hero = useHeroFigure();
+  const prayer = prayerDef(api.config.prayer);
   const [variant, setVariant] = useState<PrayerVariant>(hero.variant);
+  const [partIndex, setPartIndex] = useState(prayer.main);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const onLayout = (e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
@@ -72,16 +74,17 @@ export function PrayerGame(api: Api) {
   };
   const w = size.w || 340;
   const h = size.h || 620;
-  const props = { api, variant, tint: hero.tint, w, h };
+  const part = prayer.parts[partIndex] ?? prayer.parts[prayer.main];
+  const props = { api, variant, tint: hero.tint, w, h, part, partIndex, onPart: setPartIndex };
   return (
     <GameBoard api={api as GameApi<unknown>} topic="salah" padding={spacing.sm}>
       <View style={styles.root} onLayout={onLayout}>
         {api.config.mode === 'order' ? (
-          <OrderPlay {...props} onVariant={setVariant} />
+          <OrderPlay key={part.id} {...props} onVariant={setVariant} />
         ) : api.config.mode === 'lead' ? (
-          <LeadPlay {...props} onVariant={setVariant} />
+          <LeadPlay key={part.id} {...props} onVariant={setVariant} />
         ) : (
-          <AlongPlay {...props} onVariant={setVariant} />
+          <AlongPlay key={part.id} {...props} onVariant={setVariant} />
         )}
       </View>
     </GameBoard>
@@ -94,18 +97,44 @@ interface PlayProps {
   tint?: string;
   w: number;
   h: number;
+  part: PrayerPart;
+  partIndex: number;
+  onPart: (index: number) => void;
   onVariant: (v: PrayerVariant) => void;
 }
 
 const stageHeight = (w: number, h: number, share: number) => Math.round(Math.max(150, Math.min(h * share, w * 0.82)));
 
-function TopRow({ api, variant, onVariant, rakat, total, counted }: { api: Api; variant: PrayerVariant; onVariant: (v: PrayerVariant) => void; rakat?: number; total?: number; counted?: number }) {
+function TopRow({
+  api,
+  variant,
+  onVariant,
+  partIndex,
+  onPart,
+  rakat,
+  total,
+  counted,
+}: {
+  api: Api;
+  variant: PrayerVariant;
+  onVariant: (v: PrayerVariant) => void;
+  partIndex: number;
+  onPart: (index: number) => void;
+  rakat?: number;
+  total?: number;
+  counted?: number;
+}) {
   const prayer = prayerDef(api.config.prayer);
   const k = useKitColors();
   return (
     <View style={styles.gap4}>
       <View style={styles.row}>
-        <PartsRow prayer={prayer} current={prayer.main} t={api.t} />
+        <View style={[styles.flex, styles.gap4]}>
+          <AppText variant="tiny" color={k.textMuted}>
+            {api.t('part.choose')}
+          </AppText>
+          <PartsRow prayer={prayer} current={partIndex} onSelect={onPart} t={api.t} />
+        </View>
         <VariantToggle variant={variant} onChange={onVariant} t={api.t} />
       </View>
       {total ? (
@@ -144,9 +173,8 @@ function titleOf(position: PrayerPosition, step: PrayerStep | null, t: Api['t'])
 // ---------------------------------------------------------------------------------------------------------------
 // L1 – pray along
 
-function AlongPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
+function AlongPlay({ api, variant, tint, w, h, part, partIndex, onPart, onVariant }: PlayProps) {
   const prayer = prayerDef(api.config.prayer);
-  const part = mainPart(api.config.prayer);
   const steps = useMemo(() => partSteps(part), [part]);
   const k = useKitColors();
   const [idx, setIdx] = useState(-1);
@@ -212,7 +240,7 @@ function AlongPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
 
   return (
     <View style={styles.play}>
-      <TopRow api={api} variant={variant} onVariant={onVariant} rakat={cur?.rakat ?? 1} total={part.rakats} />
+      <TopRow api={api} variant={variant} onVariant={onVariant} partIndex={partIndex} onPart={onPart} rakat={cur?.rakat ?? 1} total={part.rakats} />
       <Stage
         prayer={prayer}
         position={position}
@@ -291,9 +319,8 @@ function SajdaBubbles({ points, tapped, onTap, width, view, t, color }: { points
 
 type LeadPhase = 'move' | 'counter' | 'recite';
 
-function LeadPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
+function LeadPlay({ api, variant, tint, w, h, part, partIndex, onPart, onVariant }: PlayProps) {
   const prayer = prayerDef(api.config.prayer);
-  const part = mainPart(api.config.prayer);
   const steps = useMemo(() => leadSteps(part), [part]);
   const [idx, setIdx] = useState(-1);
   const [phase, setPhase] = useState<LeadPhase>('move');
@@ -386,7 +413,7 @@ function LeadPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
 
   return (
     <View style={styles.play}>
-      <TopRow api={api} variant={variant} onVariant={onVariant} total={part.rakats} counted={counted} />
+      <TopRow api={api} variant={variant} onVariant={onVariant} partIndex={partIndex} onPart={onPart} total={part.rakats} counted={counted} />
       <Stage prayer={prayer} position={position} variant={variant} tint={tint} width={w} height={stageH} reducedMotion={api.reducedMotion} cues={{ arrows: true, highlight: true }} onSettled={onSettled} label={titleOf(position, cur, api.t)} />
       {phase === 'move' && cur && lines.length ? (
         <ScrollView style={styles.cardScroll} persistentScrollbar>
@@ -430,9 +457,8 @@ function LeadPlay({ api, variant, tint, w, h, onVariant }: PlayProps) {
 // ---------------------------------------------------------------------------------------------------------------
 // L2 – put it in order
 
-function roundItems(kind: RoundKind, api: Api, variant: PrayerVariant): { items: KitItem[]; prompt: string } {
+function roundItems(kind: RoundKind, api: Api, variant: PrayerVariant, part: PrayerPart): { items: KitItem[]; prompt: string } {
   const prayer = prayerDef(api.config.prayer);
-  const part = mainPart(api.config.prayer);
   const t = api.t;
   const art = (p: PrayerPosition) => figArt(p, variant);
   const partLabel = t(`kind.${part.kind}`, { n: part.rakats });
@@ -494,14 +520,14 @@ const ROUND_FACTS: Record<RoundKind, (prayer: string) => string[]> = {
   kunut: () => ['vitr-kunut'],
 };
 
-function OrderPlay({ api, variant, onVariant }: PlayProps) {
+function OrderPlay({ api, variant, part, partIndex, onPart, onVariant }: PlayProps) {
   const configRounds = api.config.rounds;
   const rounds = useMemo<readonly RoundKind[]>(() => configRounds ?? ['rakat'], [configRounds]);
   const [round, setRound] = useState(0);
   const mistakes = useRef(0);
   const moves = useRef(0);
   const { missed, add } = useMissed(api);
-  const { items, prompt } = useMemo(() => roundItems(rounds[round], api, variant), [rounds, round, api, variant]);
+  const { items, prompt } = useMemo(() => roundItems(rounds[round], api, variant, part), [rounds, round, api, variant, part]);
   const k = useKitColors();
 
   const onDone = (info: { mistakes: number }) => {
@@ -514,12 +540,12 @@ function OrderPlay({ api, variant, onVariant }: PlayProps) {
 
   return (
     <View style={styles.play}>
-      <TopRow api={api} variant={variant} onVariant={onVariant} />
+      <TopRow api={api} variant={variant} onVariant={onVariant} partIndex={partIndex} onPart={onPart} />
       <AppText variant="tiny" color={k.textMuted} align="center">
         {`${round + 1} / ${rounds.length}`}
       </AppText>
       <View style={styles.flex}>
-        <SequenceBoard key={`${round}-${variant}`} items={items} prompt={prompt} onDone={onDone} seed={`${api.gameId}:${api.level}:${round}`} testID={`order-${rounds[round]}`} />
+        <SequenceBoard key={`${round}-${variant}-${part.id}`} items={items} prompt={prompt} onDone={onDone} seed={`${api.gameId}:${api.level}:${round}:${part.id}`} testID={`order-${rounds[round]}`} />
       </View>
     </View>
   );

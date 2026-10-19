@@ -74,7 +74,7 @@
     "order": 8,
     "name": { "en": "Sufara School", "de": "Sufara-Schule", "bs": "Mekteb sufare" },
     "statName": { "en": "Sufara", "de": "Sufara", "bs": "Sufara" },
-    "description": { "en": "The Arabic letters lesson by lesson, from alif onwards: harakat, sukun, tanwin, madd, shadda and reading.", "de": "Die arabischen Buchstaben Lektion für Lektion, ab Alif: Harakat, Sukun, Tanwin, Madd, Schadda und Lesen.", "bs": "Arapski harfovi lekciju po lekciju, od elifa: harekati, sukun, tenvin, medd, šedda i čitanje." },
+    "description": { "en": "The Arabic letters lesson by lesson, from alif onwards: e, i, u, the other letters, joining, harakat, sukun, tanwin, madd, shadda and reading.", "de": "Die arabischen Buchstaben Lektion für Lektion, ab Alif: e, i, u, die übrigen Buchstaben, Verbinden, Harakat, Sukun, Tanwin, Madd, Schadda und Lesen.", "bs": "Arapski harfovi lekciju po lekciju, od elifa: e, i, u, ostali harfovi, spajanje, harekati, sukun, tenvin, medd, šedda i čitanje." },
     "scene": { "sky": "sunset", "elements": ["sun", "book", "pattern"] },
     "map": { "x": 56, "y": 12 },
     "unlock": { "areaId": "history", "unitsCompleted": 2 }

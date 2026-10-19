@@ -1,37 +1,25 @@
 import { type GameDef, registerGame } from '@/core/games';
-import type { LocalizedText } from '@/core/models';
 
 import { quoteFact } from '../shared/facts';
 import { lazyComponent } from '../shared/game';
-import { ayahMeaning, ayahRef, surahName } from '../shared/quran';
 import { surahPuzzleI18n } from './i18n';
 
 /*
- * Surah Puzzle (JigsawReveal). The Arabic ayah (data) stands above the frame; the learner rebuilds the picture the
- * ayah describes, and the finished picture reveals the ayah's translation. L1: 2 × 2 pieces (Ad-Duha 93:1–2);
- * L2: 3 × 3 pieces (At-Tin 95:1–3); L3 twist: 3 × 3 swap mode – the frame is full and mixed up (Al-Fil 105:3).
+ * Surah Puzzle (now a full-surah ayah sequence). Every level is one complete surah of Juz ʿAmma, with every ayah:
+ * L1 Al-Ikhlas – put the meanings of its four ayahs in order; L2 Al-Falaq – the five ayahs in Arabic, with the
+ * meanings; L3 An-Nas – six ayahs from memory. No ayah is left out.
  */
 
 export interface SurahPuzzleConfig {
-  art: string;
   surah: number;
-  ayah: number;
-  rows: number;
-  cols: number;
-  mode: 'place' | 'swap';
+  mode: 'meaning' | 'arabic';
   hints: boolean;
-  reveal: { title: LocalizedText; caption: LocalizedText };
 }
 
-const reveal = (s: number, a: number) => {
-  const title = `${surahName(s)} ${ayahRef(s, a)}`;
-  return { title: { en: title, de: title, bs: title }, caption: ayahMeaning(s, a) };
-};
-
 const FACTS = {
-  duha: quoteFact({ id: 'duha-morning', surah: 93, from: 1, to: 3, art: 'quran.puzzle-duha' }),
-  tin: quoteFact({ id: 'tin-fig-olive', surah: 95, from: 1, to: 3, art: 'quran.puzzle-tin' }),
-  fil: quoteFact({ id: 'fil-birds', surah: 105, from: 1, to: 3, art: 'quran.puzzle-fil' }),
+  ikhlas: quoteFact({ id: 'ikhlas-full', surah: 112, from: 1, to: 4, art: 'quran.one-star' }),
+  falaq: quoteFact({ id: 'falaq-full', surah: 113, from: 1, to: 5, art: 'quran.puzzle-duha' }),
+  nas: quoteFact({ id: 'nas-full', surah: 114, from: 1, to: 6, art: 'object.lantern' }),
 };
 
 export const surahPuzzleGame: GameDef<SurahPuzzleConfig> = {
@@ -39,13 +27,13 @@ export const surahPuzzleGame: GameDef<SurahPuzzleConfig> = {
   topicId: 'quran',
   i18n: surahPuzzleI18n,
   coverArt: 'quran.puzzle-tin',
-  hintArt: 'kit.puzzle',
+  hintArt: 'kit.tiles',
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   component: lazyComponent(() => (require('./SurahPuzzleGame') as typeof import('./SurahPuzzleGame')).SurahPuzzleGame),
   levels: [
-    { level: 1, config: { art: 'quran.puzzle-duha', surah: 93, ayah: 1, rows: 2, cols: 2, mode: 'place', hints: true, reveal: reveal(93, 1) }, facts: [FACTS.duha] },
-    { level: 2, config: { art: 'quran.puzzle-tin', surah: 95, ayah: 1, rows: 3, cols: 3, mode: 'place', hints: false, reveal: reveal(95, 1) }, facts: [FACTS.tin] },
-    { level: 3, config: { art: 'quran.puzzle-fil', surah: 105, ayah: 3, rows: 3, cols: 3, mode: 'swap', hints: false, reveal: reveal(105, 3) }, facts: [FACTS.fil] },
+    { level: 1, config: { surah: 112, mode: 'meaning', hints: true }, facts: [FACTS.ikhlas] },
+    { level: 2, config: { surah: 113, mode: 'arabic', hints: true }, facts: [FACTS.falaq] },
+    { level: 3, config: { surah: 114, mode: 'arabic', hints: false }, facts: [FACTS.nas] },
   ],
   order: 50,
 };

@@ -1,0 +1,118 @@
+{
+  "id": "arabic-numbers-time",
+  "areaId": "arabic",
+  "order": 6,
+  "difficulty": 2,
+  "title": { "en": "Numbers and Times of Day", "de": "Zahlen und Tageszeiten", "bs": "Brojevi i doba dana" },
+  "description": {
+    "en": "Arabic numbers from one to ten and the words for the times of prayer.",
+    "de": "Arabische Zahlen von eins bis zehn und die Wörter für die Gebetszeiten.",
+    "bs": "Arapski brojevi od jedan do deset i riječi za namaska vremena."
+  },
+  "lesson": [
+    {
+      "heading": { "en": "One to ten", "de": "Eins bis zehn", "bs": "Jedan do deset" },
+      "body": {
+        "en": "The Arabic numbers are وَاحِد (wahid, one), اِثْنَان (ithnan, two), ثَلَاثَة (thalatha, three), أَرْبَعَة (arba‘a, four), خَمْسَة (khamsa, five), سِتَّة (sitta, six), سَبْعَة (sab‘a, seven), ثَمَانِيَة (thamaniya, eight), تِسْعَة (tis‘a, nine) and عَشَرَة (ashara, ten). Numbers are used for the rakats, the days of Ramadan and the times of prayer.",
+        "de": "Die arabischen Zahlen sind وَاحِد (wahid, eins), اِثْنَان (ithnan, zwei), ثَلَاثَة (thalatha, drei), أَرْبَعَة (arba‘a, vier), خَمْسَة (khamsa, fünf), سِتَّة (sitta, sechs), سَبْعَة (sab‘a, sieben), ثَمَانِيَة (thamaniya, acht), تِسْعَة (tis‘a, neun) und عَشَرَة (ashara, zehn). Zahlen braucht man für die Rak‘as, die Tage des Ramadan und die Gebetszeiten.",
+        "bs": "Arapski brojevi su وَاحِد (vahid, jedan), اِثْنَان (isnan, dva), ثَلَاثَة (selase, tri), أَرْبَعَة (erbea, četiri), خَمْسَة (hamse, pet), سِتَّة (sitte, šest), سَبْعَة (seb'a, sedam), ثَمَانِيَة (semanije, osam), تِسْعَة (tis'a, devet) i عَشَرَة (ašere, deset). Brojevi se koriste za rekate, dane ramazana i namaska vremena."
+      }
+    },
+    {
+      "heading": { "en": "Day and night", "de": "Tag und Nacht", "bs": "Dan i noć" },
+      "body": {
+        "en": "يَوْم (yawm) means day, لَيْل (layl) night, صَبَاح (sabah) morning and مَسَاء (masa’) evening. The prayer times have their own names: الْفَجْر (al-fajr) dawn, الظُّهْر (az-zuhr) midday, الْعَصْر (al-‘asr) afternoon, الْمَغْرِب (al-maghrib) sunset and الْعِشَاء (al-‘isha’) night.",
+        "de": "يَوْم (yawm) heißt Tag, لَيْل (layl) Nacht, صَبَاح (sabah) Morgen und مَسَاء (masa’) Abend. Die Gebetszeiten haben eigene Namen: الْفَجْر (al-fadschr) Morgendämmerung, الظُّهْر (az-zuhr) Mittag, الْعَصْر (al-‘asr) Nachmittag, الْمَغْرِب (al-maghrib) Sonnenuntergang und الْعِشَاء (al-‘ischa’) Nacht.",
+        "bs": "يَوْم (jevmun) znači dan, لَيْل (lejl) noć, صَبَاح (sabah) jutro i مَسَاء (mesa) večer. Namaska vremena imaju svoja imena: الْفَجْر (el-fedžr) zora, الظُّهْر (ez-zuhr) podne, الْعَصْر (el-asr) ikindija, الْمَغْرِب (el-magrib) akšam i الْعِشَاء (el-iša) jacija."
+      }
+    },
+    {
+      "heading": { "en": "Use them every day", "de": "Nutze sie jeden Tag", "bs": "Koristi ih svaki dan" },
+      "body": {
+        "en": "Try to use these words in your daily life: count the rakats in Arabic, greet your family with صَبَاح الْخَيْر (sabah al-khayr, good morning) and say مَسَاء الْخَيْر (masa’ al-khayr, good evening). The more you use a word, the easier it becomes to remember.",
+        "de": "Versuche, diese Wörter im Alltag zu benutzen: Zähle die Rak‘as auf Arabisch, begrüße deine Familie mit صَبَاح الْخَيْر (sabah al-khayr, guten Morgen) und sage مَسَاء الْخَيْر (masa’ al-khayr, guten Abend). Je öfter du ein Wort benutzt, desto leichter bleibt es im Gedächtnis.",
+        "bs": "Pokušaj ove riječi koristiti svaki dan: broji rekate na arapskom, pozdravi porodicu sa صَبَاح الْخَيْر (sabahul-hajr, dobro jutro) i reci مَسَاء الْخَيْر (mesaul-hajr, dobra večer). Što više koristiš riječ, lakše je pamtiš."
+      }
+    }
+  ],
+  "practiceId": "arabic-numbers-time-p",
+  "testIds": ["arabic-numbers-time-1", "arabic-numbers-time-2", "arabic-numbers-time-3", "arabic-numbers-time-4"],
+  "explanation": {
+    "en": "Numbers and time words appear in every prayer and every Ramadan calendar – they are among the most useful Arabic words to know.",
+    "de": "Zahlen und Zeitwörter begegnen dir in jedem Gebet und jedem Ramadan-Kalender – sie gehören zu den nützlichsten arabischen Wörtern.",
+    "bs": "Brojevi i vremenske riječi pojavljuju se u svakom namazu i ramazanskom kalendaru – među najkorisnijim su arapskim riječima."
+  },
+  "sources": [{ "sourceName": "Arabic language", "sourceReference": "numbers and times of day" }],
+  "questions": [
+    {
+      "id": "arabic-numbers-time-p",
+      "type": "matching",
+      "areaId": "arabic",
+      "topic": "arabic-numbers-time",
+      "prompt": { "en": "Match each number with its meaning.", "de": "Ordne jeder Zahl ihre Bedeutung zu.", "bs": "Spoji svaki broj s njegovim značenjem." },
+      "pairs": [
+        { "id": "one", "left": { "en": "وَاحِد", "de": "وَاحِد", "bs": "وَاحِد" }, "right": { "en": "One", "de": "Eins", "bs": "Jedan" } },
+        { "id": "three", "left": { "en": "ثَلَاثَة", "de": "ثَلَاثَة", "bs": "ثَلَاثَة" }, "right": { "en": "Three", "de": "Drei", "bs": "Tri" } },
+        { "id": "five", "left": { "en": "خَمْسَة", "de": "خَمْسَة", "bs": "خَمْسَة" }, "right": { "en": "Five", "de": "Fünf", "bs": "Pet" } },
+        { "id": "ten", "left": { "en": "عَشَرَة", "de": "عَشَرَة", "bs": "عَشَرَة" }, "right": { "en": "Ten", "de": "Zehn", "bs": "Deset" } }
+      ],
+      "explanation": { "en": "Wahid, thalatha, khamsa and ashara are one, three, five and ten.", "de": "Wahid, Thalatha, Khamsa und Aschara sind eins, drei, fünf und zehn.", "bs": "Vahid, selase, hamse i ašere su jedan, tri, pet i deset." }
+    },
+    {
+      "id": "arabic-numbers-time-1",
+      "type": "multipleChoice",
+      "areaId": "arabic",
+      "topic": "arabic-numbers-time",
+      "prompt": { "en": "What does خَمْسَة (khamsa) mean?", "de": "Was bedeutet خَمْسَة (khamsa)?", "bs": "Šta znači خَمْسَة (hamse)?" },
+      "options": [
+        { "id": "a", "text": { "en": "Five", "de": "Fünf", "bs": "Pet" } },
+        { "id": "b", "text": { "en": "Six", "de": "Sechs", "bs": "Šest" } },
+        { "id": "c", "text": { "en": "Ten", "de": "Zehn", "bs": "Deset" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Khamsa is five – the number of daily prayers.", "de": "Khamsa ist fünf – die Zahl der täglichen Gebete.", "bs": "Hamse je pet – broj dnevnih namaza." }
+    },
+    {
+      "id": "arabic-numbers-time-2",
+      "type": "categorize",
+      "areaId": "arabic",
+      "topic": "arabic-numbers-time",
+      "prompt": { "en": "Sort the words: day or night?", "de": "Ordne die Wörter: Tag oder Nacht?", "bs": "Razvrstaj riječi: dan ili noć?" },
+      "categories": [
+        { "id": "day", "label": { "en": "Day", "de": "Tag", "bs": "Dan" } },
+        { "id": "night", "label": { "en": "Night", "de": "Nacht", "bs": "Noć" } }
+      ],
+      "items": [
+        { "id": "sabah", "text": { "en": "صَبَاح (sabah) – morning", "de": "صَبَاح (sabah) – Morgen", "bs": "صَبَاح (sabah) – jutro" }, "categoryId": "day" },
+        { "id": "layl", "text": { "en": "لَيْل (layl) – night", "de": "لَيْل (layl) – Nacht", "bs": "لَيْل (lejl) – noć" }, "categoryId": "night" },
+        { "id": "fajr", "text": { "en": "الْفَجْر (al-fajr) – dawn", "de": "الْفَجْر (al-fadschr) – Morgendämmerung", "bs": "الْفَجْر (el-fedžr) – zora" }, "categoryId": "day" },
+        { "id": "isha", "text": { "en": "الْعِشَاء (al-‘isha’) – night prayer", "de": "الْعِشَاء (al-‘ischa’) – Nachtgebet", "bs": "الْعِشَاء (el-iša) – jacija" }, "categoryId": "night" }
+      ],
+      "explanation": { "en": "Sabah and fajr belong to the day; layl and isha’ to the night.", "de": "Sabah und Fadschr gehören zum Tag; Layl und Ischa’ zur Nacht.", "bs": "Sabah i fedžr pripadaju danu; lejl i iša noći." }
+    },
+    {
+      "id": "arabic-numbers-time-3",
+      "type": "fillBlank",
+      "areaId": "arabic",
+      "topic": "arabic-numbers-time",
+      "prompt": { "en": "Complete the sentence.", "de": "Vervollständige den Satz.", "bs": "Dopuni rečenicu." },
+      "sentence": { "en": "الظُّهْر (az-zuhr) is the ___ prayer.", "de": "الظُّهْر (az-zuhr) ist das ___ Gebet.", "bs": "الظُّهْر (ez-zuhr) je ___ namaz." },
+      "options": [
+        { "id": "a", "text": { "en": "midday", "de": "Mittags-", "bs": "podnevni" } },
+        { "id": "b", "text": { "en": "dawn", "de": "Morgendämmerungs-", "bs": "sabah" } },
+        { "id": "c", "text": { "en": "sunset", "de": "Sonnenuntergangs-", "bs": "akšam" } }
+      ],
+      "correctOptionId": "a",
+      "explanation": { "en": "Az-zuhr is the midday prayer, podne.", "de": "Az-zuhr ist das Mittagsgebet, Dhuhr.", "bs": "Ez-zuhr je podnevni namaz, podne." }
+    },
+    {
+      "id": "arabic-numbers-time-4",
+      "type": "trueFalse",
+      "areaId": "arabic",
+      "topic": "arabic-numbers-time",
+      "prompt": { "en": "عَشَرَة (ashara) means ten.", "de": "عَشَرَة (aschara) bedeutet zehn.", "bs": "عَشَرَة (ašere) znači deset." },
+      "correct": true,
+      "explanation": { "en": "Yes – ashara is ten.", "de": "Ja – Aschara ist zehn.", "bs": "Da – ašere je deset." }
+    }
+  ]
+}

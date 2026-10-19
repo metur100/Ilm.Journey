@@ -2,28 +2,25 @@ import { defineNamespace } from '@/core/i18n';
 
 const en = {
   title: 'Surah Puzzle',
-  description: 'Put the picture of a surah back together – and its ayah reveals what it means.',
-  howTo: 'Drag the pieces into the frame. In level 3 the frame is full: swap two pieces until the picture is right.',
-  'play.promptPlace': 'Rebuild the picture of this ayah, piece by piece.',
-  'play.promptSwap': 'The pieces are mixed up – swap two at a time until the picture is right.',
+  description: 'Put a whole surah in order – every ayah, from the first to the last.',
+  howTo: 'Drag the ayahs into the order of the mushaf. Every level is one complete surah; no ayah is skipped.',
+  'play.prompt': 'Put the ayahs of {name} in order – the whole surah.',
 } as const;
 
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
   title: 'Suren-Puzzle',
-  description: 'Setz das Bild einer Sure wieder zusammen – dann zeigt ihr Vers, was er bedeutet.',
-  howTo: 'Zieh die Teile in den Rahmen. In Level 3 ist der Rahmen voll: Tausche zwei Teile, bis das Bild stimmt.',
-  'play.promptPlace': 'Setz das Bild dieses Verses Teil für Teil zusammen.',
-  'play.promptSwap': 'Die Teile sind vertauscht – tausche je zwei, bis das Bild stimmt.',
+  description: 'Bringe eine ganze Sure in die richtige Reihenfolge – jeder Vers, vom ersten bis zum letzten.',
+  howTo: 'Zieh die Verse in die Reihenfolge des Mushafs. Jede Stufe ist eine vollständige Sure; kein Vers fehlt.',
+  'play.prompt': 'Bringe die Verse von {name} in die richtige Reihenfolge – die ganze Sure.',
 };
 
 const bs: Record<Key, string> = {
-  title: 'Slagalica sura',
-  description: 'Složi sliku jedne sure – a njen ajet otkrije šta znači.',
-  howTo: 'Prevuci dijelove u okvir. U 3. nivou okvir je pun: zamijeni po dva dijela dok slika ne bude tačna.',
-  'play.promptPlace': 'Složi sliku ovog ajeta, dio po dio.',
-  'play.promptSwap': 'Dijelovi su izmiješani – mijenjaj po dva dok slika ne bude tačna.',
+  title: 'Slagalica sure',
+  description: 'Poredaj cijelu suru – svaki ajet, od prvog do posljednjeg.',
+  howTo: 'Prevuci ajete u redoslijed mushafa. Svaki nivo je jedna cijela sura; nijedan ajet nije izostavljen.',
+  'play.prompt': 'Poredaj ajete sure {name} – cijelu suru.',
 };
 
 export const surahPuzzleI18n = defineNamespace('game.surah-puzzle', { en, de, bs });
