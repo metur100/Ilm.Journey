@@ -21,7 +21,6 @@ import type { LocalizedText } from '../../models';
 import { playSound, type SoundName } from '../../services/sound';
 import { useAppStore } from '../../store/appStore';
 import { makeStyles, radius, shadows, spacing, topicThemes, useTheme } from '../../theme';
-import { TOPIC_BASICS } from '../basics';
 import { useGameProgress } from '../hooks';
 import { kitColors } from '../kit/theme';
 import { getGame } from '../registry';
@@ -29,7 +28,6 @@ import { type LevelSummary, useGamesStore } from '../store';
 import { type GameApi, type GameLevel, type GameResultInput, type HapticKind } from '../types';
 import { GameHeader } from './GameHeader';
 import { GameResult } from './GameResult';
-import { FactCard } from './parts';
 
 type Phase = 'intro' | 'levels' | 'play' | 'result';
 
@@ -167,7 +165,6 @@ export function GameShell({ gameId }: { gameId: string }) {
 
   const theme = topicThemes[def.topicId];
   const k = kitColors(c, def.topicId, dark, highContrast);
-  const basics = TOPIC_BASICS[def.topicId];
   const title = gt('title');
   const leave = () => (router.canGoBack() ? router.back() : router.replace('/(tabs)/play'));
   const levelLabel = (n: GameLevel) => `${t('common.level', { level: n })} · ${t(`games.difficulty.${n}` as CoreKey)}`;
@@ -234,10 +231,6 @@ export function GameShell({ gameId }: { gameId: string }) {
               {gt('description')}
             </AppText>
           </LinearGradient>
-          <AppText variant="heading" accessibilityRole="header">
-            {t('games.basics')}
-          </AppText>
-          <FactCard fact={basics} />
           <Button
             label={t('games.letsPlay')}
             icon="play"
@@ -265,10 +258,6 @@ export function GameShell({ gameId }: { gameId: string }) {
             </View>
           </View>
         </Card>
-        <AppText variant="heading" accessibilityRole="header">
-          {t('games.basics')}
-        </AppText>
-        <FactCard fact={basics} />
         <AppText variant="heading" accessibilityRole="header">
           {t('games.chooseLevel')}
         </AppText>
