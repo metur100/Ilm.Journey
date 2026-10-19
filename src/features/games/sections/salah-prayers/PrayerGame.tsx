@@ -128,13 +128,11 @@ function TopRow({
   const k = useKitColors();
   return (
     <View style={styles.gap4}>
+      <AppText variant="tiny" color={k.textMuted}>
+        {api.t('part.choose')}
+      </AppText>
       <View style={styles.row}>
-        <View style={[styles.flex, styles.gap4]}>
-          <AppText variant="tiny" color={k.textMuted}>
-            {api.t('part.choose')}
-          </AppText>
-          <PartsRow prayer={prayer} current={partIndex} onSelect={onPart} t={api.t} />
-        </View>
+        <PartsRow prayer={prayer} current={partIndex} onSelect={onPart} t={api.t} />
         <VariantToggle variant={variant} onChange={onVariant} t={api.t} />
       </View>
       {total ? (

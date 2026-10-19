@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   stage: { borderRadius: radius.lg, overflow: 'hidden', borderWidth: 1, alignSelf: 'center' },
   parts: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, flex: 1 },
-  part: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.pill, borderWidth: 1 },
+  part: { minHeight: 32, paddingHorizontal: 9, paddingVertical: 5, borderRadius: radius.pill, borderWidth: 1, justifyContent: 'center' },
   beads: { flexDirection: 'row', gap: 4, alignItems: 'center' },
   bead: { width: 12, height: 12, borderRadius: 6, borderWidth: 1.5 },
   toggle: { flexDirection: 'row', gap: 4 },

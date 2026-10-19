@@ -8,8 +8,9 @@ import { useAppStore } from '@/core/store/appStore';
 
 import type { LearnData } from '../models';
 import { EMPTY_LEARN, masterPassed } from '../services/progression';
+import { migrateLearnDataV1 } from '../sufara/migrate';
 
-export const LEARN_VERSION = 1;
+export const LEARN_VERSION = 2;
 
 /** Sanitizes stored learn progress (wrong shapes fall back to defaults). */
 export function sanitizeLearnData(raw: unknown): LearnData | null {
@@ -24,6 +25,7 @@ export function sanitizeLearnData(raw: unknown): LearnData | null {
 export const LEARN_PERSIST: PersistSpec<LearnData> = {
   key: storageKey('learn'),
   version: LEARN_VERSION,
+  migrations: { 1: migrateLearnDataV1 },
   sanitize: sanitizeLearnData,
 };
 
