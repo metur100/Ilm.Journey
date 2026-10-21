@@ -47,12 +47,12 @@ export const surahOrderGame: GameDef<SurahOrderConfig> = {
   levels: [
     {
       level: 1,
-      config: { mode: 'order', hints: true, marks: marks(range(110, 114)), events: [113, 110, 112, 114, 111].map((n) => event(n, n)), factOf: { s113: FACTS.falaq.id, s112: FACTS.ikhlas.id } },
-      facts: [FACTS.falaq, FACTS.ikhlas],
+      config: { mode: 'order', hints: true, marks: marks(range(108, 112)), events: [112, 111, 110, 109, 108].map((n) => event(n, n)), factOf: { s112: FACTS.ikhlas.id, s108: FACTS.kawthar.id } },
+      facts: [FACTS.ikhlas],
     },
     {
       level: 2,
-      config: { mode: 'order', hints: false, marks: marks(range(105, 114)), events: [106, 109, 105, 108, 107, 114].map((n) => event(n, n)), factOf: { s106: FACTS.quraysh.id } },
+      config: { mode: 'order', hints: false, marks: marks(range(101, 106)), events: [106, 105, 104, 103, 102, 101].map((n) => event(n, n)), factOf: { s106: FACTS.quraysh.id } },
       facts: [FACTS.quraysh],
     },
     {

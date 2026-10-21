@@ -34,7 +34,6 @@ function sections(n: number, first: SText, last: SText) {
 }
 
 const L1 = sections(5, { text: blockText('ev.trench.0') }, { key: 'reveal.caption' });
-const L2 = sections(7, { text: blockText('pl.madinah.0') }, { text: blockText('e08.ctx0') });
 const EVENTS: [string, string][] = [
   ['badr', '2'],
   ['uhud', '3'],
@@ -55,7 +54,19 @@ export const trenchGame = seerahGame({
       facts: [FACTS.trench, FACTS.madinah],
     },
     {
-      config: { mode: 'build', prompt: 'play.l2', scene: 'seerah.trench-plain', ghosts: false, hints: false, parts: L2, reveal, factMap: Object.fromEntries(L2.map((p) => [p.id, 'after-years-of-war'])) },
+      config: {
+        mode: 'connect',
+        prompt: 'play.l2',
+        hints: false,
+        pairs: [
+          { id: 'dig', left: { id: 'l-dig', label: { key: 'lesson.dig' } }, right: { id: 'r-dig', label: { key: 'meaning.dig' } } },
+          { id: 'cold', left: { id: 'l-cold', label: { key: 'lesson.cold' } }, right: { id: 'r-cold', label: { key: 'meaning.cold' } } },
+          { id: 'siege', left: { id: 'l-siege', label: { key: 'lesson.siege' } }, right: { id: 'r-siege', label: { key: 'meaning.siege' } } },
+          { id: 'wind', left: { id: 'l-wind', label: { key: 'lesson.wind' } }, right: { id: 'r-wind', label: { key: 'meaning.wind' } } },
+          { id: 'withdraw', left: { id: 'l-withdraw', label: { key: 'lesson.withdraw' } }, right: { id: 'r-withdraw', label: { key: 'meaning.withdraw' } } },
+        ],
+        factMap: { dig: 'trench-dug', cold: 'after-years-of-war', siege: 'after-years-of-war', wind: 'trench-dug', withdraw: 'trench-dug' },
+      },
       facts: [FACTS.years, FACTS.uhud],
     },
     {

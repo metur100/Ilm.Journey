@@ -28,39 +28,24 @@ const FACTS = {
   public: blockFact('public-call', 'ev.public-call.0', { art: 'seerah.safa-hill', reviewKey: 'seerah:e03-q2' }),
 };
 
-const L1 = [
-  event('birth', 'ce.570', 'seerah.elephant'),
-  event('first-revelation', 'ce.610', 'seerah.hira-mountain'),
-  event('hijrah', 'ce.622', 'seerah.thawr-cave'),
-  event('conquest', 'ce.630', 'seerah.kaaba'),
-  event('farewell', 'ce.632', 'seerah.arafat-plain'),
-];
+const L1 = [event('birth', 'ce.570', 'seerah.elephant'), event('first-revelation', 'ce.610', 'seerah.hira-mountain'), event('hijrah', 'ce.622', 'seerah.thawr-cave')];
 const L2 = [
   event('mosque', 'ah.1', 'seerah.masjid-finished'),
   event('badr', 'ah.2', 'seerah.well'),
   event('uhud', 'ah.3', 'place.mount-uhud'),
   event('trench', 'ah.5', 'seerah.trench-section'),
   event('hudaybiyyah', 'ah.6', 'seerah.pledge-tree'),
-  event('conquest', 'ah.8', 'seerah.kaaba'),
-  event('farewell', 'ah.10', 'seerah.arafat-plain'),
 ];
-const L3 = [
-  event('first-revelation', 'ce.610'),
-  event('public-call', 'ce.613'),
-  event('abyssinia', 'ce.615'),
-  event('taif', 'ce.619'),
-  event('aqabah', 'ce.621'),
-  event('hijrah', 'ce.622'),
-];
+const L3 = [event('public-call', 'ce.613'), event('abyssinia', 'ce.615'), event('taif', 'ce.619'), event('aqabah', 'ce.621')];
 
 export const timelineGame = seerahGame({
   id: 'seerah-timeline',
   i18n: timelineI18n,
   coverArt: 'seerah.timeline-road',
   levels: [
-    { config: { mode: 'timeline', prompt: 'play.l1', marks: marks(['ce.570', 'ce.610', 'ce.622', 'ce.630', 'ce.632']), events: L1, factMap: all(L1, 'the-hijrah') }, facts: [FACTS.birth, FACTS.hijrah] },
-    { config: { mode: 'timeline', prompt: 'play.l2', hints: false, marks: marks(['ah.1', 'ah.2', 'ah.3', 'ah.5', 'ah.6', 'ah.8', 'ah.10']), events: L2, factMap: all(L2, 'day-of-criterion') }, facts: [FACTS.badr, FACTS.fath] },
-    { config: { mode: 'timeline', prompt: 'play.l3', hints: false, marks: marks(['ce.610', 'ce.613', 'ce.615', 'ce.619', 'ce.621', 'ce.622']), events: L3, factMap: all(L3, 'public-call') }, facts: [FACTS.quiet, FACTS.public] },
+    { config: { mode: 'timeline', prompt: 'play.l1', marks: marks(['ce.570', 'ce.610', 'ce.622']), events: L1, factMap: all(L1, 'the-hijrah') }, facts: [FACTS.birth, FACTS.hijrah] },
+    { config: { mode: 'timeline', prompt: 'play.l2', hints: false, marks: marks(['ah.1', 'ah.2', 'ah.3', 'ah.5', 'ah.6']), events: L2, factMap: all(L2, 'day-of-criterion') }, facts: [FACTS.badr, FACTS.fath] },
+    { config: { mode: 'timeline', prompt: 'play.l3', hints: false, marks: marks(['ce.613', 'ce.615', 'ce.619', 'ce.621']), events: L3, factMap: all(L3, 'public-call') }, facts: [FACTS.quiet, FACTS.public] },
   ],
   questionKeys: ['seerah:e10-q3', 'seerah:e07-q3', 'seerah:e03-q2'],
   order: 3,

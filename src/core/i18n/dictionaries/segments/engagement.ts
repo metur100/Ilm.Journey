@@ -362,7 +362,7 @@ const bs: Record<Key, string> = {
   'garden.needsSeeds': 'Za ovo ti treba {count} sjemenki. Sjemenke dobijaš za završene lekcije, kazivanja, epizode i nivoe igara.',
   'garden.unlocked': '{name} je otključano!',
   'garden.full': 'Sva mjesta su zauzeta. Dodirni „Uredi“ da napraviš mjesta.',
-  'garden.planted': '{name} je posađeno – raste kad zaliješ bašču.',
+  'garden.planted': 'Posadili smo: {name} – raste kad zaliješ bašču.',
   'garden.wateredAlready': 'Danas si već zalio. Vrati se sutra!',
   'garden.noWater': 'Još nema vode – nauči nešto danas da napuniš kanticu.',
   'garden.watered': 'Bašča je zalivena – biljke rastu.',

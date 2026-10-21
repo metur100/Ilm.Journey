@@ -19,6 +19,7 @@ import {
   type GardenElement,
   getGardenElement,
   type MilestoneKind,
+  nextSpotFor,
   type PlacedElement,
   unlockState,
   useGardenStore,
@@ -28,7 +29,7 @@ import { useReducedMotion } from '@/core/hooks/useReducedMotion';
 import { type CoreKey, useI18n } from '@/core/i18n';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 
-type Step = 'idle' | 'choose' | 'spot' | 'edit';
+type Step = 'idle' | 'choose' | 'edit';
 
 const MILESTONES: MilestoneKind[] = ['gameLevel', 'quest', 'unit', 'story', 'episode', 'master', 'streak7'];
 
@@ -66,7 +67,6 @@ export default function GardenScreen() {
   const waterPlants = useGardenStore((s) => s.waterPlants);
 
   const [step, setStep] = useState<Step>('idle');
-  const [chosen, setChosen] = useState<GardenElement | null>(null);
   const [growSpot, setGrowSpot] = useState<number | null>(null);
   const [removing, setRemoving] = useState<PlacedElement | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -87,24 +87,17 @@ export default function GardenScreen() {
     }
     if (state === 'buyable' && !unlock(element.id, level)) return;
     if (state === 'buyable') setMessage(t('garden.unlocked', { name: name(element.id) }));
-    if (view.free.length === 0) {
+    const spot = nextSpotFor(element, view.free);
+    if (spot === null) {
       setMessage(t('garden.full'));
       setStep('idle');
       return;
     }
-    feedback.tap();
-    setChosen(element);
-    setStep('spot');
-  };
-
-  const pickSpot = (spot: number) => {
-    if (!chosen) return;
-    if (plant(chosen.id, spot, level)) {
+    if (plant(element.id, spot, level)) {
       feedback.success();
       setGrowSpot(spot);
-      setMessage(t('garden.planted', { name: name(chosen.id) }));
+      setMessage(t('garden.planted', { name: name(element.id) }));
     }
-    setChosen(null);
     setStep('idle');
   };
 
@@ -136,9 +129,7 @@ export default function GardenScreen() {
           placed={garden.placed}
           thirst={view.thirst}
           height={340}
-          mode={step === 'spot' ? 'pickSpot' : step === 'edit' ? 'edit' : 'view'}
-          freeSpots={view.free}
-          onPickSpot={pickSpot}
+          mode={step === 'edit' ? 'edit' : 'view'}
           onPressElement={(p) => setRemoving(p)}
           growSpot={growSpot}
           elementLabel={name}
@@ -170,18 +161,6 @@ export default function GardenScreen() {
             </AppText>
           </View>
         </Card>
-
-        {step === 'spot' && chosen ? (
-          <Card tone="gold">
-            <View style={styles.hint}>
-              <Art name={`garden.${chosen.id}`} size={40} />
-              <AppText variant="bodyBold" style={styles.flex}>
-                {t('garden.pickSpot', { name: name(chosen.id) })}
-              </AppText>
-            </View>
-            <Button label={t('common.cancel')} variant="ghost" onPress={() => setStep('idle')} />
-          </Card>
-        ) : null}
 
         {step === 'idle' || step === 'edit' ? (
           <View style={styles.actions}>

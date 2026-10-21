@@ -21,7 +21,7 @@ import {
 } from '@/features/games/sections/arabic/shared/letters';
 import { LETTER_LESSON } from '@/features/games/sections/arabic/shared/lessonText';
 import { type LetterPosition, letterForm, splitLetters } from '@/features/games/sections/arabic/shared/script';
-import { type GameWord, WORDS } from '@/features/games/sections/arabic/shared/words';
+import { WORDS } from '@/features/games/sections/arabic/shared/words';
 
 /*
  * The Sufara course of the Learn tab: classical sufara, lesson by lesson. First the letters in the order of the
@@ -72,13 +72,13 @@ const LETTER_GROUPS: readonly (readonly string[])[] = [
  * After elif the course teaches the three short vowels on elif – e, i, u – exactly as the Bosnian sufara does,
  * and only then the rest of the letters. Every later letter lesson repeats the earlier letters and joins them.
  */
-const LATER_KINDS: readonly SufaraLessonKind[] = ['review', 'sukun', 'tanwin', 'madd', 'shadda', 'forms', 'syllables', 'words'];
-
 const lessonId = (number: number) => `sufara-${String(number).padStart(2, '0')}`;
 
 interface LessonSeed {
   kind: SufaraLessonKind;
   letters: string[];
+  /** Kept for the four mark lessons: existing progress must keep pointing at the same lesson. */
+  id?: string;
 }
 
 const LESSON_SEEDS: readonly LessonSeed[] = [
@@ -87,11 +87,14 @@ const LESSON_SEEDS: readonly LessonSeed[] = [
   { kind: 'kasra', letters: [] },
   { kind: 'damma', letters: [] },
   ...LETTER_GROUPS.slice(1).map((letters): LessonSeed => ({ kind: 'letters', letters: [...letters] })),
-  ...LATER_KINDS.map((kind): LessonSeed => ({ kind, letters: [] })),
+  { kind: 'sukun', letters: [], id: 'sufara-21' },
+  { kind: 'tanwin', letters: [], id: 'sufara-22' },
+  { kind: 'madd', letters: [], id: 'sufara-23' },
+  { kind: 'shadda', letters: [], id: 'sufara-24' },
 ];
 
 export const SUFARA_LESSONS: readonly SufaraLesson[] = LESSON_SEEDS.map((seed, i) => ({
-  id: lessonId(i + 1),
+  id: seed.id ?? lessonId(i + 1),
   number: i + 1,
   kind: seed.kind,
   letters: seed.letters,
@@ -306,7 +309,9 @@ function letterLessonExercises(lesson: SufaraLesson, language: Language, random:
   const joining = joinLessonExercises(lesson, earlier, language, random);
   // Before the second letter there is nothing to join yet: keep the vowels on elif alive instead.
   const earlyVowels = earlier.length === 1 ? HARAKA_NAMES.slice(1).map((h) => readSyllable(earlier[0], h, HARAKA_NAMES, language, true, random, earlier)) : [];
-  return [...fresh, ...earlyVowels, ...joining, ...review];
+  // Every new letter group immediately reads real words made only from the letters learned so far.
+  const words = readingWordExercises(lesson, random);
+  return [...fresh, ...earlyVowels, ...joining, ...words, ...review];
 }
 
 /** The review lesson: twelve letters from the whole alphabet, half found by name, half named. */
@@ -532,8 +537,94 @@ function syllablesLessonExercises(language: Language, random: Random): SufaraExe
   });
 }
 
+/** A word for reading practice: Arabic with vowels and its transliteration. */
+export interface ReadingWord {
+  id: string;
+  arabic: string;
+  translit: string;
+}
+
+/**
+ * Short words whose letters occur early in the course, so that every new letter group can already read a real word
+ * made from the letters learned so far. No hamza and no ta marbuta – only letters the course teaches.
+ */
+const EARLY_WORDS: readonly ReadingWord[] = [
+  { id: 'bab-course', arabic: 'بَاب', translit: 'bāb' },
+  { id: 'bat-course', arabic: 'بَاتَ', translit: 'bāta' },
+  { id: 'tab-course', arabic: 'تَابَ', translit: 'tāba' },
+  { id: 'thabat-course', arabic: 'ثَبَتَ', translit: 'thabata' },
+  { id: 'jabal-course', arabic: 'جَبَل', translit: 'jabal' },
+  { id: 'hajar-course', arabic: 'حَجَر', translit: 'ḥajar' },
+  { id: 'khabar-course', arabic: 'خَبَر', translit: 'khabar' },
+  { id: 'dar-course', arabic: 'دَار', translit: 'dār' },
+  { id: 'dhahab-course', arabic: 'ذَهَب', translit: 'dhahab' },
+  { id: 'rajul-course', arabic: 'رَجُل', translit: 'rajul' },
+  { id: 'zaman-course', arabic: 'زَمَن', translit: 'zaman' },
+  { id: 'darab-course', arabic: 'ضَرَبَ', translit: 'ḍaraba' },
+  { id: 'tariq-course', arabic: 'طَرِيق', translit: 'ṭarīq' },
+  { id: 'zahar-course', arabic: 'ظَهَرَ', translit: 'ẓahara' },
+  { id: 'ghafar-course', arabic: 'غَفَرَ', translit: 'ghafara' },
+  { id: 'faqir-course', arabic: 'فَقِير', translit: 'faqīr' },
+  { id: 'laban-course', arabic: 'لَبَن', translit: 'laban' },
+  { id: 'nahar-course', arabic: 'نَهَر', translit: 'nahar' },
+  { id: 'waad-course', arabic: 'وَعَدَ', translit: 'waʿada' },
+  { id: 'huda-course', arabic: 'هُدَى', translit: 'hudā' },
+  { id: 'la-course', arabic: 'لَا', translit: 'lā' },
+  { id: 'yad-course', arabic: 'يَد', translit: 'yad' },
+  { id: 'yawm-course', arabic: 'يَوْم', translit: 'yawm' },
+  { id: 'din-course', arabic: 'دِين', translit: 'dīn' },
+  { id: 'ayn-course', arabic: 'عَيْن', translit: 'ʿayn' },
+  { id: 'khayr-course', arabic: 'خَيْر', translit: 'khayr' },
+  { id: 'kataba-course', arabic: 'كَتَبَ', translit: 'kataba' },
+  { id: 'fataha-course', arabic: 'فَتَحَ', translit: 'fataḥa' },
+  { id: 'jaala-course', arabic: 'جَعَلَ', translit: 'jaʿala' },
+  { id: 'samia-course', arabic: 'سَمِعَ', translit: 'samiʿa' },
+  { id: 'alima-course', arabic: 'عَلِمَ', translit: 'ʿalima' },
+  { id: 'rahima-course', arabic: 'رَحِمَ', translit: 'raḥima' },
+  { id: 'shakara-course', arabic: 'شَكَرَ', translit: 'shakara' },
+  { id: 'sabara-course', arabic: 'صَبَرَ', translit: 'ṣabara' },
+  { id: 'zalama-course', arabic: 'ظَلَمَ', translit: 'ẓalama' },
+  { id: 'ghalaba-course', arabic: 'غَلَبَ', translit: 'ghalaba' },
+  { id: 'manaa-course', arabic: 'مَنَعَ', translit: 'manaʿa' },
+  { id: 'wajada-course', arabic: 'وَجَدَ', translit: 'wajada' },
+  { id: 'hajara-course', arabic: 'هَجَرَ', translit: 'hajara' },
+  { id: 'yabisa-course', arabic: 'يَبِسَ', translit: 'yabisa' },
+];
+
 /** Words the course can read: only letters of the course (no hamza or ta marbuta yet). */
-export const READING_WORDS: readonly GameWord[] = WORDS.filter((w) => splitLetters(w.arabic).every((l) => COURSE_LETTERS.includes(l.base)));
+export const READING_WORDS: readonly ReadingWord[] = [
+  ...EARLY_WORDS,
+  ...WORDS.filter((w) => splitLetters(w.arabic).every((l) => COURSE_LETTERS.includes(l.base))).map((w) => ({ id: w.id, arabic: w.arabic, translit: w.translit })),
+]
+  .filter((word, index, all) => all.findIndex((w) => w.id === word.id) === index)
+  .filter((word, index, all) => all.findIndex((w) => w.arabic === word.arabic) === index)
+  .filter((word) => splitLetters(word.arabic).every((l) => COURSE_LETTERS.includes(l.base)));
+
+/** Reading practice of a letter lesson: short words that use only the new letter and the letters learned before it. */
+function readingWordExercises(lesson: SufaraLesson, random: Random): SufaraExercise[] {
+  const known = new Set([...lettersBefore(lesson), ...lesson.letters]);
+  const words = READING_WORDS.filter((word) => splitLetters(word.arabic).every((l) => known.has(l.base)));
+  if (words.length < 2) return [];
+  const picked = rotate(words, Math.min(3, words.length), lesson.number);
+  return picked.map((word, i) => {
+    const others = words.filter((w) => w.id !== word.id);
+    const wrong = rotate(others, 2, i * 3 + lesson.number);
+    if (i % 2 === 1) {
+      return exercise(
+        { kind: 'findReading', say: word.arabic, params: { reading: word.translit, word: '1' }, review: true },
+        { text: word.arabic, arabic: true },
+        wrong.map((w) => ({ text: w.arabic, arabic: true })),
+        random,
+      );
+    }
+    return exercise(
+      { kind: 'read', show: word.arabic, say: word.arabic, params: { word: '1' }, review: true },
+      { text: word.translit, arabic: false },
+      wrong.map((w) => ({ text: w.translit, arabic: false })),
+      random,
+    );
+  });
+}
 
 function wordsLessonExercises(lesson: SufaraLesson, random: Random): SufaraExercise[] {
   const words = rotate(READING_WORDS, 8, lesson.number);

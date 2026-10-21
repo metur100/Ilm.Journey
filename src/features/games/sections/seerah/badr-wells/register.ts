@@ -1,7 +1,7 @@
 import { registerGame } from '@/core/games';
 
 import { seerahGame } from '../shared/define';
-import { blockFact, blockText } from '../shared/facts';
+import { blockFact } from '../shared/facts';
 import { badrI18n } from './i18n';
 
 /*
@@ -29,30 +29,27 @@ export const badrGame = seerahGame({
   levels: [
     {
       config: {
-        mode: 'build',
-        prompt: 'play.build',
-        scene: 'seerah.badr-plain-empty',
-        ghosts: true,
-        parts: [
-          { id: 'well-1', label: { key: 'part.well-1' }, art: 'seerah.well', slot: { x: 0.18, y: 0.66, w: 0.16, h: 0.16 }, caption: { text: blockText('pl.badr.0') } },
-          { id: 'well-2', label: { key: 'part.well-2' }, art: 'seerah.well', slot: { x: 0.56, y: 0.6, w: 0.12, h: 0.12 } },
-          { id: 'well-3', label: { key: 'part.well-3' }, art: 'seerah.well', slot: { x: 0.74, y: 0.74, w: 0.16, h: 0.16 }, caption: { text: blockText('e07.main0') } },
-          { id: 'camp', label: { key: 'part.camp' }, art: 'seerah.camp-tents', slot: { x: 0.3, y: 0.46, w: 0.3, h: 0.18 }, caption: { text: blockText('e07.main1') } },
-          { id: 'caravan', label: { key: 'part.caravan' }, art: 'animal.camel', slot: { x: 0.02, y: 0.42, w: 0.14, h: 0.2 }, caption: { text: blockText('e07.ctx0') } },
-        ],
-        reveal: { title: { key: 'reveal.title' }, caption: { key: 'reveal.caption' } },
-        factMap: { 'well-1': 'wells-on-the-route', 'well-2': 'wells-on-the-route', 'well-3': 'few-against-many', camp: 'few-against-many', caravan: 'wells-on-the-route' },
-      },
-      facts: [FACTS.wells, FACTS.few],
-    },
-    {
-      config: {
         mode: 'sequence',
         prompt: 'play.order',
         items: STEPS.map((s) => ({ id: s, label: { key: `step.${s}` } })),
-        factMap: { caravan: 'caravan-from-syria', escape: 'caravan-from-syria', wells: 'caravan-from-syria', consult: 'dua-facing-qiblah', dua: 'dua-facing-qiblah', criterion: 'dua-facing-qiblah' },
+        factMap: { caravan: 'caravan-from-syria', escape: 'caravan-from-syria', wells: 'few-against-many', consult: 'dua-facing-qiblah', dua: 'dua-facing-qiblah', criterion: 'day-of-the-criterion' },
       },
       facts: [FACTS.caravan, FACTS.dua],
+    },
+    {
+      config: {
+        mode: 'connect',
+        prompt: 'play.lesson',
+        hints: false,
+        pairs: [
+          { id: 'few', left: { id: 'l-few', label: { key: 'lesson.few' } }, right: { id: 'r-few', label: { key: 'meaning.few' } } },
+          { id: 'water', left: { id: 'l-water', label: { key: 'lesson.water' } }, right: { id: 'r-water', label: { key: 'meaning.water' } } },
+          { id: 'dua', left: { id: 'l-dua', label: { key: 'lesson.dua' } }, right: { id: 'r-dua', label: { key: 'meaning.dua' } } },
+          { id: 'distinction', left: { id: 'l-distinction', label: { key: 'lesson.distinction' } }, right: { id: 'r-distinction', label: { key: 'meaning.distinction' } } },
+        ],
+        factMap: { few: 'few-against-many', water: 'wells-on-the-route', dua: 'dua-facing-qiblah', distinction: 'day-of-the-criterion' },
+      },
+      facts: [FACTS.few, FACTS.wells],
     },
     {
       config: {

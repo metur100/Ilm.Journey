@@ -102,29 +102,51 @@ export interface GardenSpot {
  * Index order is stable – placed elements store their spot index.
  */
 export const GARDEN_SPOTS: readonly GardenSpot[] = [
-  // back row
-  { x: 0.12, y: 0.52 },
-  { x: 0.31, y: 0.5 },
-  { x: 0.5, y: 0.49 },
-  { x: 0.69, y: 0.5 },
-  { x: 0.88, y: 0.52 },
-  // middle row
-  { x: 0.08, y: 0.67 },
-  { x: 0.25, y: 0.65 },
-  { x: 0.42, y: 0.66 },
-  { x: 0.59, y: 0.65 },
-  { x: 0.76, y: 0.66 },
-  { x: 0.93, y: 0.68 },
-  // front row
-  { x: 0.15, y: 0.84 },
-  { x: 0.34, y: 0.86 },
-  { x: 0.53, y: 0.85 },
-  { x: 0.72, y: 0.86 },
-  { x: 0.89, y: 0.84 },
+  // back row – trees, buildings and water; feet firmly on the lawn behind the path
+  { x: 0.12, y: 0.62 },
+  { x: 0.31, y: 0.6 },
+  { x: 0.5, y: 0.59 },
+  { x: 0.69, y: 0.6 },
+  { x: 0.88, y: 0.62 },
+  // middle row – plants, flowers and decor
+  { x: 0.08, y: 0.75 },
+  { x: 0.25, y: 0.73 },
+  { x: 0.42, y: 0.74 },
+  { x: 0.59, y: 0.73 },
+  { x: 0.76, y: 0.74 },
+  { x: 0.93, y: 0.76 },
+  // front row – small flowers, decor and creatures
+  { x: 0.15, y: 0.9 },
+  { x: 0.34, y: 0.92 },
+  { x: 0.53, y: 0.91 },
+  { x: 0.72, y: 0.92 },
+  { x: 0.89, y: 0.9 },
 ];
 
 /** Depth scale of a spot: 0.7 at the back row, ~1.15 at the front. */
 export function depthScale(spot: GardenSpot): number {
-  const t = Math.max(0, Math.min(1, (spot.y - 0.49) / (0.86 - 0.49)));
+  const t = Math.max(0, Math.min(1, (spot.y - 0.59) / (0.92 - 0.59)));
   return 0.7 + t * 0.45;
+}
+
+/** The tidy rows of the garden: large things at the back, small things in front. */
+export const GARDEN_ROWS: readonly (readonly number[])[] = [
+  [0, 1, 2, 3, 4],
+  [5, 6, 7, 8, 9, 10],
+  [11, 12, 13, 14, 15],
+];
+
+/**
+ * Auto-placement for an element: trees, buildings and water go to the back row, plants, flowers and decor to
+ * the middle row, creatures to the front. Fills the first free place of its row, never "anywhere".
+ */
+export function nextSpotFor(element: GardenElement, free: readonly number[]): number | null {
+  const row = element.kind === 'tree' || element.kind === 'building' || element.kind === 'water' ? 0 : element.kind === 'creature' ? 2 : 1;
+  const preferred = GARDEN_ROWS[row].find((spot) => free.includes(spot));
+  return preferred ?? free[0] ?? null;
+}
+
+/** Width cap per spot row, so neighbouring elements never overlap. */
+export function maxWidthFraction(spot: number): number {
+  return spot < 5 ? 0.18 : spot < 11 ? 0.15 : 0.18;
 }

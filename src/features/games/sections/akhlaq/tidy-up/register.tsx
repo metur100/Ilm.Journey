@@ -9,7 +9,7 @@ import { tidyUpI18n } from './i18n';
  * L3 (twist): the masjid – shoes on the rack, books on the shelf, rubbish in the bin.
  */
 
-type Bin = 'toys' | 'laundry' | 'rubbish' | 'shelf' | 'shoes';
+type Bin = 'toys' | 'laundry' | 'rubbish' | 'shelf' | 'shoes' | 'food' | 'dishes';
 
 interface TidyItem {
   id: string;
@@ -33,11 +33,22 @@ const BIN_ART: Record<Bin, string> = {
   rubbish: 'akhlaq.rubbish-bin',
   shelf: 'akhlaq.bookshelf',
   shoes: 'akhlaq.shoe-rack',
+  food: 'food.dates',
+  dishes: 'akhlaq.dishes',
 };
 
 const I = (id: string, art: string, key: string, bin: Bin): TidyItem => ({ id, art, key, bin });
 
 const ROOM = [I('ball', 'akhlaq.ball', 'item.ball', 'toys'), I('blocks', 'akhlaq.blocks', 'item.blocks', 'toys'), I('car', 'akhlaq.toy-car', 'item.car', 'toys'), I('shirt', 'akhlaq.shirt', 'item.shirt', 'laundry'), I('socks', 'akhlaq.socks', 'item.socks', 'laundry')];
+const KITCHEN = [
+  I('bread', 'object.bread', 'item.bread', 'food'),
+  I('milk', 'object.milk', 'item.milk', 'food'),
+  I('dates', 'object.dates', 'item.dates', 'food'),
+  I('plate', 'akhlaq.dishes', 'item.plate', 'dishes'),
+  I('cup', 'object.cup', 'item.cup', 'dishes'),
+  I('peel', 'akhlaq.apple-core', 'item.peel', 'rubbish'),
+  I('wrapper', 'akhlaq.paper-ball', 'item.wrapper', 'rubbish'),
+];
 const RUBBISH = [I('paper', 'akhlaq.paper-ball', 'item.paper', 'rubbish'), I('apple', 'akhlaq.apple-core', 'item.apple', 'rubbish')];
 const MASJID = [
   I('shoes', 'akhlaq.shoes', 'item.shoes', 'shoes'),
@@ -73,7 +84,7 @@ export const tidyUpGame: GameDef<TidyConfig> = {
   component: TidyUpGame,
   levels: [
     { level: 1, config: { prompt: 'play.room', bins: ['toys', 'laundry'], items: ROOM, hints: true, fact: FACTS.purity.id }, facts: [FACTS.purity] },
-    { level: 2, config: { prompt: 'play.room2', bins: ['toys', 'laundry', 'rubbish'], items: [...ROOM, ...RUBBISH], hints: false, fact: FACTS.loves.id }, facts: [FACTS.loves] },
+    { level: 2, config: { prompt: 'play.kitchen', bins: ['food', 'dishes', 'rubbish'], items: KITCHEN, hints: false, fact: FACTS.loves.id }, facts: [FACTS.loves] },
     { level: 3, config: { prompt: 'play.masjid', bins: ['shoes', 'shelf', 'rubbish'], items: MASJID, hints: false, fact: FACTS.harm.id }, facts: [FACTS.harm] },
   ],
   order: 100,

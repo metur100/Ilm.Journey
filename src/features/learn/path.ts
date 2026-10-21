@@ -41,7 +41,11 @@ export function buildTopicPath(topic: TopicId, learn: Pick<LearnData, 'units' | 
       return { order: source.order, items };
     }),
   ];
-  const items = groups.sort((a, b) => a.order - b.order).flatMap((g) => g.items);
+  const all = groups.sort((a, b) => a.order - b.order).flatMap((g) => g.items);
+  // The Sufara course teaches letters, harakat, joining and reading itself. The old Arabic letter quests and units
+  // (arabic-q1 … arabic-q5, arabic-letters … arabic-reading) were shown again after lesson 19 – exactly the repetition
+  // the course replaced. Keep them out of the Sufara path; the course and the Master Challenge remain.
+  const items = topic === 'sufara' ? all.filter((item) => !item.id.startsWith('arabic-')) : all;
 
   let previousDone = true;
   return items.map((item, index) => {

@@ -25,7 +25,7 @@ describe('Sufara course', () => {
     const kinds = SUFARA_LESSONS.map((l) => l.kind);
     expect(kinds.slice(0, 4)).toEqual(['letters', 'fatha', 'kasra', 'damma']);
     expect(kinds.slice(4, 4 + letterLessons.length - 1)).toEqual(Array(letterLessons.length - 1).fill('letters'));
-    expect(kinds.slice(4 + letterLessons.length - 1)).toEqual(['review', 'sukun', 'tanwin', 'madd', 'shadda', 'forms', 'syllables', 'words']);
+    expect(kinds.slice(4 + letterLessons.length - 1)).toEqual(['sukun', 'tanwin', 'madd', 'shadda']);
     expect(SUFARA_LESSONS.map((l) => l.number)).toEqual(SUFARA_LESSONS.map((_, i) => i + 1));
     expect(new Set(SUFARA_LESSONS.map((l) => l.id)).size).toBe(SUFARA_LESSONS.length);
     expect(getSufaraLesson('sufara-01')?.letters).toEqual(['ا']);
@@ -128,6 +128,17 @@ describe('Sufara course', () => {
     for (const word of READING_WORDS) for (const l of splitLetters(word.arabic)) expect(COURSE_LETTERS).toContain(l.base);
     expect(READING_WORDS.map((w) => w.id)).toContain('kitab');
     expect(READING_WORDS.map((w) => w.id)).not.toContain('jannah');
+  });
+
+  it('reads real words in the lesson of every new letter group', () => {
+    for (const lesson of letterLessons.slice(2)) {
+      const words = lessonExercises(lesson, 'bs').filter((e) => e.params.word === '1');
+      expect(words.length).toBeGreaterThan(0);
+      for (const e of words) {
+        expect(e.kind === 'read' || e.kind === 'findReading').toBe(true);
+        expect(e.review).toBe(true);
+      }
+    }
   });
 
   it('puts the lessons at the start of the Sufara topic path only', () => {

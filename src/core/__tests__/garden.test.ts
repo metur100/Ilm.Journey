@@ -10,8 +10,11 @@ import {
   GARDEN_ART_NAMES,
   GARDEN_ELEMENTS,
   GARDEN_SPOTS,
+  getGardenElement,
   type GardenData,
   growthStage,
+  maxWidthFraction,
+  nextSpotFor,
   MAX_WATER,
   milestoneFromTarget,
   plantElement,
@@ -132,6 +135,15 @@ describe('unlocking and planting', () => {
     for (const spot of GARDEN_SPOTS.keys()) data = plantElement(data, 'flower-rose', spot, 1, NOW)!;
     expect(freeSpots(data)).toEqual([]);
     expect(plantElement(data, 'bush', 0, 1, NOW)).toBeNull();
+  });
+
+  it('auto-places large things at the back and small things in front, never anywhere', () => {
+    const free = GARDEN_SPOTS.map((_, i) => i);
+    expect(nextSpotFor(getGardenElement('palm')!, free)).toBe(0);
+    expect(nextSpotFor(getGardenElement('flower-rose')!, free)).toBe(5);
+    expect(nextSpotFor(getGardenElement('bird')!, free)).toBe(11);
+    expect(nextSpotFor(getGardenElement('palm')!, free.filter((s) => s !== 0))).toBe(1);
+    for (let spot = 0; spot < GARDEN_SPOTS.length; spot++) expect(maxWidthFraction(spot)).toBeLessThanOrEqual(0.18);
   });
 
   it('scales the back row smaller than the front row', () => {

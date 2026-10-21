@@ -82,9 +82,10 @@ export const juzPathGame: GameDef<JuzPathConfig> = {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   component: lazyComponent(() => (require('./JuzPathGame') as typeof import('./JuzPathGame')).JuzPathGame),
   levels: [
+    // Each level walks a different part of Juz ʿAmma – no surah repeats between levels.
     { level: 1, config: { stops: stops(range(109, 114), zigzag(6), true), showRoute: true, hints: true, backwards: false }, facts: [FACTS.kafirun, FACTS.nas] },
-    { level: 2, config: { stops: stops(range(105, 114), zigzag(10), true), showRoute: false, hints: false, backwards: false }, facts: [FACTS.fil, FACTS.nasr] },
-    { level: 3, config: { stops: stops(range(106, 114).reverse(), SCATTER, false), showRoute: false, hints: false, backwards: true }, facts: [FACTS.juz] },
+    { level: 2, config: { stops: stops(range(101, 108), zigzag(8), true), showRoute: false, hints: false, backwards: false }, facts: [FACTS.fil] },
+    { level: 3, config: { stops: stops(range(95, 100), SCATTER, false), showRoute: false, hints: false, backwards: true }, facts: [FACTS.juz] },
   ],
   order: 80,
 };

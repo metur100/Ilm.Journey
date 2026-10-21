@@ -39,6 +39,20 @@ const SHOUT: Reaction = { id: 'shout', art: 'akhlaq.shout-bubble', good: false }
 const SLAM: Reaction = { id: 'slam', art: 'akhlaq.slam-door', good: false };
 const MEAN: Reaction = { id: 'mean', art: 'akhlaq.mean-bubble', good: false };
 const THROW: Reaction = { id: 'throw', art: 'akhlaq.broken-cup', good: false };
+// New reactions for levels 2 and 3 – each level has its own set, never the same cards again.
+const BREATHE: Reaction = { id: 'breathe', art: 'akhlaq.quiet-bubble', good: true };
+const WALK: Reaction = { id: 'walk', art: 'ui.heart', good: true };
+const MOCK: Reaction = { id: 'mock', art: 'akhlaq.mean-bubble', good: false };
+const PUSH: Reaction = { id: 'push', art: 'akhlaq.shout-bubble', good: false };
+const PRAY: Reaction = { id: 'pray', art: 'object.prayer-mat', good: true };
+const HELP: Reaction = { id: 'help', art: 'ui.heart', good: true };
+const SMILE: Reaction = { id: 'smile', art: 'ui.heart', good: true };
+const TIMEOUT: Reaction = { id: 'timeout', art: 'object.clock', good: true };
+const COUNT: Reaction = { id: 'count', art: 'object.clock', good: true };
+const YELL: Reaction = { id: 'yell', art: 'akhlaq.shout-bubble', good: false };
+const HIT: Reaction = { id: 'hit', art: 'akhlaq.slam-door', good: false };
+const INSULT: Reaction = { id: 'insult', art: 'akhlaq.mean-bubble', good: false };
+const BREAK: Reaction = { id: 'break', art: 'akhlaq.broken-cup', good: false };
 
 const FACTS = { sit: F.sitDown(), noAnger: F.noAnger(), strong: F.strongOne(), forgive: L.forgiveness() };
 
@@ -92,8 +106,8 @@ export const calmTheStormGame: GameDef<StormConfig> = {
   component: CalmTheStormGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', items: [SIT, QUIET, FORGIVE, SHOUT, SLAM], goal: 4, lanes: 3, speed: 'calm', hints: true, fact: FACTS.sit.id }, facts: [FACTS.sit] },
-    { level: 2, config: { prompt: 'play.l2', items: [SIT, QUIET, REFUGE, FORGIVE, SHOUT, SLAM, MEAN, THROW], goal: 6, lanes: 3, speed: 'normal', hints: false, fact: FACTS.noAnger.id }, facts: [FACTS.noAnger] },
-    { level: 3, config: { prompt: 'play.l3', items: [SIT, QUIET, REFUGE, FORGIVE, SHOUT, SLAM, MEAN, THROW], goal: 8, lanes: 4, speed: 'normal', hints: false, fact: FACTS.strong.id }, facts: [FACTS.strong, FACTS.forgive] },
+    { level: 2, config: { prompt: 'play.l2', items: [REFUGE, BREATHE, WALK, TIMEOUT, MEAN, THROW, MOCK, PUSH], goal: 6, lanes: 3, speed: 'normal', hints: false, fact: FACTS.noAnger.id }, facts: [FACTS.noAnger] },
+    { level: 3, config: { prompt: 'play.l3', items: [PRAY, HELP, SMILE, COUNT, YELL, HIT, INSULT, BREAK], goal: 8, lanes: 4, speed: 'normal', hints: false, fact: FACTS.strong.id }, facts: [FACTS.strong, FACTS.forgive] },
   ],
   order: 80,
 };

@@ -29,6 +29,9 @@ export interface TreeConfig {
 const W = (id: string, good: boolean): Word => ({ id, good });
 const GOOD = ['please', 'thanks', 'salam', 'welldone', 'sorry', 'jazak', 'help', 'cando'].map((id) => W(id, true));
 const BAD = ['stupid', 'away', 'nobody', 'loser', 'shut'].map((id) => W(id, false));
+/** Level 3 uses different words: the tree and silence at home, at school and among friends. */
+const GOOD_SILENCE = ['listen', 'share', 'forgive', 'patience'].map((id) => W(id, true));
+const BAD_SILENCE = ['gossip', 'mock', 'lie'].map((id) => W(id, false));
 
 /** Interleaves kind and hurtful words so both kinds are in the tray. */
 const mixWords = (good: Word[], bad: Word[]) => good.flatMap((g, i) => (bad[i] ? [g, bad[i]] : [g]));
@@ -86,8 +89,8 @@ export const goodWordTreeGame: GameDef<TreeConfig> = {
   component: GoodWordTreeGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', words: mixWords(GOOD.slice(0, 4), BAD.slice(0, 2)), silence: false, hints: true, fact: FACTS.tree.id }, facts: [FACTS.tree] },
-    { level: 2, config: { prompt: 'play.l2', words: mixWords(GOOD.slice(2, 8), BAD.slice(0, 4)), silence: false, hints: false, fact: FACTS.kind.id }, facts: [FACTS.kind] },
-    { level: 3, config: { prompt: 'play.l3', words: mixWords([GOOD[0], GOOD[1], GOOD[4], GOOD[6], GOOD[7]], BAD), silence: true, hints: false, fact: FACTS.silent.id }, facts: [FACTS.silent] },
+    { level: 2, config: { prompt: 'play.l2', words: mixWords(GOOD.slice(4, 8), BAD.slice(2, 5)), silence: false, hints: false, fact: FACTS.kind.id }, facts: [FACTS.kind] },
+    { level: 3, config: { prompt: 'play.l3', words: mixWords(GOOD_SILENCE, BAD_SILENCE), silence: true, hints: false, fact: FACTS.silent.id }, facts: [FACTS.silent] },
   ],
   order: 110,
 };

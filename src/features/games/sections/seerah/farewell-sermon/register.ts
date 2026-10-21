@@ -32,8 +32,8 @@ const pairs = (ids: string[]) => ids.map((id) => ({ id, left: topic(id), right: 
 const map = (ids: string[], fact: string) => Object.fromEntries(ids.map((id) => [id, fact]));
 
 const L1 = ['life', 'women', 'book'];
-const L2 = ['life', 'feuds', 'women', 'book', 'witness'];
-const L3 = ['life', 'feuds', 'women', 'book', 'witness', 'arafah'];
+const L2 = ['feuds', 'witness', 'arafah'];
+const HAJJ = ['ihram', 'arafat', 'muzdalifah', 'mina', 'tawaf'];
 
 export const farewellGame = seerahGame({
   id: 'farewell-sermon',
@@ -44,7 +44,13 @@ export const farewellGame = seerahGame({
     { config: { mode: 'connect', prompt: 'play.l1', leftShare: 0.45, pairs: pairs(L1), factMap: map(L1, 'sermon-at-arafat') }, facts: [FACTS.sermon, FACTS.arafat] },
     { config: { mode: 'connect', prompt: 'play.l2', hints: false, leftShare: 0.5, pairs: pairs(L2), factMap: map(L2, 'the-only-hajj') }, facts: [FACTS.hajj, FACTS.gathered] },
     {
-      config: { mode: 'memory', prompt: 'play.l3', hints: false, columns: 3, pairs: L3.map((id) => ({ id, a: topic(id), b: msg(id) })), factMap: { ...map(L3, 'the-only-hajj'), arafah: 'religion-perfected' } },
+      config: {
+        mode: 'sequence',
+        prompt: 'play.l3',
+        hints: false,
+        items: HAJJ.map((id) => ({ id, label: { key: `hajjstep.${id}` } })),
+        factMap: Object.fromEntries(HAJJ.map((id) => [id, 'religion-perfected'])),
+      },
       facts: [FACTS.perfected],
     },
   ],

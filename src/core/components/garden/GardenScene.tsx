@@ -11,6 +11,7 @@ import {
   GARDEN_SKY_ART,
   GARDEN_SPOTS,
   gardenArt,
+  maxWidthFraction,
   type GardenMotion,
   getGardenElement,
   growthStage,
@@ -234,7 +235,9 @@ function PlacedView({
   const spot = GARDEN_SPOTS[placed.spot];
   const growing = element.kind === 'tree' || element.kind === 'plant' || element.kind === 'flower';
   const droop = growing ? (thirst === 2 ? 0.9 : thirst === 1 ? 0.96 : 1) : 1;
-  const w = Math.round(width * element.size * depthScale(spot) * GROWTH_SCALE[growthStage(placed)] * droop);
+  const rawW = width * element.size * depthScale(spot) * GROWTH_SCALE[growthStage(placed)] * droop;
+  // Never wider than its row cell: neighbouring plants cannot cover each other.
+  const w = Math.round(Math.min(rawW, width * maxWidthFraction(placed.spot)));
   const hover = (HOVER[element.motion] ?? 0) * height;
   const phase = PHASES[placed.spot % PHASES.length];
   const input = [0, 0.25, 0.5, 0.75, 1];

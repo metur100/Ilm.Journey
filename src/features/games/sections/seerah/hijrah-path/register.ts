@@ -87,8 +87,20 @@ export const hijrahGame = seerahGame({
       facts: [FACTS.departure, FACTS.cave],
     },
     {
-      config: { mode: 'path', prompt: 'play.l2', map: MAP, stops: ROUTE, showRoute: false, hints: false, factMap: { ...MAP_FACTS, makkah: 'thawr-south', thawr: 'thawr-south' } },
-      facts: [FACTS.thawrSouth, FACTS.guide, FACTS.route],
+      config: {
+        mode: 'connect',
+        prompt: 'play.l2',
+        hints: false,
+        pairs: [
+          { id: 'abu-bakr', left: { id: 'l-abu-bakr', label: { key: 'left.abu-bakr' } }, right: { id: 'r-abu-bakr', label: { key: 'right.abu-bakr' } } },
+          { id: 'thawr', left: { id: 'l-thawr', label: { key: 'left.thawr' } }, right: { id: 'r-thawr', label: { key: 'right.thawr' } } },
+          { id: 'guide', left: { id: 'l-guide', label: { key: 'left.guide' } }, right: { id: 'r-guide', label: { key: 'right.guide' } } },
+          { id: 'quba', left: { id: 'l-quba', label: { key: 'left.quba' } }, right: { id: 'r-quba', label: { key: 'right.quba' } } },
+          { id: 'ansar', left: { id: 'l-ansar', label: { key: 'left.ansar' } }, right: { id: 'r-ansar', label: { key: 'right.ansar' } } },
+        ],
+        factMap: { 'abu-bakr': 'cave-of-thawr', thawr: 'cave-of-thawr', guide: 'guide-and-news', quba: 'arrival-quba', ansar: 'arrival-quba' },
+      },
+      facts: [FACTS.guide, FACTS.thawrSouth, FACTS.route],
     },
     {
       config: {

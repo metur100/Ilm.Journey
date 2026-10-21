@@ -44,7 +44,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `${n}. lekcija`,
     and: ' i ',
     newLetters: (letters) => `Novi harfovi: ${letters}`,
-    withReview: 'uz ponavljanje i spajanje ranijih harfova',
+    withReview: 'uz ponavljanje, spajanje i čitanje riječi od naučenih harfova',
     kindTitle: {
       review: 'Ponavljanje: svi harfovi',
       fatha: 'Fetha',
@@ -118,7 +118,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lektion ${n}`,
     and: ' und ',
     newLetters: (letters) => `Neue Buchstaben: ${letters}`,
-    withReview: 'mit Wiederholung und Verbindung der früheren Buchstaben',
+    withReview: 'mit Wiederholung, Verbinden und Lesen von Wörtern aus den gelernten Buchstaben',
     kindTitle: {
       review: 'Wiederholung: alle Buchstaben',
       fatha: 'Fatha',
@@ -192,7 +192,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lesson ${n}`,
     and: ' and ',
     newLetters: (letters) => `New letters: ${letters}`,
-    withReview: 'with a review and joining of the earlier letters',
+    withReview: 'with review, joining and reading words made from the letters learned so far',
     kindTitle: {
       review: 'Review: all letters',
       fatha: 'Fatha',
