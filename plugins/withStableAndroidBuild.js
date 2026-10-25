@@ -5,9 +5,10 @@
  *    which leaves Gradle hanging; compiling Kotlin in-process with a larger heap avoids that.
  * 2. Windows limits paths to 260 characters. CMake object files embed the full source path inside
  *    the `.cxx` staging folder, which overflows for longer project paths. On Windows the staging
- *    folder is moved to a short location at the root of the project's drive.
+ *    folder is moved to a short location at the root of the project's drive – for the app and for every
+ *    native library (reanimated, worklets …), whose prefab paths overflow too ("build.ninja still dirty").
  */
-const { withAppBuildGradle, withGradleProperties } = require('expo/config-plugins');
+const { withAppBuildGradle, withGradleProperties, withProjectBuildGradle } = require('expo/config-plugins');
 
 const PROPERTIES = {
   'kotlin.compiler.execution.strategy': 'in-process',
@@ -15,6 +16,7 @@ const PROPERTIES = {
 };
 
 const MARKER = '// withStableAndroidBuild: short CMake staging directory';
+const LIBRARY_MARKER = '// withStableAndroidBuild: short CMake staging directory for native libraries';
 
 module.exports = function withStableAndroidBuild(config) {
   config = withGradleProperties(config, (cfg) => {
@@ -22,6 +24,23 @@ module.exports = function withStableAndroidBuild(config) {
       const existing = cfg.modResults.find((item) => item.type === 'property' && item.key === key);
       if (existing) existing.value = value;
       else cfg.modResults.push({ type: 'property', key, value });
+    }
+    return cfg;
+  });
+
+  config = withProjectBuildGradle(config, (cfg) => {
+    const slug = cfg.slug ?? 'app';
+    if (!cfg.modResults.contents.includes(LIBRARY_MARKER)) {
+      cfg.modResults.contents += `
+${LIBRARY_MARKER}
+if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+  subprojects { sub ->
+    sub.plugins.withId("com.android.library") {
+      sub.android.externalNativeBuild.cmake.buildStagingDirectory = new File(rootDir.toPath().getRoot().toFile(), "cxx/${slug}-libs/" + sub.name)
+    }
+  }
+}
+`;
     }
     return cfg;
   });
