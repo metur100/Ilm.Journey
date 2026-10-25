@@ -11,7 +11,8 @@ import { surahGardenI18n } from './i18n';
 /*
  * Surah Garden (MemoryPairs; rework of the v2 game – same id and fact ids). Every found pair plants a flower in the
  * garden row above the cards. L1: surah ↔ meaning of its name, all cards shown first; L2: surah ↔ number of ayahs,
- * a short look; L3: surah ↔ the Arabic words it begins with (Quran text from the data), from memory.
+ * a short look; L3: surah ↔ the Arabic words it begins with (Quran text from the data), from memory. Each level
+ * mostly uses other surahs, so the levels do not repeat the same cards.
  */
 
 export type GardenMode = 'meaning' | 'ayahCount' | 'opening';
@@ -124,12 +125,12 @@ export const surahGardenGame: GameDef<SurahGardenConfig> = {
     },
     {
       level: 2,
-      config: { mode: 'ayahCount', peekMs: 1500, hints: false, pairs: [108, 112, 1, 105, 114, 104].map((n) => pair(n, 'ayahCount')), factOf: { s108: F.kawtharCount.id, s1: F.fatihaCount.id } },
+      config: { mode: 'ayahCount', peekMs: 1500, hints: false, pairs: [108, 106, 1, 111, 109, 104].map((n) => pair(n, 'ayahCount')), factOf: { s108: F.kawtharCount.id, s1: F.fatihaCount.id } },
       facts: [F.kawtharCount, F.fatihaCount],
     },
     {
       level: 3,
-      config: { mode: 'opening', hints: false, pairs: [1, 112, 113, 109, 110, 103].map((n) => pair(n, 'opening')), factOf: { s112: F.ikhlasOpening.id, s1: F.fatihaOpeningWords.id } },
+      config: { mode: 'opening', hints: false, pairs: [1, 112, 113, 107, 110, 109].map((n) => pair(n, 'opening')), factOf: { s112: F.ikhlasOpening.id, s1: F.fatihaOpeningWords.id } },
       facts: [F.ikhlasOpening, F.fatihaOpeningWords],
     },
   ],

@@ -1,9 +1,9 @@
 import { defineNamespace } from '@/core/i18n';
 
 const en = {
-  title: 'Fair Measure',
-  description: 'Be the honest trader of Madyan: balance the scales exactly – full measure and fair weight, as Shuayb taught.',
-  howTo: 'Tap the weights to put them on the scale until the beam is perfectly level. Tap a piece on the pan to take it back.',
+  title: 'Shuayb – the Fair Measure',
+  description: 'Three events of Shuayb’s life: his call in Madyan, full measure and fair weight, and his answer when his people mocked him – each with its lesson.',
+  howTo: 'Level 1: connect the parts of Shuayb’s call. Level 2: tap the weights until the beam of the scale is level. Level 3: put the events in order.',
   'play.promptWeigh': 'Weigh the grain: add weights until the beam is level.',
   'play.promptBlind': 'No number this time – watch the beam and balance it exactly.',
   'play.promptMeasure': 'Give full measure: scoop grain onto the left pan until it matches the weights.',
@@ -30,9 +30,9 @@ const en = {
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
-  title: 'Gerechtes Maß',
-  description: 'Sei der ehrliche Händler von Madyan: Bringe die Waage genau ins Gleichgewicht – volles Maß und gerechtes Gewicht, wie Schuaib es lehrte.',
-  howTo: 'Tippe auf die Gewichte, um sie auf die Waage zu legen, bis der Balken genau gerade ist. Tippe ein Stück auf der Schale an, um es zurückzunehmen.',
+  title: 'Schuaib – das gerechte Maß',
+  description: 'Drei Ereignisse aus Schuaibs Leben: sein Aufruf in Madyan, volles Maß und gerechtes Gewicht und seine Antwort, als sein Volk ihn verspottete – jedes mit seiner Lehre.',
+  howTo: 'Stufe 1: Verbinde die Teile von Schuaibs Aufruf. Stufe 2: Tippe auf die Gewichte, bis der Balken der Waage gerade ist. Stufe 3: Bring die Ereignisse in die richtige Reihenfolge.',
   'play.promptWeigh': 'Wiege das Getreide: Lege Gewichte auf, bis der Balken gerade ist.',
   'play.promptBlind': 'Diesmal ohne Zahl – beobachte den Balken und gleiche genau aus.',
   'play.promptMeasure': 'Gib volles Maß: Schöpfe Getreide auf die linke Schale, bis es den Gewichten entspricht.',
@@ -57,9 +57,9 @@ const de: Record<Key, string> = {
 };
 
 const bs: Record<Key, string> = {
-  title: 'Pravedna mjera',
-  description: 'Budi pošteni trgovac Medjena: uravnoteži vagu tačno – puna mjera i pravedna težina, kako je Šuajb učio.',
-  howTo: 'Dodiruj utege da ih staviš na vagu dok krak ne bude potpuno ravan. Dodirni komad na tasu da ga vratiš.',
+  title: 'Šuajb – pravedna mjera',
+  description: 'Tri događaja iz Šuajbova života: njegov poziv u Medjenu, puna mjera i pravedna težina, te njegov odgovor kad mu se narod rugao – svaki sa svojom poukom.',
+  howTo: 'Nivo 1: spoji dijelove Šuajbova poziva. Nivo 2: dodiruj utege dok krak vage ne bude ravan. Nivo 3: poredaj događaje.',
   'play.promptWeigh': 'Izvagaj žito: dodaji utege dok krak ne bude ravan.',
   'play.promptBlind': 'Ovaj put bez broja – prati krak i uravnoteži tačno.',
   'play.promptMeasure': 'Daj punu mjeru: zahvataj žito na lijevi tas dok ne bude jednako utezima.',

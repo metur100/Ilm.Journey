@@ -66,8 +66,8 @@ export function getPathSources(): PathSource[] {
 // ---------- Topic tools ----------
 
 /**
- * A tool shown on a topic page next to the path: Quran → memorization (surah list + Quranic duas),
- * Arabic → alphabet & tracing, Ramadan → 30-day calendar, Prophets → Stories, Seerah → Seerah tab.
+ * A tool shown on a topic page next to the path: Quran → Quranic duas, Sufara → alphabet & tracing,
+ * Ramadan → 30-day calendar, Salah → guide, Seerah → Seerah tab. A tool never lists what the path already shows.
  */
 export interface TopicTool {
   id: string;

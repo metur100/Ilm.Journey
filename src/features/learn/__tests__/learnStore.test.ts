@@ -7,6 +7,7 @@ import { savePersisted } from '@/core/storage';
 import { useAppStore } from '@/core/store/appStore';
 import { learnKey, testQuestionsOfArea, unitsOfArea } from '@/features/learn/content';
 import { clearLearnExtensionsForTests, registerPathSource } from '@/features/learn/extensions';
+import { isUnitTaughtElsewhere } from '@/features/learn/path';
 import { registerLearnFeature } from '@/features/learn/register';
 import { EMPTY_LEARN } from '@/features/learn/services/progression';
 import { LEARN_PERSIST, sanitizeLearnData, unitTarget, useLearnStore } from '@/features/learn/store/learnStore';
@@ -39,9 +40,10 @@ describe('learn feature registration', () => {
     expect(first).toMatchObject({ kind: 'learning', target: unitTarget(unitsOfArea('salah')[0].id), topicArea: 'salah' });
   });
 
-  it('finds units and topics in search', () => {
-    const unit = unitsOfArea('salah')[0];
+  it('finds units and topics in search – not the units a quest or story teaches instead', () => {
+    const unit = unitsOfArea('salah').find((u) => !isUnitTaughtElsewhere(u.id))!;
     expect(searchAll(unit.title.en.slice(0, 6), 'en').some((r) => r.key === `learn:unit:${unit.id}`)).toBe(true);
+    expect(searchAll('What is Salah', 'en').some((r) => r.key === 'learn:unit:salah-basics')).toBe(false);
     expect(searchAll('arab', 'en').some((r) => r.key === 'learn:topic:arabic')).toBe(true);
   });
 });

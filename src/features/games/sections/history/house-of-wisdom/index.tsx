@@ -6,9 +6,10 @@ import { finishWith, historyGame, T } from '../shared';
 
 /*
  * The House of Wisdom (Bayt al-Hikma, Baghdad): fill the library shelves by subject.
- *   L1 – two shelves (mathematics, medicine), tools of each field, hints.
- *   L2 – a third shelf (astronomy), no hints.
- *   L3 – four shelves (+ optics) and the famous books mixed in with the tools.
+ *   Every level has its own things (owner feedback: no level repeats the content of another):
+ *   L1 – the tools of mathematics and medicine, hints.
+ *   L2 – the tools of the sky and of light (astronomy, optics), no hints.
+ *   L3 – the famous books, each onto the shelf of its subject.
  */
 
 const SHELF = {
@@ -30,6 +31,7 @@ const ITEMS: Record<string, SortItem> = {
   stars: { id: 'stars', art: 'history.star-chart', label: T('Star map', 'Sternkarte', 'Karta zvijezda'), bin: 'astronomy' },
   moon: { id: 'moon', art: 'history.moon-month', label: T('Moon phases', 'Mondphasen', 'Mjesečeve mijene'), bin: 'astronomy' },
   lens: { id: 'lens', art: 'history.lens', label: T('Lens', 'Linse', 'Leća'), bin: 'optics' },
+  tasrif: { id: 'tasrif', art: 'history.surgical-tools', label: T('Al-Tasrif', 'At-Tasrif', 'Et-Tasrif'), sub: T('al-Zahrawi', 'al-Zahrawi', 'ez-Zehravi'), bin: 'medicine' },
   optics: { id: 'optics', art: 'history.book-teal', label: T('Book of Optics', 'Buch der Optik', 'Knjiga o optici'), sub: T('Ibn al-Haytham', 'Ibn al-Haitham', 'Ibn el-Hejsem'), bin: 'optics' },
 };
 
@@ -50,7 +52,7 @@ const texts = {
   'play.prompt': T('Which shelf does it belong on?', 'Auf welches Regal gehört es?', 'Na koju policu pripada?'),
 };
 
-const factOf = (id: string) => (id === 'algebra' || id === 'numerals' || id === 'dividers' ? F.khwarizmi.id : id === 'canon' ? F.canon.id : id === 'optics' || id === 'lens' ? F.optics.id : undefined);
+const factOf = (id: string) => (id === 'algebra' || id === 'numerals' || id === 'dividers' ? F.khwarizmi.id : id === 'canon' || id === 'tasrif' ? F.canon.id : id === 'optics' || id === 'lens' ? F.optics.id : undefined);
 
 export function HouseOfWisdomGame(api: GameApi<WisdomConfig>) {
   const { shelves, items, hints } = api.config;
@@ -78,12 +80,9 @@ export const houseOfWisdomGame = historyGame<WisdomConfig>({
   hintArt: 'history.shelf',
   component: HouseOfWisdomGame,
   levels: [
-    { config: { shelves: ['maths', 'medicine'], items: ['numerals', 'dividers', 'herbs', 'mortar', 'jar', 'algebra'], hints: true }, facts: [F.house, F.increase] },
-    { config: { shelves: ['maths', 'medicine', 'astronomy'], items: ['numerals', 'dividers', 'algebra', 'herbs', 'jar', 'astrolabe', 'stars', 'moon', 'mortar'], hints: false }, facts: [F.khwarizmi, F.read] },
-    {
-      config: { shelves: ['maths', 'medicine', 'astronomy', 'optics'], items: ['algebra', 'canon', 'optics', 'lens', 'astrolabe', 'herbs', 'dividers', 'stars', 'mortar', 'numerals'], hints: false },
-      facts: [F.canon, F.optics],
-    },
+    { config: { shelves: ['maths', 'medicine'], items: ['numerals', 'dividers', 'herbs', 'mortar', 'jar'], hints: true }, facts: [F.house, F.increase] },
+    { config: { shelves: ['astronomy', 'optics'], items: ['astrolabe', 'stars', 'lens', 'moon'], hints: false }, facts: [F.optics, F.read] },
+    { config: { shelves: ['maths', 'medicine', 'optics'], items: ['algebra', 'canon', 'optics', 'tasrif'], hints: false }, facts: [F.khwarizmi, F.canon] },
   ],
   order: 40,
   teaches: ['learn:history-golden-age-p', 'learn:history-golden-age-2'],

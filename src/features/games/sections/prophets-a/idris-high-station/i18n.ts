@@ -2,31 +2,25 @@ import { defineNamespace } from '@/core/i18n';
 
 const en = {
   title: 'The High Station',
-  description: 'Idris was truthful and patient, and Allah raised him to a high station. Climb the star path!',
-  howTo: 'Trace the path from star to star up the mountain. On level 3, sort good deeds into "truthful" and "patient".',
-  'play.path': 'Trace from the foot of the mountain up to the highest star.',
-  'play.pathFree': 'No path this time – find your way from star to star.',
-  'play.sort': 'Truthful or patient? Put each deed in its basket.',
+  description: 'What the Quran says about Idris: a man of truth, among the patient, raised by Allah to a high station – each with its lesson.',
+  howTo: 'Level 1: sort what is truthful. Level 2: connect each hard moment with the patient way. Level 3: find the star path up to the high station.',
+  'play.climb': 'Allah raised Idris to a high station (19:57). Find your way from star to star, up to the highest star.',
 } as const;
 
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
   title: 'Der hohe Rang',
-  description: 'Idris war wahrhaftig und geduldig, und Allah erhob ihn zu einem hohen Rang. Steig den Sternenpfad hinauf!',
-  howTo: 'Fahre den Weg von Stern zu Stern den Berg hinauf nach. In Stufe 3 sortierst du gute Taten in „wahrhaftig“ und „geduldig“.',
-  'play.path': 'Fahre vom Fuß des Berges bis zum höchsten Stern.',
-  'play.pathFree': 'Diesmal ohne Weg – finde selbst von Stern zu Stern.',
-  'play.sort': 'Wahrhaftig oder geduldig? Leg jede Tat in ihren Korb.',
+  description: 'Was der Koran über Idris sagt: ein Mann der Wahrhaftigkeit, einer der Geduldigen, von Allah zu einem hohen Rang erhoben – jedes mit seiner Lehre.',
+  howTo: 'Stufe 1: Sortiere, was wahrhaftig ist. Stufe 2: Verbinde jeden schweren Moment mit dem geduldigen Weg. Stufe 3: Finde den Sternenpfad bis zum hohen Rang.',
+  'play.climb': 'Allah erhob Idris zu einem hohen Rang (19:57). Finde deinen Weg von Stern zu Stern bis zum höchsten Stern.',
 };
 
 const bs: Record<Key, string> = {
   title: 'Visok položaj',
-  description: 'Idris je bio iskren i strpljiv, a Allah ga je uzdigao na visok položaj. Popni se zvjezdanom stazom!',
-  howTo: 'Prati stazu od zvijezde do zvijezde uz planinu. U 3. nivou razvrstaj dobra djela na „iskren“ i „strpljiv“.',
-  'play.path': 'Prati stazu od podnožja planine do najviše zvijezde.',
-  'play.pathFree': 'Ovaj put bez staze – sam pronađi put od zvijezde do zvijezde.',
-  'play.sort': 'Iskren ili strpljiv? Stavi svako djelo u njegovu korpu.',
+  description: 'Šta Kur’an kaže o Idrisu: iskren čovjek, od strpljivih, kojeg je Allah uzdigao na visoko mjesto – svaki dio sa svojom poukom.',
+  howTo: 'Nivo 1: razvrstaj šta je iskreno. Nivo 2: spoji svaki težak trenutak sa strpljivim putem. Nivo 3: pronađi zvjezdanu stazu do visokog položaja.',
+  'play.climb': 'Allah je Idrisa uzdigao na visoko mjesto (19:57). Pronađi put od zvijezde do zvijezde, sve do najviše zvijezde.',
 };
 
 export const idrisI18n = defineNamespace('game.idris-high-station', { en, de, bs });

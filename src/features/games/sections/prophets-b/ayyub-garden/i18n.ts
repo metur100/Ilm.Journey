@@ -1,9 +1,9 @@
 import { defineNamespace } from '@/core/i18n';
 
 const en = {
-  title: 'Garden of Patience',
-  description: 'Bring a withered garden back to life, bed by bed – with care and with patience, like Ayyub.',
-  howTo: 'Pick a tool, then tap a bed: seeds for empty soil, water for seeds and plants. After each care the plant needs time to grow – wait patiently.',
+  title: 'Ayyub – the Garden of Patience',
+  description: 'Three events of Ayyub’s life: his long test, his dua to the Most Merciful and how Allah healed him – each with its lesson.',
+  howTo: 'Level 1: sort the cards. Level 2: put the dua and the answer in order. Level 3: pick a tool, then tap a bed – seeds for empty soil, water for seeds and plants – and wait patiently while it grows.',
   'play.prompt': 'Water every bed until it blooms. Each plant needs a little time to grow.',
   'play.promptTools': 'Seeds for empty soil, water for seeds and plants – then wait while they grow.',
   'play.promptStrict': 'Look closely at each bed and care for it. Patience: never disturb a plant while it grows.',
@@ -31,9 +31,9 @@ const en = {
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
-  title: 'Garten der Geduld',
-  description: 'Erwecke einen verdorrten Garten Beet für Beet wieder zum Leben – mit Pflege und mit Geduld, wie Ayyub.',
-  howTo: 'Wähle ein Werkzeug und tippe dann ein Beet an: Samen für leere Erde, Wasser für Samen und Pflanzen. Nach jeder Pflege braucht die Pflanze Zeit zum Wachsen – warte geduldig.',
+  title: 'Ayyub – der Garten der Geduld',
+  description: 'Drei Ereignisse aus Ayyubs Leben: seine lange Prüfung, sein Bittgebet zum Barmherzigsten und wie Allah ihn heilte – jedes mit seiner Lehre.',
+  howTo: 'Stufe 1: Sortiere die Karten. Stufe 2: Bring das Bittgebet und die Antwort in die richtige Reihenfolge. Stufe 3: Wähle ein Werkzeug und tippe ein Beet an – Samen für leere Erde, Wasser für Samen und Pflanzen – und warte geduldig, während es wächst.',
   'play.prompt': 'Gieße jedes Beet, bis es blüht. Jede Pflanze braucht ein wenig Zeit zum Wachsen.',
   'play.promptTools': 'Samen für leere Erde, Wasser für Samen und Pflanzen – dann warten, während sie wachsen.',
   'play.promptStrict': 'Schau dir jedes Beet genau an und pflege es. Geduld: Störe nie eine Pflanze, während sie wächst.',
@@ -59,9 +59,9 @@ const de: Record<Key, string> = {
 };
 
 const bs: Record<Key, string> = {
-  title: 'Bašta strpljenja',
-  description: 'Oživi uvelu baštu, gredicu po gredicu – s pažnjom i strpljenjem, kao Ejjub.',
-  howTo: 'Izaberi alat, pa dodirni gredicu: sjeme za praznu zemlju, vodu za sjeme i biljke. Nakon svake brige biljci treba vremena da raste – strpljivo čekaj.',
+  title: 'Ejjub – bašta strpljenja',
+  description: 'Tri događaja iz Ejjubova života: njegovo dugo iskušenje, dova Najmilostivijem i kako ga je Allah izliječio – svaki sa svojom poukom.',
+  howTo: 'Nivo 1: razvrstaj karte. Nivo 2: poredaj dovu i odgovor. Nivo 3: izaberi alat, pa dodirni gredicu – sjeme za praznu zemlju, vodu za sjeme i biljke – i strpljivo čekaj dok raste.',
   'play.prompt': 'Zalijevaj svaku gredicu dok ne procvjeta. Svakoj biljci treba malo vremena da naraste.',
   'play.promptTools': 'Sjeme za praznu zemlju, voda za sjeme i biljke – pa čekaj dok rastu.',
   'play.promptStrict': 'Dobro pogledaj svaku gredicu i pobrini se za nju. Strpljenje: nikada ne diraj biljku dok raste.',

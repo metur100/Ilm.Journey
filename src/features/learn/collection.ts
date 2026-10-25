@@ -4,7 +4,7 @@ import { registerAchievements, registerCollectionCards } from '@/core/registry';
 import { getDua, getSurah, QURAN_SOURCE } from '@/features/quran';
 
 import { getUnit } from './content';
-import { ALPHABET } from './content/quests';
+import { ALPHABET, getQuest } from './content/quests';
 import { useQuestStore } from './quests/store/questStore';
 import { isMasterPassed } from './services/progression';
 import { useLearnStore } from './store/learnStore';
@@ -131,21 +131,26 @@ function duaCards(): CollectionCard[] {
 
 // ---------- Good deeds (akhlaq unit lessons) ----------
 
-const DEEDS: readonly { id: string; unitId: string; section: number; art: string }[] = [
-  { id: 'deed-sabr', unitId: 'akhlaq-sabr-shukr', section: 0, art: 'garden.sapling' },
-  { id: 'deed-shukr', unitId: 'akhlaq-sabr-shukr', section: 1, art: 'food.dates' },
-  { id: 'deed-sidq', unitId: 'akhlaq-honesty-trust', section: 0, art: 'object.scroll' },
-  { id: 'deed-amanah', unitId: 'akhlaq-honesty-trust', section: 1, art: 'object.coins' },
-  { id: 'deed-rahmah', unitId: 'akhlaq-mercy-family', section: 0, art: 'animal.dove' },
-  { id: 'deed-parents', unitId: 'akhlaq-mercy-family', section: 1, art: 'ui.heart' },
-  { id: 'deed-forgiveness', unitId: 'akhlaq-mercy-family', section: 2, art: 'pattern.star-tile' },
+/**
+ * Card text comes from the akhlaq unit lesson; the card unlocks with the beginner quest that teaches the same lesson on the
+ * Akhlaq page (the unit itself is not repeated in the path, see UNITS_TAUGHT_ELSEWHERE).
+ */
+const DEEDS: readonly { id: string; unitId: string; section: number; questId: string; art: string }[] = [
+  { id: 'deed-sabr', unitId: 'akhlaq-sabr-shukr', section: 0, questId: 'akhlaq-q1', art: 'garden.sapling' },
+  { id: 'deed-shukr', unitId: 'akhlaq-sabr-shukr', section: 1, questId: 'akhlaq-q1', art: 'food.dates' },
+  { id: 'deed-sidq', unitId: 'akhlaq-honesty-trust', section: 0, questId: 'akhlaq-q2', art: 'object.scroll' },
+  { id: 'deed-amanah', unitId: 'akhlaq-honesty-trust', section: 1, questId: 'akhlaq-q2', art: 'object.coins' },
+  { id: 'deed-rahmah', unitId: 'akhlaq-mercy-family', section: 0, questId: 'akhlaq-q3', art: 'animal.dove' },
+  { id: 'deed-parents', unitId: 'akhlaq-mercy-family', section: 1, questId: 'akhlaq-q4', art: 'ui.heart' },
+  { id: 'deed-forgiveness', unitId: 'akhlaq-mercy-family', section: 2, questId: 'akhlaq-q5', art: 'pattern.star-tile' },
 ];
 
 function deedCards(): CollectionCard[] {
-  return DEEDS.flatMap(({ id, unitId, section, art }) => {
+  return DEEDS.flatMap(({ id, unitId, section, questId, art }) => {
     const unit = getUnit(unitId);
+    const quest = getQuest(questId);
     const lesson = unit?.lesson[section];
-    if (!unit || !lesson?.heading) return [];
+    if (!unit || !quest || !lesson?.heading) return [];
     return [
       {
         id,
@@ -155,8 +160,8 @@ function deedCards(): CollectionCard[] {
         ...(lesson.arabic ? { arabic: lesson.arabic } : {}),
         fact: lesson.body,
         sources: unit.sources,
-        unlock: `unit:${unitId}:complete`,
-        unlockTitle: unit.title,
+        unlock: `quest:${questId}:complete`,
+        unlockTitle: quest.title,
       },
     ];
   });
@@ -184,6 +189,8 @@ export function learnAchievements(): AchievementKey[] {
   for (const id of quest.duasLearned) keys.push(`dua:${id}:learned`);
   for (const [id, progress] of Object.entries(learn.units)) if (progress.completed) keys.push(`unit:${id}:complete`);
   for (const [id, progress] of Object.entries(quest.quests)) if (progress.completed) keys.push(`quest:${id}:complete`);
+  // Deed cards unlocked with their akhlaq unit before the quest took its place in the path stay unlocked.
+  for (const deed of DEEDS) if (learn.units[deed.unitId]?.completed) keys.push(`quest:${deed.questId}:complete`);
   for (const topic of TOPIC_IDS) if (isMasterPassed(topic, learn.masters)) keys.push(`master:${topic}:passed`);
   return keys;
 }

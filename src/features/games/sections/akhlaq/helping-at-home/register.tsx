@@ -5,9 +5,11 @@ import { F, L } from '../shared/facts';
 import { homeI18n } from './i18n';
 
 /*
- * Helping at Home – TapScene in an illustrated room (no people). L1: find four ways to help, in any order, with
- * hints. L2: one task after another ("Find: …"), no hints, playing on is a distractor. L3 (twist): help, kind
- * words and the dua for parents from 17:24 – while "uff" and playing on are left alone.
+ * Helping at Home – TapScene in an illustrated room (no people). Every level has its own tasks:
+ * L1: four ways to help (bags, dishes, plant, shoes), any order, with hints.
+ * L2: other chores one after another (laundry, toys, water, rubbish), no hints, playing on is a distractor.
+ * L3 (twist): no chores – kind words, a seat for your parents and the dua from 17:24, while "uff" and playing on
+ * are left alone.
  */
 
 interface Spot {
@@ -31,7 +33,11 @@ const BAGS = S('bags', 'akhlaq.shopping-bags', { x: 0.07, y: 0.66, w: 0.19, h: 0
 const DISHES = S('dishes', 'akhlaq.dishes', { x: 0.67, y: 0.36, w: 0.18, h: 0.14 });
 const PLANT = S('plant', 'garden.thirsty-plant', { x: 0.11, y: 0.32, w: 0.14, h: 0.18 });
 const SHOES = S('shoes', 'akhlaq.shoes', { x: 0.47, y: 0.83, w: 0.2, h: 0.13 });
-const LAUNDRY = S('laundry', 'akhlaq.shirt', { x: 0.37, y: 0.53, w: 0.14, h: 0.15 });
+const LAUNDRY = S('laundry', 'akhlaq.laundry-basket', { x: 0.07, y: 0.66, w: 0.19, h: 0.18 });
+const TOYS = S('toys', 'akhlaq.toy-box', { x: 0.47, y: 0.83, w: 0.2, h: 0.13 });
+const WATER = S('water', 'object.water-jug', { x: 0.67, y: 0.34, w: 0.14, h: 0.16 });
+const RUBBISH = S('rubbish', 'akhlaq.rubbish-bin', { x: 0.37, y: 0.53, w: 0.14, h: 0.18 });
+const CHAIR = S('chair', 'akhlaq.chair', { x: 0.36, y: 0.5, w: 0.16, h: 0.22 });
 const KIND = S('kind', 'akhlaq.salam-bubble', { x: 0.56, y: 0.1, w: 0.16, h: 0.16 });
 const DUA = S('dua', 'object.prayer-mat', { x: 0.74, y: 0.8, w: 0.22, h: 0.16 });
 const GAME = S('game', 'akhlaq.game-pad', { x: 0.26, y: 0.84, w: 0.14, h: 0.11 }, false);
@@ -73,8 +79,8 @@ export const helpingAtHomeGame: GameDef<HomeConfig> = {
   component: HelpingAtHomeGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', spots: [BAGS, DISHES, PLANT, SHOES], ordered: false, hints: true, fact: FACTS.example.id }, facts: [FACTS.example] },
-    { level: 2, config: { prompt: 'play.l2', spots: [DISHES, BAGS, LAUNDRY, PLANT, SHOES, GAME], ordered: true, hints: false, fact: FACTS.parents.id }, facts: [FACTS.parents] },
-    { level: 3, config: { prompt: 'play.l3', spots: [BAGS, DISHES, LAUNDRY, KIND, DUA, GAME, UFF], ordered: false, hints: false, fact: FACTS.mother.id }, facts: [FACTS.mother] },
+    { level: 2, config: { prompt: 'play.l2', spots: [LAUNDRY, TOYS, WATER, RUBBISH, GAME], ordered: true, hints: false, fact: FACTS.parents.id }, facts: [FACTS.parents] },
+    { level: 3, config: { prompt: 'play.l3', spots: [KIND, CHAIR, DUA, GAME, UFF], ordered: false, hints: false, fact: FACTS.mother.id }, facts: [FACTS.mother] },
   ],
   order: 30,
 };

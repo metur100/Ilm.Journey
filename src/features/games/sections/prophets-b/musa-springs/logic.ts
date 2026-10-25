@@ -37,6 +37,5 @@ export function springPairs(n: number): ConnectPair[] {
   }));
 }
 
-export const LEVEL_1: SpringsConfig = { tribes: 4, hints: true, shuffleLeft: false };
-export const LEVEL_2: SpringsConfig = { tribes: 8, hints: false, shuffleLeft: false };
-export const LEVEL_3: SpringsConfig = { tribes: 12, hints: false, shuffleLeft: true };
+/** L3 of the Musa game – all twelve tribes, no hints. */
+export const SPRINGS: SpringsConfig = { tribes: 12, hints: false, shuffleLeft: true };

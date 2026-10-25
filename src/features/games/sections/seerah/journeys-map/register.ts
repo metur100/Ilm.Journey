@@ -47,8 +47,8 @@ const HUDAYBIYYAH: Stop[] = [
 // route-conquest: Madinah → (23.2, 39.45) → (22.0, 39.6) → Makkah
 const CONQUEST: Stop[] = [
   stop('madinah', 'stop.madinah', 24.4672, 39.6112, { text: blockText('e09.ctx0') }),
-  stop('road-1', 'stop.road', 23.2, 39.45),
-  stop('road-2', 'stop.road', 22.0, 39.6),
+  stop('conquest-road-1', 'stop.road', 23.2, 39.45),
+  stop('conquest-road-2', 'stop.road', 22.0, 39.6),
   stop('makkah', 'stop.makkah', 21.4225, 39.8262, { text: blockText('ev.conquest.0') }, 'seerah.kaaba'),
 ];
 

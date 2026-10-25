@@ -2,7 +2,8 @@ import { type GameDef, registerGame } from '@/core/games';
 
 import { lazyGame } from '../shared';
 import type { ArkConfig } from './ArkOfNuhGame';
-import { ANIMAL_ART, ARK_PARTS, VOYAGE } from './content';
+import { episodeArt } from '../../prophets-story/episode';
+import { ARK_PARTS, CALL_EPISODE, VOYAGE } from './content';
 import { ARK_FACTS } from './facts';
 import { arkI18n } from './i18n';
 
@@ -18,15 +19,16 @@ export const arkGame: GameDef<ArkConfig> = {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   component: lazyGame(() => (require('./ArkOfNuhGame') as typeof import('./ArkOfNuhGame')).ArkOfNuhGame),
   levels: [
-    { level: 1, config: { mode: 'build' }, facts: [ARK_FACTS.command, ARK_FACTS.planks, ARK_FACTS.mocked] },
-    { level: 2, config: { mode: 'pairs' }, facts: [ARK_FACTS.eachKind, ARK_FACTS.bismillah] },
-    { level: 3, config: { mode: 'voyage' }, facts: [ARK_FACTS.judi, ARK_FACTS.years, ARK_FACTS.sabr] },
+    // Three events of Nuh's life, each with its lesson: the long call, building the ark, the flood and the rescue.
+    { level: 1, config: { mode: 'episode', episode: CALL_EPISODE }, facts: [ARK_FACTS.years, ARK_FACTS.sabr] },
+    { level: 2, config: { mode: 'build' }, facts: [ARK_FACTS.mocked, ARK_FACTS.planks, ARK_FACTS.obey] },
+    { level: 3, config: { mode: 'voyage' }, facts: [ARK_FACTS.eachKind, ARK_FACTS.judi, ARK_FACTS.trust] },
   ],
   order: 3,
 };
 
 /** Every art name the game draws. */
-export const ARK_ART: string[] = ['prophet.nuh-shipyard', 'prophet.nuh-judi', ...ARK_PARTS.map((p) => p.art!), ...ANIMAL_ART, ...VOYAGE.map((v) => v.art!)];
+export const ARK_ART: string[] = ['prophet.nuh-shipyard', 'prophet.nuh-judi', ...ARK_PARTS.map((p) => p.art!), ...VOYAGE.map((v) => v.art!), ...episodeArt(CALL_EPISODE)];
 
 export function registerArkOfNuhGame(): void {
   registerGame(arkGame);

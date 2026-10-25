@@ -40,7 +40,7 @@ export function dotRounds(letters: string[]): PlaceRound[] {
 
 /**
  * Letter Dots: the body of a letter waits without its dots – drop the right number of dots in the right place (above,
- * inside, below) and the letter appears. L1 ب ت ث ن ي · L2 the other dotted letters · L3 by the sound alone.
+ * inside, below) and the letter appears. L1 ب ت ث ن ي · L2 ج خ ذ ز ش · L3 ض ظ غ ف ق by the sound alone.
  */
 export function LetterDotsGame(api: GameApi<LetterDotsConfig>) {
   const k = useKitColors();

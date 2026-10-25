@@ -8,8 +8,10 @@ import type { GameApi } from '@/core/games';
 import { Burst, ChallengeClock, FinishReveal, GameBoard, Glow, GrowIn, InlineCaption, kitResult, Tile, useKitColors, useShake } from '@/core/games/kit';
 import { radius, spacing } from '@/core/theme';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
 import { useEngineCore, useKitProbe, useMeasure } from '../shared/kit';
-import { type ArmourConfig, RING_SCALE, type RingSize } from './content';
+import { type ArmourConfig, type DawudConfig, RING_SCALE, type RingSize } from './content';
 
 function Place({ size, ring, filled, ghost, next, glow, label, burst }: { size: number; ring: RingSize; filled: boolean; ghost: boolean; next: boolean; glow: boolean; label: string; burst: number }) {
   const k = useKitColors();
@@ -36,8 +38,7 @@ function Armour({ api }: { api: GameApi<ArmourConfig> }) {
   const { t } = api;
   const toBuild = cfg.links.length - cfg.given;
   const fact = api.facts[0]?.id ?? 'iron-made-soft';
-  const prompt = cfg.given ? 'play.promptPattern' : cfg.sizes.length > 2 ? 'play.promptSizes' : 'play.prompt';
-  const core = useEngineCore({ onDone: ({ mistakes }) => api.onComplete(kitResult({ moves: toBuild, mistakes, factsMissed: mistakes > 0 ? [fact] : [] })), prompt: t(prompt), hints: cfg.hints, testID: 'dawud-armour' }, toBuild);
+  const core = useEngineCore({ onDone: ({ mistakes }) => api.onComplete(kitResult({ moves: toBuild, mistakes, factsMissed: mistakes > 0 ? [fact] : [] })), prompt: t('play.prompt'), hints: cfg.hints, testID: 'dawud-armour' }, toBuild);
   const [built, setBuilt] = useState(cfg.given);
   const [burst, setBurst] = useState<Record<number, number>>({});
   const { style: shakeStyle, shake } = useShake();
@@ -126,11 +127,13 @@ function Armour({ api }: { api: GameApi<ArmourConfig> }) {
   );
 }
 
-/** Rings of Armour (Dawud, Quran 34:10–11, 21:80): link rings of the right size into a coat of mail. */
-export function DawudArmourGame(api: GameApi<ArmourConfig>) {
+/** Dawud: L1 and L3 are episodes of his life; L2 (34:10–11, 21:80) links rings of the right size into a coat of mail. */
+export function DawudArmourGame(api: GameApi<DawudConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
   return (
     <GameBoard api={api}>
-      <Armour api={api} />
+      <Armour api={{ ...api, config }} />
     </GameBoard>
   );
 }

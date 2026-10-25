@@ -4,34 +4,41 @@ import { LANGUAGE_SOURCES } from '@/core/models';
 
 import { arabicGame, type LevelSpec } from '../shared/define';
 import type { SequenceConfig } from '../shared/engineGames';
-import { PRAYER_TIMES, T, timeItem, vocabFact, type Word } from './data';
+import { PRAYER_TIMES, T, TIME_SPANS, timeItem, vocabFact, WEEK_DAYS, type Word } from './data';
 import { loadSequenceGame } from './engines';
 
 /*
- * Prayer Times (SequenceBoard, list variant): put the five prayer times in order. L1 Fajr, Zuhr, Asr with hints ·
- * L2 up to Maghrib · L3 all five. Each item shows the Arabic name with transliteration and its meaning.
+ * Times in Arabic (SequenceBoard, list variant): Arabic words of time put in order – each level has its own words.
+ * L1 the five prayer times with hints · L2 the days of the week · L3 hour, day, week, month and year (short to long).
+ * Each item shows the Arabic word with transliteration and its meaning.
  */
 
 const COVER = 'garden.masjid-small';
 
 export const timesI18n = defineNamespace('game.arabic-times', {
   en: {
-    title: 'Prayer Times',
-    description: 'Learn the Arabic names of the five prayer times and put them in order.',
-    howTo: 'Put the prayer times in order, from dawn to night.',
+    title: 'Times in Arabic',
+    description: 'Learn Arabic words of time – the five prayer times, the days of the week and hour to year – and put them in order.',
+    howTo: 'Put the words in order: the prayer times from dawn to night, the days from al-Ahad, and time from short to long.',
     'play.order': 'Put the prayer times in the right order.',
+    'play.days': 'Put the days of the week in order, starting with al-Ahad (Sunday).',
+    'play.spans': 'Put them in order, from the shortest time to the longest.',
   },
   de: {
-    title: 'Arabische Gebetszeiten',
-    description: 'Lerne die arabischen Namen der fünf Gebetszeiten und bring sie in die richtige Reihenfolge.',
-    howTo: 'Bringe die Gebetszeiten von der Morgendämmerung bis zur Nacht in die richtige Reihenfolge.',
+    title: 'Zeiten auf Arabisch',
+    description: 'Lerne arabische Zeitwörter – die fünf Gebetszeiten, die Wochentage und Stunde bis Jahr – und bring sie in die richtige Reihenfolge.',
+    howTo: 'Bring die Wörter in die richtige Reihenfolge: die Gebetszeiten von der Morgendämmerung bis zur Nacht, die Tage ab al-Ahad und die Zeit von kurz bis lang.',
     'play.order': 'Bring die Gebetszeiten in die richtige Reihenfolge.',
+    'play.days': 'Bring die Wochentage in die richtige Reihenfolge, beginnend mit al-Ahad (Sonntag).',
+    'play.spans': 'Ordne sie von der kürzesten bis zur längsten Zeit.',
   },
   bs: {
-    title: 'Arapska vremena namaza',
-    description: 'Nauči arapske nazive pet vremena namaza i poredaj ih redom.',
-    howTo: 'Poredaj vremena namaza od zore do noći.',
+    title: 'Vrijeme na arapskom',
+    description: 'Nauči arapske riječi o vremenu – pet vremena namaza, dane u sedmici i od sata do godine – i poredaj ih.',
+    howTo: 'Poredaj riječi: vremena namaza od zore do noći, dane od al-ahada i vrijeme od kraćeg do dužeg.',
     'play.order': 'Poredaj vremena namaza u ispravan redoslijed.',
+    'play.days': 'Poredaj dane u sedmici, počevši od al-ahada (nedjelje).',
+    'play.spans': 'Poredaj ih od najkraćeg do najdužeg vremena.',
   },
 });
 
@@ -48,8 +55,8 @@ const orderFact: GameFact = {
   art: COVER,
 };
 
-const level = (words: readonly Word[], facts: readonly Word[], hints: boolean, extra: GameFact[] = []): LevelSpec<SequenceConfig> => ({
-  config: { items: words.map(timeItem), variant: 'list', hints, prompt: 'play.order' },
+const level = (words: readonly Word[], facts: readonly Word[], hints: boolean, prompt: string, extra: GameFact[] = []): LevelSpec<SequenceConfig> => ({
+  config: { items: words.map(timeItem), variant: 'list', hints, prompt },
   facts: [...facts.map((word) => vocabFact(word, COVER)), ...extra],
 });
 
@@ -60,9 +67,9 @@ export const arabicTimesGame = arabicGame<SequenceConfig>({
   hintArt: 'kit.timeline',
   load: loadSequenceGame,
   levels: [
-    level(PRAYER_TIMES.slice(0, 3), PRAYER_TIMES.slice(0, 2), true),
-    level(PRAYER_TIMES.slice(0, 4), PRAYER_TIMES.slice(2, 4), false),
-    level(PRAYER_TIMES, PRAYER_TIMES.slice(4), false, [orderFact]),
+    level(PRAYER_TIMES, [PRAYER_TIMES[0], PRAYER_TIMES[3]], true, 'play.order', [orderFact]),
+    level(WEEK_DAYS, [WEEK_DAYS[0], WEEK_DAYS[5]], false, 'play.days'),
+    level(TIME_SPANS, [TIME_SPANS[2], TIME_SPANS[4]], false, 'play.spans'),
   ],
   order: 156,
 });

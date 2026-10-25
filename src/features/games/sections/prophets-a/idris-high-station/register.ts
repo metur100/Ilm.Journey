@@ -1,7 +1,8 @@
 import { type GameDef, registerGame } from '@/core/games';
 
+import { episodeArt } from '../../prophets-story/episode';
 import { lazyGame } from '../shared';
-import { IDRIS_FACTS, PATH_L2, QUALITY_BINS, QUALITY_ITEMS } from './content';
+import { HIGH_PATH, IDRIS_FACTS, PATIENCE_EPISODE, TRUTH_EPISODE } from './content';
 import type { IdrisConfig } from './IdrisGame';
 import { idrisI18n } from './i18n';
 
@@ -16,19 +17,15 @@ export const idrisGame: GameDef<IdrisConfig> = {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   component: lazyGame(() => (require('./IdrisGame') as typeof import('./IdrisGame')).IdrisGame),
   levels: [
-    { level: 1, config: { mode: 'path' }, facts: [IDRIS_FACTS.truthful, IDRIS_FACTS.high] },
-    { level: 2, config: { mode: 'pathFree' }, facts: [IDRIS_FACTS.patient, IDRIS_FACTS.mercy] },
-    { level: 3, config: { mode: 'sort' }, facts: [IDRIS_FACTS.qualities, IDRIS_FACTS.heaven] },
+    // What the Quran says about Idris, one facet per level, each with its lesson.
+    { level: 1, config: { mode: 'episode', episode: TRUTH_EPISODE }, facts: [IDRIS_FACTS.truthful, IDRIS_FACTS.truth] },
+    { level: 2, config: { mode: 'episode', episode: PATIENCE_EPISODE }, facts: [IDRIS_FACTS.patient, IDRIS_FACTS.patience] },
+    { level: 3, config: { mode: 'climb' }, facts: [IDRIS_FACTS.high, IDRIS_FACTS.heaven, IDRIS_FACTS.raised] },
   ],
   order: 2,
 };
 
-export const IDRIS_ART: string[] = [
-  'prophet.idris-sky-steps',
-  ...PATH_L2.flatMap((s) => (s.art ? [s.art] : [])),
-  ...QUALITY_BINS.flatMap((b) => (b.art ? [b.art] : [])),
-  ...QUALITY_ITEMS.flatMap((i) => (i.art ? [i.art] : [])),
-];
+export const IDRIS_ART: string[] = ['prophet.idris-sky-steps', ...HIGH_PATH.flatMap((s) => (s.art ? [s.art] : [])), ...episodeArt(TRUTH_EPISODE), ...episodeArt(PATIENCE_EPISODE)];
 
 export function registerIdrisGame(): void {
   registerGame(idrisGame);

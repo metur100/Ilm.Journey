@@ -1,10 +1,11 @@
 import { type GameDef, registerGame } from '@/core/games';
 
-import { HARUN_FACTS, type HarunConfig, LEVEL_1, LEVEL_2, LEVEL_3 } from './content';
+import { episodeArt } from '../../prophets-story/episode';
+import { CALF_EPISODE, DUA, HARUN_FACTS, type HarunGameConfig, REQUESTS, SENT_EPISODE } from './content';
 import { HarunHelperGame } from './HarunHelperGame';
 import { harunHelperI18n } from './i18n';
 
-export const harunHelperGame: GameDef<HarunConfig> = {
+export const harunHelperGame: GameDef<HarunGameConfig> = {
   id: 'harun-helper',
   topicId: 'prophets',
   i18n: harunHelperI18n,
@@ -12,13 +13,17 @@ export const harunHelperGame: GameDef<HarunConfig> = {
   hintArt: 'prophet.harun-bloom',
   component: HarunHelperGame,
   levels: [
-    { level: 1, config: LEVEL_1, facts: [HARUN_FACTS.dua] },
-    { level: 2, config: LEVEL_2, facts: [HARUN_FACTS.helper, HARUN_FACTS.eloquent] },
-    { level: 3, config: LEVEL_3, facts: [HARUN_FACTS.remember] },
+    // Three events of Harun's life, each with its lesson: Musa's dua for a helper, sent together to Fir'awn, the calf.
+    { level: 1, config: DUA, facts: [HARUN_FACTS.dua, HARUN_FACTS.helper, HARUN_FACTS.lessonTogether] },
+    { level: 2, config: { mode: 'episode', episode: SENT_EPISODE }, facts: [HARUN_FACTS.eloquent, HARUN_FACTS.gentle, HARUN_FACTS.lessonGentle] },
+    { level: 3, config: { mode: 'episode', episode: CALF_EPISODE }, facts: [HARUN_FACTS.takesPlace, HARUN_FACTS.lessonFirm] },
   ],
-  teaches: { questionKeys: ['stories:harun-dua', 'stories:harun-memory', 'stories:harun-eloquent'] },
+  teaches: { questionKeys: ['stories:harun-dua', 'stories:harun-memory', 'stories:harun-eloquent', 'stories:harun-gentle'] },
   order: 116,
 };
+
+/** Every art name the game draws. */
+export const HARUN_ART: string[] = [...REQUESTS.map((r) => r.art!), ...episodeArt(SENT_EPISODE), ...episodeArt(CALF_EPISODE)];
 
 export function registerHarunHelperGame(): void {
   registerGame(harunHelperGame);

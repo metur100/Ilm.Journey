@@ -4,7 +4,7 @@ import { defineNamespace } from '@/core/i18n';
 const en = {
   title: 'Build the Masjid',
   description: 'Build the early Masjid an-Nabawi in Madinah – from the place where the camel knelt to the palm-leaf roof.',
-  howTo: 'Drag each part onto the building site – it snaps into place and the masjid grows. Level 1 shows the way, level 2 is from memory, level 3 brings the change of the qibla.',
+  howTo: 'Level 1: drag each part onto the building site – the masjid grows. Level 2: put the story of the first masjid in order. Level 3: the qibla changes – turn it and add the new parts.',
   'part.ground': 'The place where the camel knelt',
   'part.walls': 'Mud-brick walls',
   'part.pillars': 'Palm-trunk pillars',
@@ -26,6 +26,7 @@ const en = {
   'play.next': 'Next: {part}',
   'play.memory': 'Build from memory – the ground first, then upwards.',
   'play.after': 'Now add the shade on the qibla side and the Suffa.',
+  'play.story': 'How did the first masjid of Madinah come about? Put it in order.',
   'play.needsFirst': 'First comes: {part}.',
   'play.wrongSpot': 'Not here – where does {part} belong?',
   'play.glowHint': 'Drop it on the glowing place.',
@@ -60,7 +61,7 @@ type Key = keyof typeof en;
 const de: Record<Key, string> = {
   title: 'Baue die Moschee',
   description: 'Baue die frühe Prophetenmoschee in Medina – vom Platz, an dem das Kamel niederkniete, bis zum Palmblattdach.',
-  howTo: 'Zieh jedes Teil auf den Bauplatz – es rastet ein und die Moschee wächst. Level 1 zeigt den Weg, Level 2 geht aus dem Gedächtnis, Level 3 bringt die Änderung der Gebetsrichtung.',
+  howTo: 'Level 1: Zieh jedes Teil auf den Bauplatz – die Moschee wächst. Level 2: Bring die Geschichte der ersten Moschee in die richtige Reihenfolge. Level 3: Die Gebetsrichtung ändert sich – dreh sie und füge die neuen Teile hinzu.',
   'part.ground': 'Der Platz, an dem das Kamel niederkniete',
   'part.walls': 'Lehmziegelmauern',
   'part.pillars': 'Säulen aus Palmstämmen',
@@ -82,6 +83,7 @@ const de: Record<Key, string> = {
   'play.next': 'Als Nächstes: {part}',
   'play.memory': 'Bau aus dem Gedächtnis – zuerst der Boden, dann nach oben.',
   'play.after': 'Jetzt kommen der Schatten auf der Qibla-Seite und die Suffa.',
+  'play.story': 'Wie entstand die erste Moschee in Medina? Bring es in die richtige Reihenfolge.',
   'play.needsFirst': 'Zuerst kommt: {part}.',
   'play.wrongSpot': 'Nicht hier – wohin gehört {part}?',
   'play.glowHint': 'Leg es auf den leuchtenden Platz.',
@@ -113,8 +115,8 @@ const de: Record<Key, string> = {
 
 const bs: Record<Key, string> = {
   title: 'Izgradi mesdžid',
+  howTo: 'Nivo 1: prevuci svaki dio na gradilište – mesdžid raste. Nivo 2: poredaj priču o prvom mesdžidu. Nivo 3: kibla se mijenja – okreni je i dodaj nove dijelove.',
   description: 'Izgradi rani Poslanikov mesdžid u Medini – od mjesta gdje je deva kleknula do krova od palminog lišća.',
-  howTo: 'Prevuci svaki dio na gradilište – on sjedne na svoje mjesto i mesdžid raste. Nivo 1 pokazuje put, nivo 2 je po sjećanju, nivo 3 donosi promjenu kible.',
   'part.ground': 'Mjesto gdje je deva kleknula',
   'part.walls': 'Zidovi od čerpića',
   'part.pillars': 'Stubovi od palminih stabala',
@@ -136,6 +138,7 @@ const bs: Record<Key, string> = {
   'play.next': 'Sljedeće: {part}',
   'play.memory': 'Gradi po sjećanju – najprije tlo, pa prema gore.',
   'play.after': 'Sada dodaj hlad na strani kible i Suffu.',
+  'play.story': 'Kako je nastao prvi mesdžid u Medini? Poredaj redom.',
   'play.needsFirst': 'Najprije dolazi: {part}.',
   'play.wrongSpot': 'Ne ovdje – gdje pripada {part}?',
   'play.glowHint': 'Spusti ga na mjesto koje svijetli.',

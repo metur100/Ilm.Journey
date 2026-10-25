@@ -1,24 +1,33 @@
 import { useMemo } from 'react';
 
 import type { GameApi } from '@/core/games';
-import { GameBoard, kitResult, MemoryPairs, SequenceBoard } from '@/core/games/kit';
+import { GameBoard, kitResult, MemoryPairs } from '@/core/games/kit';
 
-import { type HarunConfig, memoryPairs, orderItems } from './content';
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
+import { type HarunConfig, type HarunGameConfig, memoryPairs } from './content';
 
-/** Speak & Support (Harun, Quran 20:25–36): match Musa's requests with their pictures, then say the dua in order. */
-export function HarunHelperGame(api: GameApi<HarunConfig>) {
-  const { mode, ids, peekMs, hints } = api.config;
+/** Harun: L1 matches the requests of Musa's dua (Quran 20:25–36) with their pictures; L2 and L3 are episodes of his life. */
+export function HarunHelperGame(api: GameApi<HarunGameConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  return <DuaPairs api={{ ...api, config }} />;
+}
+
+function DuaPairs({ api }: { api: GameApi<HarunConfig> }) {
+  const { ids, peekMs, hints } = api.config;
   const fact = api.facts[0]?.id ?? 'musa-dua';
   const pairs = useMemo(() => memoryPairs(ids), [ids]);
-  const items = useMemo(() => orderItems(ids), [ids]);
-  const done = (moves: number) => ({ mistakes }: { mistakes: number }) => api.onComplete(kitResult({ moves, mistakes, factsMissed: mistakes > 0 ? [fact] : [] }));
   return (
     <GameBoard api={api}>
-      {mode === 'memory' ? (
-        <MemoryPairs pairs={pairs} peekMs={peekMs} hints={hints} columns={4} prompt={api.t('play.promptMemory')} onDone={done(pairs.length)} />
-      ) : (
-        <SequenceBoard items={items} variant="list" hints={hints} prompt={api.t('play.promptOrder')} onDone={done(items.length)} />
-      )}
+      <MemoryPairs
+        pairs={pairs}
+        peekMs={peekMs}
+        hints={hints}
+        columns={4}
+        prompt={api.t('play.promptMemory')}
+        onDone={({ mistakes }) => api.onComplete(kitResult({ moves: pairs.length, mistakes, factsMissed: mistakes > 0 ? [fact] : [] }))}
+      />
     </GameBoard>
   );
 }

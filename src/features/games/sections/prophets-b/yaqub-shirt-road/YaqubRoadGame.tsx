@@ -9,8 +9,10 @@ import type { GameApi } from '@/core/games';
 import { Burst, ChallengeClock, CheckBadge, FinishReveal, GameBoard, Glow, InlineCaption, kitResult, useKitColors, useShake } from '@/core/games/kit';
 import { radius, spacing } from '@/core/theme';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
 import { useEngineCore, useKitProbe, useMeasure } from '../shared/kit';
-import { cellOf, classifyTap, nextOnSolution, type RoadConfig, solveRoad } from './logic';
+import { cellOf, classifyTap, nextOnSolution, type RoadConfig, solveRoad, type YaqubConfig } from './logic';
 
 type Look = 'sand' | 'rock' | 'road' | 'head' | 'start' | 'goal' | 'well' | 'wellDone';
 
@@ -180,7 +182,14 @@ function RoadBoard({ cfg, t, onDone }: RoadBoardProps) {
   );
 }
 
-export function YaqubRoadGame(api: GameApi<RoadConfig>) {
+/** Yaqub: L1 and L2 are episodes of his life; L3 (Quran 12:93–96) lays the road for the caravan with Yusuf's shirt. */
+export function YaqubRoadGame(api: GameApi<YaqubConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  return <Road api={{ ...api, config }} />;
+}
+
+function Road({ api }: { api: GameApi<RoadConfig> }) {
   const factId = api.facts[0]?.id ?? 'shirt-sight';
   const moves = useMemo(() => (solveRoad(api.config)?.length ?? 2) - 1, [api.config]);
   return (

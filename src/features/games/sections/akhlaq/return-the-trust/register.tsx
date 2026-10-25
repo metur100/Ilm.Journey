@@ -6,7 +6,7 @@ import { trustI18n } from './i18n';
 
 /*
  * Return the Trust – ConnectPairs. L1: three borrowed things → their owners (pictures on both sides, hints).
- * L2: five things, both sides shuffled, no hints. L3 (twist): the four kinds of amanah named in the lesson
+ * L2: four other borrowed things (mushaf stand, basket, umbrella, pen), both sides shuffled, no hints. L3 (twist): the four kinds of amanah named in the lesson
  * (a borrowed thing, a secret, a promise, a task) – match each example to its kind.
  */
 
@@ -35,6 +35,8 @@ const LADDER = P('ladder', { key: 'item.ladder', art: 'akhlaq.ladder' }, { key: 
 const BALL = P('ball', { key: 'item.ball', art: 'akhlaq.ball' }, { key: 'owner.school', art: 'akhlaq.school' });
 const MUSHAF = P('mushaf-stand', { key: 'item.mushaf', art: 'object.quran-stand' }, { key: 'owner.masjid', art: 'garden.masjid-small' });
 const BASKET = P('basket', { key: 'item.basket', art: 'object.basket' }, { key: 'owner.shop', art: 'place.market' });
+const UMBRELLA = P('umbrella', { key: 'item.umbrella', art: 'akhlaq.umbrella' }, { key: 'owner.aunt', art: 'place.house' });
+const PEN = P('pen', { key: 'item.pen', art: 'object.pen' }, { key: 'owner.school', art: 'akhlaq.school' });
 
 const KINDS = [
   P('borrowed', { key: 'l3.game', art: 'akhlaq.toy-car' }, { key: 'kind.borrowed' }),
@@ -70,7 +72,7 @@ export const returnTheTrustGame: GameDef<TrustConfig> = {
   component: ReturnTheTrustGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', pairs: [BOOK, LADDER, BALL], shuffleLeft: false, hints: true, fact: FACTS.amanah.id }, facts: [FACTS.amanah] },
-    { level: 2, config: { prompt: 'play.l2', pairs: [BOOK, LADDER, BALL, MUSHAF, BASKET], shuffleLeft: true, hints: false, fact: FACTS.example.id }, facts: [FACTS.example] },
+    { level: 2, config: { prompt: 'play.l2', pairs: [MUSHAF, BASKET, UMBRELLA, PEN], shuffleLeft: true, hints: false, fact: FACTS.example.id }, facts: [FACTS.example] },
     { level: 3, config: { prompt: 'play.l3', pairs: KINDS, shuffleLeft: true, hints: false, fact: FACTS.keep.id }, facts: [FACTS.keep] },
   ],
   order: 70,

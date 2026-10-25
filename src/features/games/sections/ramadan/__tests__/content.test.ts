@@ -1,6 +1,10 @@
 import { definitions } from '@/core/art/catalogue';
 import { LANGUAGES } from '@/core/models';
 import quest from '@/features/learn/content/quests/ramadan.json';
+import sabrShukr from '@/features/learn/content/akhlaq/akhlaq-sabr-shukr.json';
+import akhlaqQuest from '@/features/learn/content/quests/akhlaq.json';
+import quranQuest from '@/features/learn/content/quests/quran.json';
+import salahQuest from '@/features/learn/content/quests/salah.json';
 import month from '@/features/learn/content/ramadan/ramadan-month.json';
 
 import { CONTENT, FACTS } from '../shared/facts';
@@ -69,9 +73,18 @@ describe('Ramadan content', () => {
     expect(DEEDS).toEqual((quest.goodDeeds as { label: L }[]).map((d) => d.label));
   });
 
-  it('the Arabic words come from the Ramadan lessons', () => {
-    const arabic = (quest.lessons as unknown as { sections: { arabic?: string; transliteration?: string }[] }[]).flatMap((l) => l.sections).filter((x) => x.arabic);
-    for (const pair of Object.values(W)) expect(arabic).toContainEqual(expect.objectContaining({ arabic: pair.a.arabic, transliteration: pair.a.sub }));
+  it('the Arabic words come from the Learn lessons (Ramadan, Quran, Salah, Akhlaq)', () => {
+    const words: { arabic: string; transliteration?: string }[] = [];
+    const walk = (v: unknown): void => {
+      if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === 'object') {
+        const o = v as { arabic?: unknown; transliteration?: unknown };
+        if (typeof o.arabic === 'string') words.push({ arabic: o.arabic, transliteration: typeof o.transliteration === 'string' ? o.transliteration : undefined });
+        Object.values(v).forEach(walk);
+      }
+    };
+    [quest, quranQuest, salahQuest, akhlaqQuest, sabrShukr].forEach(walk);
+    for (const pair of Object.values(W)) expect(words).toContainEqual({ arabic: pair.a.arabic, transliteration: pair.a.sub });
   });
 
   it('section art exists', () => {

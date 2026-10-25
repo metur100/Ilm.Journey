@@ -1,6 +1,6 @@
 import type { DayKey } from '../models';
 import { daysBetween } from '../utils/date';
-import { GARDEN_SPOTS, getGardenElement, grows } from './elements';
+import { fitsSpot, GARDEN_SPOTS, getGardenElement, grows, nextSpotFor, REMOVED_GARDEN_ELEMENTS } from './elements';
 
 /**
  * Pure rules of the Ilm Garden (no React, time passed in) – earning, unlocking, planting, watering, thirst.
@@ -45,6 +45,8 @@ export const GROWTH_STAGES = [0, 1, 3] as const;
 /** Starting gift so a new learner can plant right away. */
 export const STARTING_SEEDS = 2;
 export const STARTING_WATER = 1;
+/** The first sapling stands in a flower bed of the middle row. */
+const STARTING_SPOT = 6;
 
 export interface PlacedElement {
   elementId: string;
@@ -76,7 +78,7 @@ export interface GardenData {
 
 export function createGarden(): GardenData {
   return {
-    placed: [{ elementId: 'sapling', spot: 7, plantedAt: new Date(0).toISOString(), waterings: 0 }],
+    placed: [{ elementId: 'sapling', spot: STARTING_SPOT, plantedAt: new Date(0).toISOString(), waterings: 0 }],
     unlocked: [],
     seeds: STARTING_SEEDS,
     water: STARTING_WATER,
@@ -174,9 +176,13 @@ export function freeSpots(data: GardenData): number[] {
   return GARDEN_SPOTS.map((_, i) => i).filter((i) => isSpotFree(data, i));
 }
 
-/** Plants an available element on a free spot. Returns null when the element is locked or the spot taken. */
+/**
+ * Plants an available element on a free spot of a fitting kind (water on a water spot, trees in the grove, birds in
+ * the sky …). Returns null when the element is locked, the spot taken or the wrong kind of place.
+ */
 export function plantElement(data: GardenData, elementId: string, spot: number, level: number, nowIso: string): GardenData | null {
-  if (unlockState(data, elementId, level) !== 'available' || !isSpotFree(data, spot)) return null;
+  const element = getGardenElement(elementId);
+  if (!element || unlockState(data, elementId, level) !== 'available' || !isSpotFree(data, spot) || !fitsSpot(element, spot)) return null;
   return { ...data, placed: [...data.placed, { elementId, spot, plantedAt: nowIso, waterings: 0 }] };
 }
 
@@ -234,23 +240,54 @@ export function thirstLevel(data: Pick<GardenData, 'lastWatered' | 'lastActivity
 
 const isDay = (v: unknown): v is DayKey => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
 
-/** Repairs stored garden data (unknown elements, duplicate or invalid spots, negative counters). */
+/**
+ * Places stored elements onto valid spots: unknown or removed elements are dropped; an element on a spot of the
+ * wrong kind (a fountain in the sky), on a taken spot or an invalid one moves to the first free fitting spot – or,
+ * when none is free, leaves the garden (it stays unlocked and can be planted again).
+ */
+export function repairPlacement(placed: readonly PlacedElement[]): PlacedElement[] {
+  const known = placed.filter((p) => !!getGardenElement(p.elementId));
+  const used = new Set<number>();
+  const kept = new Set<PlacedElement>();
+  for (const p of known) {
+    if (used.has(p.spot) || !fitsSpot(getGardenElement(p.elementId)!, p.spot)) continue;
+    used.add(p.spot);
+    kept.add(p);
+  }
+  const result: PlacedElement[] = [];
+  for (const p of known) {
+    if (kept.has(p)) {
+      result.push(p);
+      continue;
+    }
+    const free = GARDEN_SPOTS.map((_, i) => i).filter((i) => !used.has(i));
+    const spot = nextSpotFor(getGardenElement(p.elementId)!, free);
+    if (spot === null) continue;
+    used.add(spot);
+    result.push({ ...p, spot });
+  }
+  return result;
+}
+
+/** Repairs stored garden data (unknown or removed elements, wrong/duplicate/invalid spots, negative counters). */
 export function sanitizeGarden(raw: unknown): GardenData | null {
   if (!raw || typeof raw !== 'object') return null;
   const base = createGarden();
   const r = raw as Partial<GardenData>;
   const num = (v: unknown, fallback: number) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.floor(v) : fallback);
-  const used = new Set<number>();
-  const placed = (Array.isArray(r.placed) ? r.placed : base.placed).filter((p): p is PlacedElement => {
-    if (!p || typeof p !== 'object' || typeof p.elementId !== 'string' || !getGardenElement(p.elementId)) return false;
-    if (typeof p.spot !== 'number' || !Number.isInteger(p.spot) || p.spot < 0 || p.spot >= GARDEN_SPOTS.length || used.has(p.spot)) return false;
-    used.add(p.spot);
-    return true;
-  });
+  const stored = (Array.isArray(r.placed) ? r.placed : base.placed).filter(
+    (p): p is PlacedElement => !!p && typeof p === 'object' && typeof p.elementId === 'string' && typeof p.spot === 'number',
+  );
+  const placed = repairPlacement(
+    stored.map((p) => ({ elementId: p.elementId, spot: p.spot, plantedAt: typeof p.plantedAt === 'string' ? p.plantedAt : base.placed[0].plantedAt, waterings: num(p.waterings, 0) })),
+  );
+  const unlockedRaw = Array.isArray(r.unlocked) ? [...new Set(r.unlocked.filter((id): id is string => typeof id === 'string'))] : [];
+  // Seeds paid for elements that were taken out of the garden come back.
+  const refund = unlockedRaw.reduce((sum, id) => sum + (Object.prototype.hasOwnProperty.call(REMOVED_GARDEN_ELEMENTS, id) ? REMOVED_GARDEN_ELEMENTS[id] : 0), 0);
   return {
-    placed: placed.map((p) => ({ elementId: p.elementId, spot: p.spot, plantedAt: typeof p.plantedAt === 'string' ? p.plantedAt : base.placed[0].plantedAt, waterings: num(p.waterings, 0) })),
-    unlocked: Array.isArray(r.unlocked) ? [...new Set(r.unlocked.filter((id): id is string => typeof id === 'string' && !!getGardenElement(id)))] : [],
-    seeds: num(r.seeds, base.seeds),
+    placed,
+    unlocked: unlockedRaw.filter((id) => !!getGardenElement(id)),
+    seeds: num(r.seeds, base.seeds) + refund,
     water: Math.min(MAX_WATER, num(r.water, base.water)),
     lastWatered: isDay(r.lastWatered) ? r.lastWatered : null,
     lastActivityDay: isDay(r.lastActivityDay) ? r.lastActivityDay : null,

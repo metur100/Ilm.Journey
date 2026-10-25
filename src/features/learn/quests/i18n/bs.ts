@@ -74,8 +74,6 @@ const bs: Record<QuestKey, string> = {
   'fact.prompt': 'Da li si znao? „{fact}“ – Je li to tačno?',
   'fact.explanation': 'Da, to je tačno: {fact}',
 
-  'tool.quran': 'Džuz Amma – sve sure',
-  'tool.quranDesc': 'El-Fatiha i svih 37 sura Džuz Amme: uči svaki ajet, slušaj i provjeri se.',
   'tool.duas': 'Dove iz Kur\'ana',
   'tool.duasDesc': 'Dove iz Kur\'ana po temama – s prijevodom i kontekstom.',
   'tool.arabic': 'Harfovi i pisanje',

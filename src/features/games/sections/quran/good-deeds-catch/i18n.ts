@@ -19,6 +19,14 @@ const en = {
   'deed.scold': 'Scold someone who asks',
   'deed.showoff': 'Show off',
   'deed.withhold': 'Refuse small help',
+  'deed.honour-orphan': 'Honour the orphan',
+  'deed.purify': 'Purify yourself',
+  'deed.remember': 'Remember your Lord and pray',
+  'deed.glorify': 'Glorify your Lord',
+  'deed.mercy': 'Urge each other to mercy',
+  'deed.short-measure': 'Give short measure',
+  'deed.love-wealth': 'Love money too much',
+  'deed.more-more': 'Always want more and more',
 } as const;
 
 type Key = keyof typeof en;
@@ -42,6 +50,14 @@ const de: Record<Key, string> = {
   'deed.scold': 'Einen Bittenden anfahren',
   'deed.showoff': 'Angeben',
   'deed.withhold': 'Kleine Hilfe verweigern',
+  'deed.honour-orphan': 'Die Waise ehren',
+  'deed.purify': 'Sich läutern',
+  'deed.remember': 'An deinen Herrn denken und beten',
+  'deed.glorify': 'Deinen Herrn preisen',
+  'deed.mercy': 'Einander zur Barmherzigkeit anhalten',
+  'deed.short-measure': 'Zu wenig abmessen',
+  'deed.love-wealth': 'Geld zu sehr lieben',
+  'deed.more-more': 'Immer mehr und mehr wollen',
 };
 
 const bs: Record<Key, string> = {
@@ -63,6 +79,14 @@ const bs: Record<Key, string> = {
   'deed.scold': 'Podviknuti na onoga ko moli',
   'deed.showoff': 'Pretvarati se pred ljudima',
   'deed.withhold': 'Uskratiti malu pomoć',
+  'deed.honour-orphan': 'Pazi siroče',
+  'deed.purify': 'Očisti svoju dušu',
+  'deed.remember': 'Spominji Gospodara i klanjaj',
+  'deed.glorify': 'Veličaj svog Gospodara',
+  'deed.mercy': 'Podstičite jedni druge na milost',
+  'deed.short-measure': 'Zakidati na mjeri',
+  'deed.love-wealth': 'Previše voljeti novac',
+  'deed.more-more': 'Uvijek htjeti sve više',
 };
 
 export const goodDeedsI18n = defineNamespace('game.good-deeds-catch', { en, de, bs });

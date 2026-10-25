@@ -1,12 +1,16 @@
 import type { GameApi } from '@/core/games';
 import { GameBoard, kitResult, PathTrace } from '@/core/games/kit';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
 import { factsFor } from '../shared';
 import { SULAYMAN_MISSED, type SulaymanConfig } from './register';
 
-/** The valley of the ants (27:18) and the hoopoe's way to Saba' (27:28) – a PathTrace board. */
+/** L1 the valley of the ants (27:18) on a PathTrace board; L2 and L3 are episodes (the hoopoe, the queen of Saba'). */
 export function SulaymanGame(api: GameApi<SulaymanConfig>) {
-  const { map, stops, showRoute, hints, prompt } = api.config;
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  const { map, stops, showRoute, hints, prompt } = config;
   return (
     <GameBoard api={api}>
       <PathTrace

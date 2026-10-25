@@ -19,13 +19,14 @@ import { useAppStore } from '@/core/store/appStore';
 import { unitsOfArea } from '@/features/learn/content';
 import { getQuest, questsOfTopic } from '@/features/learn/content/quests';
 import { clearLearnExtensionsForTests, getTopicTools } from '@/features/learn/extensions';
-import { buildTopicPath, nextPathEntry } from '@/features/learn/path';
+import { buildTopicPath, isUnitTaughtElsewhere, nextPathEntry } from '@/features/learn/path';
 import { EMPTY_QUEST_DATA } from '@/features/learn/quests/services/progress';
 import { questStatus as statusOfQuest } from '@/features/learn/quests/services/status';
 import { lessonXpReason, QUEST_PERSIST, questTarget, questXpReason, useQuestStore } from '@/features/learn/quests/store/questStore';
 import { registerLearnFeature } from '@/features/learn/register';
 import { EMPTY_LEARN } from '@/features/learn/services/progression';
 import { useLearnStore } from '@/features/learn/store/learnStore';
+import { surahsTaughtByQuests } from '@/features/learn/tools/paths';
 
 const learn = () => useLearnStore.getState();
 const questStatus = (id: string) => statusOfQuest(getQuest(id)!);
@@ -100,13 +101,17 @@ describe('topic path', () => {
 
     completeAll('salah');
     expect(buildTopicPath('salah', learn()).find((e) => e.item.kind === 'unit')?.status).toBe('available');
-    expect(nextPathEntry('salah', learn())?.item.id).toBe(unitsOfArea('salah')[0].id);
+    expect(nextPathEntry('salah', learn())?.item.id).toBe(unitsOfArea('salah').find((u) => !isUnitTaughtElsewhere(u.id))?.id);
   });
 
-  it('adds all 25 prophet stories and all 38 surahs as steps', () => {
+  it('adds all 25 prophet stories and all 38 surahs as steps – each surah once', () => {
     expect(buildTopicPath('history', learn()).some((e) => e.item.kind === 'quest')).toBe(false);
     expect(buildTopicPath('prophets', learn()).filter((e) => e.item.kind === 'quest')).toHaveLength(25);
-    expect(buildTopicPath('quran', learn()).filter((e) => e.item.kind === 'quest' && e.item.id.startsWith('surah-'))).toHaveLength(38);
+    const surahSteps = buildTopicPath('quran', learn()).filter((e) => e.item.kind === 'quest' && e.item.id.startsWith('surah-'));
+    const taught = surahsTaughtByQuests();
+    expect([...taught].sort((a, b) => a - b)).toEqual([1, 103, 108, 112, 113, 114]);
+    expect(surahSteps).toHaveLength(38 - taught.size);
+    for (const n of taught) expect(surahSteps.some((e) => e.item.id === `surah-${n}`)).toBe(false);
   });
 
   it('suggests the next quest as today’s learning quest and completes it', () => {
@@ -117,13 +122,13 @@ describe('topic path', () => {
     expect(useAppStore.getState().quests.find((q) => q.kind === 'learning')?.completed).toBe(true);
   });
 
-  it('registers the topic tools for quran, sufara, ramadan, salah and prophets – and no games', () => {
-    expect(getTopicTools('quran').map((t) => t.href)).toEqual(['/tools/quran', '/tools/duas']);
+  it('registers the topic tools for quran, sufara, ramadan and salah – no games, no list of the path steps', () => {
+    expect(getTopicTools('quran').map((t) => t.href)).toEqual(['/tools/duas']);
     expect(getTopicTools('sufara').map((t) => t.href)).toEqual(['/tools/arabic']);
     expect(getTopicTools('arabic')).toEqual([]);
     expect(getTopicTools('ramadan').map((t) => t.href)).toEqual(['/tools/ramadan']);
     expect(getTopicTools('salah').map((t) => t.href)).toEqual(['/tools/salah']);
-    expect(getTopicTools('prophets').map((t) => t.href)).toEqual(['/tools/prophets']);
+    expect(getTopicTools('prophets')).toEqual([]);
     for (const topic of TOPIC_IDS) for (const tool of getTopicTools(topic)) expect(JSON.stringify(tool.href)).not.toContain('/game/');
     for (const topic of TOPIC_IDS) {
       for (const tool of getTopicTools(topic)) {

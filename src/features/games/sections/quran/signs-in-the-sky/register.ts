@@ -11,7 +11,8 @@ import { type SignsKey, signsI18n } from './i18n';
  * Signs Allah Swears By (TapScene). The oaths at the start of several surahs, found in illustrated scenes; each found
  * sign shows the translation of its ayah (data). L1: Ash-Shams 91:1–6 in the order of the ayahs, with hints.
  * L2: At-Tin 95:1–3 in any order, with a distractor. L3 twist: oaths of three surahs (92, 93, 86) one after another,
- * with distractors and no hints.
+ * with distractors and no hints. Each level teaches other ayahs – L3 uses the sky scene again, but for the oaths of
+ * other surahs (its spot ids name the surah).
  */
 
 export interface SignsConfig {
@@ -98,15 +99,15 @@ export const signsGame: GameDef<SignsConfig> = {
         hints: false,
         prompt: 'play.promptMixed',
         spots: [
-          spot('night', 'spot.night', { x: 0.6, y: 0.42, w: 0.32, h: 0.22 }, [92, 1]),
-          spot('day', 'spot.day', { x: 0.03, y: 0.42, w: 0.3, h: 0.24 }, [92, 2]),
+          spot('lail-night', 'spot.night', { x: 0.6, y: 0.42, w: 0.32, h: 0.22 }, [92, 1]),
+          spot('lail-day', 'spot.day', { x: 0.03, y: 0.42, w: 0.3, h: 0.24 }, [92, 2]),
           spot('brightness', 'spot.brightness', { x: 0.1, y: 0.1, w: 0.18, h: 0.25 }, [93, 1]),
-          spot('sky', 'spot.sky', { x: 0.36, y: 0.02, w: 0.28, h: 0.2 }, [86, 1]),
+          spot('tariq-sky', 'spot.sky', { x: 0.36, y: 0.02, w: 0.28, h: 0.2 }, [86, 1]),
           spot('star', 'spot.star', { x: 0.62, y: 0.04, w: 0.12, h: 0.14 }, [86, 3]),
-          spot('moon', 'spot.moon', { x: 0.75, y: 0.15, w: 0.15, h: 0.22 }),
-          spot('earth', 'spot.earth', { x: 0.25, y: 0.76, w: 0.5, h: 0.22 }),
+          spot('not-moon', 'spot.moon', { x: 0.75, y: 0.15, w: 0.15, h: 0.22 }),
+          spot('not-earth', 'spot.earth', { x: 0.25, y: 0.76, w: 0.5, h: 0.22 }),
         ],
-        factOf: { night: 'duha-oaths', day: 'duha-oaths', brightness: 'duha-oaths', sky: 'tariq-star', star: 'tariq-star', moon: 'duha-oaths', earth: 'duha-oaths' },
+        factOf: { 'lail-night': 'duha-oaths', 'lail-day': 'duha-oaths', brightness: 'duha-oaths', 'tariq-sky': 'tariq-star', star: 'tariq-star', 'not-moon': 'duha-oaths', 'not-earth': 'duha-oaths' },
       },
       facts: [FACTS.duha, FACTS.tariq],
     },

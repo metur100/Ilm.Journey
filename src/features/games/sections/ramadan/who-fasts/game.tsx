@@ -9,7 +9,9 @@ import { FACTS, T } from '../shared/facts';
  * Who Fasts? Connect each situation with what applies (Quran 2:183–185; Hanafi practice per the ilmihal):
  * the healthy adult fasts, the ill and the traveller make the days up later, children are not obliged, the very old
  * who cannot fast feed a poor person for each day (fidya, 2:184), and whoever feels unwell stops and tells an adult.
- * L1: three pairs with hints. L2: five pairs. L3: all six, both columns shuffled, no hints.
+ * Every level has its own situations: L1 who fasts (the adult, the child, feeling dizzy), with hints. L2 who is
+ * excused (the ill, the traveller, the very old). L3 during the fast day (practising until noon, drinking by
+ * forgetting – Bukhari 1933, thirsty in the afternoon – 2:187), both columns shuffled, no hints.
  */
 
 export const WHO_FASTS_ID = 'who-fasts';
@@ -66,6 +68,21 @@ const P = {
     left: { art: 'food.water', label: T('Practising and feeling dizzy', 'Übt und fühlt sich schwindlig', 'Vježba i vrti mu se u glavi') },
     right: { label: T('Stops and tells an adult', 'Hört auf und sagt es einem Erwachsenen', 'Prestane i kaže odrasloj osobi') },
   },
+  practise: {
+    id: 'practise',
+    left: { art: 'ramadan.sky-arc', label: T('A child practising until noon', 'Ein Kind übt bis zum Mittag', 'Dijete vježba post do podne') },
+    right: { label: T('Good – little by little, with the parents’ guidance', 'Gut – Schritt für Schritt, mit Anleitung der Eltern', 'Dobro – malo po malo, uz vodstvo roditelja') },
+  },
+  forgot: {
+    id: 'forgot',
+    left: { art: 'ramadan.thought', label: T('Drank water, forgetting the fast', 'Trank Wasser und vergaß das Fasten', 'Popio vodu, zaboravivši da posti') },
+    right: { label: T('The fast still counts – completes it', 'Das Fasten gilt – fastet weiter', 'Post mu vrijedi – nastavlja postiti') },
+  },
+  thirsty: {
+    id: 'thirsty',
+    left: { art: 'sky.afternoon', label: T('Thirsty in the afternoon, but well', 'Am Nachmittag durstig, aber gesund', 'Žedan popodne, ali je dobro') },
+    right: { label: T('Keeps the fast until sunset (Maghrib)', 'Fastet weiter bis Sonnenuntergang (Maghrib)', 'Posti dalje do zalaska sunca (akšama)') },
+  },
 } satisfies Record<string, ConnectPair>;
 
 export interface WhoFastsConfig {
@@ -81,6 +98,9 @@ const FACT_OF: Record<string, string> = {
   old: FACTS.fidya.id,
   child: FACTS.whoFasts.id,
   adult: FACTS.whoFasts.id,
+  practise: FACTS.forgot.id,
+  forgot: FACTS.forgot.id,
+  thirsty: FACTS.fastTime.id,
 };
 
 function WhoFastsGame(api: GameApi<WhoFastsConfig>) {
@@ -99,10 +119,10 @@ export const whoFastsGame = ramadanGame<WhoFastsConfig>({
   hintArt: 'ramadan.calendar',
   component: WhoFastsGame,
   levels: [
-    { level: 1, config: { pairs: [P.adult, P.ill, P.child], hints: true, shuffleLeft: false }, facts: [FACTS.whoFasts] },
-    { level: 2, config: { pairs: [P.adult, P.ill, P.traveller, P.child, P.dizzy], hints: false, shuffleLeft: false }, facts: [FACTS.makeUp, FACTS.staySafe] },
-    { level: 3, config: { pairs: [P.adult, P.ill, P.traveller, P.child, P.old, P.dizzy], hints: false, shuffleLeft: true }, facts: [FACTS.fidya] },
+    { level: 1, config: { pairs: [P.adult, P.child, P.dizzy], hints: true, shuffleLeft: false }, facts: [FACTS.whoFasts, FACTS.staySafe] },
+    { level: 2, config: { pairs: [P.ill, P.traveller, P.old], hints: false, shuffleLeft: false }, facts: [FACTS.makeUp, FACTS.fidya] },
+    { level: 3, config: { pairs: [P.practise, P.forgot, P.thirsty], hints: false, shuffleLeft: true }, facts: [FACTS.forgot, FACTS.fastTime] },
   ],
-  teaches: { questionKeys: ['learn:ramadan-month-4', 'quest:ramadan-children', 'quest:ramadan-dizzy'] },
+  teaches: { questionKeys: ['learn:ramadan-month-4', 'quest:ramadan-children', 'quest:ramadan-dizzy', 'quest:ramadan-fast-time'] },
   order: 100,
 });

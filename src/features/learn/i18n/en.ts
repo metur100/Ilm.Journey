@@ -53,8 +53,6 @@ const en = {
   'master.review': 'Review now',
   'master.retry': 'Try again',
 
-  'tool.stories': 'Prophet stories',
-  'tool.storiesDesc': 'Interactive stories of all 25 prophets in the Stories tab.',
   'tool.seerah': 'The Seerah journey',
   'tool.seerahDesc': 'Episodes, timeline and map of the life of the Prophet ﷺ.',
   'tool.salah': 'Salah – the complete guide',

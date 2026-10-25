@@ -38,8 +38,10 @@ export const wordBuilderI18n = defineNamespace('game.word-builder', {
   },
 });
 
-const THREE = ['bab', 'shams', 'qamar', 'qalam', 'jamal', 'bayt', 'tamr', 'fil', 'nar', 'asal', 'khubz'];
-const LONGER = ['nakhla', 'saa', 'khayma', 'halib', 'baqara', 'namla', 'samaka', 'miftah', 'mizan', 'zaytun', 'qindil', 'hamama', 'safina'];
+/* Every level has its own words (owner feedback: no level repeats another): short words, longer words, then a new mix with look-alike letters. */
+const THREE = ['bab', 'shams', 'qamar', 'qalam', 'jamal', 'bayt', 'tamr'];
+const LONGER = ['nakhla', 'saa', 'khayma', 'halib', 'baqara', 'namla', 'samaka', 'miftah'];
+const MIXED = ['fil', 'nar', 'asal', 'khubz', 'mizan', 'zaytun', 'qindil', 'hamama', 'safina'];
 
 export const wordBuilderGame = arabicGame<WordBuilderConfig>({
   id: 'word-builder',
@@ -51,7 +53,7 @@ export const wordBuilderGame = arabicGame<WordBuilderConfig>({
   levels: [
     { config: { anchors: ['nur'], pool: THREE, words: 4, hints: true, distractors: false }, facts: [FACTS.joining, wordFact('nur', ['kitab', 'masjid'])] },
     { config: { anchors: ['kitab', 'masjid'], pool: LONGER, words: 4, hints: false, distractors: false }, facts: [wordFact('kitab', ['nur', 'masjid']), FACTS.masjid] },
-    { config: { anchors: [], pool: [...THREE, ...LONGER], words: 4, hints: false, distractors: true }, facts: [FACTS.dots] },
+    { config: { anchors: [], pool: MIXED, words: 4, hints: false, distractors: true }, facts: [FACTS.dots] },
   ],
   teaches: { questionKeys: ['quest:arabic-rtl', 'quest:arabic-masjid-word', 'quest:arabic-dots-ba'] },
   order: 130,

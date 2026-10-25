@@ -17,8 +17,16 @@ import {
 
 export const GARDEN_PERSIST: PersistSpec<GardenData> = {
   key: storageKey('garden'),
-  version: 1,
-  migrations: {},
+  version: 2,
+  migrations: {
+    // v1 → v2: spots got kinds (grove, water, bed, path, sky) and new positions – the old indices meant other places,
+    // so every element is placed again on a fitting free spot by `sanitizeGarden`.
+    1: (data) => {
+      if (!data || typeof data !== 'object') return data;
+      const d = data as { placed?: unknown };
+      return Array.isArray(d.placed) ? { ...d, placed: d.placed.map((p: unknown) => (p && typeof p === 'object' ? { ...p, spot: -1 } : p)) } : data;
+    },
+  },
   sanitize: sanitizeGarden,
 };
 

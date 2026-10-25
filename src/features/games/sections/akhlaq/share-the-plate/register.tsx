@@ -9,9 +9,10 @@ import { type FoodPiece, pieces, shareRule } from './logic';
 import { shareI18n } from './i18n';
 
 /*
- * Share the Plate – SceneDrop on a table seen from above (Bukhari 5392: the food of two is enough for three, and the
- * food of three for four). L1: two plates, hints. L2 (the same food, a guest more): three plates, no hints.
- * L3: four plates and three kinds of food – the neighbours are invited (Muslim 2625).
+ * Share the Plate – SceneDrop on a table seen from above. Every level is a different meal:
+ * L1: a friend visits – dates and bread on two plates, hints (giving food).
+ * L2: a guest comes to dinner – rice and fruit on three plates (Bukhari 5392: the food of two is enough for three).
+ * L3: soup for the neighbours – soup, olives and milk on four plates (Muslim 2625).
  */
 
 type Plate = 'you' | 'friend' | 'guest' | 'neighbour';
@@ -24,7 +25,15 @@ export interface ShareConfig {
   fact: string;
 }
 
-const FOOD_ART: Record<string, string> = { dates: 'food.dates', bread: 'food.bread', fruit: 'food.fruit-bowl' };
+const FOOD_ART: Record<string, string> = {
+  dates: 'food.dates',
+  bread: 'food.bread',
+  fruit: 'food.fruit-bowl',
+  rice: 'food.rice',
+  soup: 'food.soup',
+  olives: 'food.olives',
+  milk: 'food.milk',
+};
 
 /** Plate places on the table (akhlaq.table) for 2, 3 or 4 plates. */
 const LAYOUT: Record<number, KitBox[]> = {
@@ -72,10 +81,10 @@ export const shareThePlateGame: GameDef<ShareConfig> = {
   component: ShareThePlateGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', plates: ['you', 'friend'], food: mix(pieces('dates', 4), pieces('bread', 2)), hints: true, fact: FACTS.give.id }, facts: [FACTS.give] },
-    { level: 2, config: { prompt: 'play.l2', plates: ['you', 'friend', 'guest'], food: mix(pieces('dates', 6), pieces('bread', 3)), hints: false, fact: FACTS.two.id }, facts: [FACTS.two] },
+    { level: 2, config: { prompt: 'play.l2', plates: ['you', 'friend', 'guest'], food: mix(pieces('rice', 3), pieces('fruit', 6)), hints: false, fact: FACTS.two.id }, facts: [FACTS.two] },
     {
       level: 3,
-      config: { prompt: 'play.l3', plates: ['you', 'friend', 'neighbour', 'guest'], food: mix(pieces('dates', 4), pieces('bread', 4), pieces('fruit', 4)), hints: false, fact: FACTS.soup.id },
+      config: { prompt: 'play.l3', plates: ['you', 'friend', 'neighbour', 'guest'], food: mix(pieces('soup', 4), pieces('olives', 4), pieces('milk', 4)), hints: false, fact: FACTS.soup.id },
       facts: [FACTS.soup],
     },
   ],

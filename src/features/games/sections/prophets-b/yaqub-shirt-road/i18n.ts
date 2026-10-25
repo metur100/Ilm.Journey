@@ -1,9 +1,9 @@
 import { defineNamespace } from '@/core/i18n';
 
 const en = {
-  title: "The Shirt's Road",
-  description: "Lay a road across the desert so the caravan can bring Yusuf's shirt from Egypt to his father Yaqub in Canaan.",
-  howTo: 'Tap the desert next to the end of the road to make it longer. Go around the rocks. Tap the last piece again to take it back.',
+  title: 'Yaqub – Beautiful Patience',
+  description: 'Three events of Yaqub’s life: the day Yusuf was taken, the years of grief without losing hope, and the shirt that brought back his sight – each with its lesson.',
+  howTo: 'Level 1: put the events in order. Level 2: connect what Yaqub said with how it goes on. Level 3: tap the desert next to the end of the road to make it longer, around the rocks and past both wells.',
   'play.prompt': 'Build the road from Egypt to Canaan – one step at a time.',
   'play.promptWells': 'The way is long: let the caravan rest at both wells before it reaches Canaan.',
   'play.rock': 'Rocks block the way – go around them.',
@@ -27,9 +27,9 @@ const en = {
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
-  title: 'Der Weg des Hemdes',
-  description: 'Lege einen Weg durch die Wüste, damit die Karawane Yusufs Hemd aus Ägypten zu seinem Vater Yaqub nach Kanaan bringen kann.',
-  howTo: 'Tippe auf die Wüste neben dem Ende des Weges, um ihn zu verlängern. Geh um die Felsen herum. Tippe das letzte Stück noch einmal an, um es zurückzunehmen.',
+  title: 'Yaqub – schöne Geduld',
+  description: 'Drei Ereignisse aus Yaqubs Leben: der Tag, an dem Yusuf fortgenommen wurde, die Jahre der Trauer ohne Verlust der Hoffnung und das Hemd, das ihm sein Augenlicht zurückbrachte – jedes mit seiner Lehre.',
+  howTo: 'Stufe 1: Bring die Ereignisse in die richtige Reihenfolge. Stufe 2: Verbinde, was Yaqub sagte, mit der Fortsetzung. Stufe 3: Tippe auf die Wüste neben dem Ende des Weges, um ihn zu verlängern – um die Felsen herum und an beiden Brunnen vorbei.',
   'play.prompt': 'Baue den Weg von Ägypten nach Kanaan – Schritt für Schritt.',
   'play.promptWells': 'Der Weg ist weit: Lass die Karawane an beiden Brunnen rasten, bevor sie Kanaan erreicht.',
   'play.rock': 'Felsen versperren den Weg – geh um sie herum.',
@@ -51,9 +51,9 @@ const de: Record<Key, string> = {
 };
 
 const bs: Record<Key, string> = {
-  title: 'Put košulje',
-  description: 'Napravi put kroz pustinju kako bi karavan donio Jusufovu košulju iz Egipta njegovom ocu Jakubu u Kanaan.',
-  howTo: 'Dodirni pustinju pored kraja puta da ga produžiš. Zaobiđi stijene. Ponovo dodirni posljednji dio da ga vratiš.',
+  title: 'Jakub – lijepo strpljenje',
+  description: 'Tri događaja iz Jakubova života: dan kad je Jusuf odveden, godine tuge bez gubljenja nade i košulja koja mu je vratila vid – svaki sa svojom poukom.',
+  howTo: 'Nivo 1: poredaj događaje. Nivo 2: spoji ono što je Jakub rekao s nastavkom. Nivo 3: dodiruj pustinju pored kraja puta da ga produžiš – oko stijena i pored oba bunara.',
   'play.prompt': 'Napravi put od Egipta do Kanaana – korak po korak.',
   'play.promptWells': 'Put je dug: neka se karavan odmori kod oba bunara prije nego što stigne u Kanaan.',
   'play.rock': 'Stijene zatvaraju put – zaobiđi ih.',

@@ -9,6 +9,8 @@ import type { GameApi } from '@/core/games';
 import { Burst, ChallengeClock, DragTile, DropZone, FinishReveal, GameBoard, InlineCaption, Pop, Tile, Tray } from '@/core/games/kit';
 import { radius, spacing } from '@/core/theme';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
 import { useEngineCore, useKitProbe } from '../shared/kit';
 import { YUSUF_FACTS } from './facts';
 import {
@@ -28,6 +30,7 @@ import {
   storeYear,
   targetFor,
   totalNeed,
+  type YusufStoreConfig,
 } from './logic';
 import { GrainItem, type SceneMode, Timeline, YusufScene } from './parts';
 
@@ -327,10 +330,12 @@ function DropZoneChip({ label, onPress, reduced, children }: { label: string; on
  * grain out in the hard years. A short storehouse is said gently in the caption and the plan can be made again; L3
  * adds the rule of 12:47 (grain in the ear keeps, loose grain spoils a little). The finished picture is the year of rain.
  */
-export function YusufStorehouseGame(api: GameApi<StorehouseConfig>) {
+export function YusufStorehouseGame(api: GameApi<YusufStoreConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
   return (
     <GameBoard api={api}>
-      <Storehouse api={api} />
+      <Storehouse api={{ ...api, config }} />
     </GameBoard>
   );
 }

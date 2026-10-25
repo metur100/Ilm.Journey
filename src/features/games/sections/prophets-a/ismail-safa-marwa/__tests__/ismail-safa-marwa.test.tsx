@@ -7,5 +7,5 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerIsmailGame();
 
 describe('Safa and Marwa', () => {
-  describeProphetGame(() => getGame(ISMAIL_GAME_ID)!, { art: ISMAIL_ART, mistakeLevel: 3 });
+  describeProphetGame(() => getGame(ISMAIL_GAME_ID)!, { art: ISMAIL_ART, mistakeLevel: 2 });
 });

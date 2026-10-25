@@ -6,18 +6,22 @@ import Svg, { Ellipse, Path } from 'react-native-svg';
 import { Art, hasArt } from '@/core/art';
 import { Icon } from '@/core/components/ui/Icon';
 import {
+  type ArtPlacement,
   depthScale,
   GARDEN_BACKDROP_LAYERS,
   GARDEN_SKY_ART,
   GARDEN_SPOTS,
   gardenArt,
-  maxWidthFraction,
+  type GardenLayout,
+  gardenLayout,
   type GardenMotion,
   getGardenElement,
   growthStage,
+  maxWidthFraction,
   type PlacedElement,
   SKY_GRADIENTS,
   skyForDate,
+  spotPoint,
   type ThirstLevel,
 } from '@/core/garden';
 import { useReducedMotion } from '@/core/hooks/useReducedMotion';
@@ -33,7 +37,7 @@ interface GardenSceneProps {
   /** Real local time decides the sky (dawn / day / sunset / night). */
   now?: Date;
   mode?: GardenSceneMode;
-  /** Free spots offered in `pickSpot` mode. */
+  /** Free spots offered in `pickSpot` mode (only spots that fit the chosen element). */
   freeSpots?: readonly number[];
   onPickSpot?: (spot: number) => void;
   /** Tapping a placed element in `edit` mode. */
@@ -45,7 +49,7 @@ interface GardenSceneProps {
   accessibilityLabel?: string;
   style?: ViewStyle;
   rounded?: boolean;
-  /** Height covered by overlay controls at the top (e.g. the Home header) – sun and moon stay below it. */
+  /** Height covered by overlay controls at the top (e.g. the Home header) – sun, moon and birds stay below it. */
   topInset?: number;
   /** Stop the idle loop while the scene is not visible (screen in the background, scrolled out of view). */
   paused?: boolean;
@@ -53,14 +57,16 @@ interface GardenSceneProps {
 }
 
 const GROWTH_SCALE = [0.55, 0.8, 1] as const;
-/** Flying creatures hover above their spot (fraction of the scene height). */
-const HOVER: Partial<Record<GardenMotion, number>> = { fly: 0.22, flutter: 0.08 };
+/** Butterflies and bees hover a little above their flower bed (fraction of the lawn depth). */
+const HOVER: Partial<Record<GardenMotion, number>> = { flutter: 0.3 };
 
 /**
  * The Ilm Garden as an illustrated, layered scene: sky by the real time of day (sun / moon / stars), the garden
- * backdrop, and the placed elements on 16 spots with depth scaling (back row smaller). Gentle idle animations
- * (swaying plants, flying birds, fluttering butterflies, shimmering water) run on one shared native-driven loop and
- * stop under reduced motion. A thirsty garden looks dry – it never dies.
+ * backdrop, and the placed elements on fixed spots (grove, water, flower beds, beside the path, sky) with depth
+ * scaling (back row smaller). The land is anchored at a computed horizon (`gardenLayout`), so ground spots stay on the
+ * lawn on every screen width. Gentle idle animations (swaying plants, flying birds, fluttering butterflies,
+ * shimmering water) run on one shared native-driven loop and stop under reduced motion. A thirsty garden looks dry –
+ * it never dies.
  */
 export function GardenScene({
   placed,
@@ -84,6 +90,7 @@ export function GardenScene({
   const { t } = useI18n();
   const { c } = useTheme();
   const [width, setWidth] = useState(0);
+  const layout = useMemo(() => (width > 0 ? gardenLayout(width, height, topInset) : null), [width, height, topInset]);
   const sky = skyForDate(now ?? new Date());
   const clock = useState(() => new Animated.Value(0))[0];
 
@@ -96,7 +103,11 @@ export function GardenScene({
     return () => loop.stop();
   }, [clock, reduced, paused]);
 
-  const sorted = useMemo(() => [...placed].sort((a, b) => GARDEN_SPOTS[a.spot].y - GARDEN_SPOTS[b.spot].y || a.spot - b.spot), [placed]);
+  // Sky first, then the lawn from the back to the front, so nearer things stand in front of farther ones.
+  const sorted = useMemo(() => {
+    const order = (spot: number) => (GARDEN_SPOTS[spot].kind === 'sky' ? -1 : GARDEN_SPOTS[spot].d);
+    return placed.filter((p) => !!GARDEN_SPOTS[p.spot]).sort((a, b) => order(a.spot) - order(b.spot) || a.spot - b.spot);
+  }, [placed]);
   const onLayout = (e: LayoutChangeEvent) => setWidth(Math.round(e.nativeEvent.layout.width));
 
   return (
@@ -105,17 +116,16 @@ export function GardenScene({
       onLayout={onLayout}
     >
       <LinearGradient colors={SKY_GRADIENTS[sky]} style={StyleSheet.absoluteFill} />
-      {width > 0 ? (
+      {layout ? (
         <>
-          <SkyPieces sky={sky} width={width} height={height} topInset={topInset} />
-          <Backdrop width={width} height={height} />
+          <SkyPieces sky={sky} layout={layout} />
+          <Backdrop layout={layout} />
           {thirst > 0 ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: thirst === 2 ? 'rgba(150,110,50,0.22)' : 'rgba(150,110,50,0.12)' }]} /> : null}
           {sorted.map((p) => (
             <PlacedView
               key={`${p.spot}-${p.elementId}`}
               placed={p}
-              width={width}
-              height={height}
+              layout={layout}
               clock={clock}
               reduced={reduced}
               thirst={thirst}
@@ -129,8 +139,7 @@ export function GardenScene({
                 <SpotMarker
                   key={spot}
                   spot={spot}
-                  width={width}
-                  height={height}
+                  layout={layout}
                   reduced={reduced}
                   label={t('garden.spot', { number: spot + 1 })}
                   onPress={() => onPickSpot?.(spot)}
@@ -148,10 +157,10 @@ export function GardenScene({
   );
 }
 
-function SkyPieces({ sky, width, height, topInset }: { sky: ReturnType<typeof skyForDate>; width: number; height: number; topInset: number }) {
-  // The open sky lies between the overlay controls and the far hills (≈ 64 % of the scene height).
-  const skyTop = Math.min(topInset, height * 0.4);
-  const skyH = height * 0.64 - skyTop;
+function SkyPieces({ sky, layout }: { sky: ReturnType<typeof skyForDate>; layout: GardenLayout }) {
+  const { width, height, skyTop, skyBottom, horizon } = layout;
+  // The open sky lies between the overlay controls and the far hills.
+  const skyH = Math.max(0, skyBottom - skyTop);
   const body = Math.round(Math.min(width * 0.22, height * 0.22, skyH * 0.7));
   const at = (f: number) => skyTop + Math.max(0, skyH - body) * f;
   const place: Record<typeof sky, { name: string; left: number; top: number }> = {
@@ -163,33 +172,46 @@ function SkyPieces({ sky, width, height, topInset }: { sky: ReturnType<typeof sk
   const p = place[sky];
   return (
     <View pointerEvents="none" style={StyleSheet.absoluteFill}>
-      {sky === 'night' ? <Art name={GARDEN_SKY_ART.stars} size={width * 0.9} style={{ position: 'absolute', left: width * 0.05, top: 0 }} /> : null}
-      <Art name={p.name} size={body} style={{ position: 'absolute', left: p.left, top: p.top }} />
+      {sky === 'night' ? <Art name={GARDEN_SKY_ART.stars} size={width * 0.9} height={Math.max(1, Math.round(horizon))} fit="cover" style={{ position: 'absolute', left: width * 0.05, top: 0 }} /> : null}
+      {body > 0 ? <Art name={p.name} size={body} style={{ position: 'absolute', left: p.left, top: p.top }} /> : null}
+    </View>
+  );
+}
+
+/** A land layer at its natural aspect, anchored at the horizon; hills may be stretched sideways on wide screens. */
+function LandLayer({ name, at }: { name: string; at: ArtPlacement }) {
+  return (
+    <View pointerEvents="none" style={{ position: 'absolute', left: at.left, top: at.top, width: at.w, height: at.h, transform: [{ scaleX: at.scaleX }] }}>
+      <Art name={name} size={at.w} height={at.h} />
     </View>
   );
 }
 
 /**
  * The garden landscape (far hills with the little masjid, trees, lawn) from the art library – only the land layers,
- * so the time-of-day sky above stays visible – or gentle hills while the pieces are not available.
+ * so the time-of-day sky above stays visible – or gentle hills while the pieces are not available. Either way the
+ * lawn begins at `layout.horizon`, where the ground spots are.
  */
-function Backdrop({ width, height }: { width: number; height: number }) {
+function Backdrop({ layout }: { layout: GardenLayout }) {
+  const { width, height, horizon } = layout;
   if (GARDEN_BACKDROP_LAYERS.every(hasArt)) {
+    const [far, mid, lawn] = GARDEN_BACKDROP_LAYERS;
     return (
       <>
-        {GARDEN_BACKDROP_LAYERS.map((name) => (
-          <Art key={name} name={name} size={width} height={height * 0.62} fit="cover" style={{ position: 'absolute', left: 0, bottom: 0 }} />
-        ))}
+        <LandLayer name={far} at={layout.hills} />
+        <LandLayer name={mid} at={layout.hills} />
+        <LandLayer name={lawn} at={layout.lawn} />
       </>
     );
   }
-  const top = height * 0.42;
+  const hill = Math.min(height * 0.16, horizon * 0.5);
+  const front = horizon + (height - horizon) * 0.55;
   return (
     <Svg pointerEvents="none" width={width} height={height} style={StyleSheet.absoluteFill}>
-      <Ellipse cx={width * 0.2} cy={top + height * 0.12} rx={width * 0.45} ry={height * 0.16} fill="#8CC57A" />
-      <Ellipse cx={width * 0.85} cy={top + height * 0.1} rx={width * 0.5} ry={height * 0.15} fill="#7DBA6C" />
-      <Path d={`M0 ${top + height * 0.08} Q${width / 2} ${top - height * 0.02} ${width} ${top + height * 0.08} V${height} H0 Z`} fill="#9ED28A" />
-      <Path d={`M0 ${height * 0.78} Q${width / 2} ${height * 0.7} ${width} ${height * 0.78} V${height} H0 Z`} fill="#8BC877" />
+      <Ellipse cx={width * 0.2} cy={horizon} rx={width * 0.45} ry={hill} fill="#8CC57A" />
+      <Ellipse cx={width * 0.85} cy={horizon} rx={width * 0.5} ry={hill * 0.9} fill="#7DBA6C" />
+      <Path d={`M0 ${horizon} Q${width / 2} ${horizon - hill * 0.25} ${width} ${horizon} V${height} H0 Z`} fill="#9ED28A" />
+      <Path d={`M0 ${front} Q${width / 2} ${front - (height - horizon) * 0.12} ${width} ${front} V${height} H0 Z`} fill="#8BC877" />
     </Svg>
   );
 }
@@ -203,8 +225,7 @@ const PHASES = [
 
 function PlacedView({
   placed,
-  width,
-  height,
+  layout,
   clock,
   reduced,
   thirst,
@@ -213,8 +234,7 @@ function PlacedView({
   label,
 }: {
   placed: PlacedElement;
-  width: number;
-  height: number;
+  layout: GardenLayout;
   clock: Animated.Value;
   reduced: boolean;
   thirst: ThirstLevel;
@@ -231,14 +251,15 @@ function PlacedView({
     Animated.spring(grow, { toValue: 1, friction: 5, tension: 80, useNativeDriver: true }).start();
   }, [grow, isNew, reduced]);
 
-  if (!element) return null;
   const spot = GARDEN_SPOTS[placed.spot];
+  if (!element || !spot) return null;
+  const { width, height, horizon } = layout;
+  const point = spotPoint(layout, placed.spot);
   const growing = element.kind === 'tree' || element.kind === 'plant' || element.kind === 'flower';
   const droop = growing ? (thirst === 2 ? 0.9 : thirst === 1 ? 0.96 : 1) : 1;
-  const rawW = width * element.size * depthScale(spot) * GROWTH_SCALE[growthStage(placed)] * droop;
-  // Never wider than its row cell: neighbouring plants cannot cover each other.
+  const rawW = layout.unit * element.size * depthScale(spot) * GROWTH_SCALE[growthStage(placed)] * droop;
+  // Never wider than its spot: neighbouring elements cannot cover each other.
   const w = Math.round(Math.min(rawW, width * maxWidthFraction(placed.spot)));
-  const hover = (HOVER[element.motion] ?? 0) * height;
   const phase = PHASES[placed.spot % PHASES.length];
   const input = [0, 0.25, 0.5, 0.75, 1];
 
@@ -266,13 +287,16 @@ function PlacedView({
     }
   }
 
-  const box: ViewStyle = { position: 'absolute', left: spot.x * width - w / 2, bottom: height - spot.y * height + hover, width: w, alignItems: 'center' };
+  // Ground elements stand with their feet on the spot; sky elements are centred on it.
+  const hover = spot.kind === 'sky' ? 0 : (HOVER[element.motion] ?? 0) * (height - horizon);
+  const feet = spot.kind === 'sky' ? point.y + w / 2 : point.y - hover;
+  const box: ViewStyle = { position: 'absolute', left: point.x - w / 2, bottom: height - feet, width: w, alignItems: 'center' };
   const art = <Art name={gardenArt(element.id)} size={w} thirsty={growing && thirst > 0} />;
   const content = <Animated.View style={{ transform: transforms as never, opacity }}>{art}</Animated.View>;
 
   if (onPress) {
     return (
-      <Pressable style={[box, { minWidth: TOUCH_TARGET, minHeight: TOUCH_TARGET }]} onPress={onPress} accessibilityRole="button" accessibilityLabel={label}>
+      <Pressable style={[box, { minWidth: TOUCH_TARGET, minHeight: TOUCH_TARGET, marginLeft: Math.min(0, (w - TOUCH_TARGET) / 2) }]} onPress={onPress} accessibilityRole="button" accessibilityLabel={label}>
         {content}
       </Pressable>
     );
@@ -286,8 +310,7 @@ function PlacedView({
 
 function SpotMarker({
   spot,
-  width,
-  height,
+  layout,
   reduced,
   label,
   onPress,
@@ -295,8 +318,7 @@ function SpotMarker({
   iconColor,
 }: {
   spot: number;
-  width: number;
-  height: number;
+  layout: GardenLayout;
   reduced: boolean;
   label: string;
   onPress: () => void;
@@ -315,14 +337,17 @@ function SpotMarker({
     loop.start();
     return () => loop.stop();
   }, [pulse, reduced]);
-  const p = GARDEN_SPOTS[spot];
+  const p = spotPoint(layout, spot);
+  // Keep the whole marker inside the scene (front-row spots sit close to the bottom edge).
+  const left = Math.max(0, Math.min(layout.width - TOUCH_TARGET, p.x - TOUCH_TARGET / 2));
+  const top = Math.max(0, Math.min(layout.height - TOUCH_TARGET, p.y - TOUCH_TARGET / 2));
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={label}
       hitSlop={4}
-      style={{ position: 'absolute', left: p.x * width - TOUCH_TARGET / 2, top: p.y * height - TOUCH_TARGET / 2, width: TOUCH_TARGET, height: TOUCH_TARGET, alignItems: 'center', justifyContent: 'center' }}
+      style={{ position: 'absolute', left, top, width: TOUCH_TARGET, height: TOUCH_TARGET, alignItems: 'center', justifyContent: 'center' }}
     >
       <Animated.View style={[styles.marker, { backgroundColor: color, transform: [{ scale: pulse }] }]}>
         <Icon name="plus" size={22} color={iconColor} strokeWidth={3} />

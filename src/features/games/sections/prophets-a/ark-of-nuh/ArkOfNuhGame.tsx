@@ -1,22 +1,22 @@
 import type { GameApi } from '@/core/games';
-import { BuildScene, GameBoard, kitResult, MemoryPairs, SequenceBoard, type KitDoneInfo } from '@/core/games/kit';
+import { BuildScene, GameBoard, kitResult, SequenceBoard, type KitDoneInfo } from '@/core/games/kit';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import type { EpisodeConfig } from '../../prophets-story/episode';
 import { factsFor } from '../shared';
-import { ANIMAL_PAIRS, ARK_PARTS, PART_FACT, VOYAGE, VOYAGE_FACT } from './content';
-import { ARK_FACTS } from './facts';
+import { ARK_PARTS, PART_FACT, VOYAGE, VOYAGE_FACT } from './content';
 
-export interface ArkConfig {
-  mode: 'build' | 'pairs' | 'voyage';
-}
+export type ArkConfig = { mode: 'build' | 'voyage' } | EpisodeConfig;
 
-/** Ark of Nuh: L1 build the ark (BuildScene), L2 animal pairs (MemoryPairs), L3 the voyage in order (SequenceBoard path). */
+/** Ark of Nuh: L1 the long call (episode: sort), L2 build the ark (BuildScene), L3 the flood and the rescue in order (SequenceBoard path). */
 export function ArkOfNuhGame(api: GameApi<ArkConfig>) {
-  const { mode } = api.config;
+  const { config } = api;
+  if (config.mode === 'episode') return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
   const finish = (moves: number, map: Record<string, string>) => ({ mistakes, missed }: KitDoneInfo) =>
     api.onComplete(kitResult({ moves, mistakes, factsMissed: factsFor(missed, map) }));
   return (
     <GameBoard api={api}>
-      {mode === 'build' ? (
+      {config.mode === 'build' ? (
         <BuildScene
           scene="prophet.nuh-shipyard"
           parts={ARK_PARTS}
@@ -24,13 +24,6 @@ export function ArkOfNuhGame(api: GameApi<ArkConfig>) {
           prompt={api.t('play.build')}
           reveal={{ title: api.t('play.reveal'), caption: api.t('play.revealCaption') }}
           onDone={finish(ARK_PARTS.length, PART_FACT)}
-        />
-      ) : mode === 'pairs' ? (
-        <MemoryPairs
-          pairs={ANIMAL_PAIRS}
-          peekMs={2500}
-          prompt={api.t('play.pairs')}
-          onDone={finish(ANIMAL_PAIRS.length, Object.fromEntries(ANIMAL_PAIRS.map((p) => [p.id, ARK_FACTS.eachKind.id])))}
         />
       ) : (
         <SequenceBoard variant="path" items={VOYAGE} hints={false} endArt="prophet.nuh-judi" prompt={api.t('play.voyage')} onDone={finish(VOYAGE.length, VOYAGE_FACT)} />

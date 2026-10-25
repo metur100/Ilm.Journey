@@ -7,7 +7,7 @@ import { type EtiquetteKey, quranEtiquetteI18n } from './i18n';
 
 /*
  * Honouring the Quran. L1 (SortBins): respectful or not. L2 twist (SequenceBoard): get ready to recite – the steps
- * in order. L3 (SortBins, three baskets): before, while or after reciting. Texts and facts follow the learn unit
+ * in order. L3 (SortBins, three baskets): other good manners – before, while or after reciting. Texts and facts follow the learn unit
  * `quran-etiquette` (16:98, 7:204, 73:4) and keep its "scholars differ" note on wudu.
  */
 
@@ -35,6 +35,11 @@ const ART: Record<string, string> = {
   talk: 'body.mouth',
   rush: 'object.clock',
   throw: 'object.book',
+  quiet: 'quran.lantern-night',
+  sit: 'object.prayer-mat',
+  beautiful: 'object.star8',
+  reflect: 'ui.sparkle',
+  close: 'object.book',
 };
 
 const item = (id: string, bin?: string) => ({ id, label: L(`item.${id}` as EtiquetteKey), art: ART[id], ...(bin ? { bin } : {}) });
@@ -116,9 +121,9 @@ export const quranEtiquetteGame: GameDef<EtiquetteConfig> = {
         hints: false,
         bins: [],
         items: [item('wudu'), item('take'), item('refuge'), item('basmala'), item('slow'), item('back')],
-        factOf: { refuge: F.refuge.id },
+        factOf: { refuge: F.refuge.id, wudu: F.wudu.id, take: F.wudu.id },
       },
-      facts: [F.refuge],
+      facts: [F.refuge, F.wudu],
     },
     {
       level: 3,
@@ -126,10 +131,10 @@ export const quranEtiquetteGame: GameDef<EtiquetteConfig> = {
         mode: 'sort',
         hints: false,
         bins: [bin('before', 'kit.basket'), bin('while', 'kit.jar'), bin('after', 'kit.crate')],
-        items: [item('wudu', 'before'), item('refuge', 'before'), item('take', 'before'), item('slow', 'while'), item('listen', 'while'), item('back', 'after')],
-        factOf: { wudu: F.wudu.id },
+        items: [item('quiet', 'before'), item('sit', 'before'), item('beautiful', 'while'), item('reflect', 'while'), item('close', 'after'), item('back', 'after')],
+        factOf: { quiet: F.manners.id, sit: F.manners.id, beautiful: F.manners.id, reflect: F.manners.id, close: F.manners.id, back: F.manners.id },
       },
-      facts: [F.manners, F.wudu],
+      facts: [F.manners],
     },
   ],
   teaches: { questionKeys: ['learn:quran-etiquette-1', 'learn:quran-etiquette-2', 'learn:quran-etiquette-p'] },

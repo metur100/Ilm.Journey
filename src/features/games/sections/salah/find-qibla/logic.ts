@@ -17,7 +17,7 @@ export interface LatLon {
 /** The Kaaba in Makkah. */
 export const KAABA: LatLon = { lat: 21.4225, lon: 39.8262 };
 
-export type CityId = 'duesseldorf' | 'sarajevo' | 'vienna' | 'london' | 'new-york' | 'istanbul' | 'cairo' | 'jakarta' | 'cape-town' | 'tokyo';
+export type CityId = 'duesseldorf' | 'sarajevo' | 'vienna' | 'london' | 'new-york' | 'istanbul' | 'cairo' | 'jakarta' | 'cape-town' | 'tokyo' | 'sydney' | 'moscow';
 
 export const CITIES: Record<CityId, LatLon> = {
   duesseldorf: { lat: 51.2277, lon: 6.7735 },
@@ -30,6 +30,8 @@ export const CITIES: Record<CityId, LatLon> = {
   jakarta: { lat: -6.2088, lon: 106.8456 },
   'cape-town': { lat: -33.9249, lon: 18.4241 },
   tokyo: { lat: 35.6762, lon: 139.6503 },
+  sydney: { lat: -33.8688, lon: 151.2093 },
+  moscow: { lat: 55.7558, lon: 37.6173 },
 };
 
 const RAD = Math.PI / 180;

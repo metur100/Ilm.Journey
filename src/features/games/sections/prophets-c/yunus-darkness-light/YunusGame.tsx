@@ -9,14 +9,24 @@ import { GameBoard, kitResult, useKitColors, WordTiles } from '@/core/games/kit'
 import { useMeasure } from '@/core/games/kit/layout';
 import { radius, spacing } from '@/core/theme';
 
-import { missedFor, type YunusConfig } from './register';
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
+import { factsFor } from '../shared';
+import { YUNUS_MISSED, type YunusConfig } from './register';
 
 /**
  * Light in the Darknesses (21:87–88): a window onto the darkness above the word tiles. Every placed tile lifts a
  * layer of darkness and the light grows; when the dua is complete, the gourd plant appears on the shore (37:146).
  */
 export function YunusGame(api: GameApi<YunusConfig>) {
-  const { target, distractors, quran, hints, prompt } = api.config;
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  return <DuaBoard api={api} config={config} />;
+}
+
+/** L2: the dua of Yunus (21:87) built tile by tile under the window onto the darkness. */
+function DuaBoard({ api, config }: { api: GameApi<YunusConfig>; config: Exclude<YunusConfig, { mode: 'episode' }> }) {
+  const { target, distractors, quran, hints, prompt } = config;
   const [done, setDone] = useState(0);
   return (
     <GameBoard api={api}>
@@ -33,7 +43,7 @@ export function YunusGame(api: GameApi<YunusConfig>) {
             kitResult({
               moves: target.length,
               mistakes,
-              factsMissed: [...new Set(missed.map((id) => missedFor(api.level, id)).filter((x): x is string => !!x))],
+              factsMissed: factsFor(missed, YUNUS_MISSED),
             }),
           )
         }

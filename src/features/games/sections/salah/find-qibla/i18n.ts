@@ -57,6 +57,8 @@ const en = {
   'city.jakarta': 'Jakarta',
   'city.cape-town': 'Cape Town',
   'city.tokyo': 'Tokyo',
+  'city.sydney': 'Sydney',
+  'city.moscow': 'Moscow',
 } as const;
 
 type Key = keyof typeof en;
@@ -118,6 +120,8 @@ const de: Record<Key, string> = {
   'city.jakarta': 'Jakarta',
   'city.cape-town': 'Kapstadt',
   'city.tokyo': 'Tokio',
+  'city.sydney': 'Sydney',
+  'city.moscow': 'Moskau',
 };
 
 const bs: Record<Key, string> = {
@@ -177,6 +181,8 @@ const bs: Record<Key, string> = {
   'city.jakarta': 'Džakarta',
   'city.cape-town': 'Cape Town',
   'city.tokyo': 'Tokio',
+  'city.sydney': 'Sidnej',
+  'city.moscow': 'Moskva',
 };
 
 export const qiblaI18n = defineNamespace('game.find-qibla', { en, de, bs });

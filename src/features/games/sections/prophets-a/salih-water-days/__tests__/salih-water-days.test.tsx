@@ -7,5 +7,5 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerSalihGame();
 
 describe('Water Days', () => {
-  describeProphetGame(() => getGame(SALIH_GAME_ID)!, { art: SALIH_ART, mistakeLevel: 2 });
+  describeProphetGame(() => getGame(SALIH_GAME_ID)!, { art: SALIH_ART, mistakeLevel: 1 });
 });

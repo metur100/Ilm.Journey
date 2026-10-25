@@ -12,10 +12,21 @@ import { giftsI18n } from './i18n';
 /*
  * Gifts for the Neighbours – SceneDrop on a street in perspective (akhlaq.street). L1: one gift for every house, any
  * order, hints. L2: the nearest door first (Bukhari 6020), doors numbered by distance. L3: six houses on both sides,
- * no numbers and no hints – judge the nearest door by yourself.
+ * no numbers and no hints – judge the nearest door by yourself. Every level brings other gifts.
  */
 
-const GIFTS: Record<string, string> = { box: 'object.gift', dates: 'food.dates', bread: 'food.bread', fruit: 'food.fruit-bowl', soup: 'food.soup', honey: 'object.honey' };
+const GIFTS: Record<string, string> = {
+  box: 'object.gift',
+  dates: 'food.dates',
+  bread: 'food.bread',
+  fruit: 'food.fruit-bowl',
+  soup: 'food.soup',
+  honey: 'object.honey',
+  milk: 'food.milk',
+  olives: 'food.olives',
+  rice: 'food.rice',
+  lamp: 'object.lamp',
+};
 
 export interface GiftsConfig {
   prompt: string;
@@ -70,10 +81,10 @@ export const giftsForNeighboursGame: GameDef<GiftsConfig> = {
   component: GiftsForNeighboursGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', houses: 3, gifts: ['box', 'dates', 'fruit'], nearestFirst: false, numbers: false, hints: true, fact: FACTS.heir.id }, facts: [FACTS.heir] },
-    { level: 2, config: { prompt: 'play.l2', houses: 4, gifts: ['dates', 'box', 'bread', 'fruit'], nearestFirst: true, numbers: true, hints: false, fact: FACTS.nearest.id }, facts: [FACTS.nearest] },
+    { level: 2, config: { prompt: 'play.l2', houses: 4, gifts: ['bread', 'milk', 'honey', 'olives'], nearestFirst: true, numbers: true, hints: false, fact: FACTS.nearest.id }, facts: [FACTS.nearest] },
     {
       level: 3,
-      config: { prompt: 'play.l3', houses: 6, gifts: ['soup', 'dates', 'box', 'honey', 'bread', 'fruit'], nearestFirst: true, numbers: false, hints: false, fact: FACTS.near.id },
+      config: { prompt: 'play.l3', houses: 6, gifts: ['soup', 'rice', 'box', 'honey', 'lamp', 'bread'], nearestFirst: true, numbers: false, hints: false, fact: FACTS.near.id },
       facts: [FACTS.near],
     },
   ],

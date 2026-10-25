@@ -3,12 +3,13 @@ import { defineNamespace } from '@/core/i18n';
 
 import { arabicGame } from '../shared/define';
 import { FACTS, letterFact } from '../shared/facts';
-import { lettersRange, SUFARA_LETTER_ORDER } from '../shared/letters';
+import { lettersRange } from '../shared/letters';
 import type { LetterLanternsConfig } from './logic';
 
 /*
  * Letter Lanterns (v2 game, reworked on the kit's CatchGame; the id is kept for existing progress).
- * L1 hear and see the letter, catch its lanterns · L2 catch the letter in its word shapes · L3 the voice only.
+ * L1 hear and see the letter, catch its lanterns (ا–ذ) · L2 catch the letter in its word shapes (ر–ظ) · L3 the voice only (ع–ي).
+ * Every level has its own letters (owner feedback: no level repeats the content of another).
  */
 
 export const letterLanternsI18n = defineNamespace('game.letter-lanterns', {
@@ -51,9 +52,9 @@ export const letterLanternsGame = arabicGame<LetterLanternsConfig>({
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   load: () => (require('./LetterLanternsGame') as typeof import('./LetterLanternsGame')).LetterLanternsGame,
   levels: [
-    { config: { mode: 'isolated', pool: range(1, 14), rounds: 4, hints: true }, facts: [FACTS.dots, FACTS.alphabet] },
-    { config: { mode: 'forms', pool: [...SUFARA_LETTER_ORDER], rounds: 4, hints: false }, facts: [FACTS.joining] },
-    { config: { mode: 'sound', pool: range(15, 28), rounds: 4, hints: false }, facts: [letterFact('ع')] },
+    { config: { mode: 'isolated', pool: range(1, 9), rounds: 4, hints: true }, facts: [FACTS.dots, FACTS.alphabet] },
+    { config: { mode: 'forms', pool: range(10, 17), rounds: 4, hints: false }, facts: [FACTS.joining] },
+    { config: { mode: 'sound', pool: range(18, 28), rounds: 4, hints: false }, facts: [letterFact('ع')] },
   ],
   teaches: { questionKeys: ['quest:arabic-dots-ba', 'quest:arabic-28', 'quest:arabic-rtl'] },
   order: 20,

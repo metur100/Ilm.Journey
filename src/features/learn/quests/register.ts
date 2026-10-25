@@ -167,16 +167,7 @@ export function registerLearnQuests(): void {
     Object.fromEntries(Object.entries(useQuestStore.getState().memorization).map(([surah, memo]) => [Number(surah), memo.learned])),
   );
 
-  // 7. Topic tools.
-  registerTopicTool({
-    id: 'quran-memorization',
-    topic: 'quran',
-    order: 20,
-    icon: 'quran',
-    label: (lang) => translateNs(questI18n, lang, 'tool.quran'),
-    description: (lang) => translateNs(questI18n, lang, 'tool.quranDesc'),
-    href: '/tools/quran',
-  });
+  // 7. Topic tools. (The Juz ʿAmma surahs have no list card: every surah is already a step of the Quran path.)
   registerTopicTool({
     id: 'quran-duas',
     topic: 'quran',

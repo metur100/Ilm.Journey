@@ -2,6 +2,7 @@ import type React from 'react';
 
 import { hasArt } from '@/core/art';
 import { type GameApi, type GameResultInput, getGame, validateGame } from '@/core/games';
+import { playToEnd, renderGame } from '@/core/games/kit/testing';
 import { translateNs } from '@/core/i18n';
 import { LANGUAGES } from '@/core/models';
 import { getQuestionByKey } from '@/core/registry';
@@ -34,6 +35,7 @@ import {
   slotCentre,
   starsFor,
 } from '../logic';
+import { STORY } from '../MasjidStory';
 import { MASJID_FACTS, MASJID_GAME_ID, masjidGame, registerBuildTheMasjidGame } from '../register';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -305,23 +307,22 @@ describe('Build the Masjid – play every level to completion', () => {
     await act(() => tree.unmount());
   });
 
-  it('level 2 (from memory): a part before its base is gently refused inline', async () => {
-    const onComplete = jest.fn();
-    const tree = await mount(2, onComplete);
-    expect(texts(tree.root)).toContain(en('play.memory'));
-    await place(tree.root, 'roof');
-    expect(texts(tree.root)).toContain(en('play.needsFirst', { part: en('part.pillars') }));
-    expect(texts(tree.root)).not.toContain(en('caption.roof'));
-    for (const id of ['ground', 'pillars', 'walls', 'roof'] as PartId[]) await placeInline(tree.root, id);
-    await finishReveal(tree.root, 'seerah.masjid-finished');
-    expect(onComplete).toHaveBeenCalledWith({ score: 36, maxScore: 40, stars: 3, mistakes: 1, factsMissed: [] });
-    await act(() => tree.unmount());
+  it('level 2: the story of the first masjid in order (its own content, no rebuilding)', async () => {
+    const game = await renderGame(getGame(MASJID_GAME_ID)!, 2);
+    const result = await playToEnd(game);
+    expect(result).toMatchObject({ stars: 3, mistakes: 0, factsMissed: [] });
+    await game.unmount();
+    const withMistakes = await renderGame(getGame(MASJID_GAME_ID)!, 2);
+    const missed = await playToEnd(withMistakes, { mistakes: 2 });
+    expect(missed.mistakes).toBeGreaterThan(0);
+    for (const id of missed.factsMissed) expect(['first-project', 'madinah-north']).toContain(id);
+    await withMistakes.unmount();
+    expect(STORY.every((item) => hasArt(item.art!))).toBe(true);
   });
 
-  it('level 3: build, turn the qibla from Jerusalem to the Kaʿbah, add the new shade and the Suffa', async () => {
+  it('level 3: the masjid stands; turn the qibla from Jerusalem to the Kaʿbah, add the new shade and the Suffa', async () => {
     const onComplete = jest.fn();
     const tree = await mount(3, onComplete);
-    for (const id of BUILD) await placeInline(tree.root, id);
     expect(texts(tree.root)).toContain(en('play.turn'));
     // Facing east first is a gentle mistake.
     for (let i = 0; i < 6; i++) await press(tree.root, en('play.turnRight'));
@@ -336,7 +337,7 @@ describe('Build the Masjid – play every level to completion', () => {
     await placeInline(tree.root, 'shade-south');
     await placeInline(tree.root, 'suffa');
     await finishReveal(tree.root, 'seerah.masjid-finished-qibla');
-    expect(onComplete).toHaveBeenCalledWith({ score: 80, maxScore: 90, stars: 3, mistakes: 1, factsMissed: ['qibla-change'] });
+    expect(onComplete).toHaveBeenCalledWith(masjidResult({ parts: 2, partsWithMistakes: 0, buildMistakes: 0, qiblaMistakes: 1 }));
     await act(() => tree.unmount());
   });
 });

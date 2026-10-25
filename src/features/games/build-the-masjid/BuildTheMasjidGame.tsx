@@ -13,11 +13,13 @@ import { hashString, seededRandom, shuffle } from '@/core/utils/random';
 
 import { MOSQUE_DATE, QIBLA_CHANGE, QIBLA_DATE, sourceRefs } from './content';
 import { Draggable } from './Draggable';
+import { MasjidStory } from './MasjidStory';
 import {
   checkPlacement,
   checkQibla,
   JERUSALEM_BEARING,
   KAABA_BEARING,
+  MAIN_BUILD,
   masjidResult,
   nextPart,
   normalize,
@@ -31,9 +33,12 @@ import { PartIcon } from './PartIcon';
 import { QiblaDial } from './QiblaDial';
 import { Burst, FadeUp, type MasjidTime, Scene } from './Scene';
 
-export interface MasjidConfig {
+export interface MasjidBuildConfig {
+  mode?: 'build';
   /** The parts of the main build, in their reference order (the guided order of level 1). */
   parts: PartId[];
+  /** Level 3: the main build (MAIN_BUILD) already stands – the level starts with the change of the qibla. */
+  standing?: boolean;
   /** Level 1: the next part glows in the tray and its place glows on the site. */
   guided: boolean;
   /** Light of the scene. */
@@ -41,6 +46,13 @@ export interface MasjidConfig {
   /** Level 3: after the main build the qibla changes – turn it, then build these parts. */
   afterQibla?: PartId[];
 }
+
+/** Level 2: the story of the first masjid in order (kit SequenceBoard, MasjidStory.tsx). */
+export interface MasjidStoryConfig {
+  mode: 'story';
+}
+
+export type MasjidConfig = MasjidBuildConfig | MasjidStoryConfig;
 
 type Phase = 'build' | 'turn' | 'after' | 'reveal';
 
@@ -109,9 +121,16 @@ const sourceLabel = (sources: SourceRef[]) => sources.map((s) => (s.sourceRefere
  * caption; there is no dialog between parts. Level 3 adds the change of the qibla, the shade on the new qibla side and
  * the Suffa. The finished masjid is revealed as a large picture before the result.
  */
-export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSound, haptic, reducedMotion, t, l }: GameApi<MasjidConfig>) {
+export function BuildTheMasjidGame(api: GameApi<MasjidConfig>) {
+  const { config } = api;
+  if (config.mode === 'story') return <MasjidStory {...(api as GameApi<MasjidStoryConfig>)} />;
+  return <MasjidBuild {...(api as GameApi<MasjidBuildConfig>)} />;
+}
+
+function MasjidBuild({ gameId, level, config, onComplete, playSound, haptic, reducedMotion, t, l }: GameApi<MasjidBuildConfig>) {
   const { c } = useTheme();
   const styles = useStyles();
+  const base = useMemo<PartId[]>(() => (config.standing ? MAIN_BUILD : []), [config.standing]);
   const afterParts = useMemo(() => config.afterQibla ?? [], [config.afterQibla]);
   const allParts = useMemo(() => [...config.parts, ...afterParts], [config.parts, afterParts]);
   const random = useMemo(() => seededRandom(hashString(`${gameId}:${level}`)), [gameId, level]);
@@ -119,8 +138,8 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
   const afterTray = useMemo(() => shuffle(afterParts, random), [afterParts, random]);
 
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
-  const [phase, setPhase] = useState<Phase>('build');
-  const [placed, setPlaced] = useState<PartId[]>([]);
+  const [phase, setPhase] = useState<Phase>(config.standing ? 'turn' : 'build');
+  const [placed, setPlaced] = useState<PartId[]>(base);
   const [info, setInfo] = useState<Info | null>(null);
   const [hint, setHint] = useState<string | null>(null);
   const [burst, setBurst] = useState<{ key: number; x: number; y: number; part: PartId } | null>(null);
@@ -131,8 +150,8 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
   const [qiblaTurned, setQiblaTurned] = useState(false);
   const counter = useRef(0);
   // Mirrors of the state for callbacks that fire after an animation (a snapping card).
-  const placedRef = useRef<PartId[]>([]);
-  const phaseRef = useRef<Phase>('build');
+  const placedRef = useRef<PartId[]>(base);
+  const phaseRef = useRef<Phase>(config.standing ? 'turn' : 'build');
   const finished = useRef(false);
   const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -155,7 +174,7 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
   // ---------- layout: scene on top, the caption, the tray (or the qibla controls) at the bottom ----------
   const w = size?.w ?? 320;
   const h = size?.h ?? 560;
-  const slots = Math.max(config.parts.length, 1);
+  const slots = Math.max(config.parts.length, afterParts.length, 1);
   const cardSize = Math.max(64, Math.min(88, (w - GAP * (slots - 1)) / slots));
   const trayH = cardSize + 6;
   const stageW = Math.min(w, ((h - trayH - CAPTION_MIN - GAP * 2) * SITE.w) / SITE.h);
@@ -288,10 +307,10 @@ export function BuildTheMasjidGame({ gameId, level, config, onComplete, playSoun
             width={stageW}
             height={stageH}
             time={config.time}
-            parts={allParts}
+            parts={[...base, ...allParts]}
             placed={placed}
             glow={guidedNext}
-            qibla={config.afterQibla && config.parts.every((p) => placed.includes(p)) ? (qiblaTurned ? 'south' : 'north') : null}
+            qibla={config.afterQibla && [...base, ...config.parts].every((p) => placed.includes(p)) ? (qiblaTurned ? 'south' : 'north') : null}
             burst={burst}
             reducedMotion={reducedMotion}
             label={t('a11y.site')}

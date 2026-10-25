@@ -21,7 +21,7 @@ export interface ListenOrderConfig {
 }
 
 function items(n: number, meaning: boolean): KitItem[] {
-  return surah(n).ayahs.map((a) => ({ id: `a${a.numberInSurah}`, arabic: a.arabic, quran: true, sub: meaning ? ayahMeaning(n, a.numberInSurah) : undefined }));
+  return surah(n).ayahs.map((a) => ({ id: `s${n}-a${a.numberInSurah}`, arabic: a.arabic, quran: true, sub: meaning ? ayahMeaning(n, a.numberInSurah) : undefined }));
 }
 
 const FACTS = {

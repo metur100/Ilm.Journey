@@ -1,5 +1,7 @@
 import type { GameFact } from '@/core/games';
 
+import { lessonFact } from '../../prophets-story/episode';
+
 /*
  * Facts of Yusuf's Storehouse. The dream, the advice to store and the storehouses are copied from the Yusuf story
  * (src/features/stories/content/prophets/yusuf.json) and the prophets unit (learn/content/prophets/
@@ -113,4 +115,37 @@ export const YUSUF_FACTS = {
     sources: [{ sourceName: 'Quran', sourceReference: '12:49' }],
     art: 'garden.olive',
   },
+  lessonHelp: lessonFact(
+    'yusuf-use-knowledge',
+    {
+      en: 'Use what Allah has taught you to help others. Yusuf had been forgotten in prison, yet he explained the dream and gave a plan that helped a whole land.',
+      de: 'Nutze, was Allah dich gelehrt hat, um anderen zu helfen. Yusuf war im Gefängnis vergessen worden, und doch deutete er den Traum und gab einen Plan, der einem ganzen Land half.',
+      bs: 'Koristi ono čemu te je Allah naučio da pomogneš drugima. Jusuf je bio zaboravljen u tamnici, a ipak je protumačio san i dao plan koji je pomogao cijeloj zemlji.',
+    },
+    [{ sourceName: 'Quran', sourceReference: '12:42–49' }],
+    { art: 'prophet.yusuf-sheaf-green' },
+  ),
+  lessonPlan: lessonFact(
+    'yusuf-plan-ahead',
+    {
+      en: 'Plan ahead: in good times, keep something for hard times, and do not waste – eat a little and store the rest, as Yusuf advised.',
+      de: 'Plane voraus: Bewahre in guten Zeiten etwas für schwere Zeiten auf und verschwende nichts – iss ein wenig und lagere den Rest, wie Yusuf riet.',
+      bs: 'Planiraj unaprijed: u dobrim vremenima sačuvaj nešto za teška vremena i ne rasipaj – jedi malo, a ostalo sačuvaj, kako je Jusuf savjetovao.',
+    },
+    [{ sourceName: 'Quran', sourceReference: '12:47–48' }],
+    { art: 'object.storehouse', reviewKey: 'stories:yusuf-lesson' },
+  ),
+  lessonTrust: lessonFact(
+    'yusuf-trustworthy',
+    {
+      en: 'Be trustworthy and fair with what you are given to look after. Yusuf guarded the storehouses well and gave everyone full measure.',
+      de: 'Sei vertrauenswürdig und gerecht mit dem, was dir anvertraut wird. Yusuf hütete die Vorratshäuser gut und gab jedem volles Maß.',
+      bs: 'Budi povjerljiv i pravedan s onim što ti je povjereno. Jusuf je dobro čuvao riznice i svakome davao punu mjeru.',
+    },
+    [
+      { sourceName: 'Quran', sourceReference: '12:55' },
+      { sourceName: 'Quran', sourceReference: '12:59' },
+    ],
+    { art: 'object.scales' },
+  ),
 } satisfies Record<string, GameFact>;

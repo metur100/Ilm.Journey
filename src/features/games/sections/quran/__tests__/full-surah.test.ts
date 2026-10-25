@@ -35,7 +35,7 @@ describe('Quran ayah games use a complete surah in every level', () => {
     const game = getGame('listen-and-order')!;
     for (const level of game.levels) {
       const config = level.config as { surah: number; items: { id: string }[] };
-      expect(config.items.map((i) => i.id)).toEqual(allAyahs(config.surah).map((a) => `a${a}`));
+      expect(config.items.map((i) => i.id)).toEqual(allAyahs(config.surah).map((a) => `s${config.surah}-a${a}`));
     }
   });
 

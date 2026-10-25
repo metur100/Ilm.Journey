@@ -8,6 +8,8 @@ import type { GameApi } from '@/core/games';
 import { Burst, ChallengeClock, FinishReveal, GameBoard, Glow, InlineCaption, kitResult, ProgressDots, Tile, useKitColors, useShake } from '@/core/games/kit';
 import { fonts, radius, spacing } from '@/core/theme';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { type EpisodeConfig, isEpisodeConfig } from '../../prophets-story/episode';
 import { useEngineCore, useKitProbe, useMeasure } from '../shared/kit';
 import { addPiece, bestPiece, piecesNeeded, type ScaleConfig, sum, tilt } from './logic';
 
@@ -187,8 +189,16 @@ function Scale({ cfg, t, onDone, missFact }: { cfg: ScaleConfig; t: GameApi<Scal
   );
 }
 
-/** Fair Measure (Shuayb, Quran 7:85, 11:84–85, 26:181–183): balance the scales exactly, round after round. */
-export function ShuaybScalesGame(api: GameApi<ScaleConfig>) {
+export type ShuaybConfig = ScaleConfig | EpisodeConfig;
+
+/** Shuayb: L1 and L3 are episodes of his life; L2 (Quran 11:84–85, 26:181–183) balances the scales exactly, round after round. */
+export function ShuaybScalesGame(api: GameApi<ShuaybConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  return <ScalesLevel api={{ ...api, config }} />;
+}
+
+function ScalesLevel({ api }: { api: GameApi<ScaleConfig> }) {
   const moves = useMemo(() => api.config.rounds.reduce((a, r) => a + piecesNeeded(r.load, api.config.pieces), 0), [api.config]);
   const fact = api.facts[0]?.id ?? 'full-measure';
   return (

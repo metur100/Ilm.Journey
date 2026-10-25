@@ -8,7 +8,8 @@ import { type DeedKey, goodDeedsI18n } from './i18n';
 /*
  * Good Deeds of Juz ʿAmma (CatchGame, calm, no lives). Every card is a deed named in a surah, with its reference:
  * good deeds go into the basket, the deeds the surahs warn about drift past. The facts quote the ayahs.
- * L1: three lanes, few cards; L2: more deeds and more look-alikes; L3: four lanes at normal speed.
+ * Every level has its own deeds: L1 (Al-ʿAsr, Al-Humazah, Al-Balad) three lanes, few cards; L2 (Ad-Duha, Al-Maʿun)
+ * more deeds and more look-alikes; L3 (Al-Fajr, Al-Aʿla, Al-Mutaffifin, At-Takathur) four lanes at normal speed.
  */
 
 export interface GoodDeedsConfig {
@@ -36,6 +37,14 @@ const DEEDS: Record<string, { art: string; ref: string; good: boolean }> = {
   scold: { art: 'object.envelope', ref: '93:10', good: false },
   showoff: { art: 'object.lamp', ref: '107:6', good: false },
   withhold: { art: 'object.key', ref: '107:7', good: false },
+  'honour-orphan': { art: 'object.gift', ref: '89:17', good: true },
+  purify: { art: 'body.water-on-hands', ref: '87:14', good: true },
+  remember: { art: 'object.prayer-beads', ref: '87:15', good: true },
+  glorify: { art: 'quran.one-star', ref: '87:1', good: true },
+  mercy: { art: 'akhlaq.note-heart', ref: '90:17', good: true },
+  'short-measure': { art: 'object.scales', ref: '83:3', good: false },
+  'love-wealth': { art: 'object.coins', ref: '89:20', good: false },
+  'more-more': { art: 'object.coin-jar', ref: '102:1', good: false },
 };
 
 const deed = (id: string): CatchItem => ({ id, label: nsText(goodDeedsI18n, `deed.${id}` as DeedKey), art: DEEDS[id].art, sub: DEEDS[id].ref, good: DEEDS[id].good });
@@ -45,6 +54,8 @@ const FACTS = {
   duha: quoteFact({ id: 'orphan-and-asker', surah: 93, from: 9, to: 11, art: 'object.gift' }),
   balad: quoteFact({ id: 'steep-pass', surah: 90, from: 13, to: 16, art: 'food.bread' }),
   humazah: quoteFact({ id: 'mocker-and-hoarder', surah: 104, from: 1, to: 3, art: 'object.coin-jar' }),
+  fajr: quoteFact({ id: 'orphan-and-wealth', surah: 89, from: 17, to: 20, art: 'object.gift' }),
+  aala: quoteFact({ id: 'purify-and-pray', surah: 87, from: 14, to: 15, art: 'object.prayer-beads' }),
 };
 
 export const goodDeedsGame: GameDef<GoodDeedsConfig> = {
@@ -58,8 +69,8 @@ export const goodDeedsGame: GameDef<GoodDeedsConfig> = {
   levels: [
     {
       level: 1,
-      config: { lanes: 3, speed: 'calm', hints: true, goal: 4, items: ['feed', 'patience', 'pray', 'truth', 'mock', 'hoard'].map(deed), factOf: { mock: FACTS.zalzalah.id, hoard: FACTS.zalzalah.id } },
-      facts: [FACTS.zalzalah],
+      config: { lanes: 3, speed: 'calm', hints: true, goal: 4, items: ['feed', 'patience', 'pray', 'truth', 'mock', 'hoard'].map(deed), factOf: { mock: FACTS.humazah.id, hoard: FACTS.humazah.id, feed: FACTS.balad.id } },
+      facts: [FACTS.zalzalah, FACTS.humazah, FACTS.balad],
     },
     {
       level: 2,
@@ -72,11 +83,11 @@ export const goodDeedsGame: GameDef<GoodDeedsConfig> = {
         lanes: 4,
         speed: 'normal',
         hints: false,
-        goal: 7,
-        items: ['feed', 'orphan', 'give', 'patience', 'truth', 'pray', 'forgive', 'mock', 'hoard', 'repel', 'withhold', 'showoff'].map(deed),
-        factOf: { mock: FACTS.humazah.id, hoard: FACTS.humazah.id, repel: FACTS.balad.id, withhold: FACTS.balad.id, showoff: FACTS.balad.id },
+        goal: 5,
+        items: ['honour-orphan', 'purify', 'remember', 'glorify', 'mercy', 'short-measure', 'love-wealth', 'more-more'].map(deed),
+        factOf: { 'honour-orphan': FACTS.fajr.id, 'love-wealth': FACTS.fajr.id, purify: FACTS.aala.id, remember: FACTS.aala.id, glorify: FACTS.aala.id, mercy: FACTS.aala.id, 'short-measure': FACTS.fajr.id, 'more-more': FACTS.fajr.id },
       },
-      facts: [FACTS.balad, FACTS.humazah],
+      facts: [FACTS.fajr, FACTS.aala],
     },
   ],
   order: 130,

@@ -1,3 +1,5 @@
+import type { EpisodeConfig } from '../../prophets-story/episode';
+
 /*
  * Garden of Patience – pure rules. Every bed of a withered garden is cared for step by step: an empty bed needs a
  * seed, a seed or a dry plant needs water, a young plant needs water again, then it blooms. After each care the plant
@@ -43,6 +45,7 @@ export function caresNeeded(beds: readonly Bed[]): number {
   return beds.reduce((sum, b) => sum + steps[b], 0);
 }
 
-export const LEVEL_1: GardenConfig = { beds: ['dry', 'dry', 'dry', 'dry'], tools: ['water'], bubbles: true, hints: true, strictPatience: false };
-export const LEVEL_2: GardenConfig = { beds: ['empty', 'dry', 'empty', 'dry', 'sprout', 'empty'], tools: ['seed', 'water'], bubbles: true, hints: false, strictPatience: false };
-export const LEVEL_3: GardenConfig = { beds: ['dry', 'empty', 'sprout', 'empty', 'dry', 'empty'], tools: ['seed', 'water'], bubbles: false, hints: false, strictPatience: true };
+/** L3 of the Ayyub game – seeds and water, and patience: never disturb a plant while it grows. */
+export const GARDEN: GardenConfig = { beds: ['empty', 'dry', 'empty', 'dry', 'sprout', 'empty'], tools: ['seed', 'water'], bubbles: true, hints: false, strictPatience: true };
+
+export type AyyubConfig = GardenConfig | EpisodeConfig;

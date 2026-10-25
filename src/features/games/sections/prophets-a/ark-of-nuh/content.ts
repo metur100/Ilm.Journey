@@ -1,9 +1,11 @@
-import type { BuildPart, KitItem, MemoryPair } from '@/core/games/kit';
+import type { BuildPart, KitItem } from '@/core/games/kit';
+
+import type { Episode } from '../../prophets-story/episode';
 
 import { T } from '../shared';
 import { ARK_FACTS } from './facts';
 
-/* Ark of Nuh – build the ark (11:37, 54:13), the pairs of every kind (11:40), the voyage to al-Judi (11:41–48). */
+/* Ark of Nuh – L1 the long call (71:5–10, 29:14), L2 building the ark (11:37–38, 54:13), L3 the flood and the rescue (11:40–48). */
 
 /** Parts at their places in `prophet.nuh-shipyard` (same boxes as the composed `prophet.nuh-ark`). */
 export const ARK_PARTS: BuildPart[] = [
@@ -44,27 +46,31 @@ export const ARK_PARTS: BuildPart[] = [
   },
 ];
 
-/** Clearly different land animals and birds of the art library (no dove: the Quran's account has none). */
-const ANIMALS: [string, ReturnType<typeof T>][] = [
-  ['camel', T('Camels', 'Kamele', 'Deve')],
-  ['sheep', T('Sheep', 'Schafe', 'Ovce')],
-  ['horse', T('Horses', 'Pferde', 'Konji')],
-  ['cow', T('Cows', 'Kühe', 'Krave')],
-  ['lion', T('Lions', 'Löwen', 'Lavovi')],
-  ['elephant', T('Elephants', 'Elefanten', 'Slonovi')],
-  ['goat', T('Goats', 'Ziegen', 'Koze')],
-  ['hoopoe', T('Hoopoes', 'Wiedehopfe', 'Pupavci')],
-];
+/** L1 – the long call (71:5–10, 11:27, 29:14): what Nuh did and what his people did. */
+export const CALL_EPISODE: Episode = {
+  kind: 'sort',
+  prompt: T(
+    'Nuh called his people for 950 years. Sort: what did Nuh do – and what did his people do?',
+    'Nuh rief sein Volk 950 Jahre lang. Sortiere: Was tat Nuh – und was tat sein Volk?',
+    'Nuh je svoj narod pozivao 950 godina. Razvrstaj: šta je činio Nuh – a šta njegov narod?',
+  ),
+  hints: true,
+  bins: [
+    { id: 'nuh', art: 'object.hourglass', label: T('Nuh', 'Nuh', 'Nuh') },
+    { id: 'people', art: 'scene.city', label: T('His people', 'Sein Volk', 'Njegov narod') },
+  ],
+  items: [
+    { id: 'night-day', bin: 'nuh', label: T('Called them by night and by day', 'Rief sie bei Nacht und bei Tag', 'Pozivao ih noću i danju'), sub: '71:5' },
+    { id: 'openly', bin: 'nuh', label: T('Called openly and in private', 'Rief offen und im Stillen', 'Pozivao javno i u četiri oka'), sub: '71:8–9' },
+    { id: 'forgiveness', bin: 'nuh', label: T('"Ask your Lord for forgiveness"', '„Bittet euren Herrn um Vergebung“', '„Tražite oprost od svog Gospodara“'), sub: '71:10' },
+    { id: 'fingers', bin: 'people', label: T('Put their fingers in their ears', 'Steckten die Finger in die Ohren', 'Stavljali prste u uši'), sub: '71:7' },
+    { id: 'garments', bin: 'people', label: T('Covered themselves with their clothes', 'Verhüllten sich mit ihren Gewändern', 'Pokrivali se odjećom'), sub: '71:7' },
+    { id: 'like-us', bin: 'people', label: T('"You are only a man like us"', '„Du bist nur ein Mensch wie wir“', '„Ti si samo čovjek kao mi“'), sub: '11:27' },
+  ],
+  factMap: { 'night-day': 'nuh-950-years', openly: 'nuh-950-years', forgiveness: 'nuh-950-years', fingers: 'lesson-sabr', garments: 'lesson-sabr', 'like-us': 'lesson-sabr' },
+};
 
-export const ANIMAL_PAIRS: MemoryPair[] = ANIMALS.slice(0, 6).map(([id, name]) => ({
-  id,
-  a: { art: `animal.${id}`, a11y: name },
-  caption: T(`Two of a kind: ${name.en} – aboard!`, `Ein Paar: ${name.de} – an Bord!`, `Par: ${name.bs} – u lađu!`),
-}));
-
-export const ANIMAL_ART = ANIMALS.map(([id]) => `animal.${id}`);
-
-/** The voyage in order (L3). */
+/** The flood and the rescue in order (L3). */
 export const VOYAGE: KitItem[] = [
   { id: 'build', art: 'prophet.nuh-planks', label: T('Build the ark', 'Die Arche bauen', 'Graditi lađu'), sub: '11:37' },
   { id: 'pairs', art: 'animal.camel', label: T('Pairs board', 'Paare steigen ein', 'Parovi ulaze'), sub: '11:40' },
@@ -75,18 +81,18 @@ export const VOYAGE: KitItem[] = [
 ];
 
 export const VOYAGE_FACT: Record<string, string> = {
-  build: ARK_FACTS.command.id,
+  build: ARK_FACTS.eachKind.id,
   pairs: ARK_FACTS.eachKind.id,
-  bismillah: ARK_FACTS.bismillah.id,
+  bismillah: ARK_FACTS.eachKind.id,
   waves: ARK_FACTS.judi.id,
   judi: ARK_FACTS.judi.id,
-  peace: ARK_FACTS.judi.id,
+  peace: ARK_FACTS.trust.id,
 };
 
 export const PART_FACT: Record<string, string> = {
   hull: ARK_FACTS.planks.id,
-  deck: ARK_FACTS.command.id,
+  deck: ARK_FACTS.mocked.id,
   cabin: ARK_FACTS.mocked.id,
-  roof: ARK_FACTS.mocked.id,
-  ramp: ARK_FACTS.command.id,
+  roof: ARK_FACTS.obey.id,
+  ramp: ARK_FACTS.obey.id,
 };

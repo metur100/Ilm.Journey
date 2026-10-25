@@ -9,7 +9,8 @@ import { surahMessagesI18n } from './i18n';
 /*
  * Messages of the Surahs (ConnectPairs). Each message is the plain meaning of the surah's own ayahs (translation in
  * the data) – the facts quote exactly those ayahs. L1: four surahs with pictures and hints; L2: five other surahs,
- * no hints; L3 twist: connect each message to the ayah (its translation) that says it.
+ * no hints; L3 twist: four more surahs (and two from before) – connect each message to the ayah (its translation)
+ * that says it.
  */
 
 export interface SurahMessagesConfig {
@@ -20,7 +21,7 @@ export interface SurahMessagesConfig {
   factOf: Record<string, string>;
 }
 
-type Msg = 112 | 103 | 114 | 94 | 107 | 99 | 106 | 108 | 93;
+type Msg = 112 | 103 | 114 | 94 | 107 | 99 | 106 | 108 | 93 | 110 | 97 | 109 | 102;
 
 const ART: Record<Msg, string> = {
   112: 'quran.one-star',
@@ -32,6 +33,10 @@ const ART: Record<Msg, string> = {
   106: 'object.kaaba-icon',
   108: 'object.prayer-mat',
   93: 'sky.morning',
+  110: 'ui.heart',
+  97: 'ramadan.qadr-sky',
+  109: 'object.scroll',
+  102: 'object.coins',
 };
 
 const message = (n: Msg, art = true) => ({ label: nsText(surahMessagesI18n, `msg.${n}`), art: art ? ART[n] : undefined });
@@ -85,7 +90,7 @@ export const surahMessagesGame: GameDef<SurahMessagesConfig> = {
       config: {
         mode: 'ayah',
         hints: false,
-        pairs: [ayahPair(112, 1), ayahPair(94, 5), ayahPair(99, 7), ayahPair(106, 3), ayahPair(114, 1), ayahPair(93, 6)],
+        pairs: [ayahPair(110, 3), ayahPair(97, 3), ayahPair(109, 6), ayahPair(102, 1), ayahPair(114, 1), ayahPair(93, 6)],
         factOf: { s93: F.duha.id, s114: F.nas.id },
       },
       facts: [F.duha, F.nas],

@@ -1,3 +1,5 @@
+import type { EpisodeConfig } from '../../prophets-story/episode';
+
 /*
  * The Shirt's Road – pure rules. The learner lays a road across the desert, cell by cell, from Egypt (start) to
  * Yaqub's home in Canaan (goal), around rocks. On level 3 the caravan must also stop at every well on the way.
@@ -85,30 +87,8 @@ export function nextOnSolution(solution: readonly number[], path: readonly numbe
 
 const at = (cols: number, c: number, r: number) => r * cols + c;
 
-/** L1: a small field, a few rocks, the next cell glows. */
-export const LEVEL_1: RoadConfig = {
-  cols: 5,
-  rows: 4,
-  start: at(5, 0, 2),
-  goal: at(5, 4, 1),
-  rocks: [at(5, 1, 1), at(5, 2, 2), at(5, 3, 0), at(5, 3, 3)],
-  wells: [],
-  hints: true,
-};
-
-/** L2: a wider desert with more rocks and no glow – find the way yourself. */
-export const LEVEL_2: RoadConfig = {
-  cols: 6,
-  rows: 5,
-  start: at(6, 0, 4),
-  goal: at(6, 5, 0),
-  rocks: [at(6, 1, 3), at(6, 1, 2), at(6, 2, 0), at(6, 3, 2), at(6, 3, 3), at(6, 4, 1), at(6, 4, 4), at(6, 5, 2), at(6, 2, 4)],
-  wells: [],
-  hints: false,
-};
-
-/** L3: the caravan must rest at both wells on the way. */
-export const LEVEL_3: RoadConfig = {
+/** L3 of the Yaqub game: the caravan brings the shirt and must rest at both wells on the way. */
+export const ROAD: RoadConfig = {
   cols: 6,
   rows: 5,
   start: at(6, 0, 0),
@@ -117,3 +97,5 @@ export const LEVEL_3: RoadConfig = {
   wells: [at(6, 0, 3), at(6, 4, 2)],
   hints: false,
 };
+
+export type YaqubConfig = RoadConfig | EpisodeConfig;

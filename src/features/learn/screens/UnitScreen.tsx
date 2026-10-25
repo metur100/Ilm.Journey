@@ -23,7 +23,8 @@ import { LessonView } from '../components/LessonView';
 import { getUnit, learnKey } from '../content';
 import { useLearnI18n } from '../i18n';
 import type { Unit } from '../models';
-import { buildTopicPath, nextPathEntry, pathItemHref } from '../path';
+import { buildTopicPath, isUnitTaughtElsewhere, nextPathEntry, pathItemHref } from '../path';
+import { isUnitCompleted } from '../services/progression';
 import { type UnitOutcome, useLearnStore } from '../store/learnStore';
 
 type Phase = 'learn' | 'practice' | 'test' | 'explanation' | 'reward';
@@ -51,7 +52,11 @@ function UnitPlayer({ id }: { id: string }) {
   const [initialStatus] = useState(() => {
     if (!unit) return 'locked';
     const learn = useLearnStore.getState();
-    return buildTopicPath(unit.areaId, learn).find((e) => e.item.kind === 'unit' && e.item.id === unit.id)?.status ?? 'locked';
+    const entry = buildTopicPath(unit.areaId, learn).find((e) => e.item.kind === 'unit' && e.item.id === unit.id);
+    if (entry) return entry.status;
+    // A unit left out of the path (a quest or story there teaches it) still opens from search, review and history.
+    if (isUnitTaughtElsewhere(unit.id)) return isUnitCompleted(learn.units, unit.id) ? 'completed' : 'available';
+    return 'locked';
   });
 
   if (!unit) {

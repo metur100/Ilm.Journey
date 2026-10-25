@@ -1,10 +1,22 @@
 /**
  * Ilm Garden element table: every placeable element, the level that makes it available and its seed cost
- * (paid once to unlock the element; planting an unlocked element is free – the 16 spots are the limit).
+ * (paid once to unlock the element; planting an unlocked element is free – the fitting free spots are the limit).
  * Art names follow the art library: `garden.<id>`.
  */
 
 export type GardenElementKind = 'tree' | 'plant' | 'flower' | 'water' | 'decor' | 'building' | 'creature';
+
+/**
+ * Kinds of places in the garden. Every spot has exactly one kind and every element lists the kinds it may stand on,
+ * so a fountain can only go to a water spot, a tree only into the grove and a bird only into the sky.
+ *
+ * - `grove`: the back row on the lawn – trees, the arch, other big things
+ * - `water`: a water spot (the head of the path, the pond corner)
+ * - `bed`: flower beds on the lawn – flowers, bushes, small plants (butterflies and bees hover above them)
+ * - `path`: beside the garden path – bench, lantern, stepping stones
+ * - `sky`: above the garden – only flying birds
+ */
+export type GardenSpotKind = 'grove' | 'water' | 'bed' | 'path' | 'sky';
 
 /** Idle animation of an element in the scene (all disabled under reduced motion). */
 export type GardenMotion = 'none' | 'sway' | 'flutter' | 'fly' | 'shimmer';
@@ -12,51 +24,55 @@ export type GardenMotion = 'none' | 'sway' | 'flutter' | 'fly' | 'shimmer';
 export interface GardenElement {
   id: string;
   kind: GardenElementKind;
+  /** Spot kinds the element may be placed on, in order of preference. */
+  spots: readonly GardenSpotKind[];
   /** Learner level at which the element becomes available. */
   minLevel: number;
   /** Seeds paid once to unlock it (0 = free once the level is reached). */
   seedCost: number;
-  /** Base width in the scene relative to the scene width (scaled by the depth of the spot). */
+  /** Base width in the scene relative to the scene size (scaled by the depth of the spot). */
   size: number;
   motion: GardenMotion;
 }
 
 export const GARDEN_ELEMENTS: readonly GardenElement[] = [
   // level 1 – the first things that grow
-  { id: 'sapling', kind: 'plant', minLevel: 1, seedCost: 0, size: 0.12, motion: 'sway' },
-  { id: 'bush', kind: 'plant', minLevel: 1, seedCost: 0, size: 0.14, motion: 'sway' },
-  { id: 'flower-rose', kind: 'flower', minLevel: 1, seedCost: 0, size: 0.09, motion: 'sway' },
-  { id: 'rock', kind: 'decor', minLevel: 1, seedCost: 0, size: 0.1, motion: 'none' },
-  { id: 'path-stone', kind: 'decor', minLevel: 1, seedCost: 0, size: 0.12, motion: 'none' },
-  { id: 'flower-tulip', kind: 'flower', minLevel: 1, seedCost: 2, size: 0.09, motion: 'sway' },
-  { id: 'flower-jasmine', kind: 'flower', minLevel: 1, seedCost: 2, size: 0.09, motion: 'sway' },
+  { id: 'sapling', kind: 'plant', spots: ['bed', 'grove'], minLevel: 1, seedCost: 0, size: 0.12, motion: 'sway' },
+  { id: 'bush', kind: 'plant', spots: ['bed', 'grove'], minLevel: 1, seedCost: 0, size: 0.14, motion: 'sway' },
+  { id: 'flower-rose', kind: 'flower', spots: ['bed'], minLevel: 1, seedCost: 0, size: 0.09, motion: 'sway' },
+  { id: 'rock', kind: 'decor', spots: ['path', 'bed'], minLevel: 1, seedCost: 0, size: 0.1, motion: 'none' },
+  { id: 'path-stone', kind: 'decor', spots: ['path'], minLevel: 1, seedCost: 0, size: 0.12, motion: 'none' },
+  { id: 'flower-tulip', kind: 'flower', spots: ['bed'], minLevel: 1, seedCost: 2, size: 0.09, motion: 'sway' },
+  { id: 'flower-jasmine', kind: 'flower', spots: ['bed'], minLevel: 1, seedCost: 2, size: 0.09, motion: 'sway' },
   // level 2
-  { id: 'palm', kind: 'tree', minLevel: 2, seedCost: 3, size: 0.22, motion: 'sway' },
-  { id: 'flower-lily', kind: 'flower', minLevel: 2, seedCost: 2, size: 0.09, motion: 'sway' },
-  { id: 'bench', kind: 'decor', minLevel: 2, seedCost: 2, size: 0.16, motion: 'none' },
-  { id: 'butterfly', kind: 'creature', minLevel: 2, seedCost: 2, size: 0.07, motion: 'flutter' },
+  { id: 'palm', kind: 'tree', spots: ['grove'], minLevel: 2, seedCost: 3, size: 0.22, motion: 'sway' },
+  { id: 'flower-lily', kind: 'flower', spots: ['bed'], minLevel: 2, seedCost: 2, size: 0.09, motion: 'sway' },
+  { id: 'bench', kind: 'decor', spots: ['path', 'grove'], minLevel: 2, seedCost: 2, size: 0.16, motion: 'none' },
+  { id: 'butterfly', kind: 'creature', spots: ['bed'], minLevel: 2, seedCost: 2, size: 0.07, motion: 'flutter' },
   // level 3
-  { id: 'olive', kind: 'tree', minLevel: 3, seedCost: 4, size: 0.22, motion: 'sway' },
-  { id: 'lantern-post', kind: 'decor', minLevel: 3, seedCost: 3, size: 0.08, motion: 'none' },
-  { id: 'bird', kind: 'creature', minLevel: 3, seedCost: 3, size: 0.07, motion: 'fly' },
-  { id: 'fence', kind: 'decor', minLevel: 3, seedCost: 2, size: 0.18, motion: 'none' },
+  { id: 'olive', kind: 'tree', spots: ['grove'], minLevel: 3, seedCost: 4, size: 0.22, motion: 'sway' },
+  { id: 'lantern-post', kind: 'decor', spots: ['path'], minLevel: 3, seedCost: 3, size: 0.08, motion: 'none' },
+  { id: 'bird', kind: 'creature', spots: ['sky'], minLevel: 3, seedCost: 3, size: 0.07, motion: 'fly' },
   // level 4
-  { id: 'fig', kind: 'tree', minLevel: 4, seedCost: 4, size: 0.2, motion: 'sway' },
-  { id: 'pond', kind: 'water', minLevel: 4, seedCost: 5, size: 0.22, motion: 'shimmer' },
-  { id: 'bee', kind: 'creature', minLevel: 4, seedCost: 2, size: 0.05, motion: 'flutter' },
-  { id: 'beehive', kind: 'decor', minLevel: 4, seedCost: 3, size: 0.09, motion: 'none' },
+  { id: 'fig', kind: 'tree', spots: ['grove'], minLevel: 4, seedCost: 4, size: 0.2, motion: 'sway' },
+  { id: 'pond', kind: 'water', spots: ['water'], minLevel: 4, seedCost: 5, size: 0.22, motion: 'shimmer' },
+  { id: 'bee', kind: 'creature', spots: ['bed'], minLevel: 4, seedCost: 2, size: 0.05, motion: 'flutter' },
+  { id: 'beehive', kind: 'decor', spots: ['bed', 'grove'], minLevel: 4, seedCost: 3, size: 0.09, motion: 'none' },
   // level 5
-  { id: 'pomegranate', kind: 'tree', minLevel: 5, seedCost: 5, size: 0.2, motion: 'sway' },
-  { id: 'stream', kind: 'water', minLevel: 5, seedCost: 5, size: 0.26, motion: 'shimmer' },
-  { id: 'dove', kind: 'creature', minLevel: 5, seedCost: 3, size: 0.08, motion: 'fly' },
-  { id: 'gate', kind: 'decor', minLevel: 5, seedCost: 3, size: 0.16, motion: 'none' },
+  { id: 'pomegranate', kind: 'tree', spots: ['grove'], minLevel: 5, seedCost: 5, size: 0.2, motion: 'sway' },
+  { id: 'dove', kind: 'creature', spots: ['sky'], minLevel: 5, seedCost: 3, size: 0.08, motion: 'fly' },
   // level 6+
-  { id: 'lemon', kind: 'tree', minLevel: 6, seedCost: 5, size: 0.2, motion: 'sway' },
-  { id: 'fountain', kind: 'water', minLevel: 6, seedCost: 6, size: 0.2, motion: 'shimmer' },
-  { id: 'arch', kind: 'building', minLevel: 7, seedCost: 6, size: 0.22, motion: 'none' },
-  { id: 'minaret', kind: 'building', minLevel: 8, seedCost: 8, size: 0.14, motion: 'none' },
-  { id: 'masjid-small', kind: 'building', minLevel: 10, seedCost: 10, size: 0.3, motion: 'none' },
+  { id: 'lemon', kind: 'tree', spots: ['grove'], minLevel: 6, seedCost: 5, size: 0.2, motion: 'sway' },
+  { id: 'fountain', kind: 'water', spots: ['water'], minLevel: 6, seedCost: 6, size: 0.2, motion: 'shimmer' },
+  { id: 'arch', kind: 'building', spots: ['grove'], minLevel: 7, seedCost: 6, size: 0.22, motion: 'none' },
 ];
+
+/**
+ * Elements taken out of the garden because they did not fit it (a lone fence piece or gate, a "stream" sprite that
+ * could not lie flat on the lawn, a minaret and a masjid next to the masjid of the backdrop) → the seeds once paid
+ * for them. Stored gardens drop them and get those seeds back.
+ */
+export const REMOVED_GARDEN_ELEMENTS: Readonly<Record<string, number>> = { fence: 2, stream: 5, gate: 3, minaret: 8, 'masjid-small': 10 };
 
 const BY_ID = new Map(GARDEN_ELEMENTS.map((e) => [e.id, e]));
 
@@ -91,62 +107,80 @@ export function grows(element: GardenElement): boolean {
 }
 
 export interface GardenSpot {
+  kind: GardenSpotKind;
   /** 0..1 from the left edge of the scene. */
   x: number;
-  /** 0..1 from the top: the element's base (feet) stands here. */
-  y: number;
+  /**
+   * Ground spots: depth on the lawn, 0 = the horizon, 1 = the bottom edge (the element's feet stand here).
+   * Sky spots: height in the open sky, 0 = its top, 1 = the horizon (the element's centre is here).
+   */
+  d: number;
+  /** Width cap relative to the scene width, so neighbours never cover each other. */
+  maxW: number;
 }
 
 /**
- * 16 predefined spots in three rows (back → front). Depth scaling makes the back row smaller.
- * Index order is stable – placed elements store their spot index.
+ * The fixed places of the garden (back → front, then the sky). Index order is stable – placed elements store their
+ * spot index. Ground spots are positioned on the lawn by `gardenLayout` (core/garden/layout.ts), so they stay on the
+ * grass on every screen size; the middle of the lawn stays free for the path.
  */
 export const GARDEN_SPOTS: readonly GardenSpot[] = [
-  // back row – trees, buildings and water; feet firmly on the lawn behind the path
-  { x: 0.12, y: 0.62 },
-  { x: 0.31, y: 0.6 },
-  { x: 0.5, y: 0.59 },
-  { x: 0.69, y: 0.6 },
-  { x: 0.88, y: 0.62 },
-  // middle row – plants, flowers and decor
-  { x: 0.08, y: 0.75 },
-  { x: 0.25, y: 0.73 },
-  { x: 0.42, y: 0.74 },
-  { x: 0.59, y: 0.73 },
-  { x: 0.76, y: 0.74 },
-  { x: 0.93, y: 0.76 },
-  // front row – small flowers, decor and creatures
-  { x: 0.15, y: 0.9 },
-  { x: 0.34, y: 0.92 },
-  { x: 0.53, y: 0.91 },
-  { x: 0.72, y: 0.92 },
-  { x: 0.89, y: 0.9 },
+  // back row – the grove, the fountain at the head of the path
+  { kind: 'grove', x: 0.09, d: 0.22, maxW: 0.17 },
+  { kind: 'grove', x: 0.27, d: 0.2, maxW: 0.18 },
+  { kind: 'water', x: 0.54, d: 0.18, maxW: 0.2 },
+  { kind: 'grove', x: 0.76, d: 0.2, maxW: 0.18 },
+  { kind: 'grove', x: 0.92, d: 0.22, maxW: 0.15 },
+  // middle row – flower beds, both sides of the path, the pond
+  { kind: 'bed', x: 0.08, d: 0.5, maxW: 0.14 },
+  { kind: 'bed', x: 0.22, d: 0.48, maxW: 0.14 },
+  { kind: 'path', x: 0.36, d: 0.5, maxW: 0.14 },
+  { kind: 'path', x: 0.66, d: 0.5, maxW: 0.14 },
+  { kind: 'water', x: 0.85, d: 0.52, maxW: 0.22 },
+  // front row – flower beds and a place beside the path
+  { kind: 'bed', x: 0.1, d: 0.86, maxW: 0.13 },
+  { kind: 'bed', x: 0.25, d: 0.88, maxW: 0.13 },
+  { kind: 'path', x: 0.37, d: 0.9, maxW: 0.11 },
+  { kind: 'bed', x: 0.64, d: 0.88, maxW: 0.13 },
+  { kind: 'bed', x: 0.79, d: 0.86, maxW: 0.13 },
+  { kind: 'bed', x: 0.93, d: 0.88, maxW: 0.12 },
+  // the sky – only birds fly here
+  { kind: 'sky', x: 0.2, d: 0.45, maxW: 0.1 },
+  { kind: 'sky', x: 0.44, d: 0.25, maxW: 0.1 },
+  { kind: 'sky', x: 0.62, d: 0.55, maxW: 0.1 },
 ];
 
-/** Depth scale of a spot: 0.7 at the back row, ~1.15 at the front. */
+/** Depth scale of a spot: 0.7 at the horizon, 1.15 at the front edge; sky spots are not scaled. */
 export function depthScale(spot: GardenSpot): number {
-  const t = Math.max(0, Math.min(1, (spot.y - 0.59) / (0.92 - 0.59)));
-  return 0.7 + t * 0.45;
+  if (spot.kind === 'sky') return 1;
+  return 0.7 + Math.max(0, Math.min(1, spot.d)) * 0.45;
 }
 
-/** The tidy rows of the garden: large things at the back, small things in front. */
-export const GARDEN_ROWS: readonly (readonly number[])[] = [
-  [0, 1, 2, 3, 4],
-  [5, 6, 7, 8, 9, 10],
-  [11, 12, 13, 14, 15],
-];
+/** Whether the element may stand on that spot (valid index, right kind of place). */
+export function fitsSpot(element: GardenElement, spot: number): boolean {
+  const s = Number.isInteger(spot) ? GARDEN_SPOTS[spot] : undefined;
+  return !!s && element.spots.includes(s.kind);
+}
+
+/** Spot indices of a kind, in index order. */
+export function spotsOfKind(kind: GardenSpotKind): number[] {
+  return GARDEN_SPOTS.flatMap((s, i) => (s.kind === kind ? [i] : []));
+}
+
+/** Free spots the element may go to, in its order of preference (its spot kinds, then index order). */
+export function fittingSpots(element: GardenElement, free: readonly number[]): number[] {
+  return element.spots.flatMap((kind) => spotsOfKind(kind).filter((i) => free.includes(i)));
+}
 
 /**
- * Auto-placement for an element: trees, buildings and water go to the back row, plants, flowers and decor to
- * the middle row, creatures to the front. Fills the first free place of its row, never "anywhere".
+ * Auto-placement: the first free spot of a fitting kind – a fountain only ever lands on a water spot, a tree in the
+ * grove, a bird in the sky. `null` when no fitting spot is free (never "anywhere").
  */
 export function nextSpotFor(element: GardenElement, free: readonly number[]): number | null {
-  const row = element.kind === 'tree' || element.kind === 'building' || element.kind === 'water' ? 0 : element.kind === 'creature' ? 2 : 1;
-  const preferred = GARDEN_ROWS[row].find((spot) => free.includes(spot));
-  return preferred ?? free[0] ?? null;
+  return fittingSpots(element, free)[0] ?? null;
 }
 
-/** Width cap per spot row, so neighbouring elements never overlap. */
+/** Width cap of a spot relative to the scene width, so neighbouring elements never overlap. */
 export function maxWidthFraction(spot: number): number {
-  return spot < 5 ? 0.18 : spot < 11 ? 0.15 : 0.18;
+  return GARDEN_SPOTS[spot]?.maxW ?? 0.12;
 }

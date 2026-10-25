@@ -7,7 +7,7 @@ import type { QiblaConfig } from './logic';
 
 /*
  * Find the Qibla (Salah game 3, docs/GAMES.md): turn the compass towards the Kaaba from cities in Europe (L1, with a
- * hint arrow), around the world (L2, with hint) and mixed without hint (L3). The real initial great-circle bearing is
+ * hint arrow), around the world (L2, with hint) and new far-away cities without hint (L3) – every level has its own cities. The real initial great-circle bearing is
  * computed in ./logic.ts; after each city the shortest path on the globe is drawn on the map.
  */
 export const findQiblaGame: GameDef<QiblaConfig> = {
@@ -21,12 +21,12 @@ export const findQiblaGame: GameDef<QiblaConfig> = {
     { level: 1, config: { mode: 'europe', cities: ['duesseldorf', 'sarajevo', 'vienna', 'london'], hint: true }, facts: [QIBLA_FACTS.kaaba] },
     {
       level: 2,
-      config: { mode: 'world', cities: ['new-york', 'istanbul', 'cairo', 'jakarta', 'cape-town'], hint: true },
+      config: { mode: 'world', cities: ['new-york', 'istanbul', 'cairo', 'cape-town'], hint: true },
       facts: [QIBLA_FACTS.everywhere, QIBLA_FACTS.shortestPath],
     },
     {
       level: 3,
-      config: { mode: 'free', cities: ['tokyo', 'new-york', 'cape-town', 'jakarta', 'duesseldorf'], hint: false, shuffle: true },
+      config: { mode: 'free', cities: ['tokyo', 'jakarta', 'sydney', 'moscow'], hint: false, shuffle: true },
       facts: [QIBLA_FACTS.firstQibla],
     },
   ],

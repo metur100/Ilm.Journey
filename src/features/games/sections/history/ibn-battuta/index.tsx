@@ -1,15 +1,16 @@
 import { regionPoint } from '@/core/art/pieces/sections/history';
 import { type GameApi, registerGame } from '@/core/games';
-import { GameBoard, PathTrace, type PathStop } from '@/core/games/kit';
+import { GameBoard, type KitItem, PathTrace, type PathStop, SequenceBoard } from '@/core/games/kit';
 
 import { BATTUTA_FACTS as F } from '../facts';
 import { finishWith, historyGame, T } from '../shared';
 
 /*
  * The Journey of Ibn Battuta (his Rihla): trace his first journey, from Tangier (1325) to the Hajj.
+ *   Every level has its own content (owner feedback: no level repeats the content of another):
  *   L1 – Tangier → Tunis → Cairo, dashed guide and hints.
- *   L2 – Cairo → Damascus → Madinah → Makkah, guide but no hints.
- *   L3 – the whole way from Tangier to Makkah without a guide.
+ *   L2 – Cairo → Damascus → Madinah → Makkah with the pilgrims’ caravan, no guide, no hints.
+ *   L3 – his life of travel in order: from setting out to the book of his journeys, the Rihla (SequenceBoard).
  */
 
 const CITY: Record<string, { lon: number; lat: number; label: ReturnType<typeof T>; caption: ReturnType<typeof T> }> = {
@@ -23,11 +24,17 @@ const CITY: Record<string, { lon: number; lat: number; label: ReturnType<typeof 
 
 const stop = (id: string): PathStop => ({ id, label: CITY[id].label, caption: CITY[id].caption, at: regionPoint(CITY[id].lon, CITY[id].lat) });
 
-export interface BattutaConfig {
-  cities: string[];
-  route: boolean;
-  hints: boolean;
-}
+export type BattutaConfig = { mode: 'trace'; cities: string[]; route: boolean; hints: boolean } | { mode: 'story' };
+
+/** L3 – his life of travel in order (facts: battuta-1325, battuta-rihla). */
+const STORY: KitItem[] = [
+  { id: 'set-out', art: 'history.journey-cover', label: T('Sets out from Tangier (1325)', 'Bricht von Tanger auf (1325)', 'Kreće iz Tangera (1325)') },
+  { id: 'hajj', art: 'object.kaaba-icon', label: T('Makes the Hajj in Makkah', 'Vollzieht die Hadsch in Mekka', 'Obavlja hadž u Mekki') },
+  { id: 'thirty-years', art: 'object.compass', label: T('Travels for almost thirty years', 'Reist fast dreißig Jahre lang', 'Putuje skoro trideset godina') },
+  { id: 'morocco', art: 'object.tent', label: T('Comes back to Morocco', 'Kehrt nach Marokko zurück', 'Vraća se u Maroko') },
+  { id: 'rihla', art: 'history.book-gold', label: T('Ibn Juzayy writes down the Rihla', 'Ibn Dschuzaiy schreibt die Rihla auf', 'Ibn Džuzejj zapisuje Rihlu') },
+];
+const STORY_FACT: Record<string, string> = { 'set-out': F.set.id, hajj: F.set.id, 'thirty-years': F.rihla.id, morocco: F.rihla.id, rihla: F.rihla.id };
 
 const texts = {
   title: T('The Journey of Ibn Battuta', 'Die Reise des Ibn Battuta', 'Putovanje Ibn Battute'),
@@ -36,16 +43,34 @@ const texts = {
     '1325 verließ Ibn Battuta Tanger, um die Hadsch zu vollziehen. Folge seinem Weg durch Nordafrika, Ägypten und Syrien bis nach Mekka.',
     'Ibn Battuta je 1325. godine krenuo iz Tangera na hadž. Prati njegov put preko sjeverne Afrike, Egipta i Sirije do Mekke.',
   ),
-  howTo: T('Trace the route with your finger from city to city.', 'Fahre die Route mit dem Finger von Stadt zu Stadt nach.', 'Prstom prati put od grada do grada.'),
+  howTo: T(
+    'Trace the route with your finger from city to city. At the end, put his life of travel in order.',
+    'Fahre die Route mit dem Finger von Stadt zu Stadt nach. Zum Schluss bringst du sein Leben auf Reisen in die richtige Reihenfolge.',
+    'Prstom prati put od grada do grada. Na kraju poredaj njegov putnički život.',
+  ),
   'play.prompt': T('Trace the journey from city to city.', 'Folge der Reise von Stadt zu Stadt.', 'Prati putovanje od grada do grada.'),
+  'play.story': T('Put his life of travel in order.', 'Bring sein Leben auf Reisen in die richtige Reihenfolge.', 'Poredaj njegov putnički život.'),
 };
 
 export function IbnBattutaGame(api: GameApi<BattutaConfig>) {
-  const { cities, route, hints } = api.config;
-  const stops = cities.map(stop);
+  const { config } = api;
+  if (config.mode === 'story') {
+    return (
+      <GameBoard api={api as GameApi<unknown>}>
+        <SequenceBoard
+          items={STORY}
+          variant="list"
+          hints={false}
+          prompt={api.t('play.story')}
+          onDone={finishWith(api as GameApi<unknown>, STORY.length, (id) => (api.facts.some((f) => f.id === STORY_FACT[id]) ? STORY_FACT[id] : undefined))}
+        />
+      </GameBoard>
+    );
+  }
+  const stops = config.cities.map(stop);
   return (
     <GameBoard api={api as GameApi<unknown>}>
-      <PathTrace map="history.map-region" stops={stops} showRoute={route} tolerance={0.07} hints={hints} prompt={api.t('play.prompt')} onDone={finishWith(api as GameApi<unknown>, stops.length - 1)} />
+      <PathTrace map="history.map-region" stops={stops} showRoute={config.route} tolerance={0.07} hints={config.hints} prompt={api.t('play.prompt')} onDone={finishWith(api as GameApi<unknown>, stops.length - 1)} />
     </GameBoard>
   );
 }
@@ -57,9 +82,9 @@ export const ibnBattutaGame = historyGame<BattutaConfig>({
   hintArt: 'history.map-region',
   component: IbnBattutaGame,
   levels: [
-    { config: { cities: ['tangier', 'tunis', 'cairo'], route: true, hints: true }, facts: [F.set] },
-    { config: { cities: ['cairo', 'damascus', 'madinah', 'makkah'], route: true, hints: false }, facts: [F.route] },
-    { config: { cities: ['tangier', 'tunis', 'cairo', 'damascus', 'madinah', 'makkah'], route: false, hints: false }, facts: [F.rihla] },
+    { config: { mode: 'trace', cities: ['tangier', 'tunis', 'cairo'], route: true, hints: true }, facts: [F.set] },
+    { config: { mode: 'trace', cities: ['cairo', 'damascus', 'madinah', 'makkah'], route: false, hints: false }, facts: [F.route] },
+    { config: { mode: 'story' }, facts: [F.rihla] },
   ],
   order: 110,
 });

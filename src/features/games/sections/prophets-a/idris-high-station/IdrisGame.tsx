@@ -1,36 +1,22 @@
 import type { GameApi } from '@/core/games';
-import { GameBoard, kitResult, PathTrace, SortBins, type KitDoneInfo } from '@/core/games/kit';
+import { GameBoard, kitResult, PathTrace, type KitDoneInfo } from '@/core/games/kit';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import type { EpisodeConfig } from '../../prophets-story/episode';
 import { factsFor } from '../shared';
-import { ITEM_FACT, PATH_L1, PATH_L2, QUALITY_BINS, QUALITY_ITEMS, STOP_FACT } from './content';
+import { HIGH_PATH, STOP_FACT } from './content';
 
-export interface IdrisConfig {
-  mode: 'path' | 'pathFree' | 'sort';
-}
+export type IdrisConfig = { mode: 'climb' } | EpisodeConfig;
 
-/** The High Station: a star path up the mountain (L1 with the route, L2 without), then sorting deeds (L3). */
+/** The High Station: L1 truthful (episode: sort), L2 patient (episode: connect), L3 the star path to the high station (PathTrace). */
 export function IdrisGame(api: GameApi<IdrisConfig>) {
-  const { mode } = api.config;
-  const finish = (moves: number, map: Record<string, string>) => ({ mistakes, missed }: KitDoneInfo) =>
-    api.onComplete(kitResult({ moves, mistakes, factsMissed: factsFor(missed, map) }));
-  if (mode === 'sort') {
-    return (
-      <GameBoard api={api}>
-        <SortBins bins={QUALITY_BINS} items={QUALITY_ITEMS} hints={false} prompt={api.t('play.sort')} onDone={finish(QUALITY_ITEMS.length, ITEM_FACT)} />
-      </GameBoard>
-    );
-  }
-  const stops = mode === 'path' ? PATH_L1 : PATH_L2;
+  const { config } = api;
+  if (config.mode === 'episode') return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  const onDone = ({ mistakes, missed }: KitDoneInfo) =>
+    api.onComplete(kitResult({ moves: HIGH_PATH.length - 1, mistakes, factsMissed: factsFor(missed, STOP_FACT) }));
   return (
     <GameBoard api={api} padding={8}>
-      <PathTrace
-        map="prophet.idris-sky-steps"
-        stops={stops}
-        showRoute={mode === 'path'}
-        hints={mode === 'path'}
-        prompt={api.t(mode === 'path' ? 'play.path' : 'play.pathFree')}
-        onDone={finish(stops.length - 1, STOP_FACT)}
-      />
+      <PathTrace map="prophet.idris-sky-steps" stops={HIGH_PATH} showRoute={false} hints={false} prompt={api.t('play.climb')} onDone={onDone} />
     </GameBoard>
   );
 }

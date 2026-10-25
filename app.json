@@ -2,7 +2,7 @@
   "expo": {
     "name": "Ilm Journey",
     "slug": "ilm-journey",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scheme": "ilmjourney",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,7 +17,7 @@
     },
     "android": {
       "package": "com.certidevelopment.ilmjourney",
-      "versionCode": 1,
+      "versionCode": 2,
       "adaptiveIcon": {
         "backgroundColor": "#14173A",
         "foregroundImage": "./assets/android-icon-foreground.png",

@@ -21,7 +21,7 @@ import { learnI18n } from './i18n';
 import { registerLearnQuests } from './quests/register';
 import { registerSufaraCourse } from './sufara/register';
 import { registerLearnContentPaths } from './tools/paths';
-import { buildTopicPath, nextPathEntry, pathItemHref, startedTopics } from './path';
+import { buildTopicPath, isUnitTaughtElsewhere, nextPathEntry, pathItemHref, startedTopics } from './path';
 import { isMasterPassed } from './services/progression';
 import { masterTarget, startLearnAutoSave, unitTarget, useLearnStore } from './store/learnStore';
 
@@ -104,7 +104,8 @@ function search(query: string, language: Parameters<typeof localize>[1]): Search
     href: { pathname: '/topic/[id]', params: { id: t } },
     score: 3,
   }));
-  const units: SearchResult[] = UNITS.flatMap((u) => {
+  // Units that a quest or story teaches are not on the topic page – their quest / story is found instead.
+  const units: SearchResult[] = UNITS.filter((u) => !isUnitTaughtElsewhere(u.id)).flatMap((u) => {
     const title = localize(u.title, language);
     const description = localize(u.description, language);
     const inTitle = title.toLowerCase().includes(q);
@@ -159,17 +160,9 @@ export function registerLearnFeature(): void {
     autoSave: startLearnAutoSave,
   });
 
-  // Topic tools that link to the other tabs. The islam-quest port adds Quran memorization,
-  // Arabic tracing and the Ramadan calendar with `registerTopicTool` from its own files.
-  registerTopicTool({
-    id: 'prophets-stories',
-    topic: 'prophets',
-    order: 10,
-    icon: 'scroll',
-    label: (lang) => translateNs(learnI18n, lang, 'tool.stories'),
-    description: (lang) => translateNs(learnI18n, lang, 'tool.storiesDesc'),
-    href: '/tools/prophets',
-  });
+  // Topic tools that link to the other tabs. The islam-quest port adds Quran duas, Arabic tracing and the Ramadan
+  // calendar with `registerTopicTool` from its own files. No tool repeats the path: the 25 prophet stories and the
+  // Juz ʿAmma surahs are path steps (registerLearnContentPaths), so they have no extra list card.
   registerTopicTool({
     id: 'salah-guide',
     topic: 'salah',

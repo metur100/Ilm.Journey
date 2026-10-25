@@ -23,11 +23,12 @@ import { buildTopicPath, pathItemHref } from '../path';
 import { TracingPad, useScreenReader } from '../quests/components/TracingPad';
 import { useQuestStore } from '../quests/store/questStore';
 import { useLearnStore } from '../store/learnStore';
-import { COURSE_LETTERS, courseLetter, FORM_LETTERS, getSufaraLesson, LAM_ELIF, lessonExercises, markExamples, SUFARA_LESSONS, type SufaraExercise, type SufaraLesson } from '../sufara/course';
+import { COURSE_LETTERS, courseLetter, FORM_LETTERS, getSufaraLesson, LAM_ELIF, lessonExercises, lessonReading, markExamples, SUFARA_LESSONS, type SufaraExercise, type SufaraLesson } from '../sufara/course';
 import { lessonExplanation, lessonTitle, SUFARA_COPY } from '../sufara/copy';
+import type { ReadingRow } from '../sufara/reading';
 import { sufaraTarget } from '../sufara/register';
 
-type Step = { kind: 'letter'; letter: string } | { kind: 'trace'; letter: string } | { kind: 'explain' } | { kind: 'exercise'; exercise: SufaraExercise } | { kind: 'done' };
+type Step = { kind: 'letter'; letter: string } | { kind: 'trace'; letter: string } | { kind: 'explain' } | { kind: 'read'; rows: ReadingRow[] } | { kind: 'exercise'; exercise: SufaraExercise } | { kind: 'done' };
 
 const useStyles = makeStyles((c) => ({
   root: { flex: 1, backgroundColor: c.background },
@@ -49,6 +50,10 @@ const useStyles = makeStyles((c) => ({
   choiceRight: { borderColor: c.success, backgroundColor: c.successSoft },
   choiceWrong: { borderColor: c.error, backgroundColor: c.errorSoft, opacity: 0.7 },
   choiceArabic: { fontSize: 38, lineHeight: 70 },
+  readRow: { flexDirection: 'row-reverse', flexWrap: 'wrap', justifyContent: 'center', gap: spacing.xs, paddingVertical: spacing.xs, borderBottomWidth: 1, borderColor: c.border },
+  readItem: { minWidth: 64, minHeight: 64, paddingHorizontal: spacing.sm, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },
+  readItemOpen: { backgroundColor: c.surfaceAlt },
+  readText: { fontSize: 34, lineHeight: 62 },
   feedback: { minHeight: 24 },
 }));
 
@@ -94,10 +99,11 @@ function LessonGate({ id }: { id: string }) {
   return <LessonPlayer lesson={lesson} />;
 }
 
-/** Steps of a lesson: each new letter (meet it, write it) or the explanation, then the practice, then the end. */
-function lessonSteps(lesson: SufaraLesson, exercises: SufaraExercise[]): Step[] {
+/** Steps of a lesson: each new letter (meet it, write it) or the explanation, the reading page, then the practice, then the end. */
+function lessonSteps(lesson: SufaraLesson, exercises: SufaraExercise[], rows: ReadingRow[]): Step[] {
   const intro: Step[] = lesson.kind === 'letters' ? lesson.letters.flatMap((letter): Step[] => [{ kind: 'letter', letter }, { kind: 'trace', letter }]) : [{ kind: 'explain' }];
-  return [...intro, ...exercises.map((exercise): Step => ({ kind: 'exercise', exercise })), { kind: 'done' }];
+  const reading: Step[] = rows.length ? [{ kind: 'read', rows }] : [];
+  return [...intro, ...reading, ...exercises.map((exercise): Step => ({ kind: 'exercise', exercise })), { kind: 'done' }];
 }
 
 function LessonPlayer({ lesson }: { lesson: SufaraLesson }) {
@@ -105,7 +111,7 @@ function LessonPlayer({ lesson }: { lesson: SufaraLesson }) {
   const { c } = useTheme();
   const styles = useStyles();
   const visit = useLearnStore((s) => s.visit);
-  const steps = useMemo(() => lessonSteps(lesson, lessonExercises(lesson, language)), [lesson, language]);
+  const steps = useMemo(() => lessonSteps(lesson, lessonExercises(lesson, language), lessonReading(lesson, language)), [lesson, language]);
   const [index, setIndex] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
   const step = steps[Math.min(index, steps.length - 1)];
@@ -139,6 +145,7 @@ function LessonPlayer({ lesson }: { lesson: SufaraLesson }) {
         {step.kind === 'letter' ? <LetterStep key={`l-${index}`} letter={step.letter} onNext={next} /> : null}
         {step.kind === 'trace' ? <TraceStep key={`t-${index}`} letter={step.letter} onNext={next} /> : null}
         {step.kind === 'explain' ? <ExplainStep lesson={lesson} onNext={next} /> : null}
+        {step.kind === 'read' ? <ReadStep key={`r-${index}`} rows={step.rows} onNext={next} /> : null}
         {step.kind === 'exercise' ? <ExerciseStep key={`e-${index}`} exercise={step.exercise} onNext={next} /> : null}
         {step.kind === 'done' ? <DoneStep lesson={lesson} /> : null}
       </ScrollView>
@@ -295,6 +302,57 @@ function ExplainStep({ lesson, onNext }: { lesson: SufaraLesson; onNext: () => v
           </View>
         </>
       ) : null}
+      <Button label={copy.start} iconRight="chevron" onPress={onNext} />
+    </>
+  );
+}
+
+/** The reading page: rows of syllables and words, read right to left; a tap says a syllable and shows its reading. */
+function ReadStep({ rows, onNext }: { rows: ReadingRow[]; onNext: () => void }) {
+  const { copy } = useCopy();
+  const { c } = useTheme();
+  const styles = useStyles();
+  const [showAll, setShowAll] = useState(false);
+  const [opened, setOpened] = useState<string[]>([]);
+
+  const tap = (text: string) => {
+    speakArabic(text);
+    setOpened((o) => (o.includes(text) ? o : [...o, text]));
+  };
+
+  return (
+    <>
+      <AppText variant="title" accessibilityRole="header">
+        {copy.readTitle}
+      </AppText>
+      <AppText variant="body" color={c.textMuted}>
+        {copy.readHint}
+      </AppText>
+      <Card>
+        {rows.map((row, r) => (
+          <View key={r} style={styles.readRow}>
+            {row.items.map((item) => {
+              const open = showAll || opened.includes(item.text);
+              return (
+                <Pressable key={item.text} onPress={() => tap(item.text)} accessibilityRole="button" accessibilityLabel={item.reading} style={[styles.readItem, open && styles.readItemOpen]}>
+                  <AppText script="arabic" style={styles.readText}>
+                    {item.text}
+                  </AppText>
+                  {open ? (
+                    <AppText variant="small" color={c.textMuted}>
+                      {item.reading}
+                    </AppText>
+                  ) : null}
+                </Pressable>
+              );
+            })}
+          </View>
+        ))}
+      </Card>
+      <Button label={showAll ? copy.hideReading : copy.showReading} variant="secondary" size="md" onPress={() => setShowAll((v) => !v)} />
+      <AppText variant="tiny" color={c.textMuted}>
+        {copy.teacher}
+      </AppText>
       <Button label={copy.start} iconRight="chevron" onPress={onNext} />
     </>
   );

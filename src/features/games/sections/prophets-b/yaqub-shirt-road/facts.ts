@@ -1,5 +1,6 @@
 import type { GameFact } from '@/core/games';
 
+import { lessonFact } from '../../prophets-story/episode';
 import { quran, T } from '../shared/kit';
 
 /** Facts of The Shirt's Road – the same wording and references as the Yaqub story (stories/content/prophets/yaqub.json). */
@@ -68,4 +69,34 @@ export const YAQUB_FACTS = {
     art: 'story.lamp',
     reviewKey: 'stories:yaqub-patience',
   },
+  lessonPatience: lessonFact(
+    'yaqub-beautiful-patience',
+    T(
+      'Beautiful patience means bearing a hard time without complaining about Allah to people, and asking Allah for help – Yaqub was sad, and still patient.',
+      'Schöne Geduld heißt, eine schwere Zeit zu ertragen, ohne sich bei den Menschen über Allah zu beklagen, und Allah um Hilfe zu bitten – Yaqub war traurig und doch geduldig.',
+      'Lijepo strpljenje znači podnijeti teško vrijeme bez žaljenja ljudima na Allaha i tražiti pomoć od Allaha – Jakub je bio tužan, a ipak strpljiv.',
+    ),
+    quran('12:18'),
+    { art: 'prophet.yaqub-home', reviewKey: 'stories:yaqub-lesson' },
+  ),
+  lessonHope: lessonFact(
+    'yaqub-never-despair',
+    T(
+      'Never give up hope in Allah’s mercy. Tell Allah what makes you sad, and keep doing your part – Yaqub still sent his sons to search after many years.',
+      'Gib die Hoffnung auf Allahs Barmherzigkeit nie auf. Sag Allah, was dich traurig macht, und tu weiter deinen Teil – Yaqub schickte seine Söhne nach vielen Jahren noch auf die Suche.',
+      'Nikad ne gubi nadu u Allahovu milost. Reci Allahu šta te rastužuje i nastavi činiti svoj dio – Jakub je i nakon mnogo godina slao sinove da traže.',
+    ),
+    quran('12:86–87'),
+    { art: 'garden.sun' },
+  ),
+  lessonJoy: lessonFact(
+    'yaqub-joy-after-patience',
+    T(
+      'Allah’s help comes at the right time. After many years of patience Allah gave Yaqub back his sight and his son – and Yaqub asked forgiveness for the sons who had wronged him.',
+      'Allahs Hilfe kommt zur rechten Zeit. Nach vielen Jahren der Geduld gab Allah Yaqub sein Augenlicht und seinen Sohn zurück – und Yaqub bat um Vergebung für die Söhne, die ihm Unrecht getan hatten.',
+      'Allahova pomoć dolazi u pravo vrijeme. Nakon mnogo godina strpljenja Allah je Jakubu vratio vid i sina – a Jakub je molio oprost za sinove koji su mu nepravdu učinili.',
+    ),
+    quran('12:96–98'),
+    { art: 'prophet.yaqub-shirt' },
+  ),
 } satisfies Record<string, GameFact>;

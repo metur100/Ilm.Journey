@@ -10,7 +10,9 @@ import { FACTS, T } from '../shared/facts';
 /*
  * Suhoor & Iftar Sky: drag the sun (or the moon) along the arc of the day to the right moment.
  * "Eat and drink until the white thread of dawn becomes distinct … then complete the fast until the night" (2:187).
- * L1: two moments with labels and a glowing target. L2: four moments, labels on, no glow. L3: five moments, no labels.
+ * Every level asks about other moments: L1 the frame of the fast (dawn, sunset) with labels and a glowing target.
+ * L2 the meals and the night prayer (suhoor, taraweeh), labels on, no glow. L3 a whole fasting day without labels
+ * (morning, noon, the hungry afternoon, eating again at night).
  */
 
 export const SKY_ID = 'suhoor-iftar-sky';
@@ -86,6 +88,24 @@ const R = {
     prompt: T('Still fasting at Dhuhr. Where is the sun?', 'Beim Dhuhr fasten wir noch. Wo ist die Sonne?', 'U podne još postimo. Gdje je sunce?'),
     caption: T('The fast lasts the whole day – from dawn until sunset.', 'Das Fasten dauert den ganzen Tag – von der Dämmerung bis Sonnenuntergang.', 'Post traje cijeli dan – od zore do zalaska sunca.'),
   },
+  morning: {
+    id: 'morning',
+    moment: 'morning',
+    prompt: T('The first hours of the fast. Where is the sun?', 'Die ersten Stunden des Fastens. Wo ist die Sonne?', 'Prvi sati posta. Gdje je sunce?'),
+    caption: T('In the morning we are already fasting – since dawn.', 'Am Morgen fasten wir schon – seit der Dämmerung.', 'Ujutro već postimo – od zore.'),
+  },
+  asr: {
+    id: 'asr',
+    moment: 'afternoon',
+    prompt: T('Asr – you are hungry, but it is not iftar yet. Where is the sun?', 'Asr – du hast Hunger, aber es ist noch nicht Iftar. Wo ist die Sonne?', 'Ikindija – gladan si, ali još nije iftar. Gdje je sunce?'),
+    caption: T('Be patient – the fast lasts until sunset.', 'Hab Geduld – das Fasten dauert bis Sonnenuntergang.', 'Strpi se – post traje do zalaska sunca.'),
+  },
+  nightMeal: {
+    id: 'night-meal',
+    moment: 'night',
+    prompt: T('After iftar – eating and drinking are allowed again. When?', 'Nach dem Iftar – Essen und Trinken sind wieder erlaubt. Wann?', 'Poslije iftara – jelo i piće su opet dozvoljeni. Kada?'),
+    caption: T('At night eating and drinking are allowed (2:187).', 'Nachts darf man essen und trinken (2:187).', 'Noću je dozvoljeno jesti i piti (2:187).'),
+  },
 } satisfies Record<string, SkyRound>;
 
 export interface SkyConfig {
@@ -100,6 +120,9 @@ const FACT_OF: Record<string, string> = {
   iftar: FACTS.iftar.id,
   suhoor: FACTS.suhoor.id,
   taraweeh: FACTS.taraweeh.id,
+  morning: FACTS.sawm.id,
+  asr: FACTS.sawm.id,
+  'night-meal': FACTS.sawm.id,
 };
 
 function SuhoorIftarSkyGame(api: GameApi<SkyConfig>) {
@@ -126,8 +149,8 @@ export const suhoorIftarSkyGame = ramadanGame<SkyConfig>({
   component: SuhoorIftarSkyGame,
   levels: [
     { level: 1, config: { rounds: [R.begin, R.iftar], labels: true, hints: true }, facts: [FACTS.fastTime, FACTS.iftar] },
-    { level: 2, config: { rounds: [R.suhoor, R.begin, R.iftar, R.taraweeh], labels: true, hints: false }, facts: [FACTS.suhoor, FACTS.taraweeh] },
-    { level: 3, config: { rounds: [R.iftar, R.suhoor, R.midday, R.taraweeh, R.begin], labels: false, hints: false }, facts: [FACTS.sawm] },
+    { level: 2, config: { rounds: [R.suhoor, R.taraweeh], labels: true, hints: false }, facts: [FACTS.suhoor, FACTS.taraweeh] },
+    { level: 3, config: { rounds: [R.morning, R.midday, R.asr, R.nightMeal], labels: false, hints: false }, facts: [FACTS.sawm] },
   ],
   teaches: { questionKeys: ['quest:ramadan-fast-time', 'quest:ramadan-meals-match', 'quest:ramadan-suhoor-blessing'] },
   order: 20,

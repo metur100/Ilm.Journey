@@ -12,7 +12,7 @@ import { gratitudeI18n } from './i18n';
 
 /*
  * The Gratitude Jar – MemoryPairs. Every found pair drops a thank-you note into the jar above the cards.
- * L1: four picture pairs, shown at the start. L2: six pairs from memory. L3 (twist): a blessing and a way of
+ * L1: four blessings at home, shown at the start. L2: six other blessings in Allah's creation, from memory. L3 (twist): a blessing and a way of
  * thanking for it (words, hearts, using a gift well – lesson "Shukr").
  */
 
@@ -34,7 +34,7 @@ export interface JarConfig {
 const B = (id: string, art: string, thanks?: string): Pair => ({ id, art, key: `b.${id}`, thanks });
 
 const L1 = [B('water', 'food.water'), B('bread', 'food.bread'), B('home', 'place.house'), B('sun', 'garden.sun')];
-const L2 = [...L1, B('rain', 'garden.cloud'), B('fruit', 'food.fruit-bowl')];
+const L2 = [B('rain', 'garden.cloud'), B('fruit', 'food.fruit-bowl'), B('honey', 'object.honey'), B('milk', 'food.milk'), B('birds', 'animal.birds'), B('olives', 'food.olives')];
 const L3 = [B('bread', 'food.bread', 'thanks.bread'), B('water', 'food.water', 'thanks.water'), B('gift', 'object.gift', 'thanks.gift'), B('book', 'object.book', 'thanks.book'), B('toys', 'akhlaq.toy-box', 'thanks.toys')];
 
 const FACTS = { shukr: L.shukr(), count: F.countBlessings(), thank: F.thankPeopleHadith(), people: L.thankPeople() };

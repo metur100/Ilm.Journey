@@ -7,7 +7,7 @@ import type { LetterDotsConfig } from './LetterDotsGame';
 
 /*
  * Letter Dots (local PlaceRounds engine): give the letter body its dots – the right number in the right place.
- * L1 ب ت ث ن ي (named, with hints) · L2 the other dotted letters · L3 the letter is only heard.
+ * Each level has its own letters: L1 ب ت ث ن ي (named, with hints) · L2 ج خ ذ ز ش · L3 ض ظ غ ف ق, only heard.
  */
 
 const zones = (en: [string, string, string], de: [string, string, string], bs: [string, string, string]) => ({ en, de, bs });
@@ -61,8 +61,8 @@ export const letterDotsGame = arabicGame<LetterDotsConfig>({
   load: () => (require('./LetterDotsGame') as typeof import('./LetterDotsGame')).LetterDotsGame,
   levels: [
     { config: { letters: ['ب', 'ت', 'ث', 'ن', 'ي'], hints: true, voiceOnly: false }, facts: [FACTS.dots] },
-    { config: { letters: ['ج', 'خ', 'ذ', 'ز', 'ش', 'ض', 'ظ', 'غ', 'ف', 'ق'], hints: false, voiceOnly: false, factOf: { ش: 'letter-shin', ج: 'letter-5' } }, facts: [letterFact('ج'), FACTS.shin] },
-    { config: { letters: ['ت', 'ق', 'ث', 'ي', 'ش', 'ن', 'ف', 'ب'], hints: false, voiceOnly: true }, facts: [letterFact('ق')] },
+    { config: { letters: ['ج', 'خ', 'ذ', 'ز', 'ش'], hints: false, voiceOnly: false, factOf: { ش: 'letter-shin', ج: 'letter-5' } }, facts: [letterFact('ج'), FACTS.shin] },
+    { config: { letters: ['ض', 'ظ', 'غ', 'ف', 'ق'], hints: false, voiceOnly: true }, facts: [letterFact('ق')] },
   ],
   teaches: { questionKeys: ['quest:arabic-dots-ba', 'quest:arabic-shin'] },
   order: 40,

@@ -73,8 +73,6 @@ const de: Record<QuestKey, string> = {
   'fact.prompt': 'Wusstest du? „{fact}“ – Stimmt das?',
   'fact.explanation': 'Ja, das stimmt: {fact}',
 
-  'tool.quran': 'Dschuz ʿAmma – alle Suren',
-  'tool.quranDesc': 'Al-Fatiha und alle 37 Suren des Dschuz ʿAmma: jeden Vers lernen, anhören und dich selbst prüfen.',
   'tool.duas': 'Bittgebete aus dem Koran',
   'tool.duasDesc': 'Bittgebete aus dem Koran nach Themen – mit Übersetzung und Zusammenhang.',
   'tool.arabic': 'Alphabet & Nachfahren',

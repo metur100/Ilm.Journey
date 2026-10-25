@@ -1,5 +1,7 @@
 import type { GameResultInput } from '@/core/games';
 
+import type { EpisodeConfig } from '../../prophets-story/episode';
+
 /*
  * Yusuf's Storehouse – pure rules (unit-tested in __tests__/yusuf-storehouse.test.ts).
  *
@@ -180,29 +182,13 @@ export function storehouseResult(input: { attempts: number; spoiledEver: boolean
 
 const repeat = <T>(value: T, n: number): T[] => Array.from({ length: n }, () => value);
 
-/** L1: 3 sacks a year, 2 needed per hard year – store 2, eat 1 (target shown). */
-export const LEVEL_1: StorehouseConfig = {
-  harvests: repeat({ ears: 0, loose: 3 }, GOOD_YEARS),
-  needs: repeat(2, HARD_YEARS),
-  minEat: 1,
-  hints: true,
-  spoilage: false,
-};
-
-/** L2: harvests and needs vary, no hints (one sack to spare). */
-export const LEVEL_2: StorehouseConfig = {
-  harvests: [3, 4, 3, 4, 3, 3, 4].map((loose) => ({ ears: 0, loose })),
-  needs: [2, 3, 2, 3, 2, 2, 2],
-  minEat: 1,
-  hints: false,
-  spoilage: false,
-};
-
-/** L3: every harvest is 2 sheaves in the ear + 1 loose sack; loose grain spoils a little – eat the loose one. */
-export const LEVEL_3: StorehouseConfig = {
+/** L2 of the Yusuf storehouse game: every harvest is 2 sheaves in the ear + 1 loose sack; loose grain spoils a little – eat the loose one (12:47). The plan is shown. */
+export const STOREHOUSE: StorehouseConfig = {
   harvests: repeat({ ears: 2, loose: 1 }, GOOD_YEARS),
   needs: repeat(2, HARD_YEARS),
   minEat: 1,
-  hints: false,
+  hints: true,
   spoilage: true,
 };
+
+export type YusufStoreConfig = StorehouseConfig | EpisodeConfig;

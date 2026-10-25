@@ -54,8 +54,6 @@ const bs: Record<LearnKey, string> = {
   'master.review': 'Ponovi sada',
   'master.retry': 'Pokušaj ponovo',
 
-  'tool.stories': 'Kazivanja o poslanicima',
-  'tool.storiesDesc': 'Interaktivna kazivanja o svih 25 poslanika u dijelu „Kazivanja“.',
   'tool.seerah': 'Putovanje kroz siru',
   'tool.seerahDesc': 'Epizode, hronologija i mapa života Poslanika ﷺ.',
   'tool.salah': 'Namaz – potpuni vodič',

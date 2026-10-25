@@ -24,6 +24,11 @@ const en = {
   'item.talk': 'Chat while it is recited',
   'item.rush': 'Rush through it',
   'item.throw': 'Toss it on the bed',
+  'item.quiet': 'Find a quiet, clean place',
+  'item.sit': 'Sit calmly',
+  'item.beautiful': 'Recite beautifully',
+  'item.reflect': 'Think about the meaning',
+  'item.close': 'Close the Mushaf gently',
 } as const;
 
 type Key = keyof typeof en;
@@ -52,6 +57,11 @@ const de: Record<Key, string> = {
   'item.talk': 'Dabei plaudern',
   'item.rush': 'Durchhetzen',
   'item.throw': 'Aufs Bett werfen',
+  'item.quiet': 'Einen ruhigen, sauberen Ort suchen',
+  'item.sit': 'Ruhig sitzen',
+  'item.beautiful': 'Schön rezitieren',
+  'item.reflect': 'Über die Bedeutung nachdenken',
+  'item.close': 'Den Mushaf sanft schließen',
 };
 
 const bs: Record<Key, string> = {
@@ -78,6 +88,11 @@ const bs: Record<Key, string> = {
   'item.talk': 'Pričati dok se uči',
   'item.rush': 'Žuriti pri učenju',
   'item.throw': 'Baciti ga na krevet',
+  'item.quiet': 'Naći mirno, čisto mjesto',
+  'item.sit': 'Mirno sjediti',
+  'item.beautiful': 'Učiti lijepo',
+  'item.reflect': 'Razmišljati o značenju',
+  'item.close': 'Nježno zatvoriti mushaf',
 };
 
 export const quranEtiquetteI18n = defineNamespace('game.quran-etiquette', { en, de, bs });

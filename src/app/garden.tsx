@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { AccessibilityInfo, Animated, Pressable, ScrollView, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { AccessibilityInfo, Animated, Pressable, ScrollView, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Art } from '@/core/art';
@@ -15,11 +15,11 @@ import { TopBar } from '@/core/components/ui/TopBar';
 import {
   DAILY_WATER_CAP,
   EARN_TABLE,
+  fittingSpots,
   GARDEN_ELEMENTS,
   type GardenElement,
   getGardenElement,
   type MilestoneKind,
-  nextSpotFor,
   type PlacedElement,
   unlockState,
   useGardenStore,
@@ -29,7 +29,7 @@ import { useReducedMotion } from '@/core/hooks/useReducedMotion';
 import { type CoreKey, useI18n } from '@/core/i18n';
 import { makeStyles, radius, spacing, useTheme } from '@/core/theme';
 
-type Step = 'idle' | 'choose' | 'edit';
+type Step = 'idle' | 'choose' | 'spot' | 'edit';
 
 const MILESTONES: MilestoneKind[] = ['gameLevel', 'quest', 'unit', 'story', 'episode', 'master', 'streak7'];
 
@@ -67,6 +67,11 @@ export default function GardenScreen() {
   const waterPlants = useGardenStore((s) => s.waterPlants);
 
   const [step, setStep] = useState<Step>('idle');
+  const [chosen, setChosen] = useState<GardenElement | null>(null);
+  const scroll = useRef<ScrollView>(null);
+  const { width: windowWidth } = useWindowDimensions();
+  // A taller scene on tablets, so the garden keeps its proportions instead of becoming a thin strip.
+  const sceneHeight = Math.round(Math.min(560, Math.max(340, (windowWidth - spacing.lg * 2) * 0.62)));
   const [growSpot, setGrowSpot] = useState<number | null>(null);
   const [removing, setRemoving] = useState<PlacedElement | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -87,17 +92,34 @@ export default function GardenScreen() {
     }
     if (state === 'buyable' && !unlock(element.id, level)) return;
     if (state === 'buyable') setMessage(t('garden.unlocked', { name: name(element.id) }));
-    const spot = nextSpotFor(element, view.free);
-    if (spot === null) {
-      setMessage(t('garden.full'));
+    // Only places of the right kind are offered: water spots for a fountain, the grove for trees, the sky for birds.
+    const spots = fittingSpots(element, view.free);
+    if (spots.length === 0) {
+      feedback.failure();
+      setMessage(t('garden.noPlace', { name: name(element.id) }));
       setStep('idle');
       return;
     }
+    if (spots.length === 1) {
+      plantOn(element, spots[0]);
+      return;
+    }
+    feedback.tap();
+    setChosen(element);
+    setStep('spot');
+    // The spot markers are in the scene at the top – bring it into view.
+    scroll.current?.scrollTo({ y: 0, animated: !reduced });
+  };
+
+  const plantOn = (element: GardenElement, spot: number) => {
     if (plant(element.id, spot, level)) {
       feedback.success();
       setGrowSpot(spot);
       setMessage(t('garden.planted', { name: name(element.id) }));
+    } else {
+      feedback.failure();
     }
+    setChosen(null);
     setStep('idle');
   };
 
@@ -124,12 +146,14 @@ export default function GardenScreen() {
   return (
     <SafeAreaView style={styles.root} edges={['top', 'left', 'right']}>
       <TopBar title={t('garden.title')} />
-      <ScrollView contentContainerStyle={styles.body}>
+      <ScrollView ref={scroll} contentContainerStyle={styles.body}>
         <GardenScene
           placed={garden.placed}
           thirst={view.thirst}
-          height={340}
-          mode={step === 'edit' ? 'edit' : 'view'}
+          height={sceneHeight}
+          mode={step === 'spot' ? 'pickSpot' : step === 'edit' ? 'edit' : 'view'}
+          freeSpots={chosen ? fittingSpots(chosen, view.free) : []}
+          onPickSpot={(spot) => chosen && plantOn(chosen, spot)}
           onPressElement={(p) => setRemoving(p)}
           growSpot={growSpot}
           elementLabel={name}
@@ -161,6 +185,25 @@ export default function GardenScreen() {
             </AppText>
           </View>
         </Card>
+
+        {step === 'spot' && chosen ? (
+          <Card tone="gold">
+            <View style={styles.hint}>
+              <Art name={`garden.${chosen.id}`} size={40} />
+              <AppText variant="bodyBold" style={styles.flex}>
+                {t('garden.pickSpot', { name: name(chosen.id) })}
+              </AppText>
+            </View>
+            <Button
+              label={t('common.cancel')}
+              variant="ghost"
+              onPress={() => {
+                setChosen(null);
+                setStep('idle');
+              }}
+            />
+          </Card>
+        ) : null}
 
         {step === 'idle' || step === 'edit' ? (
           <View style={styles.actions}>

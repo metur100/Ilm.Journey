@@ -7,5 +7,5 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerZakariyyaGame();
 
 describe('The Mihrab', () => {
-  describeProphetGame(() => getGame(ZAKARIYYA_ID)!, { art: ZAKARIYYA_ART });
+  describeProphetGame(() => getGame(ZAKARIYYA_ID)!, { art: ZAKARIYYA_ART, mistakeLevel: 3 });
 });

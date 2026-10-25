@@ -15,7 +15,7 @@ describe('qibla maths', () => {
     expect(Math.round(qiblaBearing('sarajevo'))).toBeGreaterThan(130);
     expect(Math.round(qiblaBearing('sarajevo'))).toBeLessThan(140);
     expect(compassPoint(qiblaBearing('new-york'))).toBe('ne');
-    expect(Object.keys(CITIES).length).toBe(10);
+    expect(Object.keys(CITIES).length).toBe(12);
     expect(initialBearing(KAABA, KAABA)).toBe(0);
   });
 

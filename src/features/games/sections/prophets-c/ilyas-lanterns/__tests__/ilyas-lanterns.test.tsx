@@ -7,5 +7,5 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerIlyasGame();
 
 describe('Lanterns of the Call', () => {
-  describeProphetGame(() => getGame(ILYAS_ID)!, { art: ILYAS_ART });
+  describeProphetGame(() => getGame(ILYAS_ID)!, { art: ILYAS_ART, mistakeLevel: 2 });
 });

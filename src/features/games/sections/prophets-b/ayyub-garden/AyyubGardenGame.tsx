@@ -8,8 +8,10 @@ import type { GameApi } from '@/core/games';
 import { Burst, ChallengeClock, FinishReveal, GameBoard, Glow, InlineCaption, kitResult, Tile, useKitColors, useShake } from '@/core/games/kit';
 import { radius, spacing } from '@/core/theme';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
 import { useEngineCore, useKitProbe, useMeasure } from '../shared/kit';
-import { type Bed, caresNeeded, type GardenConfig, grow, needOf, type Tool } from './logic';
+import { type AyyubConfig, type Bed, caresNeeded, type GardenConfig, grow, needOf, type Tool } from './logic';
 
 const BED_ART: Record<Bed, string> = {
   empty: 'prophet.ayyub-soil',
@@ -64,7 +66,8 @@ function Garden({ api }: { api: GameApi<GardenConfig> }) {
   const cfg = api.config;
   const { t } = api;
   const total = caresNeeded(cfg.beds);
-  const toolMissFact = api.facts[0]?.id ?? 'ayyub-call';
+  const toolMissFact = api.facts[0]?.id ?? 'ayyub-answer';
+  const patienceMissFact = api.facts[api.facts.length - 1]?.id ?? toolMissFact;
   const missed = useRef<string[]>([]);
   const core = useEngineCore(
     {
@@ -99,7 +102,7 @@ function Garden({ api }: { api: GameApi<GardenConfig> }) {
     const bed = beds[i];
     if (growing.includes(i)) {
       if (cfg.strictPatience) {
-        miss('ayyub-patient');
+        miss(patienceMissFact);
         setNudge((n) => ({ ...n, [i]: (n[i] ?? 0) + 1 }));
         core.wrong(`bed-${i}`, t('play.growing'));
       } else core.setCaption({ text: t('play.growing'), tone: 'hint' });
@@ -211,11 +214,13 @@ function Garden({ api }: { api: GameApi<GardenConfig> }) {
   );
 }
 
-/** Garden of Patience (Ayyub, Quran 21:83–84, 38:41–44): care for a withered garden; the spring is the narrated payoff. */
-export function AyyubGardenGame(api: GameApi<GardenConfig>) {
+/** Ayyub: L1 and L2 are episodes of his life; L3 (Quran 38:42–44, 21:84) cares for a withered garden back to life. */
+export function AyyubGardenGame(api: GameApi<AyyubConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
   return (
     <GameBoard api={api}>
-      <Garden api={api} />
+      <Garden api={{ ...api, config }} />
     </GameBoard>
   );
 }

@@ -28,6 +28,9 @@ export interface Rect {
 
 export type PartId = 'ground' | 'walls' | 'pillars' | 'roof' | 'shade-south' | 'suffa';
 
+/** The main build, from the ground up (levels 1 and 3 – in level 3 it already stands). */
+export const MAIN_BUILD: PartId[] = ['ground', 'walls', 'pillars', 'roof'];
+
 /** How a placed layer appears: settles on the ground, rises up, drops down from above. */
 export type Appear = 'settle' | 'rise' | 'drop';
 

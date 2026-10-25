@@ -422,6 +422,28 @@ export const PRAYER_TIMES: readonly Word[] = [
   w('isha', 'الْعِشَاء', 'al-ʿishāʾ', 'night', 'Nacht', 'noć'),
 ];
 
+// ---------- days of the week (in order, starting with al-aḥad) ----------
+
+export const WEEK_DAYS: readonly Word[] = [
+  w('ahad', 'الْأَحَد', 'al-aḥad', 'Sunday', 'Sonntag', 'nedjelja'),
+  w('ithnayn', 'الِاثْنَيْن', 'al-ithnayn', 'Monday', 'Montag', 'ponedjeljak'),
+  w('thulatha', 'الثُّلَاثَاء', 'ath-thulāthāʾ', 'Tuesday', 'Dienstag', 'utorak'),
+  w('arbia', 'الْأَرْبِعَاء', 'al-arbiʿāʾ', 'Wednesday', 'Mittwoch', 'srijeda'),
+  w('khamis', 'الْخَمِيس', 'al-khamīs', 'Thursday', 'Donnerstag', 'četvrtak'),
+  w('jumua', 'الْجُمُعَة', 'al-jumuʿa', 'Friday', 'Freitag', 'petak'),
+  w('sabt', 'السَّبْت', 'as-sabt', 'Saturday', 'Samstag', 'subota'),
+];
+
+// ---------- spans of time (from short to long) ----------
+
+export const TIME_SPANS: readonly Word[] = [
+  w('saah', 'سَاعَة', 'sāʿa', 'hour', 'Stunde', 'sat'),
+  w('yawm-day', 'يَوْم', 'yawm', 'day', 'Tag', 'dan'),
+  w('usbu', 'أُسْبُوع', 'usbūʿ', 'week', 'Woche', 'sedmica'),
+  w('shahr', 'شَهْر', 'shahr', 'month', 'Monat', 'mjesec'),
+  w('sana', 'سَنَة', 'sana', 'year', 'Jahr', 'godina'),
+];
+
 // ---------- opposites ----------
 
 export const OPPOSITES: readonly OppositeLevel[] = [

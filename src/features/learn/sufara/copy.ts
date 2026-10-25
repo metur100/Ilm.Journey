@@ -23,6 +23,11 @@ export interface SufaraCopy {
   traceTitle: string;
   traceHint: string;
   examples: string;
+  /** The reading page: rows of syllables and words, as in a printed sufara. */
+  readTitle: string;
+  readHint: string;
+  showReading: string;
+  hideReading: string;
   review: string;
   correct: string;
   tryAgain: string;
@@ -44,7 +49,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `${n}. lekcija`,
     and: ' i ',
     newLetters: (letters) => `Novi harfovi: ${letters}`,
-    withReview: 'uz ponavljanje, spajanje i čitanje riječi od naučenih harfova',
+    withReview: 'redovi za čitanje s ranijim harfovima, spajanje i ponavljanje',
     kindTitle: {
       review: 'Ponavljanje: svi harfovi',
       fatha: 'Fetha',
@@ -99,6 +104,10 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     traceTitle: 'Napiši harf',
     traceHint: 'Kreni od zelene tačke i prstom prati sivu liniju, pa dodirni tačke harfa.',
     examples: 'Primjeri',
+    readTitle: 'Čitaj red po red',
+    readHint: 'Čitaj zdesna nalijevo, red po red – kao u sufari. Dodirni slog da ga čuješ i vidiš kako se čita.',
+    showReading: 'Prikaži čitanje',
+    hideReading: 'Sakrij čitanje',
     review: 'Ponavljanje',
     correct: 'Tačno!',
     tryAgain: 'Pokušaj ponovo.',
@@ -118,7 +127,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lektion ${n}`,
     and: ' und ',
     newLetters: (letters) => `Neue Buchstaben: ${letters}`,
-    withReview: 'mit Wiederholung, Verbinden und Lesen von Wörtern aus den gelernten Buchstaben',
+    withReview: 'Lesezeilen mit den früheren Buchstaben, Verbinden und Wiederholung',
     kindTitle: {
       review: 'Wiederholung: alle Buchstaben',
       fatha: 'Fatha',
@@ -173,6 +182,10 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     traceTitle: 'Schreib den Buchstaben',
     traceHint: 'Beginne am grünen Punkt, fahr die graue Linie mit dem Finger nach und tippe dann die Punkte an.',
     examples: 'Beispiele',
+    readTitle: 'Zeile für Zeile lesen',
+    readHint: 'Lies von rechts nach links, Zeile für Zeile – wie in der Sufara. Tippe auf eine Silbe, um sie zu hören und ihre Lesung zu sehen.',
+    showReading: 'Lesung zeigen',
+    hideReading: 'Lesung verbergen',
     review: 'Wiederholung',
     correct: 'Richtig!',
     tryAgain: 'Versuch es noch einmal.',
@@ -192,7 +205,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lesson ${n}`,
     and: ' and ',
     newLetters: (letters) => `New letters: ${letters}`,
-    withReview: 'with review, joining and reading words made from the letters learned so far',
+    withReview: 'reading rows with the earlier letters, joining and review',
     kindTitle: {
       review: 'Review: all letters',
       fatha: 'Fatha',
@@ -247,6 +260,10 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     traceTitle: 'Write the letter',
     traceHint: 'Start at the green dot, follow the grey line with your finger, then tap the dots.',
     examples: 'Examples',
+    readTitle: 'Read row by row',
+    readHint: 'Read from right to left, row by row – as in a sufara. Tap a syllable to hear it and see how it is read.',
+    showReading: 'Show reading',
+    hideReading: 'Hide reading',
     review: 'Review',
     correct: 'Correct!',
     tryAgain: 'Try again.',

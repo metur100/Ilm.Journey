@@ -8,8 +8,10 @@ import type { GameApi } from '@/core/games';
 import { Burst, ChallengeClock, FinishReveal, GameBoard, Glow, InlineCaption, kitResult, useKitColors, useShake } from '@/core/games/kit';
 import { fonts, radius, spacing } from '@/core/theme';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import { isEpisodeConfig } from '../../prophets-story/episode';
 import { useEngineCore, useKitProbe, useMeasure } from '../shared/kit';
-import { type LampsConfig, nextLamp } from './content';
+import { type DhulkiflConfig, type LampsConfig, nextLamp } from './content';
 
 interface LampProps {
   index: number;
@@ -98,7 +100,7 @@ function Lamps({ api }: { api: GameApi<LampsConfig> }) {
   const { t, l } = api;
   const total = cfg.words.length;
   const fact = api.facts[0]?.id ?? 'dhulkifl-patient';
-  const prompt = cfg.showOrderMs ? 'play.promptOrder' : cfg.order.length ? 'play.prompt' : 'play.promptAny';
+  const prompt = 'play.prompt';
   const core = useEngineCore({ onDone: ({ mistakes }) => api.onComplete(kitResult({ moves: total, mistakes, factsMissed: mistakes > 0 ? [fact] : [] })), prompt: t(prompt), hints: cfg.hints, testID: 'dhulkifl-lamps' }, total);
   const [lit, setLit] = useState<number[]>([]);
   const [showNumbers, setShowNumbers] = useState(cfg.order.length > 0);
@@ -182,11 +184,13 @@ function Lamps({ api }: { api: GameApi<LampsConfig> }) {
   );
 }
 
-/** Lamps of Patience (Dhul-Kifl, Quran 21:85–86, 38:48): hold steadily to light each lamp. */
-export function DhulkiflLampsGame(api: GameApi<LampsConfig>) {
+/** Dhul-Kifl: L1 (Quran 21:85) holds steadily to light each lamp of patience; L2 and L3 are episodes (21:85–86, 38:48). */
+export function DhulkiflLampsGame(api: GameApi<DhulkiflConfig>) {
+  const { config } = api;
+  if (isEpisodeConfig(config)) return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
   return (
     <GameBoard api={api}>
-      <Lamps api={api} />
+      <Lamps api={{ ...api, config }} />
     </GameBoard>
   );
 }

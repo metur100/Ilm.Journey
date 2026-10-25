@@ -3,14 +3,21 @@ import { listSurahs } from '@/features/quran';
 import { STORIES } from '@/features/stories/content';
 import { useStoriesStore } from '@/features/stories/store/storiesStore';
 
+import { questsOfTopic } from '../content/quests';
 import { registerPathSource } from '../extensions';
 import { learnedCount } from '../quests/services/memorization';
 import { useQuestStore } from '../quests/store/questStore';
 
+/** Surahs a Quran memorisation quest already teaches (lesson, recitation and games) – they get no extra surah step. */
+export function surahsTaughtByQuests(): Set<number> {
+  return new Set(questsOfTopic('quran').flatMap((q) => q.steps.flatMap((step) => (step.kind === 'recite' ? [step.surahNumber] : []))));
+}
+
 /**
  * Learn paths that make the complete Juz ʿAmma and all 25 prophets visible as steps in the topic path:
  * every surah opens the ayah-by-ayah reader, every prophet opens his story. A step is completed when all its
- * ayahs are learned / the story is finished.
+ * ayahs are learned / the story is finished. Surahs of the memorisation quests (Al-Fatiha, Al-Ikhlas, …) are not
+ * repeated here.
  */
 export function registerLearnContentPaths(): void {
   registerPathSource({
@@ -19,7 +26,8 @@ export function registerLearnContentPaths(): void {
     items: (topic) => {
       if (topic !== 'quran') return [];
       const { memorization } = useQuestStore.getState();
-      return listSurahs('memorization').map((s) => {
+      const taught = surahsTaughtByQuests();
+      return listSurahs('memorization').filter((s) => !taught.has(s.number)).map((s) => {
         return {
           kind: 'quest' as const,
           id: `surah-${s.number}`,

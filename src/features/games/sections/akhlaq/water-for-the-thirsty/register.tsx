@@ -13,8 +13,9 @@ import { waterI18n } from './i18n';
 
 /*
  * Water for the Thirsty – PourFill (Sahih al-Bukhari 2363: the man who filled his shoe with water for a thirsty dog).
- * The animal waiting at the well is shown above the vessel. L1: the shoe for the dog and a bowl for the cat, wide
- * lines. L2: three animals, three different lines. L3: four animals, narrow lines.
+ * The animal waiting at the well is shown above the vessel. Every level brings other animals:
+ * L1: the shoe for the dog (the hadith) and a bowl for the cat, wide lines. L2: the birds, the sheep and the goat.
+ * L3: a caravan at the well – the camel, the horse and the donkey, narrow lines.
  */
 
 interface Drink {
@@ -36,6 +37,10 @@ const DOG: Drink = { id: 'dog', animal: 'animal.dog', vessel: 'shoe', art: 'akhl
 const CAT: Drink = { id: 'cat', animal: 'animal.cat', vessel: 'bowl', art: 'akhlaq.water-bowl', target: 0.5 };
 const BIRDS: Drink = { id: 'birds', animal: 'animal.birds', vessel: 'dish', art: 'akhlaq.bird-dish', target: 0.35 };
 const SHEEP: Drink = { id: 'sheep', animal: 'animal.sheep', vessel: 'trough', art: 'akhlaq.trough', target: 0.85 };
+const GOAT: Drink = { id: 'goat', animal: 'animal.goat', vessel: 'bowl', art: 'object.bowl', target: 0.6 };
+const CAMEL: Drink = { id: 'camel', animal: 'animal.camel', vessel: 'bucket', art: 'object.well-bucket', target: 0.8 };
+const HORSE: Drink = { id: 'horse', animal: 'animal.horse', vessel: 'trough', art: 'akhlaq.trough', target: 0.45 };
+const DONKEY: Drink = { id: 'donkey', animal: 'animal.donkey', vessel: 'bowl', art: 'object.bowl', target: 0.65 };
 
 const FACTS = { dog: F.dogWater(), example: L.rahmahExample(), every: F.everyLivingBeing() };
 
@@ -93,8 +98,8 @@ export const waterForTheThirstyGame: GameDef<WaterConfig> = {
   component: WaterForTheThirstyGame,
   levels: [
     { level: 1, config: { prompt: 'play.l1', drinks: [DOG, CAT], tolerance: 0.1, fact: FACTS.dog.id }, facts: [FACTS.dog] },
-    { level: 2, config: { prompt: 'play.l2', drinks: [DOG, CAT, BIRDS], tolerance: 0.07, fact: FACTS.example.id }, facts: [FACTS.example] },
-    { level: 3, config: { prompt: 'play.l3', drinks: [DOG, BIRDS, CAT, SHEEP], tolerance: 0.045, fact: FACTS.every.id }, facts: [FACTS.every] },
+    { level: 2, config: { prompt: 'play.l2', drinks: [BIRDS, SHEEP, GOAT], tolerance: 0.07, fact: FACTS.example.id }, facts: [FACTS.example] },
+    { level: 3, config: { prompt: 'play.l3', drinks: [CAMEL, HORSE, DONKEY], tolerance: 0.045, fact: FACTS.every.id }, facts: [FACTS.every] },
   ],
   order: 20,
 };

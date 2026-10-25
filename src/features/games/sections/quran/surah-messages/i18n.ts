@@ -15,6 +15,10 @@ const en = {
   'msg.106': 'Worship the Lord of this House',
   'msg.108': 'Pray to your Lord',
   'msg.93': 'Allah cares for you',
+  'msg.110': 'Praise Allah and ask His forgiveness',
+  'msg.97': 'A night better than a thousand months',
+  'msg.109': 'To you your religion, to me mine',
+  'msg.102': 'Do not let wanting more distract you',
 } as const;
 
 type Key = keyof typeof en;
@@ -34,6 +38,10 @@ const de: Record<Key, string> = {
   'msg.106': 'Dem Herrn dieses Hauses dienen',
   'msg.108': 'Bete zu deinem Herrn',
   'msg.93': 'Allah sorgt für dich',
+  'msg.110': 'Allah preisen und Ihn um Vergebung bitten',
+  'msg.97': 'Eine Nacht besser als tausend Monate',
+  'msg.109': 'Euch eure Religion, mir meine',
+  'msg.102': 'Lass dich nicht vom Mehr-Haben-Wollen ablenken',
 };
 
 const bs: Record<Key, string> = {
@@ -51,6 +59,10 @@ const bs: Record<Key, string> = {
   'msg.106': 'Klanjaj se Gospodaru ovog Hrama',
   'msg.108': 'Moli se svom Gospodaru',
   'msg.93': 'Allah brine o tebi',
+  'msg.110': 'Veličaj Allaha i traži Njegov oprost',
+  'msg.97': 'Noć bolja od hiljadu mjeseci',
+  'msg.109': 'Vama vaša vjera, a meni moja',
+  'msg.102': 'Ne daj da te zaokupi gomilanje',
 };
 
 export const surahMessagesI18n = defineNamespace('game.surah-messages', { en, de, bs });

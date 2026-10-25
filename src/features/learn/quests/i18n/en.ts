@@ -83,8 +83,6 @@ const en = {
   'fact.explanation': 'Yes, this is true: {fact}',
 
   // ---------- tools on topic pages ----------
-  'tool.quran': 'Juz ʿAmma – all surahs',
-  'tool.quranDesc': 'Al-Fatiha and all 37 surahs of Juz ʿAmma: learn every ayah, listen and test yourself.',
   'tool.duas': 'Duas from the Quran',
   'tool.duasDesc': 'Supplications from the Quran by theme – with translation and context.',
   'tool.arabic': 'Alphabet & tracing',

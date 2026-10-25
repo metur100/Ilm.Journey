@@ -2,31 +2,25 @@ import { defineNamespace } from '@/core/i18n';
 
 const en = {
   title: 'The Valley of ʿAd',
-  description: 'Allah gave the people of ʿAd many gifts. Find them in the valley – and learn what Hud called his people to.',
-  howTo: 'Tap the gifts of Allah in the valley. On level 3, sort: a gift, Hud\'s call, or their pride?',
-  'play.find': 'Find the gifts Allah gave ʿAd: livestock, gardens and springs.',
-  'play.findOrdered': 'Find the gifts one after another – the tower built for show is not a gift.',
-  'play.sort': 'A gift of Allah, Hud\'s call, or their pride? Sort each card.',
+  description: 'Three parts of Hud’s story: the gifts Allah gave ʿAd, Hud’s call and their pride, and how Allah saved Hud and the believers – each with its lesson.',
+  howTo: 'Level 1: tap the gifts of Allah in the valley. Level 2: sort Hud’s call and their pride. Level 3: put the end of the story in order.',
+  'play.find': 'Find the gifts Allah gave ʿAd: livestock, gardens, springs and palms.',
 } as const;
 
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
   title: 'Das Tal der ʿAd',
-  description: 'Allah gab den ʿAd viele Gaben. Finde sie im Tal – und lerne, wozu Hud sein Volk aufrief.',
-  howTo: 'Tippe die Gaben Allahs im Tal an. In Stufe 3 sortierst du: eine Gabe, Huds Aufruf oder ihr Hochmut?',
-  'play.find': 'Finde die Gaben, die Allah den ʿAd gab: Vieh, Gärten und Quellen.',
-  'play.findOrdered': 'Finde die Gaben nacheinander – der Turm zum Angeben ist keine Gabe.',
-  'play.sort': 'Eine Gabe Allahs, Huds Aufruf oder ihr Hochmut? Sortiere jede Karte.',
+  description: 'Drei Teile von Huds Geschichte: die Gaben Allahs an die ʿAd, Huds Aufruf und ihr Hochmut, und wie Allah Hud und die Gläubigen rettete – jeder mit seiner Lehre.',
+  howTo: 'Stufe 1: Tippe die Gaben Allahs im Tal an. Stufe 2: Sortiere Huds Aufruf und ihren Hochmut. Stufe 3: Bring das Ende der Geschichte in die richtige Reihenfolge.',
+  'play.find': 'Finde die Gaben, die Allah den ʿAd gab: Vieh, Gärten, Quellen und Palmen.',
 };
 
 const bs: Record<Key, string> = {
   title: 'Dolina Ada',
-  description: 'Allah je Adu dao mnoge blagodati. Pronađi ih u dolini – i nauči čemu je Hud pozivao svoj narod.',
-  howTo: 'Dodirni Allahove blagodati u dolini. U 3. nivou razvrstaj: blagodat, Hudov poziv ili njihova oholost?',
-  'play.find': 'Pronađi blagodati koje je Allah dao Adu: stoku, bašče i izvore.',
-  'play.findOrdered': 'Pronađi blagodati jednu za drugom – kula za razmetanje nije blagodat.',
-  'play.sort': 'Allahova blagodat, Hudov poziv ili njihova oholost? Razvrstaj svaku kartu.',
+  description: 'Tri dijela Hudove priče: blagodati koje je Allah dao Adu, Hudov poziv i njihova oholost, te kako je Allah spasio Huda i vjernike – svaki sa svojom poukom.',
+  howTo: 'Nivo 1: dodirni Allahove blagodati u dolini. Nivo 2: razvrstaj Hudov poziv i njihovu oholost. Nivo 3: poredaj kraj priče.',
+  'play.find': 'Pronađi blagodati koje je Allah dao Adu: stoku, bašče, izvore i palme.',
 };
 
 export const hudI18n = defineNamespace('game.hud-valley-of-ad', { en, de, bs });

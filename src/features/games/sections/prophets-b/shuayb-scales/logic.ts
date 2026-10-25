@@ -54,6 +54,5 @@ export function piecesNeeded(load: number, pieces: readonly number[]): number {
   return rest === 0 ? n : Number.POSITIVE_INFINITY;
 }
 
-export const LEVEL_1: ScaleConfig = { mode: 'weigh', rounds: [{ load: 3 }, { load: 6 }, { load: 8 }], pieces: [1, 2, 5], showLoad: true, hints: true };
-export const LEVEL_2: ScaleConfig = { mode: 'weigh', rounds: [{ load: 7 }, { load: 9 }, { load: 4 }, { load: 12 }], pieces: [1, 2, 5], showLoad: false, hints: false };
-export const LEVEL_3: ScaleConfig = { mode: 'measure', rounds: [{ load: 5 }, { load: 7 }, { load: 9 }], pieces: [1, 3], showLoad: true, hints: false };
+/** L2 of the Shuayb game – four customers, the grain's weight is shown, no hints. */
+export const SCALES: ScaleConfig = { mode: 'weigh', rounds: [{ load: 3 }, { load: 7 }, { load: 9 }, { load: 12 }], pieces: [1, 2, 5], showLoad: true, hints: false };

@@ -1,5 +1,7 @@
 import type { GameFact } from '@/core/games';
 
+import { lessonFact } from '../../prophets-story/episode';
+
 /*
  * Facts of Ark of Nuh – texts and sources copied from the Nuh story (src/features/stories/content/prophets/nuh.json:
  * scenes, questions, lessons). Where a story question covers a fact, `reviewKey` queues that question for review.
@@ -94,15 +96,34 @@ export const ARK_FACTS = {
     art: 'prophet.nuh-ark',
     reviewKey: 'stories:nuh-board',
   },
-  sabr: {
-    id: 'nuh-sabr',
-    text: {
-      en: 'Nuh kept calling people to good for 950 years. Sabr means not giving up on what is right, even when it takes a long time.',
-      de: 'Nuh rief 950 Jahre lang zum Guten auf. Sabr bedeutet, das Richtige nicht aufzugeben, auch wenn es lange dauert.',
-      bs: 'Nuh je 950 godina pozivao ljude dobru. Sabur znači ne odustati od ispravnog, čak i kada dugo traje.',
+  sabr: lessonFact(
+    'sabr',
+    {
+      en: 'Keep calling to good with patience (sabr), even when people do not listen and it takes a long time – like Nuh for 950 years.',
+      de: 'Ruf geduldig (mit Sabr) zum Guten auf, auch wenn die Leute nicht zuhören und es lange dauert – wie Nuh 950 Jahre lang.',
+      bs: 'Strpljivo (sa saburom) pozivaj dobru, i kad te ljudi ne slušaju i kad dugo traje – kao Nuh 950 godina.',
     },
-    sources: [{ sourceName: 'Quran', sourceReference: '29:14' }],
-    art: 'object.hourglass',
-    reviewKey: 'stories:nuh-lesson',
-  },
+    [{ sourceName: 'Quran', sourceReference: '71:5–10' }, { sourceName: 'Quran', sourceReference: '29:14' }],
+    { art: 'object.hourglass', reviewKey: 'stories:nuh-lesson' },
+  ),
+  obey: lessonFact(
+    'obey',
+    {
+      en: 'Do what Allah commands, even when others laugh at you. Nuh kept building the ark while the leaders mocked him.',
+      de: 'Tu, was Allah befiehlt, auch wenn andere über dich lachen. Nuh baute weiter an der Arche, während die Anführer spotteten.',
+      bs: 'Čini ono što Allah naređuje, i kad ti se drugi smiju. Nuh je gradio lađu dok su mu se glavešine rugale.',
+    },
+    [{ sourceName: 'Quran', sourceReference: '11:37–38' }],
+    { art: 'object.ark' },
+  ),
+  trust: lessonFact(
+    'trust',
+    {
+      en: 'Trust Allah: He saved Nuh and the believers in the ark. Start with "In the name of Allah", as Nuh did.',
+      de: 'Vertraue auf Allah: Er rettete Nuh und die Gläubigen in der Arche. Beginne mit „Im Namen Allahs“, wie Nuh.',
+      bs: 'Pouzdaj se u Allaha: On je spasio Nuha i vjernike u lađi. Počni s „U ime Allaha“, kao Nuh.',
+    },
+    [{ sourceName: 'Quran', sourceReference: '11:41' }, { sourceName: 'Quran', sourceReference: '11:48' }],
+    { art: 'prophet.nuh-judi' },
+  ),
 } satisfies Record<string, GameFact>;

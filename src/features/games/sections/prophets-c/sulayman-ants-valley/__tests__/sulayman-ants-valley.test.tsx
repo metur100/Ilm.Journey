@@ -7,5 +7,5 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerSulaymanGame();
 
 describe('The Valley of the Ants', () => {
-  describeProphetGame(() => getGame(SULAYMAN_ID)!, { art: SULAYMAN_ART });
+  describeProphetGame(() => getGame(SULAYMAN_ID)!, { art: SULAYMAN_ART, mistakeLevel: 3 });
 });

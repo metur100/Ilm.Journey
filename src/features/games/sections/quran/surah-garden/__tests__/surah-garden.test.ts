@@ -9,5 +9,5 @@ registerSurahGardenGame();
 describeQuranGame(() => getGame('surah-garden')!, { mistakeLevel: 3 });
 
 it('opening cards are the first words of ayah 1', () => {
-  for (const n of [1, 112, 113, 109, 110, 103]) expect(isQuranText(openingWords(n).text)).toBe(true);
+  for (const n of [1, 112, 113, 107, 110, 109]) expect(isQuranText(openingWords(n).text)).toBe(true);
 });

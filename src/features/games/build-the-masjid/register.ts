@@ -3,15 +3,16 @@ import { type GameDef, type GameFact, registerGame } from '@/core/games';
 import { type MasjidConfig, BuildTheMasjidGame } from './BuildTheMasjidGame';
 import { FIRST_PROJECT, MADINAH_NORTH, MOSQUE_LAND, OASIS, QIBLA_CHANGE, QIBLA_JERUSALEM, type SeerahBlock, sourceRefs } from './content';
 import { masjidI18n } from './i18n';
-import { type PartId, QIBLA_FACT_ID } from './logic';
+import { MAIN_BUILD, QIBLA_FACT_ID } from './logic';
 
 /*
  * Build the Masjid (Seerah, episode 06). Every result fact is a Seerah block copied unchanged with its sources; checks
  * reuse the Seerah questions of episode 06 (e06-q1, e06-q2). The parts and their inline captions are in logic.ts / i18n.
  *
- *   Level 1 – guided: the next part and its place glow (morning).
- *   Level 2 – from memory: shuffled parts, no glow; order and place count (midday).
- *   Level 3 – from memory, then the qibla changes: turn it to the Kaʿbah and add the new shade and the Suffa (evening).
+ *   Every level teaches something new (owner feedback: no level repeats the content of another):
+ *   Level 1 – build it, guided: the next part and its place glow (morning).
+ *   Level 2 – the story of the first masjid in order: arrival, the camel, the two orphans, the bricks, its uses (SequenceBoard).
+ *   Level 3 – the masjid stands; the qibla changes: turn it to the Kaʿbah and add the new shade and the Suffa (evening).
  */
 
 const fromBlock = (block: SeerahBlock) => ({ text: block.text, sources: sourceRefs(block.sourceIds) });
@@ -60,8 +61,6 @@ export const MASJID_FACTS = {
 
 export const MASJID_GAME_ID = 'build-the-masjid';
 
-/** The main build, from the ground up. */
-const BUILD: PartId[] = ['ground', 'walls', 'pillars', 'roof'];
 
 export const masjidGame: GameDef<MasjidConfig> = {
   id: MASJID_GAME_ID,
@@ -71,12 +70,12 @@ export const masjidGame: GameDef<MasjidConfig> = {
   hintArt: 'seerah.masjid-finished',
   component: BuildTheMasjidGame,
   levels: [
-    { level: 1, config: { parts: BUILD, guided: true, time: 'morning' }, facts: [MASJID_FACTS.land, MASJID_FACTS.oasis] },
-    { level: 2, config: { parts: BUILD, guided: false, time: 'noon' }, facts: [MASJID_FACTS.firstProject, MASJID_FACTS.jerusalem] },
+    { level: 1, config: { parts: MAIN_BUILD, guided: true, time: 'morning' }, facts: [MASJID_FACTS.land, MASJID_FACTS.oasis] },
+    { level: 2, config: { mode: 'story' }, facts: [MASJID_FACTS.firstProject, MASJID_FACTS.north] },
     {
       level: 3,
-      config: { parts: BUILD, guided: false, time: 'evening', afterQibla: ['shade-south', 'suffa'] },
-      facts: [MASJID_FACTS.change, MASJID_FACTS.north],
+      config: { parts: [], standing: true, guided: false, time: 'evening', afterQibla: ['shade-south', 'suffa'] },
+      facts: [MASJID_FACTS.jerusalem, MASJID_FACTS.change],
     },
   ],
   teaches: { questionKeys: ['seerah:e06-q1', 'seerah:e06-q2', 'seerah:e06-q4'] },

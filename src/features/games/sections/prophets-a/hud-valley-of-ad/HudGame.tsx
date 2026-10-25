@@ -1,35 +1,21 @@
 import type { GameApi } from '@/core/games';
-import { GameBoard, kitResult, SortBins, TapScene, type KitDoneInfo } from '@/core/games/kit';
+import { GameBoard, kitResult, TapScene, type KitDoneInfo } from '@/core/games/kit';
 
+import { EpisodeBoard } from '../../prophets-story/EpisodeBoard';
+import type { EpisodeConfig } from '../../prophets-story/episode';
 import { factsFor } from '../shared';
-import { BINS, ITEM_FACT, SORT_ITEMS, SPOTS_L1, SPOTS_L2 } from './content';
+import { GIFT_SPOTS, SPOT_FACT } from './content';
 
-export interface HudConfig {
-  mode: 'find' | 'findOrdered' | 'sort';
-}
+export type HudConfig = { mode: 'gifts' } | EpisodeConfig;
 
-/** The Valley of ʿAd: find the gifts (L1), one after another with a distractor (L2), sort gift / call / pride (L3). */
+/** The Valley of ʿAd: L1 find the gifts (TapScene), L2 Hud's call or their pride (episode: sort), L3 the end of ʿAd and the rescue (episode: order). */
 export function HudGame(api: GameApi<HudConfig>) {
-  const { mode } = api.config;
-  const finish = (moves: number) => ({ mistakes, missed }: KitDoneInfo) => api.onComplete(kitResult({ moves, mistakes, factsMissed: factsFor(missed, ITEM_FACT) }));
-  if (mode === 'sort') {
-    return (
-      <GameBoard api={api}>
-        <SortBins bins={BINS} items={SORT_ITEMS} hints={false} prompt={api.t('play.sort')} onDone={finish(SORT_ITEMS.length)} />
-      </GameBoard>
-    );
-  }
-  const spots = mode === 'find' ? SPOTS_L1 : SPOTS_L2;
+  const { config } = api;
+  if (config.mode === 'episode') return <EpisodeBoard api={api as GameApi<unknown>} episode={config.episode} />;
+  const onDone = ({ mistakes, missed }: KitDoneInfo) => api.onComplete(kitResult({ moves: GIFT_SPOTS.length, mistakes, factsMissed: factsFor(missed, SPOT_FACT) }));
   return (
     <GameBoard api={api} padding={8}>
-      <TapScene
-        scene="prophet.hud-valley"
-        spots={spots}
-        ordered={mode === 'findOrdered'}
-        hints={mode === 'find'}
-        prompt={api.t(mode === 'find' ? 'play.find' : 'play.findOrdered')}
-        onDone={finish(spots.filter((s) => s.target !== false).length)}
-      />
+      <TapScene scene="prophet.hud-valley" spots={GIFT_SPOTS} hints prompt={api.t('play.find')} onDone={onDone} />
     </GameBoard>
   );
 }

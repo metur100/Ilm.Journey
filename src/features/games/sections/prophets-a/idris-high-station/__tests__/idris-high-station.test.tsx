@@ -7,5 +7,5 @@ jest.mock('@/core/services/sound', () => ({ playSound: jest.fn() }));
 registerIdrisGame();
 
 describe('The High Station', () => {
-  describeProphetGame(() => getGame(IDRIS_GAME_ID)!, { art: IDRIS_ART, mistakeLevel: 3 });
+  describeProphetGame(() => getGame(IDRIS_GAME_ID)!, { art: IDRIS_ART, mistakeLevel: 1 });
 });

@@ -1,12 +1,10 @@
 import { defineNamespace } from '@/core/i18n';
 
 const en = {
-  title: 'Rings of Armour',
-  description: 'Allah made iron soft for Dawud and told him to measure the links well. Link ring after ring into a coat of mail.',
-  howTo: 'Tap the ring of the right size to link it into the next place. Measure well – a ring of the wrong size does not fit.',
-  'play.prompt': 'Link the next ring – the faint outline shows its size.',
-  'play.promptSizes': 'Three sizes now – measure each link before you add it.',
-  'play.promptPattern': 'Continue the pattern of the first rings – measure the links well (Quran 34:11).',
+  title: 'Dawud – Patience, Iron and Praise',
+  description: 'Three events of Dawud’s life: the battle against Jalut, the iron Allah made soft for him, and the mountains and birds that glorified Allah with him – each with its lesson.',
+  howTo: 'Level 1: put the story of Jalut in order. Level 2: link rings of the right size into a coat of mail. Level 3: connect each gift of Allah with its meaning.',
+  'play.prompt': 'Allah made the iron soft. Link the next ring – the faint outline shows its size (34:11).',
   'play.linked': 'Linked!',
   'play.wrongSize': 'This ring does not fit here – measure again.',
   'play.size.s': 'Small ring',
@@ -22,12 +20,10 @@ const en = {
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
-  title: 'Ringe der Rüstung',
-  description: 'Allah machte das Eisen für Dawud weich und befahl ihm, die Ringe gut abzumessen. Verbinde Ring um Ring zu einem Panzerhemd.',
-  howTo: 'Tippe auf den Ring in der richtigen Größe, um ihn an der nächsten Stelle einzuhängen. Miss gut – ein Ring der falschen Größe passt nicht.',
-  'play.prompt': 'Hänge den nächsten Ring ein – der zarte Umriss zeigt seine Größe.',
-  'play.promptSizes': 'Jetzt drei Größen – miss jeden Ring, bevor du ihn einhängst.',
-  'play.promptPattern': 'Setze das Muster der ersten Ringe fort – miss die Ringe gut ab (Koran 34:11).',
+  title: 'Dawud – Geduld, Eisen und Lobpreis',
+  description: 'Drei Ereignisse aus Dawuds Leben: der Kampf gegen Dschalut, das Eisen, das Allah für ihn weich machte, und die Berge und Vögel, die mit ihm Allah priesen – jedes mit seiner Lehre.',
+  howTo: 'Stufe 1: Bring die Geschichte von Dschalut in die richtige Reihenfolge. Stufe 2: Verbinde Ringe der richtigen Größe zu einem Panzerhemd. Stufe 3: Verbinde jede Gabe Allahs mit ihrer Bedeutung.',
+  'play.prompt': 'Allah machte das Eisen weich. Hänge den nächsten Ring ein – der zarte Umriss zeigt seine Größe (34:11).',
   'play.linked': 'Eingehängt!',
   'play.wrongSize': 'Dieser Ring passt hier nicht – miss noch einmal.',
   'play.size.s': 'Kleiner Ring',
@@ -41,12 +37,10 @@ const de: Record<Key, string> = {
 };
 
 const bs: Record<Key, string> = {
-  title: 'Karike oklopa',
-  description: 'Allah je Davudu omekšao željezo i naredio mu da pravilno spaja karike. Spajaj kariku po kariku u oklop.',
-  howTo: 'Dodirni kariku prave veličine da je spojiš na sljedeće mjesto. Dobro izmjeri – karika pogrešne veličine ne pristaje.',
-  'play.prompt': 'Spoji sljedeću kariku – blagi obris pokazuje njenu veličinu.',
-  'play.promptSizes': 'Sada tri veličine – izmjeri svaku kariku prije nego što je dodaš.',
-  'play.promptPattern': "Nastavi uzorak prvih karika – pravilno spajaj karike (Kur'an 34:11).",
+  title: 'Davud – strpljenje, željezo i slavljenje',
+  description: 'Tri događaja iz Davudova života: borba protiv Džaluta, željezo koje mu je Allah omekšao, te planine i ptice koje su s njim slavile Allaha – svaki sa svojom poukom.',
+  howTo: 'Nivo 1: poredaj priču o Džalutu. Nivo 2: spajaj karike prave veličine u oklop. Nivo 3: spoji svaki Allahov dar s njegovim značenjem.',
+  'play.prompt': 'Allah je omekšao željezo. Spoji sljedeću kariku – blagi obris pokazuje njenu veličinu (34:11).',
   'play.linked': 'Spojeno!',
   'play.wrongSize': 'Ova karika ovdje ne pristaje – izmjeri ponovo.',
   'play.size.s': 'Mala karika',

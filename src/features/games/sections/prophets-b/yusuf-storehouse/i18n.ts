@@ -1,9 +1,9 @@
 import { defineNamespace } from '@/core/i18n';
 
 const en = {
-  title: "Yusuf's Storehouse",
-  description: "Plan the grain for seven good and seven hard years – just as Yusuf explained the king's dream.",
-  howTo: 'Drag each sack of the harvest into the basket (eat now) or into the storehouse. Keep enough for the hard years!',
+  title: 'Yusuf – the Storehouses of Egypt',
+  description: 'Three events of Yusuf in Egypt: the king’s dream, storing the harvest for the hard years and the trusted guardian of the storehouses – each with its lesson.',
+  howTo: 'Level 1: find each part of the dream and its meaning. Level 2: drag each sack of the harvest into the basket (eat now) or into the storehouse – keep enough for the hard years. Level 3: connect what was said with how it goes on.',
 
   'play.dream': "Yusuf explained the king's dream: seven good years, then seven hard years (Quran 12:43–49).",
   'play.rule': 'Leave it in its ears (Quran 12:47). Grain in the ear keeps longer; in this game loose grain in the storehouse spoils a little every hard year.',
@@ -47,9 +47,9 @@ const en = {
 type Key = keyof typeof en;
 
 const de: Record<Key, string> = {
-  title: 'Yusufs Vorratshaus',
-  description: 'Plane das Getreide für sieben gute und sieben harte Jahre – so wie Yusuf den Traum des Königs deutete.',
-  howTo: 'Ziehe jeden Sack der Ernte in den Korb (jetzt essen) oder ins Vorratshaus. Bewahre genug für die harten Jahre auf!',
+  title: 'Yusuf – die Vorratshäuser Ägyptens',
+  description: 'Drei Ereignisse von Yusuf in Ägypten: der Traum des Königs, das Aufbewahren der Ernte für die harten Jahre und der vertrauenswürdige Hüter der Vorratshäuser – jedes mit seiner Lehre.',
+  howTo: 'Stufe 1: Finde jeden Teil des Traumes und seine Bedeutung. Stufe 2: Ziehe jeden Sack der Ernte in den Korb (jetzt essen) oder ins Vorratshaus – bewahre genug für die harten Jahre auf. Stufe 3: Verbinde das Gesagte mit seiner Fortsetzung.',
 
   'play.dream': 'Yusuf deutete den Traum des Königs: sieben gute Jahre, dann sieben harte Jahre (Koran 12:43–49).',
   'play.rule': 'Lasst es in seinen Ähren (Koran 12:47). Getreide in Ähren hält länger; in diesem Spiel verdirbt loses Getreide im Vorratshaus in jedem harten Jahr ein wenig.',
@@ -91,9 +91,9 @@ const de: Record<Key, string> = {
 };
 
 const bs: Record<Key, string> = {
-  title: 'Jusufov ambar',
-  description: 'Rasporedi žito za sedam rodnih i sedam teških godina – baš kako je Jusuf protumačio kraljev san.',
-  howTo: 'Odvuci svaku vreću žetve u korpu (jesti sada) ili u ambar. Sačuvaj dovoljno za teške godine!',
+  title: 'Jusuf – riznice Egipta',
+  description: 'Tri događaja s Jusufom u Egiptu: kraljev san, čuvanje žetve za teške godine i povjerljivi čuvar riznica – svaki sa svojom poukom.',
+  howTo: 'Nivo 1: nađi svaki dio sna i njegovo značenje. Nivo 2: odvuci svaku vreću žetve u korpu (jesti sada) ili u ambar – sačuvaj dovoljno za teške godine. Nivo 3: spoji ono što je rečeno s njegovim nastavkom.',
 
   'play.dream': "Jusuf je protumačio kraljev san: sedam rodnih godina, zatim sedam teških (Kur'an 12:43–49).",
   'play.rule': "Ostavite ga u klasu (Kur'an 12:47). Žito u klasu se duže čuva; u ovoj igri rasuto žito u ambaru se malo pokvari svake teške godine.",

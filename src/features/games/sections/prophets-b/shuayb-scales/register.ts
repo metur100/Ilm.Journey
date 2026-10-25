@@ -1,11 +1,13 @@
 import { type GameDef, registerGame } from '@/core/games';
 
+import { episodeArt } from '../../prophets-story/episode';
+import { ANSWER_EPISODE, CALL_EPISODE } from './content';
 import { SHUAYB_FACTS } from './facts';
 import { shuaybScalesI18n } from './i18n';
-import { LEVEL_1, LEVEL_2, LEVEL_3, type ScaleConfig } from './logic';
-import { ShuaybScalesGame } from './ShuaybScalesGame';
+import { SCALES } from './logic';
+import { type ShuaybConfig, ShuaybScalesGame } from './ShuaybScalesGame';
 
-export const shuaybScalesGame: GameDef<ScaleConfig> = {
+export const shuaybScalesGame: GameDef<ShuaybConfig> = {
   id: 'shuayb-scales',
   topicId: 'prophets',
   i18n: shuaybScalesI18n,
@@ -13,15 +15,16 @@ export const shuaybScalesGame: GameDef<ScaleConfig> = {
   hintArt: 'prophet.shuayb-weight',
   component: ShuaybScalesGame,
   levels: [
-    { level: 1, config: LEVEL_1, facts: [SHUAYB_FACTS.full] },
-    { level: 2, config: LEVEL_2, facts: [SHUAYB_FACTS.even, SHUAYB_FACTS.madyan] },
-    { level: 3, config: LEVEL_3, facts: [SHUAYB_FACTS.reform] },
+    // Three events of Shuayb's life, each with its lesson: the call in Madyan, the fair scales, mocked – and saved.
+    { level: 1, config: { mode: 'episode', episode: CALL_EPISODE }, facts: [SHUAYB_FACTS.madyan, SHUAYB_FACTS.lessonOne] },
+    { level: 2, config: SCALES, facts: [SHUAYB_FACTS.full, SHUAYB_FACTS.even, SHUAYB_FACTS.lessonHonest] },
+    { level: 3, config: { mode: 'episode', episode: ANSWER_EPISODE }, facts: [SHUAYB_FACTS.reform, SHUAYB_FACTS.saved, SHUAYB_FACTS.lessonRely] },
   ],
-  teaches: { questionKeys: ['stories:shuayb-fair', 'stories:shuayb-map', 'stories:shuayb-reform'] },
+  teaches: { questionKeys: ['stories:shuayb-fair', 'stories:shuayb-map', 'stories:shuayb-reform', 'stories:shuayb-lesson'] },
   order: 114,
 };
 
-export const SHUAYB_ART = ['prophet.shuayb-scales', 'prophet.shuayb-weight', 'prophet.shuayb-measure', 'prophet.shuayb-market', 'object.grain-sack'];
+export const SHUAYB_ART = ['prophet.shuayb-scales', 'prophet.shuayb-weight', 'prophet.shuayb-measure', 'object.grain-sack', ...episodeArt(CALL_EPISODE), ...episodeArt(ANSWER_EPISODE)];
 
 export function registerShuaybScalesGame(): void {
   registerGame(shuaybScalesGame);
