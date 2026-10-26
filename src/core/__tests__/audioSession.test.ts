@@ -11,6 +11,7 @@ const createPlayer = createAudioPlayer as jest.Mock;
 function fakePlayer(): AudioPlayer {
   return {
     play: jest.fn(),
+    replace: jest.fn(),
     pause: jest.fn(),
     remove: jest.fn(),
     seekTo: jest.fn(() => Promise.resolve()),

@@ -3,7 +3,8 @@ import { HARAKAT, LETTERS, NON_JOINERS, SHADDA, SUKUN } from '@/features/games/s
 import { splitLetters } from '@/features/games/sections/arabic/shared/script';
 
 import { lessonDescription, lessonExplanation, lessonTitle, SUFARA_COPY } from '../sufara/copy';
-import { COURSE_LETTERS, courseLetter, getSufaraLesson, LAM_ELIF, lessonExercises, lessonReading, lettersBefore, markExamples, READING_WORDS, SUFARA_LESSONS } from '../sufara/course';
+import { COURSE_LETTERS, courseLetter, getSufaraLesson, LAM_ELIF, lessonExercises, lessonReading, lettersBefore, markExamples, READING_WORDS, SPLIT_LESSONS, SUFARA_LESSONS } from '../sufara/course';
+import { migrateQuestDataV2 } from '../sufara/migrate';
 import { sufaraPathItems } from '../sufara/register';
 
 /** The order of the Bosnian sufara: elif, be, te, se, džim, ha, hı, dal, zel, ra, ze, sin, šin, sad, dad, tı, zı, ajn, gajn, fe, kaf, kef, lam, mim, nun, vav, he, lam-elif, je. */
@@ -12,25 +13,31 @@ const SUFARA_ORDER = ['ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر'
 const letterLessons = SUFARA_LESSONS.filter((l) => l.kind === 'letters');
 
 describe('Sufara course', () => {
-  it('teaches the letters one or two per lesson in the order of the Bosnian sufara', () => {
+  it('teaches one letter per lesson in the order of the Bosnian sufara', () => {
     expect(COURSE_LETTERS).toEqual(SUFARA_ORDER);
     expect(letterLessons[0].letters).toEqual(['ا']);
     expect(letterLessons[1].letters).toEqual(['ب']);
-    for (const lesson of letterLessons) expect(lesson.letters.length).toBeGreaterThanOrEqual(1);
-    for (const lesson of letterLessons) expect(lesson.letters.length).toBeLessThanOrEqual(2);
+    for (const lesson of letterLessons) expect(lesson.letters).toHaveLength(1);
+    expect(letterLessons.flatMap((l) => l.letters)).toEqual(SUFARA_ORDER);
     for (const letter of LETTERS) expect(COURSE_LETTERS).toContain(letter.letter);
   });
 
   it('starts with elif and the vowels e / i / u, then the letters with sukun after te and se, then the marks', () => {
     const kinds = SUFARA_LESSONS.map((l) => l.kind);
-    expect(kinds.slice(0, 7)).toEqual(['letters', 'fatha', 'kasra', 'damma', 'letters', 'letters', 'sukun']);
-    expect(kinds.slice(7, 7 + letterLessons.length - 3)).toEqual(Array(letterLessons.length - 3).fill('letters'));
-    expect(kinds.slice(7 + letterLessons.length - 3)).toEqual(['tanwin', 'madd', 'shadda']);
+    expect(kinds.slice(0, 8)).toEqual(['letters', 'fatha', 'kasra', 'damma', 'letters', 'letters', 'letters', 'sukun']);
+    expect(kinds.slice(8, 8 + letterLessons.length - 4)).toEqual(Array(letterLessons.length - 4).fill('letters'));
+    expect(kinds.slice(8 + letterLessons.length - 4)).toEqual(['tanwin', 'madd', 'shadda']);
     // Ids are progress keys: they stay with the lesson that teaches the same thing.
     expect(getSufaraLesson('sufara-05')?.letters).toEqual(['ب']);
     expect(getSufaraLesson('sufara-07')?.letters).toEqual(['ج']);
-    expect(getSufaraLesson('sufara-19')?.letters).toEqual([LAM_ELIF, 'ي']);
-    expect(getSufaraLesson('sufara-21')).toMatchObject({ kind: 'sukun', number: 7 });
+    expect(getSufaraLesson('sufara-06')?.letters).toEqual(['ت']);
+    expect(getSufaraLesson('sufara-19')?.letters).toEqual([LAM_ELIF]);
+    expect(getSufaraLesson('sufara-21')).toMatchObject({ kind: 'sukun', number: 8 });
+    // The second letter of a former two-letter lesson has a new id, and finishing the old lesson carries over.
+    expect(getSufaraLesson(SPLIT_LESSONS['sufara-06'])?.letters).toEqual(['ث']);
+    expect(getSufaraLesson(SPLIT_LESSONS['sufara-19'])?.letters).toEqual(['ي']);
+    expect(Object.keys(SPLIT_LESSONS)).toHaveLength(13);
+    expect(migrateQuestDataV2({ completedLessons: ['sufara-05', 'sufara-06', 'q1'] })).toEqual({ completedLessons: ['sufara-05', 'sufara-06', 'q1', SPLIT_LESSONS['sufara-06']] });
     expect(SUFARA_LESSONS.map((l) => l.number)).toEqual(SUFARA_LESSONS.map((_, i) => i + 1));
     expect(new Set(SUFARA_LESSONS.map((l) => l.id)).size).toBe(SUFARA_LESSONS.length);
     expect(getSufaraLesson('sufara-01')?.letters).toEqual(['ا']);
@@ -48,7 +55,8 @@ describe('Sufara course', () => {
       expect(lessonDescription(lesson)[language].length).toBeGreaterThan(0);
       if (lesson.kind !== 'letters') expect(lessonExplanation(lesson, language)?.text.length).toBeGreaterThan(0);
     }
-    expect(lessonTitle(letterLessons[2]).bs).toBe('6. lekcija: Te i Se');
+    expect(lessonTitle(letterLessons[2]).bs).toBe('6. lekcija: Te');
+    expect(lessonTitle(letterLessons[3]).bs).toBe('7. lekcija: Se');
   });
 
   it.each(LANGUAGES)('builds valid, deterministic practice for every lesson in %s', (language) => {

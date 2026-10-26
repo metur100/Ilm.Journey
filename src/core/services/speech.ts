@@ -1,11 +1,11 @@
-import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
+import type { AudioPlayer } from 'expo-audio';
 import * as Speech from 'expo-speech';
 import { Linking, Platform } from 'react-native';
 
 import { canSynthesize, synthesizeSpeech } from '../../../modules/audio-volume';
 import type { Language } from '../models';
 
-import { audioSessionReady, boostLearnerAudio, LOUDNESS_GAIN } from './audioSession';
+import { audioSessionReady, LOUDNESS_GAIN, sharedLearnerPlayer } from './audioSession';
 
 /**
  * Optional audio layer. Everything here uses the device's own text-to-speech engine, so no audio files are bundled.
@@ -44,8 +44,31 @@ function stopQuietly(): void {
 
 /** Increases with every new utterance / stop, so a late result of an older one is ignored. */
 let session = 0;
-let player: AudioPlayer | null = null;
+/** The session whose file the speech player is playing (null when it is idle). */
+let playing: number | null = null;
 let finish: (() => void) | null = null;
+
+/**
+ * One player for every utterance: it only swaps its file. A new expo-audio player per utterance registers a new
+ * Android media session each time, and they pile up until Android refuses new ones – after many taps on "Listen"
+ * nothing was heard any more until the app was restarted. The boost is attached once, before the first sound, so
+ * the loudness does not jump (and crackle) at the start of an utterance.
+ */
+let speechPlayer: AudioPlayer | null = null;
+
+function getSpeechPlayer(): AudioPlayer {
+  if (speechPlayer) return speechPlayer;
+  const next = sharedLearnerPlayer('speech', LOUDNESS_GAIN.speech);
+  next.addListener('playbackStatusUpdate', (s) => {
+    if (playing === null || playing !== session) return;
+    if (s.didJustFinish || s.error) {
+      playing = null;
+      done();
+    }
+  });
+  speechPlayer = next;
+  return next;
+}
 
 function done(): void {
   const f = finish;
@@ -56,12 +79,10 @@ function done(): void {
 /** Stops whatever is speaking (boosted player or the engine) and reports the old utterance as done. */
 function endCurrent(): void {
   session += 1;
-  const p = player;
-  player = null;
-  if (p) {
+  if (playing !== null) {
+    playing = null;
     try {
-      p.pause();
-      p.remove();
+      speechPlayer?.pause();
     } catch {
       // ignore
     }
@@ -122,25 +143,13 @@ function say(u: Utterance): void {
     await audioSessionReady();
     if (my !== session) return;
     try {
-      const next = createAudioPlayer({ uri: path.startsWith('file://') ? path : `file://${path}` });
-      player = next;
-      boostLearnerAudio(next, LOUDNESS_GAIN.speech);
-      next.addListener('playbackStatusUpdate', (s) => {
-        if (player !== next) return;
-        if (s.didJustFinish || s.error) {
-          player = null;
-          try {
-            next.remove();
-          } catch {
-            // ignore
-          }
-          done();
-        }
-      });
-      next.play();
+      const p = getSpeechPlayer();
+      p.replace({ uri: path.startsWith('file://') ? path : `file://${path}` });
+      playing = my;
+      p.play();
       u.options?.onStart?.();
     } catch {
-      player = null;
+      playing = null;
       speakDirect(u, my);
     }
   });

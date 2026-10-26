@@ -28,6 +28,7 @@ export interface SufaraCopy {
   readHint: string;
   showReading: string;
   hideReading: string;
+  finishReading: string;
   review: string;
   correct: string;
   tryAgain: string;
@@ -49,7 +50,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `${n}. lekcija`,
     and: ' i ',
     newLetters: (letters) => `Novi harfovi: ${letters}`,
-    withReview: 'redovi za čitanje s ranijim harfovima, spajanje i ponavljanje',
+    withReview: 'vježbe, spajanje i na kraju redovi za čitanje s ranijim harfovima',
     kindTitle: {
       review: 'Ponavljanje: svi harfovi',
       fatha: 'Fetha',
@@ -108,6 +109,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     readHint: 'Čitaj zdesna nalijevo, red po red – kao u sufari. Dodirni slog da ga čuješ i vidiš kako se čita.',
     showReading: 'Prikaži čitanje',
     hideReading: 'Sakrij čitanje',
+    finishReading: 'Završi čitanje',
     review: 'Ponavljanje',
     correct: 'Tačno!',
     tryAgain: 'Pokušaj ponovo.',
@@ -127,7 +129,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lektion ${n}`,
     and: ' und ',
     newLetters: (letters) => `Neue Buchstaben: ${letters}`,
-    withReview: 'Lesezeilen mit den früheren Buchstaben, Verbinden und Wiederholung',
+    withReview: 'Übungen, Verbinden und zum Schluss Lesezeilen mit den früheren Buchstaben',
     kindTitle: {
       review: 'Wiederholung: alle Buchstaben',
       fatha: 'Fatha',
@@ -186,6 +188,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     readHint: 'Lies von rechts nach links, Zeile für Zeile – wie in der Sufara. Tippe auf eine Silbe, um sie zu hören und ihre Lesung zu sehen.',
     showReading: 'Lesung zeigen',
     hideReading: 'Lesung verbergen',
+    finishReading: 'Lesen beenden',
     review: 'Wiederholung',
     correct: 'Richtig!',
     tryAgain: 'Versuch es noch einmal.',
@@ -205,7 +208,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     lesson: (n) => `Lesson ${n}`,
     and: ' and ',
     newLetters: (letters) => `New letters: ${letters}`,
-    withReview: 'reading rows with the earlier letters, joining and review',
+    withReview: 'practice, joining and finally reading rows with the earlier letters',
     kindTitle: {
       review: 'Review: all letters',
       fatha: 'Fatha',
@@ -264,6 +267,7 @@ export const SUFARA_COPY: Record<Language, SufaraCopy> = {
     readHint: 'Read from right to left, row by row – as in a sufara. Tap a syllable to hear it and see how it is read.',
     showReading: 'Show reading',
     hideReading: 'Hide reading',
+    finishReading: 'Finish reading',
     review: 'Review',
     correct: 'Correct!',
     tryAgain: 'Try again.',

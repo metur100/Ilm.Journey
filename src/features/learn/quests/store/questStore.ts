@@ -6,19 +6,19 @@ import { autoSave, clearPersisted, loadPersisted, type PersistSpec, storageKey }
 import { useAppStore } from '@/core/store/appStore';
 import { getSurah } from '@/features/quran';
 
-import { migrateQuestDataV1 } from '../../sufara/migrate';
+import { migrateQuestDataV1, migrateQuestDataV2 } from '../../sufara/migrate';
 import type { QuestData } from '../models';
 import { applyMemorizationTest, memorizationOf, setAyahsLearned } from '../services/memorization';
 import { applyQuestComplete, EMPTY_QUEST_DATA, sanitizeQuestData, toggleInList, toggleRamadanDeed } from '../services/progress';
 import { QUEST_PREFIX } from '../services/questions';
 
-export const QUEST_VERSION = 2;
+export const QUEST_VERSION = 3;
 
 /** `ilmjourney:quest` – islam-quest progress (quests, lessons, memorization, duas, tracing, Ramadan deeds). */
 export const QUEST_PERSIST: PersistSpec<QuestData> = {
   key: storageKey('quest'),
   version: QUEST_VERSION,
-  migrations: { 1: migrateQuestDataV1 },
+  migrations: { 1: migrateQuestDataV1, 2: migrateQuestDataV2 },
   sanitize: sanitizeQuestData,
 };
 

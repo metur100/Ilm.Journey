@@ -1,5 +1,6 @@
 import type { LearnData } from '../models';
 import type { QuestData } from '../quests/models';
+import { SPLIT_LESSONS } from './course';
 
 /**
  * Sufara lesson ids used to be positional: 1 elif, 2 be, 3 te/se … 16 lam-elif/ya, 17 review,
@@ -36,4 +37,16 @@ export function migrateLearnDataV1(raw: unknown): unknown {
   const data = raw as Partial<LearnData>;
   if (data.lastVisited?.topic !== 'sufara' || typeof data.lastVisited.itemId !== 'string') return raw;
   return { ...data, lastVisited: { ...data.lastVisited, itemId: migrateSufaraLessonId(data.lastVisited.itemId) } };
+}
+
+/**
+ * Quest data v2 → v3: every letter has its own lesson now. A finished two-letter lesson (te and se …) also finishes
+ * the new lesson of its second letter, so nobody has to repeat a letter they already learned.
+ */
+export function migrateQuestDataV2(raw: unknown): unknown {
+  if (!raw || typeof raw !== 'object') return raw;
+  const data = raw as Partial<QuestData>;
+  if (!Array.isArray(data.completedLessons)) return raw;
+  const split = data.completedLessons.flatMap((id) => (typeof id === 'string' && SPLIT_LESSONS[id] ? [SPLIT_LESSONS[id]] : []));
+  return { ...data, completedLessons: unique([...data.completedLessons, ...split]) };
 }

@@ -1,11 +1,11 @@
-import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
+import type { EventSubscription } from 'expo-modules-core';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 import { AppText } from '@/core/components/ui/AppText';
 import { Icon } from '@/core/components/ui/Icon';
 import { useKitColors } from '@/core/games/kit';
-import { boostLearnerAudio, configureAudioSession } from '@/core/services/audioSession';
+import { configureAudioSession, sharedLearnerPlayer } from '@/core/services/audioSession';
 import { radius, spacing } from '@/core/theme';
 import { audioUrlForAyah } from '@/features/quran';
 
@@ -21,7 +21,8 @@ export type RecitationState = 'idle' | 'loading' | 'playing' | 'unavailable';
 
 export function useRecitation() {
   const [state, setState] = useState<RecitationState>('idle');
-  const player = useRef<AudioPlayer | null>(null);
+  /** Listener of the ayah that is playing; the player itself is shared and reused (one media session). */
+  const active = useRef<EventSubscription | null>(null);
   const queue = useRef<number[]>([]);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const nextRef = useRef<() => void>(() => undefined);
@@ -29,12 +30,12 @@ export function useRecitation() {
   const release = useCallback(() => {
     if (timer.current) clearTimeout(timer.current);
     timer.current = null;
-    const current = player.current;
-    player.current = null;
+    const current = active.current;
+    active.current = null;
     if (current) {
+      current.remove();
       try {
-        current.pause();
-        current.remove();
+        sharedLearnerPlayer('game-recitation').pause();
       } catch {
         // ignore
       }
@@ -60,16 +61,9 @@ export function useRecitation() {
       return;
     }
     try {
-      const next = createAudioPlayer({ uri: audioUrlForAyah(global) });
-      next.volume = 1;
-      boostLearnerAudio(next);
-      player.current = next;
-      setState('loading');
-      timer.current = setTimeout(() => {
-        if (player.current === next && !next.isLoaded) stop('unavailable');
-      }, STREAM_TIMEOUT_MS);
-      next.addListener('playbackStatusUpdate', (status) => {
-        if (player.current !== next) return;
+      const next = sharedLearnerPlayer('game-recitation');
+      const sub: EventSubscription = next.addListener('playbackStatusUpdate', (status) => {
+        if (active.current !== sub) return;
         if (status.error) {
           stop('unavailable');
           return;
@@ -77,10 +71,16 @@ export function useRecitation() {
         if (status.isLoaded) setState('playing');
         if (status.didJustFinish) nextRef.current();
       });
+      active.current = sub;
+      next.replace({ uri: audioUrlForAyah(global) });
+      setState('loading');
+      timer.current = setTimeout(() => {
+        if (active.current === sub && !next.isLoaded) stop('unavailable');
+      }, STREAM_TIMEOUT_MS);
       void configureAudioSession()
         .catch(() => undefined)
         .then(() => {
-          if (player.current === next) next.play();
+          if (active.current === sub) next.play();
         });
     } catch {
       stop('unavailable');
@@ -95,7 +95,7 @@ export function useRecitation() {
   const toggle = useCallback(
     (globals: number[]) => {
       if (state === 'unavailable') return;
-      if (player.current || queue.current.length) {
+      if (active.current || queue.current.length) {
         stop();
         return;
       }

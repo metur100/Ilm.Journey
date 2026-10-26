@@ -1,4 +1,4 @@
-import { type AudioMode, setAudioModeAsync } from 'expo-audio';
+import { type AudioMode, type AudioPlayer, createAudioPlayer, setAudioModeAsync } from 'expo-audio';
 
 import { boostPlayer, bindVolumeKeys } from '../../../modules/audio-volume';
 
@@ -56,7 +56,24 @@ export function boostLearnerAudio(player: object, gainMb: number = LOUDNESS_GAIN
   void boostPlayer(player, gainMb);
 }
 
+const sharedPlayers = new Map<string, AudioPlayer>();
+
+/**
+ * One reusable, boosted player per purpose (`replace()` swaps its source). A new expo-audio player per clip registers
+ * a new Android media session each time; they pile up until Android refuses new ones and the app falls silent.
+ */
+export function sharedLearnerPlayer(key: string, gainMb: number = LOUDNESS_GAIN.recitation): AudioPlayer {
+  const existing = sharedPlayers.get(key);
+  if (existing) return existing;
+  const player = createAudioPlayer(null);
+  player.volume = 1;
+  boostLearnerAudio(player, gainMb);
+  sharedPlayers.set(key, player);
+  return player;
+}
+
 /** Tests: forget the configured session. */
 export function resetAudioSessionForTests(): void {
   audioSession = null;
+  sharedPlayers.clear();
 }

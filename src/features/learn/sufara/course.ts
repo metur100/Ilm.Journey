@@ -27,7 +27,7 @@ import { canRead, consonantIn, markRows, partsReading, partsText, type ReadingPa
 
 /*
  * The Sufara course of the Learn tab: classical sufara, lesson by lesson. First the letters in the order of the
- * Bosnian sufara (elif, be, te, se, džim … vav, he, lam-elif, je), one or two per lesson – each shown with its name, sound
+ * Bosnian sufara (elif, be, te, se, džim … vav, he, lam-elif, je), one letter per lesson – each shown with its name, sound
  * and forms, traced, then practised together with the letters of the earlier lessons (the review grows lesson by
  * lesson). Then the marks (fetha, kesra, damma, sukun, tenvin, medd, šedda), the forms of the letters in a word,
  * reading syllables and reading short words. Pure (no React); the screen is screens/SufaraScreen.tsx.
@@ -50,7 +50,11 @@ export interface SufaraLesson {
 /** Lam-elif: lam and elif joined into one sign, taught before je as in the Bosnian sufara. */
 export const LAM_ELIF = 'لا';
 
-/** New letters per lesson, in the order of the Bosnian sufara. */
+/**
+ * The letters in the order of the Bosnian sufara, grouped as the course used to teach them (two letters in some
+ * lessons). Every letter now has its own lesson; the grouping only keeps the progress keys: the first letter of a
+ * group keeps the old lesson id, the second one gets a new id (see {@link SPLIT_LESSONS}).
+ */
 const LETTER_GROUPS: readonly (readonly string[])[] = [
   ['ا'],
   ['ب'],
@@ -83,22 +87,38 @@ interface LessonSeed {
   id: string;
 }
 
-/** Letter group `g` keeps the id it had before sukun moved forward (elif 01, be 05, te/se 06 … lam-elif/je 19). */
-const letterSeed = (g: number): LessonSeed => ({ kind: 'letters', letters: [...LETTER_GROUPS[g]], id: lessonId(g === 0 ? 1 : g + 4) });
+/** Ids 01–24 are taken by the earlier course; the letters split off a two-letter lesson continue from 25. */
+const FIRST_SPLIT_ID = 25;
+
+/** One lesson per letter. Group `g` kept its old id (elif 01, be 05, te 06 … lam-elif 19); its second letter is new. */
+const LETTER_SEEDS: readonly LessonSeed[] = (() => {
+  let next = FIRST_SPLIT_ID;
+  return LETTER_GROUPS.flatMap((group, g) =>
+    group.map((letter, i): LessonSeed => ({ kind: 'letters', letters: [letter], id: i === 0 ? lessonId(g === 0 ? 1 : g + 4) : lessonId(next++) })),
+  );
+})();
+
+/** Old two-letter lesson id → id of the new lesson of its second letter (completed progress carries over). */
+export const SPLIT_LESSONS: Readonly<Record<string, string>> = Object.fromEntries(
+  LETTER_GROUPS.flatMap((group, g) => (group.length > 1 ? [[lessonId(g + 4), LETTER_SEEDS.find((s) => s.letters[0] === group[1])!.id]] : [])),
+);
+
+const letterSeed = (letter: string): LessonSeed => LETTER_SEEDS.find((s) => s.letters[0] === letter)!;
 
 /**
  * Sukun comes right after te and se, as soon as there are letters to close a syllable with: from then on every
  * letter is also read in closed syllables (بَتْ bet, اَبْ eb, بَزُدْ bezud), as in the reading rows of a printed sufara.
  */
 const LESSON_SEEDS: readonly LessonSeed[] = [
-  letterSeed(0),
+  letterSeed('ا'),
   { kind: 'fatha', letters: [], id: lessonId(2) },
   { kind: 'kasra', letters: [], id: lessonId(3) },
   { kind: 'damma', letters: [], id: lessonId(4) },
-  letterSeed(1),
-  letterSeed(2),
+  letterSeed('ب'),
+  letterSeed('ت'),
+  letterSeed('ث'),
   { kind: 'sukun', letters: [], id: 'sufara-21' },
-  ...LETTER_GROUPS.slice(3).map((_, i) => letterSeed(i + 3)),
+  ...LETTER_SEEDS.slice(4),
   { kind: 'tanwin', letters: [], id: 'sufara-22' },
   { kind: 'madd', letters: [], id: 'sufara-23' },
   { kind: 'shadda', letters: [], id: 'sufara-24' },

@@ -99,11 +99,11 @@ function LessonGate({ id }: { id: string }) {
   return <LessonPlayer lesson={lesson} />;
 }
 
-/** Steps of a lesson: each new letter (meet it, write it) or the explanation, the reading page, then the practice, then the end. */
+/** Steps of a lesson: the new letter (meet it, write it) or the explanation, the practice, then the reading page as in a printed sufara, then the end. */
 function lessonSteps(lesson: SufaraLesson, exercises: SufaraExercise[], rows: ReadingRow[]): Step[] {
   const intro: Step[] = lesson.kind === 'letters' ? lesson.letters.flatMap((letter): Step[] => [{ kind: 'letter', letter }, { kind: 'trace', letter }]) : [{ kind: 'explain' }];
   const reading: Step[] = rows.length ? [{ kind: 'read', rows }] : [];
-  return [...intro, ...reading, ...exercises.map((exercise): Step => ({ kind: 'exercise', exercise })), { kind: 'done' }];
+  return [...intro, ...exercises.map((exercise): Step => ({ kind: 'exercise', exercise })), ...reading, { kind: 'done' }];
 }
 
 function LessonPlayer({ lesson }: { lesson: SufaraLesson }) {
@@ -353,7 +353,7 @@ function ReadStep({ rows, onNext }: { rows: ReadingRow[]; onNext: () => void }) 
       <AppText variant="tiny" color={c.textMuted}>
         {copy.teacher}
       </AppText>
-      <Button label={copy.start} iconRight="chevron" onPress={onNext} />
+      <Button label={copy.finishReading} iconRight="chevron" onPress={onNext} />
     </>
   );
 }

@@ -1,7 +1,7 @@
-import { type AudioPlayer, createAudioPlayer } from 'expo-audio';
+import type { EventSubscription } from 'expo-modules-core';
 import { useCallback, useEffect, useState } from 'react';
 
-import { audioSessionReady, boostLearnerAudio } from '@/core/services/audioSession';
+import { audioSessionReady, sharedLearnerPlayer } from '@/core/services/audioSession';
 import { audioUrlForAyah } from '@/features/quran';
 
 /**
@@ -13,7 +13,8 @@ import { audioUrlForAyah } from '@/features/quran';
 /** How long a stream may take to load before we tell the learner that it needs internet. */
 export const STREAM_TIMEOUT_MS = 8000;
 
-let player: AudioPlayer | null = null;
+/** The listener of the ayah that is playing (null when nothing plays). The player itself is shared and reused. */
+let active: EventSubscription | null = null;
 let currentAyah: number | null = null;
 let streamTimeout: ReturnType<typeof setTimeout> | null = null;
 const listeners = new Set<() => void>();
@@ -25,15 +26,15 @@ function notify() {
 export function stopRecitation(): void {
   if (streamTimeout) clearTimeout(streamTimeout);
   streamTimeout = null;
-  if (player) {
+  if (active) {
+    active.remove();
     try {
-      player.pause();
-      player.remove();
+      sharedLearnerPlayer('recitation').pause();
     } catch {
       // ignore
     }
   }
-  player = null;
+  active = null;
   currentAyah = null;
   notify();
 }
@@ -42,19 +43,9 @@ export function stopRecitation(): void {
 export function playRecitation(globalAyah: number, onEnd: (error: boolean) => void): boolean {
   stopRecitation();
   try {
-    const next = createAudioPlayer({ uri: audioUrlForAyah(globalAyah) });
-    next.volume = 1;
-    boostLearnerAudio(next);
-    player = next;
-    currentAyah = globalAyah;
-    streamTimeout = setTimeout(() => {
-      if (player === next && (!next.isLoaded || !next.playing)) {
-        stopRecitation();
-        onEnd(true);
-      }
-    }, STREAM_TIMEOUT_MS);
-    next.addListener('playbackStatusUpdate', (status) => {
-      if (player !== next) return;
+    const next = sharedLearnerPlayer('recitation');
+    const sub: EventSubscription = next.addListener('playbackStatusUpdate', (status) => {
+      if (active !== sub) return;
       if (status.error) {
         stopRecitation();
         onEnd(true);
@@ -69,10 +60,19 @@ export function playRecitation(globalAyah: number, onEnd: (error: boolean) => vo
         onEnd(false);
       }
     });
+    active = sub;
+    next.replace({ uri: audioUrlForAyah(globalAyah) });
+    currentAyah = globalAyah;
+    streamTimeout = setTimeout(() => {
+      if (active === sub && (!next.isLoaded || !next.playing)) {
+        stopRecitation();
+        onEnd(true);
+      }
+    }, STREAM_TIMEOUT_MS);
     notify();
     // Configure the app audio mode first (audible in silent mode); play even if that native call failed.
     void audioSessionReady().then(() => {
-      if (player !== next) return;
+      if (active !== sub) return;
       try {
         next.play();
       } catch {
